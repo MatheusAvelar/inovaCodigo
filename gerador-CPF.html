@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de CPF</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+
+    <center>
+        <h1>Gerador de CPF</h1>
+    </center>
+
+    <div class="centro">
+        <div class="gerador-cpf">
+            <h2>Gerar CPF</h2>
+            <button id="gerarCpf">Gerar CPF</button>
+            <div id="cpfGerado">
+                <!-- Aqui serão exibidos os CPFs gerados -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("gerarCpf").addEventListener("click", function () {
+            const cpf = gerarCpf();
+            const cpfGerado = document.getElementById("cpfGerado");
+            cpfGerado.innerHTML = `<p>CPF Gerado: ${cpf}</p>`;
+        });
+
+        function gerarCpf() {
+            // Lógica para gerar um CPF aleatório
+            // Implemente aqui a lógica adequada para gerar um CPF válido
+            // (considerando as regras de formatação e validação)
+            // Retorna um CPF formatado, por exemplo: "123.456.789-09"
+        }
+    </script>
+
+</body>
+
+</html>
