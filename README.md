@@ -33,6 +33,6 @@ Bem-vindo ao InovaCódigo! Este é o repositório oficial do site [inovacodigo.c
 
 ## Contato
 
-Para entrar em contato com o autor ou para obter mais informações sobre o site, sinta-se à vontade para utilizar os detalhes de contato fornecidos no currículo ou envie um e-mail para [contato@inovacodigo.com.br](mailto:contato@inovacodigo.com.br).
+Para entrar em contato com o autor ou para obter mais informações sobre o site, sinta-se à vontade para utilizar os detalhes de contato fornecidos no currículo ou envie um e-mail para [administracao@inovacodigo.com.br](mailto:contato@inovacodigo.com.br).
 
 Divirta-se explorando o InovaCódigo!

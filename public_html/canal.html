@@ -1,0 +1,130 @@
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="img/ico.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+    <title>Inova Código - Publicações</title>
+</head>
+
+<body>
+    
+    <header class="navbar">
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="projetos.html">Projetos</a>
+            <a href="publicacoes.html">Publicações</a>
+            <a href="gerador.html">Geradores</a>
+        </nav>
+    </header>
+
+    <div class="containerCanal">
+        <h1>Canal Inova Código no YouTube</h1>
+        
+        <p>Bem-vindo ao canal Inova Código no YouTube! Somos um grupo de quatro membros apaixonados por compartilhar conhecimento e entretenimento. Neste canal, você encontrará uma variedade de vídeos sobre diversos temas interessantes.</p>
+        
+        <h2>Membros do Grupo</h2>
+        
+        <div class="postagensCanal">
+            <div class="postagem-card">
+                <img src="img/homem.png" alt="Membro 1" class="member-image">
+                <h2>Membro 1</h2>
+                <p>Olá, sou o Membro 1 e estou empolgado para trazer conteúdo incrível para vocês. Meu foco é compartilhar dicas e truques sobre tecnologia e gadgets.</p>
+            </div>
+            
+            <div class="postagem-card">
+                <img src="img/garoto.png" alt="Membro 2" class="member-image">
+                <h2>Membro 2</h2>
+                <p>Oi, eu sou o Membro 2! Aqui no canal, você pode esperar vídeos divertidos e informativos sobre viagens e aventuras ao redor do mundo.</p>
+            </div>
+        </div>
+        
+        <h2>Nossa História</h2>
+        
+        <p>O canal Inova Código foi criado em [data de criação] com o propósito de proporcionar conteúdo educativo, inspirador e divertido para nossa audiência. A ideia surgiu quando percebemos que tínhamos conhecimentos e interesses variados para compartilhar com o mundo.</p>
+        
+        <p>Ao longo do tempo, nosso canal cresceu e evoluiu graças ao apoio dos nossos inscritos e espectadores fiéis. Estamos comprometidos em continuar entregando conteúdo de qualidade e explorando novos temas que possam enriquecer a vida de todos que nos assistem.</p>
+    </div>
+
+    <div class="video-section">
+        <h2>Últimos Vídeos</h2>
+        <div class="latest-videos">
+            <!-- Os últimos vídeos do YouTube serão exibidos aqui -->
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="img/nome.png" alt="Logo da Marca no Rodapé">
+            </div>
+            <div class="footer-social">
+                <a href="https://www.linkedin.com/in/matheusavelar/" target="blank"><img align="center" src="img/linkedin.png"
+                    alt="https://www.linkedin.com/in/matheusavelar/" /></a>
+            <a href="https://fb.com/matheus.dapaz.33" target="blank"><img align="center" src="img/facebook.png"
+                    alt="matheus.dapaz.33" /></a>
+            <a href="https://instagram.com/matheusnutela" target="blank"><img align="center" src="img/instagram.png"
+                    alt="matheusnutela" /></a>
+            <a href="https://github.com/MatheusAvelar" target="blank"><img align="center" src="img/github.png"
+                    alt="matheusnutela" /></a>
+            <a href="https://api.whatsapp.com/send?phone=5531993018766" target="blank"><img align="center"
+                    src="img/whatsapp.png" alt="matheusnutela" /></a>
+            </div>
+        </div>
+        <div class="footer-links">
+            <a href="termosUso.html">Termos de Uso</a>
+            <a href="politica.html">Política de Privacidade</a>
+            <a href="contato.html">Contato</a>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2023 Inova Código. Todos os direitos reservados.
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script>
+        // Função para carregar os últimos vídeos do canal
+        function loadLatestVideos() {
+            const channelId = "SEU_ID_DO_CANAL"; // Substitua pelo ID do seu canal
+            const apiKey = "SUA_CHAVE_DE_API"; // Substitua pela sua chave de API
+    
+            const apiUrl = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&order=date&part=snippet&type=video&maxResults=3`;
+    
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const latestVideosContainer = document.querySelector(".latest-videos");
+    
+                    data.items.forEach(video => {
+                        const videoId = video.id.videoId;
+                        const videoTitle = video.snippet.title;
+    
+                        const videoDiv = document.createElement("div");
+                        videoDiv.className = "youtube-video";
+                        latestVideosContainer.appendChild(videoDiv);
+    
+                        const iframe = document.createElement("iframe");
+                        iframe.src = `https://www.youtube.com/embed/${videoId}`;
+                        iframe.width = "300"; // Ajuste conforme necessário
+                        iframe.height = "200"; // Ajuste conforme necessário
+                        iframe.title = videoTitle;
+                        videoDiv.appendChild(iframe);
+                    });
+                })
+                .catch(error => {
+                    console.error("Ocorreu um erro ao carregar os vídeos:", error);
+                });
+        }
+    
+        // Chamando a função para carregar os últimos vídeos
+        loadLatestVideos();
+    </script>
+</body>
+
+</html>

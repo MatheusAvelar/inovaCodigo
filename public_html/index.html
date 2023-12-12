@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="img/ico.ico" type="image/x-icon">
+    <title>Inova Código</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1516963750502427"
+     crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header class="navbar">
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="projetos.html">Projetos</a>
+            <a href="publicacoes.html">Publicações</a>
+            <a href="gerador.html">Geradores</a>
+            <a href="https://matheusavelar.github.io/">Currículo</a>
+        <div id="currencySelector">
+            <select id="currencySelect" onchange="changeDisplayCurrency()">
+                <option value="BRL">Real Brasileiro (BRL)</option>
+                <option selected value="USD">Dólar Americano (USD)</option>
+            </select>
+        </div>
+        </nav>
+    </header>
+    <!---<div class="weather-container">
+        <div class="weather-banner" id="city1"></div>
+        <div class="weather-banner" id="city2"></div>
+        <div class="weather-banner" id="city3"></div>
+        <div class="weather-banner" id="city4"></div>
+        <div class="weather-banner" id="city5"></div>
+        <div class="weather-banner" id="city6"></div>
+    </div>--->
+    <div class="ticker">
+        <marquee behavior="scroll" direction="left">
+            <span id="cryptoRates"></span>
+        </marquee>
+    </div>
+
+    <div class="centro">
+        <div class="jogo-da-velha">
+            <h2>Jogo da Velha</h2>
+            <button id="restart-button" onclick="restartGame()">Reiniciar Jogo</button>
+            <div class="board">
+                <div class="cell" onclick="makeMove(this)"></div>
+                <div class="cell" onclick="makeMove(this)"></div>
+                <div class="cell" onclick="makeMove(this)"></div>
+                <div class="cell" onclick="makeMove(this)"></div>
+                <div class="cell" onclick="makeMove(this)"></div>
+                <div class="cell" onclick="makeMove(this)"></div>
+                <div class="cell" onclick="makeMove(this)"></div>
+                <div class="cell" onclick="makeMove(this)"></div>
+                <div class="cell" onclick="makeMove(this)"></div>
+            </div>
+            <div id="result-message" class="result-message"></div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="img/nome.png" alt="Logo da Marca no Rodapé">
+            </div>
+            <div class="footer-social">
+                <a href="https://www.linkedin.com/in/matheusavelar/" target="blank"><img align="center" src="img/linkedin.png"
+                    alt="https://www.linkedin.com/in/matheusavelar/" /></a>
+            <a href="https://fb.com/matheus.dapaz.33" target="blank"><img align="center" src="img/facebook.png"
+                    alt="matheus.dapaz.33" /></a>
+            <a href="https://instagram.com/matheusnutela" target="blank"><img align="center" src="img/instagram.png"
+                    alt="matheusnutela" /></a>
+            <a href="https://github.com/MatheusAvelar" target="blank"><img align="center" src="img/github.png"
+                    alt="matheusnutela" /></a>
+            <a href="https://api.whatsapp.com/send?phone=5531993018766" target="blank"><img align="center"
+                    src="img/whatsapp.png" alt="matheusnutela" /></a>
+            </div>
+        </div>
+        <div class="footer-links">
+            <a href="termosUso.html">Termos de Uso</a>
+            <a href="politica.html">Política de Privacidade</a>
+            <a href="contato.html">Contato</a>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2023 Inova Código. Todos os direitos reservados.
+        </div>
+    </footer>
+    <script>
+        const apiUrl = "https://api.coincap.io/v2/rates";
+        const desiredCryptos = ["bitcoin", "ethereum", "ripple", "bitcoin-cash", "litecoin", "cardano", "polkadot", "chainlink", "binance-coin", "dogecoin"];
+        let displayCurrency = "USD"; // Moeda de exibição padrão
+
+        // Função para formatar o ID da criptomoeda
+        function formatCryptoName(id) {
+            return id.replace(/-/g, ' ')
+                .split(' ')
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(' ');
+        }
+
+        let usdToBrlExchangeRate = 5.28; // Substitua pelo valor correto da taxa de câmbio
+
+        // Função para alternar a moeda de exibição entre BRL e USD
+        function changeDisplayCurrency() {
+            const selectElement = document.getElementById("currencySelect");
+            displayCurrency = selectElement.value;
+            updateCryptoRatesDisplay();
+        }
+
+        // Função para atualizar a exibição das taxas de criptomoedas
+        function updateCryptoRatesDisplay() {
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const cryptoRatesElement = document.getElementById("cryptoRates");
+                    const rates = data.data;
+
+                    let ratesHTML = "";
+                    for (const crypto in rates) {
+                        if (rates.hasOwnProperty(crypto)) {
+                            const rate = parseFloat(rates[crypto].rateUsd);
+                            const cryptoName = rates[crypto].id;
+
+                            if (desiredCryptos.includes(cryptoName)) {
+                                const rateValue = displayCurrency === "BRL" ? rate * usdToBrlExchangeRate : rate;
+                                const formattedRate = rateValue.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 8 });
+                                ratesHTML += `<span class="ticker-item">${formatCryptoName(cryptoName)}: ${formattedRate} ${displayCurrency}</span>`;
+                            }
+                        }
+                    }
+
+                    cryptoRatesElement.innerHTML = ratesHTML;
+                })
+                .catch(error => {
+                    console.error("Ocorreu um erro:", error);
+                });
+        }
+
+        // Chamar a função de atualização inicialmente
+        updateCryptoRatesDisplay();
+
+        /*Jogo da Velha*/
+        let currentPlayer = "X";
+        let cells = document.querySelectorAll(".cell");
+        let gameOver = false;
+
+        const winCombinations = [
+            [0, 1, 2], [3, 4, 5], [6, 7, 8], // Linhas
+            [0, 3, 6], [1, 4, 7], [2, 5, 8], // Colunas
+            [0, 4, 8], [2, 4, 6]           // Diagonais
+        ];
+
+        function checkWinner(player) {
+            for (const combination of winCombinations) {
+                if (cells[combination[0]].classList.contains(player) &&
+                    cells[combination[1]].classList.contains(player) &&
+                    cells[combination[2]].classList.contains(player)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function makeMove(cell) {
+            if (!cell.textContent && !gameOver) {
+                cell.textContent = currentPlayer;
+                cell.classList.add(currentPlayer);
+                
+                if (checkWinner(currentPlayer)) {
+                    gameOver = true;
+                    document.getElementById("result-message").textContent = `O jogador ${currentPlayer} venceu!`;
+                } else if (Array.from(cells).every(cell => cell.textContent !== "")) {
+                    gameOver = true;
+                    document.getElementById("result-message").textContent = "Empate!";
+                } else {
+                    currentPlayer = currentPlayer === "X" ? "O" : "X";
+                }
+            }
+        }
+
+        function restartGame() {
+            // Limpar o conteúdo das células e as classes de jogador
+            cells.forEach(cell => {
+                cell.textContent = "";
+                cell.classList.remove("X", "O");
+            });
+        
+            // Limpar a mensagem de resultado
+            document.getElementById("result-message").textContent = "";
+        
+            // Resetar variáveis do jogo
+            currentPlayer = "X";
+            gameOver = false;
+        }
+        
+        // Função para buscar dados da API de previsão do tempo
+        async function fetchWeatherData(latitude, longitude, cityId) {
+            try {
+                const apiKey = "fe6f086413d2165eafb056fde44dc7c1";
+                const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+
+                const cidade = data.name;
+                const temperaturaAtual = data.main.temp;
+                const descricaoClima = data.weather[0].description;
+
+                // Selecione o banner de previsão do tempo da cidade pelo ID
+                const weatherBanner = document.getElementById(cityId);
+
+                const cidadeEstadoElement = document.createElement("p");
+                cidadeEstadoElement.textContent = `${cidade}`;
+
+                const temperaturaElement = document.createElement("p");
+                temperaturaElement.textContent = `Temperatura Atual: ${temperaturaAtual}°C`;
+
+                const descricaoClimaElement = document.createElement("p");
+                const descricaoClimaTraduzida = traduzirDescricaoClima(descricaoClima);
+                descricaoClimaElement.textContent = `Condição do Clima: ${descricaoClimaTraduzida}`;
+
+                // Limpe o conteúdo atual do banner, se houver algum
+                weatherBanner.innerHTML = "";
+
+                // Adicione os elementos criados ao banner
+                weatherBanner.appendChild(cidadeEstadoElement);
+                weatherBanner.appendChild(temperaturaElement);
+                weatherBanner.appendChild(descricaoClimaElement);
+            } catch (error) {
+                console.error("Erro ao buscar dados da API de previsão do tempo:", error);
+            }
+        }
+
+        // Função para traduzir a descrição do clima
+        function traduzirDescricaoClima(descricao) {
+            switch (descricao.toLowerCase()) {
+                case "clear sky":
+                    return "Céu Limpo";
+                case "few clouds":
+                    return "Poucas Nuvens";
+                case "scattered clouds":
+                    return "Nuvens Esparsas";
+                case "broken clouds":
+                    return "Nuvens Quebradas";
+                case "shower rain":
+                    return "Chuva de Banho";
+                case "rain":
+                    return "Chuva";
+                case "thunderstorm":
+                    return "Tempestade";
+                case "snow":
+                    return "Neve";
+                case "mist":
+                    return "Neblina";
+                default:
+                    return descricao;
+            }
+        }
+
+        // Coordenadas das 8 cidades
+        const cidades = [
+            { nome: "Rio de Janeiro", latitude: -22.9083, longitude: -43.1970, id: "city1" },
+            { nome: "Brasília", latitude: -15.7801, longitude: -47.9292, id: "city2" },
+            { nome: "Salvador", latitude: -12.9716, longitude: -38.5016, id: "city3" },
+            { nome: "Fortaleza", latitude: -3.7172, longitude: -38.5433, id: "city4" },
+            { nome: "Belo Horizonte", latitude: -19.9167, longitude: -43.9345, id: "city5" },
+            { nome: "Curitiba", latitude: -25.4195, longitude: -49.2646, id: "city6" },
+        ];
+
+        // Busque a previsão do tempo para cada cidade
+        for (const cidade of cidades) {
+            fetchWeatherData(cidade.latitude, cidade.longitude, cidade.id);
+        }
+    </script>
+</body>
+
+</html>
