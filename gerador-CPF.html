@@ -43,7 +43,7 @@
             <div class="input-container">
                 <label for="cpf">Digite o CPF:</label>
                 <input type="text" id="cpf" placeholder="Digite o CPF"> <!-- Altere o ID do input para 'cpf' -->
-                <button id="validar">Gerar</button> <!-- Altere o ID do botão para 'gerar' -->
+                <button id="validar">Validar</button> <!-- Altere o ID do botão para 'validar' -->
             </div>
             <div id="resultado">
                 <!-- Aqui serão exibidos os resultados da valida -->
@@ -114,24 +114,10 @@
         });
 
         document.getElementById("gerar").addEventListener("click", function () {
-            const cpf = document.getElementById("cpf").value.trim(); // Trim whitespace
             const resultado = document.getElementById("resultado2");
             var cpfGerado = geraCPF();
             if (validaCPF(cpfGerado)) {
-                resultado.innerHTML = `<p>CPF ${cpfGerado} </p>`;
-            }   
-        
-            // Remova a consulta de CEP e ajuste para validar CPF
-            if (validaCPF(cpf)) {
-                const resultado = document.getElementById("resultado");
-                resultado.innerHTML = `
-                    <h2>CPF:</h2>
-                    <p>${cpf}</p>
-                    <p>CPF válido.</p>
-                `;
-            } else {
-                const resultado = document.getElementById("resultado");
-                resultado.innerHTML = `<p>CPF inválido.</p>`;
+                resultado.innerHTML = `<p>CPF Gerado: ${cpfGerado} </p>`;
             }
         });
 
