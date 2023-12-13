@@ -107,7 +107,11 @@
                 `;
             } else {
                 const resultado = document.getElementById("resultado");
-                resultado.innerHTML = `<p>CPF inválido.</p>`;
+                resultado.innerHTML = `
+                    <h2>CPF:</h2>
+                    <p>${cpf}</p>
+                    <p>CPF inválido.</p>
+                `;
             }
         });
 
