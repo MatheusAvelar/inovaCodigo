@@ -35,9 +35,16 @@
 
     <h1>Gerador de Nomes</h1>
 
-    <div class="generator-content">
-        <button id="gerarNome">Gerar Nome</button>
-        <p id="nomeGerado"></p>
+    <div class="consulta-cpf">
+        <h1>Consulta de CPF</h1>
+        <div class="input-container">
+            <label for="cpf">Digite o CPF:</label>
+            <input type="text" id="cpf" placeholder="Digite o CPF">
+            <button id="consultar">Consultar</button>
+        </div>
+        <div id="resultado">
+            <!-- Aqui serão exibidos os resultados da consulta -->
+        </div>
     </div>
 
     <footer class="footer">
@@ -69,30 +76,38 @@
     </footer>
 
     <script>
-        const vogais = ["a", "e", "i", "o", "u"];
-        const consoantes = ["b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z"];
-
-        const botaoGerarNome = document.getElementById("gerarNome");
-        const nomeGerado = document.getElementById("nomeGerado");
-
-        function gerarNome() {
-            const comprimentoNome = Math.floor(Math.random() * 5) + 4; // Comprimento entre 4 e 8 caracteres
-            let nome = "";
-
-            for (let i = 0; i < comprimentoNome; i++) {
-                if (i % 2 === 0) {
-                    nome += consoantes[Math.floor(Math.random() * consoantes.length)];
-                } else {
-                    nome += vogais[Math.floor(Math.random() * vogais.length)];
-                }
+        document.getElementById("consultar").addEventListener("click", function () {
+            const cpf = document.getElementById("cpf").value.trim(); // Trim whitespace
+            if (cpf === "") {
+                const resultado = document.getElementById("resultado");
+                resultado.innerHTML = `<p>Por favor, digite um CPF válido.</p>`;
+                return; // Exit the function
             }
 
-            return nome.charAt(0).toUpperCase() + nome.slice(1);
-        }
-
-        botaoGerarNome.addEventListener("click", () => {
-            const nomeAleatorio = gerarNome();
-            nomeGerado.textContent = `Nome Gerado: ${nomeAleatorio}`;
+            // Realiza a chamada à API ViaCEP para consulta de endereço associado ao CPF
+            const apiUrl = `https://viacep.com.br/ws/${cpf}/json/`;
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const resultado = document.getElementById("resultado");
+                    if (data.erro) {
+                        resultado.innerHTML = `<p>CPF não encontrado ou inválido.</p>`;
+                    } else {
+                        resultado.innerHTML = `
+                            <h2>Endereço associado ao CPF:</h2>
+                            <p>CEP: ${data.cep}</p>
+                            <p>Logradouro: ${data.logradouro}</p>
+                            <p>Bairro: ${data.bairro}</p>
+                            <p>Cidade: ${data.localidade}</p>
+                            <p>Estado: ${data.uf}</p>
+                        `;
+                    }
+                })
+                .catch(error => {
+                    console.error("Erro na consulta:", error);
+                    const resultado = document.getElementById("resultado");
+                    resultado.innerHTML = `<p>Ocorreu um erro na consulta. Tente novamente.</p>`;
+                });
         });
     </script>
 </body>
