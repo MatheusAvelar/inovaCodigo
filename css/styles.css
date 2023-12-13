@@ -639,3 +639,69 @@ form button {
     align-items: center;
     margin: 5px 0; /* Espaçamento entre os parágrafos */
 }
+
+
+.valida-cpf {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.valida-cpf h1 {
+    color: #333;
+}
+
+.input-container {
+    margin-bottom: 15px;
+}
+
+.input-container label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.input-container input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.input-container button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.input-container button:hover {
+    background-color: #45a049;
+}
+
+#resultado {
+    margin-top: 15px;
+    color: #333;
+}
+
+#resultado p {
+    margin: 5px 0;
+}
+
+#resultado2 {
+    margin-top: 15px;
+    color: #333;
+}
+
+#resultado2 p {
+    margin: 5px 0;
+}
