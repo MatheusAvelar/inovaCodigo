@@ -640,42 +640,41 @@ form button {
     margin: 5px 0; /* Espaçamento entre os parágrafos */
 }
 
-
 .valida-cpf {
     max-width: 600px;
-    margin: 0 auto;
+    margin: 20px auto;
     padding: 20px;
-    background-color: #f4f4f4;
-    border: 1px solid #ccc;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    text-align: center;
 }
 
 .valida-cpf h1 {
     color: #333;
 }
 
-.input-container {
+.valida-cpf .input-container {
     margin-bottom: 15px;
 }
 
-.input-container label {
+.valida-cpf .input-container label {
     display: block;
     margin-bottom: 5px;
     color: #333;
 }
 
-.input-container input {
+.valida-cpf .input-container input {
     width: 100%;
-    padding: 8px;
+    padding: 10px;
     box-sizing: border-box;
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
 
-.input-container button {
-    background-color: #4caf50;
+.valida-cpf .input-container button {
+    background-color: rgb(68, 91, 91);
     color: #fff;
     padding: 10px 15px;
     border: none;
@@ -684,24 +683,24 @@ form button {
     font-size: 16px;
 }
 
-.input-container button:hover {
-    background-color: #45a049;
+.valida-cpf .input-container button:hover {
+    background-color: #555;
 }
 
-#resultado {
+.valida-cpf #resultado {
     margin-top: 15px;
     color: #333;
 }
 
-#resultado p {
+.valida-cpf #resultado p {
     margin: 5px 0;
 }
 
-#resultado2 {
+.valida-cpf #resultado2 {
     margin-top: 15px;
     color: #333;
 }
 
-#resultado2 p {
+.valida-cpf #resultado2 p {
     margin: 5px 0;
 }
