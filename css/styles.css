@@ -656,6 +656,17 @@ form button {
     transition: box-shadow 0.3s ease;
 }
 
+.itens-list:hover,
+.itens-verificados:hover {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.itens-list h2,
+.itens-verificados h2 {
+    color: #000000;
+    margin-bottom: 10px;
+}
+
 .checklist-container {
     max-width: 100%;
 }
