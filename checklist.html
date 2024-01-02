@@ -94,8 +94,23 @@
         <input type="checkbox" id="item3">
         <label for="item3">Item 3</label>
     </div>
-    <button>Concluir Checklist</button>
+    <button onclick="concluirChecklist()">Concluir Checklist</button>
 </div>
+
+<script>
+    function concluirChecklist() {
+        var checkboxes = document.querySelectorAll('.checklist-item input[type="checkbox"]');
+        var itensConcluidos = [];
+
+        checkboxes.forEach(function(checkbox) {
+            if (checkbox.checked) {
+                itensConcluidos.push(checkbox.nextElementSibling.textContent);
+            }
+        });
+
+        alert('Itens concluídos: ' + itensConcluidos.join(', '));
+    }
+</script>
 
 </body>
 </html>
