@@ -44,11 +44,23 @@
         </div>
     </div>
 
-<script>
-    // Função para adicionar um novo item à lista
-    function adicionarItem() {
-        var itemName = prompt("Digite o nome do item:");
-        if (itemName) {
+    <script>
+        // Função para carregar os itens armazenados no localStorage
+        function carregarItensArmazenados() {
+            var itensArmazenados = JSON.parse(localStorage.getItem('itens')) || [];
+            itensArmazenados.forEach(function (itemName) {
+                adicionarItem(itemName, true);
+            });
+        }
+    
+        // Função para adicionar um novo item à lista
+        function adicionarItem(itemName, fromStorage = false) {
+            if (!fromStorage) {
+                var itensArmazenados = JSON.parse(localStorage.getItem('itens')) || [];
+                itensArmazenados.push(itemName);
+                localStorage.setItem('itens', JSON.stringify(itensArmazenados));
+            }
+    
             var novoItem = document.createElement('div');
             novoItem.className = 'checklist-item';
             novoItem.innerHTML = `
@@ -57,19 +69,23 @@
             `;
             document.getElementById('itensContainer').appendChild(novoItem);
         }
-    }
-
-    // Função para mover um item marcado para a lista de itens verificados
-    function moverItem(itemName) {
-        var item = document.getElementById(`item-${itemName}`);
-        var containerDestino = document.getElementById('itensVerificadosContainer');
-
-        if (item.checked) {
-            containerDestino.appendChild(item.parentNode);
-        } else {
-            document.getElementById('itensContainer').appendChild(item.parentNode);
+    
+        // Função para mover um item marcado para a lista de itens verificados
+        function moverItem(itemName) {
+            var item = document.getElementById(`item-${itemName}`);
+            var containerDestino = document.getElementById('itensVerificadosContainer');
+    
+            if (item.checked) {
+                containerDestino.appendChild(item.parentNode);
+            } else {
+                document.getElementById('itensContainer').appendChild(item.parentNode);
+            }
         }
-    }
-</script>
+    
+        // Carregar os itens ao carregar a página
+        document.addEventListener('DOMContentLoaded', function () {
+            carregarItensArmazenados();
+        });
+    </script>
 </body>
 </html>
