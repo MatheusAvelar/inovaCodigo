@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyIxMfx9Xda2po0i2Exl1nMkU8FZBhSRl" crossorigin="anonymous">
+    <link rel="icon" href="img/ico.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+    <title>Inova Código - Checklist</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1516963750502427" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        To Do
+                    </div>
+                    <div class="card-body" id="todo-list">
+                        <!-- Adicione suas tarefas aqui -->
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-success btn-block" onclick="adicionarTarefa()">Adicionar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header bg-warning">
+                        In Progress
+                    </div>
+                    <div class="card-body" id="inprogress-list">
+                        <!-- Adicione suas tarefas aqui -->
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-success btn-block" onclick="adicionarTarefa()">Adicionar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header bg-success text-white">
+                        Done
+                    </div>
+                    <div class="card-body" id="done-list">
+                        <!-- Adicione suas tarefas aqui -->
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-success btn-block" onclick="adicionarTarefa()">Adicionar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-Lz3ywcAfAAU8U9pd6vo5KWGzCAVEiMQaBf8AT5w5gMV0E1QWoCc8Ekq+6uo/DU8h" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyIxMfx9Xda2po0i2Exl1nMkU8FZBhSRl" crossorigin="anonymous"></script>
+
+    <script>
+        function adicionarTarefa() {
+            var tarefa = prompt("Digite a tarefa:");
+            if (tarefa !== null && tarefa !== "") {
+                var cardBody = $("<div class='card-text'>" + tarefa + "</div>");
+                var card = $("<div class='card mb-2'><div class='card-body'>" + cardBody.html() + "</div></div>");
+
+                card.draggable({
+                    revert: true,
+                    helper: 'clone',
+                    cursor: 'move'
+                });
+
+                cardBody.appendTo("#todo-list");
+                card.appendTo("#todo-list");
+            }
+        }
+    </script>
+
+</body>
+
+</html>
