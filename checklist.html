@@ -3,114 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checklist Bonito</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-
-        .checklist-container {
-            max-width: 400px;
-            width: 100%;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-        }
-
-        .checklist-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .checklist-item input {
-            margin-right: 10px;
-        }
-
-        .checklist-item label {
-            font-size: 16px;
-        }
-
-        .checklist-item input[type="checkbox"] {
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            border: 2px solid #3498db;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .checklist-item input[type="checkbox"]:checked {
-            background-color: #3498db;
-            border: 2px solid #3498db;
-        }
-
-        .checklist-item input[type="checkbox"]:checked::before {
-            content: '\2713';
-            display: block;
-            width: 20px;
-            height: 20px;
-            text-align: center;
-            line-height: 20px;
-            color: #fff;
-        }
-
-        button {
-            background-color: #3498db;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: background-color 0.3s;
-        }
-
-        button:hover {
-            background-color: #2980b9;
-        }
-    </style>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="img/ico.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+    <title>Inova Código - Checklist</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1516963750502427"
+     crossorigin="anonymous"></script>
 </head>
 <body>
-
-<div class="checklist-container">
-    <div class="checklist-item">
-        <input type="checkbox" id="item1">
-        <label for="item1">Item 1</label>
+    <header class="navbar">
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="projetos.html">Projetos</a>
+            <a href="publicacoes.html">Publicações</a>
+            <a href="gerador.html">Geradores</a>
+            <a href="checklist.html">Checklist</a>
+            <a href="https://matheusavelar.github.io/">Currículo</a>
+        </nav>
+    </header>
+    <div class="centro">
+        <div class="consulta-cep"> <!-- Renomeie a classe -->
+            <center><h1>Checklist</h1></center>
+            <div class="itens-container">
+                <div class="itens-list">
+                    <h2>Itens</h2>
+                    <div class="checklist-container" id="itensContainer">
+                    </div>
+                </div>
+            
+                <div class="itens-verificados">
+                    <h2>Itens Verificados</h2>
+                    <div class="checklist-container" id="itensVerificadosContainer">
+                    </div>
+                </div>
+            </div>
+            <button onclick="adicionarItem()">Adicionar Item</button>
+        </div>
     </div>
-    <div class="checklist-item">
-        <input type="checkbox" id="item2">
-        <label for="item2">Item 2</label>
-    </div>
-    <div class="checklist-item">
-        <input type="checkbox" id="item3">
-        <label for="item3">Item 3</label>
-    </div>
-    <button onclick="concluirChecklist()">Concluir Checklist</button>
-</div>
 
 <script>
-    function concluirChecklist() {
-        var checkboxes = document.querySelectorAll('.checklist-item input[type="checkbox"]');
-        var itensConcluidos = [];
+    // Função para adicionar um novo item à lista
+    function adicionarItem() {
+        var itemName = prompt("Digite o nome do item:");
+        if (itemName) {
+            var novoItem = document.createElement('div');
+            novoItem.className = 'checklist-item';
+            novoItem.innerHTML = `
+                <input type="checkbox" id="item-${itemName}" onchange="moverItem('${itemName}')">
+                <label for="item-${itemName}">${itemName}</label>
+            `;
+            document.getElementById('itensContainer').appendChild(novoItem);
+        }
+    }
 
-        checkboxes.forEach(function(checkbox) {
-            if (checkbox.checked) {
-                itensConcluidos.push(checkbox.nextElementSibling.textContent);
-            }
-        });
+    // Função para mover um item marcado para a lista de itens verificados
+    function moverItem(itemName) {
+        var item = document.getElementById(`item-${itemName}`);
+        var containerDestino = document.getElementById('itensVerificadosContainer');
 
-        alert('Itens concluídos: ' + itensConcluidos.join(', '));
+        if (item.checked) {
+            containerDestino.appendChild(item.parentNode);
+        } else {
+            document.getElementById('itensContainer').appendChild(item.parentNode);
+        }
     }
 </script>
-
 </body>
 </html>

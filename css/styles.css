@@ -639,3 +639,72 @@ form button {
     align-items: center;
     margin: 5px 0; /* Espaçamento entre os parágrafos */
 }
+
+/* Estilos para o checklist */
+.itens-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.itens-list,
+.itens-verificados {
+    flex-basis: 48%;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: box-shadow 0.3s ease;
+}
+
+.checklist-container {
+    max-width: 100%;
+}
+
+.checklist-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.checklist-item input {
+    margin-right: 10px;
+}
+
+.checklist-item label {
+    font-size: 16px;
+}
+
+.checklist-item input[type="checkbox"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #000000;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.checklist-item input[type="checkbox"]:checked {
+    background-color: rgb(68, 91, 91);
+    border: 2px solid rgb(68, 91, 91);
+}
+
+.checklist-item input[type="checkbox"]:checked::before {
+    content: '\2713';
+    display: block;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    color: #fff;
+}
+
+button {
+    background-color: rgb(68, 91, 91);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
