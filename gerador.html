@@ -84,11 +84,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <script>
         document.getElementById("buscar").addEventListener("click", function () {
-            const cep = document.getElementById("cep").value.trim(); // Trim whitespace
+            const cep = document.getElementById("cep").value.trim();
             if (cep === "") {
                 const resultado = document.getElementById("resultado");
                 resultado.innerHTML = `<p>Por favor, digite um CEP válido.</p>`;
-                return; // Exit the function
+                return;
             }
     
             const apiUrl = `https://viacep.com.br/ws/${cep}/json/`;
