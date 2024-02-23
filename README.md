@@ -1,6 +1,6 @@
 # Inova Código
 
-Bem-vindo ao InovaCódigo! Este é o repositório oficial do site [inovacodigo.com.br](https://www.inovacodigo.com.br), onde você pode encontrar uma variedade de recursos interessantes, projetos pessoais, publicações e ferramentas úteis. Leia abaixo para saber mais sobre cada seção.
+Bem-vindo ao InovaCódigo! Este é o repositório oficial do site <a href="https://www.w3schools.com/" target="_blank">inovacodigo.com.br</a> [inovacodigo.com.br](https://www.inovacodigo.com.br), onde você pode encontrar uma variedade de recursos interessantes, projetos pessoais, publicações e ferramentas úteis. Leia abaixo para saber mais sobre cada seção.
 
 ## Menu de Navegação
 
