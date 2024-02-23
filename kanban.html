@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kanban</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="img/ico.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+    <title>Inova Código - Kanban</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1516963750502427"
+        crossorigin="anonymous"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -50,33 +59,51 @@
             margin-top: 20px;
         }
 
-        form input, form button {
+        form input,
+        form button {
             margin-right: 10px;
         }
     </style>
 </head>
+
 <body>
+    <header class="navbar">
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="projetos.html">Projetos</a>
+            <a href="publicacoes.html">Publicações</a>
+            <a href="gerador.html">Geradores</a>
+            <a href="checklist.html">Checklist</a>
+            <a href="projetos/controleFinanceiro/login.php">Checklist</a>
+            <a href="kanban.html">Kanban</a>
+            <a href="https://matheusavelar.github.io/">Currículo</a>
+        </nav>
+    </header>
+
+    <center>
+        <h1>Kanban</h1>
+    </center>
     <h1>Kanban</h1>
-    
+
     <div id="kanban">
         <div id="todo" class="column" ondrop="drop(event, 'todo')" ondragover="allowDrop(event)">
-            <h2>To Do</h2>
+            <h2>Tarefas</h2>
             <ul id="todo-list" class="task-list" ondrop="drop(event, 'todo')" ondragover="allowDrop(event)">
-                <!-- Tarefas da coluna To Do serão inseridas aqui -->
+                <!-- Tarefas da coluna Tarefas serão inseridas aqui -->
             </ul>
         </div>
-        
+
         <div id="doing" class="column" ondrop="drop(event, 'doing')" ondragover="allowDrop(event)">
-            <h2>Doing</h2>
+            <h2>Fazendo</h2>
             <ul id="doing-list" class="task-list" ondrop="drop(event, 'doing')" ondragover="allowDrop(event)">
-                <!-- Tarefas da coluna Doing serão inseridas aqui -->
+                <!-- Tarefas da coluna Fazendo serão inseridas aqui -->
             </ul>
         </div>
-        
+
         <div id="done" class="column" ondrop="drop(event, 'done')" ondragover="allowDrop(event)">
-            <h2>Done</h2>
+            <h2>Feito</h2>
             <ul id="done-list" class="task-list" ondrop="drop(event, 'done')" ondragover="allowDrop(event)">
-                <!-- Tarefas da coluna Done serão inseridas aqui -->
+                <!-- Tarefas da coluna Feito serão inseridas aqui -->
             </ul>
         </div>
     </div>
@@ -86,6 +113,36 @@
         <button type="button" onclick="addTask()">Adicionar</button>
     </form>
 
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="img/nome.png" alt="Logo da Marca no Rodapé">
+            </div>
+            <div class="footer-social">
+                <a href="https://www.linkedin.com/in/matheusavelar/" target="blank"><img align="center"
+                        src="img/linkedin.png" alt="https://www.linkedin.com/in/matheusavelar/" /></a>
+                <a href="https://fb.com/matheus.dapaz.33" target="blank"><img align="center" src="img/facebook.png"
+                        alt="matheus.dapaz.33" /></a>
+                <a href="https://instagram.com/matheusnutela" target="blank"><img align="center" src="img/instagram.png"
+                        alt="matheusnutela" /></a>
+                <a href="https://github.com/MatheusAvelar" target="blank"><img align="center" src="img/github.png"
+                        alt="matheusnutela" /></a>
+                <a href="https://api.whatsapp.com/send?phone=5531993018766" target="blank"><img align="center"
+                        src="img/whatsapp.png" alt="matheusnutela" /></a>
+            </div>
+        </div>
+        <div class="footer-links">
+            <a href="termosUso.html">Termos de Uso</a>
+            <a href="politica.html">Política de Privacidade</a>
+            <a href="contato.html">Contato</a>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2023 Inova Código. Todos os direitos reservados.
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <script>
         // Função para permitir a solta de elementos
         function allowDrop(event) {
@@ -114,7 +171,8 @@
             if (newTask !== '') {
                 const todoList = document.getElementById('todo-list');
                 const taskId = `task-${Date.now()}`; // Cria um ID único para a tarefa
-                const taskElement = `<li id="${taskId}" class="draggable" draggable="true" ondragstart="drag(event)">${newTask}<span class="delete-btn" onclick="deleteTask('${taskId}')">X</span></li>`;
+                const taskElement =
+                    `<li id="${taskId}" class="draggable" draggable="true" ondragstart="drag(event)">${newTask}<span class="delete-btn" onclick="deleteTask('${taskId}')">X</span></li>`;
                 todoList.innerHTML += taskElement;
                 taskInput.value = '';
                 saveTasks(); // Salva as tarefas no armazenamento local
@@ -139,7 +197,7 @@
         }
 
         // Função para carregar as tarefas do armazenamento local ao carregar a página
-        window.onload = function() {
+        window.onload = function () {
             const todo = localStorage.getItem('todo');
             const doing = localStorage.getItem('doing');
             const done = localStorage.getItem('done');
@@ -149,4 +207,5 @@
         };
     </script>
 </body>
+
 </html>
