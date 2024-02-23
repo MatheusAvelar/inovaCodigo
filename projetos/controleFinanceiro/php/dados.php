@@ -1,7 +1,7 @@
 <?php
 
 function autenticaUsuario() {
-    $conexao = mysqli_connect("127.0.0.1:3306", "u221588236_root", "Matheus@307", "id21135767_bancoinova");
+    $conexao = mysqli_connect("127.0.0.1:3306", "u221588236_root", "Matheus@307", "u221588236_controle_finan");
     ?>
     <script type="text/javascript">
     function redirecionaPainel() {
@@ -39,7 +39,7 @@ function autenticaUsuario() {
 }
 
 function cadastraLogin(){
-    $conexao = mysqli_connect("127.0.0.1:3306", "u221588236_root", "Matheus@307", "id21135767_bancoinova");
+    $conexao = mysqli_connect("127.0.0.1:3306", "u221588236_root", "Matheus@307", "u221588236_controle_finan");
     $nome       = $_POST['firstName'];
     $sobrenome  = $_POST['lastName'];
     $email      = $_POST['inputEmail'];
@@ -80,7 +80,7 @@ function geraToken() {
 }
 
 function esqueceuSenha($email){
-    $conexao = mysqli_connect("127.0.0.1:3306", "u221588236_root", "Matheus@307", "id21135767_bancoinova");
+    $conexao = mysqli_connect("127.0.0.1:3306", "u221588236_root", "Matheus@307", "u221588236_controle_finan");
     $codigo = geraToken();
     $senha = MD5($codigo);
 
@@ -113,7 +113,7 @@ function esqueceuSenha($email){
 }
 
 function insereDadosRefeicao() {    
-    $conexao = mysqli_connect("127.0.0.1:3306", "u221588236_root", "Matheus@307", "id21135767_bancoinova");
+    $conexao = mysqli_connect("127.0.0.1:3306", "u221588236_root", "Matheus@307", "u221588236_controle_finan");
 
     $descricao = $_POST['descricao'];
     $valorTotalCompra = str_replace('.', '', $_POST["valorTotalCompra"]);
@@ -127,7 +127,7 @@ function insereDadosRefeicao() {
 }
 
 function insereDadosAlimentacao() {    
-    $conexao = mysqli_connect("127.0.0.1:3306", "u221588236_root", "Matheus@307", "id21135767_bancoinova");
+    $conexao = mysqli_connect("127.0.0.1:3306", "u221588236_root", "Matheus@307", "u221588236_controle_finan");
 
     $descricao = $_POST['descricao'];
     $valorTotalCompra = str_replace('.', '', $_POST["valorTotalCompra"]);
@@ -142,7 +142,7 @@ function insereDadosAlimentacao() {
 }
 
 function insereDadosXP() {    
-    $conexao = mysqli_connect("127.0.0.1:3306", "u221588236_root", "Matheus@307", "id21135767_bancoinova");
+    $conexao = mysqli_connect("127.0.0.1:3306", "u221588236_root", "Matheus@307", "u221588236_controle_finan");
 
     $descricao = $_POST['descricao'];
     $valorTotalCompra = str_replace('.', '', $_POST["valorTotalCompra"]);
@@ -167,7 +167,7 @@ function logout() {?>
 }
 
 function recuperaDadosRefeicao() {
-    $conexao = mysqli_connect("127.0.0.1:3306", "u221588236_root", "Matheus@307", "id21135767_bancoinova");
+    $conexao = mysqli_connect("127.0.0.1:3306", "u221588236_root", "Matheus@307", "u221588236_controle_finan");
     
     if (!$conexao) {
         die("Falha na conexão: " . mysqli_connect_error());
@@ -213,7 +213,7 @@ function recuperaDadosRefeicao() {
 }
 
 function recuperaDadosAlimentacao() {
-    $conexao = mysqli_connect("127.0.0.1:3306", "u221588236_root", "Matheus@307", "id21135767_bancoinova");
+    $conexao = mysqli_connect("127.0.0.1:3306", "u221588236_root", "Matheus@307", "u221588236_controle_finan");
     
     if (!$conexao) {
         die("Falha na conexão: " . mysqli_connect_error());
@@ -259,7 +259,7 @@ function recuperaDadosAlimentacao() {
 }
 
 function recuperaDadosXP() {
-    $conexao = mysqli_connect("127.0.0.1:3306", "u221588236_root", "Matheus@307", "id21135767_bancoinova");
+    $conexao = mysqli_connect("127.0.0.1:3306", "u221588236_root", "Matheus@307", "u221588236_controle_finan");
     
     if (!$conexao) {
         die("Falha na conexão: " . mysqli_connect_error());
@@ -305,7 +305,7 @@ function recuperaDadosXP() {
 }
 
 function receitaTotal(){
-    $conexao = mysqli_connect("127.0.0.1:3306", "u221588236_root", "Matheus@307", "id21135767_bancoinova");
+    $conexao = mysqli_connect("127.0.0.1:3306", "u221588236_root", "Matheus@307", "u221588236_controle_finan");
     
     if (!$conexao) {
         die("Falha na conexão: " . mysqli_connect_error());
@@ -330,7 +330,7 @@ function receitaTotal(){
 }
 
 function despesaTotal(){
-    $conexao = mysqli_connect("127.0.0.1:3306", "u221588236_root", "Matheus@307", "id21135767_bancoinova");
+    $conexao = mysqli_connect("127.0.0.1:3306", "u221588236_root", "Matheus@307", "u221588236_controle_finan");
     
     if (!$conexao) {
         die("Falha na conexão: " . mysqli_connect_error());
@@ -356,7 +356,7 @@ function despesaTotal(){
 }
 
 function totalAlimentacao(){
-    $conexao = mysqli_connect("127.0.0.1:3306", "u221588236_root", "Matheus@307", "id21135767_bancoinova");
+    $conexao = mysqli_connect("127.0.0.1:3306", "u221588236_root", "Matheus@307", "u221588236_controle_finan");
     
     if (!$conexao) {
         die("Falha na conexão: " . mysqli_connect_error());
@@ -382,7 +382,7 @@ function totalAlimentacao(){
 }
 
 function totalRefeicao() {
-    $conexao = mysqli_connect("127.0.0.1:3306", "u221588236_root", "Matheus@307", "id21135767_bancoinova");
+    $conexao = mysqli_connect("127.0.0.1:3306", "u221588236_root", "Matheus@307", "u221588236_controle_finan");
     
     if (!$conexao) {
         die("Falha na conexão: " . mysqli_connect_error());
