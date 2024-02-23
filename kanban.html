@@ -174,14 +174,18 @@
         function addTask() {
             const taskInput = document.getElementById('task-input');
             const newTask = taskInput.value.trim();
-            if (newTask !== '') {
-                const todoList = document.getElementById('todo-list');
+            const todoList = document.getElementById('todo-list');
+        
+            // Verifica se já existem 9 tarefas na lista
+            if (todoList.children.length < 9 && newTask !== '') {
                 const taskId = `task-${Date.now()}`; // Cria um ID único para a tarefa
                 const taskElement =
                     `<li id="${taskId}" class="draggable" draggable="true" ondragstart="drag(event)">${newTask}<span class="delete-btn" onclick="deleteTask('${taskId}')">X</span></li>`;
                 todoList.innerHTML += taskElement;
                 taskInput.value = '';
                 saveTasks(); // Salva as tarefas no armazenamento local
+            } else {
+                alert('Limite máximo de 9 tarefas atingido!');
             }
         }
 
