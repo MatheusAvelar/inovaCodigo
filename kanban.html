@@ -1,337 +1,152 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt">
 <head>
-    <meta charset="utf-8">
-
-
-    <title>bs4 Kanban Board - Bootdey.com</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-    <style type="text/css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanban</title>
+    <style>
         body {
-            margin-top: 20px;
-            background: #fafafa
+            font-family: Arial, sans-serif;
         }
 
-        .card {
-            margin-bottom: 1.5rem;
-            box-shadow: 0 .25rem .5rem rgba(0, 0, 0, .025)
-        }
-
-        .card-border-primary {
-            border-top: 4px solid #2979ff
-        }
-
-        .card-border-secondary {
-            border-top: 4px solid #efefef
-        }
-
-        .card-border-success {
-            border-top: 4px solid #00c853
-        }
-
-        .card-border-info {
-            border-top: 4px solid #3d5afe
-        }
-
-        .card-border-warning {
-            border-top: 4px solid #ff9100
-        }
-
-        .card-border-danger {
-            border-top: 4px solid #ff1744
-        }
-
-        .card-border-light {
-            border-top: 4px solid #f8f9fa
-        }
-
-        .card-border-dark {
-            border-top: 4px solid #6c757d
-        }
-
-        .card-header {
-            border-bottom-width: 1px
-        }
-
-        .card-actions a {
-            color: #495057;
-            text-decoration: none
-        }
-
-        .card-actions svg {
-            width: 16px;
-            height: 16px
-        }
-
-        .card-actions .dropdown {
-            line-height: 1.4
-        }
-
-        .card-title {
-            font-weight: 500;
-            margin-top: .1rem
-        }
-
-        .card-subtitle {
-            font-weight: 400
-        }
-
-        .card-table {
-            margin-bottom: 0
-        }
-
-        .card-table tr td:first-child,
-        .card-table tr th:first-child {
-            padding-left: 1.25rem
-        }
-
-        .card-table tr td:last-child,
-        .card-table tr th:last-child {
-            padding-right: 1.25rem
-        }
-
-        .card-img-top {
-            height: 100%
-        }
-
-        .card {
-            margin-bottom: 1.5rem;
-            box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, .025);
-        }
-
-        .card {
-            position: relative;
-            display: -ms-flexbox;
+        #kanban {
             display: flex;
-            -ms-flex-direction: column;
-            flex-direction: column;
-            min-width: 0;
-            word-wrap: break-word;
+        }
+
+        .column {
+            flex: 1;
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .column h2 {
+            margin-top: 0;
+        }
+
+        .task-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .task-list li {
             background-color: #fff;
-            background-clip: border-box;
-            border: 1px solid #e5e9f2;
-            border-radius: .2rem;
+            margin-bottom: 5px;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            cursor: pointer;
         }
 
-        .card-header:first-child {
-            border-radius: calc(.2rem - 1px) calc(.2rem - 1px) 0 0;
+        .delete-btn {
+            margin-left: 5px;
+            color: red;
+            cursor: pointer;
         }
 
-        .card-header {
-            border-bottom-width: 1px;
+        form {
+            margin-top: 20px;
         }
 
-        .card-header {
-            padding: .75rem 1.25rem;
-            margin-bottom: 0;
-            color: inherit;
-            background-color: #fff;
-            border-bottom: 1px solid #e5e9f2;
+        form input, form button {
+            margin-right: 10px;
         }
     </style>
 </head>
-
 <body>
-    <main class="content">
-        <div class="container p-0">
-            <h1 class="h3 mb-3">Kanban Board</h1>
-            <div class="row">
-                <div class="col-12 col-lg-6 col-xl-3">
-                    <div class="card card-border-primary">
-                        <div class="card-header">
-                            <div class="card-actions float-right">
-                                <div class="dropdown show">
-                                    <a href="#" data-toggle="dropdown" data-display="static">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="feather feather-more-horizontal align-middle">
-                                            <circle cx="12" cy="12" r="1"></circle>
-                                            <circle cx="19" cy="12" r="1"></circle>
-                                            <circle cx="5" cy="12" r="1"></circle>
-                                        </svg>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <h5 class="card-title">A Fazer</h5>
-                            <h6 class="card-subtitle text-muted">Tarefas a ser analisadas.</h6>
-                        </div>
-                        <div class="card-body p-3">
-                            <div class="card mb-3 bg-light">
-                                <div class="card-body p-3">
-                                    <div class="float-right mr-n2">
-                                        <label class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" checked>
-                                            <span class="custom-control-label"></span>
-                                        </label>
-                                    </div>
-                                    <p>Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo.
-                                        Maecenas malesuada.</p>
-                                    <div class="float-right mt-n1">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar6.png" width="32"
-                                            height="32" class="rounded-circle" alt="Avatar">
-                                    </div>
-                                    <a class="btn btn-outline-primary btn-sm" href="#">View</a>
-                                </div>
-                            </div>
-                            <a href="#" class="btn btn-primary btn-block">Adicionar Tarefa</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-lg-6 col-xl-3">
-                    <div class="card card-border-warning">
-                        <div class="card-header">
-                            <div class="card-actions float-right">
-                                <div class="dropdown show">
-                                    <a href="#" data-toggle="dropdown" data-display="static">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="feather feather-more-horizontal align-middle">
-                                            <circle cx="12" cy="12" r="1"></circle>
-                                            <circle cx="19" cy="12" r="1"></circle>
-                                            <circle cx="5" cy="12" r="1"></circle>
-                                        </svg>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <h5 class="card-title">Em Progresso</h5>
-                            <h6 class="card-subtitle text-muted">Tarefa em desenvolvimento.</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="card mb-3 bg-light">
-                                <div class="card-body p-3">
-                                    <div class="float-right mr-n2">
-                                        <label class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input">
-                                            <span class="custom-control-label"></span>
-                                        </label>
-                                    </div>
-                                    <p>Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo.
-                                        Maecenas malesuada.</p>
-                                    <div class="float-right mt-n1">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar6.png" width="32"
-                                            height="32" class="rounded-circle" alt="Avatar">
-                                    </div>
-                                    <a class="btn btn-outline-primary btn-sm" href="#">View</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-lg-6 col-xl-3">
-                    <div class="card card-border-danger">
-                        <div class="card-header">
-                            <div class="card-actions float-right">
-                                <div class="dropdown show">
-                                    <a href="#" data-toggle="dropdown" data-display="static">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="feather feather-more-horizontal align-middle">
-                                            <circle cx="12" cy="12" r="1"></circle>
-                                            <circle cx="19" cy="12" r="1"></circle>
-                                            <circle cx="5" cy="12" r="1"></circle>
-                                        </svg>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <h5 class="card-title">Em Espera</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="card mb-3 bg-light">
-                                <div class="card-body p-3">
-                                    <div class="float-right mr-n2">
-                                        <label class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input">
-                                            <span class="custom-control-label"></span>
-                                        </label>
-                                    </div>
-                                    <p>In hac habitasse platea dictumst. Curabitur at lacus ac velit ornare lobortis.
-                                        Curabitur a felis tristique.</p>
-                                    <div class="float-right mt-n1">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar2.png" width="32"
-                                            height="32" class="rounded-circle" alt="Avatar">
-                                    </div>
-                                    <a class="btn btn-outline-primary btn-sm" href="#">View</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-lg-6 col-xl-3">
-                    <div class="card card-border-success">
-                        <div class="card-header">
-                            <div class="card-actions float-right">
-                                <div class="dropdown show">
-                                    <a href="#" data-toggle="dropdown" data-display="static">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="feather feather-more-horizontal align-middle">
-                                            <circle cx="12" cy="12" r="1"></circle>
-                                            <circle cx="19" cy="12" r="1"></circle>
-                                            <circle cx="5" cy="12" r="1"></circle>
-                                        </svg>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <h5 class="card-title">Finalizado</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="card mb-3 bg-light">
-                                <div class="card-body p-3">
-                                    <div class="float-right mr-n2">
-                                        <label class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input">
-                                            <span class="custom-control-label"></span>
-                                        </label>
-                                    </div>
-                                    <p>Nam pretium turpis et arcu. Duis arcu tortor, suscipit eget, imperdiet nec,
-                                        imperdiet iaculis, ipsum.</p>
-                                    <div class="float-right mt-n1">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar6.png" width="32"
-                                            height="32" class="rounded-circle" alt="Avatar">
-                                    </div>
-                                    <a class="btn btn-outline-primary btn-sm" href="#">View</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <h1>Kanban</h1>
+    
+    <div id="kanban">
+        <div id="todo" class="column" ondrop="drop(event, 'todo')" ondragover="allowDrop(event)">
+            <h2>To Do</h2>
+            <ul id="todo-list" class="task-list" ondrop="drop(event, 'todo')" ondragover="allowDrop(event)">
+                <!-- Tarefas da coluna To Do serão inseridas aqui -->
+            </ul>
         </div>
-    </main>
-    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript">
+        
+        <div id="doing" class="column" ondrop="drop(event, 'doing')" ondragover="allowDrop(event)">
+            <h2>Doing</h2>
+            <ul id="doing-list" class="task-list" ondrop="drop(event, 'doing')" ondragover="allowDrop(event)">
+                <!-- Tarefas da coluna Doing serão inseridas aqui -->
+            </ul>
+        </div>
+        
+        <div id="done" class="column" ondrop="drop(event, 'done')" ondragover="allowDrop(event)">
+            <h2>Done</h2>
+            <ul id="done-list" class="task-list" ondrop="drop(event, 'done')" ondragover="allowDrop(event)">
+                <!-- Tarefas da coluna Done serão inseridas aqui -->
+            </ul>
+        </div>
+    </div>
 
+    <form id="task-form">
+        <input type="text" id="task-input" placeholder="Nova Tarefa">
+        <button type="button" onclick="addTask()">Adicionar</button>
+    </form>
+
+    <script>
+        // Função para permitir a solta de elementos
+        function allowDrop(event) {
+            event.preventDefault();
+        }
+
+        // Função para iniciar o arrasto
+        function drag(event) {
+            event.dataTransfer.setData("text", event.target.id);
+        }
+
+        // Função para a solta do elemento
+        function drop(event, target) {
+            event.preventDefault();
+            const taskId = event.dataTransfer.getData("text");
+            const taskElement = document.getElementById(taskId);
+            const targetList = document.getElementById(`${target}-list`);
+            targetList.appendChild(taskElement);
+            saveTasks(); // Salva as tarefas no armazenamento local
+        }
+
+        // Função para adicionar uma nova tarefa
+        function addTask() {
+            const taskInput = document.getElementById('task-input');
+            const newTask = taskInput.value.trim();
+            if (newTask !== '') {
+                const todoList = document.getElementById('todo-list');
+                const taskId = `task-${Date.now()}`; // Cria um ID único para a tarefa
+                const taskElement = `<li id="${taskId}" class="draggable" draggable="true" ondragstart="drag(event)">${newTask}<span class="delete-btn" onclick="deleteTask('${taskId}')">X</span></li>`;
+                todoList.innerHTML += taskElement;
+                taskInput.value = '';
+                saveTasks(); // Salva as tarefas no armazenamento local
+            }
+        }
+
+        // Função para excluir uma tarefa
+        function deleteTask(taskId) {
+            const taskElement = document.getElementById(taskId);
+            taskElement.parentNode.removeChild(taskElement);
+            saveTasks(); // Salva as tarefas no armazenamento local
+        }
+
+        // Função para salvar as tarefas no armazenamento local
+        function saveTasks() {
+            const todoList = document.getElementById('todo-list').innerHTML;
+            const doingList = document.getElementById('doing-list').innerHTML;
+            const doneList = document.getElementById('done-list').innerHTML;
+            localStorage.setItem('todo', todoList);
+            localStorage.setItem('doing', doingList);
+            localStorage.setItem('done', doneList);
+        }
+
+        // Função para carregar as tarefas do armazenamento local ao carregar a página
+        window.onload = function() {
+            const todo = localStorage.getItem('todo');
+            const doing = localStorage.getItem('doing');
+            const done = localStorage.getItem('done');
+            document.getElementById('todo-list').innerHTML = todo || '';
+            document.getElementById('doing-list').innerHTML = doing || '';
+            document.getElementById('done-list').innerHTML = done || '';
+        };
     </script>
 </body>
-
 </html>
