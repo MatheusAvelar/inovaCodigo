@@ -31,6 +31,16 @@
     </header>
 
     <div class="ticker">
+        <select id="currencySelect" onchange="changeDisplayCurrency()">
+            <option value="BRL">Real Brasileiro (BRL)</option>
+            <option selected value="USD">Dólar Americano (USD)</option>
+        </select>
+        <marquee behavior="scroll" direction="left">
+            <span id="cryptoRates"></span>
+        </marquee>
+    </div>
+    
+    <div class="ticker">
         <marquee behavior="scroll" direction="left">
             <span id="cryptoRates"></span>
         </marquee>
