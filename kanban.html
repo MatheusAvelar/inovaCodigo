@@ -84,36 +84,34 @@
         <h1>Kanban</h1>
     </center>
     <div class="centro">
-        <!--<div class="consulta-cep">-->
-    <div id="kanban">
-        <div id="todo" class="column" ondrop="drop(event, 'todo')" ondragover="allowDrop(event)">
-            <h2>Tarefas</h2>
-            <ul id="todo-list" class="task-list" ondrop="drop(event, 'todo')" ondragover="allowDrop(event)">
-                <!-- Tarefas da coluna Tarefas serão inseridas aqui -->
-            </ul>
-        </div>
+        <div id="kanban">
+            <div id="todo" class="column" ondrop="drop(event, 'todo')" ondragover="allowDrop(event)">
+                <h2>Tarefas</h2>
+                <ul id="todo-list" class="task-list" ondrop="drop(event, 'todo')" ondragover="allowDrop(event)">
+                    <!-- Tarefas da coluna Tarefas serão inseridas aqui -->
+                </ul>
+            </div>
 
-        <div id="doing" class="column" ondrop="drop(event, 'doing')" ondragover="allowDrop(event)">
-            <h2>Fazendo</h2>
-            <ul id="doing-list" class="task-list" ondrop="drop(event, 'doing')" ondragover="allowDrop(event)">
-                <!-- Tarefas da coluna Fazendo serão inseridas aqui -->
-            </ul>
-        </div>
+            <div id="doing" class="column" ondrop="drop(event, 'doing')" ondragover="allowDrop(event)">
+                <h2>Fazendo</h2>
+                <ul id="doing-list" class="task-list" ondrop="drop(event, 'doing')" ondragover="allowDrop(event)">
+                    <!-- Tarefas da coluna Fazendo serão inseridas aqui -->
+                </ul>
+            </div>
 
-        <div id="done" class="column" ondrop="drop(event, 'done')" ondragover="allowDrop(event)">
-            <h2>Feito</h2>
-            <ul id="done-list" class="task-list" ondrop="drop(event, 'done')" ondragover="allowDrop(event)">
-                <!-- Tarefas da coluna Feito serão inseridas aqui -->
-            </ul>
+            <div id="done" class="column" ondrop="drop(event, 'done')" ondragover="allowDrop(event)">
+                <h2>Feito</h2>
+                <ul id="done-list" class="task-list" ondrop="drop(event, 'done')" ondragover="allowDrop(event)">
+                    <!-- Tarefas da coluna Feito serão inseridas aqui -->
+                </ul>
+            </div>
         </div>
-    <!--</div>-->
-</div>
-</div>
+        <form id="task-form">
+            <input type="text" id="task-input" placeholder="Nova Tarefa">
+            <button type="button" onclick="addTask()">Adicionar</button>
+        </form>
+    </div>
 
-    <form id="task-form">
-        <input type="text" id="task-input" placeholder="Nova Tarefa">
-        <button type="button" onclick="addTask()">Adicionar</button>
-    </form>
 
     <footer class="footer">
         <div class="footer-content">
