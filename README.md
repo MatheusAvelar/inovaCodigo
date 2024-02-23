@@ -1,6 +1,6 @@
 # Inova Código
 
-Bem-vindo ao InovaCódigo! Este é o repositório oficial do site <a href="https://www.w3schools.com/" target="_blank">inovacodigo.com.br</a> [inovacodigo.com.br](https://www.inovacodigo.com.br), onde você pode encontrar uma variedade de recursos interessantes, projetos pessoais, publicações e ferramentas úteis. Leia abaixo para saber mais sobre cada seção.
+Bem-vindo ao InovaCódigo! Este é o repositório oficial do site <a href="https://www.inovacodigo.com.br" target="_blank">inovacodigo.com.br</a>, onde você pode encontrar uma variedade de recursos interessantes, projetos pessoais, publicações e ferramentas úteis. Leia abaixo para saber mais sobre cada seção.
 
 ## Menu de Navegação
 
@@ -10,7 +10,7 @@ Bem-vindo ao InovaCódigo! Este é o repositório oficial do site <a href="https
 
 ### 2. **Projetos**
    - Descubra e explore os projetos pessoais desenvolvidos pelo autor.
-   - Cada projeto inclui links diretos para os respectivos repositórios no [GitHub](https://github.com/).
+   - Cada projeto inclui links diretos para os respectivos repositórios no <a href="https://github.com/MatheusAvelar" target="_blank">GitHub</a>.
 
 ### 3. **Publicações**
    - Leia as últimas publicações do autor sobre diversos tópicos.
@@ -40,11 +40,11 @@ Bem-vindo ao InovaCódigo! Este é o repositório oficial do site <a href="https
 
 ## Como Contribuir
 
-- Sinta-se à vontade para explorar o código-fonte dos projetos no [GitHub](https://github.com/) e contribuir com sugestões, correções ou novas funcionalidades.
-- Reporte problemas ou sugira melhorias através das [issues do GitHub](https://github.com/usuario/inovacodigo/issues).
+- Sinta-se à vontade para explorar o código-fonte dos projetos no <a href="https://github.com/MatheusAvelar" target="_blank">GitHub</a> e contribuir com sugestões, correções ou novas funcionalidades.
+- Reporte problemas ou sugira melhorias através das <a href="https://github.com/usuario/inovacodigo/issues" target="_blank">issues do GitHub</a>.
 
 ## Contato
 
-Para entrar em contato com o autor ou para obter mais informações sobre o site, sinta-se à vontade para utilizar os detalhes de contato fornecidos no currículo ou envie um e-mail para [administracao@inovacodigo.com.br](mailto:contato@inovacodigo.com.br).
+Para entrar em contato com o autor ou para obter mais informações sobre o site, sinta-se à vontade para utilizar os detalhes de contato fornecidos no currículo ou envie um e-mail para <a href="mailto:administracao@inovacodigo.com.br">administracao@inovacodigo.com.br</a>.
 
 Divirta-se explorando o InovaCódigo!
