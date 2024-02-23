@@ -165,8 +165,14 @@
             const taskId = event.dataTransfer.getData("text");
             const taskElement = document.getElementById(taskId);
             const targetList = document.getElementById(`${target}-list`);
-            targetList.appendChild(taskElement);
-            saveTasks(); // Salva as tarefas no armazenamento local
+            
+            // Verifica se a coluna já tem 9 tarefas
+            if (targetList.children.length < 9) {
+                targetList.appendChild(taskElement);
+                saveTasks(); // Salva as tarefas no armazenamento local
+            } else {
+                alert(`Limite máximo de 9 tarefas na coluna "${target}" atingido!`);
+            }
         }
 
         // Função para adicionar uma nova tarefa
