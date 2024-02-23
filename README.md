@@ -17,12 +17,24 @@ Bem-vindo ao InovaCódigo! Este é o repositório oficial do site [inovacodigo.c
    - Mantenha-se informado e envolvido com os artigos detalhados e análises interessantes.
 
 ### 4. **Geradores**
-   - **Conversor de Texto:** Converta texto entre diferentes formatos.
    - **Leitura de CEP:** Obtenha informações detalhadas sobre um CEP específico.
+   - **Conversor de Texto:** Converta texto entre diferentes formatos.
    - **Qual meu IP:** Descubra o endereço IP atual da sua conexão.
    - **Gerador de Senhas:** Crie senhas seguras de forma fácil e rápida.
+   - **Gerador de CPF:** Gere números de CPF válidos e verifique a validade de CPFs.
 
-### 5. **Currículo**
+### 5. **Controle Financeiro**
+   - Sistema de Login, envolvendo um CRUD de criar conta, fazer o login e esqueceu a senha.
+   - Controle de sessão.
+   - Gerar relatório.
+   - Gestão de Cartão de Crédito e vale alimentação.
+   - Cadastro de renda.
+   - Painel com receita e despesa.
+
+### 6. **Kanban**
+   - Adicione tarefas e mova-as pelas colunas de Tarefas, Fazendo e Feito, podendo excluí-las a qualquer momento.
+
+### 7. **Currículo**
    - Dê uma olhada no currículo do autor para obter informações detalhadas sobre sua experiência e habilidades.
    - Entre em contato para oportunidades profissionais ou colaborações.
 
