@@ -1,7 +1,7 @@
 <?php
 
 function autenticaUsuario() {
-    $conexao = mysqli_connect("127.0.0.1:3306", "u221588236_root", "Matheus@307", "u221588236_controle_finan");
+    $conexao = mysqli_connect("127.0.0.1", "u221588236_root", "Matheus@307", "u221588236_controle_finan");
     ?>
     <script type="text/javascript">
     function redirecionaPainel() {
