@@ -73,7 +73,7 @@
 
     <script>
         function getUserIP() {
-            fetch('https://api64.ipify.org?format=json')
+            fetch('https://api.ipify.org?format=json')
                 .then(response => response.json())
                 .then(data => {
                     const userIP = data.ip;
