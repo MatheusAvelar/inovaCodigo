@@ -74,7 +74,14 @@
 
         async function buscarReceitas(ingredientesParametro, apiKey) {
             const response = await fetch(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredientesParametro}&number=5&apiKey=${apiKey}`);
-            return await response.json();
+            const receitas = await response.json();
+        
+            // Traduzir os títulos das receitas para português
+            for (let receita of receitas) {
+                receita.title = await traduzirTexto(receita.title, 'en', 'pt');
+            }
+        
+            return receitas;
         }
 
         async function sugerirReceitas() {
