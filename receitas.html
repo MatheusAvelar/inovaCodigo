@@ -85,17 +85,14 @@
                 return;
             }
 
-            const ingredientesParametro = ingredientesUsuario.join(',');
+            // Traduzir ingredientes para inglês
+            const ingredientesTraduzidos = await Promise.all(ingredientesUsuario.map(ingrediente => traduzirTexto(ingrediente, 'pt', 'en')));
+            const ingredientesParametro = ingredientesTraduzidos.join(',');
+
             const apiKey = 'ae9e5c674e8146f6b4f0be6fc08e4f60'; // Sua chave de API do Spoonacular
 
             try {
                 const receitas = await buscarReceitas(ingredientesParametro, apiKey);
-
-                // Traduzir os títulos das receitas para português
-                for (let receita of receitas) {
-                    receita.title = await traduzirTexto(receita.title, 'en', 'pt');
-                }
-
                 exibirReceitas(receitas);
             } catch (error) {
                 console.error('Ocorreu um erro ao buscar as receitas:', error);
