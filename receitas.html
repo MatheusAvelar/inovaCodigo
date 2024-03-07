@@ -33,6 +33,7 @@
     <div class="consulta-cep">
         <h1>Insira os ingredientes que você tem em casa:</h1>
         <textarea id="ingredientes"></textarea>
+        <br>
         <button onclick="sugerirReceitas()">Sugerir Receitas</button>
         <div id="receitas"></div>
     </div>
@@ -72,9 +73,9 @@
             "bolo": ["ovos", "farinha", "açúcar", "leite"]
         };
 
-        // Função para verificar se uma receita contém todos os ingredientes fornecidos
+        // Função para verificar se uma receita contém pelo menos um dos ingredientes fornecidos
         function receitaContemIngredientes(receitaIngredientes, ingredientesUsuario) {
-            return ingredientesUsuario.every(ingrediente => receitaIngredientes.includes(ingrediente));
+            return receitaIngredientes.some(ingrediente => ingredientesUsuario.includes(ingrediente));
         }
 
         // Função para sugerir receitas com base nos ingredientes informados
@@ -86,7 +87,7 @@
                 return;
             }
 
-            // Filtrar as receitas que contêm todos os ingredientes fornecidos pelo usuário
+            // Filtrar as receitas que contêm pelo menos um dos ingredientes fornecidos pelo usuário
             const receitasSugeridas = Object.entries(receitas)
                 .filter(([receita, ingredientes]) => receitaContemIngredientes(ingredientes, ingredientesUsuario))
                 .map(([receita]) => receita);
