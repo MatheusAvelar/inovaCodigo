@@ -83,7 +83,12 @@
 
         // Função para sugerir receitas com base nos ingredientes informados
         function sugerirReceitas() {
-            const ingredientesUsuario = document.getElementById('ingredientes').value.split('\n');
+            const ingredientesUsuario = document.getElementById('ingredientes').value.split('\n').map(ingrediente => ingrediente.trim()).filter(ingrediente => ingrediente !== '');
+
+            if (ingredientesUsuario.length === 0) {
+                alert('Por favor, insira pelo menos um ingrediente.');
+                return;
+            }
 
             // Calcular a similaridade para cada receita
             const similaridades = {};
