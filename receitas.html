@@ -30,10 +30,12 @@
         </nav>
     </header>
 
-    <h1>Insira os ingredientes que você tem em casa:</h1>
-    <textarea id="ingredientes"></textarea>
-    <button onclick="sugerirReceitas()">Sugerir Receitas</button>
-    <div id="receitas"></div>
+    <div class="consulta-cep">
+        <h1>Insira os ingredientes que você tem em casa:</h1>
+        <textarea id="ingredientes"></textarea>
+        <button onclick="sugerirReceitas()">Sugerir Receitas</button>
+        <div id="receitas"></div>
+    </div>
 
     <footer class="footer">
         <div class="footer-content">
@@ -70,15 +72,9 @@
             "bolo": ["ovos", "farinha", "açúcar", "leite"]
         };
 
-        // Função para calcular a similaridade entre dois conjuntos de ingredientes
-        function calcularSimilaridade(ingredientes1, ingredientes2) {
-            const conjunto1 = new Set(ingredientes1);
-            const conjunto2 = new Set(ingredientes2);
-
-            const intersecao = new Set([...conjunto1].filter(ingrediente => conjunto2.has(ingrediente)));
-            const uniao = new Set([...conjunto1, ...conjunto2]);
-
-            return intersecao.size / uniao.size;
+        // Função para verificar se uma receita contém todos os ingredientes fornecidos
+        function receitaContemIngredientes(receitaIngredientes, ingredientesUsuario) {
+            return ingredientesUsuario.every(ingrediente => receitaIngredientes.includes(ingrediente));
         }
 
         // Função para sugerir receitas com base nos ingredientes informados
@@ -90,23 +86,23 @@
                 return;
             }
 
-            // Calcular a similaridade para cada receita
-            const similaridades = {};
-            for (const [receita, ingredientes] of Object.entries(receitas)) {
-                similaridades[receita] = calcularSimilaridade(ingredientes, ingredientesUsuario);
-            }
-
-            // Ordenar as receitas por similaridade
-            const receitasOrdenadas = Object.keys(similaridades).sort((a, b) => similaridades[b] - similaridades[a]);
+            // Filtrar as receitas que contêm todos os ingredientes fornecidos pelo usuário
+            const receitasSugeridas = Object.entries(receitas)
+                .filter(([receita, ingredientes]) => receitaContemIngredientes(ingredientes, ingredientesUsuario))
+                .map(([receita]) => receita);
 
             // Exibir as receitas sugeridas
             const receitasDiv = document.getElementById('receitas');
             receitasDiv.innerHTML = '<h2>Receitas sugeridas:</h2>';
-            receitasOrdenadas.forEach(receita => {
-                const receitaElement = document.createElement('p');
-                receitaElement.textContent = receita;
-                receitasDiv.appendChild(receitaElement);
-            });
+            if (receitasSugeridas.length === 0) {
+                receitasDiv.innerHTML += '<p>Nenhuma receita encontrada com os ingredientes fornecidos.</p>';
+            } else {
+                receitasSugeridas.forEach(receita => {
+                    const receitaElement = document.createElement('p');
+                    receitaElement.textContent = receita;
+                    receitasDiv.appendChild(receitaElement);
+                });
+            }
         }
     </script>
 </body>
