@@ -66,20 +66,7 @@
         </div>
     </footer>
     <script>
-        // Definindo as receitas
-        const receitas = {
-            "omelete": ["ovos", "bacon", "queijo"],
-            "panquecas": ["ovos", "farinha", "leite"],
-            "bolo": ["ovos", "farinha", "açúcar", "leite"]
-        };
-
-        // Função para verificar se uma receita contém pelo menos um dos ingredientes fornecidos
-        function receitaContemIngredientes(receitaIngredientes, ingredientesUsuario) {
-            return receitaIngredientes.some(ingrediente => ingredientesUsuario.includes(ingrediente));
-        }
-
-        // Função para sugerir receitas com base nos ingredientes informados
-        function sugerirReceitas() {
+        async function sugerirReceitas() {
             const ingredientesUsuario = document.getElementById('ingredientes').value.split('\n').map(ingrediente => ingrediente.trim()).filter(ingrediente => ingrediente !== '');
 
             if (ingredientesUsuario.length === 0) {
@@ -87,22 +74,34 @@
                 return;
             }
 
-            // Filtrar as receitas que contêm pelo menos um dos ingredientes fornecidos pelo usuário
-            const receitasSugeridas = Object.entries(receitas)
-                .filter(([receita, ingredientes]) => receitaContemIngredientes(ingredientes, ingredientesUsuario))
-                .map(([receita]) => receita);
+            const ingredientesParametro = ingredientesUsuario.join(',');
 
-            // Exibir as receitas sugeridas
+            const apiKey = 'ae9e5c674e8146f6b4f0be6fc08e4f60'; // Sua chave de API do Spoonacular
+
+            try {
+                const response = await fetch(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredientesParametro}&number=5&apiKey=${apiKey}`);
+                const receitas = await response.json();
+
+                exibirReceitas(receitas);
+            } catch (error) {
+                console.error('Ocorreu um erro ao buscar as receitas:', error);
+                alert('Ocorreu um erro ao buscar as receitas. Por favor, tente novamente mais tarde.');
+            }
+        }
+
+        function exibirReceitas(receitas) {
             const receitasDiv = document.getElementById('receitas');
             receitasDiv.innerHTML = '<h2>Receitas sugeridas:</h2>';
-            if (receitasSugeridas.length === 0) {
+            if (receitas.length === 0) {
                 receitasDiv.innerHTML += '<p>Nenhuma receita encontrada com os ingredientes fornecidos.</p>';
             } else {
-                receitasSugeridas.forEach(receita => {
-                    const receitaElement = document.createElement('p');
-                    receitaElement.textContent = receita;
-                    receitasDiv.appendChild(receitaElement);
+                const listaReceitas = document.createElement('ul');
+                receitas.forEach(receita => {
+                    const itemReceita = document.createElement('li');
+                    itemReceita.textContent = receita.title;
+                    listaReceitas.appendChild(itemReceita);
                 });
+                receitasDiv.appendChild(listaReceitas);
             }
         }
     </script>
