@@ -84,7 +84,7 @@
             chatBox.appendChild(messageElement);
             chatBox.scrollTop = chatBox.scrollHeight;
         }
-
+        const OPENAI_API_KEY = "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";
         // Função para receber resposta do bot
         async function getBotResponse(userInput) {
             console.log("Enviando solicitação à API...");
@@ -93,12 +93,13 @@
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer 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', // Substitua YOUR_API_KEY pela sua chave da OpenAI
+                    'Authorization': 'Bearer ' + OPENAI_API_KEY,
                 },
                 body: JSON.stringify({
-                    model: 'text-davinci-003', // Modelo específico do ChatGPT
+                    model: 'text-davinci-003',
                     prompt: userInput,
-                    max_tokens: 150
+                    max_tokens: 150,
+                    temperature:0.5,
                 }),
             });
 
