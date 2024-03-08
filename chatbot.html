@@ -92,17 +92,21 @@
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer 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',
+                    'Authorization': 'Bearer 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', // Substitua YOUR_API_KEY pela sua chave da OpenAI
                 },
                 body: JSON.stringify({
-                    model: 'text-davinci-003',
+                    model: 'text-davinci-003', // Modelo específico do ChatGPT
                     prompt: userInput,
                     max_tokens: 150
                 }),
             });
             const data = await response.json();
-            const botResponse = data.choices[0].text.trim();
-            appendMessage(botResponse, 'bot');
+            if (data.choices && data.choices.length > 0) {
+                const botResponse = data.choices[0].text.trim();
+                appendMessage(botResponse, 'bot');
+            } else {
+                appendMessage("Desculpe, não consegui entender sua pergunta.", 'bot');
+            }
         }
     </script>
 </body>
