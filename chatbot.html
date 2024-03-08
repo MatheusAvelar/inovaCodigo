@@ -88,11 +88,11 @@
         // Função para receber resposta do bot
         async function getBotResponse(userInput) {
             appendMessage("Digitando...", 'bot');
-            const response = await fetch('https://api.openai.com/v1/completions', {
+            const response = await fetch('https://api.openai.com/v1/chat/completions', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer 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',
+                    'Authorization': 'Bearer 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',
                 },
                 body: JSON.stringify({
                     model: 'text-davinci-003',
