@@ -87,6 +87,7 @@
 
         // Função para receber resposta do bot
         async function getBotResponse(userInput) {
+            console.log("Enviando solicitação à API...");
             appendMessage("Digitando...", 'bot');
             const response = await fetch('https://api.openai.com/v1/completions', {
                 method: 'POST',
@@ -100,11 +101,17 @@
                     max_tokens: 150
                 }),
             });
+
+            console.log("Esperando resposta da API...");
             const data = await response.json();
+            console.log("Resposta da API recebida:", data);
+
             if (data.choices && data.choices.length > 0) {
                 const botResponse = data.choices[0].text.trim();
+                console.log("Resposta do bot:", botResponse);
                 appendMessage(botResponse, 'bot');
             } else {
+                console.log("Resposta inválida da API.");
                 appendMessage("Desculpe, não consegui entender sua pergunta.", 'bot');
             }
         }
