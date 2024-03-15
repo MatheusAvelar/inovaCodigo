@@ -58,15 +58,13 @@
             border: 1px solid #ddd;
             border-radius: 3px;
             cursor: pointer;
-            position: relative;
         }
 
         .delete-btn {
-            position: absolute;
-            right: 5px;
-            top: 50%;
-            transform: translateY(-50%);
+            margin-left: 5px;
+            color: red;
             cursor: pointer;
+            float: right;
         }
 
         form {
@@ -91,6 +89,44 @@
         }
 
         .input-container img {
+            cursor: pointer;
+        }
+
+        /* Estilo do modal */
+        .modal {
+            display: none; /* Por padrão, o modal estará oculto */
+            position: fixed; /* Posição fixa para cobrir toda a tela */
+            z-index: 1; /* Coloque o modal acima de tudo */
+            left: 0;
+            top: 0;
+            width: 100%; /* Largura total */
+            height: 100%; /* Altura total */
+            overflow: auto; /* Adicione rolagem se necessário */
+            background-color: rgb(0, 0, 0); /* Fundo preto */
+            background-color: rgba(0, 0, 0, 0.4); /* Fundo preto com transparência */
+        }
+
+        /* Conteúdo do modal */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* Centralize o modal verticalmente e horizontalmente */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Largura do modal */
+        }
+
+        /* Fechar botão (x) */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
             cursor: pointer;
         }
     </style>
@@ -136,13 +172,23 @@
                 </ul>
             </div>
         </div>
-        <div class="input-container" id="add-column">
+        <div id="add-column" class="input-container">
             <input type="text" id="column-name" placeholder="Nome da Coluna">
             <img src="img/adicionar.png" alt="Adicionar" onclick="addColumn()">
         </div>
-        <div class="input-container" id="task-form">
+        <div id="task-form" class="input-container">
             <input type="text" id="task-input" placeholder="Nova Tarefa">
             <img src="img/adicionar.png" alt="Adicionar" onclick="addTask()">
+        </div>
+    </div>
+
+    <!-- Modal para exibir as descrições da tarefa -->
+    <div id="taskModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Descrições da Tarefa</h2>
+            <textarea id="taskDescription" rows="4" cols="50"></textarea>
+            <button onclick="saveTaskDescription()">Salvar</button>
         </div>
     </div>
 
@@ -174,10 +220,6 @@
             event.preventDefault();
         }
 
-        function drag(event) {
-            event.dataTransfer.setData("text", event.target.id);
-        }
-
         function drop(event, target) {
             event.preventDefault();
             const taskId = event.dataTransfer.getData("text");
@@ -198,7 +240,7 @@
             if (firstColumnList) {
                 if (firstColumnList.children.length < 6 && newTask !== '') {
                     const taskId = `task-${Date.now()}`;
-                    const taskElement = `<li id="${taskId}" class="draggable" draggable="true" ondragstart="drag(event)">${newTask}<span class="delete-btn" onclick="deleteTask('${taskId}')"><img src="img/excluirp.png" alt="Excluir"></span></li>`;
+                    const taskElement = `<li id="${taskId}" class="draggable" draggable="true" ondragstart="drag(event)" ondblclick="openModal('${taskId}')">${newTask}<span class="delete-btn" onclick="deleteTask('${taskId}')"><img src="img/delete.png" alt="Excluir"></span></li>`;
                     firstColumnList.innerHTML += taskElement;
                     taskInput.value = '';
                     saveTasks();
@@ -236,12 +278,6 @@
             }
         }
 
-        function deleteTask(taskId) {
-            const task = document.getElementById(taskId);
-            task.parentNode.removeChild(task);
-            saveTasks();
-        }
-
         function saveTasks() {
             const todoList = document.getElementById('todo-list').innerHTML;
             const doingList = document.getElementById('doing-list').innerHTML;
@@ -255,10 +291,29 @@
             localStorage.removeItem(`column_${columnId}_deleted`);
         }
 
-        function createElementFromHTML(htmlString) {
-            const div = document.createElement('div');
-            div.innerHTML = htmlString.trim();
-            return div.firstChild;
+        function deleteTask(taskId) {
+            const taskElement = document.getElementById(taskId);
+            taskElement.parentNode.removeChild(taskElement);
+            saveTasks();
+        }
+
+        let selectedTaskId; // Variável para armazenar o ID da tarefa selecionada
+
+        function openModal(taskId) {
+            selectedTaskId = taskId; // Armazena o ID da tarefa selecionada
+            const taskDescription = localStorage.getItem(taskId); // Obtém as descrições da tarefa do armazenamento local
+            document.getElementById("taskDescription").value = taskDescription || ''; // Define as descrições no campo de texto do modal
+            document.getElementById("taskModal").style.display = "block"; // Exibe o modal
+        }
+
+        function closeModal() {
+            document.getElementById("taskModal").style.display = "none"; // Oculta o modal
+        }
+
+        function saveTaskDescription() {
+            const taskDescription = document.getElementById("taskDescription").value; // Obtém as descrições do campo de texto do modal
+            localStorage.setItem(selectedTaskId, taskDescription); // Armazena as descrições da tarefa no armazenamento local
+            closeModal(); // Fecha o modal após salvar
         }
 
         window.onload = function () {
