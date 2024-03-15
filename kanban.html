@@ -111,7 +111,7 @@
             <div id="todo" class="column" ondrop="drop(event, 'todo')" ondragover="allowDrop(event)">
                 <h2>Tarefas <img src="img/configuracao.png" class="config-icon" onclick="toggleConfigMenu('todo')" alt="Configurações"></h2>
                 <div class="config-menu" id="todo-config-menu" style="display: none;">
-                    <select>
+                    <select onchange="handleColumnAction(this.value, 'todo')">
                         <option value="criar">Criar Coluna</option>
                         <option value="delete">Excluir Coluna</option>
                     </select>
@@ -245,6 +245,29 @@
             const menu = document.getElementById(`${columnId}-config-menu`);
             menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
         }
+
+        function handleColumnAction(action, columnId) {
+            if (action === 'delete') {
+                // Confirmar exclusão da coluna
+                if (confirm("Tem certeza que deseja excluir esta coluna?")) {
+                    // Remover a coluna da exibição
+                    const column = document.getElementById(columnId);
+                    column.parentNode.removeChild(column);
+                    // Armazenar a exclusão em cache
+                    localStorage.setItem(`column_${columnId}_deleted`, 'true');
+                }
+            }
+        }
+
+        window.onload = function () {
+            // Verificar se a coluna foi excluída anteriormente e removê-la da exibição
+            const todoDeleted = localStorage.getItem('column_todo_deleted');
+            if (todoDeleted === 'true') {
+                const todoColumn = document.getElementById('todo');
+                todoColumn.parentNode.removeChild(todoColumn);
+            }
+            // Outras verificações para colunas adicionais podem ser feitas da mesma maneira
+        };
     </script>
 </body>
 
