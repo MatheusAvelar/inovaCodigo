@@ -112,7 +112,26 @@
     </center>
     <div class="consulta-cep">
         <div id="kanban">
-            <!-- Colunas aqui -->
+            <div id="todo" class="column" ondrop="drop(event, 'todo')" ondragover="allowDrop(event)">
+                <h2>A Fazer <img src="img/excluir.png" class="config-icon" onclick="deleteColumn('todo')" alt="Excluir Coluna"></h2>
+                <ul id="todo-list" class="task-list" ondrop="drop(event, 'todo')" ondragover="allowDrop(event)">
+                    <!-- Tarefas da coluna A Fazer serão inseridas aqui -->
+                </ul>
+            </div>
+
+            <div id="doing" class="column" ondrop="drop(event, 'doing')" ondragover="allowDrop(event)">
+                <h2>Desenvolvendo <img src="img/excluir.png" class="config-icon" onclick="deleteColumn('doing')" alt="Excluir Coluna"></h2>
+                <ul id="doing-list" class="task-list" ondrop="drop(event, 'doing')" ondragover="allowDrop(event)">
+                    <!-- Tarefas da coluna Desenvolvendo serão inseridas aqui -->
+                </ul>
+            </div>
+
+            <div id="done" class="column" ondrop="drop(event, 'done')" ondragover="allowDrop(event)">
+                <h2>Feito <img src="img/excluir.png" class="config-icon" onclick="deleteColumn('done')" alt="Excluir Coluna"></h2>
+                <ul id="done-list" class="task-list" ondrop="drop(event, 'done')" ondragover="allowDrop(event)">
+                    <!-- Tarefas da coluna Feito serão inseridas aqui -->
+                </ul>
+            </div>
         </div>
         <div class="input-container" id="add-column">
             <input type="text" id="column-name" placeholder="Nome da Coluna">
