@@ -152,6 +152,10 @@
             event.preventDefault();
         }
 
+        function drag(event) {
+            event.dataTransfer.setData("text", event.target.id);
+        }
+
         function drop(event, target) {
             event.preventDefault();
             const taskId = event.dataTransfer.getData("text");
@@ -207,6 +211,14 @@
                 const column = document.getElementById(columnId);
                 column.parentNode.removeChild(column);
                 saveColumn(columnId);
+            }
+        }
+
+        function deleteTask(taskId) {
+            if (confirm("Tem certeza que deseja excluir esta tarefa?")) {
+                const task = document.getElementById(taskId);
+                task.parentNode.removeChild(task);
+                saveTasks();
             }
         }
 
