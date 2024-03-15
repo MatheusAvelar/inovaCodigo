@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -73,51 +74,28 @@
         }
 
         /* Adicionado */
-        .popup {
-            position: relative;
-            display: inline-block;
+        .config-icon {
+            cursor: pointer;
         }
 
-        .popup .popuptext {
-            visibility: hidden;
-            width: 160px;
-            background-color: #555;
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 8px 0;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            margin-left: -80px;
+        .input-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
         }
 
-        .popup .popuptext::after {
-            content: "";
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-left: -5px;
-            border-width: 5px;
-            border-style: solid;
-            border-color: #555 transparent transparent transparent;
+        .input-container input {
+            flex: 1;
+            padding: 5px;
+            margin-right: 10px;
         }
 
-        .popup .show {
-            visibility: visible;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+        .input-container img {
+            cursor: pointer;
         }
     </style>
 </head>
+
 <body>
     <header class="navbar">
         <nav class="nav-links">
@@ -220,10 +198,7 @@
             if (firstColumnList) {
                 if (firstColumnList.children.length < 6 && newTask !== '') {
                     const taskId = `task-${Date.now()}`;
-                    const taskElement = `<li id="${taskId}" class="draggable popup" onclick="openPopup('${taskId}')" draggable="true" ondragstart="drag(event)">
-                                            ${newTask}
-                                            <span class="popuptext" id="${taskId}-popup">A Simple Popup!A Simple Popup!A Simple Popup!A Simple Popup!A Simple Popup!A Simple Popup!A Simple Popup!A Simple Popup!A Simple Popup!A Simple Popup!A Simple Popup!A Simple Popup!</span>
-                                        </li>`;
+                    const taskElement = `<li id="${taskId}" class="draggable" draggable="true" ondragstart="drag(event)">${newTask}<span class="delete-btn" onclick="deleteTask('${taskId}')"><img src="img/excluirp.png" alt="Excluir"></span></li>`;
                     firstColumnList.innerHTML += taskElement;
                     taskInput.value = '';
                     saveTasks();
@@ -280,11 +255,6 @@
             localStorage.removeItem(`column_${columnId}_deleted`);
         }
 
-        function openPopup(taskId) {
-            const popup = document.getElementById(`${taskId}-popup`);
-            popup.classList.toggle("show");
-        }
-
         function createElementFromHTML(htmlString) {
             const div = document.createElement('div');
             div.innerHTML = htmlString.trim();
@@ -301,4 +271,5 @@
         };
     </script>
 </body>
+
 </html>
