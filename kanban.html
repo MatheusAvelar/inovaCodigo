@@ -10,36 +10,13 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
     <title>Inova Código - Kanban</title>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1516963750502427" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f0f0f0;
-            /* Cor de fundo suave */
-        }
-
-        .header {
-            background-color: #333;
-            /* Cor de fundo do cabeçalho */
-            color: #fff;
-            /* Cor do texto do cabeçalho */
-            padding: 20px;
-        }
-
-        .nav-links a {
-            color: #fff;
-            /* Cor dos links no cabeçalho */
-            margin-right: 20px;
-            text-decoration: none;
-        }
-
-        .nav-links a:hover {
-            text-decoration: underline;
-            /* Sublinhar ao passar o mouse */
+            font-family: Arial, sans-serif;
         }
 
         .footer {
-            position: fixed; /* ou 'position: absolute;' se preferir que ele role com o conteúdo */
+            position: fixed;
             bottom: 0;
             width: 100%;
             background-color: rgb(68, 91, 91);
@@ -50,9 +27,6 @@
 
         #kanban {
             display: flex;
-            justify-content: space-around;
-            /* Distribuir colunas igualmente */
-            margin-top: 20px;
         }
 
         .column {
@@ -62,10 +36,14 @@
             border: 1px solid #ccc;
             border-radius: 5px;
             background-color: #f9f9f9;
+            position: relative;
         }
 
         .column h2 {
             margin-top: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .task-list {
@@ -74,22 +52,34 @@
         }
 
         .task-list li {
-            background-color: #f9f9f9;
-            margin-bottom: 10px;
-            padding: 10px;
-            border-radius: 5px;
+            background-color: #fff;
+            margin-bottom: 5px;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
             cursor: pointer;
         }
 
         .delete-btn {
             margin-left: 5px;
             color: red;
+            cursor: pointer;
         }
 
         form {
             margin-top: 20px;
         }
 
+        /* Adicionado */
+        .config-menu {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 5px;
+        }
     </style>
 </head>
 
@@ -113,12 +103,12 @@
     <div class="consulta-cep">
         <div id="kanban">
             <div id="todo" class="column" ondrop="drop(event, 'todo')" ondragover="allowDrop(event)">
-                <h2>Tarefas <span class="config-icon" onclick="toggleConfigMenu('todo')">⚙️</span></h2>
+                <h2>Tarefas <span class="config-text" onclick="toggleConfigMenu('todo')">Configurações</span></h2>
                 <div class="config-menu" id="todo-config-menu">
-                    <ul>
-                        <li><a href="#">Editar Nome</a></li>
-                        <li><a href="#">Excluir Coluna</a></li>
-                    </ul>
+                    <select>
+                        <option value="edit">Editar Nome</option>
+                        <option value="delete">Excluir Coluna</option>
+                    </select>
                 </div>
                 <ul id="todo-list" class="task-list" ondrop="drop(event, 'todo')" ondragover="allowDrop(event)">
                     <!-- Tarefas da coluna Tarefas serão inseridas aqui -->
@@ -126,12 +116,12 @@
             </div>
 
             <div id="doing" class="column" ondrop="drop(event, 'doing')" ondragover="allowDrop(event)">
-                <h2>Fazendo <span class="config-icon" onclick="toggleConfigMenu('doing')">⚙️</span></h2>
+                <h2>Fazendo <span class="config-text" onclick="toggleConfigMenu('doing')">Configurações</span></h2>
                 <div class="config-menu" id="doing-config-menu">
-                    <ul>
-                        <li><a href="#">Editar Nome</a></li>
-                        <li><a href="#">Excluir Coluna</a></li>
-                    </ul>
+                    <select>
+                        <option value="edit">Editar Nome</option>
+                        <option value="delete">Excluir Coluna</option>
+                    </select>
                 </div>
                 <ul id="doing-list" class="task-list" ondrop="drop(event, 'doing')" ondragover="allowDrop(event)">
                     <!-- Tarefas da coluna Fazendo serão inseridas aqui -->
@@ -139,12 +129,12 @@
             </div>
 
             <div id="done" class="column" ondrop="drop(event, 'done')" ondragover="allowDrop(event)">
-                <h2>Feito <span class="config-icon" onclick="toggleConfigMenu('done')">⚙️</span></h2>
+                <h2>Feito <span class="config-text" onclick="toggleConfigMenu('done')">Configurações</span></h2>
                 <div class="config-menu" id="done-config-menu">
-                    <ul>
-                        <li><a href="#">Editar Nome</a></li>
-                        <li><a href="#">Excluir Coluna</a></li>
-                    </ul>
+                    <select>
+                        <option value="edit">Editar Nome</option>
+                        <option value="delete">Excluir Coluna</option>
+                    </select>
                 </div>
                 <ul id="done-list" class="task-list" ondrop="drop(event, 'done')" ondragover="allowDrop(event)">
                     <!-- Tarefas da coluna Feito serão inseridas aqui -->
@@ -197,9 +187,7 @@
             const taskId = event.dataTransfer.getData("text");
             const taskElement = document.getElementById(taskId);
             const targetList = document.getElementById(`${target}-list`);
-            
-            // Verifica se a coluna já tem 9 tarefas
-            if (targetList.children.length < 9) {
+            if (targetList.children.length < 6) {
                 targetList.appendChild(taskElement);
                 saveTasks();
             } else {
@@ -211,12 +199,9 @@
             const taskInput = document.getElementById('task-input');
             const newTask = taskInput.value.trim();
             const todoList = document.getElementById('todo-list');
-        
-            // Verifica se já existem 9 tarefas na lista
-            if (todoList.children.length < 9 && newTask !== '') {
-                const taskId = `task-${Date.now()}`; // Cria um ID único para a tarefa
-                const taskElement =
-                    `<li id="${taskId}" class="draggable" draggable="true" ondragstart="drag(event)">${newTask}<span class="delete-btn" onclick="deleteTask('${taskId}')">X</span></li>`;
+            if (todoList.children.length < 6 && newTask !== '') {
+                const taskId = `task-${Date.now()}`;
+                const taskElement = `<li id="${taskId}" class="draggable" draggable="true" ondragstart="drag(event)">${newTask}<span class="delete-btn" onclick="deleteTask('${taskId}')">X</span></li>`;
                 todoList.innerHTML += taskElement;
                 taskInput.value = '';
                 saveTasks();
