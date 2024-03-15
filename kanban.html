@@ -58,11 +58,14 @@
             border: 1px solid #ddd;
             border-radius: 3px;
             cursor: pointer;
+            position: relative;
         }
 
         .delete-btn {
-            margin-left: 5px;
-            color: red;
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
             cursor: pointer;
         }
 
@@ -112,26 +115,7 @@
     </center>
     <div class="consulta-cep">
         <div id="kanban">
-            <div id="todo" class="column" ondrop="drop(event, 'todo')" ondragover="allowDrop(event)">
-                <h2>A Fazer <img src="img/excluir.png" class="config-icon" onclick="deleteColumn('todo')" alt="Excluir Coluna"></h2>
-                <ul id="todo-list" class="task-list" ondrop="drop(event, 'todo')" ondragover="allowDrop(event)">
-                    <!-- Tarefas da coluna A Fazer serão inseridas aqui -->
-                </ul>
-            </div>
-
-            <div id="doing" class="column" ondrop="drop(event, 'doing')" ondragover="allowDrop(event)">
-                <h2>Desenvolvendo <img src="img/excluir.png" class="config-icon" onclick="deleteColumn('doing')" alt="Excluir Coluna"></h2>
-                <ul id="doing-list" class="task-list" ondrop="drop(event, 'doing')" ondragover="allowDrop(event)">
-                    <!-- Tarefas da coluna Desenvolvendo serão inseridas aqui -->
-                </ul>
-            </div>
-
-            <div id="done" class="column" ondrop="drop(event, 'done')" ondragover="allowDrop(event)">
-                <h2>Feito <img src="img/excluir.png" class="config-icon" onclick="deleteColumn('done')" alt="Excluir Coluna"></h2>
-                <ul id="done-list" class="task-list" ondrop="drop(event, 'done')" ondragover="allowDrop(event)">
-                    <!-- Tarefas da coluna Feito serão inseridas aqui -->
-                </ul>
-            </div>
+            <!-- Colunas aqui -->
         </div>
         <div class="input-container" id="add-column">
             <input type="text" id="column-name" placeholder="Nome da Coluna">
@@ -195,7 +179,7 @@
             if (firstColumnList) {
                 if (firstColumnList.children.length < 6 && newTask !== '') {
                     const taskId = `task-${Date.now()}`;
-                    const taskElement = `<li id="${taskId}" class="draggable" draggable="true" ondragstart="drag(event)">${newTask}<span class="delete-btn" onclick="deleteTask('${taskId}')">X</span></li>`;
+                    const taskElement = `<li id="${taskId}" class="draggable" draggable="true" ondragstart="drag(event)">${newTask}<span class="delete-btn" onclick="deleteTask('${taskId}')"><img src="img/excluir.png" alt="Excluir"></span></li>`;
                     firstColumnList.innerHTML += taskElement;
                     taskInput.value = '';
                     saveTasks();
@@ -234,11 +218,9 @@
         }
 
         function deleteTask(taskId) {
-            if (confirm("Tem certeza que deseja excluir esta tarefa?")) {
-                const task = document.getElementById(taskId);
-                task.parentNode.removeChild(task);
-                saveTasks();
-            }
+            const task = document.getElementById(taskId);
+            task.parentNode.removeChild(task);
+            saveTasks();
         }
 
         function saveTasks() {
