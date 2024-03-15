@@ -58,12 +58,14 @@
             border: 1px solid #ddd;
             border-radius: 3px;
             cursor: pointer;
-            display: flex;
-            align-items: center;
+            position: relative;
         }
 
-        .task-list li img {
-            margin-left: auto;
+        .delete-btn {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
             cursor: pointer;
         }
 
@@ -87,6 +89,10 @@
             padding: 5px;
             margin-right: 10px;
         }
+
+        .input-container img {
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -109,7 +115,26 @@
     </center>
     <div class="consulta-cep">
         <div id="kanban">
-            <!-- Colunas aqui -->
+            <div id="todo" class="column" ondrop="drop(event, 'todo')" ondragover="allowDrop(event)">
+                <h2>A Fazer <img src="img/excluir.png" class="config-icon" onclick="deleteColumn('todo')" alt="Excluir Coluna"></h2>
+                <ul id="todo-list" class="task-list" ondrop="drop(event, 'todo')" ondragover="allowDrop(event)">
+                    <!-- Tarefas da coluna A Fazer serão inseridas aqui -->
+                </ul>
+            </div>
+
+            <div id="doing" class="column" ondrop="drop(event, 'doing')" ondragover="allowDrop(event)">
+                <h2>Desenvolvendo <img src="img/excluir.png" class="config-icon" onclick="deleteColumn('doing')" alt="Excluir Coluna"></h2>
+                <ul id="doing-list" class="task-list" ondrop="drop(event, 'doing')" ondragover="allowDrop(event)">
+                    <!-- Tarefas da coluna Desenvolvendo serão inseridas aqui -->
+                </ul>
+            </div>
+
+            <div id="done" class="column" ondrop="drop(event, 'done')" ondragover="allowDrop(event)">
+                <h2>Feito <img src="img/excluir.png" class="config-icon" onclick="deleteColumn('done')" alt="Excluir Coluna"></h2>
+                <ul id="done-list" class="task-list" ondrop="drop(event, 'done')" ondragover="allowDrop(event)">
+                    <!-- Tarefas da coluna Feito serão inseridas aqui -->
+                </ul>
+            </div>
         </div>
         <div class="input-container" id="add-column">
             <input type="text" id="column-name" placeholder="Nome da Coluna">
@@ -118,16 +143,6 @@
         <div class="input-container" id="task-form">
             <input type="text" id="task-input" placeholder="Nova Tarefa">
             <img src="img/adicionar.png" alt="Adicionar" onclick="addTask()">
-        </div>
-    </div>
-
-    <!-- Modal para exibir as descrições da tarefa -->
-    <div id="taskModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>Descrições da Tarefa</h2>
-            <textarea id="taskDescription" rows="4" cols="50"></textarea>
-            <button onclick="saveTaskDescription()">Salvar</button>
         </div>
     </div>
 
@@ -159,6 +174,10 @@
             event.preventDefault();
         }
 
+        function drag(event) {
+            event.dataTransfer.setData("text", event.target.id);
+        }
+
         function drop(event, target) {
             event.preventDefault();
             const taskId = event.dataTransfer.getData("text");
@@ -179,7 +198,7 @@
             if (firstColumnList) {
                 if (firstColumnList.children.length < 6 && newTask !== '') {
                     const taskId = `task-${Date.now()}`;
-                    const taskElement = `<li id="${taskId}" class="draggable" draggable="true" ondragstart="drag(event)" ondblclick="openModal('${taskId}')">${newTask}<img src="img/delete.png" class="delete-btn" onclick="deleteTask('${taskId}')" alt="Excluir Tarefa"></li>`;
+                    const taskElement = `<li id="${taskId}" class="draggable" draggable="true" ondragstart="drag(event)">${newTask}<span class="delete-btn" onclick="deleteTask('${taskId}')"><img src="img/excluirp.png" alt="Excluir"></span></li>`;
                     firstColumnList.innerHTML += taskElement;
                     taskInput.value = '';
                     saveTasks();
@@ -217,6 +236,12 @@
             }
         }
 
+        function deleteTask(taskId) {
+            const task = document.getElementById(taskId);
+            task.parentNode.removeChild(task);
+            saveTasks();
+        }
+
         function saveTasks() {
             const todoList = document.getElementById('todo-list').innerHTML;
             const doingList = document.getElementById('doing-list').innerHTML;
@@ -234,23 +259,6 @@
             const div = document.createElement('div');
             div.innerHTML = htmlString.trim();
             return div.firstChild;
-        }
-
-        function openModal(taskId) {
-            const taskDescription = localStorage.getItem(taskId);
-            document.getElementById('taskDescription').value = taskDescription || '';
-            document.getElementById('taskModal').style.display = 'block';
-        }
-
-        function closeModal() {
-            document.getElementById('taskModal').style.display = 'none';
-        }
-
-        function saveTaskDescription() {
-            const taskId = document.getElementById('taskDescription').getAttribute('data-task-id');
-            const taskDescription = document.getElementById('taskDescription').value;
-            localStorage.setItem(taskId, taskDescription);
-            closeModal();
         }
 
         window.onload = function () {
