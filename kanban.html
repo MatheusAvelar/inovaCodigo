@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -58,7 +59,6 @@
             border-radius: 3px;
             cursor: pointer;
             position: relative;
-            width: calc(100% - 12px); /* 12px para compensar o padding e borda */
         }
 
         .delete-btn {
@@ -74,51 +74,60 @@
         }
 
         /* Adicionado */
-        .popup {
-            position: relative;
-            display: inline-block;
+        .config-icon {
+            cursor: pointer;
         }
 
-        .popup .popuptext {
-            visibility: hidden;
-            width: 160px;
-            background-color: #555;
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 8px 0;
+        .input-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .input-container input {
+            flex: 1;
+            padding: 5px;
+            margin-right: 10px;
+        }
+
+        .input-container img {
+            cursor: pointer;
+        }
+
+        /* Estilos do modal */
+        .modal {
+            display: none;
             position: absolute;
             z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            margin-left: -80px;
+            background-color: #fefefe;
+            border: 1px solid #888;
+            padding: 20px;
+            width: 300px; /* Ajuste conforme necessário */
+            max-height: 200px; /* Ajuste conforme necessário */
+            overflow-y: auto;
         }
 
-        .popup .popuptext::after {
-            content: "";
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-left: -5px;
-            border-width: 5px;
-            border-style: solid;
-            border-color: #555 transparent transparent transparent;
+        .modal-content {
+            margin: 0;
+            padding: 0;
         }
 
-        .popup .show {
-            visibility: visible;
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
         }
     </style>
 </head>
+
 <body>
     <header class="navbar">
         <nav class="nav-links">
@@ -142,6 +151,8 @@
                 <h2>A Fazer <img src="img/excluir.png" class="config-icon" onclick="deleteColumn('todo')" alt="Excluir Coluna"></h2>
                 <ul id="todo-list" class="task-list" ondrop="drop(event, 'todo')" ondragover="allowDrop(event)">
                     <!-- Tarefas da coluna A Fazer serão inseridas aqui -->
+                    <li id="task1" class="draggable" draggable="true" ondragstart="drag(event)">Tarefa 1<span class="delete-btn" onclick="deleteTask('task1')"><img src="img/excluirp.png" alt="Excluir"></span></li>
+                    <li id="task2" class="draggable" draggable="true" ondragstart="drag(event)">Tarefa 2<span class="delete-btn" onclick="deleteTask('task2')"><img src="img/excluirp.png" alt="Excluir"></span></li>
                 </ul>
             </div>
 
@@ -166,6 +177,14 @@
         <div class="input-container" id="task-form">
             <input type="text" id="task-input" placeholder="Nova Tarefa">
             <img src="img/adicionar.png" alt="Adicionar" onclick="addTask()">
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="taskModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <textarea id="taskDescription" class="modal-textarea" readonly></textarea>
         </div>
     </div>
 
@@ -221,10 +240,7 @@
             if (firstColumnList) {
                 if (firstColumnList.children.length < 6 && newTask !== '') {
                     const taskId = `task-${Date.now()}`;
-                    const taskElement = `<li id="${taskId}" class="draggable popup" onclick="openPopup('${taskId}')" draggable="true" ondragstart="drag(event)">
-                                            ${newTask}
-                                            <span class="popuptext" id="${taskId}-popup">Descrição da Tarefa: \nOi</span><span class="delete-btn" onclick="deleteTask('${taskId}')"><img src="img/excluirp.png" alt="Excluir"></span>
-                                        </li>`;
+                    const taskElement = `<li id="${taskId}" class="draggable" draggable="true" ondragstart="drag(event)" ondblclick="openModal('${taskId}')">${newTask}<span class="delete-btn" onclick="deleteTask('${taskId}')"><img src="img/excluirp.png" alt="Excluir"></span></li>`;
                     firstColumnList.innerHTML += taskElement;
                     taskInput.value = '';
                     saveTasks();
@@ -281,9 +297,17 @@
             localStorage.removeItem(`column_${columnId}_deleted`);
         }
 
-        function openPopup(taskId) {
-            const popup = document.getElementById(`${taskId}-popup`);
-            popup.classList.toggle("show");
+        function openModal(taskId) {
+            const taskDescription = document.getElementById(taskId).innerText;
+            const modal = document.getElementById('taskModal');
+            const textarea = document.getElementById('taskDescription');
+            textarea.value = taskDescription;
+            modal.style.display = "block";
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('taskModal');
+            modal.style.display = "none";
         }
 
         function createElementFromHTML(htmlString) {
@@ -302,4 +326,5 @@
         };
     </script>
 </body>
+
 </html>
