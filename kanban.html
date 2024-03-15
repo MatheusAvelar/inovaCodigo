@@ -10,13 +10,36 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
     <title>Inova Código - Kanban</title>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1516963750502427" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            /* Cor de fundo suave */
+        }
+
+        .header {
+            background-color: #333;
+            /* Cor de fundo do cabeçalho */
+            color: #fff;
+            /* Cor do texto do cabeçalho */
+            padding: 20px;
+        }
+
+        .nav-links a {
+            color: #fff;
+            /* Cor dos links no cabeçalho */
+            margin-right: 20px;
+            text-decoration: none;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+            /* Sublinhar ao passar o mouse */
         }
 
         .footer {
-            position: fixed;
+            position: fixed; /* ou 'position: absolute;' se preferir que ele role com o conteúdo */
             bottom: 0;
             width: 100%;
             background-color: rgb(68, 91, 91);
@@ -27,6 +50,9 @@
 
         #kanban {
             display: flex;
+            justify-content: space-around;
+            /* Distribuir colunas igualmente */
+            margin-top: 20px;
         }
 
         .column {
@@ -36,7 +62,6 @@
             border: 1px solid #ccc;
             border-radius: 5px;
             background-color: #f9f9f9;
-            position: relative; /* Adicionado */
         }
 
         .column h2 {
@@ -49,56 +74,22 @@
         }
 
         .task-list li {
-            background-color: #fff;
-            margin-bottom: 5px;
-            padding: 5px;
-            border: 1px solid #ddd;
-            border-radius: 3px;
+            background-color: #f9f9f9;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
             cursor: pointer;
         }
 
         .delete-btn {
             margin-left: 5px;
             color: red;
-            cursor: pointer;
         }
 
         form {
             margin-top: 20px;
         }
 
-        /* Adicionado */
-        .config-icon {
-            cursor: pointer;
-        }
-
-        /* Adicionado */
-        .config-menu {
-            display: none;
-            position: absolute;
-            right: 10px;
-            top: 30px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            z-index: 1;
-        }
-
-        /* Adicionado */
-        .config-menu ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        /* Adicionado */
-        .config-menu ul li {
-            padding: 10px;
-            cursor: pointer;
-        }
-
-        /* Adicionado */
-        .config-menu ul li:hover {
-            background-color: #f0f0f0;
-        }
     </style>
 </head>
 
@@ -206,11 +197,13 @@
             const taskId = event.dataTransfer.getData("text");
             const taskElement = document.getElementById(taskId);
             const targetList = document.getElementById(`${target}-list`);
+            
+            // Verifica se a coluna já tem 9 tarefas
             if (targetList.children.length < 9) {
                 targetList.appendChild(taskElement);
                 saveTasks();
             } else {
-                alert(`Limite máximo de 9 tarefas na coluna "${target}" atingido!`);
+                alert(`Limite máximo de 6 tarefas na coluna "${target}" atingido!`);
             }
         }
 
@@ -218,14 +211,17 @@
             const taskInput = document.getElementById('task-input');
             const newTask = taskInput.value.trim();
             const todoList = document.getElementById('todo-list');
+        
+            // Verifica se já existem 9 tarefas na lista
             if (todoList.children.length < 9 && newTask !== '') {
-                const taskId = `task-${Date.now()}`;
-                const taskElement = `<li id="${taskId}" class="draggable" draggable="true" ondragstart="drag(event)">${newTask}<span class="delete-btn" onclick="deleteTask('${taskId}')">X</span></li>`;
+                const taskId = `task-${Date.now()}`; // Cria um ID único para a tarefa
+                const taskElement =
+                    `<li id="${taskId}" class="draggable" draggable="true" ondragstart="drag(event)">${newTask}<span class="delete-btn" onclick="deleteTask('${taskId}')">X</span></li>`;
                 todoList.innerHTML += taskElement;
                 taskInput.value = '';
                 saveTasks();
             } else {
-                alert('Limite máximo de 9 tarefas atingido!');
+                alert('Limite máximo de 6 tarefas atingido!');
             }
         }
 
