@@ -233,6 +233,7 @@
                 const column = document.getElementById(columnId);
                 column.parentNode.removeChild(column);
                 saveColumn(columnId);
+                localStorage.removeItem(`column_${columnId}_deleted`); // Remover do armazenamento local
             }
         }
 
@@ -252,7 +253,7 @@
         }
 
         function saveColumn(columnId) {
-            localStorage.removeItem(`column_${columnId}_deleted`);
+            localStorage.removeItem(`column_${columnId}_deleted`); // Remover do armazenamento local
         }
 
         function createElementFromHTML(htmlString) {
