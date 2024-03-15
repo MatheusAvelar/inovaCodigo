@@ -217,7 +217,17 @@
                 todoColumn.parentNode.removeChild(todoColumn);
             }
 
-            // Verificações para outras colunas podem ser adicionadas da mesma maneira
+            const doingDeleted = localStorage.getItem('column_doing_deleted');
+            if (doingDeleted === 'true') {
+                const doingColumn = document.getElementById('doing');
+                doingColumn.parentNode.removeChild(doingColumn);
+            }
+
+            const doneDeleted = localStorage.getItem('column_done_deleted');
+            if (doneDeleted === 'true') {
+                const doneColumn = document.getElementById('done');
+                doneColumn.parentNode.removeChild(doneColumn);
+            }
         };
     </script>
 </body>
