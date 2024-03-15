@@ -93,38 +93,6 @@
         .input-container img {
             cursor: pointer;
         }
-
-        /* Estilos do modal */
-        .modal {
-            display: none;
-            position: absolute;
-            z-index: 1;
-            background-color: #fefefe;
-            border: 1px solid #888;
-            padding: 20px;
-            width: 300px; /* Ajuste conforme necessário */
-            max-height: 200px; /* Ajuste conforme necessário */
-            overflow-y: auto;
-        }
-
-        .modal-content {
-            margin: 0;
-            padding: 0;
-        }
-
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
     </style>
 </head>
 
@@ -175,14 +143,6 @@
         <div class="input-container" id="task-form">
             <input type="text" id="task-input" placeholder="Nova Tarefa">
             <img src="img/adicionar.png" alt="Adicionar" onclick="addTask()">
-        </div>
-    </div>
-
-    <!-- Modal -->
-    <div id="taskModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <textarea id="taskDescription" class="modal-textarea"></textarea>
         </div>
     </div>
 
@@ -238,7 +198,7 @@
             if (firstColumnList) {
                 if (firstColumnList.children.length < 6 && newTask !== '') {
                     const taskId = `task-${Date.now()}`;
-                    const taskElement = `<li id="${taskId}" class="draggable" draggable="true" ondragstart="drag(event)" ondblclick="openModal('${taskId}')">${newTask}<span class="delete-btn" onclick="deleteTask('${taskId}')"><img src="img/excluirp.png" alt="Excluir"></span></li>`;
+                    const taskElement = `<li id="${taskId}" class="draggable" draggable="true" ondragstart="drag(event)">${newTask}<span class="delete-btn" onclick="deleteTask('${taskId}')"><img src="img/excluirp.png" alt="Excluir"></span></li>`;
                     firstColumnList.innerHTML += taskElement;
                     taskInput.value = '';
                     saveTasks();
@@ -293,19 +253,6 @@
 
         function saveColumn(columnId) {
             localStorage.removeItem(`column_${columnId}_deleted`);
-        }
-
-        function openModal(taskId) {
-            document.getElementById('taskModal').innerHTML = '<input type="text" id="taskDescription" placeholder="Descrição">';//document.getElementById(taskId).innerText;
-            const modal = document.getElementById('taskModal');
-            const textarea = document.getElementById('taskDescription');
-            textarea.value = taskDescription;
-            modal.style.display = "block";
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('taskModal');
-            modal.style.display = "none";
         }
 
         function createElementFromHTML(htmlString) {
