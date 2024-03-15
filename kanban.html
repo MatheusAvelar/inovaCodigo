@@ -298,7 +298,7 @@
         }
 
         function openModal(taskId) {
-            const taskDescription = document.getElementById(taskId).innerText;
+            document.getElementById('taskModal').innerHTML = '<input type="text" id="taskDescription" placeholder="Descrição">';//document.getElementById(taskId).innerText;
             const modal = document.getElementById('taskModal');
             const textarea = document.getElementById('taskDescription');
             textarea.value = taskDescription;
