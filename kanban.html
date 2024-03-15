@@ -222,8 +222,7 @@
                     const taskId = `task-${Date.now()}`;
                     const taskElement = `<li id="${taskId}" class="draggable popup" onclick="openPopup('${taskId}')" draggable="true" ondragstart="drag(event)">
                                             ${newTask}
-                                            <span class="popuptext" id="${taskId}-popup">Descrição da Tarefa: \nOi
-                                            </span>
+                                            <span class="popuptext" id="${taskId}-popup">Descrição da Tarefa: \nOi</span><span class="delete-btn" onclick="deleteTask('${taskId}')"><img src="img/excluirp.png" alt="Excluir"></span>
                                         </li>`;
                     firstColumnList.innerHTML += taskElement;
                     taskInput.value = '';
