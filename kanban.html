@@ -198,7 +198,7 @@
             if (firstColumnList) {
                 if (firstColumnList.children.length < 6 && newTask !== '') {
                     const taskId = `task-${Date.now()}`;
-                    const taskElement = `<li id="${taskId}" class="draggable" draggable="true" ondragstart="drag(event)">${newTask}<span class="delete-btn" onclick="deleteTask('${taskId}')"><img src="img/excluir.png" alt="Excluir"></span></li>`;
+                    const taskElement = `<li id="${taskId}" class="draggable" draggable="true" ondragstart="drag(event)">${newTask}<span class="delete-btn" onclick="deleteTask('${taskId}')"><img src="img/excluirp.png" alt="Excluir"></span></li>`;
                     firstColumnList.innerHTML += taskElement;
                     taskInput.value = '';
                     saveTasks();
@@ -216,7 +216,7 @@
             if (columnName !== '') {
                 const columnId = columnName.toLowerCase().replace(/\s/g, '-');
                 const newColumn = `<div id="${columnId}" class="column" ondrop="drop(event, '${columnId}')" ondragover="allowDrop(event)">
-                <h2>${columnName} <img src="img/excluirp.png" class="config-icon" onclick="deleteColumn('${columnId}')" alt="Excluir Coluna"></h2>
+                <h2>${columnName} <img src="img/excluir.png" class="config-icon" onclick="deleteColumn('${columnId}')" alt="Excluir Coluna"></h2>
                 <ul id="${columnId}-list" class="task-list" ondrop="drop(event, '${columnId}')" ondragover="allowDrop(event)">
                     <!-- Tarefas da coluna ${columnName} serão inseridas aqui -->
                 </ul>
