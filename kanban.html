@@ -71,19 +71,7 @@
         }
 
         /* Adicionado */
-        .config-menu {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 5px;
-        }
-        
         .config-icon {
-            width: 20px; /* Defina o tamanho desejado para o ícone */
-            height: 20px; /* Defina o tamanho desejado para o ícone */
             cursor: pointer;
         }
     </style>
@@ -109,39 +97,21 @@
     <div class="consulta-cep">
         <div id="kanban">
             <div id="todo" class="column" ondrop="drop(event, 'todo')" ondragover="allowDrop(event)">
-                <h2>Tarefas <img src="img/configuracao.png" class="config-icon" onclick="toggleConfigMenu('todo')" alt="Configurações"></h2>
-                <div class="config-menu" id="todo-config-menu" style="display: none;">
-                    <select onchange="handleColumnAction(this.value, 'todo')">
-                        <option value="criar">Criar Coluna</option>
-                        <option value="delete">Excluir Coluna</option>
-                    </select>
-                </div>
+                <h2>Tarefas <img src="img/configuracao.png" class="config-icon" onclick="deleteColumn('todo')" alt="Excluir Coluna"></h2>
                 <ul id="todo-list" class="task-list" ondrop="drop(event, 'todo')" ondragover="allowDrop(event)">
                     <!-- Tarefas da coluna Tarefas serão inseridas aqui -->
                 </ul>
             </div>
 
             <div id="doing" class="column" ondrop="drop(event, 'doing')" ondragover="allowDrop(event)">
-                <h2>Fazendo <img src="img/configuracao.png" class="config-icon" onclick="toggleConfigMenu('doing')" alt="Configurações"></h2>
-                <div class="config-menu" id="doing-config-menu" style="display: none;">
-                    <select>
-                        <option value="criar">Criar Coluna</option>
-                        <option value="delete">Excluir Coluna</option>
-                    </select>
-                </div>
+                <h2>Fazendo <img src="img/configuracao.png" class="config-icon" onclick="deleteColumn('doing')" alt="Excluir Coluna"></h2>
                 <ul id="doing-list" class="task-list" ondrop="drop(event, 'doing')" ondragover="allowDrop(event)">
                     <!-- Tarefas da coluna Fazendo serão inseridas aqui -->
                 </ul>
             </div>
 
             <div id="done" class="column" ondrop="drop(event, 'done')" ondragover="allowDrop(event)">
-                <h2>Feito <img src="img/configuracao.png" class="config-icon" onclick="toggleConfigMenu('done')" alt="Configurações"></h2>
-                <div class="config-menu" id="done-config-menu" style="display: none;">
-                    <select>
-                        <option value="criar">Criar Coluna</option>
-                        <option value="delete">Excluir Coluna</option>
-                    </select>
-                </div>
+                <h2>Feito <img src="img/configuracao.png" class="config-icon" onclick="deleteColumn('done')" alt="Excluir Coluna"></h2>
                 <ul id="done-list" class="task-list" ondrop="drop(event, 'done')" ondragover="allowDrop(event)">
                     <!-- Tarefas da coluna Feito serão inseridas aqui -->
                 </ul>
@@ -177,15 +147,9 @@
         </div>
     </footer>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <script>
         function allowDrop(event) {
             event.preventDefault();
-        }
-
-        function drag(event) {
-            event.dataTransfer.setData("text", event.target.id);
         }
 
         function drop(event, target) {
@@ -222,6 +186,14 @@
             saveTasks();
         }
 
+        function deleteColumn(columnId) {
+            if (confirm("Tem certeza que deseja excluir esta coluna?")) {
+                const column = document.getElementById(columnId);
+                column.parentNode.removeChild(column);
+                localStorage.setItem(`column_${columnId}_deleted`, 'true');
+            }
+        }
+
         function saveTasks() {
             const todoList = document.getElementById('todo-list').innerHTML;
             const doingList = document.getElementById('doing-list').innerHTML;
@@ -238,35 +210,14 @@
             document.getElementById('todo-list').innerHTML = todo || '';
             document.getElementById('doing-list').innerHTML = doing || '';
             document.getElementById('done-list').innerHTML = done || '';
-        };
 
-        // Adicionado
-        function toggleConfigMenu(columnId) {
-            const menu = document.getElementById(`${columnId}-config-menu`);
-            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-        }
-
-        function handleColumnAction(action, columnId) {
-            if (action === 'delete') {
-                // Confirmar exclusão da coluna
-                if (confirm("Tem certeza que deseja excluir esta coluna?")) {
-                    // Remover a coluna da exibição
-                    const column = document.getElementById(columnId);
-                    column.parentNode.removeChild(column);
-                    // Armazenar a exclusão em cache
-                    localStorage.setItem(`column_${columnId}_deleted`, 'true');
-                }
-            }
-        }
-
-        window.onload = function () {
-            // Verificar se a coluna foi excluída anteriormente e removê-la da exibição
             const todoDeleted = localStorage.getItem('column_todo_deleted');
             if (todoDeleted === 'true') {
                 const todoColumn = document.getElementById('todo');
                 todoColumn.parentNode.removeChild(todoColumn);
             }
-            // Outras verificações para colunas adicionais podem ser feitas da mesma maneira
+
+            // Verificações para outras colunas podem ser adicionadas da mesma maneira
         };
     </script>
 </body>
