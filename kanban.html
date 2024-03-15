@@ -74,6 +74,27 @@
         .config-icon {
             cursor: pointer;
         }
+
+        .input-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .input-container input {
+            flex: 1;
+            padding: 5px;
+            margin-right: 10px;
+        }
+
+        .input-container button {
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -117,14 +138,14 @@
                 </ul>
             </div>
         </div>
-        <div id="add-column">
+        <div id="add-column" class="input-container">
             <input type="text" id="column-name" placeholder="Nome da Coluna">
             <button type="button" onclick="addColumn()">Adicionar Coluna</button>
         </div>
-        <form id="task-form">
+        <div id="task-form" class="input-container">
             <input type="text" id="task-input" placeholder="Nova Tarefa">
             <button type="button" onclick="addTask()">Adicionar</button>
-        </form>
+        </div>
     </div>
 
 
@@ -190,7 +211,7 @@
             if (columnName !== '') {
                 const columnId = columnName.toLowerCase().replace(/\s/g, '-');
                 const newColumn = `<div id="${columnId}" class="column" ondrop="drop(event, '${columnId}')" ondragover="allowDrop(event)">
-                <h2>${columnName} <img src="img/configuracao.png" class="config-icon" onclick="deleteColumn('${columnId}')" alt="Excluir Coluna"></h2>
+                <h2>${columnName} <img src="img/excluir.png" class="config-icon" onclick="deleteColumn('${columnId}')" alt="Excluir Coluna"></h2>
                 <ul id="${columnId}-list" class="task-list" ondrop="drop(event, '${columnId}')" ondragover="allowDrop(event)">
                     <!-- Tarefas da coluna ${columnName} serão inseridas aqui -->
                 </ul>
