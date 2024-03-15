@@ -195,9 +195,8 @@
                     <!-- Tarefas da coluna ${columnName} serão inseridas aqui -->
                 </ul>
             </div>`;
-                document.getElementById('kanban').insertBefore(createElementFromHTML(newColumn), document.getElementById('add-column'));
+                document.getElementById('kanban').innerHTML += newColumn;
                 columnNameInput.value = '';
-                saveColumn(columnId);
             } else {
                 alert('Por favor, insira um nome para a coluna.');
             }
@@ -207,7 +206,7 @@
             if (confirm("Tem certeza que deseja excluir esta coluna?")) {
                 const column = document.getElementById(columnId);
                 column.parentNode.removeChild(column);
-                localStorage.setItem(`column_${columnId}_deleted`, 'true');
+                saveColumn(columnId);
             }
         }
 
@@ -237,24 +236,6 @@
             document.getElementById('todo-list').innerHTML = todo || '';
             document.getElementById('doing-list').innerHTML = doing || '';
             document.getElementById('done-list').innerHTML = done || '';
-
-            const todoDeleted = localStorage.getItem('column_todo_deleted');
-            if (todoDeleted === 'true') {
-                const todoColumn = document.getElementById('todo');
-                todoColumn.parentNode.removeChild(todoColumn);
-            }
-
-            const doingDeleted = localStorage.getItem('column_doing_deleted');
-            if (doingDeleted === 'true') {
-                const doingColumn = document.getElementById('doing');
-                doingColumn.parentNode.removeChild(doingColumn);
-            }
-
-            const doneDeleted = localStorage.getItem('column_done_deleted');
-            if (doneDeleted === 'true') {
-                const doneColumn = document.getElementById('done');
-                doneColumn.parentNode.removeChild(doneColumn);
-            }
         };
     </script>
 </body>
