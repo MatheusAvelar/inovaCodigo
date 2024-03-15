@@ -81,11 +81,6 @@
             padding: 5px;
         }
         
-        .config-menu img {
-            display: block;
-            margin-bottom: 5px;
-        }
-        
         .config-icon {
             width: 20px; /* Defina o tamanho desejado para o ícone */
             height: 20px; /* Defina o tamanho desejado para o ícone */
@@ -116,7 +111,6 @@
             <div id="todo" class="column" ondrop="drop(event, 'todo')" ondragover="allowDrop(event)">
                 <h2>Tarefas <img src="img/configuracao.png" class="config-icon" onclick="toggleConfigMenu('todo')" alt="Configurações"></h2>
                 <div class="config-menu" id="todo-config-menu" style="display: none;">
-                    <img src="img/configuracao.png" class="config-icon" alt="Ícone de configuração">
                     <select>
                         <option value="edit">Editar Nome</option>
                         <option value="delete">Excluir Coluna</option>
