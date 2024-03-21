@@ -170,14 +170,56 @@
     </footer>
 
     <script>
+        function saveTasks() {
+            const todoList = document.getElementById('todo-list').innerHTML;
+            const doingList = document.getElementById('doing-list').innerHTML;
+            const doneList = document.getElementById('done-list').innerHTML;
+            localStorage.setItem('todo', todoList);
+            localStorage.setItem('doing', doingList);
+            localStorage.setItem('done', doneList);
+        }
+        
+        function saveColumn(columnId) {
+            localStorage.removeItem(`column_${columnId}_deleted`);
+        }
+        
+        function saveDeletedColumn(columnId) {
+            localStorage.setItem(`column_${columnId}_deleted`, true);
+        }
+        
+        function loadTasks() {
+            const todo = localStorage.getItem('todo');
+            const doing = localStorage.getItem('doing');
+            const done = localStorage.getItem('done');
+            document.getElementById('todo-list').innerHTML = todo || '';
+            document.getElementById('doing-list').innerHTML = doing || '';
+            document.getElementById('done-list').innerHTML = done || '';
+        }
+        
+        function loadDeletedColumns() {
+            const columns = document.querySelectorAll('.column');
+            columns.forEach(column => {
+                const columnId = column.id;
+                const isDeleted = localStorage.getItem(`column_${columnId}_deleted`);
+                if (isDeleted) {
+                    column.parentNode.removeChild(column);
+                }
+            });
+        }
+        
+        window.onload = function () {
+            loadTasks();
+            loadDeletedColumns();
+        };
+        
         function allowDrop(event) {
             event.preventDefault();
         }
-
+        
         function drag(event) {
             event.dataTransfer.setData("text", event.target.id);
         }
-
+        
         function drop(event, target) {
             event.preventDefault();
             const taskId = event.dataTransfer.getData("text");
@@ -190,7 +232,7 @@
                 alert(`Limite máximo de 6 tarefas na coluna "${target}" atingido!`);
             }
         }
-
+        
         function addTask() {
             const taskInput = document.getElementById('task-input');
             const newTask = taskInput.value.trim();
@@ -209,7 +251,7 @@
                 alert('Por favor, crie uma coluna primeiro.');
             }
         }
-
+        
         function addColumn() {
             const columnNameInput = document.getElementById('column-name');
             const columnName = columnNameInput.value.trim();
@@ -227,17 +269,19 @@
                 alert('Por favor, insira um nome para a coluna.');
             }
         }
-
+        
         function deleteColumn(columnId) {
             if (confirm("Tem certeza que deseja excluir esta coluna?")) {
                 const column = document.getElementById(columnId);
                 column.parentNode.removeChild(column);
+                saveDeletedColumn(columnId);
             }
         }
-
+        
         function deleteTask(taskId) {
             const task = document.getElementById(taskId);
             task.parentNode.removeChild(task);
+            saveTasks();
         }
     </script>
 </body>
