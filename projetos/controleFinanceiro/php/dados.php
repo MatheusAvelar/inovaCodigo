@@ -201,7 +201,7 @@ function recuperaDadosRefeicao() {
                     ";
         
         while ($row = mysqli_fetch_assoc($result)) {
-            echo "<tr><td>".$row["dataCompra"]."</td><td>".$row["descricao"]."</td><td>".$row["totalCompra"]."</td></tr>";
+            echo "<tr><td>".converterData($row["dataCompra"])."</td><td>".$row["descricao"]."</td><td>".$row["totalCompra"]."</td></tr>";
         }
         
         while ($row2 = mysqli_fetch_assoc($result2)) {
@@ -247,7 +247,7 @@ function recuperaDadosAlimentacao() {
                     ";
         
         while ($row = mysqli_fetch_assoc($result)) {
-            echo "<tr><td>".$row["dataCompra"]."</td><td>".$row["descricao"]."</td><td>".$row["totalCompra"]."</td></tr>";
+            echo "<tr><td>".converterData($row["dataCompra"])."</td><td>".$row["descricao"]."</td><td>".$row["totalCompra"]."</td></tr>";
         }
         
         while ($row2 = mysqli_fetch_assoc($result2)) {
