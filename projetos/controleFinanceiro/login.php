@@ -3,8 +3,6 @@
 <?php
 include "php/dados.php";
 include "php/head.php";
-//include "php/form_user.php";
-
 ?>
 
 <body class="bg-gradient-primary">
@@ -46,10 +44,8 @@ include "php/head.php";
                                     </form>
                                     <?php
                                     if (isset($_POST['inputEmail']) && isset($_POST['inputPassword'])) {
-                                        autenticaUsuario($_POST['inputEmail'],$_POST['inputPassword']);
-                                    }/* else {
-                                        include "php/arquivo_restrito.php";
-                                    }*/
+                                        autenticaUsuario();
+                                    }
                                     ?>
                                     <!--<hr>-->
                                     <div class="text-center">
