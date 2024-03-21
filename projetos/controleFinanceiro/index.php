@@ -73,12 +73,12 @@
                 </div>
             </li>
 
-            <!-- Nav Item - Cartão Alimentação/Refeição Menu -->
+            <!-- Nav Item - Alimentação / Refeição Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
-                    <span>Cartão Alimentação/Refeição</span>
+                    <span>Alimentação / Refeição</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
