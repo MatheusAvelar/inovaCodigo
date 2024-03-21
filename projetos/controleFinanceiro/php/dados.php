@@ -268,8 +268,7 @@ function recuperaDadosFatura() {
         die("Falha na conexão: " . mysqli_connect_error());
     }
 
-    $sql = "SELECT DATE_FORMAT(dataCompra, '%d/%m/%Y') AS dataFormatada, descricao, totalCompra FROM xpinvestimentos ORDER BY idCompra";
-
+    $sql = "SELECT dataCompra,descricao,totalCompra FROM xpinvestimentos ORDER BY idCompra";
     $result = mysqli_query($conexao, $sql);
 
     $sql2 = "SELECT SUM(totalCompra) AS total FROM xpinvestimentos";
@@ -294,7 +293,7 @@ function recuperaDadosFatura() {
                     ";
         
         while ($row = mysqli_fetch_assoc($result)) {
-            echo "<tr><td>".$row["dataCompra"]."</td><td>".$row["descricao"]."</td><td>".$row["totalCompra"]."</td></tr>";
+            echo "<tr><td>".converterData($row["dataCompra"])."</td><td>".$row["descricao"]."</td><td>".$row["totalCompra"]."</td></tr>";
         }
         
         while ($row2 = mysqli_fetch_assoc($result2)) {
