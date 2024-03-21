@@ -1,6 +1,6 @@
 <?php
 
-function autenticaUsuario() {
+function autenticaUsuario($email, $senha) {
     $conexao = mysqli_connect("127.0.0.1", "u221588236_root", "Camila@307", "u221588236_controle_finan");
     ?>
     <script type="text/javascript">
@@ -12,17 +12,15 @@ function autenticaUsuario() {
     }
     </script>
     <?php
-    $email   = $_POST['inputEmail'];
-    $senha   = md5($_POST['inputPassword']);
-    $query   = mysqli_query($conexao,"SELECT * FROM usuario WHERE email = '$email' and senha = '$senha'");
+    $senhaCript   = md5($senha);
+    $query   = mysqli_query($conexao,"SELECT * FROM usuario WHERE email = '$email' and senha = '$senhaCript'");
     $row     = mysqli_num_rows($query);
     
     if($row>0){
         $_SESSION['inputEmail'] = $email;
-        $_SESSION['inputPassword'] = $senha;
         ?>
         <div class="alert alert-success" role="alert">
-        <center>Autenticado com sucesso!</center>
+        <center>Autenticado com sucesso! <?php $email ?></center>
         </div>
         <hr>
         <?php

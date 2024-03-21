@@ -46,7 +46,7 @@ include "php/head.php";
                                     </form>
                                     <?php
                                     if (isset($_POST['inputEmail']) && isset($_POST['inputPassword'])) {
-                                        autenticaUsuario();
+                                        autenticaUsuario($_POST['inputEmail'],$_POST['inputPassword']);
                                     }/* else {
                                         include "php/arquivo_restrito.php";
                                     }*/
