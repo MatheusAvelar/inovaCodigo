@@ -1,5 +1,8 @@
 <?php
-session_start();
+// Verifica se a sessão não está ativa antes de iniciar
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 function autenticaUsuario() {
     $conexao = mysqli_connect("127.0.0.1", "u221588236_root", "Camila@307", "u221588236_controle_finan");
