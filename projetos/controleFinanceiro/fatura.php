@@ -233,7 +233,7 @@
                     </div>
 
                     <!-- Dados Tabela -->
-                    <?php recuperaDadosXP(); ?>
+                    <?php recuperaDadosFatura(); ?>
                     <!-- Dados Total -->
                     <?php //somaTotal(); ?>
 

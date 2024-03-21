@@ -261,14 +261,15 @@ function recuperaDadosAlimentacao() {
     mysqli_close($conexao);
 }
 
-function recuperaDadosXP() {
+function recuperaDadosFatura() {
     $conexao = mysqli_connect("127.0.0.1:3306", "u221588236_root", "Camila@307", "u221588236_controle_finan");
     
     if (!$conexao) {
         die("Falha na conexão: " . mysqli_connect_error());
     }
 
-    $sql = "SELECT dataCompra,descricao,totalCompra FROM xpinvestimentos ORDER BY idCompra";
+    $sql = "SELECT DATE_FORMAT(dataCompra, '%d/%m/%Y') AS dataFormatada, descricao, totalCompra FROM xpinvestimentos ORDER BY idCompra";
+
     $result = mysqli_query($conexao, $sql);
 
     $sql2 = "SELECT SUM(totalCompra) AS total FROM xpinvestimentos";
@@ -278,7 +279,7 @@ function recuperaDadosXP() {
 
         echo "<div class='card shadow mb-4'>
         <div class='card-header py-3'>
-            <h6 class='m-0 font-weight-bold text-primary'>Extrato - XP Cartão</h6>
+            <h6 class='m-0 font-weight-bold text-primary'>Extrato</h6>
         </div>
         <div class='card-body'>
             <div class='table-responsive'>
@@ -408,4 +409,14 @@ function totalRefeicao() {
     }
 
     mysqli_close($conexao);
+}
+
+function converterData($dataString) {
+    // Criar um objeto de data
+    $data = new DateTime($dataString);
+
+    // Formatar para o formato "DD/MM/AAAA"
+    $dataFormatada = $data->format('d/m/Y');
+
+    return $dataFormatada;
 }
