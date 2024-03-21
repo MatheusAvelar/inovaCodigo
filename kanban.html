@@ -179,12 +179,8 @@
             localStorage.setItem('done', doneList);
         }
         
-        function saveColumn(columnId, isDeleted = false) {
-            if (isDeleted) {
-                localStorage.setItem(`column_${columnId}_deleted`, true);
-            } else {
-                localStorage.removeItem(`column_${columnId}_deleted`);
-            }
+        function saveColumn(columnId) {
+            localStorage.removeItem(`column_${columnId}_deleted`);
         }
         
         function saveDeletedColumn(columnId) {
