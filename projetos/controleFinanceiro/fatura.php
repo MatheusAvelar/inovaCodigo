@@ -2,7 +2,6 @@
 <html lang="en">
 <?php
     include "php/dados.php";
-    session_start();
 ?>
 <head>
 
