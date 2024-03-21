@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-session_start();
 include "php/dados.php";
 include "php/head.php";
 ?>
