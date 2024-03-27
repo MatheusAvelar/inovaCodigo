@@ -15,11 +15,11 @@ function relatorioApropriacao() {
 
     // Query para selecionar todas as horas registradas
     $sql = "SELECT data, tarefa, hora_inicio, hora_fim, horas_gastas FROM horas";
-    $result = $conexao->query($sql);
+    $result = mysqli_query($conexao, $sql);
 
-    if ($result->num_rows > 0) {
-        // Exibir os dados em cada linha da tabela
-        while($row = $result->fetch_assoc()) {
+    if (mysqli_num_rows($result) > 0) {
+        
+        while ($row = mysqli_fetch_assoc($result)) {
             echo "<tr>";
             echo "<td>".$row["data"]."</td>";
             echo "<td>".$row["tarefa"]."</td>";
@@ -31,6 +31,6 @@ function relatorioApropriacao() {
     } else {
         echo "<tr><td colspan='5'>Nenhum registro encontrado</td></tr>";
     }
-    $conexao->close();
+    mysqli_close($conexao);
 }
 ?>
