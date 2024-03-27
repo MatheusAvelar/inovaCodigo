@@ -37,9 +37,15 @@ if (mysqli_num_rows($result) > 0) {
                 <th>Hora Início</th>
                 <th>Hora Fim</th>
                 <th>Total</th>
+                <th>Excluir</th>
             </tr>";
 
     while ($row = mysqli_fetch_assoc($result)) {
+        // Calcula o total de horas gastas no formato HH:MM
+        $horasGastas = $row["horas_gastas"];
+        list($horas, $minutos) = explode(':', $horasGastas);
+        $totalHoras += $horas * 60 + $minutos;
+        
         // Formata as datas no formato "d/m/Y"
         $data_formatada = date('d/m/Y', strtotime($row["data"]));
         
@@ -49,8 +55,18 @@ if (mysqli_num_rows($result) > 0) {
         echo "<td>".$row["hora_inicio"]."</td>";
         echo "<td>".$row["hora_fim"]."</td>";
         echo "<td>".$row["horas_gastas"]."</td>";
+        echo "<td></td>";
         echo "</tr>";
     }
+
+    // Converte o total de minutos de volta para o formato "HH:MM"
+    $horasTotal = floor($totalHoras / 60);
+    $minutosTotal = $totalHoras % 60;
+    $totalFormatado = sprintf('%02d:%02d', $horasTotal, $minutosTotal);
+
+    // Exibe o total das horas
+    echo "<tr><td colspan='5'>Total: $totalFormatado</td></tr>";
+
     echo "</table>";
 } else {
     echo "<p>Nenhum registro encontrado</p>";
