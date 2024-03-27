@@ -22,8 +22,6 @@ $sql = "INSERT INTO horas (data ,tarefa, hora_inicio, hora_fim, horas_gastas) VA
 
 if(!mysqli_query($conexao, $sql)) {
     echo "Error: ".mysqli_error($conexao);
-} else {
-    echo "Salvo no Banco!";
 }
 
 mysqli_close($conexao);
