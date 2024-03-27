@@ -13,7 +13,7 @@ if (!$conexao) {
 }
 
 // Constrói a query base
-$sql = "SELECT data, tarefa, hora_inicio, hora_fim, horas_gastas FROM horas WHERE 1";
+$sql = "SELECT id, data, tarefa, hora_inicio, hora_fim, horas_gastas FROM horas WHERE 1";
 
 // Adiciona os filtros de data e demanda, se fornecidos
 if (isset($_GET['filterDate']) && !empty($_GET['filterDate'])) {
