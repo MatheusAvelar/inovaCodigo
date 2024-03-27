@@ -15,7 +15,7 @@ $data = $_POST['date'];
 $task = $_POST['task'];
 $hours = $_POST['hours'];
 
-$sql = "INSERT INTO horas (data ,tarefa, horas_gastas) VALUES ('$data','$task', '$hours')";
+$sql = "INSERT INTO horas (data ,tarefa, hora_inicio, hora_fim, horas_gastas) VALUES ('$data','$task', '$hours')";
 
 if(!mysqli_query($conexao, $sql)) {
     echo "Error: ".mysqli_error($conexao);
