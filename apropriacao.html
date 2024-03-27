@@ -74,22 +74,8 @@
         </form>
         <div id="response"></div>
         <h1>Relatório de Horas</h1>
-        <table>
-            <tr>
-                <th>Data</th>
-                <th>Demanda</th>
-                <th>Hora Início</th>
-                <th>Hora Fim</th>
-                <th>Total</th>
-            </tr>
-            <?php
-                require_once 'relatorioApropriacao.php';
-                echo "Oi";
-                relatorioApropriacao();
-            ?>
-        </table>
+        <div id="relatorio"></div> <!-- Local onde o relatório será exibido -->
     </div>
-
 
     <script>
         function submitHours() {
@@ -97,28 +83,29 @@
             var startTimeStr = document.getElementById("startTime").value;
             var endTimeStr = document.getElementById("endTime").value;
             var task = document.getElementById("task").value;
-        
+
             if (date.trim() === '' || startTimeStr.trim() === '' || endTimeStr.trim() === '' || task.trim() === '') {
                 alert("Por favor, preencha todos os campos.");
                 return;
             }
-        
+
             var startTime = new Date("1970-01-01T" + startTimeStr + "Z");
             var endTime = new Date("1970-01-01T" + endTimeStr + "Z");
-        
+
             var totalHours = calculateTotalHours(startTime, endTime);
-        
+
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "save_hours.php", true);
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     document.getElementById("response").innerHTML = xhr.responseText;
+                    carregarRelatorio(); // Após registrar as horas, recarrega o relatório
                 }
             };
-            xhr.send("task=" + task + "&hours=" + totalHours + "&date=" + date + "&hora_inicio=" + startTime + "&hora_fim=" + endTime);
+            xhr.send("task=" + task + "&hours=" + totalHours + "&date=" + date);
         }
-        
+
         function calculateTotalHours(startTime, endTime) {
             var milliseconds = endTime - startTime;
             var totalSeconds = milliseconds / 1000;
@@ -144,6 +131,22 @@
             var totalHours = calculateTotalHours(startTime, endTime);
             document.getElementById("total").textContent = totalHours;
         }
+
+        function carregarRelatorio() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "relatorioApropriacao.php", true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    document.getElementById("relatorio").innerHTML = xhr.responseText;
+                }
+            };
+            xhr.send();
+        }
+
+        // Carrega o relatório quando a página é carregada
+        window.onload = function() {
+            carregarRelatorio();
+        };
     </script>
 </body>
 </html>
