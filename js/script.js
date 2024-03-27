@@ -7,6 +7,9 @@ function submitHours() {
         return;
     }
 
+    var totalHours = calculateTotalHours(startTime, endTime);
+    document.getElementById("total").textContent = totalHours;
+
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "save_hours.php", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -15,7 +18,7 @@ function submitHours() {
             document.getElementById("response").innerHTML = xhr.responseText;
         }
     };
-    xhr.send("task=" + task + "&hours=" + hours);
+    xhr.send("task=" + task + "&hours=" + totalHours);
 }
 
 function submitHours() {
@@ -27,8 +30,7 @@ function submitHours() {
         return;
     }
 
-    var totalHours = calculateTotalHours(startTime, endTime);
-    document.getElementById("total").textContent = totalHours;
+    
 }
 
 function calculateTotalHours(startTime, endTime) {
