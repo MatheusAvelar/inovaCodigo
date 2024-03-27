@@ -52,13 +52,16 @@
 
     <script>
         function submitHours() {
-            var startTime = document.getElementById("startTime").valueAsDate;
-            var endTime = document.getElementById("endTime").valueAsDate;
+            var startTimeStr = document.getElementById("startTime").value;
+            var endTimeStr = document.getElementById("endTime").value;
 
-            if (!startTime || !endTime) {
+            if (!startTimeStr || !endTimeStr) {
                 alert("Por favor, insira hora de início e hora de término.");
                 return;
             }
+
+            var startTime = new Date("1970-01-01T" + startTimeStr + "Z");
+            var endTime = new Date("1970-01-01T" + endTimeStr + "Z");
 
             var totalHours = calculateTotalHours(startTime, endTime);
             document.getElementById("total").textContent = totalHours;
