@@ -40,8 +40,11 @@ if (mysqli_num_rows($result) > 0) {
             </tr>";
 
     while ($row = mysqli_fetch_assoc($result)) {
+        // Formata as datas no formato "d/m/Y"
+        $data_formatada = date('d/m/Y', strtotime($row["data"]));
+        
         echo "<tr>";
-        echo "<td>".$row["data"]."</td>";
+        echo "<td>".$data_formatada."</td>";
         echo "<td>".$row["tarefa"]."</td>";
         echo "<td>".$row["hora_inicio"]."</td>";
         echo "<td>".$row["hora_fim"]."</td>";
