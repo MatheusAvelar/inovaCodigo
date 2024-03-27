@@ -37,6 +37,7 @@ if (mysqli_num_rows($result) > 0) {
                 <th>Hora Início</th>
                 <th>Hora Fim</th>
                 <th>Total</th>
+                <th>Ação</th>
             </tr>";
 
     $totalHoras = 0; // Inicializa o total de horas
