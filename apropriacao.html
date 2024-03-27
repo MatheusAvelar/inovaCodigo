@@ -8,6 +8,7 @@
     <link rel="icon" href="img/ico.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
     <title>Inova Código - Apropriação de Horas - Controle de Demandas</title>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1516963750502427" crossorigin="anonymous"></script>
     <style>
@@ -184,6 +185,21 @@
             xhr.send();
         }
 
+        function deleteRecord(recordId) {
+            if (confirm("Tem certeza de que deseja excluir este registro?")) {
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "delete_record.php", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        alert(xhr.responseText); // Exibe a resposta do servidor
+                        // Recarrega o relatório após a exclusão
+                        applyFilters();
+                    }
+                };
+                xhr.send("recordId=" + recordId);
+            }
+        }
     </script>
 </body>
 </html>
