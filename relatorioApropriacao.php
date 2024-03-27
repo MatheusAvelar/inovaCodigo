@@ -26,7 +26,7 @@ if (mysqli_num_rows($result) > 0) {
                 <th>Hora Fim</th>
                 <th>Total</th>
             </tr>";
-            
+
     while ($row = mysqli_fetch_assoc($result)) {
         
         echo "<tr>";
@@ -35,8 +35,9 @@ if (mysqli_num_rows($result) > 0) {
         echo "<td>".$row["hora_inicio"]."</td>";
         echo "<td>".$row["hora_fim"]."</td>";
         echo "<td>".$row["horas_gastas"]."</td>";
-        echo "</tr></table>";
+        echo "</tr>";
     }
+    echo "</table>";
 } else {
     echo "<tr><td colspan='5'>Nenhum registro encontrado</td></tr>";
 }
