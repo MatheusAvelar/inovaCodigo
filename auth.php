@@ -12,6 +12,8 @@ if($row>0){
     $_SESSION['loggedin'] = true;
     header("Location: apropriacao.php");
     exit;
+} else {
+    header("Location: apropriacao.php");
 }
 
 ?>
