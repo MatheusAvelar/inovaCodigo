@@ -6,6 +6,7 @@ $username = "usuario";
 $password = "senha";
 
 if ($_POST['username'] === $username && $_POST['password'] === $password) {
+    echo "Entrou.";
     $_SESSION['loggedin'] = true;
     header("Location: apropriacao.php"); // Redireciona para a página de Apropriação de Horas
     exit;
