@@ -57,6 +57,7 @@ if (mysqli_num_rows($result) > 0) {
         echo "<td>".$row["hora_inicio"]."</td>";
         echo "<td>".$row["hora_fim"]."</td>";
         echo "<td>".$row["horas_gastas"]."</td>";
+        echo "<td><button onclick=\"deleteRecord('" . $row['id'] . "')\">Excluir</button></td>";
         echo "</tr>";
     }
 
