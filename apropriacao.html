@@ -1,17 +1,50 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apropriação de Horas</title>
+    <title>Apropriação de Horas - Controle de Demandas</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        input[type="time"] {
+            width: 100px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Apropriação de Horas</h1>
+    <h1>Apropriação de Horas - Controle de Demandas</h1>
     <form id="hoursForm">
-        <label for="task">Tarefa:</label><br>
-        <input type="text" id="task" name="task"><br>
-        <label for="hours">Horas Gastas:</label><br>
-        <input type="number" id="hours" name="hours"><br><br>
+        <table>
+            <tr>
+                <th>Data</th>
+                <th>Demanda</th>
+                <th>Hora Início</th>
+                <th>Hora Fim</th>
+                <th>Total</th>
+            </tr>
+            <tr>
+                <td><input type="date" id="date" name="date"></td>
+                <td><input type="text" id="task" name="task"></td>
+                <td><input type="time" id="startTime" name="startTime"></td>
+                <td><input type="time" id="endTime" name="endTime"></td>
+                <td id="total">00:00</td>
+            </tr>
+        </table>
+        <br>
         <button type="button" onclick="submitHours()">Registrar Horas</button>
     </form>
 
