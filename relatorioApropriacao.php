@@ -12,12 +12,25 @@ if (!$conexao) {
     die("Falha na conexão: " . mysqli_connect_error());
 }
 
-// Query para selecionar todas as horas registradas
-$sql = "SELECT data, tarefa, hora_inicio, hora_fim, horas_gastas FROM horas";
+// Constrói a query base
+$sql = "SELECT data, tarefa, hora_inicio, hora_fim, horas_gastas FROM horas WHERE 1";
+
+// Adiciona os filtros de data e demanda, se fornecidos
+if (isset($_GET['filterDate']) && !empty($_GET['filterDate'])) {
+    $filterDate = $_GET['filterDate'];
+    $sql .= " AND data = '$filterDate'";
+}
+
+if (isset($_GET['filterTask']) && !empty($_GET['filterTask'])) {
+    $filterTask = $_GET['filterTask'];
+    $sql .= " AND tarefa LIKE '%$filterTask%'";
+}
+
 $result = mysqli_query($conexao, $sql);
 
 if (mysqli_num_rows($result) > 0) {
-    echo "<table>
+    echo "<h1>Relatório de Horas</h1>
+        <table>
             <tr>
                 <th>Data</th>
                 <th>Demanda</th>
@@ -27,11 +40,8 @@ if (mysqli_num_rows($result) > 0) {
             </tr>";
 
     while ($row = mysqli_fetch_assoc($result)) {
-        // Formata as datas no formato "d/m/Y"
-        $data_formatada = date('d/m/Y', strtotime($row["data"]));
-        
         echo "<tr>";
-        echo "<td>".$data_formatada."</td>";
+        echo "<td>".$row["data"]."</td>";
         echo "<td>".$row["tarefa"]."</td>";
         echo "<td>".$row["hora_inicio"]."</td>";
         echo "<td>".$row["hora_fim"]."</td>";

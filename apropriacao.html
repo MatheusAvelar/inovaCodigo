@@ -84,6 +84,13 @@
         </form>
         <div id="response"></div>
         <h1>Relatório de Horas</h1>
+        <form id="filterForm">
+            <label for="filterDate">Filtrar por Data:</label>
+            <input type="date" id="filterDate" name="filterDate" onchange="applyFilters()">
+            
+            <label for="filterTask">Filtrar por Demanda:</label>
+            <input type="text" id="filterTask" name="filterTask" oninput="applyFilters()">
+        </form>
         <div id="relatorio"></div> <!-- Local onde o relatório será exibido -->
     </div>
 
@@ -162,6 +169,20 @@
         window.onload = function() {
             carregarRelatorio();
         };
+
+        function applyFilters() {
+            var filterDate = document.getElementById("filterDate").value;
+            var filterTask = document.getElementById("filterTask").value;
+        
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "relatorioApropriacao.php?filterDate=" + filterDate + "&filterTask=" + filterTask, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    document.getElementById("relatorio").innerHTML = xhr.responseText;
+                }
+            };
+            xhr.send();
+        }
     </script>
 </body>
 </html>
