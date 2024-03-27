@@ -70,6 +70,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <a href="jogos.html">Jogos</a>
             <a href="https://matheusavelar.github.io/">Currículo</a>
             <a href="apropriacao.php">Apropriação de Horas</a>
+            <a href="receitas.html">Receitas</a>
             <a href="logout.php">Sair</a>
         </nav>
     </header>

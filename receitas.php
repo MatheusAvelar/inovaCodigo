@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+// Verifica se o usuário está logado, se não, redireciona para a página de login
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header("Location: login.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -27,6 +36,8 @@
             <a href="kanban.html">Kanban</a>
             <a href="jogos.html">Jogos</a>
             <a href="https://matheusavelar.github.io/">Currículo</a>
+            <a href="apropriacao.php">Apropriação de Horas</a>
+            <a href="logout.php">Sair</a>
         </nav>
     </header>
 
