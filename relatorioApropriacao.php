@@ -32,7 +32,6 @@ if (mysqli_num_rows($result) > 0) {
     echo "<h1>Relatório de Horas</h1>
         <table>
             <tr>
-                <th>Id</th> 
                 <th>Data</th>
                 <th>Demanda</th>
                 <th>Hora Início</th>
@@ -54,7 +53,6 @@ if (mysqli_num_rows($result) > 0) {
 
         // Exibe os dados do registro
         echo "<tr>";
-        echo "<td>".$row['id']."</td>";
         echo "<td>$data_formatada</td>";
         echo "<td>".$row["tarefa"]."</td>";
         echo "<td>".$row["hora_inicio"]."</td>";
