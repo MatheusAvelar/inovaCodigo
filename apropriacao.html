@@ -83,17 +83,17 @@
             var startTimeStr = document.getElementById("startTime").value;
             var endTimeStr = document.getElementById("endTime").value;
             var task = document.getElementById("task").value;
-
+        
             if (date.trim() === '' || startTimeStr.trim() === '' || endTimeStr.trim() === '' || task.trim() === '') {
                 alert("Por favor, preencha todos os campos.");
                 return;
             }
-
+        
             var startTime = new Date("1970-01-01T" + startTimeStr + "Z");
             var endTime = new Date("1970-01-01T" + endTimeStr + "Z");
-
+        
             var totalHours = calculateTotalHours(startTime, endTime);
-
+        
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "save_hours.php", true);
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -103,7 +103,12 @@
                     carregarRelatorio(); // Após registrar as horas, recarrega o relatório
                 }
             };
-            xhr.send("task=" + task + "&hours=" + totalHours + "&date=" + date);
+            
+            // Constrói os dados a serem enviados
+            var dataToSend = "task=" + task + "&hours=" + totalHours + "&date=" + date +
+                             "&startTime=" + startTimeStr + "&endTime=" + endTimeStr;
+                             
+            xhr.send(dataToSend);
         }
 
         function calculateTotalHours(startTime, endTime) {

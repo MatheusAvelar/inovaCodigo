@@ -17,8 +17,7 @@ $sql = "SELECT data, tarefa, hora_inicio, hora_fim, horas_gastas FROM horas";
 $result = mysqli_query($conexao, $sql);
 
 if (mysqli_num_rows($result) > 0) {
-    echo "<h1>Relatório de Horas</h1>
-        <table>
+    echo "<table>
             <tr>
                 <th>Data</th>
                 <th>Demanda</th>
