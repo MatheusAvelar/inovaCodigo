@@ -41,6 +41,12 @@ if (mysqli_num_rows($result) > 0) {
             </tr>";
 
     while ($row = mysqli_fetch_assoc($result)) {
+        $totalHoras = 0;
+        // Calcula o total de horas gastas no formato HH:MM
+        $horasGastas = $row["horas_gastas"];
+        list($horas, $minutos) = explode(':', $horasGastas);
+        $totalHoras += $horas * 60 + $minutos;
+
         // Formata as datas no formato "d/m/Y"
         $data_formatada = date('d/m/Y', strtotime($row["data"]));
         
