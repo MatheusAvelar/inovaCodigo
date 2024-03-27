@@ -11,6 +11,9 @@ if (!$conexao) {
     die("Falha na conexão: " . mysqli_connect_error());
 }
 
+$task = $_POST['task'];
+$hours = $_POST['hours'];
+
 $sql = "INSERT INTO horas (tarefa, horas_gastas) VALUES ('$task', '$hours')";
 
 if(!mysqli_query($conexao, $sql)) {
