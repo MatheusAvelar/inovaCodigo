@@ -52,7 +52,7 @@ if (mysqli_num_rows($result) > 0) {
         echo "<td>".$row["hora_inicio"]."</td>";
         echo "<td>".$row["hora_fim"]."</td>";
         echo "<td>".$row["horas_gastas"]."</td>";
-        echo "<td><button onclick=\"deleteRecord('" . $row['id'] . "')\"><i class=\"fas fa-trash-alt\"></i> Excluir</button></td>";
+        echo "<td class='delete-cell'><button onclick=\"deleteRecord('" . $row['id'] . "')\"><i class=\"fas fa-trash-alt\"></i> Excluir</button></td>";
         echo "</tr>";
 
         // Calcula o total de horas gastas no formato HH:MM
