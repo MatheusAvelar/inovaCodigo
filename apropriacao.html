@@ -37,10 +37,10 @@
                 <th>Total</th>
             </tr>
             <tr>
-                <td><input type="date" id="date" name="date"></td>
+                <td><input type="date" id="date" name="date" onchange="updateTotalHours()"></td>
                 <td><input type="text" id="task" name="task"></td>
-                <td><input type="time" id="startTime" name="startTime"></td>
-                <td><input type="time" id="endTime" name="endTime"></td>
+                <td><input type="time" id="startTime" name="startTime" onchange="updateTotalHours()"></td>
+                <td><input type="time" id="endTime" name="endTime" onchange="updateTotalHours()"></td>
                 <td id="total">00:00</td>
             </tr>
         </table>
@@ -75,6 +75,22 @@
             hours = String(hours).padStart(2, '0');
             minutes = String(minutes).padStart(2, '0');
             return hours + ":" + minutes;
+        }
+
+        function updateTotalHours() {
+            var startTimeStr = document.getElementById("startTime").value;
+            var endTimeStr = document.getElementById("endTime").value;
+
+            if (!startTimeStr || !endTimeStr) {
+                document.getElementById("total").textContent = "00:00";
+                return;
+            }
+
+            var startTime = new Date("1970-01-01T" + startTimeStr + "Z");
+            var endTime = new Date("1970-01-01T" + endTimeStr + "Z");
+
+            var totalHours = calculateTotalHours(startTime, endTime);
+            document.getElementById("total").textContent = totalHours;
         }
     </script>
 </body>
