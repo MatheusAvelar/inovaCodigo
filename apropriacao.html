@@ -53,14 +53,17 @@
     <script>
         function submitHours() {
             var date = document.getElementById("date").value;
-            var startTime = document.getElementById("startTime").value;
-            var endTime = document.getElementById("endTime").value;
+            var startTimeStr = document.getElementById("startTime").value;
+            var endTimeStr = document.getElementById("endTime").value;
             var task = document.getElementById("task").value;
         
-            if (date.trim() === '' || startTime.trim() === '' || endTime.trim() === '' || task.trim() === '') {
+            if (date.trim() === '' || startTimeStr.trim() === '' || endTimeStr.trim() === '' || task.trim() === '') {
                 alert("Por favor, preencha todos os campos.");
                 return;
             }
+        
+            var startTime = new Date("1970-01-01T" + startTimeStr + "Z");
+            var endTime = new Date("1970-01-01T" + endTimeStr + "Z");
         
             var totalHours = calculateTotalHours(startTime, endTime);
         
@@ -74,7 +77,7 @@
             };
             xhr.send("task=" + task + "&hours=" + totalHours);
         }
-
+        
         function calculateTotalHours(startTime, endTime) {
             var milliseconds = endTime - startTime;
             var totalSeconds = milliseconds / 1000;
