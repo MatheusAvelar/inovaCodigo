@@ -1,9 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apropriação de Horas - Controle de Demandas</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="img/ico.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+    <title>Inova Código - Apropriação de Horas - Controle de Demandas</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1516963750502427" crossorigin="anonymous"></script>
     <style>
         table {
             border-collapse: collapse;
@@ -26,29 +32,46 @@
     </style>
 </head>
 <body>
-    <h1>Apropriação de Horas - Controle de Demandas</h1>
-    <form id="hoursForm">
-        <table>
-            <tr>
-                <th>Data</th>
-                <th>Demanda</th>
-                <th>Hora Início</th>
-                <th>Hora Fim</th>
-                <th>Total</th>
-            </tr>
-            <tr>
-                <td><input type="date" id="date" name="date" onchange="updateTotalHours()"></td>
-                <td><input type="text" id="task" name="task"></td>
-                <td><input type="time" id="startTime" name="startTime" onchange="updateTotalHours()"></td>
-                <td><input type="time" id="endTime" name="endTime" onchange="updateTotalHours()"></td>
-                <td id="total">00:00</td>
-            </tr>
-        </table>
-        <br>
-        <button type="button" onclick="submitHours()">Registrar Horas</button>
-    </form>
+    <header class="navbar">
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="projetos.html">Projetos</a>
+            <a href="publicacoes.html">Publicações</a>
+            <a href="gerador.html">Geradores</a>
+            <a href="projetos/controleFinanceiro/login.php">Controle Financeiro</a>
+            <a href="kanban.html">Kanban</a>
+            <a href="jogos.html">Jogos</a>
+            <a href="https://matheusavelar.github.io/">Currículo</a>
+        </nav>
+    </header>
 
-    <div id="response"></div>
+    <center>
+        <h1>Apropriação de Horas - Controle de Demandas</h1>
+    </center>
+    <div class="consulta-cep">
+        <form id="hoursForm">
+            <table>
+                <tr>
+                    <th>Data</th>
+                    <th>Demanda</th>
+                    <th>Hora Início</th>
+                    <th>Hora Fim</th>
+                    <th>Total</th>
+                </tr>
+                <tr>
+                    <td><input type="date" id="date" name="date" onchange="updateTotalHours()"></td>
+                    <td><input type="text" id="task" name="task"></td>
+                    <td><input type="time" id="startTime" name="startTime" onchange="updateTotalHours()"></td>
+                    <td><input type="time" id="endTime" name="endTime" onchange="updateTotalHours()"></td>
+                    <td id="total">00:00</td>
+                </tr>
+            </table>
+            <br>
+            <button type="button" onclick="submitHours()">Registrar Horas</button>
+        </form>
+        <div id="response"></div>
+    </div>
+
 
     <script>
         function submitHours() {
