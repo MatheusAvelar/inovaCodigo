@@ -19,13 +19,22 @@ $result = mysqli_query($conexao, $sql);
 if (mysqli_num_rows($result) > 0) {
     
     while ($row = mysqli_fetch_assoc($result)) {
+        echo "<h1>Relatório de Horas</h1>
+        <table>
+            <tr>
+                <th>Data</th>
+                <th>Demanda</th>
+                <th>Hora Início</th>
+                <th>Hora Fim</th>
+                <th>Total</th>
+            </tr>";
         echo "<tr>";
         echo "<td>".$row["data"]."</td>";
         echo "<td>".$row["tarefa"]."</td>";
         echo "<td>".$row["hora_inicio"]."</td>";
         echo "<td>".$row["hora_fim"]."</td>";
         echo "<td>".$row["horas_gastas"]."</td>";
-        echo "</tr>";
+        echo "</tr></table>";
     }
 } else {
     echo "<tr><td colspan='5'>Nenhum registro encontrado</td></tr>";
