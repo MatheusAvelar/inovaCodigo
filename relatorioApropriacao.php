@@ -17,9 +17,7 @@ $sql = "SELECT data, tarefa, hora_inicio, hora_fim, horas_gastas FROM horas";
 $result = mysqli_query($conexao, $sql);
 
 if (mysqli_num_rows($result) > 0) {
-    
-    while ($row = mysqli_fetch_assoc($result)) {
-        echo "<h1>Relatório de Horas</h1>
+    echo "<h1>Relatório de Horas</h1>
         <table>
             <tr>
                 <th>Data</th>
@@ -28,6 +26,9 @@ if (mysqli_num_rows($result) > 0) {
                 <th>Hora Fim</th>
                 <th>Total</th>
             </tr>";
+            
+    while ($row = mysqli_fetch_assoc($result)) {
+        
         echo "<tr>";
         echo "<td>".$row["data"]."</td>";
         echo "<td>".$row["tarefa"]."</td>";
