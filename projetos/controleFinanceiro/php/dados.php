@@ -1,4 +1,8 @@
 <?php
+// Verifica se a sessão não está ativa antes de iniciar
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 function autenticaUsuario() {
     $conexao = mysqli_connect("127.0.0.1", "u221588236_root", "Camila@307", "u221588236_controle_finan");
@@ -19,10 +23,9 @@ function autenticaUsuario() {
     
     if($row>0){
         $_SESSION['inputEmail'] = $email;
-        $_SESSION['inputPassword'] = $senha;
         ?>
         <div class="alert alert-success" role="alert">
-        <center>Autenticado com sucesso!</center>
+        <center>Autenticado com sucesso! <?php $email ?></center>
         </div>
         <hr>
         <?php
@@ -198,7 +201,7 @@ function recuperaDadosRefeicao() {
                     ";
         
         while ($row = mysqli_fetch_assoc($result)) {
-            echo "<tr><td>".$row["dataCompra"]."</td><td>".$row["descricao"]."</td><td>".$row["totalCompra"]."</td></tr>";
+            echo "<tr><td>".converterData($row["dataCompra"])."</td><td>".$row["descricao"]."</td><td>".$row["totalCompra"]."</td></tr>";
         }
         
         while ($row2 = mysqli_fetch_assoc($result2)) {
@@ -244,7 +247,7 @@ function recuperaDadosAlimentacao() {
                     ";
         
         while ($row = mysqli_fetch_assoc($result)) {
-            echo "<tr><td>".$row["dataCompra"]."</td><td>".$row["descricao"]."</td><td>".$row["totalCompra"]."</td></tr>";
+            echo "<tr><td>".converterData($row["dataCompra"])."</td><td>".$row["descricao"]."</td><td>".$row["totalCompra"]."</td></tr>";
         }
         
         while ($row2 = mysqli_fetch_assoc($result2)) {
@@ -258,7 +261,7 @@ function recuperaDadosAlimentacao() {
     mysqli_close($conexao);
 }
 
-function recuperaDadosXP() {
+function recuperaDadosFatura() {
     $conexao = mysqli_connect("127.0.0.1:3306", "u221588236_root", "Camila@307", "u221588236_controle_finan");
     
     if (!$conexao) {
@@ -275,7 +278,7 @@ function recuperaDadosXP() {
 
         echo "<div class='card shadow mb-4'>
         <div class='card-header py-3'>
-            <h6 class='m-0 font-weight-bold text-primary'>Extrato - XP Cartão</h6>
+            <h6 class='m-0 font-weight-bold text-primary'>Extrato</h6>
         </div>
         <div class='card-body'>
             <div class='table-responsive'>
@@ -290,7 +293,7 @@ function recuperaDadosXP() {
                     ";
         
         while ($row = mysqli_fetch_assoc($result)) {
-            echo "<tr><td>".$row["dataCompra"]."</td><td>".$row["descricao"]."</td><td>".$row["totalCompra"]."</td></tr>";
+            echo "<tr><td>".converterData($row["dataCompra"])."</td><td>".$row["descricao"]."</td><td>".$row["totalCompra"]."</td></tr>";
         }
         
         while ($row2 = mysqli_fetch_assoc($result2)) {
@@ -405,4 +408,14 @@ function totalRefeicao() {
     }
 
     mysqli_close($conexao);
+}
+
+function converterData($dataString) {
+    // Criar um objeto de data
+    $data = new DateTime($dataString);
+
+    // Formatar para o formato "DD/MM/AAAA"
+    $dataFormatada = $data->format('d/m/Y');
+
+    return $dataFormatada;
 }
