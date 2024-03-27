@@ -1,16 +1,17 @@
 <?php
 session_start();
 
-// Verifica se o usuário e senha estão corretos (aqui você pode usar seu próprio sistema de autenticação)
-$username = "usuario";
-$password = "senha";
+$conexao = mysqli_connect("127.0.0.1", "u221588236_root", "Camila@307", "u221588236_controle_finan");
 
-if ($_POST['username'] === $username && $_POST['password'] === $password) {
-    echo "Entrou.";
+$email   = $_POST['username'];
+$senha   = md5($_POST['password']);
+$query   = mysqli_query($conexao,"SELECT * FROM usuario WHERE email = '$email' and senha = '$senha'");
+$row     = mysqli_num_rows($query);
+
+if($row>0){ 
     $_SESSION['loggedin'] = true;
-    header("Location: apropriacao.php"); // Redireciona para a página de Apropriação de Horas
+    header("Location: apropriacao.php");
     exit;
-} else {
-    echo "Usuário ou senha incorretos.";
 }
+
 ?>
