@@ -28,7 +28,6 @@ if (mysqli_num_rows($result) > 0) {
             </tr>";
 
     while ($row = mysqli_fetch_assoc($result)) {
-        
         echo "<tr>";
         echo "<td>".$row["data"]."</td>";
         echo "<td>".$row["tarefa"]."</td>";
@@ -39,8 +38,8 @@ if (mysqli_num_rows($result) > 0) {
     }
     echo "</table>";
 } else {
-    echo "<tr><td colspan='5'>Nenhum registro encontrado</td></tr>";
+    echo "<p>Nenhum registro encontrado</p>";
 }
-mysqli_close($conexao);
 
+mysqli_close($conexao);
 ?>
