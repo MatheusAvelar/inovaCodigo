@@ -101,7 +101,7 @@
                     document.getElementById("response").innerHTML = xhr.responseText;
                 }
             };
-            xhr.send("task=" + task + "&hours=" + totalHours);
+            xhr.send("task=" + task + "&hours=" + totalHours + "&date=" + date);
         }
         
         function calculateTotalHours(startTime, endTime) {

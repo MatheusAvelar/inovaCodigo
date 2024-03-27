@@ -11,10 +11,11 @@ if (!$conexao) {
     die("Falha na conexão: " . mysqli_connect_error());
 }
 
+$data = $_POST['date'];
 $task = $_POST['task'];
 $hours = $_POST['hours'];
 
-$sql = "INSERT INTO horas (tarefa, horas_gastas) VALUES ('$task', '$hours')";
+$sql = "INSERT INTO horas (data ,tarefa, horas_gastas) VALUES ('$data','$task', '$hours')";
 
 if(!mysqli_query($conexao, $sql)) {
     echo "Error: ".mysqli_error($conexao);
