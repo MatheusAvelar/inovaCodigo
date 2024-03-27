@@ -14,8 +14,8 @@ if (!$conexao) {
 $data = $_POST['date'];
 $task = $_POST['task'];
 $hours = $_POST['hours'];
-$hora_inicio = $_POST['hora_inicio'];
-$hora_fim = $_POST['hora_fim'];
+$hora_inicio = $_POST['startTime'];
+$hora_fim = $_POST['endTime'];
 
 
 $sql = "INSERT INTO horas (data ,tarefa, hora_inicio, hora_fim, horas_gastas) VALUES ('$data','$task', '$hora_inicio', '$hora_fim','$hours')";
