@@ -21,18 +21,6 @@ function submitHours() {
     xhr.send("task=" + task + "&hours=" + totalHours);
 }
 
-function submitHours() {
-    var startTime = document.getElementById("startTime").valueAsDate;
-    var endTime = document.getElementById("endTime").valueAsDate;
-
-    if (!startTime || !endTime) {
-        alert("Por favor, insira hora de início e hora de término.");
-        return;
-    }
-
-    
-}
-
 function calculateTotalHours(startTime, endTime) {
     var milliseconds = endTime - startTime;
     var totalSeconds = milliseconds / 1000;
