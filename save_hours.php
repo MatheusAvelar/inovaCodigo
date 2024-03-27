@@ -5,25 +5,19 @@ $password = "Camila@307";
 $dbname = "u221588236_controle_finan";
 
 // Cria a conexão
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Checa a conexão
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+$conexao = mysqli_connect($servername, $username, $password, $dbname);
+    
+if (!$conexao) {
+    die("Falha na conexão: " . mysqli_connect_error());
 }
 
-// Pega os dados do formulário
-$task = $_POST['task'];
-$hours = $_POST['hours'];
-
-// Prepara e executa a query para inserir os dados no banco
 $sql = "INSERT INTO horas (tarefa, horas_gastas) VALUES ('$task', '$hours')";
 
-if ($conn->query($sql) === TRUE) {
-    echo "Horas registradas com sucesso!";
+if(!mysqli_query($conexao, $sql)) {
+    echo "Error: ".mysqli_error($conexao);
 } else {
-    echo "Erro ao registrar horas: " . $conn->error;
+    echo "Salvo no Banco!";
 }
 
-$conn->close();
+mysqli_close($conexao);
 ?>
