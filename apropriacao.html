@@ -52,19 +52,27 @@
 
     <script>
         function submitHours() {
-            var startTimeStr = document.getElementById("startTime").value;
-            var endTimeStr = document.getElementById("endTime").value;
-
-            if (!startTimeStr || !endTimeStr) {
-                alert("Por favor, insira hora de início e hora de término.");
+            var date = document.getElementById("date").value;
+            var startTime = document.getElementById("startTime").value;
+            var endTime = document.getElementById("endTime").value;
+            var task = document.getElementById("task").value;
+        
+            if (date.trim() === '' || startTime.trim() === '' || endTime.trim() === '' || task.trim() === '') {
+                alert("Por favor, preencha todos os campos.");
                 return;
             }
-
-            var startTime = new Date("1970-01-01T" + startTimeStr + "Z");
-            var endTime = new Date("1970-01-01T" + endTimeStr + "Z");
-
+        
             var totalHours = calculateTotalHours(startTime, endTime);
-            document.getElementById("total").textContent = totalHours;
+        
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "save_hours.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    document.getElementById("response").innerHTML = xhr.responseText;
+                }
+            };
+            xhr.send("task=" + task + "&hours=" + totalHours);
         }
 
         function calculateTotalHours(startTime, endTime) {
