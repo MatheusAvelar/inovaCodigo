@@ -68,7 +68,7 @@
     </center>
     <div class="consulta-cep">
     
-    <form action="php/auth.php" method="POST">
+    <form action="auth.php" method="POST">
         <label for="username">Usuário:</label><br>
         <input type="text" id="username" name="username"><br>
         <label for="password">Senha:</label><br>
