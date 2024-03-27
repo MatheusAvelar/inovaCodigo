@@ -17,3 +17,26 @@ function submitHours() {
     };
     xhr.send("task=" + task + "&hours=" + hours);
 }
+
+function submitHours() {
+    var startTime = document.getElementById("startTime").valueAsDate;
+    var endTime = document.getElementById("endTime").valueAsDate;
+
+    if (!startTime || !endTime) {
+        alert("Por favor, insira hora de início e hora de término.");
+        return;
+    }
+
+    var totalHours = calculateTotalHours(startTime, endTime);
+    document.getElementById("total").textContent = totalHours;
+}
+
+function calculateTotalHours(startTime, endTime) {
+    var milliseconds = endTime - startTime;
+    var totalSeconds = milliseconds / 1000;
+    var hours = Math.floor(totalSeconds / 3600);
+    var minutes = Math.floor((totalSeconds % 3600) / 60);
+    hours = String(hours).padStart(2, '0');
+    minutes = String(minutes).padStart(2, '0');
+    return hours + ":" + minutes;
+}
