@@ -53,6 +53,7 @@ if (mysqli_num_rows($result) > 0) {
 
         // Exibe os dados do registro
         echo "<tr>";
+        echo "<td>".$row['id']."</td>";
         echo "<td>$data_formatada</td>";
         echo "<td>".$row["tarefa"]."</td>";
         echo "<td>".$row["hora_inicio"]."</td>";
