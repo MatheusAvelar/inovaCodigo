@@ -39,7 +39,7 @@ if (mysqli_num_rows($result) > 0) {
                 <th>Hora Início</th>
                 <th>Hora Fim</th>
                 <th>Total</th>
-                <th>Ação</th>
+                <th><center>Ação</center></th>
             </tr>";
 
     while ($row = mysqli_fetch_assoc($result)) {
