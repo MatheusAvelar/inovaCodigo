@@ -67,7 +67,7 @@ if (mysqli_num_rows($result) > 0) {
     $totalFormatado = sprintf('%02d:%02d', $horasTotal, $minutosTotal);
 
     // Exibe o total das horas
-    echo "<tr><td colspan='5'>Total: $totalFormatado</td></tr>";
+    echo "<tr><td colspan='6'>Total: $totalFormatado</td></tr>";
 
     echo "</table>";
 } else {
