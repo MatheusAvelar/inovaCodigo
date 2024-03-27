@@ -32,6 +32,7 @@ if (mysqli_num_rows($result) > 0) {
     echo "<h1>Relatório de Horas</h1>
         <table>
             <tr>
+                <th>Id</th>
                 <th>Data</th>
                 <th>Demanda</th>
                 <th>Hora Início</th>
