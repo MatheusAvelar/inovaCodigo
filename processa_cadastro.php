@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = mysqli_real_escape_string($conexao, $email);
 
     // Insere os dados na tabela de usuários
-    $query = "INSERT INTO usuario(nome, sobrenome, email, senha) VALUES('$nome','$sobrenome','$email','$senha')";
+    $sql = "INSERT INTO usuario(nome, sobrenome, email, senha) VALUES('$nome','$sobrenome','$email','$senha')";
 
     if (mysqli_query($conexao, $sql)) {
         echo "Cadastro realizado com sucesso!";
