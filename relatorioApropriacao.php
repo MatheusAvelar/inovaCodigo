@@ -4,6 +4,8 @@ $username = "u221588236_root";
 $password = "Camila@307";
 $dbname = "u221588236_controle_finan";
 
+$email = $_SESSION['email'];
+
 // Cria a conexão
 $conexao = mysqli_connect($servername, $username, $password, $dbname);
 
@@ -13,7 +15,7 @@ if (!$conexao) {
 }
 
 // Constrói a query base
-$sql = "SELECT id, data, tarefa, hora_inicio, hora_fim, horas_gastas FROM horas WHERE 1";
+$sql = "SELECT id, data, tarefa, hora_inicio, hora_fim, horas_gastas FROM horas WHERE email = $email";
 
 // Adiciona os filtros de data e demanda, se fornecidos
 if (isset($_GET['filterDate']) && !empty($_GET['filterDate'])) {

@@ -16,9 +16,10 @@ $task = $_POST['task'];
 $hours = $_POST['hours'];
 $hora_inicio = $_POST['startTime'];
 $hora_fim = $_POST['endTime'];
+$email = $_SESSION['email'];
 
 
-$sql = "INSERT INTO horas (data ,tarefa, hora_inicio, hora_fim, horas_gastas) VALUES ('$data','$task', '$hora_inicio', '$hora_fim','$hours')";
+$sql = "INSERT INTO horas (data ,tarefa, hora_inicio, hora_fim, horas_gastas, email) VALUES ('$data','$task', '$hora_inicio', '$hora_fim','$hours', '$email')";
 
 if(!mysqli_query($conexao, $sql)) {
     echo "Error: ".mysqli_error($conexao);
