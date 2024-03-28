@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $servername = "127.0.0.1:3306";
 $username = "u221588236_root";
 $password = "Camila@307";
