@@ -74,12 +74,10 @@
         <input type="text" id="username" name="username"><br>
         <label for="password">Senha:</label><br>
         <input type="password" id="password" name="password"><br><br>
-        <button type="submit">Login</button> <button id="criarAcesso">Criar Acesso</button>
+        <button type="submit">Login</button>
     </form>
-    <script>
-    document.getElementById("criarAcesso").addEventListener("click", function() {
-        window.location.href = "criar_acesso.php";
-    });
-    </script>
+    <form action="criar_acesso.php" method="GET">
+        <button type="submit">Criar Acesso</button>
+    </form>
 </body>
 </html>
