@@ -78,7 +78,7 @@
     </form>
     <script>
     document.getElementById("criarAcesso").addEventListener("click", function() {
-        window.location.href = "outra_pagina.php";
+        window.location.href = "criar_acesso.php";
     });
     </script>
 </body>
