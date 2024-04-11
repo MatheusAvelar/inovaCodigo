@@ -93,11 +93,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <a href="apropriacao.php">Apropriação de Horas</a>
             <a href="receitas.html">Receitas</a>
             <a href="logout.php">Sair</a>
+            <div id="cart-icon">
+                <i class="fas fa-shopping-cart"></i> <!-- Ícone do carrinho -->
+                <span id="cart-counter" class="cart-counter">0</span> <!-- Contador de itens no carrinho -->
+            </div>
         </nav>
-        <div id="cart-icon">
-            <i class="fas fa-shopping-cart"></i> <!-- Ícone do carrinho -->
-            <span id="cart-counter" class="cart-counter">0</span> <!-- Contador de itens no carrinho -->
-        </div>
     </header>
 
     <h1>Nossos Produtos</h1>
