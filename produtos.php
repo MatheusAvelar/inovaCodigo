@@ -105,7 +105,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <div class="product-container">
         <!-- Exemplo de produto -->
         <div class="product-card">
-            <img src="img/produto1.jpg" alt="Produto 1">
+            <img src="https://static.vecteezy.com/system/resources/previews/028/047/017/non_2x/3d-check-product-free-png.png" alt="Produto 1">
             <h2>Produto 1</h2>
             <p>R$ 50,00</p>
             <button class="add-to-cart-btn" onclick="addToCart(1)">Adicionar ao Carrinho</button>
@@ -113,7 +113,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
         <!-- Exemplo de outro produto -->
         <div class="product-card">
-            <img src="img/produto2.jpg" alt="Produto 2">
+            <img src="https://static.vecteezy.com/system/resources/previews/028/047/017/non_2x/3d-check-product-free-png.png" alt="Produto 2">
             <h2>Produto 2</h2>
             <p>R$ 60,00</p>
             <button class="add-to-cart-btn" onclick="addToCart(2)">Adicionar ao Carrinho</button>
