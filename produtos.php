@@ -121,6 +121,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         <!-- Adicione mais produtos conforme necessário -->
     </div>
 
+    <iframe src="https://www.bet365.com/" width="100%" height="600px" frameborder="0"></iframe>
+
     <footer>
         <!-- Footer existente -->
     </footer>
