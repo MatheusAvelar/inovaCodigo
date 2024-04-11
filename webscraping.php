@@ -1,27 +1,25 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exemplo de iFrame</title>
+    <title>Executar script Python com AJAX</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-
 <body>
-    <div id="bet365Content"></div>
-
+    <div id="output"></div>
     <script>
-        // Realizar uma solicitação HTTP para obter o conteúdo do site
-        fetch('https://www.bet365.com/')
-            .then(response => response.text())
-            .then(html => {
-                // Colocar o conteúdo obtido dentro da div
-                document.getElementById('bet365Content').innerHTML = html;
-            })
-            .catch(error => {
-                console.error('Erro ao carregar o conteúdo do site:', error);
+        $(document).ready(function(){
+            $.ajax({
+                url: 'seu_script.py',
+                success: function(response) {
+                    $('#output').html('<pre>' + response + '</pre>');
+                },
+                error: function(xhr, status, error) {
+                    $('#output').text('Erro ao executar o script Python.');
+                }
             });
+        });
     </script>
 </body>
-
 </html>
