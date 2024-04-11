@@ -199,6 +199,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         // Carrega o relatório quando a página é carregada
         window.onload = function() {
             carregarRelatorio();
+            setupCellEditing();
         };
 
         function applyFilters() {
@@ -230,6 +231,50 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 };
                 xhr.send("recordId=" + recordId);
             }
+        }
+
+        function setupCellEditing() {
+            var cells = document.querySelectorAll('#relatorio td:not(:first-child)');
+            cells.forEach(function(cell) {
+                cell.addEventListener('dblclick', function() {
+                    var oldValue = this.textContent;
+                    this.setAttribute('contenteditable', 'true');
+                    this.focus();
+
+                    this.addEventListener('keydown', function(event) {
+                        if (event.key === 'Enter') {
+                            event.preventDefault();
+                            this.blur();
+                        }
+                    });
+
+                    this.addEventListener('blur', function() {
+                        var newValue = this.textContent;
+                        var rowId = this.parentElement.dataset.rowId;
+                        var cellIndex = this.cellIndex; // Index of the cell in the row
+
+                        if (newValue !== oldValue) {
+                            updateCellValue(rowId, cellIndex, newValue);
+                        }
+
+                        this.removeAttribute('contenteditable');
+                    });
+                });
+            });
+        }
+
+        function updateCellValue(rowId, cellIndex, newValue) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "update_cell_value.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    console.log(xhr.responseText); // Exibe a resposta do servidor
+                    // Aqui você pode atualizar a interface do usuário de acordo com a resposta do servidor, se necessário
+                    applyFilters();
+                }
+            };
+            xhr.send("rowId=" + rowId + "&cellIndex=" + cellIndex + "&newValue=" + encodeURIComponent(newValue));
         }
     </script>
 </body>
