@@ -120,31 +120,42 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             var startTimeStr = document.getElementById("startTime").value;
             var endTimeStr = document.getElementById("endTime").value;
             var task = document.getElementById("task").value;
-        
+
             if (date.trim() === '' || startTimeStr.trim() === '' || endTimeStr.trim() === '' || task.trim() === '') {
                 alert("Por favor, preencha todos os campos.");
                 return;
             }
-        
+
             var startTime = new Date("1970-01-01T" + startTimeStr + "Z");
             var endTime = new Date("1970-01-01T" + endTimeStr + "Z");
-        
+
             var totalHours = calculateTotalHours(startTime, endTime);
-        
+
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "save_hours.php", true);
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     document.getElementById("response").innerHTML = xhr.responseText;
-                    carregarRelatorio(); // Após registrar as horas, recarrega o relatório
+                    // Verifica se a resposta do servidor indica sucesso
+                    if (xhr.responseText.trim() === "success") {
+                        // Se for bem-sucedido, exibe uma mensagem de sucesso
+                        alert("Horas registradas com sucesso!");
+                        // Limpa o formulário após o sucesso, se necessário
+                        document.getElementById("date").value = "";
+                        document.getElementById("startTime").value = "";
+                        document.getElementById("endTime").value = "";
+                        document.getElementById("task").value = "";
+                        // Recarrega o relatório
+                        carregarRelatorio();
+                    }
                 }
             };
-            
+
             // Constrói os dados a serem enviados
             var dataToSend = "task=" + task + "&hours=" + totalHours + "&date=" + date +
-                             "&startTime=" + startTimeStr + "&endTime=" + endTimeStr;
-                             
+                "&startTime=" + startTimeStr + "&endTime=" + endTimeStr;
+
             xhr.send(dataToSend);
         }
 
