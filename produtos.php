@@ -18,6 +18,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <title>Minha Loja Online</title>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1516963750502427" crossorigin="anonymous"></script>
     <style>
@@ -59,6 +60,22 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             cursor: pointer;
             margin-top: 10px;
         }
+        /* CSS para a animação do contador */
+        .counter-animation {
+            animation: pulse 0.5s ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
     </style>
 </head>
 
@@ -77,6 +94,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <a href="receitas.html">Receitas</a>
             <a href="logout.php">Sair</a>
         </nav>
+        <div id="cart-icon">
+            <i class="fas fa-shopping-cart"></i> <!-- Ícone do carrinho -->
+            <span id="cart-counter" class="cart-counter">0</span> <!-- Contador de itens no carrinho -->
+        </div>
     </header>
 
     <h1>Nossos Produtos</h1>
@@ -106,7 +127,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
     <!-- Scripts -->
     <script>
-        // Função para adicionar produto ao carrinho
         function addToCart(productId) {
             var cart = JSON.parse(sessionStorage.getItem("cart")) || [];
             var existingProductIndex = cart.findIndex(item => item.productId === productId);
@@ -122,12 +142,13 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
             sessionStorage.setItem("cart", JSON.stringify(cart));
 
-            alert("Produto adicionado ao carrinho!");
-
+            // Atualiza o contador do carrinho
             updateCartCounter();
+
+            // Anima o contador
+            animateCartCounter();
         }
 
-        // Função para atualizar o contador do carrinho
         function updateCartCounter() {
             var cart = JSON.parse(sessionStorage.getItem("cart")) || [];
             var cartCounter = document.getElementById("cart-counter");
@@ -135,6 +156,18 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             if (cartCounter) {
                 var totalItems = cart.reduce((total, item) => total + item.quantity, 0);
                 cartCounter.textContent = totalItems;
+            }
+        }
+
+        function animateCartCounter() {
+            var cartCounter = document.getElementById("cart-counter");
+            if (cartCounter) {
+                cartCounter.classList.add("counter-animation");
+
+                // Remove a classe de animação após um curto período de tempo
+                setTimeout(function() {
+                    cartCounter.classList.remove("counter-animation");
+                }, 500); // Tempo em milissegundos
             }
         }
     </script>
