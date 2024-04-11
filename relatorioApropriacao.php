@@ -20,9 +20,10 @@ if (!$conexao) {
 $sql = "SELECT id, data, tarefa, hora_inicio, hora_fim, horas_gastas FROM horas WHERE email = '$email'";
 
 // Adiciona os filtros de data e demanda, se fornecidos
-if (isset($_GET['filterDate']) && !empty($_GET['filterDate'])) {
-    $filterDate = $_GET['filterDate'];
-    $sql .= " AND data = '$filterDate'";
+if (isset($_GET['filterStartDate']) && isset($_GET['filterEndDate'])) {
+    $filterStartDate = $_GET['filterStartDate'];
+    $filterEndDate = $_GET['filterEndDate'];
+    $sql .= " AND data BETWEEN '$filterStartDate' AND '$filterEndDate'";
 }
 
 if (isset($_GET['filterTask']) && !empty($_GET['filterTask'])) {

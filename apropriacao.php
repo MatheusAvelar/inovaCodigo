@@ -102,9 +102,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         <div id="response"></div>
         <h1>Relatório de Horas</h1>
         <form id="filterForm">
-            <label for="filterDate">Filtrar por Data:</label>
-            <input type="date" id="filterDate" name="filterDate" onchange="applyFilters()">
-            
+            <label for="filterStartDate">Data Inicial:</label>
+            <input type="date" id="filterStartDate" name="filterStartDate" onchange="applyFilters()">
+
+            <label for="filterEndDate">Data Final:</label>
+            <input type="date" id="filterEndDate" name="filterEndDate" onchange="applyFilters()">
+
             <label for="filterTask">Filtrar por Demanda:</label>
             <input type="text" id="filterTask" name="filterTask" oninput="applyFilters()">
         </form>
@@ -188,11 +191,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         };
 
         function applyFilters() {
-            var filterDate = document.getElementById("filterDate").value;
+            var filterStartDate = document.getElementById("filterStartDate").value;
+            var filterEndDate = document.getElementById("filterEndDate").value;
             var filterTask = document.getElementById("filterTask").value;
-        
+            
             var xhr = new XMLHttpRequest();
-            xhr.open("GET", "relatorioApropriacao.php?filterDate=" + filterDate + "&filterTask=" + filterTask, true);
+            xhr.open("GET", "relatorioApropriacao.php?filterStartDate=" + filterStartDate + "&filterEndDate=" + filterEndDate + "&filterTask=" + filterTask, true);
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     document.getElementById("relatorio").innerHTML = xhr.responseText;
