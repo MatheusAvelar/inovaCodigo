@@ -1,5 +1,5 @@
 <?php
-require('fpdf.php');
+require('fpdf186\fpdf.php');
 
 // Função para extrair o título do PDF
 function extractPdfTitle($pdfPath) {
