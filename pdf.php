@@ -78,25 +78,50 @@
                 const arrayBuffer = event.target.result;
                 const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
 
-                const page = await pdf.getPage(1);
-                const textContent = await page.getTextContent();
-                const textItems = textContent.items.map(item => item.str);
+                let allText = ''; // Variável para armazenar todo o texto do PDF
 
-                const text = textItems.join(' ');
+                // Loop através de todas as páginas do PDF
+                for (let i = 1; i <= pdf.numPages; i++) {
+                    const page = await pdf.getPage(i);
+                    const textContent = await page.getTextContent();
+                    const textItems = textContent.items.map(item => item.str);
+                    const text = textItems.join(' '); // Texto da página
+                    allText += text + '\n'; // Adiciona o texto da página à variável allText
+                }
 
-                // Padrão para procurar uma data no formato DD/MM/AAAA
-                const dateRegex = /(\d{2}\/\d{2}\/\d{4})/;
+                // Padrões de regex para cada informação específica
+                const dateRegex = /(\d{2}\/\d{2}\/\d{4})/g; // Data no formato DD/MM/AAAA
+                const nomePagadorRegex = /Nome do Pagador: (.+?)\n/g; // Nome do Pagador
+                const cpfRegex = /CPF: (\d{3}\.\d{3}\.\d{3}-\d{2})/g; // CPF no formato XXX.XXX.XXX-XX
+                const numDocumentoRegex = /Num\. Documento: (\d+)/g; // Número do Documento
+                const valorDocumentoRegex = /Valor do documento: (.+?)\n/g; // Valor do Documento
+                const nomeBeneficiarioRegex = /Nome do Beneficiário: (.+?)\n/g; // Nome do Beneficiário
+                const cnpjBeneficiarioRegex = /CNPJ Beneficiário: (\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2})/g; // CNPJ do Beneficiário no formato XX.XXX.XXX/XXXX-XX
+                const enderecoRegex = /Endereço: (.+?)\n/g; // Endereço
 
-                // Procura pela data de vencimento no texto
-                const dateMatch = text.match(dateRegex);
+                // Extrair informações usando regex
+                const vencimentos = allText.match(dateRegex);
+                const nomesPagador = allText.match(nomePagadorRegex);
+                const cpfs = allText.match(cpfRegex);
+                const numerosDocumento = allText.match(numDocumentoRegex);
+                const valoresDocumento = allText.match(valorDocumentoRegex);
+                const nomesBeneficiario = allText.match(nomeBeneficiarioRegex);
+                const cnpjsBeneficiario = allText.match(cnpjBeneficiarioRegex);
+                const enderecos = allText.match(enderecoRegex);
 
-                const vencimento = dateMatch ? dateMatch[1] : 'Data de vencimento não encontrada';
-
-                // Exibir a data de vencimento na tabela
+                // Preencher a tabela com os dados extraídos
                 const resultTable = document.getElementById('resultTable');
-                const row = resultTable.insertRow(-1); // Insere uma nova linha na tabela
-                const cell = row.insertCell(0); // Insere uma nova célula na linha
-                cell.textContent = vencimento;
+                for (let i = 0; i < vencimentos.length; i++) {
+                    const row = resultTable.insertRow(-1);
+                    row.insertCell(0).textContent = vencimentos[i];
+                    row.insertCell(1).textContent = nomesPagador[i];
+                    row.insertCell(2).textContent = cpfs[i];
+                    row.insertCell(3).textContent = numerosDocumento[i];
+                    row.insertCell(4).textContent = valoresDocumento[i];
+                    row.insertCell(5).textContent = nomesBeneficiario[i];
+                    row.insertCell(6).textContent = cnpjsBeneficiario[i];
+                    row.insertCell(7).textContent = enderecos[i];
+                }
             };
 
             reader.readAsArrayBuffer(file);
