@@ -10,7 +10,7 @@
 <body>
     <h1>Extrair Dados de PDF</h1>
     <input type="file" id="pdfInput" accept=".pdf">
-    <button onclick="extractData()">Extrair Dados</button>
+    <button onclick="extractData()">Extrair Dados</button> 
 
     <script>
         async function extractData() {
@@ -34,16 +34,15 @@
 
                 const text = textItems.join(' ');
 
-                const nomeRegex = /Nome do Pagador: (.*) CPF\/CNPJ do Pagador:/;
-                const cpfRegex = /CPF\/CNPJ do Pagador: (\d{3}\.\d{3}\.\d{3}-\d{2})/;
+                // Padrão para procurar uma data no formato DD/MM/AAAA
+                const dateRegex = /(\d{2}\/\d{2}\/\d{4})/;
 
-                const nomeMatch = text.match(nomeRegex);
-                const cpfMatch = text.match(cpfRegex);
+                // Procura pela data de vencimento no texto
+                const dateMatch = text.match(dateRegex);
 
-                const nomePagador = nomeMatch ? nomeMatch[1] : 'Não encontrado';
-                const cpfPagador = cpfMatch ? cpfMatch[1] : 'Não encontrado';
+                const vencimento = dateMatch ? dateMatch[1] : 'Data de vencimento não encontrada';
 
-                alert('Nome do Pagador: ' + nomePagador + '\nCPF do Pagador: ' + cpfPagador);
+                alert('Data de Vencimento: ' + vencimento); 
             };
 
             reader.readAsArrayBuffer(file);
