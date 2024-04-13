@@ -55,10 +55,17 @@
         <button onclick="extractData()">Extrair Dados</button> 
     </div>
 
-    <!-- Tabela para exibir a data de vencimento -->
+    <!-- Tabela para exibir os dados extraídos -->
     <table id="resultTable" style="margin: 20px auto; border-collapse: collapse; border: 1px solid black;">
         <tr>
             <th>Data de Vencimento</th>
+            <th>Nome do Pagador</th>
+            <th>CPF</th>
+            <th>Número do Documento</th>
+            <th>Valor do Documento</th>
+            <th>Nome do Beneficiário</th>
+            <th>CNPJ do Beneficiário</th>
+            <th>Endereço</th>
         </tr>
     </table>
 
