@@ -1,37 +1,37 @@
 <?php
-require('fpdf186/fpdf.php');
+require_once('pdfparser/src/Smalot/PdfParser/Parser.php');
+require_once('pdfparser/src/Smalot/PdfParser/Document.php');
+require_once('pdfparser/src/Smalot/PdfParser/Object.php');
+require_once('pdfparser/src/Smalot/PdfParser/Exception.php');
+require_once('pdfparser/src/Smalot/PdfParser/Resource.php');
+require_once('pdfparser/src/Smalot/PdfParser/Element.php');
+require_once('pdfparser/src/Smalot/PdfParser/Encoding.php');
 
-// Função para extrair o título do PDF
-function extractPdfTitle($pdfPath) {
-    // Instancia um objeto FPDF
-    $pdf = new FPDF();
+use Smalot\PdfParser\Parser;
 
-    // Abre o arquivo PDF
-    $pdf->Open($pdfPath);
+// Caminho para o arquivo PDF
+$pdfPath = 'caminho/do/seu/arquivo.pdf';
 
-    // Retorna o título do PDF
-    return $pdf->title;
+// Crie uma instância do PdfParser
+$parser = new Parser();
+
+// Parse o PDF e obtenha um objeto Pdf
+$pdf = $parser->parseFile($pdfPath);
+
+// Extrai o texto do PDF
+$text = $pdf->getText();
+
+// Encontra o nome do pagador e o CPF
+$nomePagador = '';
+$cpfPagador = '';
+
+// Encontra padrões para o nome do pagador e CPF
+if (preg_match('/Nome do Pagador: (.*) CPF\/CNPJ do Pagador: (\d{3}\.\d{3}\.\d{3}-\d{2})/', $text, $matches)) {
+    $nomePagador = $matches[1];
+    $cpfPagador = $matches[2];
 }
 
-// Verifica se um arquivo foi enviado
-if(isset($_FILES['pdfFile'])) {
-    $file = $_FILES['pdfFile'];
-
-    // Verifica se não houve erro no upload
-    if($file['error'] === 0) {
-        // Move o arquivo temporário para um local permanente
-        $tempPath = $file['tmp_name'];
-        $targetPath = 'arquivos/' . $file['name']; // Local onde o arquivo será salvo
-        move_uploaded_file($tempPath, $targetPath);
-
-        // Extrai o título do PDF
-        $pdfTitle = extractPdfTitle($targetPath);
-
-        // Exibe o título do PDF
-        echo "<h2>Título do PDF:</h2>";
-        echo "<p>$pdfTitle</p>";
-    } else {
-        echo "Erro ao fazer upload do arquivo.";
-    }
-}
+// Exibe as informações extraídas
+echo "Nome do Pagador: " . $nomePagador . "\n";
+echo "CPF do Pagador: " . $cpfPagador . "\n";
 ?>

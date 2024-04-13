@@ -34,10 +34,45 @@
     <center>
         <h1>Extrair Dados de PDF</h1>
     </center>
-    <form action="extrair_pdf.php" method="post" enctype="multipart/form-data">
+    <form action="" method="post" enctype="multipart/form-data">
         <input type="file" name="pdfFile" accept=".pdf">
         <button type="submit" name="submit">Extrair Dados</button>
     </form>
+
+    <?php
+    // Verifica se o formulário foi submetido
+    if(isset($_POST['submit'])) {
+        require_once('pdfparser/src/Smalot/PdfParser/Parser.php');
+
+        // Caminho para o arquivo PDF
+        $pdfPath = $_FILES['pdfFile']['tmp_name'];
+
+        // Crie uma instância do PdfParser
+        $parser = new Smalot\PdfParser\Parser();
+
+        // Parse o PDF e obtenha um objeto Pdf
+        $pdf = $parser->parseFile($pdfPath);
+
+        // Extrai o texto do PDF
+        $text = $pdf->getText();
+
+        // Encontra o nome do pagador e o CPF
+        $nomePagador = '';
+        $cpfPagador = '';
+
+        // Encontra padrões para o nome do pagador e CPF
+        if (preg_match('/Nome do Pagador: (.*) CPF\/CNPJ do Pagador: (\d{3}\.\d{3}\.\d{3}-\d{2})/', $text, $matches)) {
+            $nomePagador = $matches[1];
+            $cpfPagador = $matches[2];
+        }
+
+        // Exibe as informações extraídas
+        echo "<h2>Informações do Boleto:</h2>";
+        echo "<p>Nome do Pagador: " . $nomePagador . "</p>";
+        echo "<p>CPF do Pagador: " . $cpfPagador . "</p>";
+    }
+    ?>
+
 </body>
 
 </html>
