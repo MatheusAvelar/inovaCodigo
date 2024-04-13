@@ -102,9 +102,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         <div id="response"></div>
         <h1>Relatório de Horas</h1>
         <form id="filterForm">
-            <label for="filterDate">Filtrar por Data:</label>
-            <input type="date" id="filterDate" name="filterDate" onchange="applyFilters()">
-            
+            <label for="filterStartDate">Data Inicial:</label>
+            <input type="date" id="filterStartDate" name="filterStartDate" onchange="applyFilters()">
+
+            <label for="filterEndDate">Data Final:</label>
+            <input type="date" id="filterEndDate" name="filterEndDate" onchange="applyFilters()">
+
             <label for="filterTask">Filtrar por Demanda:</label>
             <input type="text" id="filterTask" name="filterTask" oninput="applyFilters()">
         </form>
@@ -117,31 +120,42 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             var startTimeStr = document.getElementById("startTime").value;
             var endTimeStr = document.getElementById("endTime").value;
             var task = document.getElementById("task").value;
-        
+
             if (date.trim() === '' || startTimeStr.trim() === '' || endTimeStr.trim() === '' || task.trim() === '') {
                 alert("Por favor, preencha todos os campos.");
                 return;
             }
-        
+
             var startTime = new Date("1970-01-01T" + startTimeStr + "Z");
             var endTime = new Date("1970-01-01T" + endTimeStr + "Z");
-        
+
             var totalHours = calculateTotalHours(startTime, endTime);
-        
+
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "save_hours.php", true);
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     document.getElementById("response").innerHTML = xhr.responseText;
-                    carregarRelatorio(); // Após registrar as horas, recarrega o relatório
+                    // Verifica se a resposta do servidor indica sucesso
+                    if (xhr.responseText.trim() === "success") {
+                        // Se for bem-sucedido, exibe uma mensagem de sucesso
+                        alert("Horas registradas com sucesso!");
+                        // Limpa o formulário após o sucesso, se necessário
+                        document.getElementById("date").value = "";
+                        document.getElementById("startTime").value = "";
+                        document.getElementById("endTime").value = "";
+                        document.getElementById("task").value = "";
+                        // Recarrega o relatório
+                        carregarRelatorio();
+                    }
                 }
             };
-            
+
             // Constrói os dados a serem enviados
             var dataToSend = "task=" + task + "&hours=" + totalHours + "&date=" + date +
-                             "&startTime=" + startTimeStr + "&endTime=" + endTimeStr;
-                             
+                "&startTime=" + startTimeStr + "&endTime=" + endTimeStr;
+
             xhr.send(dataToSend);
         }
 
@@ -185,14 +199,16 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         // Carrega o relatório quando a página é carregada
         window.onload = function() {
             carregarRelatorio();
+            setupCellEditing();
         };
 
         function applyFilters() {
-            var filterDate = document.getElementById("filterDate").value;
+            var filterStartDate = document.getElementById("filterStartDate").value;
+            var filterEndDate = document.getElementById("filterEndDate").value;
             var filterTask = document.getElementById("filterTask").value;
-        
+            
             var xhr = new XMLHttpRequest();
-            xhr.open("GET", "relatorioApropriacao.php?filterDate=" + filterDate + "&filterTask=" + filterTask, true);
+            xhr.open("GET", "relatorioApropriacao.php?filterStartDate=" + filterStartDate + "&filterEndDate=" + filterEndDate + "&filterTask=" + filterTask, true);
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     document.getElementById("relatorio").innerHTML = xhr.responseText;
@@ -215,6 +231,50 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 };
                 xhr.send("recordId=" + recordId);
             }
+        }
+
+        function setupCellEditing() {
+            var cells = document.querySelectorAll('#relatorio td:not(:first-child)');
+            cells.forEach(function(cell) {
+                cell.addEventListener('dblclick', function() {
+                    var oldValue = this.textContent;
+                    this.setAttribute('contenteditable', 'true');
+                    this.focus();
+
+                    this.addEventListener('keydown', function(event) {
+                        if (event.key === 'Enter') {
+                            event.preventDefault();
+                            this.blur();
+                        }
+                    });
+
+                    this.addEventListener('blur', function() {
+                        var newValue = this.textContent;
+                        var rowId = this.parentElement.dataset.rowId;
+                        var cellIndex = this.cellIndex; // Index of the cell in the row
+
+                        if (newValue !== oldValue) {
+                            updateCellValue(rowId, cellIndex, newValue);
+                        }
+
+                        this.removeAttribute('contenteditable');
+                    });
+                });
+            });
+        }
+
+        function updateCellValue(rowId, cellIndex, newValue) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "update_cell_value.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    console.log(xhr.responseText); // Exibe a resposta do servidor
+                    // Aqui você pode atualizar a interface do usuário de acordo com a resposta do servidor, se necessário
+                    applyFilters();
+                }
+            };
+            xhr.send("rowId=" + rowId + "&cellIndex=" + cellIndex + "&newValue=" + encodeURIComponent(newValue));
         }
     </script>
 </body>
