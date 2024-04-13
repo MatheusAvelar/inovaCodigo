@@ -110,6 +110,14 @@
                 const valorIcms = allText.match(valorIcmsRegex);
                 const inscricaoEstadual = allText.match(inscricaoEstadualRegex);
 
+                // Construir um alerta com todas as informações extraídas
+                let allInfoAlert = 'Data de Vencimento | V. TOTAL DA NOTA | CNPJ / CPF | BASE DE CÁLC. DO ICMS | VALOR DO ICMS | INSCRIÇÃO ESTADUAL\n';
+                for (let i = 0; i < vencimentos.length; i++) {
+                    allInfoAlert += `${vencimentos[i]} | ${totalNota[i]} | ${cnpjCpf[i]} | ${baseCalcIcms[i]} | ${valorIcms[i]} | ${inscricaoEstadual[i]}\n`;
+                }
+
+                alert(allInfoAlert);
+
                 // Preencher a tabela com os dados extraídos
                 const resultTable = document.getElementById('resultTable');
                 for (let i = 0; i < vencimentos.length; i++) {
