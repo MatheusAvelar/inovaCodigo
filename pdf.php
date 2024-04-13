@@ -13,6 +13,48 @@
     <title>Extrair Dados de PDF</title>
     <!-- Inclua o PDF.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .consulta-cep {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .consulta-cep input[type="file"],
+        .consulta-cep button {
+            margin-bottom: 10px;
+        }
+
+        .consulta-cep button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .consulta-cep button:hover {
+            background-color: #45a049;
+        }
+
+        .consulta-cep table {
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
     <header class="navbar">
