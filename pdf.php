@@ -44,7 +44,7 @@
     if(isset($_POST['submit'])) {
         require_once('pdfparser/src/Smalot/PdfParser/Parser.php');
         require_once('pdfparser/src/Smalot/PdfParser/Document.php');
-        require_once('pdfparser/src/Smalot/PdfParser/Object.php');
+        require_once('pdfparser/src/Smalot/PdfParser/PDFObject.php');
         require_once('pdfparser/src/Smalot/PdfParser/Exception.php');
         require_once('pdfparser/src/Smalot/PdfParser/Resource.php');
         require_once('pdfparser/src/Smalot/PdfParser/Element.php');
