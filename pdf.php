@@ -39,6 +39,13 @@
         <button onclick="extractData()">Extrair Dados</button> 
     </div>
 
+    <!-- Tabela para exibir a data de vencimento -->
+    <table id="resultTable" style="margin: 20px auto; border-collapse: collapse; border: 1px solid black;">
+        <tr>
+            <th>Data de Vencimento</th>
+        </tr>
+    </table>
+
     <script>
         async function extractData() {
             const fileInput = document.getElementById('pdfInput');
@@ -69,7 +76,11 @@
 
                 const vencimento = dateMatch ? dateMatch[1] : 'Data de vencimento não encontrada';
 
-                alert('Data de Vencimento: ' + vencimento); 
+                // Exibir a data de vencimento na tabela
+                const resultTable = document.getElementById('resultTable');
+                const row = resultTable.insertRow(-1); // Insere uma nova linha na tabela
+                const cell = row.insertCell(0); // Insere uma nova célula na linha
+                cell.textContent = vencimento;
             };
 
             reader.readAsArrayBuffer(file);
