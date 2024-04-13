@@ -98,12 +98,12 @@
 
                 // Padrões de regex para cada informação específica
                 const dateRegex = /(\d{2}\/\d{2}\/\d{4})/g; // Data no formato DD/MM/AAAA
-                const nomePagadorRegex = /Nome do Pagador: (.+?)\n/g; // Nome do Pagador
-                const cpfRegex = /CPF: (\d{3}\.\d{3}\.\d{3}-\d{2})/g; // CPF no formato XXX.XXX.XXX-XX
-                const numDocumentoRegex = /Num\. Documento: (\d+)/g; // Número do Documento
-                const valorDocumentoRegex = /Valor do documento: (.+?)\n/g; // Valor do Documento
-                const nomeBeneficiarioRegex = /Nome do Beneficiário: (.+?)\n/g; // Nome do Beneficiário
-                const cnpjBeneficiarioRegex = /CNPJ Beneficiário: (\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2})/g; // CNPJ do Beneficiário no formato XX.XXX.XXX/XXXX-XX
+                const nomePagadorRegex = /Nome do Pagador(.+?)\n/g; // Nome do Pagador
+                const cpfRegex = /CPF(\d{3}\.\d{3}\.\d{3}-\d{2})/g; // CPF no formato XXX.XXX.XXX-XX
+                const numDocumentoRegex = /Num\. Documento(\d+)/g; // Número do Documento
+                const valorDocumentoRegex = /Valor do documento(.+?)\n/g; // Valor do Documento
+                const nomeBeneficiarioRegex = /Nome do Beneficiário(.+?)\n/g; // Nome do Beneficiário
+                const cnpjBeneficiarioRegex = /CNPJ(\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2})/g; // CNPJ do Beneficiário no formato XX.XXX.XXX/XXXX-XX
                 const enderecoRegex = /Endereço: (.+?)\n/g; // Endereço
 
                 // Extrair informações usando regex
