@@ -59,13 +59,11 @@
     <table id="resultTable" style="margin: 20px auto; border-collapse: collapse; border: 1px solid black;">
         <tr>
             <th>Data de Vencimento</th>
-            <th>Nome do Pagador</th>
-            <th>CPF</th>
-            <th>Número do Documento</th>
-            <th>Valor do Documento</th>
-            <th>Nome do Beneficiário</th>
-            <th>CNPJ do Beneficiário</th>
-            <th>Endereço</th>
+            <th>V. TOTAL DA NOTA</th>
+            <th>CNPJ / CPF</th>
+            <th>BASE DE CÁLC. DO ICMS</th>
+            <th>VALOR DO ICMS</th>
+            <th>INSCRIÇÃO ESTADUAL</th>
         </tr>
     </table>
 
@@ -98,36 +96,30 @@
 
                 // Padrões de regex para cada informação específica
                 const dateRegex = /(\d{2}\/\d{2}\/\d{4})/g; // Data no formato DD/MM/AAAA
-                const nomePagadorRegex = /Nome do Pagador(.+?)\n/g; // Nome do Pagador
-                const cpfRegex = /CPF(\d{3}\.\d{3}\.\d{3}-\d{2})/g; // CPF no formato XXX.XXX.XXX-XX
-                const numDocumentoRegex = /Num\. Documento(\d+)/g; // Número do Documento
-                const valorDocumentoRegex = /Valor do documento(.+?)\n/g; // Valor do Documento
-                const nomeBeneficiarioRegex = /Nome do Beneficiário(.+?)\n/g; // Nome do Beneficiário
-                const cnpjBeneficiarioRegex = /CNPJ(\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2})/g; // CNPJ do Beneficiário no formato XX.XXX.XXX/XXXX-XX
-                const enderecoRegex = /Endereço: (.+?)\n/g; // Endereço
+                const totalNotaRegex = /V\. TOTAL DA NOTA(.+?)\n/g; // V. TOTAL DA NOTA
+                const cnpjCpfRegex = /CNPJ \/ CPF(.+?)\n/g; // CNPJ / CPF
+                const baseCalcIcmsRegex = /BASE DE CÁLC. DO ICMS(.+?)\n/g; // BASE DE CÁLC. DO ICMS
+                const valorIcmsRegex = /VALOR DO ICMS(.+?)\n/g; // VALOR DO ICMS
+                const inscricaoEstadualRegex = /INSCRIÇÃO ESTADUAL(.+?)\n/g; // INSCRIÇÃO ESTADUAL
 
                 // Extrair informações usando regex
                 const vencimentos = allText.match(dateRegex);
-                const nomesPagador = allText.match(nomePagadorRegex);
-                const cpfs = allText.match(cpfRegex);
-                const numerosDocumento = allText.match(numDocumentoRegex);
-                const valoresDocumento = allText.match(valorDocumentoRegex);
-                const nomesBeneficiario = allText.match(nomeBeneficiarioRegex);
-                const cnpjsBeneficiario = allText.match(cnpjBeneficiarioRegex);
-                const enderecos = allText.match(enderecoRegex);
+                const totalNota = allText.match(totalNotaRegex);
+                const cnpjCpf = allText.match(cnpjCpfRegex);
+                const baseCalcIcms = allText.match(baseCalcIcmsRegex);
+                const valorIcms = allText.match(valorIcmsRegex);
+                const inscricaoEstadual = allText.match(inscricaoEstadualRegex);
 
                 // Preencher a tabela com os dados extraídos
                 const resultTable = document.getElementById('resultTable');
                 for (let i = 0; i < vencimentos.length; i++) {
                     const row = resultTable.insertRow(-1);
                     row.insertCell(0).textContent = vencimentos[i];
-                    row.insertCell(1).textContent = nomesPagador[i];
-                    row.insertCell(2).textContent = cpfs[i];
-                    row.insertCell(3).textContent = numerosDocumento[i];
-                    row.insertCell(4).textContent = valoresDocumento[i];
-                    row.insertCell(5).textContent = nomesBeneficiario[i];
-                    row.insertCell(6).textContent = cnpjsBeneficiario[i];
-                    row.insertCell(7).textContent = enderecos[i];
+                    row.insertCell(8).textContent = totalNota[i];
+                    row.insertCell(9).textContent = cnpjCpf[i];
+                    row.insertCell(10).textContent = baseCalcIcms[i];
+                    row.insertCell(11).textContent = valorIcms[i];
+                    row.insertCell(12).textContent = inscricaoEstadual[i];
                 }
             };
 
