@@ -57,15 +57,25 @@
 
     <!-- Tabela para exibir os dados extraídos -->
     <table id="resultTable" style="margin: 20px auto; border-collapse: collapse; border: 1px solid black;">
-        <tr>
-            <th>Data de Vencimento</th>
-            <th>V. TOTAL DA NOTA</th>
-            <th>CNPJ / CPF</th>
-            <th>BASE DE CÁLC. DO ICMS</th>
-            <th>VALOR DO ICMS</th>
-            <th>INSCRIÇÃO ESTADUAL</th>
-        </tr>
-    </table>
+        <thead>
+            <tr>
+                <th>Valor Total</th>
+                <th>Chave de Acesso</th>
+                <th>Natureza da Operação</th>
+                <th>Inscrição Estadual</th>
+                <th>CNPJ</th>
+                <th>Base de Cálculo do ICMS</th>
+                <th>Valor do ICMS</th>
+                <th>V. Total Produtos</th>
+                <th>Valor da COFINS</th>
+                <th>V. Total da Nota</th>
+                <th>Informações Complementares</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Os dados extraídos serão adicionados aqui -->
+        </tbody>
+    </table>  
 
     <script>
         async function extractData() {
@@ -83,56 +93,58 @@
                 const arrayBuffer = event.target.result;
                 const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
 
-                let allText = ''; // Variável para armazenar todo o texto do PDF
+                let allText = '';
 
-                // Loop através de todas as páginas do PDF
                 for (let i = 1; i <= pdf.numPages; i++) {
                     const page = await pdf.getPage(i);
                     const textContent = await page.getTextContent();
                     const textItems = textContent.items.map(item => item.str);
-                    const text = textItems.join(' '); // Texto da página
-                    allText += text + '\n'; // Adiciona o texto da página à variável allText
+                    const text = textItems.join(' ');
+                    allText += text + '\n';
                 }
 
-                // Padrões de regex para cada informação específica
-                const dateRegex = /(\d{2}\/\d{2}\/\d{4})/g; // Data no formato DD/MM/AAAA
-                const totalNotaRegex = /V\. TOTAL DA NOTA(.+?)\n/g; // V. TOTAL DA NOTA
-                const cnpjCpfRegex = /CNPJ \/ CPF(.+?)\n/g; // CNPJ / CPF
-                const baseCalcIcmsRegex = /BASE DE CÁLC. DO ICMS(.+?)\n/g; // BASE DE CÁLC. DO ICMS
-                const valorIcmsRegex = /VALOR DO ICMS(.+?)\n/g; // VALOR DO ICMS
-                const inscricaoEstadualRegex = /INSCRIÇÃO ESTADUAL(.+?)\n/g; // INSCRIÇÃO ESTADUAL
+                const dataToExtract = {
+                    'valorTotal': /VALOR TOTAL: R\$\s*([\d,]+)/,
+                    'chaveDeAcesso': /CHAVE DE ACESSO\s*([\d\s]+)/,
+                    'naturezaDaOperacao': /NATUREZA DA OPERAÇÃO (.+?)\s*INSCRIÇÃO ESTADUAL/,
+                    'InscricaoEstadual': /INSCRIÇÃO ESTADUAL (\d{9})/,
+                    'cnpj': /CNPJ (\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2})/,
+                    'baseDeCalculoDoIcms': /BASE DE CÁLC\. DO ICMS\s*([\d,]+)/,
+                    'valorDoIcms': /VALOR DO ICMS\s*([\d,]+)/,
+                    'vTotalProdutos': /V\. TOTAL PRODUTOS\s*([\d,]+)/,
+                    'valorDaCofins': /VALOR DA COFINS\s*([\d,]+)/,
+                    'vTotalDaNota': /V\. TOTAL DA NOTA\s*([\d,]+)/,
+                    'InformacoesComplementares': /INFORMAÇÕES COMPLEMENTARES([\s\S]+)/
+                };
 
-                // Extrair informações usando regex
-                const vencimentos = allText.match(dateRegex);
-                const totalNota = allText.match(totalNotaRegex);
-                const cnpjCpf = allText.match(cnpjCpfRegex);
-                const baseCalcIcms = allText.match(baseCalcIcmsRegex);
-                const valorIcms = allText.match(valorIcmsRegex);
-                const inscricaoEstadual = allText.match(inscricaoEstadualRegex);
-
-                // Construir um alerta com todas as informações extraídas
-                let allInfoAlert = 'Data de Vencimento | V. TOTAL DA NOTA | CNPJ / CPF | BASE DE CÁLC. DO ICMS | VALOR DO ICMS | INSCRIÇÃO ESTADUAL\n';
-                for (let i = 0; i < vencimentos.length; i++) {
-                    allInfoAlert += `${vencimentos[i]} | ${totalNota[i]} | ${cnpjCpf[i]} | ${baseCalcIcms[i]} | ${valorIcms[i]} | ${inscricaoEstadual[i]}\n`;
-                }
-
-                alert(allInfoAlert);
-
-                // Preencher a tabela com os dados extraídos
                 const resultTable = document.getElementById('resultTable');
-                for (let i = 0; i < vencimentos.length; i++) {
-                    const row = resultTable.insertRow(-1);
-                    row.insertCell(0).textContent = vencimentos[i];
-                    row.insertCell(8).textContent = totalNota[i];
-                    row.insertCell(9).textContent = cnpjCpf[i];
-                    row.insertCell(10).textContent = baseCalcIcms[i];
-                    row.insertCell(11).textContent = valorIcms[i];
-                    row.insertCell(12).textContent = inscricaoEstadual[i];
+                const tbody = resultTable.getElementsByTagName('tbody')[0];
+                tbody.innerHTML = ''; // Limpar o conteúdo existente da tabela
+
+                const rowData = {}; // Objeto para armazenar os dados extraídos
+
+                // Extrair os dados
+                for (const [description, regex] of Object.entries(dataToExtract)) {
+                    const match = allText.match(regex);
+                    if (match) {
+                        const value = match[1].trim();
+                        rowData[description] = value;
+                    }
                 }
+
+                // Inserir os dados na tabela
+                const row = tbody.insertRow();
+                const columns = ['valorTotal', 'chaveDeAcesso', 'naturezaDaOperacao', 'InscricaoEstadual', 'cnpj', 'baseDeCalculoDoIcms', 'valorDoIcms', 'vTotalProdutos', 'valorDaCofins', 'vTotalDaNota', 'InformacoesComplementares'];
+                columns.forEach(column => {
+                    const value = rowData[column] || ''; // Valor vazio se não houver correspondência
+                    const cell = row.insertCell();
+                    cell.textContent = value;
+                });
             };
 
             reader.readAsArrayBuffer(file);
         }
+
     </script>
 </body>
 </html>
