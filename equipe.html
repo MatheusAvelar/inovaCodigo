@@ -9,34 +9,58 @@
     <title>Inova Código</title>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1516963750502427"
      crossorigin="anonymous"></script>
+    <style>
+        .centro {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        .developer {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin: 20px;
+            max-width: 300px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .developer:hover {
+            transform: translateY(-10px);
+        }
+
+        .developer img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-top: 20px;
+        }
+
+        .developer h3 {
+            color: #333;
+            margin: 10px 0 5px;
+        }
+
+        .developer p {
+            color: #666;
+            margin: 5px 0;
+        }
+
+        .developer h2 {
+            color: #555;
+            margin: 10px 0;
+        }
+
+        .developer .description {
+            padding: 0 20px 20px;
+        }
+    </style>
 </head>
-<style>
-.centro {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    padding: 20px;
-}
 
-.developer {
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 20px;
-    width: 200px;
-    text-align: center;
-    margin: 10px;
-}
-
-.developer img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-}
-
-.developer h2, .developer h3, .developer p {
-    margin: 10px 0;
-}
-</style>
 <body>
     <header class="navbar">
         <nav class="nav-links">
@@ -56,38 +80,48 @@
     <div class="centro">
         <div class="developer">
             <img src="img/dev1.jpg" alt="Foto do Desenvolvedor 1">
-            <h3>Cargo: Desenvolvedor Full-Stack</h3>
+            <h2>João Silva</h2>
+            <h3>Desenvolvedor Full-Stack</h3>
             <p>Idade: 30</p>
-            <h2>Nome: João Silva</h2>
-            <p>Descrição: Experiência em JavaScript, Node.js, React, e MongoDB.</p>
+            <div class="description">
+                <p>Experiência em JavaScript, Node.js, React, e MongoDB.</p>
+            </div>
         </div>
         <div class="developer">
             <img src="img/dev2.jpg" alt="Foto do Desenvolvedor 2">
-            <h3>Cargo: Desenvolvedor Front-End</h3>
+            <h2>Maria Oliveira</h2>
+            <h3>Desenvolvedora Front-End</h3>
             <p>Idade: 25</p>
-            <h2>Nome: Maria Oliveira</h2>
-            <p>Descrição: Especialista em HTML, CSS, JavaScript, e Vue.js.</p>
+            <div class="description">
+                <p>Especialista em HTML, CSS, JavaScript, e Vue.js.</p>
+            </div>
         </div>
         <div class="developer">
             <img src="img/dev3.jpg" alt="Foto do Desenvolvedor 3">
-            <h3>Cargo: Desenvolvedor Back-End</h3>
+            <h2>Carlos Pereira</h2>
+            <h3>Desenvolvedor Back-End</h3>
             <p>Idade: 28</p>
-            <h2>Nome: Carlos Pereira</h2>
-            <p>Descrição: Experiência em Python, Django, e PostgreSQL.</p>
+            <div class="description">
+                <p>Experiência em Python, Django, e PostgreSQL.</p>
+            </div>
         </div>
         <div class="developer">
             <img src="img/dev4.jpg" alt="Foto do Desenvolvedor 4">
-            <h3>Cargo: Desenvolvedor Mobile</h3>
+            <h2>Ana Costa</h2>
+            <h3>Desenvolvedora Mobile</h3>
             <p>Idade: 27</p>
-            <h2>Nome: Ana Costa</h2>
-            <p>Descrição: Especialista em Flutter, Dart, e Firebase.</p>
+            <div class="description">
+                <p>Especialista em Flutter, Dart, e Firebase.</p>
+            </div>
         </div>
         <div class="developer">
             <img src="img/dev5.jpg" alt="Foto do Desenvolvedor 5">
-            <h3>Cargo: Desenvolvedor DevOps</h3>
+            <h2>Pedro Martins</h2>
+            <h3>Desenvolvedor DevOps</h3>
             <p>Idade: 32</p>
-            <h2>Nome: Pedro Martins</h2>
-            <p>Descrição: Experiência em AWS, Docker, e Kubernetes.</p>
+            <div class="description">
+                <p>Experiência em AWS, Docker, e Kubernetes.</p>
+            </div>
         </div>
     </div>
 
