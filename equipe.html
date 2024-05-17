@@ -8,14 +8,83 @@
     <link rel="icon" href="img/ico.ico" type="image/x-icon">
     <title>Inova Código</title>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1516963750502427"
-     crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script>
     <style>
         .centro {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
             padding: 20px;
             background-color: #f9f9f9;
+            display: flex;
+            justify-content: center;
+        }
+
+        .tree {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .tree ul {
+            display: flex;
+            justify-content: center;
+            padding-top: 20px;
+            position: relative;
+        }
+
+        .tree li {
+            list-style-type: none;
+            text-align: center;
+            position: relative;
+            padding: 20px 5px 0 5px;
+        }
+
+        .tree li::before,
+        .tree li::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 50%;
+            border-top: 2px solid #ccc;
+            width: 50%;
+            height: 20px;
+        }
+
+        .tree li::after {
+            right: auto;
+            left: 50%;
+            border-left: 2px solid #ccc;
+        }
+
+        .tree li:only-child::after,
+        .tree li:only-child::before {
+            display: none;
+        }
+
+        .tree li:only-child {
+            padding-top: 0;
+        }
+
+        .tree li:first-child::before,
+        .tree li:last-child::after {
+            border: 0 none;
+        }
+
+        .tree li:last-child::before {
+            border-right: 2px solid #ccc;
+            border-radius: 0 5px 0 0;
+        }
+
+        .tree li:first-child::after {
+            border-radius: 5px 0 0 0;
+        }
+
+        .tree ul ul::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            border-left: 2px solid #ccc;
+            width: 0;
+            height: 20px;
         }
 
         .developer {
@@ -23,8 +92,6 @@
             border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            margin: 20px;
-            max-width: 300px;
             text-align: center;
             transition: transform 0.3s;
         }
@@ -34,8 +101,8 @@
         }
 
         .developer img {
-            width: 150px;
-            height: 150px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             margin-top: 20px;
         }
@@ -89,65 +156,83 @@
     </header>
 
     <div class="centro">
-        <div class="developer">
-            <img src="img/dev1.jfif" alt="Foto do Desenvolvedor 1">
-            <h3>Carlos Figueiredo - Sênior</h3>
-            <div class="info">
-                <h3>Líder Técnico</h3>
-                <p>Idade: 33</p>
-                <p>Experiência em JavaScript, Python, ServiceNow, C#, e Node.js.</p>
-                <a class="linkedin-icon" href="https://www.linkedin.com/in/carlos-figueiredo-37844090/" target="_blank">
-                    <img src="img/linkedin.png" alt="LinkedIn de Carlos Figueiredo">
-                </a>
-            </div>
-        </div>
-        <div class="developer">
-            <img src="img/dev2.jfif" alt="Foto do Desenvolvedor 2">
-            <h3>Pedro Henrique - Pleno</h3>
-            <div class="info">
-                <h3>Desenvolvedor</h3>
-                <p>Idade: 28</p>
-                <p>Experiência em HTML, CSS, JavaScript, Python e ServiceNow.</p>
-                <a class="linkedin-icon" href="https://www.linkedin.com/in/phfda/" target="_blank">
-                    <img src="img/linkedin.png" alt="LinkedIn de Pedro Henrique">
-                </a>
-            </div>
-        </div>
-        <div class="developer">
-            <img src="img/dev5.jpg" alt="Foto do Desenvolvedor 3">
-            <h3>Matheus Avelar - Júnior</h3>
-            <div class="info">
-                <h3>Desenvolvedor</h3>
-                <p>Idade: 28</p>
-                <p>Experiência em JavaScript, Python, PHP, ServiceNow e SQLServer.</p>
-                <a class="linkedin-icon" href="https://www.linkedin.com/in/matheusavelar/" target="_blank">
-                    <img src="img/linkedin.png" alt="LinkedIn de Matheus Avelar">
-                </a>
-            </div>
-        </div>
-        <div class="developer">
-            <img src="img/dev4.jfif" alt="Foto do Desenvolvedor 4">
-            <h3>Christiano Eustaquio - Sênior</h3>
-            <div class="info">
-                <h3>Tester</h3>
-                <p>Idade: 35</p>
-                <p>Experiência em testes automatizados, BDD e TDD.</p>
-                <a class="linkedin-icon" href="https://www.linkedin.com/in/christiano-eust%C3%A1quio-495384207/" target="_blank">
-                    <img src="img/linkedin.png" alt="LinkedIn de Christiano Eustaquio">
-                </a>
-            </div>
-        </div>
-        <div class="developer">
-            <img src="img/dev3.jfif" alt="Foto do Desenvolvedor 5">
-            <h3>Luciano Augusto - Júnior</h3>
-            <div class="info">
-                <h3>Desenvolvedor</h3>
-                <p>Idade: 22</p>
-                <p>Experiência em JavaScript, Python e ServiceNow.</p>
-                <a class="linkedin-icon" href="https://www.linkedin.com/in/luciano-augusto-do-carmo-costa-trindade-ferreira-4b671a221/" target="_blank">
-                    <img src="img/linkedin.png" alt="LinkedIn de Luciano Augusto">
-                </a>
-            </div>
+        <div class="tree">
+            <ul>
+                <li>
+                    <div class="developer">
+                        <img src="img/dev1.jfif" alt="Foto do Desenvolvedor 1">
+                        <h3>Carlos Figueiredo - Sênior</h3>
+                        <div class="info">
+                            <h3>Líder Técnico</h3>
+                            <p>Idade: 33</p>
+                            <p>Experiência em JavaScript, Python, ServiceNow, C#, e Node.js.</p>
+                            <a class="linkedin-icon" href="https://www.linkedin.com/in/carlos-figueiredo-37844090/" target="_blank">
+                                <img src="img/linkedin.png" alt="LinkedIn de Carlos Figueiredo">
+                            </a>
+                        </div>
+                    </div>
+                    <ul>
+                        <li>
+                            <div class="developer">
+                                <img src="img/dev2.jfif" alt="Foto do Desenvolvedor 2">
+                                <h3>Pedro Henrique - Pleno</h3>
+                                <div class="info">
+                                    <h3>Desenvolvedor</h3>
+                                    <p>Idade: 28</p>
+                                    <p>Experiência em HTML, CSS, JavaScript, Python e ServiceNow.</p>
+                                    <a class="linkedin-icon" href="https://www.linkedin.com/in/phfda/" target="_blank">
+                                        <img src="img/linkedin.png" alt="LinkedIn de Pedro Henrique">
+                                    </a>
+                                </div>
+                            </div>
+                            <ul>
+                                <li>
+                                    <div class="developer">
+                                        <img src="img/dev5.jpg" alt="Foto do Desenvolvedor 3">
+                                        <h3>Matheus Avelar - Júnior</h3>
+                                        <div class="info">
+                                            <h3>Desenvolvedor</h3>
+                                            <p>Idade: 28</p>
+                                            <p>Experiência em JavaScript, Python, PHP, ServiceNow e SQLServer.</p>
+                                            <a class="linkedin-icon" href="https://www.linkedin.com/in/matheusavelar/" target="_blank">
+                                                <img src="img/linkedin.png" alt="LinkedIn de Matheus Avelar">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="developer">
+                                        <img src="img/dev4.jfif" alt="Foto do Desenvolvedor 4">
+                                        <h3>Christiano Eustaquio - Sênior</h3>
+                                        <div class="info">
+                                            <h3>Tester</h3>
+                                            <p>Idade: 35</p>
+                                            <p>Experiência em testes automatizados, BDD e TDD.</p>
+                                            <a class="linkedin-icon" href="https://www.linkedin.com/in/christiano-eust%C3%A1quio-495384207/" target="_blank">
+                                                <img src="img/linkedin.png" alt="LinkedIn de Christiano Eustaquio">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <div class="developer">
+                                <img src="img/dev3.jfif" alt="Foto do Desenvolvedor 5">
+                                <h3>Luciano Augusto - Júnior</h3>
+                                <div class="info">
+                                    <h3>Desenvolvedor</h3>
+                                    <p>Idade: 22</p>
+                                    <p>Experiência em JavaScript, Python e ServiceNow.</p>
+                                    <a class="linkedin-icon" href="https://www.linkedin.com/in/luciano-augusto-do-carmo-costa-trindade-ferreira-4b671a221/" target="_blank">
+                                        <img src="img/linkedin.png" alt="LinkedIn de Luciano Augusto">
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
         </div>
     </div>
 
@@ -158,15 +243,15 @@
             </div>
             <div class="footer-social">
                 <a href="https://www.linkedin.com/in/matheusavelar/" target="blank"><img align="center" src="img/linkedin.png"
-                    alt="https://www.linkedin.com/in/matheusavelar/" /></a>
-            <a href="https://fb.com/matheus.dapaz.33" target="blank"><img align="center" src="img/facebook.png"
-                    alt="matheus.dapaz.33" /></a>
-            <a href="https://instagram.com/matheusnutela" target="blank"><img align="center" src="img/instagram.png"
-                    alt="matheusnutela" /></a>
-            <a href="https://github.com/MatheusAvelar" target="blank"><img align="center" src="img/github.png"
-                    alt="matheusnutela" /></a>
-            <a href="https://api.whatsapp.com/send?phone=5531993018766" target="blank"><img align="center"
-                    src="img/whatsapp.png" alt="matheusnutela" /></a>
+                        alt="https://www.linkedin.com/in/matheusavelar/" /></a>
+                <a href="https://fb.com/matheus.dapaz.33" target="blank"><img align="center" src="img/facebook.png"
+                        alt="matheus.dapaz.33" /></a>
+                <a href="https://instagram.com/matheusnutela" target="blank"><img align="center" src="img/instagram.png"
+                        alt="matheusnutela" /></a>
+                <a href="https://github.com/MatheusAvelar" target="blank"><img align="center" src="img/github.png"
+                        alt="matheusnutela" /></a>
+                <a href="https://api.whatsapp.com/send?phone=5531993018766" target="blank"><img align="center"
+                        src="img/whatsapp.png" alt="matheusnutela" /></a>
             </div>
         </div>
         <div class="footer-links">
@@ -179,7 +264,7 @@
         </div>
     </footer>
     <script>
-        
+        // You can add your JavaScript here if needed
     </script>
 </body>
 
