@@ -154,52 +154,53 @@ $result = $conexao->query($sql);
     <center>
         <h1>Aprovação de Solicitações</h1>
     </center>
+    <div class="consulta-cep">
+        <div class="approval-container">
+            <form method="post" style="margin-bottom: 20px;">
+                <button type="submit" name="update_all_to_pending">Atualizar Todos para Pendente</button>
+            </form>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Descrição</th>
+                        <th>Status</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    if ($result->num_rows > 0) {
+                        // Exibir cada solicitação
+                        while ($row = $result->fetch_assoc()) {
+                            $status = $row["status"];
+                            $displayStatus = ($status === 'aprovado') ? 'Aprovado' : (($status === 'reprovado') ? 'Reprovado' : 'Pendente');
 
-    <div class="approval-container">
-        <form method="post" style="margin-bottom: 20px;">
-            <button type="submit" name="update_all_to_pending">Atualizar Todos para Pendente</button>
-        </form>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Descrição</th>
-                    <th>Status</th>
-                    <th>Ação</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                if ($result->num_rows > 0) {
-                    // Exibir cada solicitação
-                    while ($row = $result->fetch_assoc()) {
-                        $status = $row["status"];
-                        $displayStatus = ($status === 'aprovado') ? 'Aprovado' : (($status === 'reprovado') ? 'Reprovado' : 'Pendente');
-
-                        echo "<tr>";
-                        echo "<td>" . $row["id"] . "</td>";
-                        echo "<td>" . $row["descricao"] . "</td>";
-                        echo "<td>" . $displayStatus . "</td>";
-                        echo "<td>";
-                        if ($status === 'pendente') {
-                            echo "<form method='post' style='display:inline;'>
-                                <input type='hidden' name='id' value='" . $row["id"] . "'>
-                                <button type='submit' name='action' value='aprovar'>Aprovar</button>
-                            </form>
-                            <form method='post' style='display:inline;'>
-                                <input type='hidden' name='id' value='" . $row["id"] . "'>
-                                <button type='submit' name='action' value='reprovar'>Reprovar</button>
-                            </form>";
+                            echo "<tr>";
+                            echo "<td>" . $row["id"] . "</td>";
+                            echo "<td>" . $row["descricao"] . "</td>";
+                            echo "<td>" . $displayStatus . "</td>";
+                            echo "<td>";
+                            if ($status === 'pendente') {
+                                echo "<form method='post' style='display:inline;'>
+                                    <input type='hidden' name='id' value='" . $row["id"] . "'>
+                                    <button type='submit' name='action' value='aprovar'>Aprovar</button>
+                                </form>
+                                <form method='post' style='display:inline;'>
+                                    <input type='hidden' name='id' value='" . $row["id"] . "'>
+                                    <button type='submit' name='action' value='reprovar'>Reprovar</button>
+                                </form>";
+                            }
+                            echo "</td>";
+                            echo "</tr>";
                         }
-                        echo "</td>";
-                        echo "</tr>";
+                    } else {
+                        echo "<tr><td colspan='4'>Nenhuma solicitação pendente</td></tr>";
                     }
-                } else {
-                    echo "<tr><td colspan='4'>Nenhuma solicitação pendente</td></tr>";
-                }
-                ?>
-            </tbody>
-        </table>
+                    ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 
 </body>
