@@ -33,7 +33,7 @@ if (isset($_POST['action']) && isset($_POST['id'])) {
 }
 
 // Recuperar solicitações do banco de dados
-$sql = "SELECT id, descricao, status FROM solicitacao WHERE status='pendente'";
+$sql = "SELECT id, descricao, status FROM solicitacao";
 $result = $conexao->query($sql);
 ?>
 
@@ -121,6 +121,7 @@ $result = $conexao->query($sql);
                 <tr>
                     <th>ID</th>
                     <th>Descrição</th>
+                    <th>Status</th>
                     <th>Ação</th>
                 </tr>
             </thead>
@@ -132,6 +133,7 @@ $result = $conexao->query($sql);
                         echo "<tr>";
                         echo "<td>" . $row["id"] . "</td>";
                         echo "<td>" . $row["descricao"] . "</td>";
+                        echo "<td>" . $row["status"] . "</td>";
                         echo "<td>
                             <form method='post' style='display:inline;'>
                                 <input type='hidden' name='id' value='" . $row["id"] . "'>
