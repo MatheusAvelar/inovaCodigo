@@ -163,6 +163,7 @@ $result = $conexao->query($sql);
                 <thead>
                     <tr>
                         <th>ID</th>
+                        <th>Data Solicitação</th>
                         <th>Descrição</th>
                         <th>Status</th>
                         <th>Ação</th>
@@ -173,11 +174,13 @@ $result = $conexao->query($sql);
                     if ($result->num_rows > 0) {
                         // Exibir cada solicitação
                         while ($row = $result->fetch_assoc()) {
+                            $data_formatada = date('d/m/Y', strtotime($row["data"]));
                             $status = $row["status"];
                             $displayStatus = ($status === 'aprovado') ? 'Aprovado' : (($status === 'reprovado') ? 'Reprovado' : 'Pendente');
 
                             echo "<tr>";
                             echo "<td>" . $row["id"] . "</td>";
+                            echo "<td>" . $data_formatada . "</td>";
                             echo "<td>" . $row["descricao"] . "</td>";
                             echo "<td>" . $displayStatus . "</td>";
                             echo "<td>";
