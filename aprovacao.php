@@ -1,4 +1,12 @@
 <?php
+session_start();
+
+// Verifica se o usuário está logado, se não, redireciona para a página de login
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header("Location: login.php");
+    exit;
+}
+
 // Conexão com o banco de dados
 $servername = "127.0.0.1:3306";
 $username = "u221588236_root";
@@ -52,52 +60,79 @@ $result = $conexao->query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aprovação de Solicitações</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="img/ico.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+    <title>Inova Código - Aprovação de Solicitações</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1516963750502427" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        .nav-links a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .nav-links a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .approval-container {
+            margin: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        input[type="time"],
+        input[type="date"] {
+            width: 100%;
+            padding: 8px;
+            margin: 4px 0;
+            box-sizing: border-box;
+        }
+
+        form input,
+        form textarea {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .delete-cell {
+            text-align: center;
+        }
+    </style>
 </head>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-    }
-
-    .navbar {
-        background-color: #333;
-        overflow: hidden;
-    }
-
-    .nav-links a {
-        float: left;
-        display: block;
-        color: #f2f2f2;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-    }
-
-    .nav-links a:hover {
-        background-color: #ddd;
-        color: black;
-    }
-
-    .approval-container {
-        margin: 20px;
-    }
-
-    table {
-        border-collapse: collapse;
-        width: 100%;
-    }
-
-    th, td {
-        border: 1px solid #dddddd;
-        text-align: left;
-        padding: 8px;
-    }
-
-    th {
-        background-color: #f2f2f2;
-    }
-</style>
 
 <body>
     <header class="navbar">
@@ -116,7 +151,9 @@ $result = $conexao->query($sql);
         </nav>
     </header>
 
-    <h1>Aprovação de Solicitações</h1>
+    <center>
+        <h1>Aprovação de Solicitações</h1>
+    </center>
 
     <div class="approval-container">
         <form method="post" style="margin-bottom: 20px;">
@@ -170,5 +207,6 @@ $result = $conexao->query($sql);
 </html>
 
 <?php
+// Fechar conexão
 $conexao->close();
 ?>
