@@ -149,16 +149,18 @@ $result = $conexao->query($sql);
                         echo "<td>" . $row["id"] . "</td>";
                         echo "<td>" . $row["descricao"] . "</td>";
                         echo "<td>" . $displayStatus . "</td>";
-                        echo "<td>
-                            <form method='post' style='display:inline;'>
+                        echo "<td>";
+                        if ($status === 'pendente') {
+                            echo "<form method='post' style='display:inline;'>
                                 <input type='hidden' name='id' value='" . $row["id"] . "'>
                                 <button type='submit' name='action' value='aprovar'>Aprovar</button>
                             </form>
                             <form method='post' style='display:inline;'>
                                 <input type='hidden' name='id' value='" . $row["id"] . "'>
                                 <button type='submit' name='action' value='reprovar'>Reprovar</button>
-                            </form>
-                          </td>";
+                            </form>";
+                        }
+                        echo "</td>";
                         echo "</tr>";
                     }
                 } else {
@@ -174,6 +176,5 @@ $result = $conexao->query($sql);
 </html>
 
 <?php
-// Fechar conexão
 $conexao->close();
 ?>
