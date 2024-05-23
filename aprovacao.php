@@ -50,7 +50,7 @@ if (isset($_POST['update_all_to_pending'])) {
 }
 
 // Recuperar solicitações do banco de dados
-$sql = "SELECT id, descricao, status FROM solicitacao";
+$sql = "SELECT id, descricao, status, data FROM solicitacao";
 $result = $conexao->query($sql);
 ?>
 
@@ -174,7 +174,7 @@ $result = $conexao->query($sql);
                     if ($result->num_rows > 0) {
                         // Exibir cada solicitação
                         while ($row = $result->fetch_assoc()) {
-                            $data_formatada = date('d/m/Y', strtotime($row["data"]));
+                            $data_formatada = isset($row["data"]) ? date('d/m/Y', strtotime($row["data"])) : 'N/A';
                             $status = $row["status"];
                             $displayStatus = ($status === 'aprovado') ? 'Aprovado' : (($status === 'reprovado') ? 'Reprovado' : 'Pendente');
 
@@ -198,7 +198,7 @@ $result = $conexao->query($sql);
                             echo "</tr>";
                         }
                     } else {
-                        echo "<tr><td colspan='4'>Nenhuma solicitação pendente</td></tr>";
+                        echo "<tr><td colspan='5'>Nenhuma solicitação pendente</td></tr>";
                     }
                     ?>
                 </tbody>
