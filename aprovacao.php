@@ -8,7 +8,6 @@ $dbname = "u221588236_controle_finan";
 // Cria a conexão
 $conexao = mysqli_connect($servername, $username, $password, $dbname);
 
-
 // Verificar conexão
 if ($conexao->connect_error) {
     die("Conexão falhou: " . $conexao->connect_error);
@@ -29,6 +28,16 @@ if (isset($_POST['action']) && isset($_POST['id'])) {
         echo "Solicitação atualizada com sucesso!";
     } else {
         echo "Erro ao atualizar solicitação: " . $conexao->error;
+    }
+}
+
+// Função para atualizar todos os status para 'pendente'
+if (isset($_POST['update_all_to_pending'])) {
+    $sql = "UPDATE solicitacao SET status='pendente'";
+    if ($conexao->query($sql) === TRUE) {
+        echo "Todas as solicitações foram atualizadas para pendente!";
+    } else {
+        echo "Erro ao atualizar solicitações: " . $conexao->error;
     }
 }
 
@@ -116,6 +125,9 @@ $result = $conexao->query($sql);
     <h1>Aprovação de Solicitações</h1>
 
     <div class="approval-container">
+        <form method="post" style="margin-bottom: 20px;">
+            <button type="submit" name="update_all_to_pending">Atualizar Todos para Pendente</button>
+        </form>
         <table>
             <thead>
                 <tr>
@@ -130,10 +142,13 @@ $result = $conexao->query($sql);
                 if ($result->num_rows > 0) {
                     // Exibir cada solicitação
                     while ($row = $result->fetch_assoc()) {
+                        $status = $row["status"];
+                        $displayStatus = ($status === 'aprovado') ? 'Aprovado' : (($status === 'reprovado') ? 'Reprovado' : 'Pendente');
+
                         echo "<tr>";
                         echo "<td>" . $row["id"] . "</td>";
                         echo "<td>" . $row["descricao"] . "</td>";
-                        echo "<td>" . $row["status"] . "</td>";
+                        echo "<td>" . $displayStatus . "</td>";
                         echo "<td>
                             <form method='post' style='display:inline;'>
                                 <input type='hidden' name='id' value='" . $row["id"] . "'>
@@ -147,7 +162,7 @@ $result = $conexao->query($sql);
                         echo "</tr>";
                     }
                 } else {
-                    echo "<tr><td colspan='3'>Nenhuma solicitação pendente</td></tr>";
+                    echo "<tr><td colspan='4'>Nenhuma solicitação pendente</td></tr>";
                 }
                 ?>
             </tbody>
