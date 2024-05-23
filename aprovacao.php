@@ -1,6 +1,6 @@
 <?php
 // Conexão com o banco de dados
-$servername = "localhost";
+/*$servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "meubanco";
@@ -33,7 +33,7 @@ if (isset($_POST['action']) && isset($_POST['id'])) {
 
 // Recuperar solicitações do banco de dados
 $sql = "SELECT id, descricao, status FROM solicitacoes WHERE status='pendente'";
-$result = $conn->query($sql);
+$result = $conn->query($sql);*/
 ?>
 
 <!DOCTYPE html>
