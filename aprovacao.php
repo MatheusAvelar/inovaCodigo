@@ -1,16 +1,17 @@
 <?php
 // Conexão com o banco de dados
-/*$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "meubanco";
+$servername = "127.0.0.1:3306";
+$username = "u221588236_root";
+$password = "Camila@307";
+$dbname = "u221588236_controle_finan";
 
-// Criar conexão
-$conn = new mysqli($servername, $username, $password, $dbname);
+// Cria a conexão
+$conexao = mysqli_connect($servername, $username, $password, $dbname);
+
 
 // Verificar conexão
-if ($conn->connect_error) {
-    die("Conexão falhou: " . $conn->connect_error);
+if ($conexao->connect_error) {
+    die("Conexão falhou: " . $conexao->connect_error);
 }
 
 // Função para aprovar/reprovar
@@ -19,21 +20,21 @@ if (isset($_POST['action']) && isset($_POST['id'])) {
     $action = $_POST['action'];
 
     if ($action === 'aprovar') {
-        $sql = "UPDATE solicitacoes SET status='aprovado' WHERE id=$id";
+        $sql = "UPDATE solicitacao SET status='aprovado' WHERE id=$id";
     } else if ($action === 'reprovar') {
-        $sql = "UPDATE solicitacoes SET status='reprovado' WHERE id=$id";
+        $sql = "UPDATE solicitacao SET status='reprovado' WHERE id=$id";
     }
 
-    if ($conn->query($sql) === TRUE) {
+    if ($conexao->query($sql) === TRUE) {
         echo "Solicitação atualizada com sucesso!";
     } else {
-        echo "Erro ao atualizar solicitação: " . $conn->error;
+        echo "Erro ao atualizar solicitação: " . $conexao->error;
     }
 }
 
 // Recuperar solicitações do banco de dados
-$sql = "SELECT id, descricao, status FROM solicitacoes WHERE status='pendente'";
-$result = $conn->query($sql);*/
+$sql = "SELECT id, descricao, status FROM solicitacao WHERE status='pendente'";
+$result = $conexao->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -157,5 +158,5 @@ $result = $conn->query($sql);*/
 
 <?php
 // Fechar conexão
-$conn->close();
+$conexao->close();
 ?>
