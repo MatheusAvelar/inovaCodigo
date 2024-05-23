@@ -84,20 +84,14 @@ $result = $conexao->query($sql);
     }
 
     table {
-        width: 100%;
         border-collapse: collapse;
+        width: 100%;
     }
 
-    table,
-    th,
-    td {
-        border: 1px solid black;
-    }
-
-    th,
-    td {
-        padding: 15px;
+    th, td {
+        border: 1px solid #dddddd;
         text-align: left;
+        padding: 8px;
     }
 
     th {
