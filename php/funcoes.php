@@ -1,8 +1,8 @@
 <?php
 
 function autenticaUsuario() {
-    //$conexao = mysqli_connect("127.0.0.1:3306", "u221588236_root", "Inova@307", "u221588236_controle_finan");
-    $conexao = mysqli_connect("localhost", "root", "", "sgv_2024");
+    $conexao = mysqli_connect("127.0.0.1:3306", "u221588236_root", "Inova@307", "u221588236_controle_finan");
+    //$conexao = mysqli_connect("localhost", "root", "", "sgv_2024");
     ?>
     <script type="text/javascript">
     function redirecionaPainel() {
@@ -50,8 +50,8 @@ function logout() {
     </script><?php
 }
 function verificaEmailExistente($email){
-    //$conexao = mysqli_connect("127.0.0.1:3306", "u221588236_root", "Inova@307", "u221588236_controle_finan");
-    $conexao = mysqli_connect("localhost", "root", "", "sgv_2024");
+    $conexao = mysqli_connect("127.0.0.1:3306", "u221588236_root", "Inova@307", "u221588236_controle_finan");
+    //$conexao = mysqli_connect("localhost", "root", "", "sgv_2024");
     $query = mysqli_query($conexao,"SELECT * FROM usuario WHERE email = '$email'");
     $row   = mysqli_num_rows($query);
     if($row > 0){
@@ -62,8 +62,8 @@ function verificaEmailExistente($email){
 }
 
 function cadastraLogin(){
-    //$conexao = mysqli_connect("127.0.0.1:3306", "u221588236_root", "Inova@307", "u221588236_controle_finan");
-    $conexao = mysqli_connect("localhost", "root", "", "sgv_2024");
+    $conexao = mysqli_connect("127.0.0.1:3306", "u221588236_root", "Inova@307", "u221588236_controle_finan");
+    //$conexao = mysqli_connect("localhost", "root", "", "sgv_2024");
     $nome       = $_POST['nomeCriar'];
     $email      = $_POST['emailCriar1'];
     $senha      = md5($_POST['senhaCriar1']);
