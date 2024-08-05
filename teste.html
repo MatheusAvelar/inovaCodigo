@@ -63,9 +63,10 @@
     <div class="container">
         <h1>Agendamento de Macas</h1>
         <div class="grid">
+            <!-- Maca 1 -->
             <div class="maca">
                 <h2>Maca 1</h2>
-                <form>
+                <form id="form1">
                     <label for="name1">Nome:</label>
                     <input type="text" id="name1" name="name1" required>
                     <label for="date1">Data:</label>
@@ -76,14 +77,21 @@
                         <option value="10:00">10:00</option>
                         <option value="11:00">11:00</option>
                         <option value="12:00">12:00</option>
-                        <!-- Adicione mais horários conforme necessário -->
+                        <option value="13:00">13:00</option>
+                        <option value="14:00">14:00</option>
+                        <option value="15:00">15:00</option>
+                        <option value="16:00">16:00</option>
+                        <option value="17:00">17:00</option>
+                        <option value="18:00">18:00</option>
                     </select>
-                    <button type="submit">Agendar</button>
+                    <button type="button" onclick="agendar(1)">Agendar</button>
                 </form>
             </div>
+
+            <!-- Maca 2 -->
             <div class="maca">
                 <h2>Maca 2</h2>
-                <form>
+                <form id="form2">
                     <label for="name2">Nome:</label>
                     <input type="text" id="name2" name="name2" required>
                     <label for="date2">Data:</label>
@@ -94,14 +102,21 @@
                         <option value="10:00">10:00</option>
                         <option value="11:00">11:00</option>
                         <option value="12:00">12:00</option>
-                        <!-- Adicione mais horários conforme necessário -->
+                        <option value="13:00">13:00</option>
+                        <option value="14:00">14:00</option>
+                        <option value="15:00">15:00</option>
+                        <option value="16:00">16:00</option>
+                        <option value="17:00">17:00</option>
+                        <option value="18:00">18:00</option>
                     </select>
-                    <button type="submit">Agendar</button>
+                    <button type="button" onclick="agendar(2)">Agendar</button>
                 </form>
             </div>
+
+            <!-- Maca 3 -->
             <div class="maca">
                 <h2>Maca 3</h2>
-                <form>
+                <form id="form3">
                     <label for="name3">Nome:</label>
                     <input type="text" id="name3" name="name3" required>
                     <label for="date3">Data:</label>
@@ -112,14 +127,21 @@
                         <option value="10:00">10:00</option>
                         <option value="11:00">11:00</option>
                         <option value="12:00">12:00</option>
-                        <!-- Adicione mais horários conforme necessário -->
+                        <option value="13:00">13:00</option>
+                        <option value="14:00">14:00</option>
+                        <option value="15:00">15:00</option>
+                        <option value="16:00">16:00</option>
+                        <option value="17:00">17:00</option>
+                        <option value="18:00">18:00</option>
                     </select>
-                    <button type="submit">Agendar</button>
+                    <button type="button" onclick="agendar(3)">Agendar</button>
                 </form>
             </div>
+
+            <!-- Maca 4 -->
             <div class="maca">
                 <h2>Maca 4</h2>
-                <form>
+                <form id="form4">
                     <label for="name4">Nome:</label>
                     <input type="text" id="name4" name="name4" required>
                     <label for="date4">Data:</label>
@@ -130,12 +152,51 @@
                         <option value="10:00">10:00</option>
                         <option value="11:00">11:00</option>
                         <option value="12:00">12:00</option>
-                        <!-- Adicione mais horários conforme necessário -->
+                        <option value="13:00">13:00</option>
+                        <option value="14:00">14:00</option>
+                        <option value="15:00">15:00</option>
+                        <option value="16:00">16:00</option>
+                        <option value="17:00">17:00</option>
+                        <option value="18:00">18:00</option>
                     </select>
-                    <button type="submit">Agendar</button>
+                    <button type="button" onclick="agendar(4)">Agendar</button>
                 </form>
             </div>
         </div>
     </div>
+
+    <script>
+        function agendar(macaId) {
+            const form = document.getElementById(`form${macaId}`);
+            const formData = new FormData(form);
+            const name = formData.get('name' + macaId);
+            const date = formData.get('date' + macaId);
+            const time = formData.get('time' + macaId);
+
+            // Validação simples
+            if (!name || !date || !time) {
+                alert('Por favor, preencha todos os campos.');
+                return;
+            }
+
+            fetch('https://seu-servidor-exemplo.com/agendar', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Agendamento realizado com sucesso!');
+                    form.reset(); // Limpa o formulário após o envio
+                } else {
+                    alert('Houve um erro: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao agendar:', error);
+                alert('Houve um erro ao realizar o agendamento.');
+            });
+        }
+    </script>
 </body>
 </html>
