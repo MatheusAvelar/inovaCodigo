@@ -71,9 +71,19 @@
                     <input type="text" id="name1" name="name1" required>
                     <label for="date1">Data:</label>
                     <input type="date" id="date1" name="date1" required>
-                    <label for="time1">Horário:</label>
-                    <select id="time1" name="time1" required>
+                    <label for="start-time1">Horário Inicial:</label>
+                    <select id="start-time1" name="start-time1" required>
                         <option value="">Selecione o horário</option>
+                        <option value="00:00">00:00</option>
+                        <option value="01:00">01:00</option>
+                        <option value="02:00">02:00</option>
+                        <option value="03:00">03:00</option>
+                        <option value="04:00">04:00</option>
+                        <option value="05:00">05:00</option>
+                        <option value="06:00">06:00</option>
+                        <option value="07:00">07:00</option>
+                        <option value="08:00">08:00</option>
+                        <option value="09:00">09:00</option>
                         <option value="10:00">10:00</option>
                         <option value="11:00">11:00</option>
                         <option value="12:00">12:00</option>
@@ -83,85 +93,44 @@
                         <option value="16:00">16:00</option>
                         <option value="17:00">17:00</option>
                         <option value="18:00">18:00</option>
+                        <option value="19:00">19:00</option>
+                        <option value="20:00">20:00</option>
+                        <option value="21:00">21:00</option>
+                        <option value="22:00">22:00</option>
+                        <option value="23:00">23:00</option>
+                    </select>
+                    <label for="end-time1">Horário Final:</label>
+                    <select id="end-time1" name="end-time1" required>
+                        <option value="">Selecione o horário</option>
+                        <option value="01:00">01:00</option>
+                        <option value="02:00">02:00</option>
+                        <option value="03:00">03:00</option>
+                        <option value="04:00">04:00</option>
+                        <option value="05:00">05:00</option>
+                        <option value="06:00">06:00</option>
+                        <option value="07:00">07:00</option>
+                        <option value="08:00">08:00</option>
+                        <option value="09:00">09:00</option>
+                        <option value="10:00">10:00</option>
+                        <option value="11:00">11:00</option>
+                        <option value="12:00">12:00</option>
+                        <option value="13:00">13:00</option>
+                        <option value="14:00">14:00</option>
+                        <option value="15:00">15:00</option>
+                        <option value="16:00">16:00</option>
+                        <option value="17:00">17:00</option>
+                        <option value="18:00">18:00</option>
+                        <option value="19:00">19:00</option>
+                        <option value="20:00">20:00</option>
+                        <option value="21:00">21:00</option>
+                        <option value="22:00">22:00</option>
+                        <option value="23:00">23:00</option>
+                        <option value="24:00">24:00</option>
                     </select>
                     <button type="button" onclick="agendar(1)">Agendar</button>
                 </form>
             </div>
 
-            <!-- Maca 2 -->
-            <div class="maca">
-                <h2>Maca 2</h2>
-                <form id="form2">
-                    <label for="name2">Nome:</label>
-                    <input type="text" id="name2" name="name2" required>
-                    <label for="date2">Data:</label>
-                    <input type="date" id="date2" name="date2" required>
-                    <label for="time2">Horário:</label>
-                    <select id="time2" name="time2" required>
-                        <option value="">Selecione o horário</option>
-                        <option value="10:00">10:00</option>
-                        <option value="11:00">11:00</option>
-                        <option value="12:00">12:00</option>
-                        <option value="13:00">13:00</option>
-                        <option value="14:00">14:00</option>
-                        <option value="15:00">15:00</option>
-                        <option value="16:00">16:00</option>
-                        <option value="17:00">17:00</option>
-                        <option value="18:00">18:00</option>
-                    </select>
-                    <button type="button" onclick="agendar(2)">Agendar</button>
-                </form>
-            </div>
-
-            <!-- Maca 3 -->
-            <div class="maca">
-                <h2>Maca 3</h2>
-                <form id="form3">
-                    <label for="name3">Nome:</label>
-                    <input type="text" id="name3" name="name3" required>
-                    <label for="date3">Data:</label>
-                    <input type="date" id="date3" name="date3" required>
-                    <label for="time3">Horário:</label>
-                    <select id="time3" name="time3" required>
-                        <option value="">Selecione o horário</option>
-                        <option value="10:00">10:00</option>
-                        <option value="11:00">11:00</option>
-                        <option value="12:00">12:00</option>
-                        <option value="13:00">13:00</option>
-                        <option value="14:00">14:00</option>
-                        <option value="15:00">15:00</option>
-                        <option value="16:00">16:00</option>
-                        <option value="17:00">17:00</option>
-                        <option value="18:00">18:00</option>
-                    </select>
-                    <button type="button" onclick="agendar(3)">Agendar</button>
-                </form>
-            </div>
-
-            <!-- Maca 4 -->
-            <div class="maca">
-                <h2>Maca 4</h2>
-                <form id="form4">
-                    <label for="name4">Nome:</label>
-                    <input type="text" id="name4" name="name4" required>
-                    <label for="date4">Data:</label>
-                    <input type="date" id="date4" name="date4" required>
-                    <label for="time4">Horário:</label>
-                    <select id="time4" name="time4" required>
-                        <option value="">Selecione o horário</option>
-                        <option value="10:00">10:00</option>
-                        <option value="11:00">11:00</option>
-                        <option value="12:00">12:00</option>
-                        <option value="13:00">13:00</option>
-                        <option value="14:00">14:00</option>
-                        <option value="15:00">15:00</option>
-                        <option value="16:00">16:00</option>
-                        <option value="17:00">17:00</option>
-                        <option value="18:00">18:00</option>
-                    </select>
-                    <button type="button" onclick="agendar(4)">Agendar</button>
-                </form>
-            </div>
         </div>
     </div>
 
@@ -171,30 +140,56 @@
             const formData = new FormData(form);
             const name = formData.get('name' + macaId);
             const date = formData.get('date' + macaId);
-            const time = formData.get('time' + macaId);
+            const startTime = formData.get('start-time' + macaId);
+            const endTime = formData.get('end-time' + macaId);
 
             // Validação simples
-            if (!name || !date || !time) {
+            if (!name || !date || !startTime || !endTime) {
                 alert('Por favor, preencha todos os campos.');
                 return;
             }
 
-            fetch('https://seu-servidor-exemplo.com/agendar', {
+            if (startTime >= endTime) {
+                alert('O horário final deve ser depois do horário inicial.');
+                return;
+            }
+
+            // Solicita ao backend a disponibilidade do intervalo de tempo
+            fetch('https://seu-servidor-exemplo.com/verificar-disponibilidade', {
                 method: 'POST',
-                body: formData
+                body: JSON.stringify({ macaId, date, startTime, endTime }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             })
             .then(response => response.json())
             .then(data => {
-                if (data.success) {
-                    alert('Agendamento realizado com sucesso!');
-                    form.reset(); // Limpa o formulário após o envio
+                if (data.disponivel) {
+                    // Continua com o agendamento
+                    fetch('https://seu-servidor-exemplo.com/agendar', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Agendamento realizado com sucesso!');
+                            form.reset(); // Limpa o formulário após o envio
+                        } else {
+                            alert('Houve um erro: ' + data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erro ao agendar:', error);
+                        alert('Houve um erro ao realizar o agendamento.');
+                    });
                 } else {
-                    alert('Houve um erro: ' + data.message);
+                    alert('O horário selecionado já está ocupado. Por favor, escolha outro horário.');
                 }
             })
             .catch(error => {
-                console.error('Erro ao agendar:', error);
-                alert('Houve um erro ao realizar o agendamento.');
+                console.error('Erro ao verificar disponibilidade:', error);
+                alert('Houve um erro ao verificar a disponibilidade do horário.');
             });
         }
     </script>
