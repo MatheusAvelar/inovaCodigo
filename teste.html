@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamento de Macas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+        }
+        .grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .maca {
+            flex: 1;
+            min-width: 250px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .maca h2 {
+            margin-top: 0;
+        }
+        .maca form {
+            display: flex;
+            flex-direction: column;
+        }
+        .maca label {
+            margin-bottom: 5px;
+        }
+        .maca input, .maca select, .maca button {
+            margin-bottom: 15px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .maca button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .maca button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Agendamento de Macas</h1>
+        <div class="grid">
+            <div class="maca">
+                <h2>Maca 1</h2>
+                <form>
+                    <label for="name1">Nome:</label>
+                    <input type="text" id="name1" name="name1" required>
+                    <label for="date1">Data:</label>
+                    <input type="date" id="date1" name="date1" required>
+                    <label for="time1">Horário:</label>
+                    <select id="time1" name="time1" required>
+                        <option value="">Selecione o horário</option>
+                        <option value="10:00">10:00</option>
+                        <option value="11:00">11:00</option>
+                        <option value="12:00">12:00</option>
+                        <!-- Adicione mais horários conforme necessário -->
+                    </select>
+                    <button type="submit">Agendar</button>
+                </form>
+            </div>
+            <div class="maca">
+                <h2>Maca 2</h2>
+                <form>
+                    <label for="name2">Nome:</label>
+                    <input type="text" id="name2" name="name2" required>
+                    <label for="date2">Data:</label>
+                    <input type="date" id="date2" name="date2" required>
+                    <label for="time2">Horário:</label>
+                    <select id="time2" name="time2" required>
+                        <option value="">Selecione o horário</option>
+                        <option value="10:00">10:00</option>
+                        <option value="11:00">11:00</option>
+                        <option value="12:00">12:00</option>
+                        <!-- Adicione mais horários conforme necessário -->
+                    </select>
+                    <button type="submit">Agendar</button>
+                </form>
+            </div>
+            <div class="maca">
+                <h2>Maca 3</h2>
+                <form>
+                    <label for="name3">Nome:</label>
+                    <input type="text" id="name3" name="name3" required>
+                    <label for="date3">Data:</label>
+                    <input type="date" id="date3" name="date3" required>
+                    <label for="time3">Horário:</label>
+                    <select id="time3" name="time3" required>
+                        <option value="">Selecione o horário</option>
+                        <option value="10:00">10:00</option>
+                        <option value="11:00">11:00</option>
+                        <option value="12:00">12:00</option>
+                        <!-- Adicione mais horários conforme necessário -->
+                    </select>
+                    <button type="submit">Agendar</button>
+                </form>
+            </div>
+            <div class="maca">
+                <h2>Maca 4</h2>
+                <form>
+                    <label for="name4">Nome:</label>
+                    <input type="text" id="name4" name="name4" required>
+                    <label for="date4">Data:</label>
+                    <input type="date" id="date4" name="date4" required>
+                    <label for="time4">Horário:</label>
+                    <select id="time4" name="time4" required>
+                        <option value="">Selecione o horário</option>
+                        <option value="10:00">10:00</option>
+                        <option value="11:00">11:00</option>
+                        <option value="12:00">12:00</option>
+                        <!-- Adicione mais horários conforme necessário -->
+                    </select>
+                    <button type="submit">Agendar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
