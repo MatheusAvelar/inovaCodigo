@@ -206,7 +206,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($agendamentos as $agendamento) : ?>
+                        <?php
+                        // Inclua a lógica para buscar agendamentos novamente ou garantir que a variável está definida
+                        if (!isset($agendamentos)) {
+                            $agendamentos = []; // Defina um valor padrão para evitar erros
+                        }
+                        foreach ($agendamentos as $agendamento) : ?>
                             <tr>
                                 <td><?= htmlspecialchars($agendamento['nome_cliente']) ?></td>
                                 <td><?= htmlspecialchars($agendamento['maca_id']) ?></td>
