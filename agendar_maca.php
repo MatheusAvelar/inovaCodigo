@@ -13,7 +13,7 @@ if ($conn->connect_error) {
 }
 
 // Recebe os dados do formulário
-$nome_cliente = $_POST['nome_cliente'];
+$nome_cliente = $_POST['name'];
 $maca_id = $_POST['maca_id'];
 $data = $_POST['data'];
 $start_time = $_POST['start_time'];
