@@ -104,6 +104,9 @@
                     <label for="name1">Nome:</label>
                     <input type="text" id="name1" name="name" required>
 
+                    <label for="date1">Data:</label>
+                    <input type="date" id="date1" name="date" required onchange="fetchHorariosOcupados()">
+
                     <label for="maca">Maca:</label>
                     <select id="maca" name="maca" required onchange="fetchHorariosOcupados()">
                         <option value="">Selecione a maca</option>
@@ -112,9 +115,6 @@
                         <option value="3">Maca 3</option>
                         <option value="4">Maca 4</option>
                     </select>
-
-                    <label for="date1">Data:</label>
-                    <input type="date" id="date1" name="date" required onchange="fetchHorariosOcupados()">
 
                     <label for="start-time1">Horário Inicial:</label>
                     <select id="start-time1" name="start_time" required>
