@@ -58,54 +58,18 @@
             background-color: #45a049;
         }
     </style>
-    <script>
-        function fetchHorariosOcupados() {
-            const macaId = document.getElementById('maca').value;
-            const date = document.getElementById('date1').value;
-
-            if (macaId && date) {
-                // Fetching the occupied times (this should be done via an AJAX request to your PHP backend)
-                fetch(`fetch_horarios_ocupados.php?maca=${macaId}&date=${date}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        // Clear previous options
-                        const startSelect = document.getElementById('start-time1');
-                        const endSelect = document.getElementById('end-time1');
-                        startSelect.innerHTML = '';
-                        endSelect.innerHTML = '';
-
-                        // Add the available options
-                        const allTimes = ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"];
-
-                        allTimes.forEach(time => {
-                            if (!data.includes(time)) {
-                                const optionStart = document.createElement('option');
-                                optionStart.value = time;
-                                optionStart.textContent = time;
-                                startSelect.appendChild(optionStart);
-
-                                const optionEnd = document.createElement('option');
-                                optionEnd.value = time;
-                                optionEnd.textContent = time;
-                                endSelect.appendChild(optionEnd);
-                            }
-                        });
-                    });
-            }
-        }
-    </script>
 </head>
 <body>
     <div class="container">
         <h1>Agendamento de Macas</h1>
         <div class="grid">
             <div class="maca">
-                <form id="form1" action="agendar_maca.php" method="POST">
+                <form id="form1">
                     <label for="name1">Nome:</label>
-                    <input type="text" id="name1" name="name" required>
+                    <input type="text" id="name1" name="name1" required>
 
-                    <label for="maca">Maca:</label>
-                    <select id="maca" name="maca" required onchange="fetchHorariosOcupados()">
+                    <label for="maca">Selecione a Maca:</label>
+                    <select id="maca" name="maca" required>
                         <option value="">Selecione a maca</option>
                         <option value="1">Maca 1</option>
                         <option value="2">Maca 2</option>
@@ -114,22 +78,115 @@
                     </select>
 
                     <label for="date1">Data:</label>
-                    <input type="date" id="date1" name="date" required onchange="fetchHorariosOcupados()">
+                    <input type="date" id="date1" name="date1" required>
 
                     <label for="start-time1">Horário Inicial:</label>
-                    <select id="start-time1" name="start_time" required>
+                    <select id="start-time1" name="start-time1" required>
                         <option value="">Selecione o horário</option>
                     </select>
 
                     <label for="end-time1">Horário Final:</label>
-                    <select id="end-time1" name="end_time" required>
+                    <select id="end-time1" name="end-time1" required>
                         <option value="">Selecione o horário</option>
                     </select>
 
-                    <button type="submit">Agendar</button>
+                    <button type="button" onclick="agendar()">Agendar</button>
                 </form>
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Seletores dos elementos
+            const macaSelect = document.getElementById('maca');
+            const dateInput = document.getElementById('date1');
+            const startTimeSelect = document.getElementById('start-time1');
+            const endTimeSelect = document.getElementById('end-time1');
+
+            function fetchHorariosOcupados() {
+                const macaId = macaSelect.value;
+                const date = dateInput.value;
+
+                if (macaId && date) {
+                    fetch(`fetch_horarios_ocupados.php?maca=${macaId}&date=${date}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            updateHorarioOptions(data);
+                        })
+                        .catch(error => console.error('Erro ao buscar horários ocupados:', error));
+                }
+            }
+
+            function updateHorarioOptions(ocupados) {
+                const allTimes = ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"];
+
+                // Resetar opções
+                startTimeSelect.innerHTML = '';
+                endTimeSelect.innerHTML = '';
+
+                let availableStartTimes = [];
+                let availableEndTimes = [];
+
+                // Adicionar opções disponíveis
+                allTimes.forEach(time => {
+                    if (!ocupados.includes(time)) {
+                        availableStartTimes.push(time);
+                        availableEndTimes.push(time);
+                    }
+                });
+
+                // Preencher as opções de horário inicial
+                availableStartTimes.forEach(time => {
+                    const option = document.createElement('option');
+                    option.value = time;
+                    option.textContent = time;
+                    startTimeSelect.appendChild(option);
+                });
+
+                // Preencher as opções de horário final com base no horário inicial selecionado
+                startTimeSelect.addEventListener('change', function() {
+                    const startTime = startTimeSelect.value;
+                    endTimeSelect.innerHTML = ''; // Limpa opções antigas
+
+                    let showEndTimes = allTimes.filter(time => time > startTime);
+                    showEndTimes.forEach(time => {
+                        if (!ocupados.includes(time)) {
+                            const option = document.createElement('option');
+                            option.value = time;
+                            option.textContent = time;
+                            endTimeSelect.appendChild(option);
+                        }
+                    });
+                });
+
+                // Inicializa com horários disponíveis
+                startTimeSelect.dispatchEvent(new Event('change'));
+            }
+
+            // Event listeners
+            macaSelect.addEventListener('change', fetchHorariosOcupados);
+            dateInput.addEventListener('change', fetchHorariosOcupados);
+        });
+
+        function agendar() {
+            const form = document.getElementById('form1');
+            const formData = new FormData(form);
+
+            fetch('agendar_maca.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    alert('Agendamento realizado com sucesso!');
+                } else {
+                    alert('Erro ao agendar: ' + data.errors.join(', '));
+                }
+            })
+            .catch(error => console.error('Erro ao realizar o agendamento:', error));
+        }
+    </script>
 </body>
 </html>
