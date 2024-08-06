@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 // Definindo variáveis para mensagem de retorno
 $status = "";
 $message = "";
@@ -60,8 +62,9 @@ if (empty($errors)) {
         $stmt->close();
     } else {
         // Inserir no banco de dados se não houver conflitos
-        $stmt = $conn->prepare("INSERT INTO agendamentos (nome_cliente, maca_id, data, start_time, end_time) VALUES (?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssss", $name, $maca, $date, $startTime, $endTime);
+        $usuarioId = $_SESSION['user_id']; // ID do usuário logado
+        $stmt = $conn->prepare("INSERT INTO agendamentos (nome_cliente, maca_id, data, start_time, end_time, usuario_id) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssss", $name, $maca, $date, $startTime, $endTime, $usuarioId);
         if ($stmt->execute()) {
             $status = "success";
             $message = "Agendamento realizado com sucesso!";
@@ -74,17 +77,6 @@ if (empty($errors)) {
 } else {
     $status = "error";
     $message = implode("<br>", $errors);
-}
-
-// Busca de agendamentos existentes
-$agendamentos = [];
-$query = "SELECT nome_cliente, maca_id, data, start_time, end_time FROM agendamentos ORDER BY data, start_time";
-$result = $conn->query($query);
-
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $agendamentos[] = $row;
-    }
 }
 
 // Fechando a conexão
