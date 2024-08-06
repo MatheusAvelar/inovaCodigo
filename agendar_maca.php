@@ -70,6 +70,8 @@ $conn->close();
 
 // Armazenando a mensagem em sessionStorage e redirecionando
 echo "<script>
+    console.log('Status: " . addslashes($status) . "'); // Debug
+    console.log('Message: " . addslashes($message) . "'); // Debug
     sessionStorage.setItem('status', '" . addslashes($status) . "');
     sessionStorage.setItem('message', '" . addslashes($message) . "');
     window.location.href = 'teste.php';
