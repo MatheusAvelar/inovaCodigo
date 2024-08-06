@@ -148,8 +148,24 @@
         }
 
         function agendar() {
+            // Capturar os dados do formulário
             const formData = new FormData(document.getElementById('form1'));
-
+            
+            // Extrair valores dos campos do formulário
+            const nome = formData.get('name1');
+            const maca = formData.get('maca');
+            const data = formData.get('date1');
+            const horarioInicio = formData.get('start-time1');
+            const horarioFim = formData.get('end-time1');
+            
+            // Imprimir os valores no console
+            console.log("Nome:", nome);
+            console.log("Maca:", maca);
+            console.log("Data:", data);
+            console.log("Horário Inicial:", horarioInicio);
+            console.log("Horário Final:", horarioFim);
+            
+            // Continuar com o envio da requisição
             fetch('agendar_maca.php', {
                 method: 'POST',
                 body: formData
@@ -164,7 +180,7 @@
                 }
             })
             .catch(error => {
-                console.error('Erro:', error); // Adicione esta linha para depuração
+                console.error('Erro:', error);
                 exibirMensagem('Erro ao processar a solicitação. Tente novamente mais tarde.', 'error');
             });
         }
