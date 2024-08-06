@@ -258,24 +258,41 @@
                     </thead>
                     <tbody>
                         <?php
-                        // Inclua a lógica para buscar agendamentos novamente ou garantir que a variável está definida
-                        if (!isset($agendamentos)) {
-                            $agendamentos = []; // Defina um valor padrão para evitar erros
+                        // Configuração da conexão com o banco de dados
+                        $servername = "127.0.0.1:3306";
+                        $username = "u221588236_root";
+                        $password = "Camila@307";
+                        $dbname = "u221588236_controle_finan";
+
+                        // Criando a conexão
+                        $conn = new mysqli($servername, $username, $password, $dbname);
+
+                        // Verificando a conexão
+                        if ($conn->connect_error) {
+                            die("Falha na conexão: " . $conn->connect_error);
                         }
-                        foreach ($agendamentos as $agendamento) : ?>
-                            <tr>
-                                <td><?= htmlspecialchars($agendamento['nome_cliente']) ?></td>
-                                <td><?= htmlspecialchars($agendamento['maca_id']) ?></td>
-                                <td><?= htmlspecialchars($agendamento['data']) ?></td>
-                                <td><?= htmlspecialchars($agendamento['start_time']) ?></td>
-                                <td><?= htmlspecialchars($agendamento['end_time']) ?></td>
-                            </tr>
-                        <?php endforeach; ?>
-                        <?php if (empty($agendamentos)) : ?>
-                            <tr>
-                                <td colspan="5">Nenhum agendamento encontrado.</td>
-                            </tr>
-                        <?php endif; ?>
+
+                        // Busca de agendamentos existentes
+                        $query = "SELECT nome_cliente, maca_id, data, start_time, end_time FROM agendamentos ORDER BY data, start_time";
+                        $result = $conn->query($query);
+
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                echo "<tr>";
+                                echo "<td>" . htmlspecialchars($row['nome_cliente']) . "</td>";
+                                echo "<td>" . htmlspecialchars($row['maca_id']) . "</td>";
+                                echo "<td>" . htmlspecialchars($row['data']) . "</td>";
+                                echo "<td>" . htmlspecialchars($row['start_time']) . "</td>";
+                                echo "<td>" . htmlspecialchars($row['end_time']) . "</td>";
+                                echo "</tr>";
+                            }
+                        } else {
+                            echo "<tr><td colspan='5'>Nenhum agendamento encontrado.</td></tr>";
+                        }
+
+                        // Fechando a conexão
+                        $conn->close();
+                        ?>
                     </tbody>
                 </table>
             </div>
