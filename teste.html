@@ -78,10 +78,14 @@
 <body>
     <div class="container">
         <h1>Agendamento de Macas</h1>
-        <div id="message-container"></div> <!-- Contêiner para mensagens -->
+        <?php if (isset($_GET['status'])): ?>
+            <div class="message <?php echo $_GET['status']; ?>">
+                <?php echo $_GET['message']; ?>
+            </div>
+        <?php endif; ?>
         <div class="grid">
             <div class="maca">
-                <form id="form1">
+                <form id="form1" method="POST" action="agendar_maca.php">
                     <label for="name1">Nome:</label>
                     <input type="text" id="name1" name="name1" required>
                     <label for="maca">Maca:</label>
@@ -92,101 +96,21 @@
                         <option value="2">Maca 2</option>
                         <option value="3">Maca 3</option>
                         <option value="4">Maca 4</option>
-                        <!-- Adicione mais opções conforme necessário -->
                     </select>
                     <label for="date1">Data:</label>
                     <input type="date" id="date1" name="date1" required>
                     <label for="start-time1">Horário Inicial:</label>
                     <select id="start-time1" name="start-time1" required>
-                        <!-- Horários serão populados via JavaScript -->
+                        <!-- Horários -->
                     </select>
                     <label for="end-time1">Horário Final:</label>
                     <select id="end-time1" name="end-time1" required>
-                        <!-- Horários serão populados via JavaScript -->
+                        <!-- Horários -->
                     </select>
-                    <button type="button" onclick="agendar()">Agendar</button>
+                    <button type="submit">Agendar</button>
                 </form>
             </div>
         </div>
     </div>
-    <script>
-        function fetchHorariosOcupados() {
-            const macaId = document.getElementById('maca').value;
-            const date = document.getElementById('date1').value;
-
-            if (macaId && date) {
-                fetch(`fetch_horarios_ocupados.php?maca=${macaId}&date=${date}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        const startSelect = document.getElementById('start-time1');
-                        const endSelect = document.getElementById('end-time1');
-                        startSelect.innerHTML = '';
-                        endSelect.innerHTML = '';
-
-                        const allTimes = ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"];
-
-                        allTimes.forEach(time => {
-                            if (!data.includes(time)) {
-                                const optionStart = document.createElement('option');
-                                optionStart.value = time;
-                                optionStart.textContent = time;
-                                startSelect.appendChild(optionStart);
-
-                                const optionEnd = document.createElement('option');
-                                optionEnd.value = time;
-                                optionEnd.textContent = time;
-                                endSelect.appendChild(optionEnd);
-                            }
-                        });
-                    });
-            }
-        }
-
-        function exibirMensagem(mensagem, tipo) {
-            const messageContainer = document.getElementById('message-container');
-            messageContainer.innerHTML = `<div class="message ${tipo}">${mensagem}</div>`;
-        }
-
-        function agendar() {
-            // Capturar os dados do formulário
-            const formData = new FormData(document.getElementById('form1'));
-            
-            // Extrair valores dos campos do formulário
-            const nome = formData.get('name1');
-            const maca = formData.get('maca');
-            const data = formData.get('date1');
-            const horarioInicio = formData.get('start-time1');
-            const horarioFim = formData.get('end-time1');
-            
-            // Imprimir os valores no console
-            console.log("Nome:", nome);
-            console.log("Maca:", maca);
-            console.log("Data:", data);
-            console.log("Horário Inicial:", horarioInicio);
-            console.log("Horário Final:", horarioFim);
-            
-            // Continuar com o envio da requisição
-            fetch('agendar_maca.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    exibirMensagem('Agendamento realizado com sucesso!', 'success');
-                } else {
-                    const erros = data.errors.join('<br>');
-                    exibirMensagem(`Erro(s): ${erros}`, 'error');
-                }
-            })
-            .catch(error => {
-                console.error('Erro:', error);
-                exibirMensagem('Erro ao processar a solicitação. Tente novamente mais tarde.', 'error');
-            });
-        }
-
-        document.getElementById('maca').addEventListener('change', fetchHorariosOcupados);
-        document.getElementById('date1').addEventListener('change', fetchHorariosOcupados);
-    </script>
 </body>
 </html>
