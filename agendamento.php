@@ -243,39 +243,9 @@
                 </form>
             </div>
         </div>
-    </div>
-
-    <!-- Seção de agendamentos -->
-    <div class="container">
-
-        <!-- Seção de filtro -->
+        <!-- Botão para acessar a página de horários agendados -->
         <div class="container">
-            <h2>Filtrar Agendamentos</h2>
-            <form id="filter-form" method="GET" action="teste.php">
-                <label for="filter-date">Data:</label>
-                <input type="date" id="filter-date" name="filter_date" value="<?= htmlspecialchars($_GET['filter_date'] ?? '') ?>">
-                <button type="submit">Filtrar</button>
-            </form>
-        </div>
-        
-        <h2>Horários Já Agendados</h2>
-        <div class="grid">
-            <div class="maca">
-                <table border="1" cellspacing="0" cellpadding="10">
-                    <thead>
-                        <tr>
-                            <th>Cliente</th>
-                            <th>Maca</th>
-                            <th>Data</th>
-                            <th>Horário Inicial</th>
-                            <th>Horário Final</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php include 'fetch_agendamentos.php'; ?>
-                    </tbody>
-                </table>
-            </div>
+            <a href="horarios_agendados.html" class="button">Ver Horários Agendados</a>
         </div>
     </div>
 
