@@ -1,8 +1,4 @@
 <?php
-// Definindo variáveis para mensagem de retorno
-$status = "";
-$message = "";
-
 // Configuração da conexão com o banco de dados
 $servername = "127.0.0.1:3306";
 $username = "u221588236_root";
@@ -25,7 +21,7 @@ $startTime = $_POST['start-time1'] ?? '';
 $endTime = $_POST['end-time1'] ?? '';
 
 // Validação dos dados
-$errors = []; 
+$errors = [];
 if (empty($name)) {
     $errors[] = "O nome é obrigatório.";
 }
@@ -45,18 +41,40 @@ if (!empty($startTime) && !empty($endTime) && $startTime >= $endTime) {
     $errors[] = "O horário final deve ser maior que o horário inicial.";
 }
 
-// Se não houver erros, inserir no banco de dados
+// Se não houver erros, verificar conflitos de horário
 if (empty($errors)) {
-    // Prevenção contra SQL Injection
-    $stmt = $conn->prepare("INSERT INTO agendamentos (nome_cliente, maca_id, data, start_time, end_time) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssss", $name, $maca, $date, $startTime, $endTime);
+    // Verificar se já existe um agendamento na mesma maca e data com conflito de horário
+    $sql = "SELECT start_time, end_time FROM agendamentos 
+            WHERE maca_id = ? AND data = ? 
+            AND ((start_time < ? AND end_time > ?) 
+            OR (start_time < ? AND end_time > ?)
+            OR (start_time >= ? AND start_time < ?))";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("issssss", $maca, $date, $endTime, $startTime, $startTime, $endTime, $startTime, $endTime);
+    $stmt->execute();
+    $result = $stmt->get_result();
     
-    if ($stmt->execute()) {
-        $status = "success";
-        $message = "Agendamento realizado com sucesso!";
-    } else {
+    if ($result->num_rows > 0) {
+        // Construir a mensagem de erro com os horários conflitantes
+        $conflictingTimes = [];
+        while ($row = $result->fetch_assoc()) {
+            $conflictingTimes[] = $row['start_time'] . " às " . $row['end_time'];
+        }
+        $conflictingTimesList = implode(", ", $conflictingTimes);
         $status = "error";
-        $message = "Erro ao realizar o agendamento. Tente novamente.";
+        $message = "Já existe um agendamento para a maca e data selecionadas com conflito de horário: " . $conflictingTimesList . ".";
+    } else {
+        // Se não houver conflito, inserir o novo agendamento
+        $stmt = $conn->prepare("INSERT INTO agendamentos (nome_cliente, maca_id, data, start_time, end_time) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssss", $name, $maca, $date, $startTime, $endTime);
+        
+        if ($stmt->execute()) {
+            $status = "success";
+            $message = "Agendamento realizado com sucesso!";
+        } else {
+            $status = "error";
+            $message = "Erro ao realizar o agendamento. Tente novamente.";
+        }
     }
     
     $stmt->close();
@@ -67,13 +85,4 @@ if (empty($errors)) {
 
 // Fechando a conexão
 $conn->close();
-
-// Armazenando a mensagem em sessionStorage e redirecionando
-echo "<script>
-    //console.log('Status: " . addslashes($status) . "');
-    //console.log('Message: " . addslashes($message) . "');
-    sessionStorage.setItem('status', '" . addslashes($status) . "');
-    sessionStorage.setItem('message', '" . addslashes($message) . "');
-    window.location.href = 'teste.php';
-</script>";
 ?>
