@@ -134,11 +134,12 @@
                 font-size: 24px;
             }
         }
-        /* Estilos gerais da tabela */
+        /* Estilos para a tabela */
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
+            table-layout: fixed; /* Adiciona uma largura fixa para as células */
         }
 
         thead {
@@ -150,6 +151,9 @@
             text-align: left;
             border-bottom: 1px solid #ddd;
             font-size: 16px;
+            overflow: hidden; /* Garante que o texto não ultrapasse a célula */
+            text-overflow: ellipsis; /* Adiciona reticências se o texto for muito longo */
+            white-space: nowrap; /* Impede que o texto quebre em várias linhas */
         }
 
         th {
@@ -257,42 +261,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                        // Configuração da conexão com o banco de dados
-                        $servername = "127.0.0.1:3306";
-                        $username = "u221588236_root";
-                        $password = "Camila@307";
-                        $dbname = "u221588236_controle_finan";
-
-                        // Criando a conexão
-                        $conn = new mysqli($servername, $username, $password, $dbname);
-
-                        // Verificando a conexão
-                        if ($conn->connect_error) {
-                            die("Falha na conexão: " . $conn->connect_error);
-                        }
-
-                        // Busca de agendamentos existentes
-                        $query = "SELECT nome_cliente, maca_id, data, start_time, end_time FROM agendamentos ORDER BY data, start_time";
-                        $result = $conn->query($query);
-
-                        if ($result->num_rows > 0) {
-                            while ($row = $result->fetch_assoc()) {
-                                echo "<tr>";
-                                echo "<td>" . htmlspecialchars($row['nome_cliente']) . "</td>";
-                                echo "<td>" . htmlspecialchars($row['maca_id']) . "</td>";
-                                echo "<td>" . htmlspecialchars($row['data']) . "</td>";
-                                echo "<td>" . htmlspecialchars($row['start_time']) . "</td>";
-                                echo "<td>" . htmlspecialchars($row['end_time']) . "</td>";
-                                echo "</tr>";
-                            }
-                        } else {
-                            echo "<tr><td colspan='5'>Nenhum agendamento encontrado.</td></tr>";
-                        }
-
-                        // Fechando a conexão
-                        $conn->close();
-                        ?>
+                        <?php include 'fetch_agendamentos.php'; ?>
                     </tbody>
                 </table>
             </div>
