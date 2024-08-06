@@ -112,5 +112,46 @@
             </div>
         </div>
     </div>
+    <script>
+        function fetchHorariosOcupados() {
+            const macaId = document.getElementById('maca').value;
+            const date = document.getElementById('date1').value;
+
+            if (macaId && date) {
+                fetch(`fetch_horarios_ocupados.php?maca=${macaId}&date=${date}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const startSelect = document.getElementById('start-time1');
+                        const endSelect = document.getElementById('end-time1');
+                        startSelect.innerHTML = '';
+                        endSelect.innerHTML = '';
+
+                        const allTimes = ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"];
+
+                        allTimes.forEach(time => {
+                            if (!data.includes(time)) {
+                                const optionStart = document.createElement('option');
+                                optionStart.value = time;
+                                optionStart.textContent = time;
+                                startSelect.appendChild(optionStart);
+
+                                const optionEnd = document.createElement('option');
+                                optionEnd.value = time;
+                                optionEnd.textContent = time;
+                                endSelect.appendChild(optionEnd);
+                            }
+                        });
+                    });
+            }
+        }
+
+        function exibirMensagem(mensagem, tipo) {
+            const messageContainer = document.getElementById('message-container');
+            messageContainer.innerHTML = `<div class="message ${tipo}">${mensagem}</div>`;
+        }
+
+        document.getElementById('maca').addEventListener('change', fetchHorariosOcupados);
+        document.getElementById('date1').addEventListener('change', fetchHorariosOcupados);
+    </script>
 </body>
 </html>
