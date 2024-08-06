@@ -192,15 +192,15 @@
                 document.getElementById('end-time1-error').innerText = 'O horário final deve ser maior que o horário inicial.';
             }
 
-            return isValid;
+            return isValid; 
         }
 
         document.addEventListener('DOMContentLoaded', function () {
             const status = sessionStorage.getItem('status');
             const message = sessionStorage.getItem('message');
 
-            console.log('Status retrieved:', status); // Debug
-            console.log('Message retrieved:', message); // Debug
+            console.log('Status: ', status); // Debug
+            console.log('Message: ', message); // Debug
 
             if (status && message) {
                 const messageContainer = document.getElementById('message-container');
