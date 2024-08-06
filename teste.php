@@ -93,7 +93,7 @@
         }
 
         .maca button:hover {
-            background-color: #45a049;
+            background-color: #dbbe4d;
         }
 
         .message {
@@ -203,10 +203,8 @@
     </div>
 
     <footer>
-        <p>Contato: (XX) XXXX-XXXX</p>
-        <p>Siga-nos: 
-            <a href="https://facebook.com/estudio" target="_blank">Facebook</a> |
-            <a href="https://instagram.com/estudio" target="_blank">Instagram</a>
+        <p>Contato:
+            <a href="https://www.instagram.com/avelarttattoo/" target="_blank">Instagram</a>
         </p>
     </footer>
 
