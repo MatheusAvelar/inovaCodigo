@@ -14,8 +14,14 @@ if ($conn->connect_error) {
 $macaId = $_GET['maca'];
 $date = $_GET['date'];
 
+// Verifica se os parâmetros foram recebidos corretamente
+if (!$macaId || !$date) {
+    echo json_encode([]);
+    exit();
+}
+
 // Consultar horários ocupados
-$sql = "SELECT start_time, end_time FROM agendamentos WHERE maca_id = ? AND date = ?";
+$sql = "SELECT start_time, end_time FROM agendamentos WHERE maca_id = ? AND data = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("is", $macaId, $date);
 $stmt->execute();
@@ -39,5 +45,6 @@ $stmt->close();
 $conn->close();
 
 // Retorna horários ocupados como JSON
+header('Content-Type: application/json');
 echo json_encode($ocupados);
 ?>
