@@ -15,8 +15,17 @@ if ($conn->connect_error) {
     die("Falha na conexão: " . $conn->connect_error);
 }
 
-// Busca de agendamentos existentes
-$query = "SELECT nome_cliente, maca_id, data, start_time, end_time FROM agendamentos ORDER BY data, start_time";
+// Obtendo a data do filtro se estiver definida
+$filterDate = isset($_GET['filter_date']) ? $_GET['filter_date'] : '';
+
+// Condição para aplicar o filtro de data
+$whereClause = "";
+if (!empty($filterDate)) {
+    $whereClause = "WHERE data = '" . $conn->real_escape_string($filterDate) . "'";
+}
+
+// Busca de agendamentos existentes com o filtro aplicado
+$query = "SELECT nome_cliente, maca_id, data, start_time, end_time FROM agendamentos $whereClause ORDER BY data, start_time";
 $result = $conn->query($query);
 
 if ($result->num_rows > 0) {

@@ -247,6 +247,17 @@
 
     <!-- Seção de agendamentos -->
     <div class="container">
+
+        <!-- Seção de filtro -->
+        <div class="container">
+            <h2>Filtrar Agendamentos</h2>
+            <form id="filter-form" method="GET" action="teste.php">
+                <label for="filter-date">Data:</label>
+                <input type="date" id="filter-date" name="filter_date" value="<?= htmlspecialchars($_GET['filter_date'] ?? '') ?>">
+                <button type="submit">Filtrar</button>
+            </form>
+        </div>
+        
         <h2>Horários Já Agendados</h2>
         <div class="grid">
             <div class="maca">
