@@ -114,20 +114,10 @@
                     <input type="date" id="date1" name="date1" required>
 
                     <label for="start-time1">Horário Inicial:</label>
-                    <select id="start-time1" name="start-time1" required>
-                        <?php for ($hour = 0; $hour < 24; $hour++) : ?>
-                            <?php $time = sprintf('%02d:00', $hour); ?>
-                            <option value="<?php echo $time; ?>"><?php echo $time; ?></option>
-                        <?php endfor; ?>
-                    </select>
+                    <input type="time" id="start-time1" name="start-time1" required>
 
                     <label for="end-time1">Horário Final:</label>
-                    <select id="end-time1" name="end-time1" required>
-                        <?php for ($hour = 0; $hour < 24; $hour++) : ?>
-                            <?php $time = sprintf('%02d:00', $hour); ?>
-                            <option value="<?php echo $time; ?>"><?php echo $time; ?></option>
-                        <?php endfor; ?>
-                    </select>
+                    <input type="time" id="end-time1" name="end-time1" required>
 
                     <button type="submit">Agendar</button>
                 </form>
