@@ -57,6 +57,11 @@
         .maca button:hover {
             background-color: #45a049;
         }
+        .message {
+            color: red;
+            font-weight: bold;
+            text-align: center;
+        }
     </style>
     <script>
         function fetchHorariosOcupados() {
@@ -64,17 +69,14 @@
             const date = document.getElementById('date1').value;
 
             if (macaId && date) {
-                // Fetching the occupied times (this should be done via an AJAX request to your PHP backend)
                 fetch(`fetch_horarios_ocupados.php?maca=${macaId}&date=${date}`)
                     .then(response => response.json())
                     .then(data => {
-                        // Clear previous options
                         const startSelect = document.getElementById('start-time1');
                         const endSelect = document.getElementById('end-time1');
                         startSelect.innerHTML = '';
                         endSelect.innerHTML = '';
 
-                        // Add the available options
                         const allTimes = ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"];
 
                         allTimes.forEach(time => {
@@ -93,6 +95,25 @@
                     });
             }
         }
+
+        function validateHorario() {
+            const startTime = document.getElementById('start-time1').value;
+            const endTime = document.getElementById('end-time1').value;
+            const macaId = document.getElementById('maca').value;
+            const date = document.getElementById('date1').value;
+
+            if (startTime && endTime && macaId && date) {
+                fetch(`fetch_horarios_ocupados.php?maca=${macaId}&date=${date}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.includes(startTime) || data.includes(endTime)) {
+                            document.getElementById('message').textContent = 'O horário selecionado já está ocupado. Por favor, escolha outro horário.';
+                        } else {
+                            document.getElementById('message').textContent = '';
+                        }
+                    });
+            }
+        }
     </script>
 </head>
 <body>
@@ -100,7 +121,7 @@
         <h1>Agendamento de Macas</h1>
         <div class="grid">
             <div class="maca">
-                <form id="form1" action="agendar_maca.php" method="POST">
+                <form id="form1" action="agendar_maca.php" method="POST" onsubmit="validateHorario()">
                     <label for="name1">Nome:</label>
                     <input type="text" id="name1" name="name" required>
 
@@ -117,14 +138,16 @@
                     </select>
 
                     <label for="start-time1">Horário Inicial:</label>
-                    <select id="start-time1" name="start_time" required>
+                    <select id="start-time1" name="start_time" required onchange="validateHorario()">
                         <option value="">Selecione o horário</option>
                     </select>
 
                     <label for="end-time1">Horário Final:</label>
-                    <select id="end-time1" name="end_time" required>
+                    <select id="end-time1" name="end_time" required onchange="validateHorario()">
                         <option value="">Selecione o horário</option>
                     </select>
+
+                    <div id="message" class="message"></div>
 
                     <button type="submit">Agendar</button>
                 </form>
