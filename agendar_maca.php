@@ -24,7 +24,7 @@ $startTime = $_POST['start-time1'];
 $endTime = $_POST['end-time1'];
 
 // Validação dos dados
-$errors = [];
+$errors = []; 
 if (empty($name)) {
     $errors[] = "O nome é obrigatório.";
 }
@@ -47,7 +47,7 @@ if ($startTime >= $endTime) {
 // Se não houver erros, inserir no banco de dados
 if (empty($errors)) {
     // Prevenção contra SQL Injection
-    $stmt = $conn->prepare("INSERT INTO agendamentos (nome, maca, data, hora_inicio, hora_fim) VALUES (?, ?, ?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO agendamentos (nome_cliente, maca_id, data, start_time, end_time) VALUES (?, ?, ?, ?, ?)");
     $stmt->bind_param("sssss", $name, $maca, $date, $startTime, $endTime);
     
     if ($stmt->execute()) {
