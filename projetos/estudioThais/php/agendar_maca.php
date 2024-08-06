@@ -94,6 +94,6 @@ $conn->close();
 echo "<script>
     sessionStorage.setItem('status', '" . addslashes($status) . "');
     sessionStorage.setItem('message', '" . addslashes($message) . "');
-    window.location.href = 'projetos/estudioThais/agendamento.php';
+    window.location.href = 'agendamento.php';
 </script>";
 ?>
