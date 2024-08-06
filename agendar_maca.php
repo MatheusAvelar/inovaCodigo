@@ -14,8 +14,8 @@ if ($conn->connect_error) {
 
 // Recebe os dados do formulário
 $nome_cliente = $_POST['name'];
-$maca_id = $_POST['maca_id'];
-$data = $_POST['data'];
+$maca_id = $_POST['maca'];
+$data = $_POST['date'];
 $start_time = $_POST['start_time'];
 $end_time = $_POST['end_time'];
 
