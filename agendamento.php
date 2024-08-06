@@ -245,7 +245,7 @@
         </div>
         <!-- Botão para acessar a página de horários agendados -->
         <div class="container">
-            <a href="horarios_agendados.html" class="button">Ver Horários Agendados</a>
+            <a href="horarios_agendados.php" class="button">Ver Horários Agendados</a>
         </div>
     </div>
 
