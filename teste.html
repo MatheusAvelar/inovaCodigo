@@ -67,126 +67,69 @@
                 <form id="form1">
                     <label for="name1">Nome:</label>
                     <input type="text" id="name1" name="name1" required>
-
-                    <label for="maca">Selecione a Maca:</label>
-                    <select id="maca" name="maca" required>
-                        <option value="">Selecione a maca</option>
-                        <option value="1">Maca 1</option>
-                        <option value="2">Maca 2</option>
-                        <option value="3">Maca 3</option>
-                        <option value="4">Maca 4</option>
-                    </select>
-
                     <label for="date1">Data:</label>
                     <input type="date" id="date1" name="date1" required>
-
                     <label for="start-time1">Horário Inicial:</label>
                     <select id="start-time1" name="start-time1" required>
                         <option value="">Selecione o horário</option>
+                        <option value="00:00">00:00</option>
+                        <option value="01:00">01:00</option>
+                        <option value="02:00">02:00</option>
+                        <option value="03:00">03:00</option>
+                        <option value="04:00">04:00</option>
+                        <option value="05:00">05:00</option>
+                        <option value="06:00">06:00</option>
+                        <option value="07:00">07:00</option>
+                        <option value="08:00">08:00</option>
+                        <option value="09:00">09:00</option>
+                        <option value="10:00">10:00</option>
+                        <option value="11:00">11:00</option>
+                        <option value="12:00">12:00</option>
+                        <option value="13:00">13:00</option>
+                        <option value="14:00">14:00</option>
+                        <option value="15:00">15:00</option>
+                        <option value="16:00">16:00</option>
+                        <option value="17:00">17:00</option>
+                        <option value="18:00">18:00</option>
+                        <option value="19:00">19:00</option>
+                        <option value="20:00">20:00</option>
+                        <option value="21:00">21:00</option>
+                        <option value="22:00">22:00</option>
+                        <option value="23:00">23:00</option>
                     </select>
-
                     <label for="end-time1">Horário Final:</label>
                     <select id="end-time1" name="end-time1" required>
                         <option value="">Selecione o horário</option>
+                        <option value="01:00">01:00</option>
+                        <option value="02:00">02:00</option>
+                        <option value="03:00">03:00</option>
+                        <option value="04:00">04:00</option>
+                        <option value="05:00">05:00</option>
+                        <option value="06:00">06:00</option>
+                        <option value="07:00">07:00</option>
+                        <option value="08:00">08:00</option>
+                        <option value="09:00">09:00</option>
+                        <option value="10:00">10:00</option>
+                        <option value="11:00">11:00</option>
+                        <option value="12:00">12:00</option>
+                        <option value="13:00">13:00</option>
+                        <option value="14:00">14:00</option>
+                        <option value="15:00">15:00</option>
+                        <option value="16:00">16:00</option>
+                        <option value="17:00">17:00</option>
+                        <option value="18:00">18:00</option>
+                        <option value="19:00">19:00</option>
+                        <option value="20:00">20:00</option>
+                        <option value="21:00">21:00</option>
+                        <option value="22:00">22:00</option>
+                        <option value="23:00">23:00</option>
+                        <option value="24:00">24:00</option>
                     </select>
-
-                    <button type="button" onclick="agendar()">Agendar</button>
+                    <button type="button">Agendar</button>
                 </form>
             </div>
+
         </div>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Seletores dos elementos
-            const macaSelect = document.getElementById('maca');
-            const dateInput = document.getElementById('date1');
-            const startTimeSelect = document.getElementById('start-time1');
-            const endTimeSelect = document.getElementById('end-time1');
-
-            function fetchHorariosOcupados() {
-                const macaId = macaSelect.value;
-                const date = dateInput.value;
-
-                if (macaId && date) {
-                    fetch(`fetch_horarios_ocupados.php?maca=${macaId}&date=${date}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            updateHorarioOptions(data);
-                        })
-                        .catch(error => console.error('Erro ao buscar horários ocupados:', error));
-                }
-            }
-
-            function updateHorarioOptions(ocupados) {
-                const allTimes = ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"];
-
-                // Resetar opções
-                startTimeSelect.innerHTML = '';
-                endTimeSelect.innerHTML = '';
-
-                let availableStartTimes = [];
-                let availableEndTimes = [];
-
-                // Adicionar opções disponíveis
-                allTimes.forEach(time => {
-                    if (!ocupados.includes(time)) {
-                        availableStartTimes.push(time);
-                        availableEndTimes.push(time);
-                    }
-                });
-
-                // Preencher as opções de horário inicial
-                availableStartTimes.forEach(time => {
-                    const option = document.createElement('option');
-                    option.value = time;
-                    option.textContent = time;
-                    startTimeSelect.appendChild(option);
-                });
-
-                // Preencher as opções de horário final com base no horário inicial selecionado
-                startTimeSelect.addEventListener('change', function() {
-                    const startTime = startTimeSelect.value;
-                    endTimeSelect.innerHTML = ''; // Limpa opções antigas
-
-                    let showEndTimes = allTimes.filter(time => time > startTime);
-                    showEndTimes.forEach(time => {
-                        if (!ocupados.includes(time)) {
-                            const option = document.createElement('option');
-                            option.value = time;
-                            option.textContent = time;
-                            endTimeSelect.appendChild(option);
-                        }
-                    });
-                });
-
-                // Inicializa com horários disponíveis
-                startTimeSelect.dispatchEvent(new Event('change'));
-            }
-
-            // Event listeners
-            macaSelect.addEventListener('change', fetchHorariosOcupados);
-            dateInput.addEventListener('change', fetchHorariosOcupados);
-        });
-
-        function agendar() {
-            const form = document.getElementById('form1');
-            const formData = new FormData(form);
-
-            fetch('agendar_maca.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    alert('Agendamento realizado com sucesso!');
-                } else {
-                    alert('Erro ao agendar: ' + data.errors.join(', '));
-                }
-            })
-            .catch(error => console.error('Erro ao realizar o agendamento:', error));
-        }
-    </script>
 </body>
 </html>
