@@ -1,6 +1,76 @@
 <?php
-// Conexão com o banco de dados
+header('Content-Type: application/json');
 $servername = "127.0.0.1:3306";
+$username = "u221588236_root";
+$password = "Camila@307";
+$dbname = "u221588236_controle_finan";
+
+$mysqli = new mysqli($servername, $username, $password, $dbname);
+
+// Verificar conexão
+if ($mysqli->connect_error) {
+    echo json_encode(['status' => 'error', 'errors' => ['Erro na conexão com o banco de dados.']]);
+    exit();
+}
+
+// Receber parâmetros
+$nomeCliente = isset($_POST['name1']) ? $mysqli->real_escape_string($_POST['name1']) : '';
+$macaId = isset($_POST['maca']) ? $mysqli->real_escape_string($_POST['maca']) : '';
+$data = isset($_POST['date1']) ? $mysqli->real_escape_string($_POST['date1']) : '';
+$startTime = isset($_POST['start-time1']) ? $mysqli->real_escape_string($_POST['start-time1']) : '';
+$endTime = isset($_POST['end-time1']) ? $mysqli->real_escape_string($_POST['end-time1']) : '';
+
+// Validar dados
+$errors = [];
+if (!$nomeCliente) $errors[] = 'O nome do cliente é obrigatório.';
+if (!$macaId) $errors[] = 'O ID da maca é inválido.';
+if (!$data) $errors[] = 'A data é obrigatória.';
+if (!$startTime) $errors[] = 'O horário inicial é obrigatório.';
+if (!$endTime) $errors[] = 'O horário final é obrigatório.';
+
+// Verificar se o horário está disponível
+if (empty($errors)) {
+    $sql = "SELECT start_time FROM agendamentos WHERE maca_id = ? AND date = ? AND start_time = ?";
+    $stmt = $mysqli->prepare($sql);
+    if (!$stmt) {
+        echo json_encode(['status' => 'error', 'errors' => ['Erro na preparação da consulta.']]);
+        exit();
+    }
+    $stmt->bind_param("sss", $macaId, $data, $startTime);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if ($result->num_rows > 0) {
+        $errors[] = 'O horário selecionado não está disponível.';
+    }
+    $stmt->close();
+}
+
+// Se não houver erros, inserir o agendamento
+if (empty($errors)) {
+    $sql = "INSERT INTO agendamentos (name, maca_id, date, start_time, end_time) VALUES (?, ?, ?, ?, ?)";
+    $stmt = $mysqli->prepare($sql);
+    if (!$stmt) {
+        echo json_encode(['status' => 'error', 'errors' => ['Erro na preparação da inserção.']]);
+        exit();
+    }
+    $stmt->bind_param("sssss", $nomeCliente, $macaId, $data, $startTime, $endTime);
+    
+    if ($stmt->execute()) {
+        echo json_encode(['status' => 'success']);
+    } else {
+        echo json_encode(['status' => 'error', 'errors' => ['Erro ao agendar.']]);
+    }
+    
+    $stmt->close();
+}
+
+// Fechar conexão
+$mysqli->close();
+?>
+
+// Conexão com o banco de dados
+/*$servername = "127.0.0.1:3306";
 $username = "u221588236_root";
 $password = "Camila@307";
 $dbname = "u221588236_controle_finan";
@@ -73,5 +143,5 @@ if ($stmt->execute()) {
 }
 
 $stmt->close();
-$conn->close();
+$conn->close();*/
 ?>
