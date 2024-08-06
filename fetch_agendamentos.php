@@ -15,16 +15,22 @@ if ($conn->connect_error) {
     die("Falha na conexão: " . $conn->connect_error);
 }
 
-// Obtendo a data do filtro se estiver definida
+// Obtendo os filtros do formulário se estiverem definidos
 $filterDate = isset($_GET['filter_date']) ? $_GET['filter_date'] : '';
+$filterMaca = isset($_GET['filter_maca']) ? $_GET['filter_maca'] : '';
 
-// Condição para aplicar o filtro de data
-$whereClause = "";
+// Condição para aplicar os filtros
+$whereClause = "WHERE 1=1"; // Começa com condição verdadeira para adicionar filtros dinamicamente
+
 if (!empty($filterDate)) {
-    $whereClause = "WHERE data = '" . $conn->real_escape_string($filterDate) . "'";
+    $whereClause .= " AND data = '" . $conn->real_escape_string($filterDate) . "'";
 }
 
-// Busca de agendamentos existentes com o filtro aplicado
+if (!empty($filterMaca)) {
+    $whereClause .= " AND maca_id = '" . $conn->real_escape_string($filterMaca) . "'";
+}
+
+// Busca de agendamentos existentes com os filtros aplicados
 $query = "SELECT nome_cliente, maca_id, data, start_time, end_time FROM agendamentos $whereClause ORDER BY data, start_time";
 $result = $conn->query($query);
 
