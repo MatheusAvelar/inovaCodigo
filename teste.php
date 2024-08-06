@@ -15,10 +15,10 @@
         }
 
         header {
-            background-color: #333;
-            color: #fff;
+            background-color: #fff; /* Removido fundo preto */
             padding: 15px;
             text-align: center;
+            border-bottom: 1px solid #ddd; /* Linha fina para separação */
         }
 
         .logo-container {
@@ -122,13 +122,11 @@
         }
 
         footer {
-            background-color: #333;
-            color: #fff;
+            background-color: #fff; /* Removido fundo preto */
+            color: #333;
             text-align: center;
             padding: 10px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
+            border-top: 1px solid #ddd; /* Linha fina para separação */
         }
 
         footer a {
