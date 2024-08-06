@@ -31,6 +31,7 @@
         .logo {
             width: 50px;
             height: auto;
+            border-radius: 50%; /* Bordas arredondadas */
         }
 
         h1 {
@@ -158,8 +159,8 @@
 <body>
     <header>
         <div class="logo-container">
-            <img src="img/tatto.jpeg" alt="AVELART TATTOO" class="logo">
-            <h1>Nome do Estúdio</h1>
+            <img src="img/tatto.jpeg" alt="Logo do Estúdio" class="logo">
+            <h1>Avelart Tattoo</h1>
         </div>
     </header>
 
