@@ -25,6 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (mysqli_query($conexao, $sql)) {
         echo "Cadastro realizado com sucesso!";
+        header("Location: ../login.php");
     } else {
         echo "Erro ao cadastrar: " . mysqli_error($conexao);
     }
