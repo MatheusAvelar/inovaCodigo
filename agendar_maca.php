@@ -68,6 +68,6 @@ if (empty($errors)) {
 $conn->close();
 
 // Redirecionando de volta para a página principal com a mensagem de status
-header("Location: index.php?status=$status&message=" . urlencode($message));
+header("Location: teste.php?status=$status&message=" . urlencode($message));
 exit();
 ?>
