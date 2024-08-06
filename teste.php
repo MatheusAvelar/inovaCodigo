@@ -101,6 +101,10 @@
 <body>
     <div class="container">
         <h1>Agendamento de Macas</h1>
+        
+        <!-- Adicionei a div para exibir a mensagem -->
+        <div id="message-container"></div>
+
         <div class="grid">
             <div class="maca">
                 <form id="form1" method="POST" action="agendar_maca.php" onsubmit="return validateForm()">
