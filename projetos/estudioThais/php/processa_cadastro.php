@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (mysqli_num_rows($resultado) > 0) {
         // Se o e-mail já estiver cadastrado
-        echo "<script>alert('O e-mail informado já está cadastrado.'); window.location.href='../cadastro.php';</script>";
+        echo "<script>alert('O e-mail informado já está cadastrado.'); window.location.href='../criar_acesso.php';</script>";
     } else {
         // Insere os dados na tabela de usuários
         $sql = "INSERT INTO usuarioEstudio(nome, sobrenome, email, senha) VALUES('$nome','$sobrenome','$email','$senha')";
