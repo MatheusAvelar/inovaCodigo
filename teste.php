@@ -7,19 +7,50 @@
     <title>Agendamento de Macas</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
+            padding: 0;
+            background: url('background-image.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
             padding: 20px;
-            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 80px;
+            height: auto;
+        }
+
+        h1 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 24px;
+            margin: 0;
         }
 
         .container {
             max-width: 800px;
             margin: 0 auto;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 8px;
         }
 
         h1 {
             text-align: center;
+            margin-bottom: 20px;
         }
 
         .grid {
@@ -33,11 +64,15 @@
             min-width: 250px;
             background-color: #fff;
             border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             padding: 20px;
+            color: #000;
+            position: relative;
         }
 
         .maca h2 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 18px;
             margin-top: 0;
         }
 
@@ -65,6 +100,7 @@
             color: white;
             border: none;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
         .maca button:hover {
@@ -95,15 +131,43 @@
             font-size: 14px;
             margin-bottom: 10px;
         }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        footer a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .maca:hover {
+            transform: scale(1.02);
+            transition: transform 0.3s ease;
+        }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <h1>Agendamento de Macas</h1>
+    <header>
+        <div class="logo-container">
+            <img src="logo.png" alt="Logo do Estúdio" class="logo">
+            <h1>Nome do Estúdio</h1>
+        </div>
+    </header>
 
-        <!-- Adicionei a div para exibir a mensagem -->
+    <div class="container">
         <div id="message-container"></div>
+
+        <h1>Agendamento de Macas</h1>
 
         <div class="grid">
             <div class="maca">
@@ -139,6 +203,14 @@
             </div>
         </div>
     </div>
+
+    <footer>
+        <p>Contato: (XX) XXXX-XXXX</p>
+        <p>Siga-nos: 
+            <a href="https://facebook.com/estudio" target="_blank">Facebook</a> |
+            <a href="https://instagram.com/estudio" target="_blank">Instagram</a>
+        </p>
+    </footer>
 
     <script>
         function validateForm() {
