@@ -76,6 +76,17 @@ if (empty($errors)) {
     $message = implode("<br>", $errors);
 }
 
+// Busca de agendamentos existentes
+$agendamentos = [];
+$query = "SELECT nome_cliente, maca_id, data, start_time, end_time FROM agendamentos ORDER BY data, start_time";
+$result = $conn->query($query);
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $agendamentos[] = $row;
+    }
+}
+
 // Fechando a conexão
 $conn->close();
 

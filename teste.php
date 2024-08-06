@@ -149,6 +149,37 @@
 
         <h1>Agendamento de Macas</h1>
 
+        <!-- Seção de agendamentos -->
+        <h2>Horários Já Agendados</h2>
+        <table border="1" cellspacing="0" cellpadding="10">
+            <thead>
+                <tr>
+                    <th>Cliente</th>
+                    <th>Maca</th>
+                    <th>Data</th>
+                    <th>Horário Inicial</th>
+                    <th>Horário Final</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (!empty($agendamentos)) : ?>
+                    <?php foreach ($agendamentos as $agendamento) : ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($agendamento['nome_cliente']); ?></td>
+                            <td><?php echo htmlspecialchars($agendamento['maca_id']); ?></td>
+                            <td><?php echo htmlspecialchars($agendamento['data']); ?></td>
+                            <td><?php echo htmlspecialchars($agendamento['start_time']); ?></td>
+                            <td><?php echo htmlspecialchars($agendamento['end_time']); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else : ?>
+                    <tr>
+                        <td colspan="5">Nenhum agendamento encontrado.</td>
+                    </tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
+        
         <div class="grid">
             <div class="maca">
                 <form id="form1" method="POST" action="agendar_maca.php" onsubmit="return validateForm()">
