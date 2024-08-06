@@ -158,7 +158,7 @@
 <body>
     <header>
         <div class="logo-container">
-            <img src="img/tatto.jpeg" alt="Logo do Estúdio" class="logo">
+            <img src="img/tatto.jpeg" alt="AVELART TATTOO" class="logo">
             <h1>Nome do Estúdio</h1>
         </div>
     </header>
