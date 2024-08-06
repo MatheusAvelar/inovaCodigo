@@ -215,27 +215,22 @@
     </header>
 
     <div class="container">
-        <!-- Seção de filtro -->
-        <div class="container">
-            <h2>Filtrar Agendamentos</h2>
-            <form id="filter-form" method="GET" action="horarios_agendados.php">
-                <label for="filter-date">Data:</label>
-                <input type="date" id="filter-date" name="filter_date" value="<?= htmlspecialchars($_GET['filter_date'] ?? '') ?>">
-
-                <label for="filter-maca">Maca:</label>
-                <select id="filter-maca" name="filter_maca">
-                    <option value="">Todas as Macas</option>
-                    <option value="1" <?= isset($_GET['filter_maca']) && $_GET['filter_maca'] == '1' ? 'selected' : '' ?>>Maca 1</option>
-                    <option value="2" <?= isset($_GET['filter_maca']) && $_GET['filter_maca'] == '2' ? 'selected' : '' ?>>Maca 2</option>
-                    <option value="3" <?= isset($_GET['filter_maca']) && $_GET['filter_maca'] == '3' ? 'selected' : '' ?>>Maca 3</option>
-                    <option value="4" <?= isset($_GET['filter_maca']) && $_GET['filter_maca'] == '4' ? 'selected' : '' ?>>Maca 4</option>
-                </select>
-
-                <button type="submit">Filtrar</button>
-            </form>
-        </div>
-        
         <h2>Horários Já Agendados</h2>
+        <form id="filter-form" method="GET" action="horarios_agendados.php">
+            <label for="filter-date">Data:</label>
+            <input type="date" id="filter-date" name="filter_date" value="<?= htmlspecialchars($_GET['filter_date'] ?? '') ?>">
+
+            <label for="filter-maca">Maca:</label>
+            <select id="filter-maca" name="filter_maca">
+                <option value="">Todas as Macas</option>
+                <option value="1" <?= isset($_GET['filter_maca']) && $_GET['filter_maca'] == '1' ? 'selected' : '' ?>>Maca 1</option>
+                <option value="2" <?= isset($_GET['filter_maca']) && $_GET['filter_maca'] == '2' ? 'selected' : '' ?>>Maca 2</option>
+                <option value="3" <?= isset($_GET['filter_maca']) && $_GET['filter_maca'] == '3' ? 'selected' : '' ?>>Maca 3</option>
+                <option value="4" <?= isset($_GET['filter_maca']) && $_GET['filter_maca'] == '4' ? 'selected' : '' ?>>Maca 4</option>
+            </select>
+
+            <button type="submit">Filtrar</button>
+        </form>
         <div class="grid">
             <div class="maca">
                 <table border="1" cellspacing="0" cellpadding="10">
