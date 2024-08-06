@@ -3,6 +3,7 @@
 $status = "";
 $message = "";
 
+// Configuração da conexão com o banco de dados
 $servername = "127.0.0.1:3306";
 $username = "u221588236_root";
 $password = "Camila@307";
@@ -17,11 +18,11 @@ if ($conn->connect_error) {
 }
 
 // Capturando dados do formulário
-$name = $_POST['name1'];
-$maca = $_POST['maca'];
-$date = $_POST['date1'];
-$startTime = $_POST['start-time1'];
-$endTime = $_POST['end-time1'];
+$name = $_POST['name1'] ?? '';
+$maca = $_POST['maca'] ?? '';
+$date = $_POST['date1'] ?? '';
+$startTime = $_POST['start-time1'] ?? '';
+$endTime = $_POST['end-time1'] ?? '';
 
 // Validação dos dados
 $errors = []; 
@@ -40,7 +41,7 @@ if (empty($startTime)) {
 if (empty($endTime)) {
     $errors[] = "O horário final é obrigatório.";
 }
-if ($startTime >= $endTime) {
+if (!empty($startTime) && !empty($endTime) && $startTime >= $endTime) {
     $errors[] = "O horário final deve ser maior que o horário inicial.";
 }
 
@@ -67,7 +68,10 @@ if (empty($errors)) {
 // Fechando a conexão
 $conn->close();
 
-// Redirecionando de volta para a página principal com a mensagem de status
-header("Location: teste.php?status=$status&message=" . urlencode($message));
-exit();
+// Armazenando a mensagem em sessionStorage e redirecionando
+echo "<script>
+    sessionStorage.setItem('status', '" . addslashes($status) . "');
+    sessionStorage.setItem('message', '" . addslashes($message) . "');
+    window.location.href = 'teste.php';
+</script>";
 ?>
