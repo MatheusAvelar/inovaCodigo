@@ -14,7 +14,7 @@ if($row>0){
     header("Location: ../agendamento.php");
     exit;
 } else {
-    header("Location: ../agendamento.php");
+    header("Location: ../login.php");
 }
 
 ?>
