@@ -20,14 +20,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sobrenome = mysqli_real_escape_string($conexao, $sobrenome);
     $email = mysqli_real_escape_string($conexao, $email);
 
-    // Insere os dados na tabela de usuários
-    $sql = "INSERT INTO usuarioEstudio(nome, sobrenome, email, senha) VALUES('$nome','$sobrenome','$email','$senha')";
+    // Verifica se já existe um cadastro com o mesmo e-mail
+    $verificaEmail = "SELECT * FROM usuarioEstudio WHERE email = '$email'";
+    $resultado = mysqli_query($conexao, $verificaEmail);
 
-    if (mysqli_query($conexao, $sql)) {
-        echo "Cadastro realizado com sucesso!";
-        header("Location: ../login.php");
+    if (mysqli_num_rows($resultado) > 0) {
+        // Se o e-mail já estiver cadastrado
+        echo "<script>alert('O e-mail informado já está cadastrado.'); window.location.href='../cadastro.php';</script>";
     } else {
-        echo "Erro ao cadastrar: " . mysqli_error($conexao);
+        // Insere os dados na tabela de usuários
+        $sql = "INSERT INTO usuarioEstudio(nome, sobrenome, email, senha) VALUES('$nome','$sobrenome','$email','$senha')";
+
+        if (mysqli_query($conexao, $sql)) {
+            echo "<script>alert('Cadastro realizado com sucesso!'); window.location.href='../login.php';</script>";
+        } else {
+            echo "Erro ao cadastrar: " . mysqli_error($conexao);
+        }
     }
 
     // Fecha a conexão com o banco de dados
