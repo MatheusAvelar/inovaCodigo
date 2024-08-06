@@ -101,7 +101,7 @@
 <body>
     <div class="container">
         <h1>Agendamento de Macas</h1>
-        
+
         <!-- Adicionei a div para exibir a mensagem -->
         <div id="message-container"></div>
 
@@ -211,8 +211,8 @@
                 messageContainer.appendChild(messageElement);
 
                 // Limpa as mensagens após exibi-las
-                //sessionStorage.removeItem('status');
-                //sessionStorage.removeItem('message');
+                sessionStorage.removeItem('status');
+                sessionStorage.removeItem('message');
             }
         });
     </script>
