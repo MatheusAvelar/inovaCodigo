@@ -265,7 +265,7 @@
         
         <!-- Botão para voltar à página de agendamento -->
         <div class="container">
-            <a href="agendamento.html" class="button">Voltar ao Agendamento</a>
+            <a href="agendamento.php" class="button">Voltar ao Agendamento</a>
         </div>
     </div>
 </body>
