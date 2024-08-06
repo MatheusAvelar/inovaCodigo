@@ -134,36 +134,36 @@
                 font-size: 24px;
             }
         }
-        /* Estilos para a tabela */
+        /* Estilos gerais da tabela */
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         thead {
-            background-color: #f8f9fa;
+            background-color: #f0f0f0; /* Cor de fundo suave */
         }
 
         th, td {
             padding: 12px;
             text-align: left;
             border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #007bff;
-            color: white;
             font-size: 16px;
         }
 
+        th {
+            background-color: #fec76f; /* Cor que combina com o botão */
+            color: #333;
+            font-weight: bold;
+        }
+
         tbody tr:nth-child(even) {
-            background-color: #f2f2f2;
+            background-color: #fafafa; /* Fundo alternado suave */
         }
 
         tbody tr:hover {
-            background-color: #e9ecef;
+            background-color: #f0f0f0; /* Destaque ao passar o mouse */
         }
 
         /* Estilos para mensagens de erro e sucesso */
