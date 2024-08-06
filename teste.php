@@ -141,7 +141,6 @@
     <header>
         <div class="logo-container">
             <img src="img/tatto.jpeg" alt="Logo do Estúdio" class="logo">
-            <h1>Avelart Tattoo</h1>
         </div>
     </header>
 
