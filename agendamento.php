@@ -240,6 +240,7 @@
                     <div id="end-time1-error" class="error-message"></div>
 
                     <button type="submit">Agendar</button>
+                    <a href="horarios_agendados.php" class="button">Ver Horários Agendados</a>
                 </form>
             </div>
         </div>
