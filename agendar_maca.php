@@ -1,5 +1,10 @@
 <?php
 header('Content-Type: application/json');
+
+// Habilitar exibição de erros
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 $servername = "127.0.0.1:3306";
 $username = "u221588236_root";
 $password = "Camila@307";
