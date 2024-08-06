@@ -50,7 +50,7 @@
                         $filter_maca = $_GET['filter_maca'] ?? '';
 
                         // Inclua o arquivo com a lógica para buscar agendamentos com filtros
-                        include 'fetch_agendamentos.php';
+                        include 'php/fetch_agendamentos.php';
                         ?>
                     </tbody>
                 </table>

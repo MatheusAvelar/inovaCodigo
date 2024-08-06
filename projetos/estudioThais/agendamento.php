@@ -28,7 +28,7 @@
 
         <div class="grid">
             <div class="maca">
-                <form id="form1" method="POST" action="agendar_maca.php" onsubmit="return validateForm()">
+                <form id="form1" method="POST" action="php/agendar_maca.php" onsubmit="return validateForm()">
                     <label for="name1">Nome:</label>
                     <input type="text" id="name1" name="name1" required>
                     <div id="name1-error" class="error-message"></div>
