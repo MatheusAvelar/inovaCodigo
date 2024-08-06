@@ -192,7 +192,7 @@
 
     <!-- Seção de agendamentos -->
     <div class="container">
-        <h2>Horários Agendados</h2>
+        <h2>Horários Já Agendados</h2>
         <div class="grid">
             <div class="maca">
                 <table border="1" cellspacing="0" cellpadding="10">
@@ -201,8 +201,8 @@
                             <th>Cliente</th>
                             <th>Maca</th>
                             <th>Data</th>
-                            <th>Horário Inicial</th> 
-                            <th>Horário Final</th> 
+                            <th>Horário Inicial</th>
+                            <th>Horário Final</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -215,7 +215,7 @@
                                 <td><?= htmlspecialchars($agendamento['end_time']) ?></td>
                             </tr>
                         <?php endforeach; ?>
-                        <?php if (empty($agendamentos)) : ?> 
+                        <?php if (empty($agendamentos)) : ?>
                             <tr>
                                 <td colspan="5">Nenhum agendamento encontrado.</td>
                             </tr>
@@ -227,3 +227,78 @@
     </div>
 
     <script>
+        function validateForm() {
+            let isValid = true;
+
+            // Clear previous error messages
+            document.querySelectorAll('.error-message').forEach(function (element) {
+                element.innerText = '';
+            });
+
+            // Get form values
+            const name = document.getElementById('name1').value.trim();
+            const maca = document.getElementById('maca').value;
+            const date = document.getElementById('date1').value;
+            const startTime = document.getElementById('start-time1').value;
+            const endTime = document.getElementById('end-time1').value;
+
+            // Validate name
+            if (name === '') {
+                isValid = false;
+                document.getElementById('name1-error').innerText = 'O nome é obrigatório.';
+            }
+
+            // Validate maca
+            if (maca === '') {
+                isValid = false;
+                document.getElementById('maca-error').innerText = 'Selecione uma maca.';
+            }
+
+            // Validate date
+            if (date === '') {
+                isValid = false;
+                document.getElementById('date1-error').innerText = 'A data é obrigatória.';
+            }
+
+            // Validate start time
+            if (startTime === '') {
+                isValid = false;
+                document.getElementById('start-time1-error').innerText = 'O horário inicial é obrigatório.';
+            }
+
+            // Validate end time
+            if (endTime === '') {
+                isValid = false;
+                document.getElementById('end-time1-error').innerText = 'O horário final é obrigatório.';
+            }
+
+            // Validate that end time is after start time
+            if (startTime && endTime && startTime >= endTime) {
+                isValid = false;
+                document.getElementById('end-time1-error').innerText = 'O horário final deve ser maior que o horário inicial.';
+            }
+
+            return isValid; 
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const status = sessionStorage.getItem('status');
+            const message = sessionStorage.getItem('message');
+
+            if (status && message) {
+                const messageContainer = document.getElementById('message-container');
+                const messageElement = document.createElement('div');
+                messageElement.className = 'message ' + status;
+                messageElement.innerHTML = message;
+
+                messageContainer.appendChild(messageElement);
+
+                // Limpa as mensagens após exibi-las
+                sessionStorage.removeItem('status');
+                sessionStorage.removeItem('message');
+            }
+        });
+    </script>
+</body>
+
+</html>
