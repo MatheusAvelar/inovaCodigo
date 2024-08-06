@@ -197,7 +197,7 @@
 
             console.log('Status retrieved:', status); // Debug
             console.log('Message retrieved:', message); // Debug
-            
+
             if (status && message) {
                 const messageContainer = document.getElementById('message-container');
                 const messageElement = document.createElement('div');
@@ -207,8 +207,8 @@
                 messageContainer.appendChild(messageElement);
 
                 // Limpa as mensagens após exibi-las
-                sessionStorage.removeItem('status');
-                sessionStorage.removeItem('message');
+                //sessionStorage.removeItem('status');
+                //sessionStorage.removeItem('message');
             }
         });
     </script>
