@@ -164,6 +164,7 @@
                 }
             })
             .catch(error => {
+                console.error('Erro:', error); // Adicione esta linha para depuração
                 exibirMensagem('Erro ao processar a solicitação. Tente novamente mais tarde.', 'error');
             });
         }
