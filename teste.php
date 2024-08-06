@@ -86,7 +86,7 @@
         }
 
         .maca button {
-            background-color: #4CAF50;
+            background-color: #fec76f;
             color: white;
             border: none;
             cursor: pointer;
@@ -130,7 +130,7 @@
         }
 
         footer a {
-            color: #4CAF50;
+            color: #fec76f;
             text-decoration: none;
         }
 
