@@ -58,77 +58,77 @@
             background-color: #45a049;
         }
     </style>
+    <script>
+        function fetchHorariosOcupados() {
+            const macaId = document.getElementById('maca').value;
+            const date = document.getElementById('date1').value;
+
+            if (macaId && date) {
+                // Fetching the occupied times (this should be done via an AJAX request to your PHP backend)
+                fetch(`fetch_horarios_ocupados.php?maca=${macaId}&date=${date}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Clear previous options
+                        const startSelect = document.getElementById('start-time1');
+                        const endSelect = document.getElementById('end-time1');
+                        startSelect.innerHTML = '';
+                        endSelect.innerHTML = '';
+
+                        // Add the available options
+                        const allTimes = ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"];
+
+                        allTimes.forEach(time => {
+                            if (!data.includes(time)) {
+                                const optionStart = document.createElement('option');
+                                optionStart.value = time;
+                                optionStart.textContent = time;
+                                startSelect.appendChild(optionStart);
+
+                                const optionEnd = document.createElement('option');
+                                optionEnd.value = time;
+                                optionEnd.textContent = time;
+                                endSelect.appendChild(optionEnd);
+                            }
+                        });
+                    });
+            }
+        }
+    </script>
 </head>
 <body>
     <div class="container">
         <h1>Agendamento de Macas</h1>
         <div class="grid">
             <div class="maca">
-                <form id="form1">
+                <form id="form1" action="agendar_maca.php" method="POST">
                     <label for="name1">Nome:</label>
-                    <input type="text" id="name1" name="name1" required>
+                    <input type="text" id="name1" name="name" required>
+
+                    <label for="maca">Maca:</label>
+                    <select id="maca" name="maca" required onchange="fetchHorariosOcupados()">
+                        <option value="">Selecione a maca</option>
+                        <option value="1">Maca 1</option>
+                        <option value="2">Maca 2</option>
+                        <option value="3">Maca 3</option>
+                        <option value="4">Maca 4</option>
+                    </select>
+
                     <label for="date1">Data:</label>
-                    <input type="date" id="date1" name="date1" required>
+                    <input type="date" id="date1" name="date" required onchange="fetchHorariosOcupados()">
+
                     <label for="start-time1">Horário Inicial:</label>
-                    <select id="start-time1" name="start-time1" required>
+                    <select id="start-time1" name="start_time" required>
                         <option value="">Selecione o horário</option>
-                        <option value="00:00">00:00</option>
-                        <option value="01:00">01:00</option>
-                        <option value="02:00">02:00</option>
-                        <option value="03:00">03:00</option>
-                        <option value="04:00">04:00</option>
-                        <option value="05:00">05:00</option>
-                        <option value="06:00">06:00</option>
-                        <option value="07:00">07:00</option>
-                        <option value="08:00">08:00</option>
-                        <option value="09:00">09:00</option>
-                        <option value="10:00">10:00</option>
-                        <option value="11:00">11:00</option>
-                        <option value="12:00">12:00</option>
-                        <option value="13:00">13:00</option>
-                        <option value="14:00">14:00</option>
-                        <option value="15:00">15:00</option>
-                        <option value="16:00">16:00</option>
-                        <option value="17:00">17:00</option>
-                        <option value="18:00">18:00</option>
-                        <option value="19:00">19:00</option>
-                        <option value="20:00">20:00</option>
-                        <option value="21:00">21:00</option>
-                        <option value="22:00">22:00</option>
-                        <option value="23:00">23:00</option>
                     </select>
+
                     <label for="end-time1">Horário Final:</label>
-                    <select id="end-time1" name="end-time1" required>
+                    <select id="end-time1" name="end_time" required>
                         <option value="">Selecione o horário</option>
-                        <option value="01:00">01:00</option>
-                        <option value="02:00">02:00</option>
-                        <option value="03:00">03:00</option>
-                        <option value="04:00">04:00</option>
-                        <option value="05:00">05:00</option>
-                        <option value="06:00">06:00</option>
-                        <option value="07:00">07:00</option>
-                        <option value="08:00">08:00</option>
-                        <option value="09:00">09:00</option>
-                        <option value="10:00">10:00</option>
-                        <option value="11:00">11:00</option>
-                        <option value="12:00">12:00</option>
-                        <option value="13:00">13:00</option>
-                        <option value="14:00">14:00</option>
-                        <option value="15:00">15:00</option>
-                        <option value="16:00">16:00</option>
-                        <option value="17:00">17:00</option>
-                        <option value="18:00">18:00</option>
-                        <option value="19:00">19:00</option>
-                        <option value="20:00">20:00</option>
-                        <option value="21:00">21:00</option>
-                        <option value="22:00">22:00</option>
-                        <option value="23:00">23:00</option>
-                        <option value="24:00">24:00</option>
                     </select>
-                    <button type="button">Agendar</button>
+
+                    <button type="submit">Agendar</button>
                 </form>
             </div>
-
         </div>
     </div>
 </body>
