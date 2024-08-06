@@ -181,3 +181,26 @@ tbody tr:hover {
     color: #721c24;
     border: 1px solid #f5c6cb;
 }
+
+/* Botão de Deslogar */
+.logout-container {
+    text-align: right;
+    margin: 10px;
+}
+
+.logout-button {
+    background-color: #f44336; /* Cor de fundo do botão */
+    color: white; /* Cor do texto */
+    border: none; /* Remove a borda padrão */
+    padding: 10px 20px; /* Espaçamento interno */
+    text-align: center; /* Centraliza o texto */
+    text-decoration: none; /* Remove o sublinhado */
+    display: inline-block; /* Ajusta o botão para o inline */
+    font-size: 16px; /* Tamanho da fonte */
+    cursor: pointer; /* Muda o cursor ao passar sobre o botão */
+    border-radius: 5px; /* Bordas arredondadas */
+}
+
+.logout-button:hover {
+    background-color: #e53935; /* Cor de fundo ao passar o mouse */
+}

@@ -22,6 +22,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         <div class="logo-container">
             <img src="img/tatto.jpeg" alt="Logo do Estúdio" class="logo">
         </div>
+        <div class="logout-container">
+        <form action="php/logout.php" method="post">
+            <button type="submit" class="logout-button">Logout</button>
+        </form>
+    </div>
     </header>
 
     <div class="container">
