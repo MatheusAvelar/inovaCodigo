@@ -121,23 +121,6 @@
             margin-bottom: 10px;
         }
 
-        footer {
-            background-color: #fff; /* Removido fundo preto */
-            color: #333;
-            text-align: center;
-            padding: 10px;
-            border-top: 1px solid #ddd; /* Linha fina para separação */
-        }
-
-        footer a {
-            color: #fec76f;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
         @media (min-width: 600px) {
             .container {
                 max-width: 600px;
@@ -201,12 +184,6 @@
             </div>
         </div>
     </div>
-
-    <footer>
-        <p>Contato:
-            <a href="https://www.instagram.com/avelarttattoo/" target="_blank">Instagram</a>
-        </p>
-    </footer>
 
     <script>
         function validateForm() {
