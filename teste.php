@@ -10,15 +10,14 @@
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background: url('background-image.jpg') no-repeat center center fixed;
-            background-size: cover;
-            color: #fff;
+            background: #f4f4f4;
+            color: #333;
         }
 
         header {
             background-color: #333;
             color: #fff;
-            padding: 20px;
+            padding: 15px;
             text-align: center;
         }
 
@@ -26,52 +25,42 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
+            gap: 10px;
         }
 
         .logo {
-            width: 80px;
+            width: 50px;
             height: auto;
         }
 
         h1 {
-            font-family: 'Roboto', sans-serif;
-            font-size: 24px;
+            font-size: 20px;
             margin: 0;
         }
 
         .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 20px;
+            max-width: 90%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 15px;
             border-radius: 8px;
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .grid {
             display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
+            flex-direction: column;
+            gap: 15px;
         }
 
         .maca {
-            flex: 1;
-            min-width: 250px;
-            background-color: #fff;
+            background-color: #fafafa;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            color: #000;
-            position: relative;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 15px;
         }
 
         .maca h2 {
-            font-family: 'Roboto', sans-serif;
             font-size: 18px;
             margin-top: 0;
         }
@@ -88,7 +77,7 @@
         .maca input,
         .maca select,
         .maca button {
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             padding: 10px;
             font-size: 16px;
             border: 1px solid #ccc;
@@ -100,7 +89,6 @@
             color: white;
             border: none;
             cursor: pointer;
-            transition: background-color 0.3s ease;
         }
 
         .maca button:hover {
@@ -109,9 +97,9 @@
 
         .message {
             padding: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             border-radius: 4px;
-            font-size: 16px;
+            font-size: 14px;
         }
 
         .message.success {
@@ -136,8 +124,10 @@
             background-color: #333;
             color: #fff;
             text-align: center;
-            padding: 20px;
-            margin-top: 20px;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
         }
 
         footer a {
@@ -149,9 +139,18 @@
             text-decoration: underline;
         }
 
-        .maca:hover {
-            transform: scale(1.02);
-            transition: transform 0.3s ease;
+        @media (min-width: 600px) {
+            .container {
+                max-width: 600px;
+            }
+
+            .logo {
+                width: 80px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
         }
     </style>
 </head>
@@ -270,9 +269,6 @@
         document.addEventListener('DOMContentLoaded', function () {
             const status = sessionStorage.getItem('status');
             const message = sessionStorage.getItem('message');
-
-            console.log('Status: ', status); // Debug
-            console.log('Message: ', message); // Debug
 
             if (status && message) {
                 const messageContainer = document.getElementById('message-container');
