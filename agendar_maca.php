@@ -1,4 +1,8 @@
 <?php
+// Definindo variáveis para mensagem de retorno
+$status = "";
+$message = "";
+
 // Configuração da conexão com o banco de dados
 $servername = "127.0.0.1:3306";
 $username = "u221588236_root";
@@ -85,4 +89,11 @@ if (empty($errors)) {
 
 // Fechando a conexão
 $conn->close();
+
+// Armazenando a mensagem em sessionStorage e redirecionando
+echo "<script>
+    sessionStorage.setItem('status', '" . addslashes($status) . "');
+    sessionStorage.setItem('message', '" . addslashes($message) . "');
+    window.location.href = 'teste.php';
+</script>";
 ?>
