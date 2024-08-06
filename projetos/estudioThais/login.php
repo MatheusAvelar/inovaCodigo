@@ -25,7 +25,7 @@
                     <input type="password" id="password" name="password"><br><br>
                     <button type="submit">Login</button>
                 </form>
-                <form action="criar_acesso.html" method="GET">
+                <form action="criar_acesso.php" method="GET">
                     <button type="submit">Criar Acesso</button>
                 </form>
             </div>
