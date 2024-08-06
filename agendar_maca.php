@@ -1,9 +1,9 @@
 <?php
 // Conexão com o banco de dados
-$servername = "localhost";
-$username = "usuario";
-$password = "senha";
-$dbname = "estudio_tatuagem";
+$servername = "127.0.0.1:3306";
+$username = "u221588236_root";
+$password = "Camila@307";
+$dbname = "u221588236_controle_finan";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
