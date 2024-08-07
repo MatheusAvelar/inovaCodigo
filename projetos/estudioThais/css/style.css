@@ -195,7 +195,6 @@ td:nth-child(6) {
 .logout-container {
     display: inline-block;
     vertical-align: middle;
-    float: right;
 }
 
 .header {
