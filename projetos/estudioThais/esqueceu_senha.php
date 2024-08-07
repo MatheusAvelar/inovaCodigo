@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recuperar Senha</title>
+    <title>Esqueceu a Senha</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
     <header>
         <div class="logo-container">
@@ -16,18 +14,16 @@
             </a>
         </div>
     </header>
-
     <div class="container">
-        <div class="grid">
-            <div class="maca">
-                <h2>Recuperar Senha</h2>
-                <form action="php/recuperar_senha.php" method="POST">
-                    <label for="email">E-mail:</label><br>
-                    <input type="email" id="email" name="email" required><br><br>
-                    <button type="submit">Enviar Instruções</button>
-                </form>
-            </div>
-        </div>
+        <h2>Esqueceu a Senha</h2>
+        <?php if (!empty($message)): ?>
+            <div class="message"><?= htmlspecialchars($message) ?></div>
+        <?php endif; ?>
+        <form action="" method="POST">
+            <label for="email">Seu E-mail:</label>
+            <input type="email" id="email" name="email" required>
+            <button type="submit">Enviar Link de Redefinição</button>
+        </form>
     </div>
 </body>
 </html>
