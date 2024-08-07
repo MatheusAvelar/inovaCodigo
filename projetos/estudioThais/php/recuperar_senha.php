@@ -54,6 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     echo "<script>
+        console.log('" . addslashes($message) . "');
         sessionStorage.setItem('status', '" . addslashes($status) . "');
         sessionStorage.setItem('message', '" . addslashes($message) . "');
         window.location.href = '../esqueceu_senha.php';
