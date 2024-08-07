@@ -1,12 +1,3 @@
-<?php
-session_start();
-
-// Verifica se o usuário está logado, se não, redireciona para a página de login
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    header("Location: login.php");
-    exit;
-}
-?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -19,6 +10,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <header>
         <div class="logo-container">
             <img src="img/tatto.jpeg" alt="Logo do Estúdio" class="logo">
+            <h1>Nome do Estúdio</h1>
         </div>
         <div class="logout-container">
         <form action="php/logout.php" method="post">
@@ -41,11 +33,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <option value="4" <?= isset($_GET['filter_maca']) && $_GET['filter_maca'] == '4' ? 'selected' : '' ?>>Maca 4</option>
             </select>
 
-            <button type="submit">Filtrar</button>
+            <button type="submit" class="button">Filtrar</button>
         </form>
         <div class="grid">
             <div class="maca">
-                <table border="1" cellspacing="0" cellpadding="10">
+                <table>
                     <thead>
                         <tr>
                             <th>Tatuador</th>
