@@ -19,30 +19,28 @@ if ($conn->connect_error) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $token = $conn->real_escape_string($_POST['token']);
+    $token = $_POST['token'];
     $password = $conn->real_escape_string($_POST['password']);
     $confirm_password = $conn->real_escape_string($_POST['confirm_password']);
 
     if ($password !== $confirm_password) {
-        die("As senhas não coincidem.");
+        echo "As senhas não coincidem.";
+        exit;
     }
 
     // Verifica se o token é válido e não expirou
-    $query = "SELECT email FROM password_reset WHERE token='$token' AND exp_date > NOW()";
-    $result = $conn->query($query);
-
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $email = $row['email'];
+    if (isset($_SESSION['reset_token']) && $_SESSION['reset_token'] === $token && isset($_SESSION['reset_token_expiry']) && new DateTime() < new DateTime($_SESSION['reset_token_expiry'])) {
+        $email = $_SESSION['reset_email'];
 
         // Atualiza a senha do usuário
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-        $query = "UPDATE usuarios SET senha='$hashed_password' WHERE email='$email'";
+        $hashed_password = md5($password);
+        $query = "UPDATE usuarioEstudio SET senha='$hashed_password' WHERE email='$email'";
 
         if ($conn->query($query) === TRUE) {
             // Remove o token de recuperação de senha
-            $query = "DELETE FROM password_reset WHERE token='$token'";
-            $conn->query($query);
+            unset($_SESSION['reset_token']);
+            unset($_SESSION['reset_token_expiry']);
+            unset($_SESSION['reset_email']);
 
             echo "Sua senha foi redefinida com sucesso.";
         } else {
