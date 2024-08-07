@@ -26,7 +26,7 @@
                     <div class="message"><?= $message ?></div>
                 <?php endif; ?>
                 <form action="php/resetar_senha.php" method="POST">
-                    <input type="hidden" name="token" value="<?= htmlspecialchars($_GET['token']) ?>">
+                    <input type="hidden" name="token" value="<?= htmlspecialchars($_GET['token'] ?? '') ?>">
 
                     <label for="password">Nova Senha:</label>
                     <input type="password" id="password" name="password" required>

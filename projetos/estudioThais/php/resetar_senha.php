@@ -18,8 +18,6 @@ if ($conn->connect_error) {
     die("Falha na conexão: " . $conn->connect_error);
 }
 
-$message = "";
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $token = $conn->real_escape_string($_POST['token']);
     $password = $conn->real_escape_string($_POST['password']);
@@ -36,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = $_SESSION['reset_email'];
 
         // Atualiza a senha do usuário
-        $hashed_password = MD5($password);
+        $hashed_password = MD5($password, PASSWORD_DEFAULT);
         $query = "UPDATE usuarioEstudio SET senha='$hashed_password' WHERE email='$email'";
 
         if ($conn->query($query) === TRUE) {
