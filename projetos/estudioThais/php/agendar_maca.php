@@ -20,7 +20,7 @@ if ($conn->connect_error) {
 }
 
 // Capturando dados do formulário
-$name = $_POST['name1'] ?? '';
+$descricao = $_POST['name1'] ?? '';
 $maca = $_POST['maca'] ?? '';
 $date = $_POST['date1'] ?? '';
 $startTime = $_POST['start-time1'] ?? '';
@@ -28,8 +28,8 @@ $endTime = $_POST['end-time1'] ?? '';
 
 // Validação dos dados
 $errors = [];
-if (empty($name)) {
-    $errors[] = "O nome é obrigatório.";
+if (empty($descricao)) {
+    $errors[] = "A descrição é obrigatória.";
 }
 if (empty($maca)) {
     $errors[] = "A maca é obrigatória.";
@@ -63,8 +63,8 @@ if (empty($errors)) {
     } else {
         // Inserir no banco de dados se não houver conflitos
         $usuarioId = $_SESSION['id']; // ID do usuário logado
-        $stmt = $conn->prepare("INSERT INTO agendamentos (nome_cliente, maca_id, data, start_time, end_time, usuario_id) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssssss", $name, $maca, $date, $startTime, $endTime, $usuarioId);
+        $stmt = $conn->prepare("INSERT INTO agendamentos (descricao, maca_id, data, start_time, end_time, usuario_id) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssss", $descricao, $maca, $date, $startTime, $endTime, $usuarioId);
         if ($stmt->execute()) {
             $status = "success";
             $message = "Agendamento realizado com sucesso!";
