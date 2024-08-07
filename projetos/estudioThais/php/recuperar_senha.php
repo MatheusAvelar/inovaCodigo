@@ -3,7 +3,6 @@ session_start();
 
 // Inicializar variáveis de mensagens
 $message = '';
-$status = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
@@ -11,7 +10,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Verifica se o e-mail é válido
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $message = "E-mail inválido.";
-        $status = "error";
     } else {
         // Configuração da conexão com o banco de dados
         $servername = "127.0.0.1:3306";
@@ -49,24 +47,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if (mail($email, $subject, $messageContent, $headers)) {
                 $message = "Um link de recuperação de senha foi enviado para o seu e-mail.";
-                $status = "success";
             } else {
                 $message = "Falha ao enviar o e-mail. Tente novamente mais tarde.";
-                $status = "error";
             }
         } else {
             $message = "E-mail não encontrado.";
-            $status = "error";
         }
 
         $conn->close();
     }
-
-    // Define a mensagem no sessionStorage e redireciona para a mesma página
-    echo "<script>
-            sessionStorage.setItem('status', '$status');
-            sessionStorage.setItem('message', '$message');
-            window.location.href = window.location.href;
-          </script>";
-    exit;
 }
+?>
