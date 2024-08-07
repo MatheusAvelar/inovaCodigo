@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($password !== $confirm_password) {
         $message = "As senhas não coincidem.";
-        header("Location: ../resetar_senha.php?message=" . urlencode($message));
+        header("Location: ../resetar_senha.php?token=" . urlencode($token) . "&message=" . urlencode($message));
         exit;
     }
 
@@ -50,12 +50,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit;
         } else {
             $message = "Erro ao redefinir a senha.";
-            header("Location: ../resetar_senha.php?message=" . urlencode($message));
+            header("Location: ../resetar_senha.php?token=" . urlencode($token) . "&message=" . urlencode($message));
             exit;
         }
     } else {
         $message = "Token inválido ou expirado.";
-        header("Location: ../resetar_senha.php?message=" . urlencode($message));
+        header("Location: ../resetar_senha.php?token=" . urlencode($token) . "&message=" . urlencode($message));
         exit;
     }
 }
