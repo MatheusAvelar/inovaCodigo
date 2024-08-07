@@ -28,9 +28,6 @@ $endTime = $_POST['end-time1'] ?? '';
 
 // Validação dos dados
 $errors = [];
-if (empty($descricao)) {
-    $errors[] = "A descrição é obrigatória.";
-}
 if (empty($maca)) {
     $errors[] = "A maca é obrigatória.";
 }
