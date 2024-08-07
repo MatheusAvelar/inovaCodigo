@@ -13,7 +13,7 @@ if (!$conexao) {
 }
 
 // Obtém o perfil do usuário
-$usuario_id = $_SESSION['usuario_id'];
+$usuario_id = $_SESSION['id'];
 $sql = "SELECT perfil_id FROM usuarioEstudio WHERE id = '$usuario_id'";
 $resultado = mysqli_query($conexao, $sql);
 
