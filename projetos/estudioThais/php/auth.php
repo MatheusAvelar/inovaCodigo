@@ -28,12 +28,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['perfil_id'] = $usuario['perfil_id'];
 
         // Redireciona o usuário com base no perfil
-        /*if ($usuario['perfil_id'] == 1) {
+        if ($usuario['perfil_id'] == 1) {
             header("Location: ../agendamento.php");
         } elseif ($usuario['perfil_id'] == 2) {
             header("Location: ../agendamento.php");
-        }*/
-        header("Location: ../agendamento.php");
+        }
         exit;
     } else {
         $status = "error";
