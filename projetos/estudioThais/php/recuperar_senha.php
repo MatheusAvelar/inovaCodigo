@@ -42,13 +42,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $headers = "From: no-reply@inovacodigo.com.br";
 
         if (mail($email, $subject, $message, $headers)) {
-            echo "Um link de recuperação de senha foi enviado para o seu e-mail.";
+            $status = "success";
+            $message = "Um link de recuperação de senha foi enviado para o seu e-mail.";
         } else {
-            echo "Falha ao enviar o e-mail. Tente novamente mais tarde.";
+            $status = "error";
+            $message = "Falha ao enviar o e-mail. Tente novamente mais tarde.";
         }
     } else {
-        echo "E-mail não encontrado.";
+        $status = "error";
+        $message = "E-mail não encontrado.";
     }
+
+    echo "<script>
+        sessionStorage.setItem('status', '" . addslashes($status) . "');
+        sessionStorage.setItem('message', '" . addslashes($message) . "');
+        window.location.href = '../esqueceu_senha.php';
+    </script>";
+    exit();
 }
 
 $conn->close();

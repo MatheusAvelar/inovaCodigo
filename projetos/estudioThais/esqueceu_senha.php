@@ -15,13 +15,17 @@
         </div>
     </header>
     
-    <div class="container">    
+    <div class="container">
+        <div id="message-container">
+            <?php if (isset($status) && isset($message)) : ?>
+                <div class="message <?= $status ?>">
+                    <?= $message ?>
+                </div>
+            <?php endif; ?>
+        </div>
+        <h2>Esqueceu a Senha</h2>
         <div class="grid">
             <div class="maca">
-                <h2>Esqueceu a Senha</h2>
-                <?php if (!empty($message)): ?>
-                    <div class="message"><?= htmlspecialchars($message) ?></div>
-                <?php endif; ?>
                 <form action="php/recuperar_senha.php" method="POST">
                     <label for="email">Seu E-mail:</label>
                     <input type="email" id="email" name="email" required>
