@@ -10,11 +10,10 @@
     <header>
         <div class="logo-container">
             <img src="img/tatto.jpeg" alt="Logo do Estúdio" class="logo">
-            <h1>Nome do Estúdio</h1>
         </div>
         <div class="logout-container">
         <form action="php/logout.php" method="post">
-            <button type="submit" class="logout-button">Logout</button>
+            <button type="submit" class="logout-button">Sair</button>
         </form>
     </header>
 
