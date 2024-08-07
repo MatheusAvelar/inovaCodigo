@@ -29,12 +29,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['loggedin'] = true;
         $_SESSION['email'] = $email;
 
+        header("Location: ../agendamento.php");
         // Redireciona o usuário com base no perfil
-        if ($usuario['perfil_id'] == 1) {
+        /*if ($usuario['perfil_id'] == 1) {
             header("Location: ../agendamento.php");
         } elseif ($usuario['perfil_id'] == 2) {
             header("Location: ../admin_dashboard.php");
-        }
+        }*/
         exit;
     } else {
         $status = "error";
