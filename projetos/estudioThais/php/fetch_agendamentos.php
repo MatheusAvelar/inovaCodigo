@@ -1,5 +1,5 @@
 <?php
-// fetch_agendamentos.php
+session_start();
 
 // Configuração da conexão com o banco de dados
 $servername = "127.0.0.1:3306";
@@ -14,6 +14,9 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Falha na conexão: " . $conn->connect_error);
 }
+
+// Obtendo o ID do usuário logado
+$loggedInUserId = $_SESSION['id'];
 
 // Obtendo os filtros do formulário se estiverem definidos
 $filterDate = isset($_GET['filter_date']) ? $_GET['filter_date'] : '';
@@ -31,7 +34,7 @@ if (!empty($filterMaca)) {
 }
 
 // Busca de agendamentos existentes com os filtros aplicados
-$query = "SELECT ag.id, ag.descricao, ag.maca_id, ag.data, ag.start_time, ag.end_time, u.nome AS tatuador_nome 
+$query = "SELECT ag.id, ag.descricao, ag.maca_id, ag.data, ag.start_time, ag.end_time, ag.usuario_id, u.nome AS tatuador_nome 
           FROM agendamentos AS ag
           JOIN usuarioEstudio AS u ON ag.usuario_id = u.id
           $whereClause 
@@ -59,7 +62,8 @@ if ($result->num_rows > 0) {
         $currentDate = new DateTime();
         $interval = $currentDate->diff($appointmentDate);
 
-        if ($interval->days >= 2 || $interval->invert == 0) { // interval->invert == 0 indica que a data do agendamento é futura
+        // Verifica se o usuário logado é o criador do agendamento
+        if ($interval->days >= 2 || $interval->invert == 0 && $row['usuario_id'] == $loggedInUserId) {
             echo "<td><form action='php/delete_agendamento.php' method='post'>
                     <input type='hidden' name='id' value='" . htmlspecialchars($row['id']) . "'>
                     <button type='submit' class='delete-button'>Excluir</button>

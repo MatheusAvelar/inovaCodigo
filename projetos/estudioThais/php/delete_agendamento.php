@@ -1,5 +1,5 @@
 <?php
-// delete_agendamento.php
+session_start();
 
 // Configuração da conexão com o banco de dados
 $servername = "127.0.0.1:3306";
@@ -17,13 +17,14 @@ if ($conn->connect_error) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $_POST['id'];
+    $loggedInUserId = $_SESSION['id'];
     
     // Verificar se o agendamento pode ser excluído
-    $query = "SELECT data FROM agendamentos WHERE id = ?";
+    $query = "SELECT usuario_id, data FROM agendamentos WHERE id = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param('i', $id);
     $stmt->execute();
-    $stmt->bind_result($data);
+    $stmt->bind_result($usuario_id, $data);
     $stmt->fetch();
     $stmt->close();
     
@@ -32,18 +33,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $appointmentDate = new DateTime($data);
         $interval = $currentDate->diff($appointmentDate);
         
-        // Verificar se a data agendada é pelo menos 2 dias após a data atual
+        // Verificar se a data agendada é pelo menos 2 dias após a data atual e se o usuário é o criador do agendamento
         if ($interval->days >= 2 || $interval->invert == 0) {
-            // Excluir agendamento
-            $query = "DELETE FROM agendamentos WHERE id = ?";
-            $stmt = $conn->prepare($query);
-            $stmt->bind_param('i', $id);
-            if ($stmt->execute()) {
-                echo "Agendamento excluído com sucesso.";
+            if ($usuario_id == $loggedInUserId) {
+                // Excluir agendamento
+                $query = "DELETE FROM agendamentos WHERE id = ?";
+                $stmt = $conn->prepare($query);
+                $stmt->bind_param('i', $id);
+                if ($stmt->execute()) {
+                    echo "Agendamento excluído com sucesso.";
+                } else {
+                    echo "Erro ao excluir o agendamento.";
+                }
+                $stmt->close();
             } else {
-                echo "Erro ao excluir o agendamento.";
+                echo "Você não tem permissão para excluir este agendamento.";
             }
-            $stmt->close();
         } else {
             echo "Não é possível excluir um agendamento com menos de 2 dias de antecedência.";
         }
