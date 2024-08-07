@@ -15,16 +15,17 @@
         </div>
     </header>
     
-    <div class="container">    
+    <div class="container">
+        <div id="message-container">
+            <?php if (isset($status) && isset($message)) : ?>
+                <div class="message <?= $status ?>">
+                    <?= $message ?>
+                </div>
+            <?php endif; ?>
+        </div>
+        <h2>Redefinir Senha</h2>
         <div class="grid">
             <div class="maca">
-                <h2>Redefinir Senha</h2>
-                <?php
-                if (isset($_GET['message']) && !empty($_GET['message'])): 
-                    $message = htmlspecialchars($_GET['message']);
-                ?>
-                    <div class="message"><?= $message ?></div>
-                <?php endif; ?>
                 <form action="php/resetar_senha.php" method="POST">
                     <input type="hidden" name="token" value="<?= htmlspecialchars($_GET['token'] ?? '') ?>">
 
@@ -39,5 +40,25 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const status = sessionStorage.getItem('status');
+            const message = sessionStorage.getItem('message');
+
+            if (status && message) {
+                const messageContainer = document.getElementById('message-container');
+                const messageElement = document.createElement('div');
+                messageElement.className = 'message ' + status;
+                messageElement.innerHTML = message;
+
+                messageContainer.appendChild(messageElement);
+
+                // Limpa as mensagens após exibi-las
+                sessionStorage.removeItem('status');
+                sessionStorage.removeItem('message');
+            }
+        });
+    </script>
 </body>
 </html>
