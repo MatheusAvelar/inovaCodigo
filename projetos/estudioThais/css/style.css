@@ -7,7 +7,7 @@ body {
 }
 
 header {
-    background-color: #fff; /* Removido fundo preto */
+    background-color: #fff; /* Fundo branco */
     padding: 15px;
     text-align: center;
     border-bottom: 1px solid #ddd; /* Linha fina para separação */
@@ -81,7 +81,7 @@ h1 {
 button,
 .logout-button,
 .button {
-    background-color: #fec76f; /* Cor laranja */
+    background-color: #ff8c00; /* Laranja mais suave */
     color: white;
     border: none;
     cursor: pointer;
@@ -97,13 +97,13 @@ button,
 button:hover,
 .logout-button:hover,
 .button:hover {
-    background-color: #dbbe4d; /* Laranja mais escuro ao passar o mouse */
+    background-color: #ff7f00; /* Laranja mais escuro ao passar o mouse */
 }
 
 button:active,
 .logout-button:active,
 .button:active {
-    background-color: #dbbe4d;
+    background-color: #ff7f00;
     box-shadow: 0 4px #666;
     transform: translateY(2px);
 }
