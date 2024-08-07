@@ -74,5 +74,13 @@
             <a href="agendamento.php" class="button">Voltar ao Agendamento</a>
         </div>
     </div>
+    <script>
+        document.getElementById('export-button').addEventListener('click', function() {
+            const form = document.getElementById('filter-form');
+            form.action = 'export_agendamentos.php';
+            form.submit();
+            form.action = 'horarios_agendados.php';
+        });
+    </script>
 </body>
 </html>
