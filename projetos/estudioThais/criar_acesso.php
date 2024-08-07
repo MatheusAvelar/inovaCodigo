@@ -41,6 +41,12 @@
                     <label for="senha">Senha:</label>
                     <input type="password" id="senha" name="senha" required>
 
+                    <label for="perfil">Perfil:</label>
+                    <select id="perfil" name="perfil" required>
+                        <option value="1">Usuário</option>
+                        <option value="2">Master</option>
+                    </select>
+                    
                     <button type="submit">Cadastrar</button>
                 </form>
             </div>

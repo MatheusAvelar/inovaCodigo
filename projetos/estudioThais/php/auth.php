@@ -1,37 +1,51 @@
 <?php
 session_start();
 
-// Conexão com o banco de dados
-$conexao = mysqli_connect("127.0.0.1", "u221588236_root", "Camila@307", "u221588236_controle_finan");
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-// Verificação de conexão
-if (!$conexao) {
-    die("Falha na conexão: " . mysqli_connect_error());
+    // Cria a conexão
+    $conexao = mysqli_connect("127.0.0.1:3306", "u221588236_root", "Camila@307", "u221588236_controle_finan");
+
+    // Verifica se a conexão foi estabelecida com sucesso
+    if (!$conexao) {
+        die("Falha na conexão: " . mysqli_connect_error());
+    }
+
+    // Prepara os dados recebidos do formulário
+    $email = $_POST['username'];
+    $senha = md5($_POST['password']);
+
+    // Escapa caracteres especiais para evitar injeção de SQL
+    $email = mysqli_real_escape_string($conexao, $email);
+
+    // Verifica as credenciais do usuário
+    $query = "SELECT id, perfil_id FROM usuarioEstudio WHERE email='$email' AND senha='$senha'";
+    $resultado = mysqli_query($conexao, $query);
+
+    if (mysqli_num_rows($resultado) > 0) {
+        $usuario = mysqli_fetch_assoc($resultado);
+        $_SESSION['usuario_id'] = $usuario['id'];
+        $_SESSION['perfil_id'] = $usuario['perfil_id'];
+
+        // Redireciona o usuário com base no perfil
+        /*if ($usuario['perfil_id'] == 1) {
+            header("Location: ../agendamento.php");
+        } elseif ($usuario['perfil_id'] == 2) {
+            header("Location: ../agendamento.php");
+        }*/
+        header("Location: ../agendamento.php");
+        exit;
+    } else {
+        $status = "error";
+        $message = "Usuário ou senha inválidos.";
+        echo "<script>
+            sessionStorage.setItem('status', '" . addslashes($status) . "');
+            sessionStorage.setItem('message', '" . addslashes($message) . "');
+            window.location.href = '../login.php';
+        </script>";
+    }
+
+    // Fecha a conexão com o banco de dados
+    mysqli_close($conexao);
 }
-
-// Captura dos dados do formulário
-$email = $_POST['username'];
-$senha = md5($_POST['password']);
-
-// Verificação de email e senha
-$query = mysqli_query($conexao, "SELECT id FROM usuarioEstudio WHERE email = '$email' AND senha = '$senha'");
-$row = mysqli_fetch_assoc($query);
-
-// Verificação se o usuário foi encontrado
-if ($row) {
-    $_SESSION['loggedin'] = true;
-    $_SESSION['email'] = $email;
-    $_SESSION['id'] = $row['id']; // Armazenando o ID do usuário na sessão
-
-    // Redirecionamento para a página de agendamento
-    header("Location: ../agendamento.php");
-    exit;
-} else {
-    // Redirecionamento para a página de login caso as credenciais estejam incorretas
-    header("Location: ../login.php");
-    exit;
-}
-
-// Fechando a conexão com o banco de dados
-mysqli_close($conexao);
 ?>

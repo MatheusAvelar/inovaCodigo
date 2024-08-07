@@ -14,11 +14,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sobrenome = $_POST['sobrenome'];
     $email = $_POST['email'];
     $senha = md5($_POST['senha']);
+    $perfil_id = $_POST['perfil'];
 
     // Escapa caracteres especiais para evitar injeção de SQL
     $nome = mysqli_real_escape_string($conexao, $nome);
     $sobrenome = mysqli_real_escape_string($conexao, $sobrenome);
     $email = mysqli_real_escape_string($conexao, $email);
+    $perfil_id = mysqli_real_escape_string($conexao, $perfil_id);
 
     // Verifica se já existe um cadastro com o mesmo e-mail
     $verificaEmail = "SELECT * FROM usuarioEstudio WHERE email = '$email'";
@@ -35,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </script>";
     } else {
         // Insere os dados na tabela de usuários
-        $sql = "INSERT INTO usuarioEstudio(nome, sobrenome, email, senha) VALUES('$nome','$sobrenome','$email','$senha')";
+        $sql = "INSERT INTO usuarioEstudio(nome, sobrenome, email, senha, perfil_id) VALUES('$nome','$sobrenome','$email','$senha', '$perfil_id')";
 
         if (mysqli_query($conexao, $sql)) {
             $status = "success";
@@ -43,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "<script>
                 sessionStorage.setItem('status', '" . addslashes($status) . "');
                 sessionStorage.setItem('message', '" . addslashes($message) . "');
-                window.location.href = '../criar_acesso.php';
+                window.location.href = '../login.php';
             </script>";
         } else {
             $status = "error";
