@@ -1,0 +1,58 @@
+<?php
+// Verifica se a sessão já foi iniciada
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Configuração da conexão com o banco de dados
+$servername = "127.0.0.1:3306";
+$username = "u221588236_root";
+$password = "Camila@307";
+$dbname = "u221588236_controle_finan";
+
+// Criando a conexão
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Verificando a conexão
+if ($conn->connect_error) {
+    die("Falha na conexão: " . $conn->connect_error);
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = $conn->real_escape_string($_POST['email']);
+
+    // Verifica se o e-mail existe no banco de dados
+    $query = "SELECT id FROM usuarios WHERE email='$email'";
+    $result = $conn->query($query);
+
+    if ($result->num_rows > 0) {
+        // Gerar um token único para a recuperação de senha
+        $token = bin2hex(random_bytes(50));
+
+        // Define a data de expiração do token (por exemplo, 1 hora a partir de agora)
+        $expDate = date("Y-m-d H:i:s", strtotime("+1 hour"));
+
+        // Insere o token no banco de dados
+        $query = "INSERT INTO password_reset (email, token, exp_date) VALUES ('$email', '$token', '$expDate')";
+        if ($conn->query($query) === TRUE) {
+            // Envia o e-mail com o link de recuperação de senha
+            $resetLink = "https://inovacodigo.com.br/projetos/estudioThais/resetar_senha.php?token=$token";
+            $subject = "Recuperação de Senha";
+            $message = "Clique no link a seguir para resetar sua senha: $resetLink";
+            $headers = "From: no-reply@inovacodigo.com.br";
+
+            if (mail($email, $subject, $message, $headers)) {
+                echo "Um link de recuperação de senha foi enviado para o seu e-mail.";
+            } else {
+                echo "Falha ao enviar o e-mail. Tente novamente mais tarde.";
+            }
+        } else {
+            echo "Erro ao salvar o token de recuperação de senha.";
+        }
+    } else {
+        echo "E-mail não encontrado.";
+    }
+}
+
+$conn->close();
+?>
