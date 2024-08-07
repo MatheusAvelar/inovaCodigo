@@ -25,7 +25,7 @@
                     <input type="text" id="username" name="username" required><br>
                     <label for="password">Senha:</label><br>
                     <input type="password" id="password" name="password" required><br><br>
-                    <button type="submit">Login</button>
+                    <button type="submit">Entrar</button>
                 </form>
                 <form action="esqueceu_senha.php" method="GET">
                     <button type="submit">Esqueceu a Senha</button>
