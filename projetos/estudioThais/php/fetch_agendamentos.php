@@ -18,9 +18,6 @@ if ($conn->connect_error) {
     die("Falha na conexão: " . $conn->connect_error);
 }
 
-// Obtendo o ID do usuário logado
-$loggedInUserId = $_SESSION['id'];
-
 // Obtendo os filtros do formulário se estiverem definidos
 $filterDate = isset($_GET['filter_date']) ? $_GET['filter_date'] : '';
 $filterMaca = isset($_GET['filter_maca']) ? $_GET['filter_maca'] : '';
@@ -60,19 +57,23 @@ if ($result->num_rows > 0) {
         echo "<td>" . $formattedEndTime . "</td>";
         echo "<td>" . htmlspecialchars($row['tatuador_nome']) . "</td>";
 
-        // Verifica se a data do agendamento é pelo menos 2 dias antes da data agendada
-        $appointmentDate = new DateTime($row['data']);
-        $currentDate = new DateTime();
-        $interval = $currentDate->diff($appointmentDate);
+        // Verificação para mostrar o botão de excluir apenas se o usuário logado é o dono do agendamento
+        if ($row['usuario_id'] == $_SESSION['id']) {
+            // Verifica se a data do agendamento está a pelo menos 2 dias no futuro
+            $agendamentoDate = strtotime($row['data']);
+            $currentDate = strtotime(date('Y-m-d'));
+            $dateDiff = ($agendamentoDate - $currentDate) / 86400; // diferença em dias
 
-        // Verifica se o usuário logado é o criador do agendamento
-        if ($interval->days >= 2 || $interval->invert == 0 && $row['usuario_id'] == $loggedInUserId) {
-            echo "<td><form action='php/delete_agendamento.php' method='post'>
-                    <input type='hidden' name='id' value='" . htmlspecialchars($row['id']) . "'>
-                    <button type='submit' class='delete-button'>Excluir</button>
-                  </form></td>";
+            if ($dateDiff >= 2) {
+                echo "<td><form method='POST' action='php/delete_agendamento.php'>
+                          <input type='hidden' name='agendamento_id' value='" . htmlspecialchars($row['id']) . "'>
+                          <button type='submit'>Excluir</button>
+                      </form></td>";
+            } else {
+                echo "<td>Não pode excluir</td>";
+            }
         } else {
-            echo "<td>Não pode excluir</td>";
+            echo "<td></td>";
         }
 
         echo "</tr>";
@@ -83,3 +84,4 @@ if ($result->num_rows > 0) {
 
 // Fechando a conexão
 $conn->close();
+?>
