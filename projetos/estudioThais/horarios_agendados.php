@@ -48,11 +48,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <table border="1" cellspacing="0" cellpadding="10">
                     <thead>
                         <tr>
-                            <th>Cliente</th>
+                            <th>Descrição</th>
                             <th>Maca</th>
                             <th>Data</th>
                             <th>H. Inicial</th>
                             <th>H. Final</th>
+                            <th>Tatuador</th>
                         </tr>
                     </thead>
                     <tbody>

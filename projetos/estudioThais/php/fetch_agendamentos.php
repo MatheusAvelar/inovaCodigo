@@ -31,7 +31,7 @@ if (!empty($filterMaca)) {
 }
 
 // Busca de agendamentos existentes com os filtros aplicados
-$query = "SELECT nome_cliente, maca_id, data, start_time, end_time FROM agendamentos $whereClause ORDER BY data, start_time";
+$query = "SELECT descricao, maca_id, data, start_time, end_time, usuario_id FROM agendamentos $whereClause ORDER BY data, start_time";
 $result = $conn->query($query);
 
 if ($result->num_rows > 0) {
@@ -42,11 +42,12 @@ if ($result->num_rows > 0) {
         $formattedEndTime = date('H:i', strtotime($row['end_time']));
         
         echo "<tr>";
-        echo "<td>" . htmlspecialchars($row['nome_cliente']) . "</td>";
+        echo "<td>" . htmlspecialchars($row['descricao']) . "</td>";
         echo "<td>" . htmlspecialchars($row['maca_id']) . "</td>";
         echo "<td>" . $formattedDate . "</td>";
         echo "<td>" . $formattedStartTime . "</td>";
         echo "<td>" . $formattedEndTime . "</td>";
+        echo "<td>" . htmlspecialchars($row['usuario_id']) . "</td>";
         echo "</tr>";
     }
 } else {
