@@ -9,7 +9,7 @@
 <body>
     <header>
         <div class="logo-container">
-            <a href="http://example.com">
+            <a href="https://inovacodigo.com.br/projetos/estudioThais/agendamento.php">
                 <img src="img/tatto.jpeg" alt="Logo do Estúdio" class="logo">
             </a>
         </div>
