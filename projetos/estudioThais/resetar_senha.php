@@ -19,8 +19,11 @@
         <div class="grid">
             <div class="maca">
                 <h2>Redefinir Senha</h2>
-                <?php if (!empty($message)): ?>
-                    <div class="message"><?= htmlspecialchars($message) ?></div>
+                <?php
+                if (isset($_GET['message']) && !empty($_GET['message'])): 
+                    $message = htmlspecialchars($_GET['message']);
+                ?>
+                    <div class="message"><?= $message ?></div>
                 <?php endif; ?>
                 <form action="php/resetar_senha.php" method="POST">
                     <input type="hidden" name="token" value="<?= htmlspecialchars($_GET['token']) ?>">
