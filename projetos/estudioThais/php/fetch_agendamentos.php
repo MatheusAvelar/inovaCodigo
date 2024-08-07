@@ -63,11 +63,13 @@ if ($result->num_rows > 0) {
             $currentDate = strtotime(date('Y-m-d'));
             $dateDiff = ($agendamentoDate - $currentDate) / 86400; // diferença em dias
 
-            // Verifica se a diferença em dias é maior ou igual a 2
             if ($dateDiff >= 2) {
-                echo "<td><form method='POST' action='php/delete_agendamento.php' onsubmit='return confirmDelete()'>
+                echo "<td><form method='POST' action='php/delete_agendamento.php' onsubmit='return confirmDelete(this)'>
                           <input type='hidden' name='agendamento_id' value='" . htmlspecialchars($row['id']) . "'>
-                          <button type='submit'>Excluir</button>
+                          <button type='submit' data-description='" . htmlspecialchars($row['descricao']) . "' 
+                                  data-date='" . $formattedDate . "' 
+                                  data-start-time='" . $formattedStartTime . "' 
+                                  data-end-time='" . $formattedEndTime . "'>Excluir</button>
                       </form></td>";
             } else {
                 echo "<td>Não pode excluir</td>";
@@ -87,7 +89,15 @@ $conn->close();
 ?>
 
 <script>
-    function confirmDelete() {
-        return confirm('Você tem certeza de que deseja excluir este agendamento e todas as suas informações?');
+    function confirmDelete(form) {
+        const button = form.querySelector('button');
+        const description = button.getAttribute('data-description');
+        const date = button.getAttribute('data-date');
+        const startTime = button.getAttribute('data-start-time');
+        const endTime = button.getAttribute('data-end-time');
+        
+        const message = `Você tem certeza de que deseja excluir o agendamento com a descrição "${description}" agendado para ${date} das ${startTime} às ${endTime}?`;
+
+        return confirm(message);
     }
 </script>
