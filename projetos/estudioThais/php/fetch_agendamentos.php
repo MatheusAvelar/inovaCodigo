@@ -23,15 +23,20 @@ $filterMaca = isset($_GET['filter_maca']) ? $_GET['filter_maca'] : '';
 $whereClause = "WHERE 1=1"; // Começa com condição verdadeira para adicionar filtros dinamicamente
 
 if (!empty($filterDate)) {
-    $whereClause .= " AND data = '" . $conn->real_escape_string($filterDate) . "'";
+    $whereClause .= " AND ag.data = '" . $conn->real_escape_string($filterDate) . "'";
 }
 
 if (!empty($filterMaca)) {
-    $whereClause .= " AND maca_id = '" . $conn->real_escape_string($filterMaca) . "'";
+    $whereClause .= " AND ag.maca_id = '" . $conn->real_escape_string($filterMaca) . "'";
 }
 
 // Busca de agendamentos existentes com os filtros aplicados
-$query = "SELECT descricao, maca_id, data, start_time, end_time, usuario_id FROM agendamentos $whereClause ORDER BY data, start_time";
+$query = "SELECT ag.descricao, ag.maca_id, ag.data, ag.start_time, ag.end_time, u.nome AS tatuador_nome 
+          FROM agendamentos AS ag
+          JOIN usuarioEstudio AS u ON ag.usuario_id = u.id
+          $whereClause 
+          ORDER BY ag.data, ag.start_time";
+
 $result = $conn->query($query);
 
 if ($result->num_rows > 0) {
@@ -40,20 +45,19 @@ if ($result->num_rows > 0) {
         $formattedDate = date('d/m/Y', strtotime($row['data']));
         $formattedStartTime = date('H:i', strtotime($row['start_time']));
         $formattedEndTime = date('H:i', strtotime($row['end_time']));
-        
+
         echo "<tr>";
         echo "<td>" . htmlspecialchars($row['descricao']) . "</td>";
         echo "<td>" . htmlspecialchars($row['maca_id']) . "</td>";
         echo "<td>" . $formattedDate . "</td>";
         echo "<td>" . $formattedStartTime . "</td>";
         echo "<td>" . $formattedEndTime . "</td>";
-        echo "<td>" . htmlspecialchars($row['usuario_id']) . "</td>";
+        echo "<td>" . htmlspecialchars($row['tatuador_nome']) . "</td>";
         echo "</tr>";
     }
 } else {
-    echo "<tr><td colspan='5'>Nenhum agendamento encontrado.</td></tr>";
+    echo "<tr><td colspan='6'>Nenhum agendamento encontrado.</td></tr>";
 }
 
 // Fechando a conexão
 $conn->close();
-?>
