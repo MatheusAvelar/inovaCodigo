@@ -121,7 +121,17 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 document.getElementById('end-time1-error').innerText = 'O horário final deve ser maior que o horário inicial.';
             }
 
+            if (!isValidDateFormat(date)) {
+                isValid = false;
+                document.getElementById('date1-error').innerText = 'Formato de data inválido. Use YYYY-MM-DD.';
+            }
+
             return isValid; 
+        }
+
+        function isValidDateFormat(date) {
+            const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+            return datePattern.test(date);
         }
 
         document.addEventListener('DOMContentLoaded', function () {
