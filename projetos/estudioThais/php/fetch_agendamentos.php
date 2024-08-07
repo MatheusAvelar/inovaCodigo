@@ -50,12 +50,11 @@ if ($result->num_rows > 0) {
         $formattedEndTime = date('H:i', strtotime($row['end_time']));
 
         echo "<tr>";
-        echo "<td>" . htmlspecialchars($row['descricao']) . "</td>";
+        echo "<td>" . htmlspecialchars($row['tatuador_nome']) . "</td>";
         echo "<td>" . htmlspecialchars($row['maca_id']) . "</td>";
         echo "<td>" . $formattedDate . "</td>";
         echo "<td>" . $formattedStartTime . "</td>";
         echo "<td>" . $formattedEndTime . "</td>";
-        echo "<td>" . htmlspecialchars($row['tatuador_nome']) . "</td>";
 
         // Verificação para mostrar o botão de excluir apenas se o usuário logado é o dono do agendamento
         if ($row['usuario_id'] == $_SESSION['id']) {

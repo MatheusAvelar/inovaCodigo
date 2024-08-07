@@ -48,19 +48,16 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <table border="1" cellspacing="0" cellpadding="10">
                     <thead>
                         <tr>
-                            <th>Descrição</th>
+                            <th>Tatuador</th>
                             <th>Maca</th>
                             <th>Data</th>
                             <th>H. Inicial</th>
                             <th>H. Final</th>
-                            <th>Tatuador</th>
                             <th>Ação</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        // Exemplo de como você pode filtrar os dados com PHP
-                        // Ajuste conforme necessário
                         $filter_date = $_GET['filter_date'] ?? '';
                         $filter_maca = $_GET['filter_maca'] ?? '';
 
