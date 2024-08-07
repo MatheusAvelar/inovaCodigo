@@ -68,7 +68,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     <label for="name1">Descrição:</label>
                     <input type="text" id="name1" name="name1">
                     <div id="name1-error" class="error-message"></div>
-                    
+
                     <button type="submit">Agendar</button>
                     <a href="horarios_agendados.php" class="button">Ver Horários Agendados</a>
                 </form>
@@ -86,17 +86,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             });
 
             // Get form values
-            const name = document.getElementById('name1').value.trim();
             const maca = document.getElementById('maca').value;
             const date = document.getElementById('date1').value;
             const startTime = document.getElementById('start-time1').value;
             const endTime = document.getElementById('end-time1').value;
-
-            // Validate name
-            if (name === '') {
-                isValid = false;
-                document.getElementById('name1-error').innerText = 'O nome é obrigatório.';
-            }
 
             // Validate maca
             if (maca === '') {
