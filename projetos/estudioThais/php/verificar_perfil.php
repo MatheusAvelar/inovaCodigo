@@ -7,11 +7,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     exit;
 }
 
-// Verifica se `usuario_id` está definido na sessão
-if (!isset($_SESSION['usuario_id'])) {
-    die("ID do usuário não está definido na sessão.");
-}
-
 // Conecta ao banco de dados para obter o perfil do usuário
 $conexao = mysqli_connect("127.0.0.1:3306", "u221588236_root", "Camila@307", "u221588236_controle_finan");
 
@@ -26,11 +21,7 @@ $resultado = mysqli_query($conexao, $sql);
 
 if ($resultado) {
     $usuario = mysqli_fetch_assoc($resultado);
-    if ($usuario) {
-        $perfil_id = $usuario['perfil_id'];
-    } else {
-        die("Usuário não encontrado.");
-    }
+    $perfil_id = $usuario['perfil_id'];
 } else {
     die("Erro ao obter perfil do usuário: " . mysqli_error($conexao));
 }
