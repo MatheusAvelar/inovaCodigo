@@ -45,6 +45,7 @@
             </select>
 
             <button type="submit" class="button">Filtrar</button>
+            <button type="button" class="button" id="export-button">Exportar</button>
         </form>
         <div class="grid">
             <div class="maca">
