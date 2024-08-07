@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome = $_POST['nome'];
     $sobrenome = $_POST['sobrenome'];
     $email = $_POST['email'];
-    $senha = MD5($_POST['senha']);
+    $senha = md5($_POST['senha']);
 
     // Escapa caracteres especiais para evitar injeção de SQL
     $nome = mysqli_real_escape_string($conexao, $nome);
@@ -26,15 +26,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (mysqli_num_rows($resultado) > 0) {
         // Se o e-mail já estiver cadastrado
-        echo "<script>alert('O e-mail informado já está cadastrado.'); window.location.href='../criar_acesso.php';</script>";
+        $status = "error";
+        $message = "O e-mail informado já está cadastrado.";
+        echo "<script>
+            sessionStorage.setItem('status', '" . addslashes($status) . "');
+            sessionStorage.setItem('message', '" . addslashes($message) . "');
+            window.location.href = '../criar_acesso.php';
+        </script>";
     } else {
         // Insere os dados na tabela de usuários
         $sql = "INSERT INTO usuarioEstudio(nome, sobrenome, email, senha) VALUES('$nome','$sobrenome','$email','$senha')";
 
         if (mysqli_query($conexao, $sql)) {
-            echo "<script>alert('Cadastro realizado com sucesso!'); window.location.href='../login.php';</script>";
+            $status = "success";
+            $message = "Cadastro realizado com sucesso!";
+            echo "<script>
+                sessionStorage.setItem('status', '" . addslashes($status) . "');
+                sessionStorage.setItem('message', '" . addslashes($message) . "');
+                window.location.href = '../login.php';
+            </script>";
         } else {
-            echo "Erro ao cadastrar: " . mysqli_error($conexao);
+            $status = "error";
+            $message = "Erro ao cadastrar: " . mysqli_error($conexao);
+            echo "<script>
+                sessionStorage.setItem('status', '" . addslashes($status) . "');
+                sessionStorage.setItem('message', '" . addslashes($message) . "');
+                window.location.href = '../criar_acesso.php';
+            </script>";
         }
     }
 
