@@ -1,5 +1,8 @@
 <?php
-session_start();
+// Verifica se a sessão já foi iniciada
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Configuração da conexão com o banco de dados
 $servername = "127.0.0.1:3306";
