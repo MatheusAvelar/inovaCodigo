@@ -43,10 +43,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         <div class="grid">
             <div class="maca">
                 <form id="form1" method="POST" action="php/agendar_maca.php" onsubmit="return validateForm()">
-                    <label for="name1">Descrição:</label>
-                    <input type="text" id="name1" name="name1">
-                    <div id="name1-error" class="error-message"></div>
-
                     <label for="maca">Maca:</label>
                     <select id="maca" name="maca" required>
                         <option value="">Selecione a maca</option>
@@ -69,6 +65,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     <input type="time" id="end-time1" name="end-time1" required>
                     <div id="end-time1-error" class="error-message"></div>
 
+                    <label for="name1">Descrição:</label>
+                    <input type="text" id="name1" name="name1">
+                    <div id="name1-error" class="error-message"></div>
+                    
                     <button type="submit">Agendar</button>
                     <a href="horarios_agendados.php" class="button">Ver Horários Agendados</a>
                 </form>
