@@ -36,7 +36,7 @@ $stmt->store_result();
 $stmt->bind_result($data, $usuario_id);
 $stmt->fetch();
 
-if ($stmt->num_rows > 0 && $usuario_id == $_SESSION['usuario_id']) {
+if ($stmt->num_rows > 0 && $usuario_id == $_SESSION['id']) {
     // Verifica se a data do agendamento está a pelo menos 2 dias no futuro
     $agendamentoDate = strtotime($data);
     $currentDate = strtotime(date('Y-m-d'));
