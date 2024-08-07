@@ -19,6 +19,7 @@ if ($conn->connect_error) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $token = $conn->real_escape_string($_POST['token']);
     $password = $conn->real_escape_string($_POST['password']);
     $confirm_password = $conn->real_escape_string($_POST['confirm_password']);
 
@@ -28,30 +29,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Verifica se o token é válido e não expirou
-    if (isset($_SESSION['reset_token']) && isset($_SESSION['reset_token_expiry']) && new DateTime() < new DateTime($_SESSION['reset_token_expiry'])) {
-        $token = $_GET['token']; // Captura o token da URL
-        if ($_SESSION['reset_token'] === $token) {
-            $email = $_SESSION['reset_email'];
+    if (isset($_SESSION['reset_token']) && $_SESSION['reset_token'] === $token && isset($_SESSION['reset_token_expiry']) && new DateTime() < new DateTime($_SESSION['reset_token_expiry'])) {
+        $email = $_SESSION['reset_email'];
 
-            // Atualiza a senha do usuário
-            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-            $query = "UPDATE usuarioEstudio SET senha='$hashed_password' WHERE email='$email'";
+        // Atualiza a senha do usuário
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        $query = "UPDATE usuarioEstudio SET senha='$hashed_password' WHERE email='$email'";
 
-            if ($conn->query($query) === TRUE) {
-                // Remove o token de recuperação de senha
-                unset($_SESSION['reset_token']);
-                unset($_SESSION['reset_token_expiry']);
-                unset($_SESSION['reset_email']);
+        if ($conn->query($query) === TRUE) {
+            // Remove o token de recuperação de senha
+            unset($_SESSION['reset_token']);
+            unset($_SESSION['reset_token_expiry']);
+            unset($_SESSION['reset_email']);
 
-                echo "Sua senha foi redefinida com sucesso.";
-            } else {
-                echo "Erro ao redefinir a senha.";
-            }
+            echo "Sua senha foi redefinida com sucesso.";
         } else {
-            echo "Token inválido.";
+            echo "Erro ao redefinir a senha.";
         }
     } else {
-        echo "Token expirado.";
+        echo "Token inválido ou expirado.";
     }
 }
 
