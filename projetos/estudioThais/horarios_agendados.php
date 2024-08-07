@@ -54,6 +54,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                             <th>H. Inicial</th>
                             <th>H. Final</th>
                             <th>Tatuador</th>
+                            <th>Ação</th>
                         </tr>
                     </thead>
                     <tbody>

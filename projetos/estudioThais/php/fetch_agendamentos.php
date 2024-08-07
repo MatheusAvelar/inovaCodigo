@@ -31,7 +31,7 @@ if (!empty($filterMaca)) {
 }
 
 // Busca de agendamentos existentes com os filtros aplicados
-$query = "SELECT ag.descricao, ag.maca_id, ag.data, ag.start_time, ag.end_time, u.nome AS tatuador_nome 
+$query = "SELECT ag.id, ag.descricao, ag.maca_id, ag.data, ag.start_time, ag.end_time, u.nome AS tatuador_nome 
           FROM agendamentos AS ag
           JOIN usuarioEstudio AS u ON ag.usuario_id = u.id
           $whereClause 
@@ -53,10 +53,25 @@ if ($result->num_rows > 0) {
         echo "<td>" . $formattedStartTime . "</td>";
         echo "<td>" . $formattedEndTime . "</td>";
         echo "<td>" . htmlspecialchars($row['tatuador_nome']) . "</td>";
+
+        // Verifica se a data do agendamento é pelo menos 2 dias antes da data agendada
+        $appointmentDate = new DateTime($row['data']);
+        $currentDate = new DateTime();
+        $interval = $currentDate->diff($appointmentDate);
+
+        if ($interval->days >= 2 || $interval->invert == 0) { // interval->invert == 0 indica que a data do agendamento é futura
+            echo "<td><form action='php/delete_agendamento.php' method='post'>
+                    <input type='hidden' name='id' value='" . htmlspecialchars($row['id']) . "'>
+                    <button type='submit' class='delete-button'>Excluir</button>
+                  </form></td>";
+        } else {
+            echo "<td>Não pode excluir</td>";
+        }
+
         echo "</tr>";
     }
 } else {
-    echo "<tr><td colspan='6'>Nenhum agendamento encontrado.</td></tr>";
+    echo "<tr><td colspan='7'>Nenhum agendamento encontrado.</td></tr>";
 }
 
 // Fechando a conexão

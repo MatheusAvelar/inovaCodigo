@@ -44,7 +44,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <div class="maca">
                 <form id="form1" method="POST" action="php/agendar_maca.php" onsubmit="return validateForm()">
                     <label for="name1">Descrição:</label>
-                    <input type="text" id="name1" name="name1" required>
+                    <input type="text" id="name1" name="name1">
                     <div id="name1-error" class="error-message"></div>
 
                     <label for="maca">Maca:</label>
