@@ -126,60 +126,108 @@ h1 {
         font-size: 24px;
     }
 }
-/* Estilos para a tabela */
+/* Estilizando a tabela */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin: 20px 0;
-    table-layout: fixed; /* Adiciona uma largura fixa para as células */
+    font-size: 14px; /* Ajuste o tamanho da fonte */
 }
 
-thead {
-    background-color: #f0f0f0; /* Cor de fundo suave */
-}
-
-th, td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-    font-size: 16px;
-    overflow: hidden; /* Garante que o texto não ultrapasse a célula */
-    text-overflow: ellipsis; /* Adiciona reticências se o texto for muito longo */
-    white-space: nowrap; /* Impede que o texto quebre em várias linhas */
+table, th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
 }
 
 th {
-    background-color: #fec76f; /* Cor que combina com o botão */
-    color: #333;
-    font-weight: bold;
+    background-color: #f2f2f2;
+    text-align: left;
+    white-space: nowrap; /* Evita que o texto das cabeçalhos quebrem */
 }
 
-tbody tr:nth-child(even) {
-    background-color: #fafafa; /* Fundo alternado suave */
+td {
+    white-space: nowrap; /* Evita que o texto das células quebrem */
 }
 
-tbody tr:hover {
-    background-color: #f0f0f0; /* Destaque ao passar o mouse */
+tr:nth-child(even) {
+    background-color: #f9f9f9;
 }
 
-/* Estilos para mensagens de erro e sucesso */
-.message {
-    padding: 10px;
-    margin-bottom: 15px;
-    border-radius: 4px;
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Ajusta a largura das colunas */
+th:nth-child(1),
+td:nth-child(1) {
+    width: 20%;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+    width: 15%;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+    width: 15%;
+}
+
+th:nth-child(4),
+td:nth-child(4) {
+    width: 15%;
+}
+
+th:nth-child(5),
+td:nth-child(5) {
+    width: 15%;
+}
+
+th:nth-child(6),
+td:nth-child(6) {
+    width: 20%;
+}
+
+.logo-container {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.logout-container {
+    display: inline-block;
+    vertical-align: middle;
+    float: right;
+}
+
+.header {
+    background-color: #333;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
     font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
 }
 
-.message.success {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
+.button:hover {
+    background-color: #3e8e41;
 }
 
-.message.error {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
+.button:active {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
 }
 
 /* Botão de Deslogar */
