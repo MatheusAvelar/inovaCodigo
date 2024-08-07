@@ -77,6 +77,11 @@ if ($result->num_rows > 0) {
 
     // Envia os dados do arquivo para o output
     fpassthru($f);
+} else {
+    echo "Nenhum agendamento encontrado.";
 }
+
+// Fechando a conexão
+$conn->close();
 exit;
 ?>
