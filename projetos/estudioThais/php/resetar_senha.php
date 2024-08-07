@@ -18,13 +18,16 @@ if ($conn->connect_error) {
     die("Falha na conexão: " . $conn->connect_error);
 }
 
+$message = "";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $token = $conn->real_escape_string($_POST['token']);
     $password = $conn->real_escape_string($_POST['password']);
     $confirm_password = $conn->real_escape_string($_POST['confirm_password']);
 
     if ($password !== $confirm_password) {
-        echo "As senhas não coincidem.";
+        $message = "As senhas não coincidem.";
+        header("Location: ../resetar_senha.php?message=" . urlencode($message));
         exit;
     }
 
@@ -42,12 +45,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             unset($_SESSION['reset_token_expiry']);
             unset($_SESSION['reset_email']);
 
-            echo "Sua senha foi redefinida com sucesso.";
+            $message = "Sua senha foi redefinida com sucesso.";
+            header("Location: ../resetar_senha.php?message=" . urlencode($message));
+            exit;
         } else {
-            echo "Erro ao redefinir a senha.";
+            $message = "Erro ao redefinir a senha.";
+            header("Location: ../resetar_senha.php?message=" . urlencode($message));
+            exit;
         }
     } else {
-        echo "Token inválido ou expirado.";
+        $message = "Token inválido ou expirado.";
+        header("Location: ../resetar_senha.php?message=" . urlencode($message));
+        exit;
     }
 }
 
