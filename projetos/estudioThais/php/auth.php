@@ -24,14 +24,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (mysqli_num_rows($resultado) > 0) {
         $usuario = mysqli_fetch_assoc($resultado);
-        $_SESSION['usuario_id'] = $usuario['id'];
+        $_SESSION['id'] = $usuario['id'];
         $_SESSION['perfil_id'] = $usuario['perfil_id'];
+        $_SESSION['loggedin'] = true;
+        $_SESSION['email'] = $email;
 
         // Redireciona o usuário com base no perfil
         if ($usuario['perfil_id'] == 1) {
             header("Location: ../agendamento.php");
         } elseif ($usuario['perfil_id'] == 2) {
-            header("Location: ../agendamento.php");
+            header("Location: ../admin_dashboard.php");
         }
         exit;
     } else {
