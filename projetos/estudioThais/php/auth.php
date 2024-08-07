@@ -1,6 +1,5 @@
 <?php
 session_start();
-include 'php/verificar_perfil.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
