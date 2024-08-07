@@ -14,16 +14,21 @@
             </a>
         </div>
     </header>
-    <div class="container">
-        <h2>Esqueceu a Senha</h2>
-        <?php if (!empty($message)): ?>
-            <div class="message"><?= htmlspecialchars($message) ?></div>
-        <?php endif; ?>
-        <form action="php/recuperar_senha.php" method="POST">
-            <label for="email">Seu E-mail:</label>
-            <input type="email" id="email" name="email" required>
-            <button type="submit">Enviar Link de Redefinição</button>
-        </form>
+    
+    <div class="container">    
+        <div class="grid">
+            <div class="maca">
+                <h2>Esqueceu a Senha</h2>
+                <?php if (!empty($message)): ?>
+                    <div class="message"><?= htmlspecialchars($message) ?></div>
+                <?php endif; ?>
+                <form action="php/recuperar_senha.php" method="POST">
+                    <label for="email">Seu E-mail:</label>
+                    <input type="email" id="email" name="email" required>
+                    <button type="submit">Enviar Link de Redefinição</button>
+                </form>
+            </div>
+        </div>
     </div>
 </body>
 </html>

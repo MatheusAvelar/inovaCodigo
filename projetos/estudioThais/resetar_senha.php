@@ -14,20 +14,25 @@
             </a>
         </div>
     </header>
-    <div class="container">
-        <h2>Redefinir Senha</h2>
-        <?php if (!empty($message)): ?>
-            <div class="message"><?= htmlspecialchars($message) ?></div>
-        <?php endif; ?>
-        <form action="php/resetar_senha.php" method="POST">
-            <label for="password">Nova Senha:</label>
-            <input type="password" id="password" name="password" required>
+    
+    <div class="container">    
+        <div class="grid">
+            <div class="maca">
+                <h2>Redefinir Senha</h2>
+                <?php if (!empty($message)): ?>
+                    <div class="message"><?= htmlspecialchars($message) ?></div>
+                <?php endif; ?>
+                <form action="php/resetar_senha.php" method="POST">
+                    <label for="password">Nova Senha:</label>
+                    <input type="password" id="password" name="password" required>
 
-            <label for="confirm_password">Confirme a Senha:</label>
-            <input type="password" id="confirm_password" name="confirm_password" required>
+                    <label for="confirm_password">Confirme a Senha:</label>
+                    <input type="password" id="confirm_password" name="confirm_password" required>
 
-            <button type="submit">Redefinir Senha</button>
-        </form>
+                    <button type="submit">Redefinir Senha</button>
+                </form>
+            </div>
+        </div>
     </div>
 </body>
 </html>
