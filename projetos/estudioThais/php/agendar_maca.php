@@ -67,7 +67,7 @@ if (empty($errors)) {
         $stmt->bind_param("ssssss", $descricao, $maca, $date, $startTime, $endTime, $usuarioId);
         if ($stmt->execute()) {
             $status = "success";
-            $message = "Agendamento realizado com sucesso!";
+            $message = "Agendamento realizado com sucesso!" + $usuarioId;
         } else {
             $status = "error";
             $message = "Erro ao realizar o agendamento. Tente novamente.";
@@ -84,6 +84,7 @@ $conn->close();
 
 // Armazenando a mensagem em sessionStorage e redirecionando
 echo "<script>
+    console.log('" . addslashes($message) . "');
     sessionStorage.setItem('status', '" . addslashes($status) . "');
     sessionStorage.setItem('message', '" . addslashes($message) . "');
     window.location.href = '../agendamento.php';
