@@ -75,12 +75,16 @@
         </div>
     </div>
     <script>
-        document.getElementById('export-button').addEventListener('click', function() {
-            const form = document.getElementById('filter-form');
-            form.action = 'export_agendamentos.php';
-            form.submit();
-            form.action = 'horarios_agendados.php';
-        });
-    </script>
+    document.getElementById('export-button').addEventListener('click', function() {
+        const form = document.getElementById('filter-form');
+        const originalAction = form.action; // Salva a ação original
+
+        form.action = 'export_agendamentos.php'; // Define a nova ação para exportação
+        form.method = 'GET'; // Define o método GET
+        form.submit(); // Submete o formulário
+
+        form.action = originalAction; // Restaura a ação original
+    });
+</script>
 </body>
 </html>
