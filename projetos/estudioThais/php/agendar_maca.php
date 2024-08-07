@@ -62,7 +62,7 @@ if (empty($errors)) {
         $stmt->close();
     } else {
         // Inserir no banco de dados se não houver conflitos
-        $usuarioId = $_SESSION['user_id']; // ID do usuário logado
+        $usuarioId = $_SESSION['id']; // ID do usuário logado
         $stmt = $conn->prepare("INSERT INTO agendamentos (nome_cliente, maca_id, data, start_time, end_time, usuario_id) VALUES (?, ?, ?, ?, ?, ?)");
         $stmt->bind_param("ssssss", $name, $maca, $date, $startTime, $endTime, $usuarioId);
         if ($stmt->execute()) {
