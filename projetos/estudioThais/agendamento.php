@@ -1,11 +1,6 @@
 <?php
 session_start();
-
-// Verifica se o usuário está logado, se não, redireciona para a página de login
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    header("Location: login.php");
-    exit;
-}
+include 'php/verificar_perfil.php';
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -25,10 +20,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             </a>
         </div>
         <div class="logout-container">
-        <form action="php/logout.php" method="post">
-            <button type="submit" class="logout-button">Sair</button>
-        </form>
-    </div>
+            <form action="php/logout.php" method="post">
+                <button type="submit" class="logout-button">Sair</button>
+            </form>
+        </div>
     </header>
 
     <div class="container">
@@ -73,6 +68,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
                     <button type="submit">Agendar</button>
                     <a href="horarios_agendados.php" class="button">Ver Horários Agendados</a>
+                    <?php if ($perfil_id == 2) : ?>
+                        <form action="criar_acesso.php" method="GET" style="display:inline;">
+                            <button type="submit">Criar Acesso</button>
+                        </form>
+                    <?php endif; ?>
                 </form>
             </div>
         </div>

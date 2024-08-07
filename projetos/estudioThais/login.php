@@ -37,9 +37,6 @@
                 <form action="esqueceu_senha.php" method="GET">
                     <button type="submit">Esqueceu a Senha</button>
                 </form>
-                <form action="criar_acesso.php" method="GET">
-                    <button type="submit">Criar Acesso</button>
-                </form>
             </div>
         </div>
     </div>
