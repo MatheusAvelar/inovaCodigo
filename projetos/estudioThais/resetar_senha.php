@@ -19,7 +19,7 @@
         <?php if (!empty($message)): ?>
             <div class="message"><?= htmlspecialchars($message) ?></div>
         <?php endif; ?>
-        <form action="" method="POST">
+        <form action="php/resetar_senha.php" method="POST">
             <label for="password">Nova Senha:</label>
             <input type="password" id="password" name="password" required>
 
