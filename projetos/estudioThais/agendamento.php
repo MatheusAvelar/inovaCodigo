@@ -69,9 +69,7 @@ include 'php/verificar_perfil.php';
                     <button type="submit">Agendar</button>
                     <a href="horarios_agendados.php" class="button">Ver Horários Agendados</a>
                     <?php if ($perfil_id == 2) : ?>
-                        <form action="criar_acesso.php" method="GET" style="display:inline;">
-                            <button type="submit">Criar Acesso</button>
-                        </form>
+                        <a href="criar_acesso.php" class="button">Criar Acesso</a>
                     <?php endif; ?>
                 </form>
             </div>
