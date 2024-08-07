@@ -19,7 +19,7 @@
         <?php if (!empty($message)): ?>
             <div class="message"><?= htmlspecialchars($message) ?></div>
         <?php endif; ?>
-        <form action="" method="POST">
+        <form action="php/recuperar_senha.php" method="POST">
             <label for="email">Seu E-mail:</label>
             <input type="email" id="email" name="email" required>
             <button type="submit">Enviar Link de Redefinição</button>
