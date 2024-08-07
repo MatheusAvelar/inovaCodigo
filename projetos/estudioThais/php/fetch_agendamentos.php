@@ -63,6 +63,7 @@ if ($result->num_rows > 0) {
             $currentDate = strtotime(date('Y-m-d'));
             $dateDiff = ($agendamentoDate - $currentDate) / 86400; // diferença em dias
 
+            // Verifica se a diferença em dias é maior ou igual a 2
             if ($dateDiff >= 2) {
                 echo "<td><form method='POST' action='php/delete_agendamento.php'>
                           <input type='hidden' name='agendamento_id' value='" . htmlspecialchars($row['id']) . "'>
