@@ -34,6 +34,16 @@
                 <option value="4" <?= isset($_GET['filter_maca']) && $_GET['filter_maca'] == '4' ? 'selected' : '' ?>>Maca 4</option>
             </select>
 
+            <label for="filter-tatuador">Tatuador:</label>
+            <select id="filter-tatuador" name="filter_tatuador">
+                <option value="">Todos os Tatuadores</option>
+                <?php
+                // Carregar a lista de tatuadores
+                // Inclua a lógica para obter os tatuadores do banco de dados
+                include 'php/get_tatuadores.php';
+                ?>
+            </select>
+
             <button type="submit" class="button">Filtrar</button>
         </form>
         <div class="grid">

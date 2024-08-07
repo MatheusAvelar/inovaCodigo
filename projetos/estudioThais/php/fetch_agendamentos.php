@@ -21,6 +21,7 @@ if ($conn->connect_error) {
 // Obtendo os filtros do formulário se estiverem definidos
 $filterDate = isset($_GET['filter_date']) ? $_GET['filter_date'] : '';
 $filterMaca = isset($_GET['filter_maca']) ? $_GET['filter_maca'] : '';
+$filterTatuador = isset($_GET['filter_tatuador']) ? $_GET['filter_tatuador'] : '';
 
 // Condição para aplicar os filtros
 $whereClause = "WHERE 1=1"; // Começa com condição verdadeira para adicionar filtros dinamicamente
@@ -31,6 +32,10 @@ if (!empty($filterDate)) {
 
 if (!empty($filterMaca)) {
     $whereClause .= " AND ag.maca_id = '" . $conn->real_escape_string($filterMaca) . "'";
+}
+
+if (!empty($filterTatuador)) {
+    $whereClause .= " AND ag.usuario_id = '" . $conn->real_escape_string($filterTatuador) . "'";
 }
 
 // Busca de agendamentos existentes com os filtros aplicados
