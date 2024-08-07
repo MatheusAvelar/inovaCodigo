@@ -72,7 +72,7 @@ if ($result->num_rows > 0) {
                 echo "<td>Não pode excluir</td>";
             }
         } else {
-            echo "<td></td>";
+            echo "<td>Não pode excluir</td>";
         }
 
         echo "</tr>";
