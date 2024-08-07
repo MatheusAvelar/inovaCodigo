@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = $_SESSION['reset_email'];
 
         // Atualiza a senha do usuário
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        $hashed_password = MD5($password);
         $query = "UPDATE usuarioEstudio SET senha='$hashed_password' WHERE email='$email'";
 
         if ($conn->query($query) === TRUE) {
