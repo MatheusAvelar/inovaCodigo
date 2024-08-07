@@ -64,7 +64,7 @@ if (empty($errors)) {
         $stmt->bind_param("ssssss", $descricao, $maca, $date, $startTime, $endTime, $usuarioId);
         if ($stmt->execute()) {
             $status = "success";
-            $message = "Agendamento realizado com sucesso! $usuarioId";
+            $message = "Agendamento realizado com sucesso!";
         } else {
             $status = "error";
             $message = "Erro ao realizar o agendamento. Tente novamente.";
