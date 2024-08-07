@@ -77,15 +77,35 @@ h1 {
     border-radius: 4px;
 }
 
-.maca button {
-    background-color: #fec76f;
+/* Estilo comum para todos os botões */
+button,
+.logout-button,
+.button {
+    background-color: #fec76f; /* Cor laranja */
     color: white;
     border: none;
     cursor: pointer;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    box-shadow: 0 4px #999;
 }
 
-.maca button:hover {
+button:hover,
+.logout-button:hover,
+.button:hover {
+    background-color: #dbbe4d; /* Laranja mais escuro ao passar o mouse */
+}
+
+button:active,
+.logout-button:active,
+.button:active {
     background-color: #dbbe4d;
+    box-shadow: 0 4px #666;
+    transform: translateY(2px);
 }
 
 .message {
@@ -126,6 +146,7 @@ h1 {
         font-size: 24px;
     }
 }
+
 /* Estilizando a tabela */
 table {
     width: 100%;
@@ -187,67 +208,8 @@ td:nth-child(6) {
     width: 20%;
 }
 
-.logo-container {
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.logout-container {
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.header {
-    background-color: #333;
-    color: #fff;
-    padding: 15px;
-    text-align: center;
-}
-
-.button {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 14px;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    outline: none;
-    color: #fff;
-    background-color: #4CAF50;
-    border: none;
-    border-radius: 15px;
-    box-shadow: 0 9px #999;
-}
-
-.button:hover {
-    background-color: #3e8e41;
-}
-
-.button:active {
-    background-color: #3e8e41;
-    box-shadow: 0 5px #666;
-    transform: translateY(4px);
-}
-
 /* Botão de Deslogar */
 .logout-container {
     text-align: right;
     margin: 10px;
-}
-
-.logout-button {
-    background-color: #f44336; /* Cor de fundo do botão */
-    color: white; /* Cor do texto */
-    border: none; /* Remove a borda padrão */
-    padding: 10px 20px; /* Espaçamento interno */
-    text-align: center; /* Centraliza o texto */
-    text-decoration: none; /* Remove o sublinhado */
-    display: inline-block; /* Ajusta o botão para o inline */
-    font-size: 16px; /* Tamanho da fonte */
-    cursor: pointer; /* Muda o cursor ao passar sobre o botão */
-    border-radius: 5px; /* Bordas arredondadas */
-}
-
-.logout-button:hover {
-    background-color: #e53935; /* Cor de fundo ao passar o mouse */
 }
