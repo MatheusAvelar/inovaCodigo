@@ -7,10 +7,10 @@ body {
 }
 
 header {
-    background-color: #fff; /* Fundo branco */
+    background-color: #fff;
     padding: 15px;
     text-align: center;
-    border-bottom: 1px solid #ddd; /* Linha fina para separação */
+    border-bottom: 1px solid #ddd;
 }
 
 .logo-container {
@@ -23,7 +23,7 @@ header {
 .logo {
     width: 50px;
     height: auto;
-    border-radius: 50%; /* Bordas arredondadas */
+    border-radius: 50%;
 }
 
 h1 {
@@ -37,7 +37,6 @@ h1 {
     background-color: #fff;
     padding: 15px;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .grid {
@@ -49,7 +48,6 @@ h1 {
 .maca {
     background-color: #fafafa;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding: 15px;
 }
 
@@ -77,35 +75,15 @@ h1 {
     border-radius: 4px;
 }
 
-/* Estilo comum para todos os botões */
-button,
-.logout-button,
-.button {
-    background-color: #ff8c00; /* Laranja mais suave */
+.maca button {
+    background-color: #fec66f;
     color: white;
     border: none;
     cursor: pointer;
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 5px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    box-shadow: 0 4px #999;
 }
 
-button:hover,
-.logout-button:hover,
-.button:hover {
-    background-color: #ff7f00; /* Laranja mais escuro ao passar o mouse */
-}
-
-button:active,
-.logout-button:active,
-.button:active {
-    background-color: #ff7f00;
-    box-shadow: 0 4px #666;
-    transform: translateY(2px);
+.maca button:hover {
+    background-color: #dbbe4d;
 }
 
 .message {
@@ -151,7 +129,7 @@ button:active,
 table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 14px; /* Ajuste o tamanho da fonte */
+    font-size: 14px;
 }
 
 table, th, td {
@@ -162,11 +140,11 @@ table, th, td {
 th {
     background-color: #f2f2f2;
     text-align: left;
-    white-space: nowrap; /* Evita que o texto das cabeçalhos quebrem */
+    white-space: nowrap;
 }
 
 td {
-    white-space: nowrap; /* Evita que o texto das células quebrem */
+    white-space: nowrap;
 }
 
 tr:nth-child(even) {
@@ -208,7 +186,52 @@ td:nth-child(6) {
     width: 20%;
 }
 
-/* Botão de Deslogar */
+.logo-container {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.logout-container {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.header {
+    background-color: #333;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+}
+
+/* Botões */
+.button,
+.maca button,
+.logout-button {
+    background-color: #fec66f;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.button:hover,
+.maca button:hover,
+.logout-button:hover {
+    background-color: #dbbe4d;
+}
+
+/* Remove sombras */
+.button:active,
+.maca button:active,
+.logout-button:active {
+    background-color: #dbbe4d;
+    transform: translateY(2px);
+}
+
 .logout-container {
     text-align: right;
     margin: 10px;

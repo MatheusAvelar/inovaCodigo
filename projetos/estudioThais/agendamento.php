@@ -24,7 +24,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         </div>
         <div class="logout-container">
         <form action="php/logout.php" method="post">
-            <button type="submit" class="logout-button">Logout</button>
+            <button type="submit" class="logout-button">Sair</button>
         </form>
     </div>
     </header>
