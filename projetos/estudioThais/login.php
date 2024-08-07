@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agendamento de Macas</title>
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+    </style>
 </head>
 
 <body>
@@ -22,10 +29,13 @@
             <div class="maca">
                 <form action="php/auth.php" method="POST">
                     <label for="username">Usuário:</label><br>
-                    <input type="text" id="username" name="username"><br>
+                    <input type="text" id="username" name="username" required><br>
                     <label for="password">Senha:</label><br>
-                    <input type="password" id="password" name="password"><br><br>
-                    <button type="submit">Login</button>
+                    <input type="password" id="password" name="password" required><br><br>
+                    <div class="button-container">
+                        <button type="submit">Login</button>
+                        <a href="esqueceu_senha.php" class="button">Esqueceu a Senha</a>
+                    </div>
                 </form>
                 <form action="criar_acesso.php" method="GET">
                     <button type="submit">Criar Acesso</button>
