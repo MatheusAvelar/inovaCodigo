@@ -20,7 +20,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 <body>
     <header>
         <div class="logo-container">
-            <img src="img/tatto.jpeg" alt="Logo do Estúdio" class="logo">
+            <a href="http://example.com">
+                <img src="img/tatto.jpeg" alt="Logo do Estúdio" class="logo">
+            </a>
         </div>
         <div class="logout-container">
         <form action="php/logout.php" method="post">
