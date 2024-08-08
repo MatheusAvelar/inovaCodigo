@@ -78,13 +78,6 @@
 
     <script>
         document.getElementById('export-button').addEventListener('click', function() {
-            const form = document.getElementById('filter-form');
-            form.action = 'export_agendamentos.php'; // Define a ação para exportar
-            form.method = 'GET'; // Define o método GET
-            form.submit(); // Submete o formulário
-        });
-
-        document.getElementById('export-button').addEventListener('click', function() {
         const form = document.getElementById('filter-form');
         const filterData = new FormData(form);
 
