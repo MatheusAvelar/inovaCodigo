@@ -78,13 +78,9 @@
     <script>
         document.getElementById('export-button').addEventListener('click', function() {
             const form = document.getElementById('filter-form');
-            const originalAction = form.action; // Salva a ação original
-
-            form.action = 'export_agendamentos.php'; // Define a nova ação para exportação
+            form.action = 'export_agendamentos.php'; // Define a ação para exportar
             form.method = 'GET'; // Define o método GET
             form.submit(); // Submete o formulário
-
-            form.action = originalAction; // Restaura a ação original
         });
     </script>
 </body>

@@ -48,11 +48,13 @@ $query = "SELECT ag.id, ag.descricao, ag.maca_id, ag.data, ag.start_time, ag.end
 $result = $conn->query($query);
 
 if ($result->num_rows > 0) {
-    $delimiter = ";"; // Usando ponto e vírgula como delimitador, teste se a vírgula não funciona bem
+    $delimiter = ";"; // Usando ponto e vírgula como delimitador
     $filename = "agendamentos_filtrados_" . date('Y-m-d') . ".csv";
 
     // Cria um arquivo temporário
-    $f = fopen('php://memory', 'w');
+    $f = fopen('php://output', 'w');
+    header('Content-Type: text/csv; charset=UTF-8');
+    header('Content-Disposition: attachment; filename="' . $filename . '"');
 
     // Define os cabeçalhos
     $fields = array('Tatuador', 'Maca', 'Data', 'H. Inicial', 'H. Final');
@@ -68,15 +70,8 @@ if ($result->num_rows > 0) {
         fputcsv($f, $lineData, $delimiter);
     }
 
-    // Volta o ponteiro para o início do arquivo
-    fseek($f, 0);
-
-    // Define os headers para download
-    header('Content-Type: text/csv; charset=UTF-8');
-    header('Content-Disposition: attachment; filename="' . $filename . '";');
-
-    // Envia os dados do arquivo para o output
-    fpassthru($f);
+    // Finaliza o arquivo
+    fclose($f);
 } else {
     echo "Nenhum agendamento encontrado.";
 }
