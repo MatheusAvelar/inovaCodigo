@@ -78,25 +78,46 @@
 
     <script>
         document.getElementById('export-button').addEventListener('click', function() {
-        const form = document.getElementById('filter-form');
-        const filterData = new FormData(form);
+            console.log('Exportar botão clicado');
 
-        fetch('php/fetch_agendamentos.php?' + new URLSearchParams(filterData))
-            .then(response => response.json())
-            .then(data => {
-                // Adiciona os cabeçalhos das colunas
-                const headers = ['Tatuador', 'Maca', 'Data', 'H. Inicial', 'H. Final'];
-                
-                // Cria uma planilha com os dados
-                const worksheet = XLSX.utils.json_to_sheet(data, {header: headers});
-                const workbook = XLSX.utils.book_new();
-                XLSX.utils.book_append_sheet(workbook, worksheet, "Agendamentos");
+            const form = document.getElementById('filter-form');
+            const filterData = new FormData(form);
 
-                // Gera o arquivo e força o download
-                XLSX.writeFile(workbook, "agendamentos_filtrados.xlsx");
-            })
-            .catch(error => console.error('Error:', error));
-    });
+            // Converte os dados do formulário para uma string de query
+            const queryString = new URLSearchParams(filterData).toString();
+            console.log('Query string gerada:', queryString);
+
+            // Faz a requisição para o PHP e busca os dados
+            fetch('php/fetch_agendamentos.php?' + queryString)
+                .then(response => {
+                    console.log('Resposta recebida:', response);
+                    // Verifica se a resposta está OK
+                    if (!response.ok) {
+                        throw new Error('Resposta da rede não foi OK.');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Dados recebidos:', data);
+
+                    // Adiciona os cabeçalhos das colunas
+                    const headers = ['Tatuador', 'Maca', 'Data', 'H. Inicial', 'H. Final'];
+                    
+                    // Cria uma planilha com os dados
+                    const worksheet = XLSX.utils.json_to_sheet(data, {header: headers});
+                    const workbook = XLSX.utils.book_new();
+                    XLSX.utils.book_append_sheet(workbook, worksheet, "Agendamentos");
+
+                    // Gera o arquivo e força o download
+                    XLSX.writeFile(workbook, "agendamentos_filtrados.xlsx");
+
+                    console.log('Arquivo Excel gerado e baixado.');
+                })
+                .catch(error => {
+                    console.error('Erro na requisição ou na geração do arquivo:', error);
+                });
+        });
     </script>
+
 </body>
 </html>
