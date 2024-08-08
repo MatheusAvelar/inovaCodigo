@@ -61,11 +61,11 @@ if ($result->num_rows > 0) {
         $formattedEndTime = date('H:i', strtotime($row['end_time']));
 
         $data[] = [
-            'tatuador_nome' => htmlspecialchars($row['tatuador_nome']),
-            'maca_id' => htmlspecialchars($row['maca_id']),
-            'data' => $formattedDate,
-            'start_time' => $formattedStartTime,
-            'end_time' => $formattedEndTime
+            'Tatuador' => htmlspecialchars($row['tatuador_nome']),
+            'Maca' => htmlspecialchars($row['maca_id']),
+            'Data' => $formattedDate,
+            'H.Inicial' => $formattedStartTime,
+            'H.Final' => $formattedEndTime
         ];
     }
 } else {

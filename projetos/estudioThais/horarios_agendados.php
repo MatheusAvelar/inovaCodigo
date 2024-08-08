@@ -101,7 +101,7 @@
                     console.log('Dados recebidos (JSON):', jsonData);
 
                     // Adiciona os cabeçalhos das colunas
-                    const headers = ['Tatuador', 'Maca', 'Data', 'H. Inicial', 'H. Final'];
+                    const headers = ['Tatuador', 'Maca', 'Data', '', 'H.Final'];
 
                     // Cria uma planilha com os dados
                     const worksheet = XLSX.utils.json_to_sheet(jsonData, {header: headers});
