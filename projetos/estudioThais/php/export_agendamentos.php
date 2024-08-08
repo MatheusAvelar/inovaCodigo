@@ -52,7 +52,7 @@ if ($result->num_rows > 0) {
     $filename = "agendamentos_filtrados_" . date('Y-m-d') . ".csv";
 
     // Cria um arquivo temporário
-    $f = fopen('php://output', 'w');
+    $f = fopen($filename, 'w');
     header('Content-Type: text/csv; charset=UTF-8');
     header('Content-Disposition: attachment; filename="' . $filename . '"');
 
