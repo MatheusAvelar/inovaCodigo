@@ -48,7 +48,7 @@ $query = "SELECT ag.id, ag.descricao, ag.maca_id, ag.data, ag.start_time, ag.end
 $result = $conn->query($query);
 
 if ($result->num_rows > 0) {
-    $delimiter = ",";
+    $delimiter = ";"; // Usando ponto e vírgula como delimitador, teste se a vírgula não funciona bem
     $filename = "agendamentos_filtrados_" . date('Y-m-d') . ".csv";
 
     // Cria um arquivo temporário
@@ -72,7 +72,7 @@ if ($result->num_rows > 0) {
     fseek($f, 0);
 
     // Define os headers para download
-    header('Content-Type: text/csv');
+    header('Content-Type: text/csv; charset=UTF-8');
     header('Content-Disposition: attachment; filename="' . $filename . '";');
 
     // Envia os dados do arquivo para o output
