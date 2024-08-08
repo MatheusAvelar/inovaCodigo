@@ -47,34 +47,27 @@ $query = "SELECT ag.id, ag.descricao, ag.maca_id, ag.data, ag.start_time, ag.end
 
 $result = $conn->query($query);
 
+$data = [];
 if ($result->num_rows > 0) {
-    $delimiter = ";"; // Usando ponto e vírgula como delimitador
-    $filename = "agendamentos_filtrados_" . date('Y-m-d') . ".csv";
-
-    // Cria um arquivo temporário
-    $f = fopen($filename, 'w');
-    header('Content-Type: text/csv; charset=UTF-8');
-    header('Content-Disposition: attachment; filename="' . $filename . '"');
-
-    // Define os cabeçalhos
-    $fields = array('Tatuador', 'Maca', 'Data', 'H. Inicial', 'H. Final');
-    fputcsv($f, $fields, $delimiter);
-
-    // Preenche os dados
     while ($row = $result->fetch_assoc()) {
+        // Formatando a data
         $formattedDate = date('d/m/Y', strtotime($row['data']));
         $formattedStartTime = date('H:i', strtotime($row['start_time']));
         $formattedEndTime = date('H:i', strtotime($row['end_time']));
 
-        $lineData = array($row['tatuador_nome'], $row['maca_id'], $formattedDate, $formattedStartTime, $formattedEndTime);
-        fputcsv($f, $lineData, $delimiter);
+        $data[] = [
+            'Tatuador' => $row['tatuador_nome'],
+            'Maca' => $row['maca_id'],
+            'Data' => $formattedDate,
+            'H. Inicial' => $formattedStartTime,
+            'H. Final' => $formattedEndTime
+        ];
     }
-
-    // Finaliza o arquivo
-    fclose($f);
-} else {
-    echo "Nenhum agendamento encontrado.";
 }
+
+// Configura o tipo de conteúdo para JSON
+header('Content-Type: application/json');
+echo json_encode($data);
 
 // Fechando a conexão
 $conn->close();

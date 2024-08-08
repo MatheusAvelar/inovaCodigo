@@ -6,6 +6,8 @@
     <title>Horários Agendados</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.sheetjs.com/xlsx-latest/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+
 </head>
 <body>
     <header>
@@ -88,7 +90,7 @@
             console.log('Query string gerada:', queryString);
 
             // Faz a requisição para o PHP e busca os dados
-            fetch('php/fetch_agendamentos.php?' + queryString)
+            fetch('php/export_agendamentos.php?' + queryString)
                 .then(response => {
                     console.log('Resposta recebida:', response);
                     // Verifica se a resposta está OK
