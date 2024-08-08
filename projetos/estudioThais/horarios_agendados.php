@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Horários Agendados</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.sheetjs.com/xlsx-latest/xlsx.full.min.js"></script>
 </head>
 <body>
     <header>
@@ -82,6 +83,27 @@
             form.method = 'GET'; // Define o método GET
             form.submit(); // Submete o formulário
         });
+
+        document.getElementById('export-button').addEventListener('click', function() {
+        const form = document.getElementById('filter-form');
+        const filterData = new FormData(form);
+
+        fetch('php/fetch_agendamentos.php?' + new URLSearchParams(filterData))
+            .then(response => response.json())
+            .then(data => {
+                // Adiciona os cabeçalhos das colunas
+                const headers = ['Tatuador', 'Maca', 'Data', 'H. Inicial', 'H. Final'];
+                
+                // Cria uma planilha com os dados
+                const worksheet = XLSX.utils.json_to_sheet(data, {header: headers});
+                const workbook = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(workbook, worksheet, "Agendamentos");
+
+                // Gera o arquivo e força o download
+                XLSX.writeFile(workbook, "agendamentos_filtrados.xlsx");
+            })
+            .catch(error => console.error('Error:', error));
+    });
     </script>
 </body>
 </html>
