@@ -91,22 +91,20 @@
 
             // Faz a requisição para o PHP e busca os dados
             fetch('php/export_agendamentos.php?' + queryString)
-                .then(response => {
-                    console.log('Resposta recebida:', response);
-                    // Verifica se a resposta está OK
-                    if (!response.ok) {
-                        throw new Error('Resposta da rede não foi OK.');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log('Dados recebidos:', data);
+            .then(response => response.text())  // Use text() para ver o conteúdo bruto
+            .then(data => {
+                console.log('Dados recebidos (texto bruto):', data);
+
+                try {
+                    // Tente converter o texto para JSON
+                    const jsonData = JSON.parse(data);
+                    console.log('Dados recebidos (JSON):', jsonData);
 
                     // Adiciona os cabeçalhos das colunas
                     const headers = ['Tatuador', 'Maca', 'Data', 'H. Inicial', 'H. Final'];
-                    
+
                     // Cria uma planilha com os dados
-                    const worksheet = XLSX.utils.json_to_sheet(data, {header: headers});
+                    const worksheet = XLSX.utils.json_to_sheet(jsonData, {header: headers});
                     const workbook = XLSX.utils.book_new();
                     XLSX.utils.book_append_sheet(workbook, worksheet, "Agendamentos");
 
@@ -114,10 +112,13 @@
                     XLSX.writeFile(workbook, "agendamentos_filtrados.xlsx");
 
                     console.log('Arquivo Excel gerado e baixado.');
-                })
-                .catch(error => {
-                    console.error('Erro na requisição ou na geração do arquivo:', error);
-                });
+                } catch (error) {
+                    console.error('Erro ao interpretar JSON:', error);
+                }
+            })
+            .catch(error => {
+                console.error('Erro na requisição ou na geração do arquivo:', error);
+            });
         });
     </script>
 

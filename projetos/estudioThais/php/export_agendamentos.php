@@ -47,7 +47,12 @@ $query = "SELECT ag.id, ag.descricao, ag.maca_id, ag.data, ag.start_time, ag.end
 
 $result = $conn->query($query);
 
+// Inicia a resposta JSON
+header('Content-Type: application/json');
+
+// Prepara um array para armazenar os dados
 $data = [];
+
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         // Formatando a data
@@ -56,20 +61,23 @@ if ($result->num_rows > 0) {
         $formattedEndTime = date('H:i', strtotime($row['end_time']));
 
         $data[] = [
-            'Tatuador' => $row['tatuador_nome'],
-            'Maca' => $row['maca_id'],
-            'Data' => $formattedDate,
-            'H. Inicial' => $formattedStartTime,
-            'H. Final' => $formattedEndTime
+            'tatuador_nome' => htmlspecialchars($row['tatuador_nome']),
+            'maca_id' => htmlspecialchars($row['maca_id']),
+            'data' => $formattedDate,
+            'start_time' => $formattedStartTime,
+            'end_time' => $formattedEndTime
         ];
     }
+} else {
+    $data[] = ['message' => 'Nenhum agendamento encontrado.'];
 }
 
-// Configura o tipo de conteúdo para JSON
-header('Content-Type: application/json');
+// Adiciona a linha para depuração
+error_log(json_encode($data));
+
+// Retorna o JSON
 echo json_encode($data);
 
 // Fechando a conexão
 $conn->close();
-exit;
 ?>
