@@ -74,7 +74,9 @@ if ($result->num_rows > 0) {
                           <button type='submit' data-description='" . htmlspecialchars($row['descricao']) . "' 
                                   data-date='" . $formattedDate . "' 
                                   data-start-time='" . $formattedStartTime . "' 
-                                  data-end-time='" . $formattedEndTime . "'>Excluir</button>
+                                  data-end-time='" . $formattedEndTime . "'>
+                              <i class='fas fa-trash'></i>
+                          </button>
                       </form></td>";
             } else {
                 echo "<td>Não pode excluir</td>";
