@@ -13,8 +13,6 @@ $dbname = "u221588236_controle_finan";
 
 // Criando a conexão
 $conn = new mysqli($servername, $username, $password, $dbname);
-
-// Verificando a conexão
 if ($conn->connect_error) {
     die("Falha na conexão: " . $conn->connect_error);
 }
@@ -31,6 +29,12 @@ $maca = $_POST['maca'] ?? '';
 $date = $_POST['date1'] ?? '';
 $startTime = $_POST['start-time1'] ?? '';
 $endTime = $_POST['end-time1'] ?? '';
+
+echo "Nome Cliente: $nomeCliente<br>";
+echo "Estilo: $estilo<br>";
+echo "Tamanho: $tamanho<br>";
+echo "Valor Recebido: " . $_POST['valor'] . "<br>";
+echo "Valor Formatado: $valor<br>";
 
 // Validação dos dados
 $errors = [];
@@ -53,32 +57,44 @@ if (!is_numeric($valor) || $valor <= 0) {
     $errors[] = "O valor deve ser um número maior que R$ 0.";
 }
 
+if ($errors) {
+    echo "Erros encontrados:<br>";
+    foreach ($errors as $error) {
+        echo "$error<br>";
+    }
+}
+
 // Verificação de conflito de horário
 if (empty($errors)) {
     $stmt = $conn->prepare("SELECT start_time, end_time FROM agendamentos WHERE maca_id = ? AND data = ? AND ((start_time <= ? AND end_time > ?) OR (start_time < ? AND end_time >= ?))");
     $stmt->bind_param("ssssss", $maca, $date, $startTime, $startTime, $endTime, $endTime);
-    $stmt->execute();
-    $stmt->store_result();
 
-    if ($stmt->num_rows > 0) {
-        $stmt->bind_result($existingStartTime, $existingEndTime);
-        $stmt->fetch();
-        $status = "error";
-        $message = "Já existe um agendamento para a maca e data selecionadas com conflito de horário: de $existingStartTime às $existingEndTime.";
-        $stmt->close();
+    if (!$stmt->execute()) {
+        echo "Erro na execução da consulta: " . $stmt->error . "<br>";
     } else {
-        // Inserir no banco de dados se não houver conflitos
-        $usuarioId = $_SESSION['id']; // ID do usuário logado
-        $stmt = $conn->prepare("INSERT INTO agendamentos (nome_cliente, estilo, tamanho, valor, forma_pagamento, sinal_pago, descricao, maca_id, data, start_time, end_time, usuario_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssssssssssss", $nomeCliente, $estilo, $tamanho, $valor, $formaPagamento, $sinalPago, $descricao, $maca, $date, $startTime, $endTime, $usuarioId);
-        if ($stmt->execute()) {
-            $status = "success";
-            $message = "Agendamento realizado com sucesso!";
-        } else {
+        $stmt->store_result();
+        echo "Número de linhas retornadas: " . $stmt->num_rows . "<br>";
+
+        if ($stmt->num_rows > 0) {
+            $stmt->bind_result($existingStartTime, $existingEndTime);
+            $stmt->fetch();
             $status = "error";
-            $message = "Erro ao realizar o agendamento. Tente novamente.";
+            $message = "Já existe um agendamento para a maca e data selecionadas com conflito de horário: de $existingStartTime às $existingEndTime.";
+            $stmt->close();
+        } else {
+            // Inserir no banco de dados se não houver conflitos
+            $usuarioId = $_SESSION['id']; // ID do usuário logado
+            $stmt = $conn->prepare("INSERT INTO agendamentos (nome_cliente, estilo, tamanho, valor, forma_pagamento, sinal_pago, descricao, maca_id, data, start_time, end_time, usuario_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("ssssssssssss", $nomeCliente, $estilo, $tamanho, $valor, $formaPagamento, $sinalPago, $descricao, $maca, $date, $startTime, $endTime, $usuarioId);
+
+            if (!$stmt->execute()) {
+                echo "Erro na inserção: " . $stmt->error . "<br>";
+            } else {
+                $status = "success";
+                $message = "Agendamento realizado com sucesso!";
+            }
+            $stmt->close();
         }
-        $stmt->close();
     }
 } else {
     $status = "error";
@@ -90,7 +106,7 @@ $conn->close();
 
 // Armazenando a mensagem em sessionStorage e redirecionando
 echo "<script>
-    console.log('" . addslashes($message) . "');
+    console.log('Mensagem de erro: " . addslashes($message) . "');
     sessionStorage.setItem('status', '" . addslashes($status) . "');
     sessionStorage.setItem('message', '" . addslashes($message) . "');
     window.location.href = '../agendamento.php';
