@@ -1,8 +1,7 @@
 <?php
 session_start();
 include 'php/verificar_perfil.php';
-?>
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
@@ -23,10 +22,7 @@ include 'php/verificar_perfil.php';
     
     <div class="container">
         <nav id="menu"> 
-            <ul> 
-                <?php if ($perfil_id == 2) : ?>
-                    <li><a href="criar_acesso.php">Criar Acesso</a></li>
-                <?php endif; ?>
+            <ul>
                 <li><a href="agendamento.php">Agendamento</a></li>
                 <li><a href="horarios_agendados.php">Horários Agendados</a></li>
                 <li><a href="php/logout.php">Sair</a></li>
