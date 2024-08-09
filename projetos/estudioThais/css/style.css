@@ -289,3 +289,16 @@ td:nth-child(6) {
     color: #6D6D6D;
     border-bottom:3px solid #fec66f;
 }
+
+#delete-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 5px;
+    color: #ff5722; /* cor do ícone */
+}
+
+#delete-button:hover i {
+    color: #e64a19; /* cor ao passar o mouse */
+}
