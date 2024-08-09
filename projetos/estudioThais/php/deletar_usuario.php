@@ -1,7 +1,7 @@
 <?php
 session_start();
 include 'php/verificar_perfil.php';
-
+echo "Script de exclusão foi chamado"; 
 // Verifica se o ID do usuário foi passado na URL
 if (!isset($_GET['id']) || empty($_GET['id'])) {
     $_SESSION['status'] = 'error';
@@ -29,6 +29,8 @@ if ($conn->connect_error) {
     exit();
 }
 
+echo "Conexão com o banco de dados bem-sucedida";
+
 // Verificando se o usuário existe
 $query = "SELECT id FROM usuarioEstudio WHERE id = $userId";
 $result = $conn->query($query);
@@ -43,9 +45,12 @@ if ($result->num_rows === 0) {
 // Deletando o usuário
 $query = "DELETE FROM usuarioEstudio WHERE id = $userId";
 if ($conn->query($query) === TRUE) {
+    echo "Usuário deletado com sucesso.";
     $_SESSION['status'] = 'success';
     $_SESSION['message'] = 'Usuário deletado com sucesso.';
+    echo "Usuário deletado com sucesso.";
 } else {
+    echo "Erro ao deletar usuário.";
     $_SESSION['status'] = 'error';
     $_SESSION['message'] = 'Erro ao deletar usuário: ' . $conn->error;
 }
