@@ -35,23 +35,27 @@ include 'php/verificar_perfil.php';
             </ul> 
         </nav>
         <h2>Usuários do Sistema</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>Sobrenome</th>
-                    <th>Email</th>
-                    <th>Perfil</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                include 'php/get_usuarios.php';
-                ?>
-            </tbody>
-        </table>
+        <div class="grid">
+            <div class="maca">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Sobrenome</th>
+                            <th>Email</th>
+                            <th>Perfil</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        include 'php/get_usuarios.php';
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </body>
 </html>

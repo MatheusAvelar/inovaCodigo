@@ -36,28 +36,32 @@ include 'php/verificar_perfil.php';
             </ul> 
         </nav>
         <h2>Editar Usuário</h2>
-        <form action="atualizar_usuario.php" method="POST">
-            <input type="hidden" name="id" value="<?= htmlspecialchars($user['id']) ?>">
-            <label for="nome">Nome:</label>
-            <input type="text" id="nome" name="nome" value="<?= htmlspecialchars($user['nome']) ?>" required>
-            
-            <label for="sobrenome">Sobrenome:</label>
-            <input type="text" id="sobrenome" name="sobrenome" value="<?= htmlspecialchars($user['sobrenome']) ?>" required>
-            
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" value="<?= htmlspecialchars($user['email']) ?>" required>
-            
-            <label for="perfil">Perfil:</label>
-            <select id="perfil" name="perfil_id" required>
-                <?php while ($perfil = $perfResult->fetch_assoc()) : ?>
-                    <option value="<?= htmlspecialchars($perfil['id']) ?>" <?= $perfil['id'] == $user['perfil_id'] ? 'selected' : '' ?>>
-                        <?= htmlspecialchars($perfil['nome']) ?>
-                    </option>
-                <?php endwhile; ?>
-            </select>
-            
-            <button type="submit" class="button">Atualizar</button>
-        </form>
+        <div class="grid">
+            <div class="maca">
+                <form action="atualizar_usuario.php" method="POST">
+                    <input type="hidden" name="id" value="<?= htmlspecialchars($user['id']) ?>">
+                    <label for="nome">Nome:</label>
+                    <input type="text" id="nome" name="nome" value="<?= htmlspecialchars($user['nome']) ?>" required>
+                    
+                    <label for="sobrenome">Sobrenome:</label>
+                    <input type="text" id="sobrenome" name="sobrenome" value="<?= htmlspecialchars($user['sobrenome']) ?>" required>
+                    
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" value="<?= htmlspecialchars($user['email']) ?>" required>
+                    
+                    <label for="perfil">Perfil:</label>
+                    <select id="perfil" name="perfil_id" required>
+                        <?php while ($perfil = $perfResult->fetch_assoc()) : ?>
+                            <option value="<?= htmlspecialchars($perfil['id']) ?>" <?= $perfil['id'] == $user['perfil_id'] ? 'selected' : '' ?>>
+                                <?= htmlspecialchars($perfil['nome']) ?>
+                            </option>
+                        <?php endwhile; ?>
+                    </select>
+                    
+                    <button type="submit" class="button">Atualizar</button>
+                </form>
+            </div>
+        </div>
     </div>
 </body>
 </html>
