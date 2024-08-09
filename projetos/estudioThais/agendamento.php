@@ -25,19 +25,22 @@ include 'php/verificar_perfil.php';
             </form>
         </div>
     </header>
-    <nav>
-        <div class="menu-btn">
-            <div class="menu-btn__burger"></div>
-        </div>
-        <ul class="nav-links">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Serviços</a></li>
-            <li><a href="#">Sobre</a></li>
-            <li><a href="#">Contato</a></li>
-        </ul>
-    </nav>
 
     <div class="container">
+        <div class="hamburger-menu">
+            <input type="checkbox" id="menu-toggle">
+            <label for="menu-toggle" class="menu-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="#criar-acesso">Criar Acesso</a></li>
+                    <li><a href="#ver-horarios-agendados">Ver Horários Agendados</a></li>
+                </ul>
+            </nav>
+        </div>
         <div id="message-container">
             <?php if (isset($status) && isset($message)) : ?>
                 <div class="message <?= $status ?>">
@@ -88,15 +91,7 @@ include 'php/verificar_perfil.php';
         </div>
     </div>
 
-    <script>
-        const menuBtn = document.querySelector('.menu-btn');
-        const navLinks = document.querySelector('.nav-links');
-
-        menuBtn.addEventListener('click', () => {
-            menuBtn.classList.toggle('active');
-            navLinks.classList.toggle('nav-active');
-        });
-        
+    <script>        
         function validateForm() {
             let isValid = true;
 
