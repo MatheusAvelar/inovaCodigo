@@ -292,12 +292,12 @@ td:nth-child(6) {
 
 /* Estilo do ícone de exclusão */
 .delete-icon {
-    color: #ff5722; /* cor do ícone */
+    color: #fdcf9c; /* cor do ícone */
     font-size: 20px;
     text-decoration: none;
     cursor: pointer;
 }
 
 .delete-icon:hover {
-    color: #e64a19; /* cor ao passar o mouse */
+    color: #fec66f; /* cor ao passar o mouse */
 }
