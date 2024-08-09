@@ -37,7 +37,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Redireciona para a lista de usuários com uma mensagem de sucesso
         $status = "success";
         $message = "Usuário atualizado com sucesso!";
-        exit();
     } else {
         $status = "error";
         $message = "Erro ao atualizar usuário: " . $conn->error;
