@@ -10,6 +10,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = "Camila@307";
     $dbname = "u221588236_controle_finan";
 
+    // Definindo variáveis para mensagem de retorno
+    $status = "";
+    $message = "";
+
     // Criando a conexão
     $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -32,17 +36,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($conn->query($query) === TRUE) {
         // Redireciona para a lista de usuários com uma mensagem de sucesso
+        $status = "success";
         $message = "Usuário atualizado com sucesso!";
         header('Location: ../usuarios_estudio.php');
         exit();
     } else {
+        $status = "error";
         $message = "Erro ao atualizar usuário: " . $conn->error;
     }
 
     echo "<script>
-                sessionStorage.setItem('message', '" . addslashes($message) . "');
-                window.location.href = '../editar_usuario.php';
-            </script>";
+            console.log('Mensagem de erro: " . addslashes($message) . "');
+            sessionStorage.setItem('status', '" . addslashes($status) . "');
+            sessionStorage.setItem('message', '" . addslashes($message) . "');
+            window.location.href = '../agendamento.php';
+        </script>";
 
     // Fechando a conexão
     $conn->close();
