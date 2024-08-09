@@ -54,6 +54,17 @@ if ($row['agendamentos_count'] > 0) {
     exit();
 }
 
+// Excluindo registros na tabela log_alteracoes_usuario
+$query = "DELETE FROM log_alteracoes_usuario WHERE usuario_id = $userId";
+if ($conn->query($query) === FALSE) {
+    $_SESSION['status'] = 'error';
+    $_SESSION['message'] = 'Erro ao excluir registros relacionados: ' . $conn->error;
+    echo "Erro ao excluir registros relacionados.";
+    $conn->close();
+    header('Location: ../usuarios_estudio.php');
+    exit();
+}
+
 // Deletando o usuário
 $query = "DELETE FROM usuarioEstudio WHERE id = $userId";
 if ($conn->query($query) === TRUE) {
