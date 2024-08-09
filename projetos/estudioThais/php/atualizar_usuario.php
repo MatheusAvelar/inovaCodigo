@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 foreach ($fields as $field) {
                     if ($user[$field] !== $$field) {
                         $valor_antigo = $conn->real_escape_string($user[$field]);
-                        $valor_novo = $conn->real_escape_string($$field);
+                        $valor_novo = $conn->real_escape_string($field);
                         $logQuery = "INSERT INTO log_alteracoes_usuario (usuario_id, campo, valor_antigo, valor_novo, alterado_por, data_alteracao)
                                      VALUES ($id, '$field', '$valor_antigo', '$valor_novo', $alterado_por, $data_alteracao)";
                         $conn->query($logQuery);
