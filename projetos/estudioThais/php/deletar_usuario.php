@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'php/verificar_perfil.php';
+//include 'php/verificar_perfil.php';
 
 // Verifica se o ID do usuário foi passado na URL e o converte para um inteiro
 $userId = isset($_GET['id']) ? intval($_GET['id']) : 0;
