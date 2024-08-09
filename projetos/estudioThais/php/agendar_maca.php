@@ -20,10 +20,10 @@ if ($conn->connect_error) {
 }
 
 // Capturando dados do formulário
-$nomeCliente = $_POST['name'] ?? '';
+$nomeCliente = $_POST['cliente'] ?? '';
 $estilo = $_POST['estilo'] ?? '';
 $tamanho = $_POST['tamanho'] ?? '';
-$valor = str_replace(['R$ ', '.'], ['', ','], $_POST['valor']) ?? ''; // Remove R$ e formata para decimal
+$valor = str_replace(['R$ ', '.'], ['', '.'], $_POST['valor']) ?? ''; // Remove R$ e formata para decimal
 $formaPagamento = $_POST['pagamento'] ?? '';
 $sinalPago = $_POST['sinal_pago'] ?? '';
 $descricao = $_POST['descricao'] ?? '';
