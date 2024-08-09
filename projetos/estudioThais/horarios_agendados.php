@@ -36,7 +36,7 @@ include 'php/verificar_perfil.php';
         <form id="filter-form" method="GET" action="horarios_agendados.php">
             <label for="filter-date">Data:</label>
             <input type="date" id="filter-date" name="filter_date" value="<?= htmlspecialchars($_GET['filter_date'] ?? '') ?>">
-            <br><br>
+    
             <label for="filter-maca">Maca:</label>
             <select id="filter-maca" name="filter_maca">
                 <option value="">Todas as Macas</option>
@@ -45,7 +45,7 @@ include 'php/verificar_perfil.php';
                 <option value="3" <?= isset($_GET['filter_maca']) && $_GET['filter_maca'] == '3' ? 'selected' : '' ?>>Maca 3</option>
                 <option value="4" <?= isset($_GET['filter_maca']) && $_GET['filter_maca'] == '4' ? 'selected' : '' ?>>Maca 4</option>
             </select>
-            <br><br>
+    
             <label for="filter-tatuador">Tatuador:</label>
             <select id="filter-tatuador" name="filter_tatuador">
                 <option value="">Todos os Tatuadores</option>
@@ -55,7 +55,7 @@ include 'php/verificar_perfil.php';
                 include 'php/get_tatuadores.php';
                 ?>
             </select>
-            <br><br>
+    
             <button type="submit" class="button" id="filter-button">
                 <i class="fas fa-search"></i>
             </button>
