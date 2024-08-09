@@ -65,7 +65,8 @@ if ($result->num_rows > 0) {
             'Maca' => htmlspecialchars($row['maca_id']),
             'Data' => $formattedDate,
             'H.Inicial' => $formattedStartTime,
-            'H.Final' => $formattedEndTime
+            'H.Final' => $formattedEndTime,
+            'Descricao' => htmlspecialchars($row['descricao'])
         ];
     }
 } else {
