@@ -36,6 +36,14 @@ include 'php/verificar_perfil.php';
                 <li><a href="php/logout.php">Sair</a></li>
             </ul> 
         </nav>
+        <br>
+        <div id="message-container">
+            <?php if ($status && $message) : ?>
+                <div class="message <?= $status ?>">
+                    <?= htmlspecialchars($message) ?>
+                </div>
+            <?php endif; ?>
+        </div>
         <h2>Horários Agendados</h2>
         <form id="filter-form" method="GET" action="horarios_agendados.php">
             <!-- <label for="filter-date">Data:</label>

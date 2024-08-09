@@ -45,13 +45,13 @@ $stmt->store_result();
 $stmt->bind_result($data, $usuario_id);
 $stmt->fetch();
 
-if ($stmt->num_rows > 0 && $usuario_id == $_SESSION['id']) {
+if ($stmt->num_rows > 0 && $usuario_id == $_SESSION['id'] || $row['perfil_id'] == 2) {
     // Verifica se a data do agendamento está a pelo menos 2 dias no futuro
     $agendamentoDate = strtotime($data);
     $currentDate = strtotime(date('Y-m-d'));
     $dateDiff = ($agendamentoDate - $currentDate) / 86400; // diferença em dias
 
-    if ($dateDiff >= 2) {
+    if ($dateDiff >= 2 || $row['perfil_id'] == 2) {
         // Exclui o agendamento
         $deleteQuery = "DELETE FROM agendamentos WHERE id = ?";
         $deleteStmt = $conn->prepare($deleteQuery);
