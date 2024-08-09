@@ -32,12 +32,6 @@ $date = $_POST['date1'] ?? '';
 $startTime = $_POST['start-time1'] ?? '';
 $endTime = $_POST['end-time1'] ?? '';
 
-echo "Nome Cliente: $nomeCliente<br>";
-echo "Estilo: $estilo<br>";
-echo "Tamanho: $tamanho<br>";
-echo "Valor Recebido: " . $_POST['valor'] . "<br>";
-echo "Valor Formatado: ".var_dump($valor)."<br>";
-
 // Validação dos dados
 $errors = [];
 if (empty($maca)) {
@@ -111,6 +105,6 @@ echo "<script>
     console.log('Mensagem de erro: " . addslashes($message) . "');
     sessionStorage.setItem('status', '" . addslashes($status) . "');
     sessionStorage.setItem('message', '" . addslashes($message) . "');
-    //window.location.href = '../agendamento.php';
+    window.location.href = '../agendamento.php';
 </script>";
 ?>
