@@ -69,13 +69,13 @@ if ($result->num_rows > 0) {
         echo "<td>" . $formattedEndTime . "</td>";
 
         // Verificação para mostrar o botão de excluir apenas se o usuário logado é o dono do agendamento
-        if ($row['usuario_id'] == $_SESSION['id'] || $row['perfil_id'] == 2) {
+        if ($row['usuario_id'] == $_SESSION['id']) {
             // Verifica se a data do agendamento está a pelo menos 2 dias no futuro
             $agendamentoDate = strtotime($row['data']);
             $currentDate = strtotime(date('Y-m-d'));
             $dateDiff = ($agendamentoDate - $currentDate) / 86400; // diferença em dias
 
-            if ($dateDiff >= 2) {
+            if ($dateDiff >= 2 || $row['perfil_id'] == 2) {
                 echo "<td><form method='POST' action='php/delete_agendamento.php' onsubmit='return confirmDelete(this)'>
                           <input type='hidden' name='agendamento_id' value='" . htmlspecialchars($row['id']) . "'>
                           <button type='submit' class='delete-button' data-description='" . htmlspecialchars($row['descricao']) . "' 
