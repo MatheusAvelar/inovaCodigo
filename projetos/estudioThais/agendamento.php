@@ -29,6 +29,7 @@ include 'php/verificar_perfil.php';
             <ul> 
                 <?php if ($perfil_id == 2) : ?>
                     <li><a href="criar_acesso.php">Criar Acesso</a></li>
+                    <li><a href="usuarios_estudio.php">Usuários</a></li>
                 <?php endif; ?>
                 <li><a href="horarios_agendados.php">Horários Agendados</a></li>
                 <li><a href="php/logout.php">Sair</a></li>
