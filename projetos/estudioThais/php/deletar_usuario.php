@@ -61,8 +61,8 @@ if ($conn->query($query) === TRUE) {
     $query = "INSERT INTO log_deletes_usuario (usuario_id, deletado_por, data_exclusao) VALUES ($userId, $loggedInUserId, NOW())";
     if ($conn->query($query) === TRUE) {
         $_SESSION['status'] = 'success';
-        $_SESSION['message'] = 'Usuário deletado com sucesso.';
-        echo "Usuário deletado com sucesso.";
+        $_SESSION['message'] = 'Usuário desativado com sucesso.';
+        echo "Usuário desativado com sucesso.";
     } else {
         $_SESSION['status'] = 'error';
         $_SESSION['message'] = 'Erro ao registrar log de exclusão: ' . $conn->error;
