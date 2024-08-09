@@ -1,6 +1,11 @@
 <?php
 session_start();
 
+// Ativa a exibição de erros
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // Verifica se o formulário foi enviado
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Configuração da conexão com o banco de dados
@@ -23,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $sobrenome = $conn->real_escape_string(trim($_POST['sobrenome']));
     $email = $conn->real_escape_string(trim($_POST['email']));
     $perfil_id = intval($_POST['perfil_id']);
-    $alterado_por = $_SESSION['usuario_id']; // Supondo que o ID do usuário logado está na sessão
+    $alterado_por = intval($_SESSION['usuario_id']); // Supondo que o ID do usuário logado está na sessão
     $data_alteracao = date('Y-m-d H:i:s'); // Data e hora atual
 
     // Inicia uma transação
@@ -33,46 +38,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Obtém os dados atuais do usuário
         $query = "SELECT nome, sobrenome, email, perfil_id FROM usuarioEstudio WHERE id = $id";
         $result = $conn->query($query);
-        echo "<script>alert($query)</script>";
-        if ($result) {
-            $user = $result->fetch_assoc();
-
-            // Prepara a atualização
-            $updateQuery = "UPDATE usuarioEstudio 
-                            SET nome = '$nome', sobrenome = '$sobrenome', email = '$email', perfil_id = $perfil_id
-                            WHERE id = $id";
-
-            if ($conn->query($updateQuery) === TRUE) {
-                // Registra alterações
-                $fields = ['nome', 'sobrenome', 'email', 'perfil_id'];
-                foreach ($fields as $field) {
-                    if ($user[$field] !== $$field) {
-                        $valor_antigo = $conn->real_escape_string($user[$field]);
-                        $valor_novo = $conn->real_escape_string($field);
-                        $logQuery = "INSERT INTO log_alteracoes_usuario (usuario_id, campo, valor_antigo, valor_novo, alterado_por, data_alteracao)
-                                     VALUES ($id, '$field', '$valor_antigo', '$valor_novo', $alterado_por, $data_alteracao)";
-                        $conn->query($logQuery);
-                    }
-                }
-
-                // Commit da transação
-                $conn->commit();
-
-                // Define mensagem de sucesso
-                $_SESSION['status'] = "success";
-                //$_SESSION['message'] = "Usuário atualizado com sucesso!";
-            } else {
-                throw new Exception("Erro ao atualizar usuário: " . $conn->error);
-            }
-        } else {
+        if (!$result) {
             throw new Exception("Erro ao buscar dados do usuário: " . $conn->error);
         }
+
+        $user = $result->fetch_assoc();
+
+        // Prepara a atualização
+        $updateQuery = "UPDATE usuarioEstudio 
+                        SET nome = '$nome', sobrenome = '$sobrenome', email = '$email', perfil_id = $perfil_id
+                        WHERE id = $id";
+
+        if (!$conn->query($updateQuery)) {
+            throw new Exception("Erro ao atualizar usuário: " . $conn->error);
+        }
+
+        // Registra alterações
+        $fields = ['nome', 'sobrenome', 'email', 'perfil_id'];
+        foreach ($fields as $field) {
+            $old_value = $user[$field];
+            $new_value = $$field; // Verifica o valor correto para a variável
+
+            if ($old_value !== $new_value) {
+                $valor_antigo = $conn->real_escape_string($old_value);
+                $valor_novo = $conn->real_escape_string($new_value);
+                $logQuery = "INSERT INTO log_alteracoes_usuario (usuario_id, campo, valor_antigo, valor_novo, alterado_por, data_alteracao)
+                             VALUES ($id, '$field', '$valor_antigo', '$valor_novo', $alterado_por, '$data_alteracao')";
+                if (!$conn->query($logQuery)) {
+                    throw new Exception("Erro ao registrar alteração: " . $conn->error);
+                }
+            }
+        }
+
+        // Commit da transação
+        $conn->commit();
+
+        // Define mensagem de sucesso
+        $_SESSION['status'] = "success";
+        $_SESSION['message'] = "Usuário atualizado com sucesso!";
     } catch (Exception $e) {
         // Rollback em caso de erro
         $conn->rollback();
         $_SESSION['status'] = "error";
-        //$_SESSION['message'] = $e->getMessage();
-        $_SESSION['message'] = $e->getCode();
+        $_SESSION['message'] = $e->getMessage();
+
+        // Exibe a mensagem de erro e código do erro
+        echo "Erro: " . $e->getMessage() . "<br>";
+        echo "Código do erro: " . $e->getCode() . "<br>";
     }
 
     // Redireciona de volta para a página de edição com o ID do usuário
