@@ -69,7 +69,7 @@ if ($result->num_rows > 0) {
         echo "<td>" . $formattedEndTime . "</td>";
 
         // Verificação para mostrar o botão de excluir apenas se o usuário logado é o dono do agendamento
-        if ($row['usuario_id'] == $_SESSION['id']) {
+        if ($row['usuario_id'] == $_SESSION['id'] || $row['perfil_id'] == 2) {
             // Verifica se a data do agendamento está a pelo menos 2 dias no futuro
             $agendamentoDate = strtotime($row['data']);
             $currentDate = strtotime(date('Y-m-d'));
