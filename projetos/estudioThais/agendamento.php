@@ -140,7 +140,10 @@ include 'php/verificar_perfil.php';
             const date = document.getElementById('date1').value;
             const startTime = document.getElementById('start-time1').value;
             const endTime = document.getElementById('end-time1').value;
-            const valor = document.getElementById('valor').value.replace('R$ ', '').replace('.', '').replace(',', '.');
+            
+            // Remove mask and convert to float
+            const valorInput = document.getElementById('valor').value;
+            const valor = parseFloat(valorInput.replace('R$ ', '').replace(/\./g, '').replace(',', '.'));
 
             // Validate maca
             if (maca === '') {
@@ -173,9 +176,9 @@ include 'php/verificar_perfil.php';
             }
 
             // Validate valor
-            if (isNaN(valor) || parseFloat(valor) <= 0) {
+            if (isNaN(valor) || valor <= 0) {
                 isValid = false;
-                document.getElementById('valor-error').innerText = 'O valor deve ser maior que R$ 0.' + valor;
+                document.getElementById('valor-error').innerText = 'O valor deve ser maior que R$ 0.';
             }
 
             if (!isValidDateFormat(date)) {
@@ -183,7 +186,7 @@ include 'php/verificar_perfil.php';
                 document.getElementById('date1-error').innerText = 'Formato de data inválido. Use YYYY-MM-DD.';
             }
 
-            return isValid; 
+            return isValid;
         }
 
         function isValidDateFormat(date) {
