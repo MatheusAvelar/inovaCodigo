@@ -83,12 +83,7 @@ include 'php/verificar_perfil.php';
         </div>
     </div>
 
-    <script>       
-        function toggleMenu() {
-            const menu = document.querySelector('.menu');
-            menu.classList.toggle('active');
-        }
-                        
+    <script>                  
         function validateForm() {
             let isValid = true;
 
