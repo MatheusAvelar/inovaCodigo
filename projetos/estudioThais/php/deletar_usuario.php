@@ -48,7 +48,7 @@ $result = $conn->query($query);
 
 if ($result->num_rows === 0) {
     $_SESSION['status'] = 'error';
-    $_SESSION['message'] = 'Usuário que está realizando a exclusão não encontrado.';
+    $_SESSION['message'] = 'Usuário que está realizando a exclusão não encontrado.' + $loggedInUserId;
     header('Location: ../usuarios_estudio.php');
     exit();
 }
