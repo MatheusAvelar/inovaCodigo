@@ -26,7 +26,7 @@ if ($conn->connect_error) {
 // Deletando o usuário
 $query = "DELETE FROM usuarioEstudio WHERE id = $userId";
 if ($conn->query($query) === TRUE) {
-    header('Location: visualizar_usuarios.php'); // Redireciona para a lista de usuários
+    header('Location: ../usuarios_estudio.php'); // Redireciona para a lista de usuários
     exit();
 } else {
     echo "Erro ao deletar usuário: " . $conn->error;
