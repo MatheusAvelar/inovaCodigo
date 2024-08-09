@@ -53,10 +53,5 @@ include 'php/verificar_perfil.php';
             </tbody>
         </table>
     </div>
-
-    <?php
-    // Fechando a conexão
-    $conn->close();
-    ?>
 </body>
 </html>
