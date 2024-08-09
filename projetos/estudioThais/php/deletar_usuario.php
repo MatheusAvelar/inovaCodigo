@@ -55,7 +55,7 @@ if ($row['agendamentos_count'] > 0) {
 }
 
 // Deletando o usuário
-$query = "DELETE FROM usuarioEstudio WHERE id = $userId";
+$query = "UPDATE usuarioEstudio SET ativo = 0 WHERE id = $userId";
 if ($conn->query($query) === TRUE) {
     // Inserindo log de exclusão
     $query = "INSERT INTO log_deletes_usuario (usuario_id, deletado_por, data_exclusao) VALUES ($userId, $loggedInUserId, NOW())";
