@@ -135,6 +135,7 @@ include 'php/verificar_perfil.php';
             });
 
             // Get form values
+            const valor = document.getElementById('valor').value.replace('R$ ', '').replace('.', '').replace(',', '.');
             const startTime = document.getElementById('start-time1').value;
             const endTime = document.getElementById('end-time1').value;
 
@@ -145,6 +146,11 @@ include 'php/verificar_perfil.php';
                 document.getElementById('end-time1-error').innerText = 'O horário final deve ser maior que o horário inicial.';
             }
 
+            if (isNaN(valor) || valor <= 0) {
+                isValid = false;
+                document.getElementById('valor-error').innerText = 'O valor deve ser maior que R$ 0.';
+            }
+            
             if (!isValidDateFormat(date)) {
                 isValid = false;
                 document.getElementById('date1-error').innerText = 'Formato de data inválido. Use YYYY-MM-DD.';
