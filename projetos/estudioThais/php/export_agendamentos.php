@@ -39,7 +39,7 @@ if (!empty($filterTatuador)) {
 }
 
 // Busca de agendamentos existentes com os filtros aplicados
-$query = "SELECT ag.id, ag.descricao, ag.maca_id, ag.data, ag.start_time, ag.end_time, ag.usuario_id, u.nome AS tatuador_nome 
+$query = "SELECT ag.id, ag.descricao, ag.maca_id, ag.data, ag.start_time, ag.end_time, ag.usuario_id, ag.nome_cliente, ag.estilo, ag.tamanho, ag.valor, ag.forma_pagamento, ag.sinal_pago, u.nome AS tatuador_nome 
           FROM agendamentos AS ag
           JOIN usuarioEstudio AS u ON ag.usuario_id = u.id
           $whereClause 
@@ -66,6 +66,12 @@ if ($result->num_rows > 0) {
             'data' => $formattedDate,
             'h.inicial' => $formattedStartTime,
             'h.final' => $formattedEndTime,
+            'nomeCliente' => htmlspecialchars($row['nome_cliente']),
+            'estilo' => htmlspecialchars($row['estilo']),
+            'tamanho' => htmlspecialchars($row['tamanho']),
+            'valor' => htmlspecialchars($row['valor']),
+            'formaPagamento' => htmlspecialchars($row['forma_pagamento']),
+            'sinal' => htmlspecialchars($row['sinal_pago']),
             'descricao' => htmlspecialchars($row['descricao'])
         ];
     }

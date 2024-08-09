@@ -118,7 +118,7 @@ include 'php/verificar_perfil.php';
                     console.log('Dados recebidos (JSON):', jsonData);
 
                     // Adiciona os cabeçalhos das colunas
-                    const headers = ['tatuador', 'maca', 'data', 'h.inicial', 'h.final', 'descricao'];
+                    const headers = ['tatuador', 'maca', 'data', 'h.inicial', 'h.final', 'descricao','nomeCliente','estilo','tamanho','valor','formaPagamento','sinal'];
 
                     // Cria uma planilha com os dados
                     const worksheet = XLSX.utils.json_to_sheet(jsonData, {header: headers});
