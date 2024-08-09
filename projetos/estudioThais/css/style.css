@@ -111,9 +111,9 @@ h1 {
     margin-bottom: 10px;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 700px) {
     .container {
-        max-width: 600px;
+        max-width: 700px;
     }
 
     .logo {
