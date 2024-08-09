@@ -83,7 +83,7 @@ h1 {
 }
 
 .maca button:hover {
-    background-color: #dbbe4d;
+    background-color: #f4ab36;
 }
 
 .message {
@@ -260,7 +260,7 @@ td:nth-child(6) {
 
 #filter-button:hover i,
 #export-button:hover i {
-    color: #fec66f; /* cor ao passar o mouse */
+    color: #f4ab36; /* cor ao passar o mouse */
 }
 
 #menu ul { 
