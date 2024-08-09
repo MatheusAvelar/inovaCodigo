@@ -1,6 +1,5 @@
 <?php
 session_start();
-include 'php/verificar_perfil.php';
 
 // Verifica se o formulário foi enviado
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
