@@ -51,6 +51,12 @@ if ($stmt->num_rows > 0 && $usuario_id == $_SESSION['id']) {
 
         if ($deleteStmt->affected_rows > 0) {
             echo "Agendamento excluído com sucesso.";
+
+            // Adiciona log de exclusão
+            $logQuery = "INSERT INTO log_exclusoes_agendamento (agendamento_id, data_exclusao, usuario_id, motivo) VALUES (?, NOW(), ?, 'Exclusão pelo usuário')";
+            $logStmt = $conn->prepare($logQuery);
+            $logStmt->bind_param("ss", $agendamento_id, $_SESSION['id']);
+            $logStmt->execute();
         } else {
             echo "Erro ao excluir o agendamento.";
         }

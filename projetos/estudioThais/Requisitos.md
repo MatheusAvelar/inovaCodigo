@@ -7,7 +7,7 @@
 - [ ] Editar agendamento.
 - [x] ~~*Deixar visivel para todos os usuários, apenas os dias, horários e quem agendou.*~~ [09-08-2024] **Dúvida**
 - [x] ~~*Criar filtro por mês.*~~ [09-08-2024]
-- [ ] Excluir agendamento (Perfil master exclui qualquer agendamento).
+- [x] ~~*Excluir agendamento (Perfil master exclui qualquer agendamento).*~~ [09-08-2024]
   Observação: Criar log de exclusão.
 - [ ] Envio de e-mail (Cliente e Tatuador).
   Observação: No dia que foi agendado e um dia antes.
