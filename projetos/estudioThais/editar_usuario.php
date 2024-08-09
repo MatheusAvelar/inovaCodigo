@@ -43,6 +43,7 @@ unset($_SESSION['status'], $_SESSION['message']);
                     <li><a href="php/logout.php">Sair</a></li>
                 </ul> 
         </nav>
+        <br>
         <div id="message-container">
             <?php if ($status && $message) : ?>
                 <div class="message <?= $status ?>">
