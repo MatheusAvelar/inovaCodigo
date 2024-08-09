@@ -69,7 +69,7 @@ if ($result->num_rows > 0) {
             $dateDiff = ($agendamentoDate - $currentDate) / 86400; // diferença em dias
 
             if ($dateDiff >= 2) {
-                echo "<td><a href='#' class='delete-icon' 
+                echo "<td><a href='php/delete_agendamento.php' class='delete-icon' 
                           data-id='" . htmlspecialchars($row['id']) . "' 
                           data-description='" . htmlspecialchars($row['descricao']) . "' 
                           data-date='" . $formattedDate . "' 
