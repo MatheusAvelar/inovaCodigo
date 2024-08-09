@@ -38,8 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Redireciona para a lista de usuários com uma mensagem de sucesso
         $status = "success";
         $message = "Usuário atualizado com sucesso!";
-        header('Location: ../usuarios_estudio.php');
-        exit();
+        //exit();
     } else {
         $status = "error";
         $message = "Erro ao atualizar usuário: " . $conn->error;
@@ -49,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             console.log('Mensagem de erro: " . addslashes($message) . "');
             sessionStorage.setItem('status', '" . addslashes($status) . "');
             sessionStorage.setItem('message', '" . addslashes($message) . "');
-            window.location.href = '../agendamento.php';
+            window.location.href = '../usuarios_estudio.php';
         </script>";
 
     // Fechando a conexão
