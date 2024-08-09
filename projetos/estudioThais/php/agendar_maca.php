@@ -34,7 +34,7 @@ echo "Nome Cliente: $nomeCliente<br>";
 echo "Estilo: $estilo<br>";
 echo "Tamanho: $tamanho<br>";
 echo "Valor Recebido: " . $_POST['valor'] . "<br>";
-echo "Valor Formatado: $valor<br>";
+echo "Valor Formatado: ".var_dump($valor)."<br>";
 
 // Validação dos dados
 $errors = [];
