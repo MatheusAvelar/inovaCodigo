@@ -40,7 +40,24 @@ include 'php/verificar_perfil.php';
         <form id="filter-form" method="GET" action="horarios_agendados.php">
             <label for="filter-date">Data:</label>
             <input type="date" id="filter-date" name="filter_date" value="<?= htmlspecialchars($_GET['filter_date'] ?? '') ?>">
-    
+            
+            <label for="filter-month">Mês:</label>
+            <select id="filter-month" name="filter_month">
+                <option value="">Todos os Meses</option>
+                <?php
+                $months = [
+                    '01' => 'Janeiro', '02' => 'Fevereiro', '03' => 'Março', '04' => 'Abril',
+                    '05' => 'Maio', '06' => 'Junho', '07' => 'Julho', '08' => 'Agosto',
+                    '09' => 'Setembro', '10' => 'Outubro', '11' => 'Novembro', '12' => 'Dezembro'
+                ];
+
+                foreach ($months as $value => $name) {
+                    $selected = (isset($_GET['filter_month']) && $_GET['filter_month'] == $value) ? 'selected' : '';
+                    echo "<option value=\"$value\" $selected>$name</option>";
+                }
+                ?>
+            </select>
+
             <label for="filter-maca">Maca:</label>
             <select id="filter-maca" name="filter_maca">
                 <option value="">Todas as Macas</option>
