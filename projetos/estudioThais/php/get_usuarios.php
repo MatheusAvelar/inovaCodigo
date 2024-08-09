@@ -31,7 +31,7 @@ if ($result->num_rows > 0) {
             <a href='editar_usuario.php?id=" . htmlspecialchars($row['id']) . "' title='Editar'>
                 <i class='fas fa-edit'></i>
             </a>
-            <a href='deletar_usuario.php?id=" . htmlspecialchars($row['id']) . "' title='Deletar' onclick='return confirm(\"Tem certeza que deseja deletar este usuário?\");'>
+            <a href='php/deletar_usuario.php?id=" . htmlspecialchars($row['id']) . "' title='Deletar' onclick='return confirm(\"Tem certeza que deseja deletar este usuário?\");'>
                 <i class='fas fa-trash-alt'></i>
             </a>
             </td>";
