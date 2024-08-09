@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = mysqli_real_escape_string($conexao, $email);
 
     // Verifica as credenciais do usuário
-    $query = "SELECT id, perfil_id FROM usuarioEstudio WHERE email='$email' AND senha='$senha'";
+    $query = "SELECT id, perfil_id, nome FROM usuarioEstudio WHERE email='$email' AND senha='$senha'";
     $resultado = mysqli_query($conexao, $query);
 
     if (mysqli_num_rows($resultado) > 0) {
@@ -28,6 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['perfil_id'] = $usuario['perfil_id'];
         $_SESSION['loggedin'] = true;
         $_SESSION['email'] = $email;
+        $_SESSION['usuario_nome'] = $usuario['nome'];
 
         header("Location: ../agendamento.php");
         // Redireciona o usuário com base no perfil

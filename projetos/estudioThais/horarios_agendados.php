@@ -20,6 +20,9 @@ include 'php/verificar_perfil.php';
                 <img src="img/tatto.jpeg" alt="Logo do Estúdio" class="logo">
             </a>
         </div>
+        <div class="welcome-message">
+            Bem Vindo, <?= htmlspecialchars($_SESSION['usuario_nome']) ?>!
+        </div>
     </header>
 
     <div class="container">
