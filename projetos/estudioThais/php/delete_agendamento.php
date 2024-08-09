@@ -21,7 +21,10 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Verificando a conexão
 if ($conn->connect_error) {
-    die("Falha na conexão: " . $conn->connect_error);
+    $_SESSION['status'] = 'error';
+    $_SESSION['message'] = 'Erro na conexão com o banco de dados: ' . $conn->connect_error;
+    header("Location: ../horarios_agendados.php");
+    exit;
 }
 
 // Obtendo o ID do agendamento a ser excluído
@@ -30,6 +33,12 @@ $agendamento_id = isset($_POST['agendamento_id']) ? $_POST['agendamento_id'] : '
 // Verifica se o agendamento pertence ao usuário logado
 $query = "SELECT data, usuario_id FROM agendamentos WHERE id = ?";
 $stmt = $conn->prepare($query);
+if (!$stmt) {
+    $_SESSION['status'] = 'error';
+    $_SESSION['message'] = 'Erro ao preparar a consulta: ' . $conn->error;
+    header("Location: ../horarios_agendados.php");
+    exit;
+}
 $stmt->bind_param("i", $agendamento_id);
 $stmt->execute();
 $stmt->store_result();
@@ -46,26 +55,46 @@ if ($stmt->num_rows > 0 && $usuario_id == $_SESSION['id']) {
         // Exclui o agendamento
         $deleteQuery = "DELETE FROM agendamentos WHERE id = ?";
         $deleteStmt = $conn->prepare($deleteQuery);
+        if (!$deleteStmt) {
+            $_SESSION['status'] = 'error';
+            $_SESSION['message'] = 'Erro ao preparar a exclusão: ' . $conn->error;
+            header("Location: ../horarios_agendados.php");
+            exit;
+        }
         $deleteStmt->bind_param("i", $agendamento_id);
         $deleteStmt->execute();
 
         if ($deleteStmt->affected_rows > 0) {
-            echo "Agendamento excluído com sucesso.";
-
             // Adiciona log de exclusão
             $logQuery = "INSERT INTO log_exclusoes_agendamento (agendamento_id, data_exclusao, usuario_id, motivo) VALUES (?, NOW(), ?, 'Exclusão pelo usuário')";
             $logStmt = $conn->prepare($logQuery);
-            $logStmt->bind_param("ss", $agendamento_id, $_SESSION['id']);
+            if (!$logStmt) {
+                $_SESSION['status'] = 'error';
+                $_SESSION['message'] = 'Erro ao preparar o log: ' . $conn->error;
+                header("Location: ../horarios_agendados.php");
+                exit;
+            }
+            $logStmt->bind_param("ii", $agendamento_id, $_SESSION['id']);
             $logStmt->execute();
+
+            $_SESSION['status'] = 'success';
+            $_SESSION['message'] = 'Agendamento excluído com sucesso.';
         } else {
-            echo "Erro ao excluir o agendamento.";
+            $_SESSION['status'] = 'error';
+            $_SESSION['message'] = 'Erro ao excluir o agendamento: ' . $conn->error;
         }
     } else {
-        echo "Você não pode excluir um agendamento com menos de 2 dias de antecedência.";
+        $_SESSION['status'] = 'error';
+        $_SESSION['message'] = 'Você não pode excluir um agendamento com menos de 2 dias de antecedência.';
     }
 } else {
-    echo "Você não tem permissão para excluir este agendamento.";
+    $_SESSION['status'] = 'error';
+    $_SESSION['message'] = 'Você não tem permissão para excluir este agendamento.';
 }
+
+// Redireciona para a página de erro ou sucesso
+header("Location: ../horarios_agendados.php");
+exit;
 
 // Fechando a conexão
 $conn->close();

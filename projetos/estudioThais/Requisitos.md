@@ -8,7 +8,7 @@
 - [x] ~~*Deixar visivel para todos os usuários, apenas os dias, horários e quem agendou.*~~ [09-08-2024] **Dúvida**
 - [x] ~~*Criar filtro por mês.*~~ [09-08-2024]
 - [x] ~~*Excluir agendamento (Perfil master exclui qualquer agendamento).*~~ [09-08-2024]
-  Observação: Criar log de exclusão.
+  - [x] ~~*Observação: Criar log de exclusão.*~~ [09-08-2024]
 - [ ] Envio de e-mail (Cliente e Tatuador).
   Observação: No dia que foi agendado e um dia antes.
 - [ ] Envio de Wpp, Qual valor ?
