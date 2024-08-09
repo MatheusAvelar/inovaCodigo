@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         // Obtém os dados atuais do usuário
-        $query = "SELECT nome, sobrenome, email, perfil_id FROM usuarioEstudio WHERE id = $id";
+        $query = "SELECT nome, ativo, sobrenome, email, perfil_id FROM usuarioEstudio WHERE id = $id";
         $result = $conn->query($query);
         if (!$result) {
             throw new Exception("Erro ao buscar dados do usuário: " . $conn->error);
