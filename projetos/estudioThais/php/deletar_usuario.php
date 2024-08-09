@@ -39,17 +39,28 @@ if ($result->num_rows === 0) {
     exit();
 }
 
+// Verificando se há agendamentos associados ao usuário
+$query = "SELECT COUNT(*) AS agendamentos_count FROM agendamentos WHERE usuario_id = $userId";
+$result = $conn->query($query);
+$row = $result->fetch_assoc();
+
+if ($row['agendamentos_count'] > 0) {
+    $_SESSION['status'] = 'error';
+    $_SESSION['message'] = 'Não é possível excluir o usuário porque há agendamentos associados a ele. Exclua os agendamentos primeiro.';
+    header('Location: ../usuarios_estudio.php');
+    exit();
+}
+
 // Deletando o usuário
 $query = "DELETE FROM usuarioEstudio WHERE id = $userId";
 if ($conn->query($query) === TRUE) {
-    echo "Usuário deletado com sucesso.";
     $_SESSION['status'] = 'success';
     $_SESSION['message'] = 'Usuário deletado com sucesso.';
     echo "Usuário deletado com sucesso.";
 } else {
-    echo "Erro ao deletar usuário.";
     $_SESSION['status'] = 'error';
     $_SESSION['message'] = 'Erro ao deletar usuário: ' . $conn->error;
+    echo "Erro ao deletar usuário.";
 }
 
 // Fechando a conexão
