@@ -28,12 +28,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $conn->real_escape_string(trim($_POST['email']));
     $perfil_id = intval($_POST['perfil_id']);
 
+    // Obtém os dados antigos para o log
+    $queryOldData = "SELECT nome, sobrenome, email, perfil_id FROM usuarioEstudio WHERE id = $id";
+    $resultOldData = $conn->query($queryOldData);
+    $oldData = $resultOldData->fetch_assoc();
+
     // Atualiza os dados do usuário no banco de dados
     $query = "UPDATE usuarioEstudio 
               SET nome = '$nome', sobrenome = '$sobrenome', email = '$email', perfil_id = $perfil_id
               WHERE id = $id";
 
     if ($conn->query($query) === TRUE) {
+        // Log de alteração
+        $detalhes = "Nome: {$oldData['nome']} -> $nome; Sobrenome: {$oldData['sobrenome']} -> $sobrenome; Email: {$oldData['email']} -> $email; Perfil ID: {$oldData['perfil_id']} -> $perfil_id";
+        $logQuery = "INSERT INTO logs (usuario_id, acao, detalhes) VALUES ($id, 'Atualização', '$detalhes')";
+        $conn->query($logQuery);
+
         // Redireciona para a lista de usuários com uma mensagem de sucesso
         $_SESSION['status'] = "success";
         $_SESSION['message'] = "Usuário atualizado com sucesso!";
