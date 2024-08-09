@@ -46,7 +46,7 @@ include 'php/edita_usuario.php';
         <h2>Editar Usuário</h2>
         <div class="grid">
             <div class="maca">
-                <form action="atualizar_usuario.php" method="POST">
+                <form action="php/atualizar_usuario.php" method="POST">
                     <input type="hidden" name="id" value="<?= htmlspecialchars($user['id']) ?>">
                     <label for="nome">Nome:</label>
                     <input type="text" id="nome" name="nome" value="<?= htmlspecialchars($user['nome']) ?>" required>
