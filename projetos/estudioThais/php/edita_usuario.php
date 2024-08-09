@@ -1,12 +1,10 @@
 <?php
-include 'php/verificar_perfil.php';
-
-// Verifica se o ID do usuário foi passado na URL
+/*// Verifica se o ID do usuário foi passado na URL
 if (!isset($_GET['id']) || empty($_GET['id'])) {
     die('ID do usuário não fornecido.');
 }
 
-$userId = intval($_GET['id']);
+$userId = intval($_GET['id']);*/
 
 // Configuração da conexão com o banco de dados
 $servername = "127.0.0.1:3306";
