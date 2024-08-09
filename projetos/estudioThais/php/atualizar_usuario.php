@@ -1,5 +1,4 @@
 <?php
-session_start();
 include 'php/verificar_perfil.php';
 
 // Verifica se o ID do usuário foi passado na URL

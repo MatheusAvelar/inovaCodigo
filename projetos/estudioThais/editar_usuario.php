@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'php/verificar_perfil.php';
 include 'php/atualizar_usuario.php';
 ?>
