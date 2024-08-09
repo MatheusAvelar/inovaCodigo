@@ -59,9 +59,11 @@ include 'php/verificar_perfil.php';
             <button type="submit" class="button" id="filter-button">
                 <i class="fas fa-search"></i>
             </button>
-            <button type="button" class="button" id="export-button">
-                <i class="fa-solid fa-file-csv"></i>
-            </button>
+            <?php if ($perfil_id == 2) : ?>
+                <button type="button" class="button" id="export-button">
+                    <i class="fa-solid fa-file-csv"></i>
+                </button>
+            <?php endif; ?>
         </form>
         <div class="grid">
             <div class="maca">
