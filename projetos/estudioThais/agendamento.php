@@ -27,15 +27,12 @@ include 'php/verificar_perfil.php';
     </header>
 
     <div class="container">
-        <div class="menu-hamburguer" onclick="toggleMenu()">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-        <div class="menu">
-            <a href="#">Criar Acesso</a>
-            <a href="#">Ver Horários Agendados</a>
-        </div>
+        <nav id="menu"> 
+            <ul> 
+                <li><a href="#">Criar Acesso</a></li>
+                <li><a href="#">Horários Agendados</a></li>
+            </ul> 
+        </nav>
         <div id="message-container">
             <?php if (isset($status) && isset($message)) : ?>
                 <div class="message <?= $status ?>">
