@@ -66,9 +66,47 @@ include 'php/verificar_perfil.php';
                     <input type="time" id="end-time1" name="end-time1" required>
                     <div id="end-time1-error" class="error-message"></div>
 
-                    <label for="name1">Descrição:</label>
-                    <input type="text" id="name1" name="name1">
-                    <div id="name1-error" class="error-message"></div>
+                    <label for="cliente">Nome do Cliente:</label>
+                    <input type="text" id="cliente" name="cliente" required>
+                    <div id="name-error" class="error-message"></div>
+
+                    <label for="estilo">Estilo:</label>
+                    <select id="estilo" name="estilo" required>
+                        <option value="">Selecione o estilo</option>
+                        <option value="Pontilhismo">Pontilhismo</option>
+                        <option value="Minimalista">Minimalista</option>
+                        <option value="Blackwork">Blackwork</option>
+                        <option value="Realista">Realista</option>
+                    </select>
+                    <div id="estilo-error" class="error-message"></div>
+
+                    <label for="tamanho">Tamanho (cm):</label>
+                    <input type="text" id="tamanho" name="tamanho" required>
+                    <div id="tamanho-error" class="error-message"></div>
+
+                    <label for="valor">Valor:</label>
+                    <input type="text" id="valor" name="valor" required>
+                    <div id="valor-error" class="error-message"></div>
+
+                    <label for="pagamento">Forma de Pagamento:</label>
+                    <select id="pagamento" name="pagamento" required>
+                        <option value="">Selecione a forma de pagamento</option>
+                        <option value="Dinheiro">Dinheiro</option>
+                        <option value="Cartão">Cartão</option>
+                        <option value="Pix">Pix</option>
+                    </select>
+                    <div id="pagamento-error" class="error-message"></div>
+
+                    <label for="sinal_pago">Sinal pago?</label>
+                    <select id="sinal_pago" name="sinal_pago" required>
+                        <option value="">Selecione uma opção</option>
+                        <option value="Sim">Sim</option>
+                        <option value="Não">Não</option>
+                    </select>
+                    <div id="sinal_pago-error" class="error-message"></div>
+
+                    <label for="descricao">Descrição:</label>
+                    <input type="text" id="descricao" name="descricao">
 
                     <button type="submit">Agendar</button>
                 </form>
@@ -76,7 +114,18 @@ include 'php/verificar_perfil.php';
         </div>
     </div>
 
-    <script>                  
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const valorInput = document.getElementById('valor');
+            
+            valorInput.addEventListener('input', function () {
+                let value = valorInput.value.replace(/\D/g, '');
+                value = (value / 100).toFixed(2);
+                value = value.replace('.', ',');
+                valorInput.value = 'R$ ' + value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+            });
+        });
+
         function validateForm() {
             let isValid = true;
 
@@ -86,35 +135,10 @@ include 'php/verificar_perfil.php';
             });
 
             // Get form values
-            const maca = document.getElementById('maca').value;
-            const date = document.getElementById('date1').value;
             const startTime = document.getElementById('start-time1').value;
             const endTime = document.getElementById('end-time1').value;
 
-            // Validate maca
-            if (maca === '') {
-                isValid = false;
-                document.getElementById('maca-error').innerText = 'Selecione uma maca.';
-            }
-
-            // Validate date
-            if (date === '') {
-                isValid = false;
-                document.getElementById('date1-error').innerText = 'A data é obrigatória.';
-            }
-
-            // Validate start time
-            if (startTime === '') {
-                isValid = false;
-                document.getElementById('start-time1-error').innerText = 'O horário inicial é obrigatório.';
-            }
-
-            // Validate end time
-            if (endTime === '') {
-                isValid = false;
-                document.getElementById('end-time1-error').innerText = 'O horário final é obrigatório.';
-            }
-
+            
             // Validate that end time is after start time
             if (startTime && endTime && startTime >= endTime) {
                 isValid = false;
