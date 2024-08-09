@@ -27,29 +27,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $sobrenome = $conn->real_escape_string(trim($_POST['sobrenome']));
     $email = $conn->real_escape_string(trim($_POST['email']));
     $perfil_id = intval($_POST['perfil_id']);
+    $alterado_por = $_SESSION['usuario_id']; // Supondo que o ID do usuário logado está na sessão
 
-    // Obtém os dados antigos para o log
-    $queryOldData = "SELECT nome, sobrenome, email, perfil_id FROM usuarioEstudio WHERE id = $id";
-    $resultOldData = $conn->query($queryOldData);
-    $oldData = $resultOldData->fetch_assoc();
+    // Obtém os dados atuais do usuário
+    $query = "SELECT nome, sobrenome, email, perfil_id FROM usuarioEstudio WHERE id = $id";
+    $result = $conn->query($query);
+    $user = $result->fetch_assoc();
 
-    // Atualiza os dados do usuário no banco de dados
-    $query = "UPDATE usuarioEstudio 
-              SET nome = '$nome', sobrenome = '$sobrenome', email = '$email', perfil_id = $perfil_id
-              WHERE id = $id";
+    // Prepara a atualização
+    $updateQuery = "UPDATE usuarioEstudio 
+                    SET nome = '$nome', sobrenome = '$sobrenome', email = '$email', perfil_id = $perfil_id
+                    WHERE id = $id";
 
-    if ($conn->query($query) === TRUE) {
-        // Log de alteração
-        $detalhes = "Nome: {$oldData['nome']} -> $nome; Sobrenome: {$oldData['sobrenome']} -> $sobrenome; Email: {$oldData['email']} -> $email; Perfil ID: {$oldData['perfil_id']} -> $perfil_id";
-        $logQuery = "INSERT INTO logs (usuario_id, acao, detalhes) VALUES ($id, 'Atualização', '$detalhes')";
-        $conn->query($logQuery);
+    // Inicia uma transação
+    $conn->begin_transaction();
 
-        // Redireciona para a lista de usuários com uma mensagem de sucesso
-        $_SESSION['status'] = "success";
-        $_SESSION['message'] = "Usuário atualizado com sucesso!";
-    } else {
+    try {
+        if ($conn->query($updateQuery) === TRUE) {
+            // Registra alterações
+            $fields = ['nome', 'sobrenome', 'email', 'perfil_id'];
+            foreach ($fields as $field) {
+                if ($user[$field] !== $$field) {
+                    $logQuery = "INSERT INTO log_alteracoes_usuario (usuario_id, campo, valor_antigo, valor_novo, alterado_por)
+                                 VALUES ($id, '$field', '{$user[$field]}', '{$$field}', $alterado_por)";
+                    $conn->query($logQuery);
+                }
+            }
+
+            // Commit da transação
+            $conn->commit();
+
+            // Define mensagem de sucesso
+            $_SESSION['status'] = "success";
+            $_SESSION['message'] = "Usuário atualizado com sucesso!";
+        } else {
+            throw new Exception("Erro ao atualizar usuário: " . $conn->error);
+        }
+    } catch (Exception $e) {
+        // Rollback em caso de erro
+        $conn->rollback();
         $_SESSION['status'] = "error";
-        $_SESSION['message'] = "Erro ao atualizar usuário: " . $conn->error;
+        $_SESSION['message'] = $e->getMessage();
     }
 
     // Redireciona de volta para a página de edição com o ID do usuário
