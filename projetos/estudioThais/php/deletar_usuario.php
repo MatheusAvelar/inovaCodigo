@@ -6,7 +6,7 @@ session_start();
 $userId = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
 // ID do usuário que está realizando a exclusão (ajuste conforme necessário)
-$loggedInUserId = isset($_SESSION['user_id']) ? intval($_SESSION['user_id']) : 0;
+$loggedInUserId = isset($_SESSION['id']) ? intval($_SESSION['id']) : 0;
 
 if ($userId == 0) {
     die('ID do usuário não fornecido ou inválido.');
