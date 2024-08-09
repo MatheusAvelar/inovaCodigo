@@ -39,7 +39,7 @@ include 'php/verificar_perfil.php';
             <?php endif; ?>
         </div>
 
-        <h1>Agendamento de Macas</h1>
+        <h2>Agendamento de Macas</h2>
 
         <div class="grid">
             <div class="maca">
