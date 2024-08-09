@@ -19,18 +19,16 @@ include 'php/verificar_perfil.php';
                 <img src="img/tatto.jpeg" alt="Logo do Estúdio" class="logo">
             </a>
         </div>
-        <div class="logout-container">
-            <form action="php/logout.php" method="post">
-                <button type="submit" class="logout-button">Sair</button>
-            </form>
-        </div>
     </header>
 
     <div class="container">
         <nav id="menu"> 
             <ul> 
-                <li><a href="#">Criar Acesso</a></li>
-                <li><a href="#">Horários Agendados</a></li>
+                <?php if ($perfil_id == 2) : ?>
+                    <li><a href="criar_acesso.php">Criar Acesso</a></li>
+                <?php endif; ?>
+                <li><a href="horarios_agendados.php">Horários Agendados</a></li>
+                <li><a href="php/logout.php">Sair</a></li>
             </ul> 
         </nav>
         <div id="message-container">
@@ -73,11 +71,6 @@ include 'php/verificar_perfil.php';
                     <div id="name1-error" class="error-message"></div>
 
                     <button type="submit">Agendar</button>
-                    <a href="horarios_agendados.php" class="button">Ver Horários Agendados</a>
-                    <?php if ($perfil_id == 2) : ?>
-                        <br>
-                        <a href="criar_acesso.php" class="button">Criar Acesso</a>
-                    <?php endif; ?>
                 </form>
             </div>
         </div>

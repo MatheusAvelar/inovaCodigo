@@ -269,10 +269,6 @@ td:nth-child(6) {
     transition: background-color 0.3s;
 }
 
-.filter-button:hover {
-    background-color: #0056b3;
-}
-
 #menu ul { 
     padding:0px;
     margin:0px;
@@ -296,5 +292,5 @@ td:nth-child(6) {
 #menu ul li a:hover { 
     background-color:#D6D6D6;
     color: #6D6D6D;
-    border-bottom:3px solid ##fec66f;
+    border-bottom:3px solid #fec66f;
 }
