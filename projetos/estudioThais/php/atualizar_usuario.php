@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Obtém os dados atuais do usuário
         $query = "SELECT nome, sobrenome, email, perfil_id FROM usuarioEstudio WHERE id = $id";
         $result = $conn->query($query);
-        $_SESSION['message'] = $query;
+        echo "<script>alert($query)</script>";
         if ($result) {
             $user = $result->fetch_assoc();
 
