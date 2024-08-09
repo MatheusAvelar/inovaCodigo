@@ -290,16 +290,14 @@ td:nth-child(6) {
     border-bottom:3px solid #fec66f;
 }
 
-#delete-button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 20px;
-    padding: 5px;
+/* Estilo do ícone de exclusão */
+.delete-icon {
     color: #ff5722; /* cor do ícone */
+    font-size: 20px;
+    text-decoration: none;
+    cursor: pointer;
 }
 
-#delete-button:hover i {
+.delete-icon:hover {
     color: #e64a19; /* cor ao passar o mouse */
 }
-
