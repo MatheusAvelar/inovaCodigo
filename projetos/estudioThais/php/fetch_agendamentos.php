@@ -61,7 +61,7 @@ if ($result->num_rows > 0) {
         echo "<td>" . $formattedStartTime . "</td>";
         echo "<td>" . $formattedEndTime . "</td>";
 
-        // Verificação para mostrar o ícone de excluir apenas se o usuário logado é o dono do agendamento
+        // Verificação para mostrar o botão de excluir apenas se o usuário logado é o dono do agendamento
         if ($row['usuario_id'] == $_SESSION['id']) {
             // Verifica se a data do agendamento está a pelo menos 2 dias no futuro
             $agendamentoDate = strtotime($row['data']);
@@ -69,14 +69,15 @@ if ($result->num_rows > 0) {
             $dateDiff = ($agendamentoDate - $currentDate) / 86400; // diferença em dias
 
             if ($dateDiff >= 2) {
-                echo "<td><a href='delete_agendamento.php' class='delete-icon' 
-                          data-id='" . htmlspecialchars($row['id']) . "' 
-                          data-description='" . htmlspecialchars($row['descricao']) . "' 
-                          data-date='" . $formattedDate . "' 
-                          data-start-time='" . $formattedStartTime . "' 
-                          data-end-time='" . $formattedEndTime . "'>
-                          <i class='fas fa-trash'></i>
-                      </a></td>";
+                echo "<td><form method='POST' action='php/delete_agendamento.php' onsubmit='return confirmDelete(this)'>
+                          <input type='hidden' name='agendamento_id' value='" . htmlspecialchars($row['id']) . "'>
+                          <button type='submit' class='delete-button' data-description='" . htmlspecialchars($row['descricao']) . "' 
+                                  data-date='" . $formattedDate . "' 
+                                  data-start-time='" . $formattedStartTime . "' 
+                                  data-end-time='" . $formattedEndTime . "'>
+                              <i class='fas fa-trash'></i>
+                          </button>
+                      </form></td>";
             } else {
                 echo "<td>Não pode excluir</td>";
             }
@@ -93,3 +94,17 @@ if ($result->num_rows > 0) {
 // Fechando a conexão
 $conn->close();
 ?>
+
+<script>
+    function confirmDelete(form) {
+        const button = form.querySelector('button');
+        const description = button.getAttribute('data-description');
+        const date = button.getAttribute('data-date');
+        const startTime = button.getAttribute('data-start-time');
+        const endTime = button.getAttribute('data-end-time');
+        
+        const message = `Você tem certeza de que deseja excluir o agendamento com a descrição "${description}" agendado para ${date} das ${startTime} às ${endTime}?`;
+
+        return confirm(message);
+    }
+</script>
