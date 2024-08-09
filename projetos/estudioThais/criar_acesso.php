@@ -1,3 +1,7 @@
+<?php
+session_start();
+include 'php/verificar_perfil.php';
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
