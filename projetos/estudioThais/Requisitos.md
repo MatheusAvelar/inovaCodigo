@@ -17,4 +17,4 @@ Sem Melhorias
 ### Tela de Usuarios
 - [x] ~~*Visualizar lista de usuários cadastrados.*~~ [09-08-2024]
 - [x] ~~*Editar/Excluir usuário.*~~ [09-08-2024]
-- [ ] Log de alterações no usuário.
+- [x] ~~*Log de alterações no usuário.*~~ [09-08-2024]

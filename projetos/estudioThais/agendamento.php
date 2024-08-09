@@ -76,13 +76,7 @@ include 'php/verificar_perfil.php';
                     <div id="name-error" class="error-message"></div>
 
                     <label for="estilo">Estilo:</label>
-                    <select id="estilo" name="estilo" required>
-                        <option value="">Selecione o estilo</option>
-                        <option value="Pontilhismo">Pontilhismo</option>
-                        <option value="Minimalista">Minimalista</option>
-                        <option value="Blackwork">Blackwork</option>
-                        <option value="Realista">Realista</option>
-                    </select>
+                    <input type="text" id="estilo" name="estilo" required>
                     <div id="estilo-error" class="error-message"></div>
 
                     <label for="tamanho">Tamanho (cm):</label>
