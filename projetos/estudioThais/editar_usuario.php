@@ -31,25 +31,25 @@ unset($_SESSION['status'], $_SESSION['message']);
         </div>
     </header>
     <br>
-    <div id="message-container">
-        <?php if ($status && $message) : ?>
-            <div class="message <?= $status ?>">
-                <?= htmlspecialchars($message) ?>
-            </div>
-        <?php endif; ?>
-    </div>
     <div class="container">
         <nav id="menu"> 
             <ul> 
                 <?php if ($perfil_id == 2) : ?>
                     <li><a href="criar_acesso.php">Criar Acesso</a></li>
                     <li><a href="usuarios_estudio.php">Usuários</a></li>
-                <?php endif; ?>
-                <li><a href="agendamento.php">Agendamento</a></li>
-                <li><a href="horarios_agendados.php">Horários Agendados</a></li>
-                <li><a href="php/logout.php">Sair</a></li>
-            </ul> 
+                    <?php endif; ?>
+                    <li><a href="agendamento.php">Agendamento</a></li>
+                    <li><a href="horarios_agendados.php">Horários Agendados</a></li>
+                    <li><a href="php/logout.php">Sair</a></li>
+                </ul> 
         </nav>
+        <div id="message-container">
+            <?php if ($status && $message) : ?>
+                <div class="message <?= $status ?>">
+                    <?= htmlspecialchars($message) ?>
+                </div>
+            <?php endif; ?>
+        </div>
         <h2>Editar Usuário</h2>
         <div class="grid">
             <div class="maca">
