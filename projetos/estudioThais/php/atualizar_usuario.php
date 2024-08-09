@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             console.log('Mensagem de erro: " . addslashes($message) . "');
             sessionStorage.setItem('status', '" . addslashes($status) . "');
             sessionStorage.setItem('message', '" . addslashes($message) . "');
-            window.location.href = '../usuarios_estudio.php';
+            window.location.href = '../editar_usuario.php';
         </script>";
 
     // Fechando a conexão
