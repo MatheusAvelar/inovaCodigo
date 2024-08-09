@@ -31,6 +31,7 @@ include 'php/verificar_perfil.php';
                 <li><a href="php/logout.php">Sair</a></li>
             </ul> 
         </nav>
+        <br>
         <div id="message-container">
             <?php if (isset($status) && isset($message)) : ?>
                 <div class="message <?= $status ?>">
