@@ -15,6 +15,6 @@
 ### Criar Acesso
 Sem Melhorias
 ### Tela de Usuarios
-- [ ] Visualizar lista de usuários cadastrados.
+- [x] ~~*Visualizar lista de usuários cadastrados.*~~ [09-08-2024]
 - [ ] Editar/Excluir usuário.
 - [ ] Log de alterações no usuário.

@@ -14,7 +14,9 @@ if ($conn->connect_error) {
 }
 
 // Obtendo a lista de tatuadores
-$query = "SELECT id, nome, sobrenome, email, perfil_id FROM usuarioEstudio";
+$query = "SELECT u.id, u.nome, u.sobrenome, u.email, p.nome AS perfil_nome
+          FROM usuarioEstudio AS u
+          JOIN perfis AS p ON u.perfil_id = p.id";
 $result = $conn->query($query);
 
 if ($result->num_rows > 0) {
@@ -24,7 +26,7 @@ if ($result->num_rows > 0) {
         echo "<td>" . htmlspecialchars($row['nome']) . "</td>";
         echo "<td>" . htmlspecialchars($row['sobrenome']) . "</td>";
         echo "<td>" . htmlspecialchars($row['email']) . "</td>";
-        echo "<td>" . htmlspecialchars($row['perfil_id']) . "</td>";
+        echo "<td>" . htmlspecialchars($row['perfil_nome']) . "</td>";
         echo "<td>
             <a href='editar_usuario.php?id=" . htmlspecialchars($row['id']) . "' title='Editar'>
                 <i class='fas fa-edit'></i>
