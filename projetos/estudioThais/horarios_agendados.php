@@ -60,7 +60,7 @@ include 'php/verificar_perfil.php';
                 <i class="fas fa-search"></i>
             </button>
             <button type="button" class="button" id="export-button">
-                <i class="fa-solid fa-file-xls"></i>
+                <i class="fa-solid fa-file-csv"></i>
             </button>
         </form>
         <div class="grid">
