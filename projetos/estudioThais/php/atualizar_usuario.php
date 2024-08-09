@@ -9,10 +9,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = "Camila@307";
     $dbname = "u221588236_controle_finan";
 
-    // Definindo variáveis para mensagem de retorno
-    $status = "";
-    $message = "";
-
     // Criando a conexão
     $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -29,21 +25,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $perfil_id = intval($_POST['perfil_id']);
     $alterado_por = $_SESSION['usuario_id']; // Supondo que o ID do usuário logado está na sessão
 
-    // Obtém os dados atuais do usuário
-    $query = "SELECT nome, sobrenome, email, perfil_id FROM usuarioEstudio WHERE id = $id";
-    $result = $conn->query($query);
-    if ($result) {
-        $user = $result->fetch_assoc();
+    // Inicia uma transação
+    $conn->begin_transaction();
 
-        // Prepara a atualização
-        $updateQuery = "UPDATE usuarioEstudio 
-                        SET nome = '$nome', sobrenome = '$sobrenome', email = '$email', perfil_id = $perfil_id
-                        WHERE id = $id";
+    try {
+        // Obtém os dados atuais do usuário
+        $query = "SELECT nome, sobrenome, email, perfil_id FROM usuarioEstudio WHERE id = $id";
+        $result = $conn->query($query);
+        if ($result) {
+            $user = $result->fetch_assoc();
 
-        // Inicia uma transação
-        $conn->begin_transaction();
+            // Prepara a atualização
+            $updateQuery = "UPDATE usuarioEstudio 
+                            SET nome = '$nome', sobrenome = '$sobrenome', email = '$email', perfil_id = $perfil_id
+                            WHERE id = $id";
 
-        try {
             if ($conn->query($updateQuery) === TRUE) {
                 // Registra alterações
                 $fields = ['nome', 'sobrenome', 'email', 'perfil_id'];
@@ -66,15 +62,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             } else {
                 throw new Exception("Erro ao atualizar usuário: " . $conn->error);
             }
-        } catch (Exception $e) {
-            // Rollback em caso de erro
-            $conn->rollback();
-            $_SESSION['status'] = "error";
-            $_SESSION['message'] = $e->getMessage();
+        } else {
+            throw new Exception("Erro ao buscar dados do usuário: " . $conn->error);
         }
-    } else {
+    } catch (Exception $e) {
+        // Rollback em caso de erro
+        $conn->rollback();
         $_SESSION['status'] = "error";
-        $_SESSION['message'] = "Erro ao buscar dados do usuário: " . $conn->error;
+        $_SESSION['message'] = $e->getMessage();
     }
 
     // Redireciona de volta para a página de edição com o ID do usuário
