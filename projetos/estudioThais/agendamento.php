@@ -143,7 +143,9 @@ include 'php/verificar_perfil.php';
             
             // Remove mask and convert to float
             const valorInput = document.getElementById('valor').value;
+            console.log('Valor input:', valorInput); // Debug: Log the masked input
             const valor = parseFloat(valorInput.replace('R$ ', '').replace(/\./g, '').replace(',', '.'));
+            console.log('Valor parsed:', valor); // Debug: Log the parsed value
 
             // Validate maca
             if (maca === '') {
