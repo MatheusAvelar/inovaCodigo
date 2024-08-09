@@ -14,7 +14,7 @@ if ($conn->connect_error) {
 }
 
 // Obtendo a lista de tatuadores
-$query = "SELECT u.id, u.nome, u.sobrenome, u.email, p.nome AS perfil_nome
+$query = "SELECT u.id, u.ativo, u.nome, u.sobrenome, u.email, p.nome AS perfil_nome
           FROM usuarioEstudio AS u
           JOIN perfis AS p ON u.perfil_id = p.id";
 $result = $conn->query($query);
