@@ -232,7 +232,7 @@ td:nth-child(6) {
     margin: 10px;
 }
 
-/* Estilo geral do filtro */
+/* Estilo geral do filtro *//*
 .filter-group {
     margin-bottom: 15px;
 }
@@ -262,6 +262,36 @@ td:nth-child(6) {
     font-size: 14px;
     cursor: pointer;
     transition: background-color 0.3s;
+}*/
+#filter-form {
+    display: flex;
+    align-items: center;
+}
+
+#filter-form label, 
+#filter-form input, 
+#filter-form select {
+    margin-right: 10px;
+}
+
+#filter-button, 
+#export-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 5px;
+    margin-left: 10px;
+}
+
+#filter-button i,
+#export-button i {
+    color: #ff5722; /* ou a cor que você preferir */
+}
+
+#filter-button:hover i,
+#export-button:hover i {
+    color: #e64a19; /* cor ao passar o mouse */
 }
 
 #menu ul { 
