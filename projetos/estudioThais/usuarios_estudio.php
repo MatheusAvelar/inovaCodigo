@@ -48,7 +48,7 @@ include 'php/verificar_perfil.php';
             </thead>
             <tbody>
                 <?php
-                include 'get_usuarios.php';
+                include 'php/get_usuarios.php';
                 ?>
             </tbody>
         </table>
