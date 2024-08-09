@@ -60,7 +60,7 @@ if ($result->num_rows === 0) {
 // Verificando se o ID do usuário que está realizando a exclusão é válido
 $query = "SELECT id FROM usuarioEstudio WHERE id = ?";
 $stmt = $conn->prepare($query);
-$stmt->bind_param('i', $loggedInUserId);
+$stmt->bind_param('s', $loggedInUserId);
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -76,7 +76,7 @@ if ($result->num_rows === 0) {
 // Verificando se há agendamentos associados ao usuário
 $query = "SELECT COUNT(*) AS agendamentos_count FROM agendamentos WHERE usuario_id = ?";
 $stmt = $conn->prepare($query);
-$stmt->bind_param('i', $userId);
+$stmt->bind_param('s', $userId);
 $stmt->execute();
 $result = $stmt->get_result();
 $row = $result->fetch_assoc();
@@ -98,7 +98,7 @@ if ($stmt->execute()) {
     // Inserindo log de exclusão
     $query = "INSERT INTO log_deletes_usuario (usuario_id, deletado_por, data_exclusao) VALUES (?, ?, NOW())";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param('ii', $userId, $loggedInUserId);
+    $stmt->bind_param('ss', $userId, $loggedInUserId);
     if ($stmt->execute()) {
         $_SESSION['status'] = 'success';
         $_SESSION['message'] = 'Usuário marcado como inativo com sucesso.';
