@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $sobrenome = $conn->real_escape_string(trim($_POST['sobrenome']));
     $email = $conn->real_escape_string(trim($_POST['email']));
     $perfil_id = intval($_POST['perfil_id']);
-    $alterado_por = intval($_SESSION['usuario_id']); // Supondo que o ID do usuário logado está na sessão
+    $alterado_por = intval($_SESSION['id']); // Supondo que o ID do usuário logado está na sessão
     $data_alteracao = date('Y-m-d H:i:s'); // Data e hora atual
 
     // Verifique se o ID do usuário logado é válido
