@@ -21,7 +21,9 @@ if ($conn->connect_error) {
 $nomeCliente = $_POST['cliente'] ?? '';
 $estilo = $_POST['estilo'] ?? '';
 $tamanho = $_POST['tamanho'] ?? '';
-$valor = str_replace(['R$ ', '.'], ['', '.'], $_POST['valor']) ?? ''; // Remove R$ e formata para decimal
+$valor = str_replace(['R$ ', '.'], ['', ','], $_POST['valor']) ?? ''; // Remove R$ e formata para decimal
+$valor = str_replace(',', '.', $valor); // Substitui a vírgula por ponto para garantir formato decimal
+$valor = floatval($valor); // Converte para float
 $formaPagamento = $_POST['pagamento'] ?? '';
 $sinalPago = $_POST['sinal_pago'] ?? '';
 $descricao = $_POST['descricao'] ?? '';
