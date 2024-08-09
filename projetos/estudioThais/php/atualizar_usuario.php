@@ -30,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $perfil_id = intval($_POST['perfil_id']);
     $alterado_por = intval($_SESSION['id']); // Supondo que o ID do usuário logado está na sessão
     $data_alteracao = date('Y-m-d H:i:s'); // Data e hora atual
+    $status = intval($_POST['status']); // Obtém o status do formulário
 
     // Verifique se o ID do usuário logado é válido
     $checkUserQuery = "SELECT id FROM usuarioEstudio WHERE id = $alterado_por";
@@ -53,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Prepara a atualização
         $updateQuery = "UPDATE usuarioEstudio 
-                        SET nome = '$nome', sobrenome = '$sobrenome', email = '$email', perfil_id = $perfil_id
+                        SET nome = '$nome', sobrenome = '$sobrenome', email = '$email', perfil_id = $perfil_id, ativo = $status
                         WHERE id = $id";
 
         if (!$conn->query($updateQuery)) {
@@ -61,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Registra alterações
-        $fields = ['nome', 'sobrenome', 'email', 'perfil_id'];
+        $fields = ['nome', 'sobrenome', 'email', 'perfil_id', 'status'];
         foreach ($fields as $field) {
             $old_value = $user[$field];
             $new_value = $$field; // Verifica o valor correto para a variável
