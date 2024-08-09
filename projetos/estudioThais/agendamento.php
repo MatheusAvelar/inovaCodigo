@@ -178,7 +178,7 @@ include 'php/verificar_perfil.php';
             }
 
             // Validate valor
-            if (isNaN(valor) || valor <= 0) {
+            if (valor <= 0) {
                 isValid = false;
                 document.getElementById('valor-error').innerText = 'O valor deve ser maior que R$ 0.';
             }
