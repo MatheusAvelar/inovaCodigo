@@ -48,27 +48,7 @@ include 'php/verificar_perfil.php';
             </thead>
             <tbody>
                 <?php
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        echo "<tr>";
-                        echo "<td>" . htmlspecialchars($row['id']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['nome']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['sobrenome']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['email']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['perfil_id']) . "</td>";
-                        echo "<td>
-                            <a href='editar_usuario.php?id=" . htmlspecialchars($row['id']) . "' title='Editar'>
-                                <i class='fas fa-edit'></i>
-                            </a>
-                            <a href='deletar_usuario.php?id=" . htmlspecialchars($row['id']) . "' title='Deletar' onclick='return confirm(\"Tem certeza que deseja deletar este usuário?\");'>
-                                <i class='fas fa-trash-alt'></i>
-                            </a>
-                            </td>";
-                        echo "</tr>";
-                    }
-                } else {
-                    echo "<tr><td colspan='6'>Nenhum usuário encontrado.</td></tr>";
-                }
+                include 'get_usuarios.php';
                 ?>
             </tbody>
         </table>
