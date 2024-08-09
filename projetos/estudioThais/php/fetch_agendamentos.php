@@ -75,7 +75,7 @@ if ($result->num_rows > 0) {
                                   data-date='" . $formattedDate . "' 
                                   data-start-time='" . $formattedStartTime . "' 
                                   data-end-time='" . $formattedEndTime . "'>
-                              <img src='img/icone-lixeira.png' alt='Excluir' style='width: 20px; height: 20px; border: none;'>
+                              <i class='fas fa-trash'></i>
                           </button>
                       </form></td>";
             } else {
