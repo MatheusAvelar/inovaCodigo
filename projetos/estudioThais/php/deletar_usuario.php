@@ -42,6 +42,17 @@ if ($result->num_rows === 0) {
     exit();
 }
 
+// Verificando se o ID do usuário que está realizando a exclusão é válido
+$query = "SELECT id FROM usuarioEstudio WHERE id = $loggedInUserId";
+$result = $conn->query($query);
+
+if ($result->num_rows === 0) {
+    $_SESSION['status'] = 'error';
+    $_SESSION['message'] = 'Usuário que está realizando a exclusão não encontrado.';
+    header('Location: ../usuarios_estudio.php');
+    exit();
+}
+
 // Verificando se há agendamentos associados ao usuário
 $query = "SELECT COUNT(*) AS agendamentos_count FROM agendamentos WHERE usuario_id = $userId";
 $result = $conn->query($query);
