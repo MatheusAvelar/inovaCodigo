@@ -16,13 +16,18 @@
                 <img src="img/tatto.jpeg" alt="Logo do Estúdio" class="logo">
             </a>
         </div>
-        <div class="logout-container">
-        <form action="php/logout.php" method="post">
-            <button type="submit" class="logout-button">Sair</button>
-        </form>
     </header>
 
     <div class="container">
+        <nav id="menu"> 
+            <ul> 
+                <?php if ($perfil_id == 2) : ?>
+                    <li><a href="criar_acesso.php">Criar Acesso</a></li>
+                <?php endif; ?>
+                <li><a href="agendamento.php">Agendamento</a></li>
+                <li><a href="php/logout.php">Sair</a></li>
+            </ul> 
+        </nav>
         <h2>Horários Agendados</h2>
         <form id="filter-form" method="GET" action="horarios_agendados.php">
             <label for="filter-date">Data:</label>
@@ -73,8 +78,7 @@
                         ?>
                     </tbody>
                 </table>
-            </div>
-            <a href="agendamento.php" class="button">Voltar ao Agendamento</a>
+            </div>            
         </div>
     </div>
 
