@@ -11,7 +11,7 @@ include 'php/verificar_perfil.php';
     <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.sheetjs.com/xlsx-latest/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header>
@@ -56,8 +56,12 @@ include 'php/verificar_perfil.php';
                 ?>
             </select>
 
-            <button type="submit" class="button">Filtrar</button>
-            <button type="button" class="button" id="export-button">Exportar</button>
+            <button type="submit" class="button" id="filter-button">
+                <i class="fas fa-search"></i>
+            </button>
+            <button type="button" class="button" id="export-button">
+                <i class="fas fa-file-excel"></i>
+            </button>
         </form>
         <div class="grid">
             <div class="maca">
