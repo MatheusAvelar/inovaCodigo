@@ -54,26 +54,15 @@ if ($row['agendamentos_count'] > 0) {
     exit();
 }
 
-// Excluindo registros na tabela log_alteracoes_usuario
-$query = "DELETE FROM log_alteracoes_usuario WHERE usuario_id = $userId";
-if ($conn->query($query) === FALSE) {
-    $_SESSION['status'] = 'error';
-    $_SESSION['message'] = 'Erro ao excluir registros relacionados: ' . $conn->error;
-    echo "Erro ao excluir registros relacionados.";
-    $conn->close();
-    header('Location: ../usuarios_estudio.php');
-    exit();
-}
-
-// Deletando o usuário
-$query = "DELETE FROM usuarioEstudio WHERE id = $userId";
+// Atualizando o usuário para inativo
+$query = "UPDATE usuarioEstudio SET ativo = 0 WHERE id = $userId";
 if ($conn->query($query) === TRUE) {
     // Inserindo log de exclusão
     $query = "INSERT INTO log_deletes_usuario (usuario_id, deletado_por, data_exclusao) VALUES ($userId, $loggedInUserId, NOW())";
     if ($conn->query($query) === TRUE) {
         $_SESSION['status'] = 'success';
-        $_SESSION['message'] = 'Usuário deletado com sucesso.';
-        echo "Usuário deletado com sucesso.";
+        $_SESSION['message'] = 'Usuário marcado como inativo com sucesso.';
+        echo "Usuário marcado como inativo com sucesso.";
     } else {
         $_SESSION['status'] = 'error';
         $_SESSION['message'] = 'Erro ao registrar log de exclusão: ' . $conn->error;
@@ -81,8 +70,8 @@ if ($conn->query($query) === TRUE) {
     }
 } else {
     $_SESSION['status'] = 'error';
-    $_SESSION['message'] = 'Erro ao deletar usuário: ' . $conn->error;
-    echo "Erro ao deletar usuário.";
+    $_SESSION['message'] = 'Erro ao marcar usuário como inativo: ' . $conn->error;
+    echo "Erro ao marcar usuário como inativo.";
 }
 
 // Fechando a conexão
