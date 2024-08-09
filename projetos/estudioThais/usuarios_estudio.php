@@ -18,6 +18,12 @@ include 'php/verificar_perfil.php';
                 <img src="img/tatto.jpeg" alt="Logo do Estúdio" class="logo">
             </a>
         </div>
+        <div class="welcome-message">
+            Bem Vindo, <?= htmlspecialchars($_SESSION['usuario_nome']) ?>!
+        </div>
+    </header>
+    
+    <div class="container">
         <nav id="menu"> 
             <ul> 
                 <?php if ($perfil_id == 2) : ?>
@@ -28,10 +34,7 @@ include 'php/verificar_perfil.php';
                 <li><a href="php/logout.php">Sair</a></li>
             </ul> 
         </nav>
-    </header>
-
-    <div class="container">
-        <h1>Usuários do Sistema</h1>
+        <h2>Usuários do Sistema</h2>
         <table>
             <thead>
                 <tr>
