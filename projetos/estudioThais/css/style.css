@@ -273,90 +273,59 @@ td:nth-child(6) {
     background-color: #0056b3;
 }
 
-.hamburger-menu {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.menu-icon {
-    display: flex;
+/** **/
+/* Estilo do menu de hambúrguer */
+.menu-hamburguer {
+    display: none;
     flex-direction: column;
-    justify-content: space-between;
-    width: 30px;
-    height: 22px;
     cursor: pointer;
 }
 
-.menu-icon span {
-    background-color: #333;
-    height: 4px;
-    border-radius: 2px;
+.menu-hamburguer div {
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+    margin: 4px 0;
+    transition: 0.4s;
 }
 
-#menu-toggle {
-    display: none;
+/* Estilo dos botões do menu */
+.menu {
+    display: flex;
+    gap: 15px;
 }
 
-.nav-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: #f9f9f9;
-    width: 100%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
-}
-
-.nav-menu ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.nav-menu ul li {
-    padding: 10px 20px;
-    border-bottom: 1px solid #e0e0e0;
-}
-
-.nav-menu ul li:last-child {
-    border-bottom: none;
-}
-
-.nav-menu ul li a {
+.menu a {
+    color: white;
     text-decoration: none;
-    color: #333;
-    display: block;
+    padding: 8px 16px;
+    border-radius: 5px;
+    background-color: #444;
+    transition: background-color 0.3s ease;
 }
 
-#menu-toggle:checked + .menu-icon + .nav-menu {
-    display: block;
+.menu a:hover {
+    background-color: #555;
 }
 
-@media (min-width: 768px) {
-    .menu-icon {
+/* Estilo responsivo */
+@media (max-width: 768px) {
+    .menu-hamburguer {
+        display: flex;
+    }
+
+    .menu {
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        flex-direction: column;
+        background-color: #333;
+        width: 200px;
         display: none;
+        z-index: 1;
     }
 
-    .nav-menu {
+    .menu.active {
         display: flex;
-        position: static;
-        box-shadow: none;
-        background-color: transparent;
-        width: auto;
-    }
-
-    .nav-menu ul {
-        display: flex;
-        flex-direction: row;
-    }
-
-    .nav-menu ul li {
-        border: none;
-    }
-
-    .nav-menu ul li a {
-        padding: 10px 20px;
     }
 }

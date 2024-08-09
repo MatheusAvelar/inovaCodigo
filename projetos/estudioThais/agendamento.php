@@ -27,19 +27,14 @@ include 'php/verificar_perfil.php';
     </header>
 
     <div class="container">
-        <div class="hamburger-menu">
-            <input type="checkbox" id="menu-toggle">
-            <label for="menu-toggle" class="menu-icon">
-                <span></span>
-                <span></span>
-                <span></span>
-            </label>
-            <nav class="nav-menu">
-                <ul>
-                    <li><a href="#criar-acesso">Criar Acesso</a></li>
-                    <li><a href="#ver-horarios-agendados">Ver Horários Agendados</a></li>
-                </ul>
-            </nav>
+        <div class="menu-hamburguer" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="menu">
+            <a href="#">Criar Acesso</a>
+            <a href="#">Ver Horários Agendados</a>
         </div>
         <div id="message-container">
             <?php if (isset($status) && isset($message)) : ?>
@@ -91,7 +86,12 @@ include 'php/verificar_perfil.php';
         </div>
     </div>
 
-    <script>        
+    <script>       
+        function toggleMenu() {
+            const menu = document.querySelector('.menu');
+            menu.classList.toggle('active');
+        }
+                        
         function validateForm() {
             let isValid = true;
 
