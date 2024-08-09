@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Registra alterações
-        $fields = ['nome', 'sobrenome', 'email', 'perfil_id', 'status'];
+        $fields = ['nome', 'sobrenome', 'email', 'perfil_id', 'ativo'];
         foreach ($fields as $field) {
             $old_value = $user[$field];
             $new_value = $$field; // Verifica o valor correto para a variável
