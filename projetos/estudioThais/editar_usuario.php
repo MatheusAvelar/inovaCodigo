@@ -76,8 +76,8 @@ unset($_SESSION['status'], $_SESSION['message']);
 
                     <label for="status">Status:</label>
                     <select id="status" name="status" required>
-                        <option value="1" <?= $perfil['ativo'] == 1 ? 'selected' : '' ?>>Ativo</option>
-                        <option value="0" <?= $perfil['ativo'] == 0 ? 'selected' : '' ?>>Inativo</option>
+                        <option value="1" <?= $user['ativo'] == 1 ? 'selected' : '' ?>>Ativo</option>
+                        <option value="0" <?= $user['ativo'] == 0 ? 'selected' : '' ?>>Inativo</option>
                     </select>
                     
                     <button type="submit" class="button">Atualizar</button>

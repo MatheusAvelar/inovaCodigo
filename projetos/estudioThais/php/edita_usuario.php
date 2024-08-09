@@ -21,7 +21,7 @@ if ($conn->connect_error) {
 }
 
 // Obtendo os dados do usuário
-$query = "SELECT u.id, u.nome, u.sobrenome, u.email, u.perfil_id, p.nome AS perfil_nome
+$query = "SELECT u.ativo, u.id, u.nome, u.sobrenome, u.email, u.perfil_id, p.nome AS perfil_nome
           FROM usuarioEstudio AS u
           JOIN perfis AS p ON u.perfil_id = p.id
           WHERE u.id = $userId";
