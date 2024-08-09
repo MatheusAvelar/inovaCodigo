@@ -1,6 +1,13 @@
 <?php
 session_start();
 include 'php/verificar_perfil.php';
+
+// Verifica se há mensagem de status na sessão
+$status = isset($_SESSION['status']) ? $_SESSION['status'] : null;
+$message = isset($_SESSION['message']) ? $_SESSION['message'] : null;
+
+// Limpa as mensagens de status da sessão após exibir
+unset($_SESSION['status'], $_SESSION['message']);
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -34,6 +41,14 @@ include 'php/verificar_perfil.php';
                 <li><a href="php/logout.php">Sair</a></li>
             </ul> 
         </nav>
+        <br>
+        <div id="message-container">
+            <?php if ($status && $message) : ?>
+                <div class="message <?= $status ?>">
+                    <?= htmlspecialchars($message) ?>
+                </div>
+            <?php endif; ?>
+        </div>
         <h2>Usuários do Sistema</h2>
         <div class="grid">
             <div class="maca">
