@@ -31,7 +31,10 @@ if ($conn->connect_error) {
 $agendamento_id = isset($_POST['agendamento_id']) ? $_POST['agendamento_id'] : '';
 
 // Verifica se o agendamento pertence ao usuário logado
-$query = "SELECT data, usuario_id FROM agendamentos WHERE id = ?";
+$query = "SELECT a.data, a.usuario_id, u.perfil_id 
+    FROM agendamentos a
+    JOIN usuarioEstudio u ON a.usuario_id = u.id
+    WHERE a.id = ?";
 $stmt = $conn->prepare($query);
 if (!$stmt) {
     $_SESSION['status'] = 'error';
