@@ -136,18 +136,43 @@ include 'php/verificar_perfil.php';
             });
 
             // Get form values
-            const valor = document.getElementById('valor').value.replace('R$ ', '').replace('.', '').replace(',', '.');
+            const maca = document.getElementById('maca').value;
+            const date = document.getElementById('date1').value;
             const startTime = document.getElementById('start-time1').value;
             const endTime = document.getElementById('end-time1').value;
+            const valor = document.getElementById('valor').value.replace('R$ ', '').replace('.', '').replace(',', '.');
 
-            
+            // Validate maca
+            if (maca === '') {
+                isValid = false;
+                document.getElementById('maca-error').innerText = 'Selecione uma maca.';
+            }
+
+            // Validate date
+            if (date === '') {
+                isValid = false;
+                document.getElementById('date1-error').innerText = 'A data é obrigatória.';
+            }
+
+            // Validate start time
+            if (startTime === '') {
+                isValid = false;
+                document.getElementById('start-time1-error').innerText = 'O horário inicial é obrigatório.';
+            }
+
+            // Validate end time
+            if (endTime === '') {
+                isValid = false;
+                document.getElementById('end-time1-error').innerText = 'O horário final é obrigatório.';
+            }
+
             // Validate that end time is after start time
             if (startTime && endTime && startTime >= endTime) {
                 isValid = false;
                 document.getElementById('end-time1-error').innerText = 'O horário final deve ser maior que o horário inicial.';
             }
 
-            console.log(valor);
+            // Validate valor
             if (isNaN(valor) || valor <= 0) {
                 isValid = false;
                 document.getElementById('valor-error').innerText = 'O valor deve ser maior que R$ 0.';
