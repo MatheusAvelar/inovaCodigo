@@ -20,7 +20,13 @@ if ($conn->connect_error) {
 }
 
 // Capturando dados do formulário
-$descricao = $_POST['name1'] ?? '';
+$nomeCliente = $_POST['name'] ?? '';
+$estilo = $_POST['estilo'] ?? '';
+$tamanho = $_POST['tamanho'] ?? '';
+$valor = str_replace(['R$ ', '.'], ['', ','], $_POST['valor']) ?? ''; // Remove R$ e formata para decimal
+$formaPagamento = $_POST['pagamento'] ?? '';
+$sinalPago = $_POST['sinal_pago'] ?? '';
+$descricao = $_POST['descricao'] ?? '';
 $maca = $_POST['maca'] ?? '';
 $date = $_POST['date1'] ?? '';
 $startTime = $_POST['start-time1'] ?? '';
@@ -43,6 +49,9 @@ if (empty($endTime)) {
 if (!empty($startTime) && !empty($endTime) && $startTime >= $endTime) {
     $errors[] = "O horário final deve ser maior que o horário inicial.";
 }
+if (!is_numeric($valor) || $valor <= 0) {
+    $errors[] = "O valor deve ser um número maior que R$ 0.";
+}
 
 // Verificação de conflito de horário
 if (empty($errors)) {
@@ -60,8 +69,8 @@ if (empty($errors)) {
     } else {
         // Inserir no banco de dados se não houver conflitos
         $usuarioId = $_SESSION['id']; // ID do usuário logado
-        $stmt = $conn->prepare("INSERT INTO agendamentos (descricao, maca_id, data, start_time, end_time, usuario_id) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssssss", $descricao, $maca, $date, $startTime, $endTime, $usuarioId);
+        $stmt = $conn->prepare("INSERT INTO agendamentos (nome_cliente, estilo, tamanho, valor, forma_pagamento, sinal_pago, descricao, maca_id, data, start_time, end_time, usuario_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssssssssss", $nomeCliente, $estilo, $tamanho, $valor, $formaPagamento, $sinalPago, $descricao, $maca, $date, $startTime, $endTime, $usuarioId);
         if ($stmt->execute()) {
             $status = "success";
             $message = "Agendamento realizado com sucesso!";
