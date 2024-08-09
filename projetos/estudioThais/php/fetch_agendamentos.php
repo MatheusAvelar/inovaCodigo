@@ -46,7 +46,7 @@ if (!empty($filterMonth)) {
 }
 
 // Busca de agendamentos existentes com os filtros aplicados
-$query = "SELECT ag.id, ag.descricao, ag.maca_id, ag.data, ag.start_time, ag.end_time, ag.usuario_id, u.nome AS tatuador_nome 
+$query = "SELECT ag.id, ag.descricao, ag.maca_id, ag.data, ag.start_time, ag.end_time, ag.usuario_id, u.nome AS tatuador_nome, u.perfil_id
           FROM agendamentos AS ag
           JOIN usuarioEstudio AS u ON ag.usuario_id = u.id
           $whereClause 
@@ -69,7 +69,7 @@ if ($result->num_rows > 0) {
         echo "<td>" . $formattedEndTime . "</td>";
 
         // Verificação para mostrar o botão de excluir apenas se o usuário logado é o dono do agendamento
-        if ($row['usuario_id'] == $_SESSION['id'] || $perfil_id == 2) {
+        if ($row['usuario_id'] == $_SESSION['id'] || $row['perfil_id'] == 2) {
             // Verifica se a data do agendamento está a pelo menos 2 dias no futuro
             $agendamentoDate = strtotime($row['data']);
             $currentDate = strtotime(date('Y-m-d'));
