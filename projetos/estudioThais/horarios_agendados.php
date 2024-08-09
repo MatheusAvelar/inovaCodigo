@@ -140,6 +140,8 @@ include 'php/verificar_perfil.php';
                 icon.addEventListener('click', function(event) {
                     event.preventDefault();
                     
+                    console.log('Ícone de exclusão clicado'); // Adicione este log
+
                     const id = this.getAttribute('data-id');
                     const description = this.getAttribute('data-description');
                     const date = this.getAttribute('data-date');
@@ -149,8 +151,11 @@ include 'php/verificar_perfil.php';
                     const message = `Você tem certeza de que deseja excluir o agendamento com a descrição "${description}" agendado para ${date} das ${startTime} às ${endTime}?`;
 
                     if (confirm(message)) {
+                        console.log('Confirmação recebida, redirecionando para exclusão...'); // Adicione este log
                         // Se confirmado, redireciona para o script de exclusão
                         window.location.href = `php/delete_agendamento.php?agendamento_id=${id}`;
+                    } else {
+                        console.log('Exclusão cancelada'); // Adicione este log
                     }
                 });
             });
