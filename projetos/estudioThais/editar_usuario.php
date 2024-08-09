@@ -1,6 +1,7 @@
 <?php
 session_start();
 include 'php/verificar_perfil.php';
+include 'php/editar_usuario.php';
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
