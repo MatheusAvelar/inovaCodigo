@@ -33,6 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Obtém os dados atuais do usuário
         $query = "SELECT nome, sobrenome, email, perfil_id FROM usuarioEstudio WHERE id = $id";
         $result = $conn->query($query);
+        $_SESSION['message'] = $query;
         if ($result) {
             $user = $result->fetch_assoc();
 
@@ -59,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 // Define mensagem de sucesso
                 $_SESSION['status'] = "success";
-                $_SESSION['message'] = "Usuário atualizado com sucesso!";
+                //$_SESSION['message'] = "Usuário atualizado com sucesso!";
             } else {
                 throw new Exception("Erro ao atualizar usuário: " . $conn->error);
             }
