@@ -24,6 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $conn->real_escape_string(trim($_POST['email']));
     $perfil_id = intval($_POST['perfil_id']);
     $alterado_por = $_SESSION['usuario_id']; // Supondo que o ID do usuário logado está na sessão
+    $data_alteracao = date('Y-m-d H:i:s'); // Data e hora atual
 
     // Inicia uma transação
     $conn->begin_transaction();
@@ -47,8 +48,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     if ($user[$field] !== $$field) {
                         $valor_antigo = $conn->real_escape_string($user[$field]);
                         $valor_novo = $conn->real_escape_string($$field);
-                        $logQuery = "INSERT INTO log_alteracoes_usuario (usuario_id, campo, valor_antigo, valor_novo, alterado_por)
-                                     VALUES ($id, '$field', '$valor_antigo', '$valor_novo', $alterado_por)";
+                        $logQuery = "INSERT INTO log_alteracoes_usuario (usuario_id, campo, valor_antigo, valor_novo, alterado_por, data_alteracao)
+                                     VALUES ($id, '$field', '$valor_antigo', '$valor_novo', $alterado_por, $data_alteracao)";
                         $conn->query($logQuery);
                     }
                 }
@@ -69,7 +70,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Rollback em caso de erro
         $conn->rollback();
         $_SESSION['status'] = "error";
-        $_SESSION['message'] = $e->getMessage();
+        //$_SESSION['message'] = $e->getMessage();
+        $_SESSION['message'] = $e->getCode();
     }
 
     // Redireciona de volta para a página de edição com o ID do usuário
