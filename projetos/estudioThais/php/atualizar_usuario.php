@@ -31,6 +31,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $alterado_por = intval($_SESSION['usuario_id']); // Supondo que o ID do usuário logado está na sessão
     $data_alteracao = date('Y-m-d H:i:s'); // Data e hora atual
 
+    // Verifique se o ID do usuário logado é válido
+    $checkUserQuery = "SELECT id FROM usuarioEstudio WHERE id = $alterado_por";
+    $checkUserResult = $conn->query($checkUserQuery);
+    if ($checkUserResult->num_rows === 0) {
+        die("ID do usuário logado não encontrado na tabela usuarioEstudio.");
+    }
+
     // Inicia uma transação
     $conn->begin_transaction();
 
