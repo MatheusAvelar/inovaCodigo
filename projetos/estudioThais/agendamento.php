@@ -24,7 +24,8 @@ include 'php/verificar_perfil.php';
                 <button type="submit" class="logout-button">Sair</button>
             </form>
         </div>
-        <nav>
+    </header>
+    <nav>
         <div class="menu-btn">
             <div class="menu-btn__burger"></div>
         </div>
@@ -35,7 +36,6 @@ include 'php/verificar_perfil.php';
             <li><a href="#">Contato</a></li>
         </ul>
     </nav>
-    </header>
 
     <div class="container">
         <div id="message-container">
