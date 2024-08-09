@@ -23,7 +23,14 @@ include 'php/edita_usuario.php';
             Bem Vindo, <?= htmlspecialchars($_SESSION['usuario_nome']) ?>!
         </div>
     </header>
-
+    <br>
+    <div id="message-container">
+        <?php if (isset($status) && isset($message)) : ?>
+            <div class="message <?= $status ?>">
+                <?= $message ?>
+            </div>
+        <?php endif; ?>
+    </div>
     <div class="container">
         <nav id="menu"> 
             <ul> 
