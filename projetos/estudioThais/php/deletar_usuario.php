@@ -17,7 +17,6 @@ $loggedInUserId = isset($_SESSION['user_id']) ? intval($_SESSION['user_id']) : 0
 
 if ($userId == 0) {
     logError('ID do usuário não fornecido ou inválido.');
-    die('ID do usuário não fornecido ou inválido.');
 }
 
 // Configuração da conexão com o banco de dados
