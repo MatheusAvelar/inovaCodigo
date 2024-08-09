@@ -1,16 +1,13 @@
 <?php
 session_start();
 include 'php/verificar_perfil.php';
-echo "Script de exclusão foi chamado"; 
-// Verifica se o ID do usuário foi passado na URL
-if (!isset($_GET['id']) || empty($_GET['id'])) {
-    $_SESSION['status'] = 'error';
-    $_SESSION['message'] = 'ID do usuário não fornecido.';
-    header('Location: ../usuarios_estudio.php');
-    exit();
-}
 
-$userId = intval($_GET['id']);
+// Verifica se o ID do usuário foi passado na URL e o converte para um inteiro
+$userId = isset($_GET['id']) ? intval($_GET['id']) : 0;
+
+if ($userId == 0) {
+    die('ID do usuário não fornecido ou inválido.');
+}
 
 // Configuração da conexão com o banco de dados
 $servername = "127.0.0.1:3306";
