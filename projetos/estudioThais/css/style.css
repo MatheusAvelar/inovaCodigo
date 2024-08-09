@@ -191,11 +191,6 @@ td:nth-child(6) {
     vertical-align: middle;
 }
 
-.logout-container {
-    display: inline-block;
-    vertical-align: middle;
-}
-
 .header {
     background-color: #333;
     color: #fff;
