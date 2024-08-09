@@ -24,6 +24,17 @@ include 'php/verificar_perfil.php';
                 <button type="submit" class="logout-button">Sair</button>
             </form>
         </div>
+        <nav>
+        <div class="menu-btn">
+            <div class="menu-btn__burger"></div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Serviços</a></li>
+            <li><a href="#">Sobre</a></li>
+            <li><a href="#">Contato</a></li>
+        </ul>
+    </nav>
     </header>
 
     <div class="container">
@@ -78,6 +89,14 @@ include 'php/verificar_perfil.php';
     </div>
 
     <script>
+        const menuBtn = document.querySelector('.menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuBtn.addEventListener('click', () => {
+            menuBtn.classList.toggle('active');
+            navLinks.classList.toggle('nav-active');
+        });
+        
         function validateForm() {
             let isValid = true;
 
