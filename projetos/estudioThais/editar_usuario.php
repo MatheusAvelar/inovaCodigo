@@ -2,6 +2,13 @@
 session_start();
 include 'php/verificar_perfil.php';
 include 'php/edita_usuario.php';
+
+// Verifica se há mensagem de status na sessão
+$status = isset($_SESSION['status']) ? $_SESSION['status'] : null;
+$message = isset($_SESSION['message']) ? $_SESSION['message'] : null;
+
+// Limpa as mensagens de status da sessão após exibir
+unset($_SESSION['status'], $_SESSION['message']);
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -25,9 +32,9 @@ include 'php/edita_usuario.php';
     </header>
     <br>
     <div id="message-container">
-        <?php if (isset($status) && isset($message)) : ?>
+        <?php if ($status && $message) : ?>
             <div class="message <?= $status ?>">
-                <?= $message ?>
+                <?= htmlspecialchars($message) ?>
             </div>
         <?php endif; ?>
     </div>

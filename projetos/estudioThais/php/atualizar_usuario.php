@@ -35,19 +35,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($conn->query($query) === TRUE) {
         // Redireciona para a lista de usuários com uma mensagem de sucesso
-        $status = "success";
-        $message = "Usuário atualizado com sucesso!";
+        $_SESSION['status'] = "success";
+        $_SESSION['message'] = "Usuário atualizado com sucesso!";
     } else {
-        $status = "error";
-        $message = "Erro ao atualizar usuário: " . $conn->error;
+        $_SESSION['status'] = "error";
+        $_SESSION['message'] = "Erro ao atualizar usuário: " . $conn->error;
     }
 
-    echo "<script>
-            console.log('Mensagem de erro: " . addslashes($message) . "');
-            sessionStorage.setItem('status', '" . addslashes($status) . "');
-            sessionStorage.setItem('message', '" . addslashes($message) . "');
-            window.location.href = '../editar_usuario.php?id=$id';
-        </script>";
+    // Redireciona de volta para a página de edição com o ID do usuário
+    header("Location: ../editar_usuario.php?id=$id");
+    exit();
 
     // Fechando a conexão
     $conn->close();
