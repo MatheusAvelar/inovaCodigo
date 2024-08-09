@@ -38,8 +38,8 @@ include 'php/verificar_perfil.php';
         </nav>
         <h2>Horários Agendados</h2>
         <form id="filter-form" method="GET" action="horarios_agendados.php">
-            <label for="filter-date">Data:</label>
-            <input type="date" id="filter-date" name="filter_date" value="<?= htmlspecialchars($_GET['filter_date'] ?? '') ?>">
+            <!-- <label for="filter-date">Data:</label>
+            <input type="date" id="filter-date" name="filter_date" value="<?= htmlspecialchars($_GET['filter_date'] ?? '') ?>"> -->
             
             <label for="filter-month">Mês:</label>
             <select id="filter-month" name="filter_month">
