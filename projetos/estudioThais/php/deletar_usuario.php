@@ -5,6 +5,9 @@ session_start();
 // Verifica se o ID do usuário foi passado na URL e o converte para um inteiro
 $userId = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
+// ID do usuário que está realizando a exclusão (ajuste conforme necessário)
+$loggedInUserId = isset($_SESSION['user_id']) ? intval($_SESSION['user_id']) : 0;
+
 if ($userId == 0) {
     die('ID do usuário não fornecido ou inválido.');
 }
@@ -54,9 +57,17 @@ if ($row['agendamentos_count'] > 0) {
 // Deletando o usuário
 $query = "DELETE FROM usuarioEstudio WHERE id = $userId";
 if ($conn->query($query) === TRUE) {
-    $_SESSION['status'] = 'success';
-    $_SESSION['message'] = 'Usuário deletado com sucesso.';
-    echo "Usuário deletado com sucesso.";
+    // Inserindo log de exclusão
+    $query = "INSERT INTO log_deletes_usuario (usuario_id, deletado_por, data_exclusao) VALUES ($userId, $loggedInUserId, NOW())";
+    if ($conn->query($query) === TRUE) {
+        $_SESSION['status'] = 'success';
+        $_SESSION['message'] = 'Usuário deletado com sucesso.';
+        echo "Usuário deletado com sucesso.";
+    } else {
+        $_SESSION['status'] = 'error';
+        $_SESSION['message'] = 'Erro ao registrar log de exclusão: ' . $conn->error;
+        echo "Erro ao registrar log de exclusão.";
+    }
 } else {
     $_SESSION['status'] = 'error';
     $_SESSION['message'] = 'Erro ao deletar usuário: ' . $conn->error;
