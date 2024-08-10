@@ -3,7 +3,7 @@ session_start();
 include 'envia_email.php';
 
 // Definindo variáveis para mensagem de retorno
-$status = "";
+$_SESSION['status'] = "";
 $message = "";
 
 // Configuração da conexão com o banco de dados
@@ -76,8 +76,8 @@ if (empty($errors)) {
         if ($stmt->num_rows > 0) {
             $stmt->bind_result($existingStartTime, $existingEndTime);
             $stmt->fetch();
-            $status = "error";
-            $message = "Já existe um agendamento para a maca e data selecionadas com conflito de horário: de $existingStartTime às $existingEndTime.";
+            $_SESSION['status'] = "error";
+            $_SESSION['message'] = "Já existe um agendamento para a maca e data selecionadas com conflito de horário: de $existingStartTime às $existingEndTime.";
             $stmt->close();
         } else {
             // Inserir no banco de dados se não houver conflitos
@@ -115,10 +115,10 @@ if (empty($errors)) {
                 echo "Erro na inserção: " . $stmt->error . "<br>";
             } else {
                 if (sendEmail($to, $subject, $messages, $headers)) {
-                    $status = "success";
-                    $message = "Agendamento realizado com sucesso!"."\n"."Foi enviado um e-mail com os dados do agendamento para o cliente.";
+                    $_SESSION['status'] = "success";
+                    $_SESSION['message'] = "Agendamento realizado com sucesso!"."\n"."Foi enviado um e-mail com os dados do agendamento para o cliente.";
                 } else {
-                    $message = 'Erro ao enviar e-mail: ' . $result['error'];
+                    $_SESSION['message'] = 'Erro ao enviar e-mail: ' . $result['error'];
                 }
             }
 
@@ -129,18 +129,14 @@ if (empty($errors)) {
         }
     }
 } else {
-    $status = "error";
-    $message = implode("<br>", $errors);
+    $_SESSION['status'] = "error";
+    $_SESSION['message'] = implode("<br>", $errors);
 }
+
+// Redireciona de volta para a página de edição com o ID do usuário
+header("Location: ../agendamento.php");
+exit();
 
 // Fechando a conexão
 $conn->close();
-
-// Armazenando a mensagem em sessionStorage e redirecionando
-echo "<script>
-    console.log('Mensagem de erro: " . addslashes($message) . "');
-    sessionStorage.setItem('status', '" . addslashes($status) . "');
-    sessionStorage.setItem('message', '" . addslashes($message) . "');
-    window.location.href = '../agendamento.php';
-</script>";
 ?>
