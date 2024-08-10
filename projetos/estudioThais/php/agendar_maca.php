@@ -118,7 +118,7 @@ if (empty($errors)) {
             } else {
                 if (sendEmail($to, $subject, $messages, $headers) && !empty($emailCliente)) {
                     // Exemplo de uso da função
-                    $toPhoneNumber = '5531993018766';
+                    $toPhoneNumber = '+5531993018766';
                     $parameters = [
                         ['type' => 'text', 'text' => $nomeCliente],
                         ['type' => 'text', 'text' => $dataFormatada],

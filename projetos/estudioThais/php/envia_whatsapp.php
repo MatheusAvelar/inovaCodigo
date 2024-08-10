@@ -40,9 +40,23 @@ function sendWhatsAppMessage($toPhoneNumber, $templateName = 'confirmar_agendame
     // Executa a requisição e obtém a resposta
     $response = curl_exec($ch);
 
+    // Verifica se houve erros no cURL
+    if (curl_errno($ch)) {
+        echo 'Erro cURL: ' . curl_error($ch);
+    } else {
+        // Verifica o código de resposta HTTP
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        if ($httpCode != 200) {
+            echo 'Erro API: ' . $response;
+        } else {
+            echo 'Mensagem enviada com sucesso: ' . $response;
+        }
+    }
+
     // Fecha o cURL
     curl_close($ch);
 
     // Retorna a resposta
     return $response;
 }
+?>
