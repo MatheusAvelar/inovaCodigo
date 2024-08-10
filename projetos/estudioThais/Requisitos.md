@@ -13,7 +13,7 @@
   Observação:
     - [x] ~~*No dia que foi agendado*~~ [09-08-2024]
     - [x] ~~*Usuário deve digitar o e-mail para enviar o e-mail para o cliente.*~~ [09-08-2024]
-    - [ ] Um dia antes.
+    - [x] ~~*Um dia antes.*~~ [10-08-2024]
 - [ ] Envio de Wpp, Qual valor ?
 ### Criar Acesso
 Sem Melhorias
