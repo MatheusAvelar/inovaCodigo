@@ -116,7 +116,7 @@ if (empty($errors)) {
             if (!$stmt->execute()) {
                 echo "Erro na inserção: " . $stmt->error . "<br>";
             } else {
-                if (sendEmail($to, $subject, $messages, $headers) && !empty($emailCliente)) {
+               // if (sendEmail($to, $subject, $messages, $headers) && !empty($emailCliente)) {
                     // Exemplo de uso da função
                     $toPhoneNumber = '+5531993018766';
                     $parameters = [
@@ -131,10 +131,10 @@ if (empty($errors)) {
                     echo $response;
                     $_SESSION['status'] = "success";
                     $_SESSION['message'] = "$response Agendamento realizado com sucesso!"."\n"."Foi enviado um e-mail com os dados do agendamento para o cliente.";
-                } else {
+                /*} else {
                     $_SESSION['status'] = "success";
                     $_SESSION['message'] = 'Agendamento realizado com sucesso!';
-                }
+                }*/
             }
 
             
