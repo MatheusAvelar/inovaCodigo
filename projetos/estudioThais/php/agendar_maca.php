@@ -87,7 +87,7 @@ if (empty($errors)) {
             // Dados do e-mail
             $to = 'cliente@example.com'; // Endereço de e-mail do cliente
             $subject = 'Confirmação de Agendamento de Tatuagem';
-            $message = "
+            $messages = "
                 <html>
                 <head>
                     <title>Confirmação de Agendamento</title>
@@ -118,12 +118,12 @@ if (empty($errors)) {
             }
 
             // Enviar o e-mail
-            $result = sendEmail($to, $subject, $message, $headers);
+            $result = sendEmail($to, $subject, $messages, $headers);
 
             if ($result['success']) {
                 $message .= "Foi enviado um e-mail com os dados do agendamento para o cliente."."\n";
             } else {
-                echo 'Erro ao enviar e-mail: ' . $result['error'];
+                $message .= 'Erro ao enviar e-mail: ' . $result['error'];
             }
             $stmt->close();
         }
