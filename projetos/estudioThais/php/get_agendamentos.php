@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 // Configuração da conexão com o banco de dados
 $servername = "127.0.0.1:3306";
 $username = "u221588236_root";

@@ -28,6 +28,13 @@
             fetch('get_agendamentos.php')
                 .then(response => response.json())
                 .then(data => {
+                    console.log('Dados recebidos:', data); // Adiciona log para verificar dados
+
+                    if (!data || data.length === 0) {
+                        console.error('Nenhum dado encontrado.');
+                        return;
+                    }
+
                     // Processa os dados para o gráfico de pizza
                     const formaPagamento = {};
                     data.forEach(agendamento => {
@@ -82,6 +89,9 @@
                             }
                         }
                     });
+                })
+                .catch(error => {
+                    console.error('Erro ao carregar os dados:', error);
                 });
         });
     </script>
