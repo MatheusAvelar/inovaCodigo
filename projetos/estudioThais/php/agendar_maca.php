@@ -113,18 +113,18 @@ if (empty($errors)) {
             if (!$stmt->execute()) {
                 echo "Erro na inserção: " . $stmt->error . "<br>";
             } else {
-                $status = "success";
-                $message .= "Agendamento realizado com sucesso!";
+                if ($result['success']) {
+                    $status = "success";
+                    $message = "Agendamento realizado com sucesso!"."\n"."Foi enviado um e-mail com os dados do agendamento para o cliente.";
+                } else {
+                    $message = 'Erro ao enviar e-mail: ' . $result['error'];
+                }
             }
 
             // Enviar o e-mail
             $result = sendEmail($to, $subject, $messages, $headers);
 
-            if ($result['success']) {
-                $message .= "Foi enviado um e-mail com os dados do agendamento para o cliente."."\n";
-            } else {
-                $message .= 'Erro ao enviar e-mail: ' . $result['error'];
-            }
+            
             $stmt->close();
         }
     }
