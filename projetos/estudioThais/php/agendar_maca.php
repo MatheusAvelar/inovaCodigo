@@ -85,7 +85,7 @@ if (empty($errors)) {
             $stmt->bind_param("ssssssssssss", $nomeCliente, $estilo, $tamanho, $valor, $formaPagamento, $sinalPago, $descricao, $maca, $date, $startTime, $endTime, $usuarioId);
 
             // Dados do e-mail
-            $to = 'cliente@example.com'; // Endereço de e-mail do cliente
+            $to = 'matheus_valladao@hotmail.com'; // Endereço de e-mail do cliente
             $subject = 'Confirmação de Agendamento de Tatuagem';
             $messages = "
                 <html>
