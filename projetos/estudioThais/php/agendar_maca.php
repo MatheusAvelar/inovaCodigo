@@ -25,11 +25,13 @@ $tamanho = $_POST['tamanho'] ?? '';
 $valor = str_replace(['R$ ', '.'], ['', ','], $_POST['valor']) ?? ''; // Remove R$ e formata para decimal
 $valor = str_replace(',', '.', $valor); // Substitui a vírgula por ponto para garantir formato decimal
 $valor = floatval($valor); // Converte para float
+$valorFormatado = 'R$ ' . number_format($valor, 2, ',', '.');
 $formaPagamento = $_POST['pagamento'] ?? '';
 $sinalPago = $_POST['sinal_pago'] ?? '';
 $descricao = $_POST['descricao'] ?? '';
 $maca = $_POST['maca'] ?? '';
 $date = $_POST['date1'] ?? '';
+$dataFormatada = date('d/m/Y', strtotime($date));
 $startTime = $_POST['start-time1'] ?? '';
 $endTime = $_POST['end-time1'] ?? '';
 
@@ -93,13 +95,13 @@ if (empty($errors)) {
                     <title>Confirmação de Agendamento</title>
                 </head>
                 <body>
-                    <h1>Olá [Nome do Cliente],</h1>
+                    <h1>Olá $nomeCliente,</h1>
                     <p>Seu agendamento foi confirmado com sucesso!</p>
-                    <p><strong>Data:</strong> $date</p>
+                    <p><strong>Data:</strong> $dataFormatada</p>
                     <p><strong>Hora:</strong> $startTime</p>
                     <p><strong>Estilo:</strong> $estilo</p>
                     <p><strong>Tamanho:</strong> $tamanho</p>
-                    <p><strong>Valor:</strong> $valor</p>
+                    <p><strong>Valor:</strong> $valorFormatado</p>
                     <p>Por favor, chegue 15 minutos antes do horário agendado.</p>
                     <p>Obrigado por escolher nosso estúdio Avelart!</p>
                     <p>Atenciosamente,<br>Equipe do Estúdio Avelart</p>
