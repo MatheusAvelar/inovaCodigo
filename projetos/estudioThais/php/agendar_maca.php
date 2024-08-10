@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'envia_email.php';
+include 'php/envia_email.php';
 
 // Definindo variáveis para mensagem de retorno
 $status = "";
