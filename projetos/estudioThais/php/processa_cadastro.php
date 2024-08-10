@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </script>";
     } else {
         // Insere os dados na tabela de usuários
-        $sql = "INSERT INTO usuarioEstudio(nome, sobrenome, email, senha, perfil_id) VALUES('$nome','$sobrenome','$email','$senha', '$perfil_id')";
+        $sql = "INSERT INTO usuarioEstudio(nome, sobrenome, email, senha, perfil_id, ativo) VALUES('$nome','$sobrenome','$email','$senha', '$perfil_id', '1')";
 
         if (mysqli_query($conexao, $sql)) {
             $status = "success";
