@@ -4,7 +4,7 @@ function sendWhatsAppMessage($toPhoneNumber, $templateName = 'confirmar_agendame
     $url = 'https://graph.facebook.com/v20.0/400898223102870/messages';
 
     // Token de autorização (Substitua pelo seu token real)
-    $token = 'EAAT8turL4I8BOz0ZANVjZB0kG5M6WAqcgHDB6zWzVtig9Hp69jsqhGzCj2lpxeZBeWYRM7by7iIiytFVXjZASwgDGHxg096IalDwMHTgKfCrjZAXTRQ3Mpwfl9W4ZCwHR5Sf84nSxqW1nV5E8Rw9aglrHOXpi4j7b682BW6l26fDHnlGbC2sC9Kv4CZBrtMZBdE9CDR57Y0bEmKLrqD6GrcZD';
+    $token = 'EAAT8turL4I8BO4ODHhHkMZBvpZCynnHZCt57TmmCEq67qc5Lj66IbcNQX72a2s24lUtreFSuMd1b2AZBC40ZA5MxpvVPJZC0kcY1ciOh7rotKWy4f9a1ToDGfeWeZAnjneP57ZBAqeaulbYcXAeZATJU6fFEcSh27Md7vjeo0a8QirrFuxSopyZBSEfiCttuP34pKHtrjw8ZBd8LqhGNhBqmF53';
 
     // Dados da requisição
     $data = array(
