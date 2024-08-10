@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "<script>
                 sessionStorage.setItem('status', '" . addslashes($status) . "');
                 sessionStorage.setItem('message', '" . addslashes($message) . "');
-                window.location.href = '../login.php';
+                window.location.href = '../criar_acesso.php';
             </script>";
         } else {
             $status = "error";
