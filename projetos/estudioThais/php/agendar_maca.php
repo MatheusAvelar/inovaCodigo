@@ -72,7 +72,6 @@ if (empty($errors)) {
         echo "Erro na execução da consulta: " . $stmt->error . "<br>";
     } else {
         $stmt->store_result();
-        echo "Número de linhas retornadas: " . $stmt->num_rows . "<br>";
 
         if ($stmt->num_rows > 0) {
             $stmt->bind_result($existingStartTime, $existingEndTime);
