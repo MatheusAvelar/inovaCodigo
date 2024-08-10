@@ -36,7 +36,10 @@ $date = $_POST['date1'] ?? '';
 $dataFormatada = date('d/m/Y', strtotime($date));
 $startTime = $_POST['start-time1'] ?? '';
 $endTime = $_POST['end-time1'] ?? '';
+
+// Captura o telefone e remove a máscara
 $telefoneCliente = $_POST['telefone'] ?? '';
+$telefoneCliente = str_replace(['(', ')', ' ', '-'], '', $telefoneCliente); // Remove a máscara de telefone
 
 // Validação dos dados
 $errors = [];
@@ -153,4 +156,3 @@ exit();
 
 // Fechando a conexão
 $conn->close();
-?>
