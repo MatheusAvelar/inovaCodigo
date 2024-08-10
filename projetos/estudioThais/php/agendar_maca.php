@@ -1,6 +1,7 @@
 <?php
 session_start();
 include 'envia_email.php';
+include 'envia_whatsapp.php';
 
 // Definindo variáveis para mensagem de retorno
 $_SESSION['status'] = "";
@@ -116,6 +117,10 @@ if (empty($errors)) {
                 echo "Erro na inserção: " . $stmt->error . "<br>";
             } else {
                 if (sendEmail($to, $subject, $messages, $headers) && !empty($emailCliente)) {
+                    // Exemplo de uso da função
+                    $toPhoneNumber = '5531993018766';
+                    $response = sendWhatsAppMessage($toPhoneNumber);
+                    echo $response;
                     $_SESSION['status'] = "success";
                     $_SESSION['message'] = "Agendamento realizado com sucesso!"."\n"."Foi enviado um e-mail com os dados do agendamento para o cliente.";
                 } else {
