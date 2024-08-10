@@ -9,8 +9,10 @@
 - [x] ~~*Criar filtro por mês.*~~ [09-08-2024]
 - [x] ~~*Excluir agendamento (Perfil master exclui qualquer agendamento).*~~ [09-08-2024]
   - [x] ~~*Observação: Criar log de exclusão.*~~ [09-08-2024]
-- [ ] Envio de e-mail (Cliente e Tatuador).
-  Observação: No dia que foi agendado e um dia antes.
+- [x] ~~*Envio de e-mail (Cliente e Tatuador).*~~ [09-08-2024]
+  Observação:
+    - [x] ~~*No dia que foi agendado*~~ [09-08-2024]
+    - [ ] Um dia antes.
 - [ ] Envio de Wpp, Qual valor ?
 ### Criar Acesso
 Sem Melhorias
