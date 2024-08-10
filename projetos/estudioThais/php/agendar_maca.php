@@ -119,6 +119,7 @@ if (empty($errors)) {
                     $_SESSION['status'] = "success";
                     $_SESSION['message'] = "Agendamento realizado com sucesso!"."\n"."Foi enviado um e-mail com os dados do agendamento para o cliente.";
                 } else {
+                    $_SESSION['status'] = "success";
                     $_SESSION['message'] = 'Agendamento realizado com sucesso!';
                 }
             }
