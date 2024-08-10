@@ -70,7 +70,7 @@ if ($result->num_rows > 0) {
         echo "<td>" . $formattedEndTime . "</td>";
 
         // Debug para verificar a consulta SQL
-        debugAlert($perfil_id, 'Perfil: ');
+        //debugAlert($perfil_id, 'Perfil: ');
 
         // Verificação para mostrar o botão de excluir apenas se o usuário logado é o dono do agendamento
         if ($row['usuario_id'] == $_SESSION['id'] || $perfil_id == 2) {

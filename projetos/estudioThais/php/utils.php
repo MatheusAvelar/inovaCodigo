@@ -6,6 +6,7 @@
  *
  * @param mixed $data Dados para depurar. Pode ser uma string, array, ou objeto.
  * @param string $message Mensagem opcional para exibir antes dos dados.
+ * debugAlert($perfil_id, 'Perfil: ');
  */
 function debugAlert($data, $message = '') {
     $debugJson = json_encode($data);
