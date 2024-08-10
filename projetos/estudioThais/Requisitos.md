@@ -21,3 +21,5 @@ Sem Melhorias
 - [x] ~~*Visualizar lista de usuários cadastrados.*~~ [09-08-2024]
 - [x] ~~*Editar/Excluir usuário.*~~ [09-08-2024]
 - [x] ~~*Log de alterações no usuário.*~~ [09-08-2024]
+### Graficos
+- [ ] Criar relatorios do tipo pizza e barra.
