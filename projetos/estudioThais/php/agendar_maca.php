@@ -115,9 +115,7 @@ if (empty($errors)) {
             if (!$stmt->execute()) {
                 echo "Erro na inserção: " . $stmt->error . "<br>";
             } else {
-                // Enviar o e-mail
-                $result = sendEmail($to, $subject, $messages, $headers);
-                if ($result['success']) {
+                if (sendEmail($to, $subject, $messages, $headers)) {
                     $status = "success";
                     $message = "Agendamento realizado com sucesso!"."\n"."Foi enviado um e-mail com os dados do agendamento para o cliente.";
                 } else {
