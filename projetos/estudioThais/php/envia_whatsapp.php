@@ -1,5 +1,5 @@
 <?php
-function sendWhatsAppMessage($toPhoneNumber, $templateName = 'hello_world', $languageCode = 'en_US') {
+function sendWhatsAppMessage($toPhoneNumber, $templateName = 'bem_vindo', $languageCode = 'pt_BR') {
     // URL da API do WhatsApp
     $url = 'https://graph.facebook.com/v20.0/400898223102870/messages';
 
