@@ -82,6 +82,10 @@ unset($_SESSION['status'], $_SESSION['message']);
                     <input type="text" id="cliente" name="cliente" required>
                     <div id="name-error" class="error-message"></div>
 
+                    <label for="email">E-mail do Cliente:</label>
+                    <input type="email" id="email" name="email">
+                    <div id="email-error" class="error-message"></div>
+
                     <label for="estilo">Estilo:</label>
                     <input type="text" id="estilo" name="estilo" required>
                     <div id="estilo-error" class="error-message"></div>
@@ -121,6 +125,21 @@ unset($_SESSION['status'], $_SESSION['message']);
     </div>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var emailInput = document.getElementById('email');
+            var emailError = document.getElementById('email-error');
+
+            emailInput.addEventListener('input', function() {
+                if (emailInput.validity.valid) {
+                    emailError.textContent = ''; // Limpa a mensagem de erro se válido
+                    emailError.style.display = 'none';
+                } else {
+                    emailError.textContent = 'Por favor, insira um e-mail válido.';
+                    emailError.style.display = 'block';
+                }
+            });
+        });
+
         document.addEventListener('DOMContentLoaded', function () {
             const valorInput = document.getElementById('valor');
             

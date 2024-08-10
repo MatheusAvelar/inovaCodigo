@@ -12,6 +12,7 @@
 - [x] ~~*Envio de e-mail (Cliente e Tatuador).*~~ [09-08-2024]
   Observação:
     - [x] ~~*No dia que foi agendado*~~ [09-08-2024]
+    - [ ] Usuário deve digitar o e-mail para enviar o e-mail para o cliente.
     - [ ] Um dia antes.
 - [ ] Envio de Wpp, Qual valor ?
 ### Criar Acesso
