@@ -1,5 +1,6 @@
 <?php
 session_start();
+include 'send_email.php';
 
 // Definindo variáveis para mensagem de retorno
 $status = "";
@@ -83,11 +84,46 @@ if (empty($errors)) {
             $stmt = $conn->prepare("INSERT INTO agendamentos (nome_cliente, estilo, tamanho, valor, forma_pagamento, sinal_pago, descricao, maca_id, data, start_time, end_time, usuario_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             $stmt->bind_param("ssssssssssss", $nomeCliente, $estilo, $tamanho, $valor, $formaPagamento, $sinalPago, $descricao, $maca, $date, $startTime, $endTime, $usuarioId);
 
+            // Dados do e-mail
+            $to = 'cliente@example.com'; // Endereço de e-mail do cliente
+            $subject = 'Confirmação de Agendamento de Tatuagem';
+            $message = "
+                <html>
+                <head>
+                    <title>Confirmação de Agendamento</title>
+                </head>
+                <body>
+                    <h1>Olá [Nome do Cliente],</h1>
+                    <p>Seu agendamento foi confirmado com sucesso!</p>
+                    <p><strong>Data:</strong> $date</p>
+                    <p><strong>Hora:</strong> $startTime</p>
+                    <p><strong>Estilo:</strong> $estilo</p>
+                    <p><strong>Tamanho:</strong> $tamanho</p>
+                    <p><strong>Valor:</strong> $valor</p>
+                    <p>Por favor, chegue 15 minutos antes do horário agendado.</p>
+                    <p>Obrigado por escolher nosso estúdio Avelart!</p>
+                    <p>Atenciosamente,<br>Equipe do Estúdio Avelart</p>
+                </body>
+                </html>
+            ";
+            $headers = 'From: agendamentos@estudioavelart.com' . "\r\n" .
+                    'Reply-To: contato@estudioavelart.com' . "\r\n" .
+                    'Content-Type: text/html; charset=UTF-8' . "\r\n";
+
             if (!$stmt->execute()) {
                 echo "Erro na inserção: " . $stmt->error . "<br>";
             } else {
                 $status = "success";
-                $message = "Agendamento realizado com sucesso!";
+                $message .= "Agendamento realizado com sucesso!";
+            }
+
+            // Enviar o e-mail
+            $result = sendEmail($to, $subject, $message, $headers);
+
+            if ($result['success']) {
+                $message .= "Foi enviado um e-mail com os dados do agendamento para o cliente."."\n";
+            } else {
+                echo 'Erro ao enviar e-mail: ' . $result['error'];
             }
             $stmt->close();
         }
