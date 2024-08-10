@@ -119,7 +119,15 @@ if (empty($errors)) {
                 if (sendEmail($to, $subject, $messages, $headers) && !empty($emailCliente)) {
                     // Exemplo de uso da função
                     $toPhoneNumber = '5531993018766';
-                    $response = sendWhatsAppMessage($toPhoneNumber);
+                    $parameters = [
+                        ['type' => 'text', 'text' => $nomeCliente],
+                        ['type' => 'text', 'text' => $dataFormatada],
+                        ['type' => 'text', 'text' => $startTime],
+                        ['type' => 'text', 'text' => $estilo],
+                        ['type' => 'text', 'text' => $tamanho],
+                        ['type' => 'text', 'text' => $valorFormatado]
+                    ];
+                    $response = sendWhatsAppMessage($toPhoneNumber, 'confirmacao_de_agendamento', 'pt_BR', $parameters);
                     echo $response;
                     $_SESSION['status'] = "success";
                     $_SESSION['message'] = "Agendamento realizado com sucesso!"."\n"."Foi enviado um e-mail com os dados do agendamento para o cliente.";
