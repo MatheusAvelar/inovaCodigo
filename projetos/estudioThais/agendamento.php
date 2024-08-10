@@ -82,6 +82,10 @@ unset($_SESSION['status'], $_SESSION['message']);
                     <input type="text" id="cliente" name="cliente" required>
                     <div id="name-error" class="error-message"></div>
 
+                    <label for="telefone">Telefone:</label>
+                    <input type="tel" id="telefone" name="telefone" placeholder="(99) 99999-9999" pattern="\(\d{2}\) \d{5}-\d{4}" required>
+                    <div id="telefone-error" class="error-message"></div>
+
                     <label for="email">E-mail do Cliente:</label>
                     <input type="email" id="email" name="email">
                     <div id="email-error" class="error-message"></div>
