@@ -1,7 +1,7 @@
 <?php
-function sendWhatsAppMessage($toPhoneNumber, $templateName = 'bem_vindo', $languageCode = 'pt_BR') {
+function sendWhatsAppMessage($toPhoneNumber, $templateName = 'confirmar_agendamento', $languageCode = 'pt_BR', $parameters = []) {
     // URL da API do WhatsApp
-    $url = 'https://graph.facebook.com/v20.0/403038589558138/messages';
+    $url = 'https://graph.facebook.com/v20.0/400898223102870/messages';
 
     // Token de autorização (Substitua pelo seu token real)
     $token = 'EAAT8turL4I8BOz0ZANVjZB0kG5M6WAqcgHDB6zWzVtig9Hp69jsqhGzCj2lpxeZBeWYRM7by7iIiytFVXjZASwgDGHxg096IalDwMHTgKfCrjZAXTRQ3Mpwfl9W4ZCwHR5Sf84nSxqW1nV5E8Rw9aglrHOXpi4j7b682BW6l26fDHnlGbC2sC9Kv4CZBrtMZBdE9CDR57Y0bEmKLrqD6GrcZD';
@@ -15,6 +15,12 @@ function sendWhatsAppMessage($toPhoneNumber, $templateName = 'bem_vindo', $langu
             'name' => $templateName,
             'language' => array(
                 'code' => $languageCode
+            ),
+            'components' => array(
+                array(
+                    'type' => 'body',
+                    'parameters' => $parameters
+                )
             )
         )
     );
@@ -40,4 +46,3 @@ function sendWhatsAppMessage($toPhoneNumber, $templateName = 'bem_vindo', $langu
     // Retorna a resposta
     return $response;
 }
-?>
