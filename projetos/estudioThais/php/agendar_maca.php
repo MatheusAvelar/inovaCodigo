@@ -20,6 +20,7 @@ if ($conn->connect_error) {
 
 // Capturando dados do formulário
 $nomeCliente = $_POST['cliente'] ?? '';
+$emailCliente = $_POST['email'] ?? '';
 $estilo = $_POST['estilo'] ?? '';
 $tamanho = $_POST['tamanho'] ?? '';
 $valor = str_replace(['R$ ', '.'], ['', ','], $_POST['valor']) ?? ''; // Remove R$ e formata para decimal
@@ -86,7 +87,7 @@ if (empty($errors)) {
             $stmt->bind_param("ssssssssssss", $nomeCliente, $estilo, $tamanho, $valor, $formaPagamento, $sinalPago, $descricao, $maca, $date, $startTime, $endTime, $usuarioId);
 
             // Dados do e-mail
-            $to = 'matheus_valladao@hotmail.com'; // Endereço de e-mail do cliente
+            $to = $emailCliente; // Endereço de e-mail do cliente
             $subject = 'Confirmação de Agendamento de Tatuagem';
             $messages = "
                 <html>
@@ -114,11 +115,11 @@ if (empty($errors)) {
             if (!$stmt->execute()) {
                 echo "Erro na inserção: " . $stmt->error . "<br>";
             } else {
-                if (sendEmail($to, $subject, $messages, $headers)) {
+                if (sendEmail($to, $subject, $messages, $headers) && !empty($emailCliente)) {
                     $_SESSION['status'] = "success";
                     $_SESSION['message'] = "Agendamento realizado com sucesso!"."\n"."Foi enviado um e-mail com os dados do agendamento para o cliente.";
                 } else {
-                    $_SESSION['message'] = 'Erro ao enviar e-mail: ' . $result['error'];
+                    $_SESSION['message'] = 'Agendamento realizado com sucesso!';
                 }
             }
 
