@@ -128,7 +128,7 @@ if ($errors) {
 
                 // Envio de WhatsApp, se o telefone do cliente estiver preenchido
                 if (!empty($telefoneCliente)) {
-                    $toPhoneNumber = $telefoneCliente; // Número de telefone do cliente
+                    $toPhoneNumber = "+55".$telefoneCliente;
                     $parameters = [
                         ['type' => 'text', 'text' => $nomeCliente],
                         ['type' => 'text', 'text' => $dataFormatada],
