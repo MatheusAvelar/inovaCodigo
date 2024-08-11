@@ -80,7 +80,7 @@ if ($result->num_rows > 0) {
             $dateDiff = ($agendamentoDate - $currentDate) / 86400; // diferença em dias
 
             if ($dateDiff >= 2 || $perfil_id == 2) {
-                echo "<td><form method='POST' action='php/delete_agendamento.php' onsubmit='return confirmDelete(this)'>
+                /*echo "<td><form method='POST' action='php/delete_agendamento.php' onsubmit='return confirmDelete(this)'>
                           <input type='hidden' name='agendamento_id' value='" . htmlspecialchars($row['id']) . "'>
                           <button type='submit' class='delete-button' data-description='" . htmlspecialchars($row['descricao']) . "' 
                                   data-date='" . $formattedDate . "' 
@@ -88,7 +88,15 @@ if ($result->num_rows > 0) {
                                   data-end-time='" . $formattedEndTime . "'>
                               <i class='fas fa-trash'></i>
                           </button>
-                      </form></td>";
+                      </form></td>";*/
+                echo "<td>
+                      <a href='editar_agendamento.php?id=" . htmlspecialchars($row['id']) . "' title='Editar'>
+                          <i class='fas fa-edit'></i>
+                      </a>
+                      <a href='php/deletar_agendamento.php?id=" . htmlspecialchars($row['id']) . "' title='Deletar' onclick='return confirm(\"Tem certeza que deseja deletar este agendamento?\");'>
+                          <i class='fas fa-trash-alt'></i>
+                      </a>
+                      </td>";
             } else {
                 echo "<td>Não pode excluir</td>";
             }
