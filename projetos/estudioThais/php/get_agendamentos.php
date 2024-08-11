@@ -7,7 +7,7 @@ $barWidth = 40;
 $barSpacing = 10;
 
 $data = [
-    'A' => 10,
+    'A' => 0,
     'B' => 25,
     'C' => 30,
     'D' => 20,
