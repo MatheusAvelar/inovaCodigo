@@ -21,8 +21,7 @@ if ($conn->connect_error) {
 }
 
 // Obtendo os dados do agendamento
-$query = "SELECT a.id, a.maca_id, a.data, a.start_time, a.end_time, a.nome_cliente, a.telefone_cliente, 
-                 a.estilo, a.tamanho, a.valor, a.forma_pagamento, a.sinal_pago, a.descricao
+$query = "SELECT a.id, a.maca_id, a.data, a.start_time, a.end_time, a.nome_cliente, a.telefone_cliente, a.email_cliente, a.estilo, a.tamanho, a.valor, a.forma_pagamento, a.sinal_pago, a.descricao
           FROM agendamentos AS a
           WHERE a.id = $agendamentoId";
 $result = $conn->query($query);
