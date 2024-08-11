@@ -19,8 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = intval($_POST['id']);
     $maca_id = intval($_POST['maca']);
     $data = $_POST['date1'];
-    $start_time1 = $_POST['start-time1'];
-    $end_time1 = $_POST['end-time1'];
+    $start_time = $_POST['start-time1'];
+    $end_time = $_POST['end-time1'];
     $nome_cliente = $_POST['cliente'];
     $telefone_cliente = $_POST['telefone'];
     $email_cliente = $_POST['email'];
