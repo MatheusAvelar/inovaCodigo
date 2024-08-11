@@ -1,44 +1,47 @@
 <?php
-// Inclua o arquivo de biblioteca pChart
-require_once("php/pChart2.1.4/data/pData.class");
-require_once("php/pChart2.1.4/class/pChart.class");
+header('Content-Type: image/png');
 
-// Dados para o gráfico
+$width = 500;
+$height = 300;
+$barWidth = 40;
+$barSpacing = 10;
+
 $data = [
-    'Jan' => 120,
-    'Feb' => 150,
-    'Mar' => 170,
-    'Apr' => 130,
-    'May' => 180
+    'A' => 10,
+    'B' => 25,
+    'C' => 30,
+    'D' => 20,
+    'E' => 15
 ];
 
-// Criação do objeto de dados
-$myData = new pData();
-$myData->addPoints(array_values($data), "Valores");
-$myData->addPoints(array_keys($data), "Meses");
-$myData->setSerieDescription("Meses", "Meses");
-$myData->setAbscissa("Meses");
+$image = imagecreatetruecolor($width, $height);
+$backgroundColor = imagecolorallocate($image, 255, 255, 255);
+$barColor = imagecolorallocate($image, 0, 0, 255);
+$axisColor = imagecolorallocate($image, 0, 0, 0);
 
-// Criação do gráfico
-$myPicture = new pChart(700, 400);
-$myPicture->setBackgroundColor(array(255, 255, 255));
-$myPicture->setGraphArea(60, 40, 680, 350);
+imagefill($image, 0, 0, $backgroundColor);
 
-// Desenho das barras
-$myPicture->drawScale(array("drawSubTicks" => TRUE));
-$myPicture->drawBarChart(array("displayValues" => TRUE, "displayColor" => DISPLAY_AUTO));
+// Desenhar o eixo Y
+imageline($image, 50, 10, 50, $height - 20, $axisColor);
 
-// Desenho das linhas de referência
-$myPicture->drawLineChart();
-$myPicture->drawThreshold(100, array("R" => 255, "G" => 0, "B" => 0, "Alpha" => 50));
+// Desenhar o eixo X
+imageline($image, 50, $height - 20, $width - 10, $height - 20, $axisColor);
 
-// Adicionar títulos e outras anotações
-$myPicture->drawText(350, 20, "Gráfico de Barras Avançado", array("FontSize" => 15, "Align" => TEXT_ALIGN_BOTTOMMIDDLE));
+$maxValue = max($data);
+$scale = ($height - 30) / $maxValue;
 
-// Renderizar a imagem
-$myPicture->Render("chart.png");
+$x = 60;
 
-// Exibir a imagem
-header("Content-Type: image/png");
-readfile("chart.png");
+foreach ($data as $label => $value) {
+    $barHeight = $value * $scale;
+    imagefilledrectangle($image, $x, $height - 20 - $barHeight, $x + $barWidth, $height - 20, $barColor);
+    
+    // Adicionar rótulo
+    imagestring($image, 3, $x + ($barWidth / 4), $height - 20 + 5, $label, $axisColor);
+
+    $x += $barWidth + $barSpacing;
+}
+
+imagepng($image);
+imagedestroy($image);
 ?>
