@@ -17,17 +17,17 @@ if ($conn->connect_error) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = intval($_POST['id']);
-    $maca = intval($_POST['maca']);
-    $date1 = $_POST['date1'];
+    $maca_id = intval($_POST['maca']);
+    $data = $_POST['date1'];
     $start_time1 = $_POST['start-time1'];
     $end_time1 = $_POST['end-time1'];
-    $cliente = $_POST['cliente'];
-    $telefone = $_POST['telefone'];
-    $email = $_POST['email'];
+    $nome_cliente = $_POST['cliente'];
+    $telefone_cliente = $_POST['telefone'];
+    $email_cliente = $_POST['email'];
     $estilo = $_POST['estilo'];
     $tamanho = $_POST['tamanho'];
     $valor = floatval(str_replace(['R$', '.', ','], ['', '', '.'], $_POST['valor']));
-    $pagamento = $_POST['pagamento'];
+    $forma_pagamento = $_POST['pagamento'];
     $sinal_pago = $_POST['sinal_pago'];
     $descricao = $_POST['descricao'];
 
