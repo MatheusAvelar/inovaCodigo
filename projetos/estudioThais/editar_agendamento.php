@@ -61,31 +61,31 @@ unset($_SESSION['status'], $_SESSION['message']);
 
                     <label for="maca">Maca:</label>
                     <select id="maca" name="maca" required>
-                        <option value="1" <?= $agendamento['maca'] == 1 ? 'selected' : '' ?>>Maca 1</option>
-                        <option value="2" <?= $agendamento['maca'] == 2 ? 'selected' : '' ?>>Maca 2</option>
-                        <option value="3" <?= $agendamento['maca'] == 3 ? 'selected' : '' ?>>Maca 3</option>
-                        <option value="4" <?= $agendamento['maca'] == 4 ? 'selected' : '' ?>>Maca 4</option>
+                        <option value="1" <?= $agendamento['maca_id'] == 1 ? 'selected' : '' ?>>Maca 1</option>
+                        <option value="2" <?= $agendamento['maca_id'] == 2 ? 'selected' : '' ?>>Maca 2</option>
+                        <option value="3" <?= $agendamento['maca_id'] == 3 ? 'selected' : '' ?>>Maca 3</option>
+                        <option value="4" <?= $agendamento['maca_id'] == 4 ? 'selected' : '' ?>>Maca 4</option>
                     </select>
                     <div id="maca-error" class="error-message"></div>
 
                     <label for="date1">Data:</label>
-                    <input type="date" id="date1" name="date1" value="<?= $agendamento['date1'] ?>" required>
+                    <input type="date" id="date1" name="date1" value="<?= $agendamento['data'] ?>" required>
                     <div id="date1-error" class="error-message"></div>
 
                     <label for="start-time1">Horário Inicial:</label>
-                    <input type="time" id="start-time1" name="start-time1" value="<?= $agendamento['start_time1'] ?>" required>
+                    <input type="time" id="start-time1" name="start-time1" value="<?= $agendamento['start_time'] ?>" required>
                     <div id="start-time1-error" class="error-message"></div>
 
                     <label for="end-time1">Horário Final:</label>
-                    <input type="time" id="end-time1" name="end-time1" value="<?= $agendamento['end_time1'] ?>" required>
+                    <input type="time" id="end-time1" name="end-time1" value="<?= $agendamento['end_time'] ?>" required>
                     <div id="end-time1-error" class="error-message"></div>
 
                     <label for="cliente">Nome do Cliente:</label>
-                    <input type="text" id="cliente" name="cliente" value="<?= $agendamento['cliente'] ?>" required>
+                    <input type="text" id="cliente" name="cliente" value="<?= $agendamento['nome_cliente'] ?>" required>
                     <div id="name-error" class="error-message"></div>
 
                     <label for="telefone">Telefone Celular:</label>
-                    <input type="tel" id="telefone" name="telefone" value="<?= $agendamento['telefone'] ?>" pattern="\(\d{2}\) \d{5}-\d{4}" required>
+                    <input type="tel" id="telefone" name="telefone" value="<?= $agendamento['telefone_cliente'] ?>" pattern="\(\d{2}\) \d{5}-\d{4}" required>
                     <div id="telefone-error" class="error-message"></div>
 
                     <label for="email">E-mail do Cliente:</label>
@@ -106,9 +106,9 @@ unset($_SESSION['status'], $_SESSION['message']);
 
                     <label for="pagamento">Forma de Pagamento:</label>
                     <select id="pagamento" name="pagamento" required>
-                        <option value="Dinheiro" <?= $agendamento['pagamento'] == 'Dinheiro' ? 'selected' : '' ?>>Dinheiro</option>
-                        <option value="Cartão" <?= $agendamento['pagamento'] == 'Cartão' ? 'selected' : '' ?>>Cartão</option>
-                        <option value="Pix" <?= $agendamento['pagamento'] == 'Pix' ? 'selected' : '' ?>>Pix</option>
+                        <option value="Dinheiro" <?= $agendamento['forma_pagamento'] == 'Dinheiro' ? 'selected' : '' ?>>Dinheiro</option>
+                        <option value="Cartão" <?= $agendamento['forma_pagamento'] == 'Cartão' ? 'selected' : '' ?>>Cartão</option>
+                        <option value="Pix" <?= $agendamento['forma_pagamento'] == 'Pix' ? 'selected' : '' ?>>Pix</option>
                     </select>
                     <div id="pagamento-error" class="error-message"></div>
 
