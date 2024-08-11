@@ -1,34 +1,29 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Relatórios</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        canvas {
-            -moz-user-select: none;
-            -webkit-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-    </style>
 </head>
 <body>
-    <h1>Relatórios de Agendamentos</h1>
+    <h1>Relatórios</h1>
 
-    <h2>Gráfico de Pizza - Forma de Pagamento</h2>
-    <canvas id="pieChart"></canvas>
-
-    <h2>Gráfico de Barra - Valor por Estilo</h2>
-    <canvas id="barChart"></canvas>
+    <!-- Gráficos -->
+    <canvas id="pieChart" width="400" height="200"></canvas>
+    <canvas id="barChart" width="400" height="200"></canvas>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             fetch('get_agendamentos.php')
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro na rede');
+                    }
+                    return response.json();
+                })
                 .then(data => {
-                    console.log('Dados recebidos:', data); // Adiciona log para verificar dados
+                    console.log('Dados recebidos:', data);
 
                     if (!data || data.length === 0) {
                         console.error('Nenhum dado encontrado.');
