@@ -93,7 +93,7 @@ if ($result->num_rows > 0) {
                       <a href='editar_agendamento.php?id=" . htmlspecialchars($row['id']) . "' title='Editar'>
                           <i class='fas fa-edit'></i>
                       </a>
-                      <a href='php/deletar_agendamento.php?id=" . htmlspecialchars($row['id']) . "' title='Deletar' onclick='return confirm(\"Tem certeza que deseja deletar este agendamento?\");'>
+                      <a href='php/delete_agendamento.php?id=" . htmlspecialchars($row['id']) . "' title='Deletar' onclick='return confirm(\"Tem certeza que deseja deletar este agendamento?\");'>
                           <i class='fas fa-trash-alt'></i>
                       </a>
                       </td>";

@@ -28,7 +28,7 @@ if ($conn->connect_error) {
 }
 
 // Obtendo o ID do agendamento a ser excluído
-$agendamento_id = isset($_POST['agendamento_id']) ? $_POST['agendamento_id'] : '';
+$agendamento_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
 // Verifica se o agendamento pertence ao usuário logado
 $query = "SELECT a.data, a.usuario_id, u.perfil_id 
