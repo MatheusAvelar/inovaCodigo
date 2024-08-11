@@ -7,6 +7,6 @@
 </head>
 <body>
     <h1>Gráfico de Colunas</h1>
-    <img src="get_agendamentos.php" alt="Gráfico de Colunas">
+    <img src="php/get_agendamentos.php" alt="Gráfico de Colunas">
 </body>
 </html>
