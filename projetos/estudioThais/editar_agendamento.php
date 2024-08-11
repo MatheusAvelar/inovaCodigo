@@ -89,7 +89,7 @@ unset($_SESSION['status'], $_SESSION['message']);
                     <div id="telefone-error" class="error-message"></div>
 
                     <label for="email">E-mail do Cliente:</label>
-                    <input type="email" id="email" name="email" value="<?= $agendamento['email'] ?>">
+                    <input type="email" id="email" name="email" value="<?= $agendamento['email_cliente'] ?>">
                     <div id="email-error" class="error-message"></div>
 
                     <label for="estilo">Estilo:</label>
