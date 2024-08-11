@@ -37,7 +37,8 @@ debugAlert($agendamento_id, 'Agendamento: ');
 $query = "SELECT a.data, a.usuario_id, u.perfil_id 
     FROM agendamentos a
     JOIN usuarioEstudio u ON a.usuario_id = u.id
-    WHERE a.id = ?";
+    WHERE a.id = ?
+    AND status = '1'";
 $stmt = $conn->prepare($query);
 if (!$stmt) {
     $_SESSION['status'] = 'error';
@@ -59,7 +60,7 @@ if ($stmt->num_rows > 0 && $usuario_id == $_SESSION['id'] || $perfil_id == 2) {
 
     if ($dateDiff >= 2 || $perfil_id == 2) {
         // Exclui o agendamento
-        $deleteQuery = "DELETE FROM agendamentos WHERE id = ?";
+        $deleteQuery = "UPDATE agendamentos SET status = '0' WHERE id = ?";
         $deleteStmt = $conn->prepare($deleteQuery);
         if (!$deleteStmt) {
             $_SESSION['status'] = 'error';
