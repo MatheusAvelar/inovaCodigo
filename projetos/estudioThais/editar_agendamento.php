@@ -57,70 +57,70 @@ unset($_SESSION['status'], $_SESSION['message']);
         <div class="grid">
             <div class="maca">
                 <form id="form1" method="POST" action="php/atualizar_maca.php" onsubmit="return validateForm()">
-                    <input type="hidden" name="id" value="<?= $maca['id'] ?>">
+                    <input type="hidden" name="id" value="<?= $agendamento['id'] ?>">
 
                     <label for="maca">Maca:</label>
                     <select id="maca" name="maca" required>
-                        <option value="1" <?= $maca['maca'] == 1 ? 'selected' : '' ?>>Maca 1</option>
-                        <option value="2" <?= $maca['maca'] == 2 ? 'selected' : '' ?>>Maca 2</option>
-                        <option value="3" <?= $maca['maca'] == 3 ? 'selected' : '' ?>>Maca 3</option>
-                        <option value="4" <?= $maca['maca'] == 4 ? 'selected' : '' ?>>Maca 4</option>
+                        <option value="1" <?= $agendamento['maca'] == 1 ? 'selected' : '' ?>>Maca 1</option>
+                        <option value="2" <?= $agendamento['maca'] == 2 ? 'selected' : '' ?>>Maca 2</option>
+                        <option value="3" <?= $agendamento['maca'] == 3 ? 'selected' : '' ?>>Maca 3</option>
+                        <option value="4" <?= $agendamento['maca'] == 4 ? 'selected' : '' ?>>Maca 4</option>
                     </select>
                     <div id="maca-error" class="error-message"></div>
 
                     <label for="date1">Data:</label>
-                    <input type="date" id="date1" name="date1" value="<?= $maca['date1'] ?>" required>
+                    <input type="date" id="date1" name="date1" value="<?= $agendamento['date1'] ?>" required>
                     <div id="date1-error" class="error-message"></div>
 
                     <label for="start-time1">Horário Inicial:</label>
-                    <input type="time" id="start-time1" name="start-time1" value="<?= $maca['start_time1'] ?>" required>
+                    <input type="time" id="start-time1" name="start-time1" value="<?= $agendamento['start_time1'] ?>" required>
                     <div id="start-time1-error" class="error-message"></div>
 
                     <label for="end-time1">Horário Final:</label>
-                    <input type="time" id="end-time1" name="end-time1" value="<?= $maca['end_time1'] ?>" required>
+                    <input type="time" id="end-time1" name="end-time1" value="<?= $agendamento['end_time1'] ?>" required>
                     <div id="end-time1-error" class="error-message"></div>
 
                     <label for="cliente">Nome do Cliente:</label>
-                    <input type="text" id="cliente" name="cliente" value="<?= $maca['cliente'] ?>" required>
+                    <input type="text" id="cliente" name="cliente" value="<?= $agendamento['cliente'] ?>" required>
                     <div id="name-error" class="error-message"></div>
 
                     <label for="telefone">Telefone Celular:</label>
-                    <input type="tel" id="telefone" name="telefone" value="<?= $maca['telefone'] ?>" pattern="\(\d{2}\) \d{5}-\d{4}" required>
+                    <input type="tel" id="telefone" name="telefone" value="<?= $agendamento['telefone'] ?>" pattern="\(\d{2}\) \d{5}-\d{4}" required>
                     <div id="telefone-error" class="error-message"></div>
 
                     <label for="email">E-mail do Cliente:</label>
-                    <input type="email" id="email" name="email" value="<?= $maca['email'] ?>">
+                    <input type="email" id="email" name="email" value="<?= $agendamento['email'] ?>">
                     <div id="email-error" class="error-message"></div>
 
                     <label for="estilo">Estilo:</label>
-                    <input type="text" id="estilo" name="estilo" value="<?= $maca['estilo'] ?>" required>
+                    <input type="text" id="estilo" name="estilo" value="<?= $agendamento['estilo'] ?>" required>
                     <div id="estilo-error" class="error-message"></div>
 
                     <label for="tamanho">Tamanho (cm):</label>
-                    <input type="text" id="tamanho" name="tamanho" value="<?= $maca['tamanho'] ?>" required>
+                    <input type="text" id="tamanho" name="tamanho" value="<?= $agendamento['tamanho'] ?>" required>
                     <div id="tamanho-error" class="error-message"></div>
 
                     <label for="valor">Valor:</label>
-                    <input type="text" id="valor" name="valor" value="<?= 'R$ ' . number_format($maca['valor'], 2, ',', '.') ?>" required>
+                    <input type="text" id="valor" name="valor" value="<?= 'R$ ' . number_format($agendamento['valor'], 2, ',', '.') ?>" required>
                     <div id="valor-error" class="error-message"></div>
 
                     <label for="pagamento">Forma de Pagamento:</label>
                     <select id="pagamento" name="pagamento" required>
-                        <option value="Dinheiro" <?= $maca['pagamento'] == 'Dinheiro' ? 'selected' : '' ?>>Dinheiro</option>
-                        <option value="Cartão" <?= $maca['pagamento'] == 'Cartão' ? 'selected' : '' ?>>Cartão</option>
-                        <option value="Pix" <?= $maca['pagamento'] == 'Pix' ? 'selected' : '' ?>>Pix</option>
+                        <option value="Dinheiro" <?= $agendamento['pagamento'] == 'Dinheiro' ? 'selected' : '' ?>>Dinheiro</option>
+                        <option value="Cartão" <?= $agendamento['pagamento'] == 'Cartão' ? 'selected' : '' ?>>Cartão</option>
+                        <option value="Pix" <?= $agendamento['pagamento'] == 'Pix' ? 'selected' : '' ?>>Pix</option>
                     </select>
                     <div id="pagamento-error" class="error-message"></div>
 
                     <label for="sinal_pago">Sinal pago?</label>
                     <select id="sinal_pago" name="sinal_pago" required>
-                        <option value="Sim" <?= $maca['sinal_pago'] == 'Sim' ? 'selected' : '' ?>>Sim</option>
-                        <option value="Não" <?= $maca['sinal_pago'] == 'Não' ? 'selected' : '' ?>>Não</option>
+                        <option value="Sim" <?= $agendamento['sinal_pago'] == 'Sim' ? 'selected' : '' ?>>Sim</option>
+                        <option value="Não" <?= $agendamento['sinal_pago'] == 'Não' ? 'selected' : '' ?>>Não</option>
                     </select>
                     <div id="sinal_pago-error" class="error-message"></div>
 
                     <label for="descricao">Descrição:</label>
-                    <input type="text" id="descricao" name="descricao" value="<?= $maca['descricao'] ?>">
+                    <input type="text" id="descricao" name="descricao" value="<?= $agendamento['descricao'] ?>">
 
                     <button type="submit">Atualizar</button>
                 </form>
