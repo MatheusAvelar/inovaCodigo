@@ -1,7 +1,7 @@
 <?php
 // Inclua o arquivo de biblioteca pChart
-require_once("pChart/pData.class");
-require_once("pChart/pChart.class");
+require_once("php/pChart/pData.class");
+require_once("php/pChart/pChart.class");
 
 // Dados para o gráfico
 $data = [
