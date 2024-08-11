@@ -85,7 +85,7 @@ unset($_SESSION['status'], $_SESSION['message']);
                     <div id="name-error" class="error-message"></div>
 
                     <label for="telefone">Telefone Celular:</label>
-                    <input type="tel" id="telefone" name="telefone" value="<?= $agendamento['telefone_cliente'] ?>" pattern="\(\d{2}\) \d{5}-\d{4}" required>
+                    <input type="tel" id="telefone" name="telefone" value="<?= $agendamento['telefone_cliente'] ?>" pattern="\(\d{2}\) \d{5}-\d{4}">
                     <div id="telefone-error" class="error-message"></div>
 
                     <label for="email">E-mail do Cliente:</label>
