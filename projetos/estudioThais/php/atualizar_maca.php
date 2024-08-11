@@ -35,7 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $conflictQuery = $conn->prepare("
         SELECT start_time, end_time 
         FROM agendamentos 
-        WHERE maca_id = ? 
+        WHERE maca_id = ?
+        AND status = '1' 
         AND data = ? 
         AND id != ? 
         AND (

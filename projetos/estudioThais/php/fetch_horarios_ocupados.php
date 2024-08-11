@@ -21,7 +21,7 @@ if (!$macaId || !$date) {
 }
 
 // Consultar horários ocupados
-$sql = "SELECT start_time, end_time FROM agendamentos WHERE maca_id = ? AND data = ?";
+$sql = "SELECT start_time, end_time FROM agendamentos WHERE maca_id = ? AND data = ? AND status = '1'";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("is", $macaId, $date);
 $stmt->execute();

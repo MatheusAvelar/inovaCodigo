@@ -18,7 +18,7 @@ if ($conn->connect_error) {
 $dataAmanha = date('Y-m-d', strtotime('+1 day'));
 
 // Selecionar agendamentos para o dia seguinte
-$sql = "SELECT nome_cliente, email_cliente, telefone_cliente, estilo, tamanho, valor, forma_pagamento, data, start_time, end_time FROM agendamentos WHERE data = ?";
+$sql = "SELECT nome_cliente, email_cliente, telefone_cliente, estilo, tamanho, valor, forma_pagamento, data, start_time, end_time FROM agendamentos WHERE data = ? AND status = '1'";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $dataAmanha);
 $stmt->execute();

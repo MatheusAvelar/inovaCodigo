@@ -43,7 +43,7 @@ if ($result->num_rows === 0) {
 }
 
 // Verificando se há agendamentos associados ao usuário
-$query = "SELECT COUNT(*) AS agendamentos_count FROM agendamentos WHERE usuario_id = $userId";
+$query = "SELECT COUNT(*) AS agendamentos_count FROM agendamentos WHERE usuario_id = $userId AND status = '1'";
 $result = $conn->query($query);
 $row = $result->fetch_assoc();
 

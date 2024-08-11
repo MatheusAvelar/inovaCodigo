@@ -24,7 +24,7 @@ $filterMaca = isset($_GET['filter_maca']) ? $_GET['filter_maca'] : '';
 $filterTatuador = isset($_GET['filter_tatuador']) ? $_GET['filter_tatuador'] : '';
 
 // Condição para aplicar os filtros
-$whereClause = "WHERE 1=1"; // Começa com condição verdadeira para adicionar filtros dinamicamente
+$whereClause = "WHERE status = 1"; // Começa com condição verdadeira para adicionar filtros dinamicamente
 
 if (!empty($filterDate)) {
     $whereClause .= " AND ag.data = '" . $conn->real_escape_string($filterDate) . "'";
