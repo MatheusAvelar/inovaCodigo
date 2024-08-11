@@ -1,6 +1,7 @@
 <?php
 session_start();
 include 'php/verificar_perfil.php';
+include 'php/edita_agendamento.php';
 
 // Verifica se há mensagem de status na sessão
 $status = isset($_SESSION['status']) ? $_SESSION['status'] : null;
