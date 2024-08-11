@@ -80,15 +80,6 @@ if ($result->num_rows > 0) {
             $dateDiff = ($agendamentoDate - $currentDate) / 86400; // diferença em dias
 
             if ($dateDiff >= 2 || $perfil_id == 2) {
-                /*echo "<td><form method='POST' action='php/delete_agendamento.php' onsubmit='return confirmDelete(this)'>
-                          <input type='hidden' name='agendamento_id' value='" . htmlspecialchars($row['id']) . "'>
-                          <button type='submit' class='delete-button' data-description='" . htmlspecialchars($row['descricao']) . "' 
-                                  data-date='" . $formattedDate . "' 
-                                  data-start-time='" . $formattedStartTime . "' 
-                                  data-end-time='" . $formattedEndTime . "'>
-                              <i class='fas fa-trash'></i>
-                          </button>
-                      </form></td>";*/
                 echo "<td>
                       <a href='editar_agendamento.php?id=" . htmlspecialchars($row['id']) . "' title='Editar'>
                           <i class='fas fa-edit'></i>
