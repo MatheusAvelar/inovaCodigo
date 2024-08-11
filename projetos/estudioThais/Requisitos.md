@@ -4,7 +4,7 @@
 **Melhorias:**
 - [x] ~~*Campo 'Estilo', texto livre e obrigatório.*~~ [09-08-2024]
 ### Horarios Agendados
-- [ ] Editar agendamento.
+- [x] ~~*Editar agendamento.*~~ [11-08-2024]
 - [x] ~~*Deixar visivel para todos os usuários, apenas os dias, horários e quem agendou.*~~ [09-08-2024] **Dúvida**
 - [x] ~~*Criar filtro por mês.*~~ [09-08-2024]
 - [x] ~~*Excluir agendamento (Perfil master exclui qualquer agendamento).*~~ [09-08-2024]
