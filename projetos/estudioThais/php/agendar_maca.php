@@ -36,6 +36,7 @@ $date = $_POST['date1'] ?? '';
 $dataFormatada = date('d/m/Y', strtotime($date));
 $startTime = $_POST['start-time1'] ?? '';
 $endTime = $_POST['end-time1'] ?? '';
+$status = '1';
 
 // Captura o telefone e remove a máscara
 $telefoneCliente = $_POST['telefone'] ?? '';
@@ -86,7 +87,7 @@ if ($errors) {
             // Inserir no banco de dados se não houver conflitos
             $usuarioId = $_SESSION['id']; // ID do usuário logado
             $stmt = $conn->prepare("INSERT INTO agendamentos (nome_cliente, estilo, tamanho, valor, forma_pagamento, sinal_pago, descricao, maca_id, data, start_time, end_time, usuario_id, email_cliente, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("ssssssssssssss", $nomeCliente, $estilo, $tamanho, $valor, $formaPagamento, $sinalPago, $descricao, $maca, $date, $startTime, $endTime, $usuarioId, $emailCliente, 1);
+            $stmt->bind_param("ssssssssssssss", $nomeCliente, $estilo, $tamanho, $valor, $formaPagamento, $sinalPago, $descricao, $maca, $date, $startTime, $endTime, $usuarioId, $emailCliente, $status);
 
             if (!$stmt->execute()) {
                 $_SESSION['status'] = "error";
