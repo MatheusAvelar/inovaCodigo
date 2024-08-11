@@ -85,8 +85,8 @@ if ($errors) {
         } else {
             // Inserir no banco de dados se não houver conflitos
             $usuarioId = $_SESSION['id']; // ID do usuário logado
-            $stmt = $conn->prepare("INSERT INTO agendamentos (nome_cliente, estilo, tamanho, valor, forma_pagamento, sinal_pago, descricao, maca_id, data, start_time, end_time, usuario_id, email_cliente) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("ssssssssssss", $nomeCliente, $estilo, $tamanho, $valor, $formaPagamento, $sinalPago, $descricao, $maca, $date, $startTime, $endTime, $usuarioId, $emailCliente);
+            $stmt = $conn->prepare("INSERT INTO agendamentos (nome_cliente, estilo, tamanho, valor, forma_pagamento, sinal_pago, descricao, maca_id, data, start_time, end_time, usuario_id, email_cliente) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("sssssssssssss", $nomeCliente, $estilo, $tamanho, $valor, $formaPagamento, $sinalPago, $descricao, $maca, $date, $startTime, $endTime, $usuarioId, $emailCliente);
 
             if (!$stmt->execute()) {
                 $_SESSION['status'] = "error";
