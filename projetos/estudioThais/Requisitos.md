@@ -16,6 +16,9 @@
     - [x] ~~*Usuário deve digitar o e-mail para enviar o e-mail para o cliente.*~~ [09-08-2024]
     - [x] ~~*Um dia antes.*~~ [10-08-2024]
 - [ ] Envio de Wpp, Qual valor ?
+- [ ] Criar visualização por Calendario (Exemplos no GitHub).
+  - [ ] https://github.com/GabrielpBiu/calendario-de-eventos-php-fullcalendar-mysql?tab=readme-ov-file
+  - [ ] https://github.com/DehDelfino/Calendario
 ### Criar Acesso
 Sem Melhorias
 ### Tela de Usuarios
@@ -24,3 +27,8 @@ Sem Melhorias
 - [x] ~~*Log de alterações no usuário.*~~ [09-08-2024]
 ### Graficos
 - [ ] Criar relatorios do tipo pizza e barra.
+### Visualizar PDFs (Autorização)
+- [ ] Criar formulário de perguntas.
+- [ ] Enviar email com um formulário de perguntas.
+- [ ] Vincular formulário a tabela de dados, para gerar o PDF.
+- [ ] Criar tela para visualizar e baixar os PDFs preenchidos após o envio do email.
