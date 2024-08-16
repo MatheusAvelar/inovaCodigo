@@ -5,6 +5,7 @@
 - [x] ~~*Campo 'Estilo', texto livre e obrigatório.*~~ [09-08-2024]
 ### Horarios Agendados
 - [x] ~~*Editar agendamento.*~~ [11-08-2024]
+  - [ ] Verificar exibição dos botões de exclusão e editar (Só deve ficar disponivel para quem agendou e o perfil master)
 - [x] ~~*Deixar visivel para todos os usuários, apenas os dias, horários e quem agendou.*~~ [09-08-2024] **Dúvida**
 - [x] ~~*Criar filtro por mês.*~~ [09-08-2024]
 - [x] ~~*Excluir agendamento (Perfil master exclui qualquer agendamento).*~~ [09-08-2024]
