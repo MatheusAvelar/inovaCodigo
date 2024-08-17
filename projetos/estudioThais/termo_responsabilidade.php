@@ -39,10 +39,10 @@
                     <input type="text" name="nome_responsavel" required><br>
 
                     <label>RG: </label>
-                    <input type="text" name="rg_responsavel" id="rg" required><br>
+                    <input type="text" name="rg_responsavel" id="rg" maxlength="12" required><br>
 
                     <label>CPF: </label>
-                    <input type="text" name="cpf_responsavel" id="cpf" required><br>
+                    <input type="text" name="cpf_responsavel" id="cpf" maxlength="14" required><br>
 
                     <label>Data de Nascimento: </label>
                     <input type="date" name="nascimento_responsavel" required><br>
@@ -60,10 +60,10 @@
                         <input type="text" name="nome_menor"><br>
 
                         <label>RG: </label>
-                        <input type="text" name="rg_menor" id="rg"><br>
+                        <input type="text" name="rg_menor" id="rg" maxlength="12"><br>
 
                         <label>CPF: </label>
-                        <input type="text" name="cpf_menor" id="cpf"><br>
+                        <input type="text" name="cpf_menor" id="cpf" maxlength="14"><br>
 
                         <label>Data de Nascimento: </label>
                         <input type="date" name="nascimento_menor"><br>
@@ -222,9 +222,28 @@
             });
         });
 
-        $(document).ready(function(){
-            $('#rg').inputmask('99.999.999-9');  // Máscara para RG
-            $('#cpf').inputmask('999.999.999-99');  // Máscara para CPF
+        function maskRG(value) {
+            return value
+                .replace(/\D/g, '') // Remove tudo o que não é dígito
+                .replace(/(\d{2})(\d)/, '$1.$2') // Coloca um ponto entre o segundo e o terceiro dígitos
+                .replace(/(\d{3})(\d)/, '$1.$2') // Coloca um ponto entre o quinto e o sexto dígitos
+                .replace(/(\d{3})(\d)/, '$1-$2'); // Coloca um hífen entre o nono e o décimo dígitos
+        }
+
+        function maskCPF(value) {
+            return value
+                .replace(/\D/g, '') // Remove tudo o que não é dígito
+                .replace(/(\d{3})(\d)/, '$1.$2') // Coloca um ponto entre o terceiro e o quarto dígitos
+                .replace(/(\d{3})(\d)/, '$1.$2') // Coloca um ponto entre o sexto e o sétimo dígitos
+                .replace(/(\d{3})(\d{1,2})$/, '$1-$2'); // Coloca um hífen entre o nono e o décimo dígitos
+        }
+
+        document.getElementById('rg').addEventListener('input', function(e) {
+            e.target.value = maskRG(e.target.value);
+        });
+
+        document.getElementById('cpf').addEventListener('input', function(e) {
+            e.target.value = maskCPF(e.target.value);
         });
     </script>
 </body>
