@@ -7,7 +7,7 @@ class PDF extends FPDF
     function Header()
     {
         // Logo
-        $this->Image('img/tatto.jpeg', 10, 6, 30);
+        $this->Image('../img/tatto.jpeg', 10, 6, 30);
         // Fonte do cabeçalho
         $this->SetFont('Arial', 'B', 12);
         // Título
