@@ -7,7 +7,7 @@ class PDF extends FPDF
     {
         $this->Image('../img/tatto.jpeg', 10, 6, 30);  // Caminho relativo para a imagem
         $this->SetFont('Arial', 'B', 16);
-        $this->Cell(0, 10, 'Termo de Autorizacao - Estudio de Tatuagem', 0, 1, 'C');
+        $this->Cell(0, 10, 'Termo de Autorizacao - Estudio Avelart Tattoo', 0, 1, 'C');
         $this->Ln(10);
     }
 
@@ -50,7 +50,7 @@ $nascimento_menor = $_POST['nascimento_menor'];
 $assinatura_responsavel = $_POST['assinatura_responsavel'];
 
 // Adicionar conteúdo ao PDF
-$pdf->ChapterTitle('Declaração de Autorização');
+$pdf->ChapterTitle("\nDeclaração de Autorização");
 $pdf->ChapterBody(
     "Eu, abaixo identificado, declaro que no gozo pleno de minhas faculdades mentais e psíquicas pelo presente e na melhor forma de direito, autorizo o(a) artista a executar sobre meu corpo ou de meu/minha filho(a) menor nascido, abaixo identificado, que em minha companhia reside e pelo qual sou inteiramente responsável a prática da tatuagem.\n" .
     "Assumo na qualidade de genitor(a) do(a) menor, plena responsabilidade pelo trabalho ora autorizado. É de minha livre vontade declarar que isento de responsabilidade civil ou criminal ao tatuador(a), seja de ordem médica, estética ou ainda defeitos da própria inscrição, salvo aquelas decorrentes de imperícia técnica. Ficando ainda plenamente ciente de que o procedimento da tatuagem tem caráter permanente, não podendo ser removida.\n" .
