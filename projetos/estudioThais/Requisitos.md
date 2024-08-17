@@ -19,7 +19,7 @@
 - [ ] Criar visualização por Calendario (Exemplos no GitHub).
   - [ ] https://github.com/GabrielpBiu/calendario-de-eventos-php-fullcalendar-mysql?tab=readme-ov-file
   - [ ] https://github.com/DehDelfino/Calendario
-  - Exemplo: 	![Calendario](img/calendario.png)
+![Calendario](img/calendario.png)
 ### Criar Acesso
 Sem Melhorias
 ### Tela de Usuarios
