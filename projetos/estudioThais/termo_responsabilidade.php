@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Termo de Autorização</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.8/inputmask.min.js"></script>
 </head>
 <body>
     <header>
@@ -179,27 +178,6 @@
         </div>
     </div>
     <script>
-        // Aplicar máscaras com Inputmask
-        Inputmask({
-            "mask": "999.999.999-99", // Máscara para CPF
-            "placeholder": ""
-        }).mask(document.querySelector('input[name="cpf_responsavel"]'));
-
-        Inputmask({
-            "mask": "99.999.999-9", // Máscara para RG
-            "placeholder": ""
-        }).mask(document.querySelector('input[name="rg_responsavel"]'));
-
-        Inputmask({
-            "mask": "99.999.999-9", // Máscara para RG do menor
-            "placeholder": ""
-        }).mask(document.querySelector('input[name="rg_menor"]'));
-
-        Inputmask({
-            "mask": "999.999.999-99", // Máscara para CPF do menor
-            "placeholder": ""
-        }).mask(document.querySelector('input[name="cpf_menor"]'));
-
         function toggleMenorFields() {
             var isMenor = document.getElementById('isMenor').value;
             var menorFields = document.getElementById('menorFields');
