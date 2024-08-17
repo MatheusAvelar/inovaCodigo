@@ -70,5 +70,12 @@
             </div>
         </div>
     </div>
+    <script>
+        function toggleMenorFields() {
+            var isMenor = document.getElementById('isMenor').value;
+            var menorFields = document.getElementById('menorFields');
+            menorFields.style.display = (isMenor === 'sim') ? 'block' : 'none';
+        }
+    </script>
 </body>
 </html>
