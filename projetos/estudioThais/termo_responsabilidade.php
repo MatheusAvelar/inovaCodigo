@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Termo de Autorização</title>
-    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <header>
@@ -77,42 +76,96 @@
                     <input type="text" name="nome_tatuador"><br><br>
 
                     <label>Tem problemas de cicatrização? </label>
-                    <input type="radio" name="cicatrizacao" value="sim"> Sim
-                    <input type="radio" name="cicatrizacao" value="nao"> Não<br>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="cicatrizacao" value="sim"> 
+                        <span class="checkmark"></span> Sim
+                    </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="cicatrizacao" value="nao"> 
+                        <span class="checkmark"></span> Não
+                    </label><br>
 
                     <label>Tem problemas de desmaio? </label>
-                    <input type="radio" name="desmaio" value="sim"> Sim
-                    <input type="radio" name="desmaio" value="nao"> Não<br>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="desmaio" value="sim"> 
+                        <span class="checkmark"></span> Sim
+                    </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="desmaio" value="nao"> 
+                        <span class="checkmark"></span> Não
+                    </label><br>
 
                     <label>É hemofílico? </label>
-                    <input type="radio" name="hemofilico" value="sim"> Sim
-                    <input type="radio" name="hemofilico" value="nao"> Não<br>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="hemofilico" value="sim"> 
+                        <span class="checkmark"></span> Sim
+                    </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="hemofilico" value="nao"> 
+                        <span class="checkmark"></span> Não
+                    </label><br>
 
                     <label>Já contraiu hepatite? </label>
-                    <input type="radio" name="hepatite" value="sim"> Sim
-                    <input type="radio" name="hepatite" value="nao"> Não
+                    <label class="custom-checkbox">
+                        <input type="radio" name="hepatite" value="sim"> 
+                        <span class="checkmark"></span> Sim
+                    </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="hepatite" value="nao"> 
+                        <span class="checkmark"></span> Não
+                    </label>
                     <input type="text" name="hepatite_tipo" placeholder="Tipo e quando" style="display: none;"><br>
 
                     <label>Portador de HIV? </label>
-                    <input type="radio" name="hiv" value="sim"> Sim
-                    <input type="radio" name="hiv" value="nao"> Não<br>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="hiv" value="sim"> 
+                        <span class="checkmark"></span> Sim
+                    </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="hiv" value="nao"> 
+                        <span class="checkmark"></span> Não
+                    </label><br>
 
                     <label>Tem doença autoimune? </label>
-                    <input type="radio" name="autoimune" value="sim"> Sim
-                    <input type="radio" name="autoimune" value="nao"> Não<br>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="autoimune" value="sim"> 
+                        <span class="checkmark"></span> Sim
+                    </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="autoimune" value="nao"> 
+                        <span class="checkmark"></span> Não
+                    </label><br>
 
                     <label>É epilético? </label>
-                    <input type="radio" name="epileptico" value="sim"> Sim
-                    <input type="radio" name="epileptico" value="nao"> Não<br>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="epileptico" value="sim"> 
+                        <span class="checkmark"></span> Sim
+                    </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="epileptico" value="nao"> 
+                        <span class="checkmark"></span> Não
+                    </label><br>
 
                     <label>Faz uso de algum medicamento? </label>
-                    <input type="radio" name="medicamento" value="sim"> Sim
-                    <input type="radio" name="medicamento" value="nao"> Não
+                    <label class="custom-checkbox">
+                        <input type="radio" name="medicamento" value="sim"> 
+                        <span class="checkmark"></span> Sim
+                    </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="medicamento" value="nao"> 
+                        <span class="checkmark"></span> Não
+                    </label>
                     <input type="text" name="medicamento_nome" placeholder="Qual medicamento" style="display: none;"><br>
 
                     <label>É alérgico a algo? </label>
-                    <input type="radio" name="alergia" value="sim"> Sim
-                    <input type="radio" name="alergia" value="nao"> Não
+                    <label class="custom-checkbox">
+                        <input type="radio" name="alergia" value="sim"> 
+                        <span class="checkmark"></span> Sim
+                    </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="alergia" value="nao"> 
+                        <span class="checkmark"></span> Não
+                    </label>
                     <input type="text" name="alergia_nome" placeholder="Qual alergia" style="display: none;"><br><br>
 
                     <label>Assinatura (digite seu nome completo): </label>
