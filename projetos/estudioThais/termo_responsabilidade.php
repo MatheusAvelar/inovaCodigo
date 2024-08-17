@@ -50,16 +50,16 @@
                     <div id="menorFields" style="display: none;">
                         <h3>Informações do Menor</h3>
                         <label>Nome do menor: </label>
-                        <input type="text" name="nome_menor"><br>
+                        <input type="text" name="nome_menor" required><br>
 
                         <label>RG: </label>
-                        <input type="text" name="rg_menor"><br>
+                        <input type="text" name="rg_menor" required><br>
 
                         <label>CPF: </label>
-                        <input type="text" name="cpf_menor"><br>
+                        <input type="text" name="cpf_menor" required><br>
 
                         <label>Data de Nascimento: </label>
-                        <input type="date" name="nascimento_menor"><br>
+                        <input type="date" name="nascimento_menor" required><br>
                     </div>
 
                     <label>Assinatura (digite seu nome completo): </label>
