@@ -39,10 +39,10 @@
                     <input type="text" name="nome_responsavel" required><br>
 
                     <label>RG: </label>
-                    <input type="text" name="rg_responsavel" required><br>
+                    <input type="text" name="rg_responsavel" id="rg" required><br>
 
                     <label>CPF: </label>
-                    <input type="text" name="cpf_responsavel" required><br>
+                    <input type="text" name="cpf_responsavel" id="cpf" required><br>
 
                     <label>Data de Nascimento: </label>
                     <input type="date" name="nascimento_responsavel" required><br>
@@ -60,10 +60,10 @@
                         <input type="text" name="nome_menor"><br>
 
                         <label>RG: </label>
-                        <input type="text" name="rg_menor"><br>
+                        <input type="text" name="rg_menor" id="rg"><br>
 
                         <label>CPF: </label>
-                        <input type="text" name="cpf_menor"><br>
+                        <input type="text" name="cpf_menor" id="cpf"><br>
 
                         <label>Data de Nascimento: </label>
                         <input type="date" name="nascimento_menor"><br>
