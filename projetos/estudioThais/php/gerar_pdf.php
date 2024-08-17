@@ -5,6 +5,7 @@ class PDF extends FPDF
 {
     function Header()
     {
+        // Alinhar a imagem no centro
         $this->Image('../img/tatto.jpeg', 10, 6, 30);  // Caminho relativo para a imagem
         $this->SetFont('Arial', 'B', 16);
         $this->Cell(0, 10, 'Termo de Autorizacao - Estudio de Tatuagem', 0, 1, 'C');
@@ -21,7 +22,7 @@ class PDF extends FPDF
     function ChapterTitle($title)
     {
         $this->SetFont('Arial', 'B', 12);
-        $this->Cell(0, 10, $title, 0, 1, 'L');
+        $this->Cell(0, 10, utf8_decode($title), 0, 1, 'L');
         $this->Ln(4);
     }
 
