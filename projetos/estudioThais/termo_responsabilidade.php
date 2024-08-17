@@ -26,7 +26,7 @@
         <h2>Termo de Autorização</h2>
         <div class="grid">
             <div class="maca">
-                <form action="gerar_pdf.php" method="POST">
+                <form action="php/gerar_pdf.php" method="POST">
                     <p>Eu, abaixo identificado, declaro que no gozo pleno de minhas faculdades mentais e psíquicas pelo presente e na melhor forma de direito, autorizo o(a) artista a executar sobre meu corpo ou de meu/minha filho(a) menor nascido, abaixo identificado, que em minha companhia reside e pelo qual sou inteiramente responsável a prática da tatuagem...</p>
 
                     <label>Nome do cliente/Responsável: </label>
