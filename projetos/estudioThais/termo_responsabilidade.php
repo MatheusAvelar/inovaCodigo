@@ -67,6 +67,54 @@
                         <input type="date" name="nascimento_menor"><br>
                     </div>
 
+                    <label>Local e desenho da tatuagem: </label>
+                    <input type="text" name="local_tatuagem"><br>
+
+                    <label>Data: </label>
+                    <input type="date" name="data_tatuagem"><br>
+
+                    <label>Nome do tatuador: </label>
+                    <input type="text" name="nome_tatuador"><br><br>
+
+                    <label>Tem problemas de cicatrização? </label>
+                    <input type="radio" name="cicatrizacao" value="sim"> Sim
+                    <input type="radio" name="cicatrizacao" value="nao"> Não<br>
+
+                    <label>Tem problemas de desmaio? </label>
+                    <input type="radio" name="desmaio" value="sim"> Sim
+                    <input type="radio" name="desmaio" value="nao"> Não<br>
+
+                    <label>É hemofílico? </label>
+                    <input type="radio" name="hemofilico" value="sim"> Sim
+                    <input type="radio" name="hemofilico" value="nao"> Não<br>
+
+                    <label>Já contraiu hepatite? </label>
+                    <input type="radio" name="hepatite" value="sim"> Sim
+                    <input type="radio" name="hepatite" value="nao"> Não
+                    <input type="text" name="hepatite_tipo" placeholder="Tipo e quando" style="display: none;"><br>
+
+                    <label>Portador de HIV? </label>
+                    <input type="radio" name="hiv" value="sim"> Sim
+                    <input type="radio" name="hiv" value="nao"> Não<br>
+
+                    <label>Tem doença autoimune? </label>
+                    <input type="radio" name="autoimune" value="sim"> Sim
+                    <input type="radio" name="autoimune" value="nao"> Não<br>
+
+                    <label>É epilético? </label>
+                    <input type="radio" name="epileptico" value="sim"> Sim
+                    <input type="radio" name="epileptico" value="nao"> Não<br>
+
+                    <label>Faz uso de algum medicamento? </label>
+                    <input type="radio" name="medicamento" value="sim"> Sim
+                    <input type="radio" name="medicamento" value="nao"> Não
+                    <input type="text" name="medicamento_nome" placeholder="Qual medicamento" style="display: none;"><br>
+
+                    <label>É alérgico a algo? </label>
+                    <input type="radio" name="alergia" value="sim"> Sim
+                    <input type="radio" name="alergia" value="nao"> Não
+                    <input type="text" name="alergia_nome" placeholder="Qual alergia" style="display: none;"><br><br>
+
                     <label>Assinatura (digite seu nome completo): </label>
                     <input type="text" name="assinatura_responsavel" required><br><br>
 
@@ -98,6 +146,25 @@
                 nascimentoMenor.removeAttribute('required');
             }
         }
+
+        // Mostrar ou esconder campos adicionais de saúde conforme a seleção
+        document.querySelectorAll('input[name="hepatite"]').forEach(el => {
+            el.addEventListener('change', function () {
+                document.querySelector('input[name="hepatite_tipo"]').style.display = this.value === 'sim' ? 'inline' : 'none';
+            });
+        });
+
+        document.querySelectorAll('input[name="medicamento"]').forEach(el => {
+            el.addEventListener('change', function () {
+                document.querySelector('input[name="medicamento_nome"]').style.display = this.value === 'sim' ? 'inline' : 'none';
+            });
+        });
+
+        document.querySelectorAll('input[name="alergia"]').forEach(el => {
+            el.addEventListener('change', function () {
+                document.querySelector('input[name="alergia_nome"]').style.display = this.value === 'sim' ? 'inline' : 'none';
+            });
+        });
     </script>
 </body>
 </html>
