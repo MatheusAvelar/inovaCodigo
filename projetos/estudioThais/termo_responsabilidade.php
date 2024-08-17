@@ -150,28 +150,6 @@
                         <span class="checkmark"></span> Não
                     </label><br>
 
-                    <label>Faz uso de algum medicamento? </label>
-                    <label class="custom-checkbox">
-                        <input type="radio" name="medicamento" value="sim" required> 
-                        <span class="checkmark"></span> Sim
-                    </label>
-                    <label class="custom-checkbox">
-                        <input type="radio" name="medicamento" value="nao" required> 
-                        <span class="checkmark"></span> Não
-                    </label>
-                    <input type="text" name="medicamento_nome" placeholder="Qual medicamento" id="medicamento_nome" style="display: none;"><br>
-
-                    <label>Já contraiu hepatite? </label>
-                    <label class="custom-checkbox">
-                        <input type="radio" name="hepatite" value="sim" required> 
-                        <span class="checkmark"></span> Sim
-                    </label>
-                    <label class="custom-checkbox">
-                        <input type="radio" name="hepatite" value="nao" required> 
-                        <span class="checkmark"></span> Não
-                    </label>
-                    <input type="text" name="hepatite_tipo" placeholder="Qual tipo e quando" id="hepatite_tipo" style="display: none;"><br>
-
                     <label>Grávida ou amamentando? </label>
                     <label class="custom-checkbox">
                         <input type="radio" name="gravida" value="sim" required> 
@@ -182,7 +160,10 @@
                         <span class="checkmark"></span> Não
                     </label><br>
 
-                    <button type="submit">Assinar</button>
+                    <label>Assinatura (digite seu nome completo): </label>
+                    <input type="text" name="assinatura_responsavel" required><br><br>
+
+                    <button type="submit">Assinar e Gerar PDF</button>
                 </form>
             </div>
         </div>
