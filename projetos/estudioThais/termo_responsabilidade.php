@@ -43,6 +43,7 @@
 
                     <label>O cliente é menor de idade?</label>
                     <select id="isMenor" name="isMenor" onchange="toggleMenorFields()" required>
+                        <option value="" disabled selected>Selecione...</option>
                         <option value="nao">Não</option>
                         <option value="sim">Sim</option>
                     </select><br><br>
@@ -50,16 +51,16 @@
                     <div id="menorFields" style="display: none;">
                         <h3>Informações do Menor</h3>
                         <label>Nome do menor: </label>
-                        <input type="text" name="nome_menor" required><br>
+                        <input type="text" name="nome_menor"><br>
 
                         <label>RG: </label>
-                        <input type="text" name="rg_menor" required><br>
+                        <input type="text" name="rg_menor"><br>
 
                         <label>CPF: </label>
-                        <input type="text" name="cpf_menor" required><br>
+                        <input type="text" name="cpf_menor"><br>
 
                         <label>Data de Nascimento: </label>
-                        <input type="date" name="nascimento_menor" required><br>
+                        <input type="date" name="nascimento_menor"><br>
                     </div>
 
                     <label>Assinatura (digite seu nome completo): </label>
@@ -74,7 +75,24 @@
         function toggleMenorFields() {
             var isMenor = document.getElementById('isMenor').value;
             var menorFields = document.getElementById('menorFields');
-            menorFields.style.display = (isMenor === 'sim') ? 'block' : 'none';
+            var nomeMenor = document.querySelector('input[name="nome_menor"]');
+            var rgMenor = document.querySelector('input[name="rg_menor"]');
+            var cpfMenor = document.querySelector('input[name="cpf_menor"]');
+            var nascimentoMenor = document.querySelector('input[name="nascimento_menor"]');
+
+            if (isMenor === 'sim') {
+                menorFields.style.display = 'block';
+                nomeMenor.setAttribute('required', 'required');
+                rgMenor.setAttribute('required', 'required');
+                cpfMenor.setAttribute('required', 'required');
+                nascimentoMenor.setAttribute('required', 'required');
+            } else {
+                menorFields.style.display = 'none';
+                nomeMenor.removeAttribute('required');
+                rgMenor.removeAttribute('required');
+                cpfMenor.removeAttribute('required');
+                nascimentoMenor.removeAttribute('required');
+            }
         }
     </script>
 </body>
