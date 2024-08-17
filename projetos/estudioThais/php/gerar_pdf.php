@@ -33,11 +33,17 @@ $pdf = new FPDF();
 $pdf->AddPage();
 $pdf->SetFont('Arial', '', 12);
 
+// Adiciona a logo do estúdio à esquerda
+$pdf->Image('../img/tatto.jpeg', 10, 10, 30); // Ajuste o caminho da imagem, a posição X (10), Y (10) e o tamanho (30) conforme necessário
+
+// Define a posição inicial para o texto
+$pdf->SetXY(50, 10); // Ajuste a posição X (50) e Y (10) para alinhar o texto ao lado da logo
+
 // Adiciona o conteúdo ao PDF
-$pdf->MultiCell(0, 10, utf8_decode("Termo de Autorização - Estúdio de Tatuagem\n\nDeclaração de Autorização\nEu, abaixo identificado, declaro que no gozo pleno de minhas faculdades mentais e psíquicas pelo presente e na melhor forma de direito, autorizo o(a) artista a executar sobre meu corpo ou de meu/minha filho(a) menor nascido, abaixo identificado, que em minha companhia reside e pelo qual sou inteiramente responsável a prática da tatuagem.\n\nAssumo na qualidade de genitor(a) do(a) menor, plena responsabilidade pelo trabalho ora autorizado. É de minha livre vontade declarar que isento de responsabilidade civil ou criminal ao tatuador(a), seja de ordem médica, estética ou ainda defeitos da própria inscrição, salvo aquelas decorrentes de imperícia técnica. Ficando ainda plenamente ciente de que o procedimento da tatuagem tem caráter permanente, não podendo ser removida.\n\nDeclaro ainda, ser do meu conhecimento as técnicas a serem executadas, os materiais a serem utilizados, bem como fui informado e tenho total ciência dos procedimentos e cuidados que devem ser executados por mim ou por meu/minha filho(a) durante o período recomendado pelo tatuador, com a finalidade de evitar qualquer complicação no período de cicatrização do local. Reconheço finalmente que a tatuagem se trata de um processo artesanal e como tal não comporta perfeição.\n"));
+$pdf->MultiCell(0, 10, utf8_decode("Termo de Autorização - Estúdio Avelart Tattoo\nDeclaração de Autorização\nEu, abaixo identificado, declaro que no gozo pleno de minhas faculdades mentais e psíquicas pelo presente e na melhor forma de direito, autorizo o(a) artista a executar sobre meu corpo ou de meu/minha filho(a) menor nascido, abaixo identificado, que em minha companhia reside e pelo qual sou inteiramente responsável a prática da tatuagem.\nAssumo na qualidade de genitor(a) do(a) menor, plena responsabilidade pelo trabalho ora autorizado. É de minha livre vontade declarar que isento de responsabilidade civil ou criminal ao tatuador(a), seja de ordem médica, estética ou ainda defeitos da própria inscrição, salvo aquelas decorrentes de imperícia técnica. Ficando ainda plenamente ciente de que o procedimento da tatuagem tem caráter permanente, não podendo ser removida.\nDeclaro ainda, ser do meu conhecimento as técnicas a serem executadas, os materiais a serem utilizados, bem como fui informado e tenho total ciência dos procedimentos e cuidados que devem ser executados por mim ou por meu/minha filho(a) durante o período recomendado pelo tatuador, com a finalidade de evitar qualquer complicação no período de cicatrização do local. Reconheço finalmente que a tatuagem se trata de um processo artesanal e como tal não comporta perfeição.\n"));
 
 // Adiciona informações pessoais
-$pdf->Ln(10);
+$pdf->Ln(20);
 $pdf->Cell(0, 10, utf8_decode("Nome do cliente/Responsável: " . $nome_responsavel), 0, 1);
 $pdf->Cell(0, 10, utf8_decode("RG: " . $rg_responsavel), 0, 1);
 $pdf->Cell(0, 10, utf8_decode("CPF: " . $cpf_responsavel), 0, 1);
