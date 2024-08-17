@@ -120,13 +120,13 @@
                         <span class="checkmark"></span> Não
                     </label><br>
 
-                    <label>É hemofílico? </label>
+                    <label>Portador de HIV?</label>
                     <label class="custom-checkbox">
-                        <input type="radio" name="hemofilico" value="sim" required> 
+                        <input type="radio" name="portador_hiv" value="sim" required> 
                         <span class="checkmark"></span> Sim
                     </label>
                     <label class="custom-checkbox">
-                        <input type="radio" name="hemofilico" value="nao" required> 
+                        <input type="radio" name="portador_hiv" value="nao" required> 
                         <span class="checkmark"></span> Não
                     </label><br>
 
@@ -150,7 +150,27 @@
                         <span class="checkmark"></span> Não
                     </label><br>
 
-                    <label>Grávida ou amamentando? </label>
+                    <label>É alérgico á algo? </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="alergico" value="sim" required> 
+                        <span class="checkmark"></span> Sim
+                    </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="alergico" value="nao" required> 
+                        <span class="checkmark"></span> Não
+                    </label><br>
+
+                    <label>É hemofílico? </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="hemofílico" value="sim" required> 
+                        <span class="checkmark"></span> Sim
+                    </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="hemofílico" value="nao" required> 
+                        <span class="checkmark"></span> Não
+                    </label><br>
+
+                    <!--<label>Grávida ou amamentando? </label>
                     <label class="custom-checkbox">
                         <input type="radio" name="gravida" value="sim" required> 
                         <span class="checkmark"></span> Sim
@@ -158,7 +178,7 @@
                     <label class="custom-checkbox">
                         <input type="radio" name="gravida" value="nao" required> 
                         <span class="checkmark"></span> Não
-                    </label><br>
+                    </label><br>-->
 
                     <label>Assinatura (digite seu nome completo): </label>
                     <input type="text" name="assinatura_responsavel" required><br><br>
