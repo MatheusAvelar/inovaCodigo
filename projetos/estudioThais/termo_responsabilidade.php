@@ -122,11 +122,11 @@
 
                     <label>Portador de HIV?</label>
                     <label class="custom-checkbox">
-                        <input type="radio" name="portador_hiv" value="sim" required> 
+                        <input type="radio" name="hiv" value="sim" required> 
                         <span class="checkmark"></span> Sim
                     </label>
                     <label class="custom-checkbox">
-                        <input type="radio" name="portador_hiv" value="nao" required> 
+                        <input type="radio" name="hiv" value="nao" required> 
                         <span class="checkmark"></span> Não
                     </label><br>
 
@@ -152,21 +152,21 @@
 
                     <label>É alérgico á algo? </label>
                     <label class="custom-checkbox">
-                        <input type="radio" name="alergico" value="sim" required> 
+                        <input type="radio" name="alergia" value="sim" required> 
                         <span class="checkmark"></span> Sim
                     </label>
                     <label class="custom-checkbox">
-                        <input type="radio" name="alergico" value="nao" required> 
+                        <input type="radio" name="alergia" value="nao" required> 
                         <span class="checkmark"></span> Não
                     </label><br>
 
                     <label>É hemofílico? </label>
                     <label class="custom-checkbox">
-                        <input type="radio" name="hemofílico" value="sim" required> 
+                        <input type="radio" name="hemofilico" value="sim" required> 
                         <span class="checkmark"></span> Sim
                     </label>
                     <label class="custom-checkbox">
-                        <input type="radio" name="hemofílico" value="nao" required> 
+                        <input type="radio" name="hemofilico" value="nao" required> 
                         <span class="checkmark"></span> Não
                     </label><br>
 
