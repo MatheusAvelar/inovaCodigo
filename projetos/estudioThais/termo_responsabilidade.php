@@ -78,6 +78,28 @@
                     <label>Nome do tatuador: </label>
                     <input type="text" name="nome_tatuador"><br><br>
 
+                    <label>Faz uso de algum medicamento? </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="medicamento" value="sim" onchange="toggleMedicamentoField()" required> 
+                        <span class="checkmark"></span> Sim
+                    </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="medicamento" value="nao" onchange="toggleMedicamentoField()" required> 
+                        <span class="checkmark"></span> Não
+                    </label><br>
+                    <input type="text" name="medicamento_nome" placeholder="Qual medicamento" id="medicamento_nome" style="display: none;"><br>
+
+                    <label>Já contraiu hepatite? </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="hepatite" value="sim" onchange="toggleHepatiteField()" required> 
+                        <span class="checkmark"></span> Sim
+                    </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="hepatite" value="nao" onchange="toggleHepatiteField()" required> 
+                        <span class="checkmark"></span> Não
+                    </label><br>
+                    <input type="text" name="hepatite_tipo" placeholder="Qual tipo e quando" id="hepatite_tipo" style="display: none;"><br>
+
                     <label>Tem problemas de cicatrização? </label>
                     <label class="custom-checkbox">
                         <input type="radio" name="cicatrizacao" value="sim" required> 
@@ -105,27 +127,6 @@
                     </label>
                     <label class="custom-checkbox">
                         <input type="radio" name="hemofilico" value="nao" required> 
-                        <span class="checkmark"></span> Não
-                    </label><br>
-
-                    <label>Já contraiu hepatite? </label>
-                    <label class="custom-checkbox">
-                        <input type="radio" name="hepatite" value="sim" required> 
-                        <span class="checkmark"></span> Sim
-                    </label>
-                    <label class="custom-checkbox">
-                        <input type="radio" name="hepatite" value="nao" required> 
-                        <span class="checkmark"></span> Não
-                    </label>
-                    <input type="text" name="hepatite_tipo" placeholder="Tipo e quando" style="display: none;"><br>
-
-                    <label>Portador de HIV? </label>
-                    <label class="custom-checkbox">
-                        <input type="radio" name="hiv" value="sim" required> 
-                        <span class="checkmark"></span> Sim
-                    </label>
-                    <label class="custom-checkbox">
-                        <input type="radio" name="hiv" value="nao" required> 
                         <span class="checkmark"></span> Não
                     </label><br>
 
@@ -158,18 +159,18 @@
                         <input type="radio" name="medicamento" value="nao" required> 
                         <span class="checkmark"></span> Não
                     </label>
-                    <input type="text" name="medicamento_nome" placeholder="Qual medicamento" style="display: none;"><br>
+                    <input type="text" name="medicamento_nome" placeholder="Qual medicamento" id="medicamento_nome" style="display: none;"><br>
 
-                    <label>É alérgico a algo? </label>
+                    <label>Já contraiu hepatite? </label>
                     <label class="custom-checkbox">
-                        <input type="radio" name="alergia" value="sim" required> 
+                        <input type="radio" name="hepatite" value="sim" required> 
                         <span class="checkmark"></span> Sim
                     </label>
                     <label class="custom-checkbox">
-                        <input type="radio" name="alergia" value="nao" required> 
+                        <input type="radio" name="hepatite" value="nao" required> 
                         <span class="checkmark"></span> Não
                     </label>
-                    <input type="text" name="alergia_nome" placeholder="Qual alergia" style="display: none;"><br>
+                    <input type="text" name="hepatite_tipo" placeholder="Qual tipo e quando" id="hepatite_tipo" style="display: none;"><br>
 
                     <label>Grávida ou amamentando? </label>
                     <label class="custom-checkbox">
@@ -188,6 +189,18 @@
     </div>
     
     <script>
+        function toggleMedicamentoField() {
+            var medicamentoSim = document.querySelector('input[name="medicamento"][value="sim"]');
+            var medicamentoNome = document.getElementById('medicamento_nome');
+            medicamentoNome.style.display = medicamentoSim.checked ? 'block' : 'none';
+        }
+
+        function toggleHepatiteField() {
+            var hepatiteSim = document.querySelector('input[name="hepatite"][value="sim"]');
+            var hepatiteTipo = document.getElementById('hepatite_tipo');
+            hepatiteTipo.style.display = hepatiteSim.checked ? 'block' : 'none';
+        }
+
         function toggleMenorFields() {
             var isMenor = document.getElementById('isMenor').value;
             var menorFields = document.getElementById('menorFields');
@@ -206,25 +219,10 @@
         document.getElementById('rg').inputmask({ mask: '99.999.999-9' });
         document.getElementById('cpf').inputmask({ mask: '999.999.999-99' });
 
-        // Exibir campos adicionais dependendo das seleções
-        const hepatiteSim = document.querySelector('input[name="hepatite"][value="sim"]');
-        const hepatiteTipo = document.querySelector('input[name="hepatite_tipo"]');
-        const medicamentoSim = document.querySelector('input[name="medicamento"][value="sim"]');
-        const medicamentoNome = document.querySelector('input[name="medicamento_nome"]');
-        const alergiaSim = document.querySelector('input[name="alergia"][value="sim"]');
-        const alergiaNome = document.querySelector('input[name="alergia_nome"]');
-        
-        hepatiteSim.addEventListener('change', function() {
-            hepatiteTipo.style.display = 'block';
-        });
-
-        medicamentoSim.addEventListener('change', function() {
-            medicamentoNome.style.display = 'block';
-        });
-
-        alergiaSim.addEventListener('change', function() {
-            alergiaNome.style.display = 'block';
-        });
+        // Inicializar o estado dos campos dependentes
+        toggleMedicamentoField();
+        toggleHepatiteField();
+        toggleMenorFields();
     </script>
 </body>
 </html>
