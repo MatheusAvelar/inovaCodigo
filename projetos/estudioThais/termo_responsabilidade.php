@@ -60,10 +60,10 @@
                         <input type="text" name="nome_menor"><br>
 
                         <label>RG: </label>
-                        <input type="text" name="rg_menor" maxlength="12"><br>
+                        <input type="text" name="rg_menor" id="rg_menor" maxlength="12"><br>
 
                         <label>CPF: </label>
-                        <input type="text" name="cpf_menor" maxlength="14"><br>
+                        <input type="text" name="cpf_menor" id="cpf_menor" maxlength="14"><br>
 
                         <label>Data de Nascimento: </label>
                         <input type="date" name="nascimento_menor"><br>
@@ -80,170 +80,150 @@
 
                     <label>Tem problemas de cicatrização? </label>
                     <label class="custom-checkbox">
-                        <input type="radio" name="cicatrizacao" value="sim"> 
+                        <input type="radio" name="cicatrizacao" value="sim" required> 
                         <span class="checkmark"></span> Sim
                     </label>
                     <label class="custom-checkbox">
-                        <input type="radio" name="cicatrizacao" value="nao"> 
+                        <input type="radio" name="cicatrizacao" value="nao" required> 
                         <span class="checkmark"></span> Não
                     </label><br>
 
                     <label>Tem problemas de desmaio? </label>
                     <label class="custom-checkbox">
-                        <input type="radio" name="desmaio" value="sim"> 
+                        <input type="radio" name="desmaio" value="sim" required> 
                         <span class="checkmark"></span> Sim
                     </label>
                     <label class="custom-checkbox">
-                        <input type="radio" name="desmaio" value="nao"> 
+                        <input type="radio" name="desmaio" value="nao" required> 
                         <span class="checkmark"></span> Não
                     </label><br>
 
                     <label>É hemofílico? </label>
                     <label class="custom-checkbox">
-                        <input type="radio" name="hemofilico" value="sim"> 
+                        <input type="radio" name="hemofilico" value="sim" required> 
                         <span class="checkmark"></span> Sim
                     </label>
                     <label class="custom-checkbox">
-                        <input type="radio" name="hemofilico" value="nao"> 
+                        <input type="radio" name="hemofilico" value="nao" required> 
                         <span class="checkmark"></span> Não
                     </label><br>
 
                     <label>Já contraiu hepatite? </label>
                     <label class="custom-checkbox">
-                        <input type="radio" name="hepatite" value="sim"> 
+                        <input type="radio" name="hepatite" value="sim" required> 
                         <span class="checkmark"></span> Sim
                     </label>
                     <label class="custom-checkbox">
-                        <input type="radio" name="hepatite" value="nao"> 
+                        <input type="radio" name="hepatite" value="nao" required> 
                         <span class="checkmark"></span> Não
                     </label>
                     <input type="text" name="hepatite_tipo" placeholder="Tipo e quando" style="display: none;"><br>
 
                     <label>Portador de HIV? </label>
                     <label class="custom-checkbox">
-                        <input type="radio" name="hiv" value="sim"> 
+                        <input type="radio" name="hiv" value="sim" required> 
                         <span class="checkmark"></span> Sim
                     </label>
                     <label class="custom-checkbox">
-                        <input type="radio" name="hiv" value="nao"> 
+                        <input type="radio" name="hiv" value="nao" required> 
                         <span class="checkmark"></span> Não
                     </label><br>
 
                     <label>Tem doença autoimune? </label>
                     <label class="custom-checkbox">
-                        <input type="radio" name="autoimune" value="sim"> 
+                        <input type="radio" name="autoimune" value="sim" required> 
                         <span class="checkmark"></span> Sim
                     </label>
                     <label class="custom-checkbox">
-                        <input type="radio" name="autoimune" value="nao"> 
+                        <input type="radio" name="autoimune" value="nao" required> 
                         <span class="checkmark"></span> Não
                     </label><br>
 
                     <label>É epilético? </label>
                     <label class="custom-checkbox">
-                        <input type="radio" name="epileptico" value="sim"> 
+                        <input type="radio" name="epileptico" value="sim" required> 
                         <span class="checkmark"></span> Sim
                     </label>
                     <label class="custom-checkbox">
-                        <input type="radio" name="epileptico" value="nao"> 
+                        <input type="radio" name="epileptico" value="nao" required> 
                         <span class="checkmark"></span> Não
                     </label><br>
 
                     <label>Faz uso de algum medicamento? </label>
                     <label class="custom-checkbox">
-                        <input type="radio" name="medicamento" value="sim"> 
+                        <input type="radio" name="medicamento" value="sim" required> 
                         <span class="checkmark"></span> Sim
                     </label>
                     <label class="custom-checkbox">
-                        <input type="radio" name="medicamento" value="nao"> 
+                        <input type="radio" name="medicamento" value="nao" required> 
                         <span class="checkmark"></span> Não
                     </label>
                     <input type="text" name="medicamento_nome" placeholder="Qual medicamento" style="display: none;"><br>
 
                     <label>É alérgico a algo? </label>
                     <label class="custom-checkbox">
-                        <input type="radio" name="alergia" value="sim"> 
+                        <input type="radio" name="alergia" value="sim" required> 
                         <span class="checkmark"></span> Sim
                     </label>
                     <label class="custom-checkbox">
-                        <input type="radio" name="alergia" value="nao"> 
+                        <input type="radio" name="alergia" value="nao" required> 
                         <span class="checkmark"></span> Não
                     </label>
-                    <input type="text" name="alergia_nome" placeholder="Qual alergia" style="display: none;"><br><br>
+                    <input type="text" name="alergia_nome" placeholder="Qual alergia" style="display: none;"><br>
 
-                    <label>Assinatura (digite seu nome completo): </label>
-                    <input type="text" name="assinatura_responsavel" required><br><br>
+                    <label>Grávida ou amamentando? </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="gravida" value="sim" required> 
+                        <span class="checkmark"></span> Sim
+                    </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="gravida" value="nao" required> 
+                        <span class="checkmark"></span> Não
+                    </label><br>
 
-                    <input type="submit" value="Assinar e Gerar PDF">
+                    <button type="submit">Assinar</button>
                 </form>
             </div>
         </div>
     </div>
+    
     <script>
         function toggleMenorFields() {
             var isMenor = document.getElementById('isMenor').value;
             var menorFields = document.getElementById('menorFields');
-            var nomeMenor = document.querySelector('input[name="nome_menor"]');
-            var rgMenor = document.querySelector('input[name="rg_menor"]');
-            var cpfMenor = document.querySelector('input[name="cpf_menor"]');
-            var nascimentoMenor = document.querySelector('input[name="nascimento_menor"]');
-
             if (isMenor === 'sim') {
                 menorFields.style.display = 'block';
-                nomeMenor.setAttribute('required', 'required');
-                rgMenor.setAttribute('required', 'required');
-                cpfMenor.setAttribute('required', 'required');
-                nascimentoMenor.setAttribute('required', 'required');
+                
+                // Aplicar as máscaras nos campos do menor
+                document.getElementById('rg_menor').inputmask({ mask: '99.999.999-9' });
+                document.getElementById('cpf_menor').inputmask({ mask: '999.999.999-99' });
             } else {
                 menorFields.style.display = 'none';
-                nomeMenor.removeAttribute('required');
-                rgMenor.removeAttribute('required');
-                cpfMenor.removeAttribute('required');
-                nascimentoMenor.removeAttribute('required');
             }
         }
 
-        // Mostrar ou esconder campos adicionais de saúde conforme a seleção
-        document.querySelectorAll('input[name="hepatite"]').forEach(el => {
-            el.addEventListener('change', function () {
-                document.querySelector('input[name="hepatite_tipo"]').style.display = this.value === 'sim' ? 'inline' : 'none';
-            });
+        // Aplicar as máscaras nos campos do responsável
+        document.getElementById('rg').inputmask({ mask: '99.999.999-9' });
+        document.getElementById('cpf').inputmask({ mask: '999.999.999-99' });
+
+        // Exibir campos adicionais dependendo das seleções
+        const hepatiteSim = document.querySelector('input[name="hepatite"][value="sim"]');
+        const hepatiteTipo = document.querySelector('input[name="hepatite_tipo"]');
+        const medicamentoSim = document.querySelector('input[name="medicamento"][value="sim"]');
+        const medicamentoNome = document.querySelector('input[name="medicamento_nome"]');
+        const alergiaSim = document.querySelector('input[name="alergia"][value="sim"]');
+        const alergiaNome = document.querySelector('input[name="alergia_nome"]');
+        
+        hepatiteSim.addEventListener('change', function() {
+            hepatiteTipo.style.display = 'block';
         });
 
-        document.querySelectorAll('input[name="medicamento"]').forEach(el => {
-            el.addEventListener('change', function () {
-                document.querySelector('input[name="medicamento_nome"]').style.display = this.value === 'sim' ? 'inline' : 'none';
-            });
+        medicamentoSim.addEventListener('change', function() {
+            medicamentoNome.style.display = 'block';
         });
 
-        document.querySelectorAll('input[name="alergia"]').forEach(el => {
-            el.addEventListener('change', function () {
-                document.querySelector('input[name="alergia_nome"]').style.display = this.value === 'sim' ? 'inline' : 'none';
-            });
-        });
-
-        function maskRG(value) {
-            return value
-                .replace(/\D/g, '') // Remove tudo o que não é dígito
-                .replace(/(\d{2})(\d)/, '$1.$2') // Coloca um ponto entre o segundo e o terceiro dígitos
-                .replace(/(\d{3})(\d)/, '$1.$2') // Coloca um ponto entre o quinto e o sexto dígitos
-                .replace(/(\d{3})(\d)/, '$1-$2'); // Coloca um hífen entre o nono e o décimo dígitos
-        }
-
-        function maskCPF(value) {
-            return value
-                .replace(/\D/g, '') // Remove tudo o que não é dígito
-                .replace(/(\d{3})(\d)/, '$1.$2') // Coloca um ponto entre o terceiro e o quarto dígitos
-                .replace(/(\d{3})(\d)/, '$1.$2') // Coloca um ponto entre o sexto e o sétimo dígitos
-                .replace(/(\d{3})(\d{1,2})$/, '$1-$2'); // Coloca um hífen entre o nono e o décimo dígitos
-        }
-
-        document.getElementById('rg').addEventListener('input', function(e) {
-            e.target.value = maskRG(e.target.value);
-        });
-
-        document.getElementById('cpf').addEventListener('input', function(e) {
-            e.target.value = maskCPF(e.target.value);
+        alergiaSim.addEventListener('change', function() {
+            alergiaNome.style.display = 'block';
         });
     </script>
 </body>

@@ -1,5 +1,5 @@
 <?php
-require('fpdf/fpdf.php');
+require('../fpdf/fpdf.php');
 
 // Captura os dados do formulário
 $nome_responsavel = $_POST['nome_responsavel'];
