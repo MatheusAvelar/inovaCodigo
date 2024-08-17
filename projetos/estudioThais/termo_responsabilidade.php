@@ -60,10 +60,10 @@
                         <input type="text" name="nome_menor"><br>
 
                         <label>RG: </label>
-                        <input type="text" name="rg_menor" id="rg" maxlength="12"><br>
+                        <input type="text" name="rg_menor" maxlength="12"><br>
 
                         <label>CPF: </label>
-                        <input type="text" name="cpf_menor" id="cpf" maxlength="14"><br>
+                        <input type="text" name="cpf_menor" maxlength="14"><br>
 
                         <label>Data de Nascimento: </label>
                         <input type="date" name="nascimento_menor"><br>
