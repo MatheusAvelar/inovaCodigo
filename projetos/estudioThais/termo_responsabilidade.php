@@ -47,6 +47,56 @@
                     <label>Data de Nascimento: </label>
                     <input type="date" name="nascimento_responsavel" required><br>
 
+                    <label>Endereço: </label>
+                    <input type="text" name="endereco_responsavel" required><br>
+
+                    <label>Bairro: </label>
+                    <input type="text" name="bairro_responsavel" required><br>
+
+                    <label>Cidade: </label>
+                    <input type="text" name="cidade_responsavel" required><br>
+
+                    <label>Estado: </label>
+                    <select name="estado_responsavel" required>
+                        <option value="">Selecione</option>
+                        <option value="AC">Acre</option>
+                        <option value="AL">Alagoas</option>
+                        <option value="AP">Amapá</option>
+                        <option value="AM">Amazonas</option>
+                        <option value="BA">Bahia</option>
+                        <option value="CE">Ceará</option>
+                        <option value="DF">Distrito Federal</option>
+                        <option value="ES">Espírito Santo</option>
+                        <option value="GO">Goiás</option>
+                        <option value="MA">Maranhão</option>
+                        <option value="MT">Mato Grosso</option>
+                        <option value="MS">Mato Grosso do Sul</option>
+                        <option value="MG">Minas Gerais</option>
+                        <option value="PA">Pará</option>
+                        <option value="PB">Paraíba</option>
+                        <option value="PR">Paraná</option>
+                        <option value="PE">Pernambuco</option>
+                        <option value="PI">Piauí</option>
+                        <option value="RJ">Rio de Janeiro</option>
+                        <option value="RN">Rio Grande do Norte</option>
+                        <option value="RS">Rio Grande do Sul</option>
+                        <option value="RO">Rondônia</option>
+                        <option value="RR">Roraima</option>
+                        <option value="SC">Santa Catarina</option>
+                        <option value="SP">São Paulo</option>
+                        <option value="SE">Sergipe</option>
+                        <option value="TO">Tocantins</option>
+                    </select><br>
+
+                    <label>Telefone: </label>
+                    <input type="text" name="telefone_responsavel" required><br>
+
+                    <label>Profissão: </label>
+                    <input type="text" name="profissao_responsavel" required><br>
+
+                    <label>Email: </label>
+                    <input type="email" name="email_responsavel" required><br>
+
                     <label>O cliente é menor de idade?</label>
                     <select id="isMenor" name="isMenor" onchange="toggleMenorFields()" required>
                         <option value="" disabled selected>Selecione...</option>
@@ -67,6 +117,53 @@
 
                         <label>Data de Nascimento: </label>
                         <input type="date" name="nascimento_menor"><br>
+
+                        <label>Endereço: </label>
+                        <input type="text" name="endereco_menor"><br>
+
+                        <label>Bairro: </label>
+                        <input type="text" name="bairro_menor"><br>
+
+                        <label>Cidade: </label>
+                        <input type="text" name="cidade_menor"><br>
+
+                        <label>Estado: </label>
+                        <select name="estado_menor">
+                            <option value="">Selecione</option>
+                            <option value="AC">Acre</option>
+                            <option value="AL">Alagoas</option>
+                            <option value="AP">Amapá</option>
+                            <option value="AM">Amazonas</option>
+                            <option value="BA">Bahia</option>
+                            <option value="CE">Ceará</option>
+                            <option value="DF">Distrito Federal</option>
+                            <option value="ES">Espírito Santo</option>
+                            <option value="GO">Goiás</option>
+                            <option value="MA">Maranhão</option>
+                            <option value="MT">Mato Grosso</option>
+                            <option value="MS">Mato Grosso do Sul</option>
+                            <option value="MG">Minas Gerais</option>
+                            <option value="PA">Pará</option>
+                            <option value="PB">Paraíba</option>
+                            <option value="PR">Paraná</option>
+                            <option value="PE">Pernambuco</option>
+                            <option value="PI">Piauí</option>
+                            <option value="RJ">Rio de Janeiro</option>
+                            <option value="RN">Rio Grande do Norte</option>
+                            <option value="RS">Rio Grande do Sul</option>
+                            <option value="RO">Rondônia</option>
+                            <option value="RR">Roraima</option>
+                            <option value="SC">Santa Catarina</option>
+                            <option value="SP">São Paulo</option>
+                            <option value="SE">Sergipe</option>
+                            <option value="TO">Tocantins</option>
+                        </select><br>
+
+                        <label>Telefone: </label>
+                        <input type="text" name="telefone_menor"><br>
+
+                        <label>Email: </label>
+                        <input type="email" name="email_menor"><br>
                     </div>
 
                     <label>Local e desenho da tatuagem: </label>
