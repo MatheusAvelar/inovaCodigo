@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Termo de Autorização</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.7/jquery.inputmask.min.js"></script>
 </head>
 <body>
     <header>
@@ -218,6 +220,11 @@
             el.addEventListener('change', function () {
                 document.querySelector('input[name="alergia_nome"]').style.display = this.value === 'sim' ? 'inline' : 'none';
             });
+        });
+
+        $(document).ready(function(){
+            $('#rg').inputmask('99.999.999-9');  // Máscara para RG
+            $('#cpf').inputmask('999.999.999-99');  // Máscara para CPF
         });
     </script>
 </body>
