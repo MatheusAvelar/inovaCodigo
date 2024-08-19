@@ -35,29 +35,32 @@
 
                     <p>Declaro ainda, ser do meu conhecimento as técnicas a serem executadas, os materiais a serem utilizados, bem como fui informado e tenho total ciência dos procedimentos e cuidados que devem ser executados por mim ou por meu/minha filho(a) durante o período recomendado pelo tatuador, com a finalidade de evitar qualquer complicação no período de cicatrização do local. Reconheço finalmente que a tatuagem se trata de um processo artesanal e como tal não comporta perfeição.</p>
 
-                    <label>Nome do cliente/Responsável: </label>
-                    <input type="text" name="nome_responsavel" required><br>
+                    <!-- Dados do Cliente -->
+
+                    <h3>Dados do Cliente</h3>
+                    <label>Nome: </label>
+                    <input type="text" name="nome_cliente" required><br>
 
                     <label>RG: </label>
-                    <input type="text" name="rg_responsavel" id="rg" maxlength="12" required><br>
+                    <input type="text" name="rg_cliente" id="rg_cliente" maxlength="12" oninput="mascaraRG(this)" required><br>
 
                     <label>CPF: </label>
-                    <input type="text" name="cpf_responsavel" id="cpf" maxlength="14" required><br>
+                    <input type="text" name="cpf_cliente" id="cpf_cliente" maxlength="14" oninput="mascara(this)" required><br>
 
                     <label>Data de Nascimento: </label>
-                    <input type="date" name="nascimento_responsavel" required><br>
+                    <input type="date" name="nascimento_cliente" required><br>
 
                     <label>Endereço: </label>
-                    <input type="text" name="endereco_responsavel" required><br>
+                    <input type="text" name="endereco_cliente" required><br>
 
                     <label>Bairro: </label>
-                    <input type="text" name="bairro_responsavel" required><br>
+                    <input type="text" name="bairro_cliente" required><br>
 
                     <label>Cidade: </label>
-                    <input type="text" name="cidade_responsavel" required><br>
+                    <input type="text" name="cidade_cliente" required><br>
 
                     <label>Estado: </label>
-                    <select name="estado_responsavel" required>
+                    <select name="estado_cliente" required>
                         <option value="">Selecione</option>
                         <option value="AC">Acre</option>
                         <option value="AL">Alagoas</option>
@@ -89,82 +92,85 @@
                     </select><br>
 
                     <label>Telefone: </label>
-                    <input type="text" name="telefone_responsavel" required><br>
-
-                    <label>Profissão: </label>
-                    <input type="text" name="profissao_responsavel" required><br>
+                    <input type="text" name="telefone_cliente" required><br>
 
                     <label>Email: </label>
-                    <input type="email" name="email_responsavel" required><br>
+                    <input type="email" name="email_cliente" required><br>
 
                     <label>O cliente é menor de idade?</label>
-                    <select id="isMenor" name="isMenor" onchange="toggleMenorFields()" required>
+                    <select id="isMenor" name="isMenor" onchange="toggleClienteFields()" required>
                         <option value="" disabled selected>Selecione...</option>
                         <option value="nao">Não</option>
                         <option value="sim">Sim</option>
-                    </select><br><br>
+                    </select><br>
+                    
+                    <div class="grid" id="responsavel">
+                        <div class="maca">
+                            <h3>Dados do Responsável</h3>
+                            <label>Nome do cliente: </label><br>
+                            <input type="text" name="nome_responsavel" id="nome_responsavel" required><br>
 
-                    <div id="menorFields" style="display: none;">
-                        <h3>Informações do Menor</h3>
-                        <label>Nome do menor: </label>
-                        <input type="text" name="nome_menor"><br>
+                            <label>RG: </label><br>
+                            <input type="text" name="rg_responsavel" id="rg_responsavel" maxlength="12" required oninput="mascaraRG(this)"><br>
 
-                        <label>RG: </label>
-                        <input type="text" name="rg_menor" id="rg_menor" maxlength="12"><br>
+                            <label>CPF: </label><br>
+                            <input type="text" name="cpf_responsavel" id="cpf_responsavel" maxlength="14" required oninput="mascara(this)"><br>
 
-                        <label>CPF: </label>
-                        <input type="text" name="cpf_menor" id="cpf_menor" maxlength="14"><br>
+                            <label>Data de Nascimento: </label><br>
+                            <input type="date" name="nascimento_responsavel" id="nascimento_responsavel" required><br>
 
-                        <label>Data de Nascimento: </label>
-                        <input type="date" name="nascimento_menor"><br>
+                            <label>Endereço: </label><br>
+                            <input type="text" name="endereco_responsavel" id="endereco_responsavel" required><br>
 
-                        <label>Endereço: </label>
-                        <input type="text" name="endereco_menor"><br>
+                            <label>Bairro: </label><br>
+                            <input type="text" name="bairro_responsavel" id="bairro_responsavel" required><br>
 
-                        <label>Bairro: </label>
-                        <input type="text" name="bairro_menor"><br>
+                            <label>Cidade: </label><br>
+                            <input type="text" name="cidade_responsavel" id="cidade_responsavel" required><br>
 
-                        <label>Cidade: </label>
-                        <input type="text" name="cidade_menor"><br>
+                            <label>Estado: </label><br>
+                            <select name="estado_responsavel" id="estado_responsavel">
+                                <option value="">Selecione</option>
+                                <option value="AC">Acre</option>
+                                <option value="AL">Alagoas</option>
+                                <option value="AP">Amapá</option>
+                                <option value="AM">Amazonas</option>
+                                <option value="BA">Bahia</option>
+                                <option value="CE">Ceará</option>
+                                <option value="DF">Distrito Federal</option>
+                                <option value="ES">Espírito Santo</option>
+                                <option value="GO">Goiás</option>
+                                <option value="MA">Maranhão</option>
+                                <option value="MT">Mato Grosso</option>
+                                <option value="MS">Mato Grosso do Sul</option>
+                                <option value="MG">Minas Gerais</option>
+                                <option value="PA">Pará</option>
+                                <option value="PB">Paraíba</option>
+                                <option value="PR">Paraná</option>
+                                <option value="PE">Pernambuco</option>
+                                <option value="PI">Piauí</option>
+                                <option value="RJ">Rio de Janeiro</option>
+                                <option value="RN">Rio Grande do Norte</option>
+                                <option value="RS">Rio Grande do Sul</option>
+                                <option value="RO">Rondônia</option>
+                                <option value="RR">Roraima</option>
+                                <option value="SC">Santa Catarina</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="SE">Sergipe</option>
+                                <option value="TO">Tocantins</option>
+                            </select><br>
 
-                        <label>Estado: </label>
-                        <select name="estado_menor">
-                            <option value="">Selecione</option>
-                            <option value="AC">Acre</option>
-                            <option value="AL">Alagoas</option>
-                            <option value="AP">Amapá</option>
-                            <option value="AM">Amazonas</option>
-                            <option value="BA">Bahia</option>
-                            <option value="CE">Ceará</option>
-                            <option value="DF">Distrito Federal</option>
-                            <option value="ES">Espírito Santo</option>
-                            <option value="GO">Goiás</option>
-                            <option value="MA">Maranhão</option>
-                            <option value="MT">Mato Grosso</option>
-                            <option value="MS">Mato Grosso do Sul</option>
-                            <option value="MG">Minas Gerais</option>
-                            <option value="PA">Pará</option>
-                            <option value="PB">Paraíba</option>
-                            <option value="PR">Paraná</option>
-                            <option value="PE">Pernambuco</option>
-                            <option value="PI">Piauí</option>
-                            <option value="RJ">Rio de Janeiro</option>
-                            <option value="RN">Rio Grande do Norte</option>
-                            <option value="RS">Rio Grande do Sul</option>
-                            <option value="RO">Rondônia</option>
-                            <option value="RR">Roraima</option>
-                            <option value="SC">Santa Catarina</option>
-                            <option value="SP">São Paulo</option>
-                            <option value="SE">Sergipe</option>
-                            <option value="TO">Tocantins</option>
-                        </select><br>
+                            <label>Telefone: </label><br>
+                            <input type="text" name="telefone_responsavel" id="telefone_responsavel" required><br>
 
-                        <label>Telefone: </label>
-                        <input type="text" name="telefone_menor"><br>
+                            <label>Profissão: </label><br>
+                            <input type="text" name="profissao_responsavel" id="profissao_responsavel" required><br>
 
-                        <label>Email: </label>
-                        <input type="email" name="email_menor"><br>
+                            <label>Email: </label><br>
+                            <input type="email" name="email_responsavel" id="email_responsavel" required><br>
+                        </div>
                     </div>
+                    <!-- Dados da Tatuagem -->
 
                     <label>Local e desenho da tatuagem: </label>
                     <input type="text" name="local_tatuagem"><br>
@@ -174,6 +180,8 @@
 
                     <label>Nome do tatuador: </label>
                     <input type="text" name="nome_tatuador"><br><br>
+
+                    <!-- Perguntas de Saude -->
 
                     <label>Faz uso de algum medicamento? </label>
                     <label class="custom-checkbox">
@@ -267,6 +275,8 @@
                         <span class="checkmark"></span> Não
                     </label><br>
 
+                    <!-- Assinatura -->
+                     
                     <label>Assinatura (digite seu nome completo): </label>
                     <input type="text" name="assinatura_responsavel" required><br><br>
 
@@ -289,28 +299,43 @@
             hepatiteTipo.style.display = hepatiteSim.checked ? 'block' : 'none';
         }
 
-        function toggleMenorFields() {
+        function toggleClienteFields() {
             var isMenor = document.getElementById('isMenor').value;
-            var menorFields = document.getElementById('menorFields');
+            var responsavel = document.getElementById('responsavel');
+            
             if (isMenor === 'sim') {
-                menorFields.style.display = 'block';
-                
-                // Aplicar as máscaras nos campos do menor
-                document.getElementById('rg_menor').inputmask({ mask: '99.999.999-9' });
-                document.getElementById('cpf_menor').inputmask({ mask: '999.999.999-99' });
+                responsavel.style.display = 'block';
             } else {
-                menorFields.style.display = 'none';
+                responsavel.style.display = 'none';
             }
         }
 
-        // Aplicar as máscaras nos campos do responsável
-        document.getElementById('rg').inputmask({ mask: '99.999.999-9' });
-        document.getElementById('cpf').inputmask({ mask: '999.999.999-99' });
+        function mascaraRG(input) {
+            let value = input.value.replace(/\D/g, ""); // Remove tudo que não é dígito
+            value = value.replace(/(\d{2})(\d)/, "$1.$2"); // Coloca o ponto após os primeiros 2 dígitos
+            value = value.replace(/(\d{3})(\d)/, "$1.$2"); // Coloca o ponto após os próximos 3 dígitos
+            value = value.replace(/(\d{3})(\d{1,2})$/, "$1-$2"); // Coloca o traço antes dos últimos 2 dígitos
+            input.value = value;
+        }
 
+        function mascara(i){
+            var v = i.value;
+            
+            if(isNaN(v[v.length-1])){ // impede entrar outro caractere que não seja número
+                i.value = v.substring(0, v.length-1);
+                return;
+            }
+            
+            i.setAttribute("maxlength", "14");
+            if (v.length == 3 || v.length == 7) i.value += ".";
+            if (v.length == 11) i.value += "-";
+        
+        }
+        
         // Inicializar o estado dos campos dependentes
         toggleMedicamentoField();
         toggleHepatiteField();
-        toggleMenorFields();
+        toggleClienteFields();
     </script>
 </body>
 </html>
