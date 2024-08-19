@@ -28,7 +28,7 @@
         <h2>Termo de Autorização</h2>
         <div class="grid">
             <div class="maca"><?
-                include "form_termo_responsabilidade.php";
+                include "php/form_termo_responsabilidade.php";
                 ?>
             </div>
         </div>
