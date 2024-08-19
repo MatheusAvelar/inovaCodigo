@@ -43,10 +43,10 @@ $rg_responsavel = $_POST['rg_responsavel'];
 $cpf_responsavel = $_POST['cpf_responsavel'];
 $nascimento_responsavel = $_POST['nascimento_responsavel'];
 $isMenor = $_POST['isMenor'];
-$nome_menor = $_POST['nome_menor'];
-$rg_menor = $_POST['rg_menor'];
-$cpf_menor = $_POST['cpf_menor'];
-$nascimento_menor = $_POST['nascimento_menor'];
+$nome_cliente = $_POST['nome_cliente'];
+$rg_cliente = $_POST['rg_cliente'];
+$cpf_cliente = $_POST['cpf_cliente'];
+$nascimento_cliente = $_POST['nascimento_cliente'];
 $assinatura_responsavel = $_POST['assinatura_responsavel'];
 $local_tatuagem = $_POST['local_tatuagem'];
 $data_tatuagem = $_POST['data_tatuagem'];
@@ -82,10 +82,10 @@ if ($isMenor === 'sim') {
     $pdf->SetFont('Arial', 'B', 12);
     $pdf->Cell(0, 10, utf8_decode('Informações do Menor'), 0, 1, 'L');
     $pdf->SetFont('Arial', '', 12);
-    $pdf->Cell(0, 10, utf8_decode('Nome: ' . $nome_menor), 0, 1);
-    $pdf->Cell(0, 10, utf8_decode('RG: ' . $rg_menor), 0, 1);
-    $pdf->Cell(0, 10, utf8_decode('CPF: ' . $cpf_menor), 0, 1);
-    $pdf->Cell(0, 10, utf8_decode('Data de Nascimento: ' . date('d/m/Y', strtotime($nascimento_menor))), 0, 1);
+    $pdf->Cell(0, 10, utf8_decode('Nome: ' . $nome_cliente), 0, 1);
+    $pdf->Cell(0, 10, utf8_decode('RG: ' . $rg_cliente), 0, 1);
+    $pdf->Cell(0, 10, utf8_decode('CPF: ' . $cpf_cliente), 0, 1);
+    $pdf->Cell(0, 10, utf8_decode('Data de Nascimento: ' . date('d/m/Y', strtotime($nascimento_cliente))), 0, 1);
 }
 
 $pdf->Ln(10);
