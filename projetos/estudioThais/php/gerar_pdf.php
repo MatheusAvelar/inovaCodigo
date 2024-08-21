@@ -5,7 +5,7 @@ class PDF extends FPDF
 {
     function Header()
     {
-        $this->Image('../img/tatto.jpeg', 10, 6, 30);  // Caminho relativo para a imagem
+        $this->Image('../img/tatto.jpeg', 10, 3, 30);  // Caminho relativo para a imagem
         $this->SetFont('Arial', 'B', 16);
         $this->Cell(0, 10, 'Termo de Autorizacao - Estudio Avelart Tattoo', 0, 1, 'C');
         $this->Ln(10);
