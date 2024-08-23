@@ -1,5 +1,5 @@
 <?php
-require('../fpdf/fpdf.php');
+require('fpdf.php');
 
 // Conectar ao banco de dados
 $servername = "127.0.0.1:3306";
