@@ -317,13 +317,42 @@ unset($_SESSION['status'], $_SESSION['message']);
         function toggleClienteFields() {
             var isMenor = document.getElementById('isMenor').value;
             var responsavel = document.getElementById('responsavel');
+            var nomeResponsavel = document.getElementById('nome_responsavel'); // Campo que será obrigatório
+            var rgResponsavel = document.getElementById('rg_responsavel');
+            var cpfResponsavel = document.getElementById('cpf_responsavel');
+            var nascimentoResponsavel = document.getElementById('nascimento_responsavel');
+            var enderecoResponsavel = document.getElementById('endereco_responsavel');
+            var bairroResponsavel = document.getElementById('bairro_responsavel');
+            var telefoneResponsavel = document.getElementById('telefone_responsavel');
+            var profissaoResponsavel = document.getElementById('profissao_responsavel');
+            var emailResponsavel = document.getElementById('email_responsavel');
             
+
             if (isMenor === 'sim') {
                 responsavel.style.display = 'block';
+                nomeResponsavel.setAttribute('required', 'required');
+                rgResponsavel.setAttribute('required', 'required');
+                cpfResponsavel.setAttribute('required', 'required');
+                nascimentoResponsavel.setAttribute('required', 'required');
+                enderecoResponsavel.setAttribute('required', 'required');
+                bairroResponsavel.setAttribute('required', 'required');
+                telefoneResponsavel.setAttribute('required', 'required');
+                profissaoResponsavel.setAttribute('required', 'required');
+                emailResponsavel.setAttribute('required', 'required');
             } else {
                 responsavel.style.display = 'none';
+                nomeResponsavel.removeAttribute('required');
+                rgResponsavel.removeAttribute('required');
+                cpfResponsavel.removeAttribute('required');
+                nascimentoResponsavel.removeAttribute('required');
+                enderecoResponsavel.removeAttribute('required');
+                bairroResponsavel.removeAttribute('required');
+                telefoneResponsavel.removeAttribute('required');
+                profissaoResponsavel.removeAttribute('required');
+                emailResponsavel.removeAttribute('required');
             }
         }
+
 
         function mascaraRG(input) {
             let value = input.value.replace(/\D/g, ""); // Remove tudo que não é dígito
