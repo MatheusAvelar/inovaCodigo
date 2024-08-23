@@ -1,7 +1,6 @@
 <?php
 session_start();
 require('../fpdf/fpdf.php');
-include 'inclui_termo.php';
 
 class PDF extends FPDF
 {
@@ -12,21 +11,21 @@ class PDF extends FPDF
         $this->Cell(0, 10, 'Termo de Autorizacao - Estudio Avelart Tattoo', 0, 1, 'C');
         $this->Ln(10);
     }
-
+    
     function Footer()
     {
         $this->SetY(-15);
         $this->SetFont('Arial', 'I', 8);
         $this->Cell(0, 10, 'Pagina ' . $this->PageNo() . '/{nb}', 0, 0, 'C');
     }
-
+    
     function ChapterTitle($title)
     {
         $this->SetFont('Arial', 'B', 12);
         $this->Cell(0, 10, utf8_decode($title), 0, 1, 'L');
         $this->Ln(4);
     }
-
+    
     function ChapterBody($body)
     {
         $this->SetFont('Arial', '', 12);
@@ -122,4 +121,5 @@ $pdf->Output('D', 'termo_autorizacao.pdf');
 
 $_SESSION['message'] .= "Termo de autorização gerado com sucesso!";
 
+include 'inclui_termo.php';
 ?>
