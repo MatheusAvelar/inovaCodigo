@@ -39,7 +39,6 @@ unset($_SESSION['status'], $_SESSION['message']);
                 <?php endif; ?>
                 <li><a href="agendamento.php">Agendamento</a></li>
                 <li><a href="horarios_agendados.php">Horários Agendados</a></li>
-                <li><a href="termos_enviados.php">Termos Enviados</a></li>
                 <li><a href="php/logout.php">Sair</a></li>
             </ul> 
         </nav>

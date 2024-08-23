@@ -26,8 +26,9 @@ include 'php/verificar_perfil.php';
     <div class="container">
     <nav id="menu"> 
             <ul> 
-                <?php if ($perfil_id == 2) : ?>
+            <?php if ($perfil_id == 2) : ?>
                     <li><a href="usuarios_estudio.php">Usuários</a></li>
+                    <li><a href="termos_enviados.php">Termos Enviados</a></li>
                 <?php endif; ?>
                 <li><a href="agendamento.php">Agendamento</a></li>
                 <li><a href="horarios_agendados.php">Horários Agendados</a></li>
