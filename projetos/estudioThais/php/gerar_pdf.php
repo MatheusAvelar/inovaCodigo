@@ -1,5 +1,5 @@
 <?php
-require('../fpdf/fpdf.php');  // Caminho relativo para a biblioteca FPDF
+require('../fpdf/fpdf.php');
 
 class PDF extends FPDF
 {
