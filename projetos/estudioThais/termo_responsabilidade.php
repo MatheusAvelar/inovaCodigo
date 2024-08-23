@@ -118,25 +118,25 @@ unset($_SESSION['status'], $_SESSION['message']);
                         <div class="maca">
                             <h3>Dados do Responsável</h3>
                             <label>Nome: </label><br>
-                            <input type="text" name="nome_responsavel" id="nome_responsavel" required><br>
+                            <input type="text" name="nome_responsavel" id="nome_responsavel"><br>
 
                             <label>RG: </label><br>
-                            <input type="text" name="rg_responsavel" id="rg_responsavel" maxlength="12" required oninput="mascaraRG(this)"><br>
+                            <input type="text" name="rg_responsavel" id="rg_responsavel" maxlength="12" oninput="mascaraRG(this)"><br>
 
                             <label>CPF: </label><br>
-                            <input type="text" name="cpf_responsavel" id="cpf_responsavel" maxlength="14" required oninput="mascara(this)"><br>
+                            <input type="text" name="cpf_responsavel" id="cpf_responsavel" maxlength="14" oninput="mascara(this)"><br>
 
                             <label>Data de Nascimento: </label><br>
-                            <input type="date" name="nascimento_responsavel" id="nascimento_responsavel" required><br>
+                            <input type="date" name="nascimento_responsavel" id="nascimento_responsavel"><br>
 
                             <label>Endereço: </label><br>
-                            <input type="text" name="endereco_responsavel" id="endereco_responsavel" required><br>
+                            <input type="text" name="endereco_responsavel" id="endereco_responsavel"><br>
 
                             <label>Bairro: </label><br>
-                            <input type="text" name="bairro_responsavel" id="bairro_responsavel" required><br>
+                            <input type="text" name="bairro_responsavel" id="bairro_responsavel"><br>
 
                             <label>Cidade: </label><br>
-                            <input type="text" name="cidade_responsavel" id="cidade_responsavel" required><br>
+                            <input type="text" name="cidade_responsavel" id="cidade_responsavel"><br>
 
                             <label>Estado: </label><br>
                             <select name="estado_responsavel" id="estado_responsavel">
@@ -297,6 +297,16 @@ unset($_SESSION['status'], $_SESSION['message']);
     </div>
     
     <script>
+        document.getElementById('telefone_responsavel').addEventListener('input', function (e) {
+            var x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
+            e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+        });
+
+        document.getElementById('telefone_cliente').addEventListener('input', function (e) {
+            var x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
+            e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+        });
+
         function toggleMedicamentoField() {
             var medicamentoSim = document.querySelector('input[name="medicamento"][value="sim"]');
             var medicamentoNome = document.getElementById('medicamento_nome');
