@@ -118,12 +118,17 @@ $pdf->Cell(0, 10, utf8_decode('Assinatura do Responsável: ' . $assinatura_respo
 
 $pdf->Output('D', 'termo_autorizacao.pdf');
 
-// Conectar ao banco de dados
-$mysqli = new mysqli("localhost", "usuario", "senha", "banco_de_dados");
+// Conexão com o banco de dados
+$servername = "127.0.0.1:3306";
+$username = "u221588236_root";
+$password = "Camila@307";
+$dbname = "u221588236_controle_finan";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
 
 // Verificar conexão
-if ($mysqli->connect_error) {
-    die("Falha na conexão: " . $mysqli->connect_error);
+if ($conn->connect_error) {
+    die("Falha na conexão: " . $conn->connect_error);
 }
 
 // Preparar a consulta SQL
@@ -143,11 +148,11 @@ $sql = "INSERT INTO termos_enviados (
         )";
 
 // Preparar a declaração
-$stmt = $mysqli->prepare($sql);
+$stmt = $conn->prepare($sql);
 
 // Verifique se a preparação da declaração foi bem-sucedida
 if ($stmt === false) {
-    die("Erro na preparação da consulta: " . $mysqli->error);
+    die("Erro na preparação da consulta: " . $conn->error);
 }
 
 // Obter o conteúdo do PDF como string
@@ -175,5 +180,5 @@ if ($stmt->execute()) {
 
 // Fechar a declaração e a conexão
 $stmt->close();
-$mysqli->close();
+$conn->close();
 ?>
