@@ -102,7 +102,7 @@ unset($_SESSION['status'], $_SESSION['message']);
                     </select><br>
 
                     <label>Telefone: </label>
-                    <input type="text" name="telefone_cliente" value="<?php echo htmlspecialchars($_GET['telefone_cliente'] ?? '', ENT_QUOTES); ?>" required><br>
+                    <input type="text" name="telefone_cliente" id="telefone_cliente" value="<?php echo htmlspecialchars($_GET['telefone_cliente'] ?? '', ENT_QUOTES); ?>" required><br>
 
                     <label>Email: </label>
                     <input type="email" name="email_cliente" value="<?php echo htmlspecialchars($_GET['email_cliente'] ?? '', ENT_QUOTES); ?>" required><br>
@@ -302,11 +302,6 @@ unset($_SESSION['status'], $_SESSION['message']);
             e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
         });
 
-        document.getElementById('telefone_cliente').addEventListener('input', function (e) {
-            var x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
-            e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
-        });
-
         function toggleMedicamentoField() {
             var medicamentoSim = document.querySelector('input[name="medicamento"][value="sim"]');
             var medicamentoNome = document.getElementById('medicamento_nome');
@@ -356,6 +351,11 @@ unset($_SESSION['status'], $_SESSION['message']);
         toggleMedicamentoField();
         toggleHepatiteField();
         toggleClienteFields();
+
+        document.getElementById('telefone_cliente').addEventListener('input', function (e) {
+            var x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
+            e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+        });
     </script>
 </body>
 </html>
