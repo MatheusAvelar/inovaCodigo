@@ -12,12 +12,12 @@ if ($conn->connect_error) {
     die("Conexão falhou: " . $conn->connect_error);
 }
 
-// Comando ALTER TABLE para adicionar os campos
-$sql = "-- Excluir a tabela existente
-DROP TABLE IF EXISTS termos_enviados;
+$sql_drop = "DROP TABLE IF EXISTS termos_enviados";
+$resultado = executarSQL($conn, $sql_drop);
+echo $resultado;
 
--- Criar a tabela novamente com os novos campos
-CREATE TABLE termos_enviados (
+// Criar a tabela novamente com os novos campos
+$sql_create = "CREATE TABLE termos_enviados (
     id INT AUTO_INCREMENT PRIMARY KEY,
     usuario_id INT NOT NULL,
     data_envio DATETIME NOT NULL,
@@ -46,11 +46,7 @@ CREATE TABLE termos_enviados (
     alergia ENUM('sim', 'nao') NOT NULL,
     assinatura_responsavel TEXT NOT NULL
 )";
-
-// Executar o comando ALTER TABLE
-$resultado = executarSQL($conn, $sql);
-
-// Exibir resultado
+$resultado = executarSQL($conn, $sql_create);
 echo $resultado;
 
 //$sql = "SELECT nome_cliente, email_cliente, data_envio, status FROM termos_enviados ORDER BY data_envio DESC";
