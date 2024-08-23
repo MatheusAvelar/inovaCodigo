@@ -43,7 +43,7 @@ $pdfContent = ob_get_clean();
 
 // Vincular parâmetros
 $stmt->bind_param(
-    "sssssssssssssssssssssssss", 
+    "ssssssssssssssssssssssssss", 
     $usuario_id, $pdfContent, 
     $nome_responsavel, $rg_responsavel, $cpf_responsavel, $nascimento_responsavel, 
     $nome_cliente, $email_cliente, $rg_cliente, $cpf_cliente, $nascimento_cliente, 
