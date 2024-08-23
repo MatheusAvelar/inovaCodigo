@@ -13,27 +13,9 @@ if ($conn->connect_error) {
 }
 
 // Comando ALTER TABLE para adicionar os campos
-$sql = "ALTER TABLE termos_enviados
-ADD COLUMN nome_responsavel VARCHAR(255) NOT NULL,
-ADD COLUMN rg_responsavel VARCHAR(20) NOT NULL,
-ADD COLUMN cpf_responsavel VARCHAR(14) NOT NULL,
-ADD COLUMN nascimento_responsavel DATE NOT NULL,
-ADD COLUMN rg_cliente VARCHAR(20) DEFAULT NULL,
-ADD COLUMN cpf_cliente VARCHAR(14) DEFAULT NULL,
-ADD COLUMN nascimento_cliente DATE DEFAULT NULL,
-ADD COLUMN local_tatuagem VARCHAR(255) NOT NULL,
-ADD COLUMN data_tatuagem DATE NOT NULL,
-ADD COLUMN nome_tatuador VARCHAR(255) NOT NULL,
-ADD COLUMN cicatrizacao ENUM('sim', 'não') NOT NULL,
-ADD COLUMN desmaio ENUM('sim', 'não') NOT NULL,
-ADD COLUMN hemofilico ENUM('sim', 'não') NOT NULL,
-ADD COLUMN hepatite ENUM('sim', 'não') NOT NULL,
-ADD COLUMN hiv ENUM('sim', 'não') NOT NULL,
-ADD COLUMN autoimune ENUM('sim', 'não') NOT NULL,
-ADD COLUMN epileptico ENUM('sim', 'não') NOT NULL,
-ADD COLUMN medicamento ENUM('sim', 'não') NOT NULL,
-ADD COLUMN alergia ENUM('sim', 'não') NOT NULL,
-ADD COLUMN assinatura_responsavel TEXT NOT NULL;";
+$sql = "ALTER TABLE termos_enviados 
+        CHANGE COLUMN cliente_nome nome_cliente VARCHAR(255), 
+        CHANGE COLUMN cliente_email email_cliente VARCHAR(255);";
 
 // Executar o comando ALTER TABLE
 $resultado = executarSQL($conn, $sql);
@@ -41,7 +23,7 @@ $resultado = executarSQL($conn, $sql);
 // Exibir resultado
 echo $resultado;
 
-$sql = "SELECT cliente_nome, cliente_email, data_envio, status FROM termos_enviados ORDER BY data_envio DESC";
+$sql = "SELECT nome_cliente, email_cliente, data_envio, status FROM termos_enviados ORDER BY data_envio DESC";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
