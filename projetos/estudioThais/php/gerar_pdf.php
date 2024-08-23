@@ -140,8 +140,8 @@ $sql = "INSERT INTO termos_enviados (
             hemofilico, hepatite, hiv, autoimune, epileptico, medicamento, alergia, 
             assinatura_responsavel
         ) VALUES (
-            ?, NOW(), ?, 'ativo', 
-            ?, ?, ?, ?, 
+            ?, NOW(), 'ativo', 
+            ?, ?, ?, ?, ?,
             ?, ?, ?, ?, 
             ?, ?, ?, ?, ?, 
             ?, ?, ?, ?, ?, ?, ?, ?
