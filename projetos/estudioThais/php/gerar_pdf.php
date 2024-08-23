@@ -184,6 +184,10 @@ if ($stmt->execute()) {
     $_SESSION['message'] .= "Erro ao salvar o termo: " . $stmt->error;
 }
 
+// Redireciona de volta para a página de agendamento
+header("Location: ../termo_responsabilidade.php");
+exit();
+
 // Fechar a declaração e a conexão
 $stmt->close();
 $conn->close();
