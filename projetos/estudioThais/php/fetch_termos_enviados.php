@@ -15,13 +15,19 @@ if ($conn->connect_error) {
 // Comando ALTER TABLE para adicionar os campos
 $sql = "SHOW COLUMNS FROM termos_enviados";
 
-// Executar o comando ALTER TABLE
-$resultado = executarSQL($conn, $sql);
+$result = $conn->query($sql);
 
-// Exibir resultado
-echo $resultado;
+// Verificar se há colunas
+if ($result->num_rows > 0) {
+    // Imprimir os nomes das colunas
+    while($row = $result->fetch_assoc()) {
+        echo $row['Field'] . "<br>";
+    }
+} else {
+    echo "Nenhuma coluna encontrada na tabela $tabela.";
+}
 
-$sql = "SELECT nome_cliente, email_cliente, data_envio, status FROM termos_enviados ORDER BY data_envio DESC";
+//$sql = "SELECT nome_cliente, email_cliente, data_envio, status FROM termos_enviados ORDER BY data_envio DESC";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
