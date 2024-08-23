@@ -12,13 +12,6 @@ if ($conn->connect_error) {
     die("Conexão falhou: " . $conn->connect_error);
 }
 
-$sql = "ALTER TABLE termos_enviados
-ADD COLUMN cliente_nome VARCHAR(255) NOT NULL AFTER usuario_id,
-ADD COLUMN cliente_email VARCHAR(255) NOT NULL AFTER cliente_nome";
-
-$resultado = executarSQL($conn, $sql);
-echo $resultado;
-
 $sql = "SELECT cliente_nome, cliente_email, data_envio, status FROM termos_enviados ORDER BY data_envio DESC";
 $result = $conn->query($sql);
 
