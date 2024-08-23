@@ -59,7 +59,6 @@ unset($_SESSION['status'], $_SESSION['message']);
                             <th>Cliente</th>
                             <th>Email</th>
                             <th>Data Envio</th>
-                            <th>Status</th>
                             <th>Ação</th>
                         </tr>
                     </thead>

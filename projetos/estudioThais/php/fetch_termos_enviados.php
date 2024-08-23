@@ -12,7 +12,7 @@ if ($conn->connect_error) {
     die("Conexão falhou: " . $conn->connect_error);
 }
 
-$sql = "SELECT id,nome_cliente, email_cliente, data_envio, status FROM termos_enviados ORDER BY data_envio DESC";
+$sql = "SELECT id,nome_cliente, email_cliente, data_envio FROM termos_enviados WHERE status = 'ativo' ORDER BY data_envio DESC";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -21,7 +21,6 @@ if ($result->num_rows > 0) {
         echo "<td>" . htmlspecialchars($row['nome_cliente']) . "</td>";
         echo "<td>" . htmlspecialchars($row['email_cliente']) . "</td>";
         echo "<td>" . htmlspecialchars(date('d/m/Y H:i:s', strtotime($row['data_envio']))) . "</td>";
-        echo "<td>" . htmlspecialchars($row['status']) . "</td>";
         echo "<td><a href='visualizar_termo.php?id=" . $row['id'] . "'>Visualizar</a></td>";
         echo "</tr>";
     }
