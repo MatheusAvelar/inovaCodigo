@@ -12,7 +12,7 @@ if ($conn->connect_error) {
     die("Conexão falhou: " . $conn->connect_error);
 }
 
-$sql = "SELECT nome_cliente, email_cliente, data_envio, status FROM termos_enviados ORDER BY data_envio DESC";
+$sql = "SELECT id,nome_cliente, email_cliente, data_envio, status FROM termos_enviados ORDER BY data_envio DESC";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
