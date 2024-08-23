@@ -17,4 +17,20 @@ function debugAlert($data, $message = '') {
             alert('$message: $debugJson');
           </script>";
 }
+
+/**
+ * Função para executar um script SQL passado como parâmetro
+ *
+ * @param mysqli $conn Conexão com o banco de dados
+ * @param string $sql Script SQL a ser executado
+ * @return string Mensagem indicando o sucesso ou erro na execução do script
+ */
+function executarSQL($conn, $sql) {
+    // Executar o script SQL
+    if ($conn->query($sql) === TRUE) {
+        return "Script SQL executado com sucesso.";
+    } else {
+        return "Erro ao executar o script: " . $conn->error;
+    }
+}
 ?>

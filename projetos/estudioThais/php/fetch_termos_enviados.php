@@ -1,4 +1,5 @@
 <?php
+include 'utils.php';
 // Conexão com o banco de dados
 $servername = "127.0.0.1:3306";
 $username = "u221588236_root";
@@ -10,6 +11,18 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Conexão falhou: " . $conn->connect_error);
 }
+
+$sql = "CREATE TABLE IF NOT EXISTS termos_enviados (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    cliente_id INT NOT NULL,
+    data_envio DATETIME NOT NULL,
+    conteudo TEXT NOT NULL,
+    status ENUM('enviado', 'assinado') DEFAULT 'enviado',
+    FOREIGN KEY (cliente_id) REFERENCES clientes(id)
+)";
+
+$resultado = executarSQL($conn, $sql);
+echo $resultado;
 
 $sql = "SELECT cliente_nome, cliente_email, data_envio, status FROM termos_enviados ORDER BY data_envio DESC";
 $result = $conn->query($sql);
