@@ -13,19 +13,45 @@ if ($conn->connect_error) {
 }
 
 // Comando ALTER TABLE para adicionar os campos
-$sql = "SHOW COLUMNS FROM termos_enviados";
+$sql = "-- Excluir a tabela existente
+DROP TABLE IF EXISTS termos_enviados;
 
-$result = $conn->query($sql);
+-- Criar a tabela novamente com os novos campos
+CREATE TABLE termos_enviados (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT NOT NULL,
+    data_envio DATETIME NOT NULL,
+    conteudo TEXT NOT NULL,
+    status ENUM('ativo', 'inativo') NOT NULL,
+    nome_responsavel VARCHAR(255) NOT NULL,
+    rg_responsavel VARCHAR(20) NOT NULL,
+    cpf_responsavel VARCHAR(14) NOT NULL,
+    nascimento_responsavel DATE NOT NULL,
+    nome_cliente VARCHAR(255) NOT NULL,
+    email_cliente VARCHAR(255) NOT NULL,
+    rg_cliente VARCHAR(20) NOT NULL,
+    cpf_cliente VARCHAR(14) NOT NULL,
+    nascimento_cliente DATE NOT NULL,
+    local_tatuagem VARCHAR(255) NOT NULL,
+    data_tatuagem DATE NOT NULL,
+    nome_tatuador VARCHAR(255) NOT NULL,
+    cicatrizacao ENUM('sim', 'nao') NOT NULL,
+    desmaio ENUM('sim', 'nao') NOT NULL,
+    hemofilico ENUM('sim', 'nao') NOT NULL,
+    hepatite ENUM('sim', 'nao') NOT NULL,
+    hiv ENUM('sim', 'nao') NOT NULL,
+    autoimune ENUM('sim', 'nao') NOT NULL,
+    epileptico ENUM('sim', 'nao') NOT NULL,
+    medicamento ENUM('sim', 'nao') NOT NULL,
+    alergia ENUM('sim', 'nao') NOT NULL,
+    assinatura_responsavel TEXT NOT NULL
+)";
 
-// Verificar se há colunas
-if ($result->num_rows > 0) {
-    // Imprimir os nomes das colunas
-    while($row = $result->fetch_assoc()) {
-        echo $row['Field'] . "<br>";
-    }
-} else {
-    echo "Nenhuma coluna encontrada na tabela $tabela.";
-}
+// Executar o comando ALTER TABLE
+$resultado = executarSQL($conn, $sql);
+
+// Exibir resultado
+echo $resultado;
 
 //$sql = "SELECT nome_cliente, email_cliente, data_envio, status FROM termos_enviados ORDER BY data_envio DESC";
 $result = $conn->query($sql);
