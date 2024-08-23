@@ -98,8 +98,14 @@ if ($errors) {
 
                 // Envio de e-mail, se o e-mail do cliente estiver preenchido
                 if (!empty($emailCliente)) {
-                    $to = $emailCliente; // Endereço de e-mail do cliente
+                    $to = $emailCliente;
                     $subject = 'Confirmação de Agendamento de Tatuagem';
+                    
+                    $linkTermo = "https://inovacodigo.com.br/projetos/estudioThais/termo_responsabilidade.php";
+                    $linkTermo .= "?nome_cliente=" . urlencode($nomeCliente);
+                    $linkTermo .= "&telefone_cliente=" . urlencode($telefoneCliente);
+                    $linkTermo .= "&email_cliente=" . urlencode($emailCliente);
+
                     $messages = "
                         <html>
                         <head>
@@ -113,15 +119,17 @@ if ($errors) {
                             <p><strong>Estilo:</strong> $estilo</p>
                             <p><strong>Tamanho:</strong> $tamanho</p>
                             <p><strong>Valor:</strong> $valorFormatado</p>
+                            <p><a href=\"$linkTermo\">Clique aqui para preencher o termo de responsabilidade</a></p>
                             <p>Por favor, chegue 15 minutos antes do horário agendado.</p>
                             <p>Obrigado por escolher nosso estúdio Avelart!</p>
                             <p>Atenciosamente,<br>Equipe do Estúdio Avelart</p>
                         </body>
                         </html>
                     ";
+
                     $headers = 'From: agendamentos@estudioavelart.com' . "\r\n" .
-                                'Reply-To: contato@estudioavelart.com' . "\r\n" .
-                                'Content-Type: text/html; charset=UTF-8' . "\r\n";
+                            'Reply-To: contato@estudioavelart.com' . "\r\n" .
+                            'Content-Type: text/html; charset=UTF-8' . "\r\n";
 
                     if (sendEmail($to, $subject, $messages, $headers)) {
                         $_SESSION['message'] .= "\n"."Foi enviado um e-mail com os dados do agendamento para o cliente.";
@@ -130,8 +138,9 @@ if ($errors) {
                     }
                 }
 
+
                 // Envio de WhatsApp, se o telefone do cliente estiver preenchido
-                if (!empty($telefoneCliente)) {
+                /*if (!empty($telefoneCliente)) {
                     $toPhoneNumber = "+55".$telefoneCliente;
                     $parameters = [
                         ['type' => 'text', 'text' => $nomeCliente],
@@ -143,7 +152,7 @@ if ($errors) {
                     ];
                     $response = sendWhatsAppMessage($toPhoneNumber, 'confirmacao_de_agendamento', 'pt_BR', $parameters);
                     $_SESSION['message'] .= "\n"."Mensagem de confirmação enviada via WhatsApp.";
-                }
+                }*/
             }
 
             $stmt->close();

@@ -39,7 +39,7 @@
 
                     <h3>Dados do Cliente</h3>
                     <label>Nome: </label>
-                    <input type="text" name="nome_cliente" required><br>
+                    <input type="text" name="nome_cliente" value="<?php echo htmlspecialchars($_GET['nome_cliente'] ?? '', ENT_QUOTES); ?>" required><br>
 
                     <label>RG: </label>
                     <input type="text" name="rg_cliente" id="rg_cliente" maxlength="12" oninput="mascaraRG(this)" required><br>
@@ -92,10 +92,10 @@
                     </select><br>
 
                     <label>Telefone: </label>
-                    <input type="text" name="telefone_cliente" required><br>
+                    <input type="text" name="telefone_cliente" value="<?php echo htmlspecialchars($_GET['telefone_cliente'] ?? '', ENT_QUOTES); ?>" required><br>
 
                     <label>Email: </label>
-                    <input type="email" name="email_cliente" required><br>
+                    <input type="email" name="email_cliente" value="<?php echo htmlspecialchars($_GET['email_cliente'] ?? '', ENT_QUOTES); ?>" required><br>
 
                     <label>O cliente é menor de idade?</label>
                     <select id="isMenor" name="isMenor" onchange="toggleClienteFields()" required>
@@ -107,7 +107,7 @@
                     <div class="grid" id="responsavel">
                         <div class="maca">
                             <h3>Dados do Responsável</h3>
-                            <label>Nome do cliente: </label><br>
+                            <label>Nome: </label><br>
                             <input type="text" name="nome_responsavel" id="nome_responsavel" required><br>
 
                             <label>RG: </label><br>
