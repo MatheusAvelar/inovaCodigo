@@ -117,7 +117,7 @@ $pdf->Cell(0, 10, utf8_decode('Assinatura'), 0, 1, 'L');
 $pdf->SetFont('Arial', '', 12);
 $pdf->Cell(0, 10, utf8_decode('Assinatura do Responsável: ' . $assinatura_responsavel), 0, 1);
 
-$pdf->Output('D', 'termo_autorizacao.pdf');
+
 
 $_SESSION['status'] = "success";
 $_SESSION['message'] .= "Termo de autorização gerado com sucesso!";
@@ -160,7 +160,7 @@ if ($stmt === false) {
 }
 
 // Obter o conteúdo do PDF como string
-ob_start();
+//ob_start();
 //$pdf->Output('S');
 $pdfContent = ob_get_clean();
 
@@ -183,6 +183,8 @@ if ($stmt->execute()) {
     $_SESSION['status'] = "error";
     $_SESSION['message'] .= "Erro ao salvar o termo: " . $stmt->error;
 }
+
+$pdf->Output('D', 'termo_autorizacao.pdf');
 
 // Redireciona de volta para a página de agendamento
 header("Location: ../termo_responsabilidade.php");
