@@ -13,9 +13,7 @@ if ($conn->connect_error) {
 }
 
 // Comando ALTER TABLE para adicionar os campos
-$sql = "ALTER TABLE termos_enviados 
-        CHANGE COLUMN cliente_nome nome_cliente VARCHAR(255), 
-        CHANGE COLUMN cliente_email email_cliente VARCHAR(255);";
+$sql = "SHOW COLUMNS FROM termos_enviados";
 
 // Executar o comando ALTER TABLE
 $resultado = executarSQL($conn, $sql);
