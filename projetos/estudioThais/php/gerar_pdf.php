@@ -177,7 +177,7 @@ if ($stmt->execute()) {
     $_SESSION['message'] = "Erro ao salvar o termo: " . $stmt->error;
 }
 
-
+$pdf->Output('D', 'termo_autorizacao.pdf');
 // Redireciona de volta para a página de agendamento
 header("Location: ../termo_responsabilidade.php");
 exit();
