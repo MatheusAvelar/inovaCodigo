@@ -14,11 +14,11 @@ if ($conn->connect_error) {
 
 $sql = "CREATE TABLE IF NOT EXISTS termos_enviados (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    cliente_id INT NOT NULL,
+    usuario_id INT NOT NULL,
     data_envio DATETIME NOT NULL,
     conteudo TEXT NOT NULL,
     status ENUM('enviado', 'assinado') DEFAULT 'enviado',
-    FOREIGN KEY (cliente_id) REFERENCES clientes(id) ON DELETE CASCADE
+    FOREIGN KEY (usuario_id) REFERENCES usuarioEstudio(id) ON DELETE CASCADE
 )";
 
 $resultado = executarSQL($conn, $sql);
