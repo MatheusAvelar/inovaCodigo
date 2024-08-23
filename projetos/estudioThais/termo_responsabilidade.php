@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+// Verifica se há mensagem de status na sessão
+$status = isset($_SESSION['status']) ? $_SESSION['status'] : null;
+$message = isset($_SESSION['message']) ? $_SESSION['message'] : null;
+
+// Limpa as mensagens de status da sessão após exibir
+unset($_SESSION['status'], $_SESSION['message']);
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
