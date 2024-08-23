@@ -12,14 +12,9 @@ if ($conn->connect_error) {
     die("Conexão falhou: " . $conn->connect_error);
 }
 
-$sql = "CREATE TABLE IF NOT EXISTS termos_enviados (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    usuario_id INT NOT NULL,
-    data_envio DATETIME NOT NULL,
-    conteudo TEXT NOT NULL,
-    status ENUM('enviado', 'assinado') DEFAULT 'enviado',
-    FOREIGN KEY (usuario_id) REFERENCES usuarioEstudio(id) ON DELETE CASCADE
-)";
+$sql = "ALTER TABLE termos_enviados
+ADD COLUMN cliente_nome VARCHAR(255) NOT NULL AFTER usuario_id,
+ADD COLUMN cliente_email VARCHAR(255) NOT NULL AFTER cliente_nome";
 
 $resultado = executarSQL($conn, $sql);
 echo $resultado;
