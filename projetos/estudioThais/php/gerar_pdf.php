@@ -161,7 +161,7 @@ if ($stmt === false) {
 
 // Obter o conteúdo do PDF como string
 ob_start();
-$pdf->Output('S');
+//$pdf->Output('S');
 $pdfContent = ob_get_clean();
 
 // Vincular parâmetros
