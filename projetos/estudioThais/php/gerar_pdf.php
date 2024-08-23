@@ -164,6 +164,8 @@ if ($stmt === false) {
 //$pdf->Output('S');
 $pdfContent = ob_get_clean();
 
+$usuario_id = $_SESSION['id'];
+
 // Vincular parâmetros
 $stmt->bind_param(
     "ssssssssssssssssssssssss", 
@@ -184,12 +186,12 @@ if ($stmt->execute()) {
     $_SESSION['message'] .= "Erro ao salvar o termo: " . $stmt->error;
 }
 
-$pdf->Output('D', 'termo_autorizacao.pdf');
 
 // Redireciona de volta para a página de agendamento
 header("Location: ../termo_responsabilidade.php");
 exit();
 
+$pdf->Output('D', 'termo_autorizacao.pdf');
 // Fechar a declaração e a conexão
 $stmt->close();
 $conn->close();
