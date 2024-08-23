@@ -181,7 +181,7 @@ $stmt->bind_param(
 // Executar a declaração
 if ($stmt->execute()) {
     $_SESSION['status'] = "success";
-    $_SESSION['message'] .= "Termo salvo com sucesso.";
+    $_SESSION['message'] .= "\nTermo salvo com sucesso.";
 } else {
     $_SESSION['status'] = "error";
     $_SESSION['message'] .= "Erro ao salvar o termo: " . $stmt->error;
