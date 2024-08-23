@@ -361,7 +361,7 @@ unset($_SESSION['status'], $_SESSION['message']);
                 console.log(data);
                 alert('PDF gerado e termo salvo com sucesso!');
                 // Redirecionar para a página de agendamento (caso necessário)
-                window.location.href = '../termo_responsabilidade.php';
+                //window.location.href = 'termo_responsabilidade.php';
             })
             .catch(error => {
                 console.error('Erro:', error);
