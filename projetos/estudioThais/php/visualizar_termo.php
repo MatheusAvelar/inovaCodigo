@@ -102,7 +102,7 @@ $pdf->ChapterBody(
 );
 
 $pdf->SetFont('Arial', 'B', 12);
-$pdf->Cell(0, 10, utf8_decode('Informações do Menor'), 0, 1, 'L');
+$pdf->Cell(0, 10, utf8_decode('Informações do Cliente'), 0, 1, 'L');
 $pdf->SetFont('Arial', '', 12);
 $pdf->Cell(0, 10, utf8_decode('Nome: ' . $nome_cliente), 0, 1);
 $pdf->Cell(0, 10, utf8_decode('RG: ' . $rg_cliente), 0, 1);
