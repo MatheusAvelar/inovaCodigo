@@ -40,6 +40,7 @@ $pdf->AddPage();
 
 // Coletar dados do formulário
 $nome_responsavel = $_POST['nome_responsavel'];
+$isMenor = $_POST['isMenor'];
 $rg_responsavel = $_POST['rg_responsavel'];
 $cpf_responsavel = $_POST['cpf_responsavel'];
 $nascimento_responsavel = $_POST['nascimento_responsavel'];
@@ -70,17 +71,16 @@ $pdf->ChapterBody(
     "Declaro ainda, ser do meu conhecimento as técnicas a serem executadas, os materiais a serem utilizados, bem como fui informado e tenho total ciência dos procedimentos e cuidados que devem ser executados por mim ou por meu/minha filho(a) durante o período recomendado pelo tatuador, com a finalidade de evitar qualquer complicação no período de cicatrização do local. Reconheço finalmente que a tatuagem se trata de um processo artesanal e como tal não comporta perfeição."
 );
 
+$pdf->SetFont('Arial', 'B', 12);
+$pdf->Cell(0, 10, utf8_decode('Informações do Cliente'), 0, 1, 'L');
+$pdf->SetFont('Arial', '', 12);
+$pdf->Cell(0, 10, utf8_decode('Nome: ' . $nome_cliente), 0, 1);
+$pdf->Cell(0, 10, utf8_decode('RG: ' . $rg_cliente), 0, 1);
+$pdf->Cell(0, 10, utf8_decode('CPF: ' . $cpf_cliente), 0, 1);
+$pdf->Cell(0, 10, utf8_decode('Data de Nascimento: ' . date('d/m/Y', strtotime($nascimento_cliente))), 0, 1);
+
+if ($isMenor === 'sim') {
     $pdf->Ln(10);
-    $pdf->SetFont('Arial', 'B', 12);
-    $pdf->Cell(0, 10, utf8_decode('Informações do Cliente'), 0, 1, 'L');
-    $pdf->SetFont('Arial', '', 12);
-    $pdf->Cell(0, 10, utf8_decode('Nome: ' . $nome_cliente), 0, 1);
-    $pdf->Cell(0, 10, utf8_decode('RG: ' . $rg_cliente), 0, 1);
-    $pdf->Cell(0, 10, utf8_decode('CPF: ' . $cpf_cliente), 0, 1);
-    $pdf->Cell(0, 10, utf8_decode('Data de Nascimento: ' . date('d/m/Y', strtotime($nascimento_cliente))), 0, 1);
-
-
-if ($nome_responsavel != '') {
     $pdf->SetFont('Arial', 'B', 12);
     $pdf->Cell(0, 10, utf8_decode('Informações do Responsável'), 0, 1, 'L');
     $pdf->SetFont('Arial', '', 12);

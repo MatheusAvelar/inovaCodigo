@@ -74,7 +74,6 @@ $nome_responsavel = $data['nome_responsavel'];
 $rg_responsavel = $data['rg_responsavel'];
 $cpf_responsavel = $data['cpf_responsavel'];
 $nascimento_responsavel = $data['nascimento_responsavel'];
-$isMenor = $data['isMenor'];
 $nome_cliente = $data['nome_cliente'];
 $email_cliente = $data['email_cliente'];
 $rg_cliente = $data['rg_cliente'];
@@ -103,22 +102,22 @@ $pdf->ChapterBody(
 );
 
 $pdf->SetFont('Arial', 'B', 12);
-$pdf->Cell(0, 10, utf8_decode('Informações do Responsável'), 0, 1, 'L');
+$pdf->Cell(0, 10, utf8_decode('Informações do Menor'), 0, 1, 'L');
 $pdf->SetFont('Arial', '', 12);
-$pdf->Cell(0, 10, utf8_decode('Nome: ' . $nome_responsavel), 0, 1);
-$pdf->Cell(0, 10, utf8_decode('RG: ' . $rg_responsavel), 0, 1);
-$pdf->Cell(0, 10, utf8_decode('CPF: ' . $cpf_responsavel), 0, 1);
-$pdf->Cell(0, 10, utf8_decode('Data de Nascimento: ' . date('d/m/Y', strtotime($nascimento_responsavel))), 0, 1);
+$pdf->Cell(0, 10, utf8_decode('Nome: ' . $nome_cliente), 0, 1);
+$pdf->Cell(0, 10, utf8_decode('RG: ' . $rg_cliente), 0, 1);
+$pdf->Cell(0, 10, utf8_decode('CPF: ' . $cpf_cliente), 0, 1);
+$pdf->Cell(0, 10, utf8_decode('Data de Nascimento: ' . date('d/m/Y', strtotime($nascimento_cliente))), 0, 1);
 
-if ($isMenor === 'sim') {
+if ($nome_responsavel != '') {
     $pdf->Ln(10);
     $pdf->SetFont('Arial', 'B', 12);
-    $pdf->Cell(0, 10, utf8_decode('Informações do Menor'), 0, 1, 'L');
+    $pdf->Cell(0, 10, utf8_decode('Informações do Responsável'), 0, 1, 'L');
     $pdf->SetFont('Arial', '', 12);
-    $pdf->Cell(0, 10, utf8_decode('Nome: ' . $nome_cliente), 0, 1);
-    $pdf->Cell(0, 10, utf8_decode('RG: ' . $rg_cliente), 0, 1);
-    $pdf->Cell(0, 10, utf8_decode('CPF: ' . $cpf_cliente), 0, 1);
-    $pdf->Cell(0, 10, utf8_decode('Data de Nascimento: ' . date('d/m/Y', strtotime($nascimento_cliente))), 0, 1);
+    $pdf->Cell(0, 10, utf8_decode('Nome: ' . $nome_responsavel), 0, 1);
+    $pdf->Cell(0, 10, utf8_decode('RG: ' . $rg_responsavel), 0, 1);
+    $pdf->Cell(0, 10, utf8_decode('CPF: ' . $cpf_responsavel), 0, 1);
+    $pdf->Cell(0, 10, utf8_decode('Data de Nascimento: ' . date('d/m/Y', strtotime($nascimento_responsavel))), 0, 1);
 }
 
 $pdf->Ln(10);
