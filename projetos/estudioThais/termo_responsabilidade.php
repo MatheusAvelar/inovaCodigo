@@ -290,7 +290,7 @@ unset($_SESSION['status'], $_SESSION['message']);
                     <label>Assinatura (digite seu nome completo): </label>
                     <input type="text" name="assinatura_responsavel" required><br><br>
 
-                    <button type="button" onclick="gravarTermo()">Assinar e Gerar PDF</button>
+                    <button type="button">Assinar e Gerar PDF</button>
                 </form>
             </div>
         </div>
@@ -346,28 +346,6 @@ unset($_SESSION['status'], $_SESSION['message']);
         toggleMedicamentoField();
         toggleHepatiteField();
         toggleClienteFields();
-
-        function gravarTermo() {
-            // Obter os dados do formulário
-            const formData = new FormData(document.getElementById("form1"));
-
-            // Fazer a requisição ao arquivo PHP
-            fetch('grava_pdf.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.text())
-            .then(data => {
-                console.log(data);
-                alert('PDF gerado e termo salvo com sucesso!');
-                // Redirecionar para a página de agendamento (caso necessário)
-                //window.location.href = 'termo_responsabilidade.php';
-            })
-            .catch(error => {
-                console.error('Erro:', error);
-                alert('Ocorreu um erro ao salvar o termo e gerar o PDF.');
-            });
-        }
     </script>
 </body>
 </html>

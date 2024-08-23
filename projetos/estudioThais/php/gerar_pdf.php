@@ -118,9 +118,71 @@ $pdf->Cell(0, 10, utf8_decode('Assinatura'), 0, 1, 'L');
 $pdf->SetFont('Arial', '', 12);
 $pdf->Cell(0, 10, utf8_decode('Assinatura do Responsável: ' . $assinatura_responsavel), 0, 1);
 
-$_SESSION['status'] = "success";
-$_SESSION['message'] = "Termo de autorização gerado com sucesso!";
+// Conexão com o banco de dados
+$servername = "127.0.0.1:3306";
+$username = "u221588236_root";
+$password = "Camila@307";
+$dbname = "u221588236_controle_finan";
 
-$pdf->Output('D', 'termo_autorizacao.pdf');
+$conn = new mysqli($servername, $username, $password, $dbname);
 
+// Verificar conexão
+if ($conn->connect_error) {
+    die("Falha na conexão: " . $conn->connect_error);
+}
+
+// Preparar a consulta SQL
+$sql = "INSERT INTO termos_enviados (
+            usuario_id, data_envio, status, 
+            nome_responsavel, rg_responsavel, cpf_responsavel, nascimento_responsavel, 
+            nome_cliente, email_cliente, rg_cliente, cpf_cliente, nascimento_cliente, 
+            local_tatuagem, data_tatuagem, nome_tatuador, cicatrizacao, desmaio, 
+            hemofilico, hepatite, hiv, autoimune, epileptico, medicamento, alergia, 
+            assinatura_responsavel
+        ) VALUES (
+            ?, NOW(), ?, 'ativo', 
+            ?, ?, ?, ?, 
+            ?, ?, ?, ?, 
+            ?, ?, ?, ?, ?, 
+            ?, ?, ?, ?, ?, ?, ?, ?
+        )";
+
+// Preparar a declaração
+$stmt = $conn->prepare($sql);
+
+// Verifique se a preparação da declaração foi bem-sucedida
+if ($stmt === false) {
+    die("Erro na preparação da consulta: " . $conn->error);
+}
+
+$usuario_id = $_SESSION['id'];
+
+// Vincular parâmetros
+$stmt->bind_param(
+    "sssssssssssssssssssssss", 
+    $usuario_id, 
+    $nome_responsavel, $rg_responsavel, $cpf_responsavel, $nascimento_responsavel, 
+    $nome_cliente, $email_cliente, $rg_cliente, $cpf_cliente, $nascimento_cliente, 
+    $local_tatuagem, $data_tatuagem, $nome_tatuador, $cicatrizacao, $desmaio, 
+    $hemofilico, $hepatite, $hiv, $autoimune, $epileptico, $medicamento, $alergia, 
+    $assinatura_responsavel
+);
+
+// Executar a declaração
+if ($stmt->execute()) {
+    $_SESSION['status'] = "success";
+    $_SESSION['message'] = "Termo de autorização gerado com sucesso!";
+} else {
+    $_SESSION['status'] = "error";
+    $_SESSION['message'] = "Erro ao salvar o termo: " . $stmt->error;
+}
+
+
+// Redireciona de volta para a página de agendamento
+header("Location: ../termo_responsabilidade.php");
+exit();
+
+// Fechar a declaração e a conexão
+$stmt->close();
+$conn->close();
 ?>
