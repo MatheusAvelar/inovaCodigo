@@ -179,8 +179,9 @@ if ($stmt->execute()) {
 
 $pdf->Output('D', 'termo_autorizacao.pdf');
 // Redireciona de volta para a página de agendamento
-header("Location: ../termo_responsabilidade.php");
-exit();
+echo '<script type="text/javascript">';
+echo 'window.location.href = "../termo_responsabilidade.php";';
+echo '</script>';
 
 // Fechar a declaração e a conexão
 $stmt->close();
