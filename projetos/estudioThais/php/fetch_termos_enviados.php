@@ -18,7 +18,7 @@ $sql = "CREATE TABLE IF NOT EXISTS termos_enviados (
     data_envio DATETIME NOT NULL,
     conteudo TEXT NOT NULL,
     status ENUM('enviado', 'assinado') DEFAULT 'enviado',
-    FOREIGN KEY (cliente_id) REFERENCES clientes(id)
+    FOREIGN KEY (cliente_id) REFERENCES clientes(id) ON DELETE CASCADE
 )";
 
 $resultado = executarSQL($conn, $sql);
