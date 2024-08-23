@@ -119,6 +119,7 @@ $pdf->Cell(0, 10, utf8_decode('Assinatura do Responsável: ' . $assinatura_respo
 
 $pdf->Output('D', 'termo_autorizacao.pdf');
 
+$_SESSION['status'] = "success";
 $_SESSION['message'] .= "Termo de autorização gerado com sucesso!";
 
 // Conexão com o banco de dados
@@ -176,8 +177,10 @@ $stmt->bind_param(
 
 // Executar a declaração
 if ($stmt->execute()) {
+    $_SESSION['status'] = "success";
     $_SESSION['message'] .= "Termo salvo com sucesso.";
 } else {
+    $_SESSION['status'] = "error";
     $_SESSION['message'] .= "Erro ao salvar o termo: " . $stmt->error;
 }
 
