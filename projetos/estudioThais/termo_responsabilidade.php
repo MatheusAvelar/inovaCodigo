@@ -38,7 +38,7 @@ unset($_SESSION['status'], $_SESSION['message']);
         <h2>Termo de Autorização</h2>
         <div class="grid">
             <div class="maca">
-                <form action="php/gerar_pdf.php" method="POST" id="form1">
+                <form action="php/gerar_pdf.php" method="POST">
                     <p>Eu, abaixo identificado, declaro que no gozo pleno de minhas faculdades mentais e psíquicas pelo presente e na melhor forma de direito, autorizo o(a) artista a executar sobre meu corpo ou de meu/minha filho(a) menor nascido, abaixo identificado, que em minha companhia reside e pelo qual sou inteiramente responsável a prática da tatuagem.</p>
 
                     <p>Assumo na qualidade de genitor(a) do(a) menor, plena responsabilidade pelo trabalho ora autorizado. É de minha livre vontade declarar que isento de responsabilidade civil ou criminal ao tatuador(a), seja de ordem médica, estética ou ainda defeitos da própria inscrição, salvo aquelas decorrentes de imperícia técnica. Ficando ainda plenamente ciente de que o procedimento da tatuagem tem caráter permanente, não podendo ser removida.</p>
@@ -290,7 +290,7 @@ unset($_SESSION['status'], $_SESSION['message']);
                     <label>Assinatura (digite seu nome completo): </label>
                     <input type="text" name="assinatura_responsavel" required><br><br>
 
-                    <button type="button">Assinar e Gerar PDF</button>
+                    <button type="submit">Assinar e Gerar PDF</button>
                 </form>
             </div>
         </div>
