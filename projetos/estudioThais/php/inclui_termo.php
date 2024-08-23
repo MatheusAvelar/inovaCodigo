@@ -1,5 +1,4 @@
 <?php
-session_start();
 // Conexão com o banco de dados
 $servername = "127.0.0.1:3306";
 $username = "u221588236_root";
