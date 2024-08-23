@@ -45,6 +45,7 @@ $cpf_responsavel = $_POST['cpf_responsavel'];
 $nascimento_responsavel = $_POST['nascimento_responsavel'];
 $isMenor = $_POST['isMenor'];
 $nome_cliente = $_POST['nome_cliente'];
+$email_cliente = $_POST['email_cliente'];
 $rg_cliente = $_POST['rg_cliente'];
 $cpf_cliente = $_POST['cpf_cliente'];
 $nascimento_cliente = $_POST['nascimento_cliente'];
