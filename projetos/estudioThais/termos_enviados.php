@@ -5,6 +5,24 @@ include 'php/verificar_perfil.php';
 // Verifica se há mensagem de status na sessão
 $status = isset($_SESSION['status']) ? $_SESSION['status'] : null;
 $message = isset($_SESSION['message']) ? $_SESSION['message'] : null;
+$servername = "127.0.0.1:3306";
+$username = "u221588236_root";
+$password = "Camila@307";
+$dbname = "u221588236_controle_finan";
+
+// Criando a conexão
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+$sql = "ALTER TABLE sua_tabela 
+ADD COLUMN hepatite_tipo VARCHAR(255),
+ADD COLUMN medicamento_nome VARCHAR(255),
+ADD COLUMN alergia_nome VARCHAR(255)";
+
+if ($conn->query($sql) === TRUE) {
+    return "Script SQL executado com sucesso.";
+} else {
+    return "Erro ao executar o script: " . $conn->error;
+}
 
 // Limpa as mensagens de status da sessão após exibir
 unset($_SESSION['status'], $_SESSION['message']);
