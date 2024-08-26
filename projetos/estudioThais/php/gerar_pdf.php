@@ -138,13 +138,13 @@ $sql = "INSERT INTO termos_enviados (
             nome_cliente, email_cliente, rg_cliente, cpf_cliente, nascimento_cliente, 
             local_tatuagem, data_tatuagem, nome_tatuador, cicatrizacao, desmaio, 
             hemofilico, hepatite, hiv, autoimune, epileptico, medicamento, alergia, 
-            assinatura_responsavel
+            assinatura_responsavel, hepatite_tipo, medicamento_nome, alergia_nome
         ) VALUES (
             ?, NOW(), 'ativo', 
             ?, ?, ?, ?, ?,
             ?, ?, ?, ?, 
             ?, ?, ?, ?, ?, 
-            ?, ?, ?, ?, ?, ?, ?, ?
+            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
         )";
 
 // Preparar a declaração
