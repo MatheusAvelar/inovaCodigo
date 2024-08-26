@@ -274,6 +274,7 @@ unset($_SESSION['status'], $_SESSION['message']);
                         <input type="radio" name="alergia" value="nao" required> 
                         <span class="checkmark"></span> Não
                     </label><br>
+                    <input type="text" name="alergia_nome" placeholder="Qual medicamento" id="alergia_nome" style="display: none;"><br>
 
                     <label>É hemofílico? </label>
                     <label class="custom-checkbox">
@@ -306,6 +307,12 @@ unset($_SESSION['status'], $_SESSION['message']);
             var medicamentoSim = document.querySelector('input[name="medicamento"][value="sim"]');
             var medicamentoNome = document.getElementById('medicamento_nome');
             medicamentoNome.style.display = medicamentoSim.checked ? 'block' : 'none';
+        }
+
+        function toggleAlergiaField() {
+            var alergiaSim = document.querySelector('input[name="alergia"][value="sim"]');
+            var alergiaNome = document.getElementById('alergia_nome');
+            alergiaNome.style.display = alergiaSim.checked ? 'block' : 'none';
         }
 
         function toggleHepatiteField() {
@@ -380,6 +387,7 @@ unset($_SESSION['status'], $_SESSION['message']);
         toggleMedicamentoField();
         toggleHepatiteField();
         toggleClienteFields();
+        toggleAlergiaField();
 
         document.getElementById('telefone_cliente').addEventListener('input', function (e) {
             var x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
