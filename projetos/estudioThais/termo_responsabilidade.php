@@ -267,14 +267,14 @@ unset($_SESSION['status'], $_SESSION['message']);
 
                     <label>É alérgico á algo? </label>
                     <label class="custom-checkbox">
-                        <input type="radio" name="alergia" value="sim" required> 
+                        <input type="radio" name="alergia" value="sim" onchange="toggleAlergiaField()" required> 
                         <span class="checkmark"></span> Sim
                     </label>
                     <label class="custom-checkbox">
-                        <input type="radio" name="alergia" value="nao" required> 
+                        <input type="radio" name="alergia" value="nao" onchange="toggleAlergiaField()" required> 
                         <span class="checkmark"></span> Não
                     </label><br>
-                    <input type="text" name="alergia_nome" placeholder="Qual medicamento" id="alergia_nome" style="display: none;"><br>
+                    <input type="text" name="alergia_nome" placeholder="Alergia de que?" id="alergia_nome" style="display: none;"><br>
 
                     <label>É hemofílico? </label>
                     <label class="custom-checkbox">
