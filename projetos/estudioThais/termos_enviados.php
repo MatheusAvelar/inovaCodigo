@@ -13,7 +13,7 @@ $dbname = "u221588236_controle_finan";
 // Criando a conexão
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-$sql = "ALTER TABLE sua_tabela 
+$sql = "ALTER TABLE termos_enviados 
 ADD COLUMN hepatite_tipo VARCHAR(255),
 ADD COLUMN medicamento_nome VARCHAR(255),
 ADD COLUMN alergia_nome VARCHAR(255)";
