@@ -62,6 +62,9 @@ $autoimune = $_POST['autoimune'];
 $epileptico = $_POST['epileptico'];
 $medicamento = $_POST['medicamento'];
 $alergia = $_POST['alergia'];
+$hepatite_tipo = $_POST['hepatite_tipo'];
+$medicamento_nome = $_POST['medicamento_nome'];
+$alergia_nome = $_POST['alergia_nome'];
 
 // Adicionar conteúdo ao PDF
 $pdf->ChapterTitle('Declaração de Autorização');
@@ -138,13 +141,13 @@ $sql = "INSERT INTO termos_enviados (
             nome_cliente, email_cliente, rg_cliente, cpf_cliente, nascimento_cliente, 
             local_tatuagem, data_tatuagem, nome_tatuador, cicatrizacao, desmaio, 
             hemofilico, hepatite, hiv, autoimune, epileptico, medicamento, alergia, 
-            assinatura_responsavel
+            assinatura_responsavel, hepatite_tipo, medicamento_nome, alergia_nome
         ) VALUES (
             ?, NOW(), 'ativo', 
             ?, ?, ?, ?, ?,
             ?, ?, ?, ?, 
             ?, ?, ?, ?, ?, 
-            ?, ?, ?, ?, ?, ?, ?, ?
+            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
         )";
 
 // Preparar a declaração
@@ -159,13 +162,13 @@ $usuario_id = $_SESSION['id'];
 
 // Vincular parâmetros
 $stmt->bind_param(
-    "sssssssssssssssssssssss", 
+    "ssssssssssssssssssssssssss", 
     $usuario_id, 
     $nome_responsavel, $rg_responsavel, $cpf_responsavel, $nascimento_responsavel, 
     $nome_cliente, $email_cliente, $rg_cliente, $cpf_cliente, $nascimento_cliente, 
     $local_tatuagem, $data_tatuagem, $nome_tatuador, $cicatrizacao, $desmaio, 
     $hemofilico, $hepatite, $hiv, $autoimune, $epileptico, $medicamento, $alergia, 
-    $assinatura_responsavel
+    $assinatura_responsavel, $hepatite_tipo, $medicamento_nome, $alergia_nome
 );
 
 // Executar a declaração
