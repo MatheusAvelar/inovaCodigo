@@ -9,7 +9,7 @@ metodos = [
     cv2.THRESH_TOZERO_INV,
 ]
 
-imagem = cv2.imread("bdcaptcha/telanova0.png")
+imagem = cv2.imread("C:/wamp64/www/inovaCodigo/inovaCodigo/bdcap/telanova0.png")
 
 # transformar a imagem em escala de cinza
 imagem_cinza = cv2.cvtColor(imagem, cv2.COLOR_RGB2GRAY)
