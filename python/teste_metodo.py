@@ -9,7 +9,7 @@ metodos = [
     cv2.THRESH_TOZERO_INV,
 ]
 
-imagem = cv2.imread("C:/wamp64/www/inovaCodigo/inovaCodigo/bdcap/telanova0.png")
+imagem = cv2.imread('captcha_image.png')
 
 # transformar a imagem em escala de cinza
 imagem_cinza = cv2.cvtColor(imagem, cv2.COLOR_RGB2GRAY)
@@ -20,9 +20,9 @@ for metodo in metodos:
     _, imagem_tratada = cv2.threshold(imagem_cinza, 127, 255, metodo or cv2.THRESH_OTSU)
     cv2.imwrite(f'testesmetodo/imagem_tratada_{i}.png', imagem_tratada)
 
-imagem = Image.open("testesmetodo/imagem_tratada_3.png")
-imagem = imagem.convert("P")
-imagem2 = Image.new("P", imagem.size, 255)
+imagem = Image.open('testesmetodo/imagem_tratada_3.png')
+imagem = imagem.convert('P')
+imagem2 = Image.new('P', imagem.size, 255)
 
 for x in range(imagem.size[1]):
     for y in range(imagem.size[0]):
