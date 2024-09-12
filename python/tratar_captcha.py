@@ -32,4 +32,4 @@ def tratar_imagens(pasta_origem, pasta_destino='ajeitado'):
 
 
 if __name__ == "__main__":
-    tratar_imagens('bdcaptcha')
+    tratar_imagens('bdcap')
