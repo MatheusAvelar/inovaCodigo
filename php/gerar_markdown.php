@@ -1,5 +1,5 @@
 <?php
-require 'parsedown/Parsedown.php'; // Biblioteca Parsedown para conversão de HTML para Markdown
+require('parsedown/Parsedown.php'); // Biblioteca Parsedown para conversão de HTML para Markdown
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Receber o texto HTML enviado pelo formulário
