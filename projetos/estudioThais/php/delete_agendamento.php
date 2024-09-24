@@ -32,7 +32,7 @@ if ($conn->connect_error) {
 $agendamento_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
 // Verifica se o agendamento pertence ao usuário logado
-$query = "SELECT a.data, a.usuario_id, u.perfil_id 
+$query = "SELECT a.data, a.usuario_id 
     FROM agendamentos a
     JOIN usuarioEstudio u ON a.usuario_id = u.id
     WHERE a.id = ?
@@ -47,16 +47,16 @@ if (!$stmt) {
 $stmt->bind_param("i", $agendamento_id);
 $stmt->execute();
 $stmt->store_result();
-$stmt->bind_result($data, $usuario_id, $perfil_id);
+$stmt->bind_result($data, $usuario_id);
 $stmt->fetch();
 
-if ($stmt->num_rows > 0 && $usuario_id == $_SESSION['id'] || $perfil_id == 2) {
+if ($stmt->num_rows > 0 && $usuario_id == $_SESSION['id'] || $_SESSION['perfil_id'] == 2) {
     // Verifica se a data do agendamento está a pelo menos 2 dias no futuro
     $agendamentoDate = strtotime($data);
     $currentDate = strtotime(date('Y-m-d'));
     $dateDiff = ($agendamentoDate - $currentDate) / 86400; // diferença em dias
 
-    if ($dateDiff >= 2 || $perfil_id == 2) {
+    if ($dateDiff >= 2 || $_SESSION['perfil_id'] == 2) {
         // Exclui o agendamento
         $deleteQuery = "UPDATE agendamentos SET status = '0' WHERE id = ?";
         $deleteStmt = $conn->prepare($deleteQuery);
