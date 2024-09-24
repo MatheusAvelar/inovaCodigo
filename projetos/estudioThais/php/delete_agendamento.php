@@ -94,8 +94,8 @@ if ($stmt->num_rows > 0 && $usuario_id == $_SESSION['id'] || $_SESSION['perfil_i
     }
 } else {
     $_SESSION['status'] = 'error';
-    //$_SESSION['message'] = "Você não tem permissão para excluir este agendamento.";
-    $_SESSION['message'] = "Você não tem permissão para excluir este agendamento. " . $usuario_id . " " . $_SESSION['id'] . " " . $perfil_id;
+    $_SESSION['message'] = "Você não tem permissão para excluir este agendamento.";
+    //$_SESSION['message'] = "Você não tem permissão para excluir este agendamento. " . $usuario_id . " " . $_SESSION['id'] . " " . $perfil_id;
 }
 
 // Redireciona para a página de erro ou sucesso
