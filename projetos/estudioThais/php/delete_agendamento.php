@@ -31,17 +31,6 @@ if ($conn->connect_error) {
 // Obtendo o ID do agendamento a ser excluído
 $agendamento_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-debugAlert($agendamento_id, 'Agendamento: ');
-
-echo "<script>
-    console.log(<?php echo json_encode($usuario_id); ?>);
-</script>";
-var_dump($usuario_id);
-var_dump($_SESSION['id']);
-var_dump($perfil_id);
-error_log("Usuário logado: " . $_SESSION['id']);
-error_log("Usuário do agendamento: " . $usuario_id);
-
 // Verifica se o agendamento pertence ao usuário logado
 $query = "SELECT a.data, a.usuario_id, u.perfil_id 
     FROM agendamentos a
@@ -60,8 +49,6 @@ $stmt->execute();
 $stmt->store_result();
 $stmt->bind_result($data, $usuario_id, $perfil_id);
 $stmt->fetch();
-
-debugAlert($perfil_id, 'Perfil: ');
 
 if ($stmt->num_rows > 0 && $usuario_id == $_SESSION['id'] || $perfil_id == 2) {
     // Verifica se a data do agendamento está a pelo menos 2 dias no futuro
@@ -107,7 +94,7 @@ if ($stmt->num_rows > 0 && $usuario_id == $_SESSION['id'] || $perfil_id == 2) {
     }
 } else {
     $_SESSION['status'] = 'error';
-    $_SESSION['message'] = 'Você não tem permissão para excluir este agendamento.';
+    $_SESSION['message'] = "Você não tem permissão para excluir este agendamento. " . $usuario_id . " " . $_SESSION['id'] . " " . $perfil_id;
 }
 
 // Redireciona para a página de erro ou sucesso
