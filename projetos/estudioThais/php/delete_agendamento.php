@@ -47,7 +47,7 @@ if (!$stmt) {
 $stmt->bind_param("i", $agendamento_id);
 $stmt->execute();
 $stmt->store_result();
-$stmt->bind_result($data, $usuario_id, $perfil_id);
+$stmt->bind_result($data, $usuario_id);
 $stmt->fetch();
 
 if ($stmt->num_rows > 0 && $usuario_id == $_SESSION['id'] || $perfil_id == 2) {
