@@ -33,6 +33,15 @@ $agendamento_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
 debugAlert($agendamento_id, 'Agendamento: ');
 
+echo "<script>
+    console.log(<?php echo json_encode($usuario_id); ?>);
+</script>";
+var_dump($usuario_id);
+var_dump($_SESSION['id']);
+var_dump($perfil_id);
+error_log("Usuário logado: " . $_SESSION['id']);
+error_log("Usuário do agendamento: " . $usuario_id);
+
 // Verifica se o agendamento pertence ao usuário logado
 $query = "SELECT a.data, a.usuario_id, u.perfil_id 
     FROM agendamentos a
