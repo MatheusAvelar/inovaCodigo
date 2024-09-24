@@ -52,6 +52,8 @@ $stmt->store_result();
 $stmt->bind_result($data, $usuario_id, $perfil_id);
 $stmt->fetch();
 
+debugAlert($perfil_id);
+
 if ($stmt->num_rows > 0 && $usuario_id == $_SESSION['id'] || $perfil_id == 2) {
     // Verifica se a data do agendamento está a pelo menos 2 dias no futuro
     $agendamentoDate = strtotime($data);
