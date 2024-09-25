@@ -144,7 +144,7 @@ unset($_SESSION['status'], $_SESSION['message']);
                     emailError.textContent = ''; // Limpa a mensagem de erro se válido
                     emailError.style.display = 'none';
                 } else {
-                    emailError.textContent = 'Por favor, insira um e-mail válido para receber as informações do seu agendamento.';
+                    emailError.textContent = 'Por favor, insira um e-mail válido para o cliente receber as informações do seu agendamento.';
                     emailError.style.display = 'block';
                 }
             });
