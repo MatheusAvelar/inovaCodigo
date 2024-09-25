@@ -121,7 +121,7 @@ unset($_SESSION['status'], $_SESSION['message']);
                     <div id="sinal_pago-error" class="error-message"></div>
 
                     <label for="descricao">Descrição:</label>
-                    <input type="text" id="descricao" name="descricao">
+                    <input type="text" id="descricao" name="descricao" required>
 
                     <button type="submit">Agendar</button>
                 </form>
