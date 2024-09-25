@@ -92,7 +92,11 @@ if ($result->num_rows > 0) {
                         </a>
                     </td>";
             } else {
-                echo "<td>Não pode excluir</td>";
+                echo "<td>
+                        <a href='php/reenvia_termos.php?id=" . htmlspecialchars($row['id']) . "' title='Reenviar Termo'>
+                            <i class='fas fa-envelope'></i>
+                        </a>
+                    </td>";
             }
         } else {
             echo "<td>Não pode excluir</td>";
