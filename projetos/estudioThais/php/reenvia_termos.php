@@ -105,6 +105,9 @@ if ($result->num_rows > 0) {
     }
 }
 
+// Redireciona para a página de erro ou sucesso
+header("Location: ../horarios_agendados.php");
+exit;
 // Fechando a conexão com o banco de dados
 $conn->close();
 ?>
