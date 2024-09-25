@@ -88,8 +88,8 @@ unset($_SESSION['status'], $_SESSION['message']);
                     <div id="telefone-error" class="error-message"></div>
 
                     <label for="email">E-mail do Cliente:</label>
-                    <input type="email" id="email" name="email">
-                    <div id="email-error" class="error-message"></div>
+                    <input type="email" id="email" name="email" onchange="validateEmail()">
+                    <div id="email-error" class="error-message" style="color: red;"></div>
 
                     <label for="estilo">Estilo:</label>
                     <input type="text" id="estilo" name="estilo" required>
@@ -161,6 +161,17 @@ unset($_SESSION['status'], $_SESSION['message']);
             });
         });
 
+        function validateEmail(){
+            var email = document.getElementById("email").value;
+            var errorDiv = document.getElementById("email-error");
+
+            errorDiv.textContent = "";
+
+            if (email === "") {
+                errorDiv.textContent = "Por favor, insira um e-mail válido para receber as informações do seu agendamento.";
+            }
+        }
+
         function validateForm() {
             let isValid = true;
 
@@ -168,7 +179,7 @@ unset($_SESSION['status'], $_SESSION['message']);
             document.querySelectorAll('.error-message').forEach(function (element) {
                 element.innerText = '';
             });
-
+            
             // Get form values
             const maca = document.getElementById('maca').value;
             const date = document.getElementById('date1').value;
