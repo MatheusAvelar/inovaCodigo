@@ -88,7 +88,7 @@ unset($_SESSION['status'], $_SESSION['message']);
                     <div id="telefone-error" class="error-message"></div>
 
                     <label for="email">E-mail do Cliente:</label>
-                    <input type="email" id="email" name="email" onchange="checkEmail()">
+                    <input type="email" id="email" name="email">
                     <div id="email-error" class="error-message" style="color: red;"></div>
 
                     <label for="estilo">Estilo:</label>
@@ -130,17 +130,20 @@ unset($_SESSION['status'], $_SESSION['message']);
     </div>
 
     <script>
-        function checkEmail() {
-            var email = document.getElementById("email").value;
+        // Validação no submit para avisar sobre o campo vazio
+        form.addEventListener('submit', function(event) {
+            if (emailInput.value === '') {
+                event.preventDefault(); // Impede o envio do formulário
 
-            if (email === "") {
-                var confirmSubmit = confirm("O campo de e-mail está vazio. Você deseja continuar sem inserir o e-mail?");
+                var confirmSubmit = confirm("O campo de e-mail está vazio. Deseja continuar sem inserir o e-mail?");
                 
-                if (!confirmSubmit) {
-                    document.getElementById("email").focus(); // Volta o foco para o campo de e-mail
+                if (confirmSubmit) {
+                    form.submit(); // Envia o formulário se o usuário confirmar
+                } else {
+                    emailInput.focus(); // Volta o foco para o campo de e-mail
                 }
             }
-        }
+        });
 
         document.getElementById('telefone').addEventListener('input', function (e) {
             var x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
