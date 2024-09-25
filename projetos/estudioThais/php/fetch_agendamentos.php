@@ -81,13 +81,16 @@ if ($result->num_rows > 0) {
 
             if ($dateDiff >= 2 || $perfil_id == 2) {
                 echo "<td>
-                      <a href='editar_agendamento.php?id=" . htmlspecialchars($row['id']) . "' title='Editar'>
-                          <i class='fas fa-edit'></i>
-                      </a>
-                      <a href='php/delete_agendamento.php?id=" . htmlspecialchars($row['id']) . "' title='Deletar' onclick='return confirm(\"Tem certeza que deseja deletar este agendamento?\");'>
-                          <i class='fas fa-trash-alt'></i>
-                      </a>
-                      </td>";
+                        <a href='editar_agendamento.php?id=" . htmlspecialchars($row['id']) . "' title='Editar'>
+                            <i class='fas fa-edit'></i>
+                        </a>
+                        <a href='php/delete_agendamento.php?id=" . htmlspecialchars($row['id']) . "' title='Deletar' onclick='return confirm(\"Tem certeza que deseja deletar este agendamento?\");'>
+                            <i class='fas fa-trash-alt'></i>
+                        </a>
+                        <a href='php/reenvia_termos.php?id=" . htmlspecialchars($row['id']) . "' title='Reenviar Termo'>
+                            <i class='fas fa-envelope'></i>
+                        </a>
+                    </td>";
             } else {
                 echo "<td>Não pode excluir</td>";
             }
