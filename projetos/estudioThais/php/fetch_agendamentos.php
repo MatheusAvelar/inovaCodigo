@@ -87,9 +87,9 @@ if ($result->num_rows > 0) {
                         <a href='php/delete_agendamento.php?id=" . htmlspecialchars($row['id']) . "' title='Deletar' onclick='return confirm(\"Tem certeza que deseja deletar este agendamento?\");'>
                             <i class='fas fa-trash-alt'></i>
                         </a>
-                        <a href='php/reenvia_termos.php?id=" . htmlspecialchars($row['id']) . "' title='Reenviar Termo'>
+                        <!-- <a href='php/reenvia_termos.php?id=" . htmlspecialchars($row['id']) . "' title='Reenviar Termo'>
                             <i class='fas fa-envelope'></i>
-                        </a>
+                        </a> -->
                     </td>";
             } else {
                 echo "<td>Não pode excluir</td>";
