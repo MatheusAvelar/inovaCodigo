@@ -13,6 +13,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     // Exibir o markdown gerado
     echo "<h2>Markdown Gerado:</h2>";
-    echo ""+htmlspecialchars($markdown_text)+"";
+    echo $markdown_text;
 }
 ?>
