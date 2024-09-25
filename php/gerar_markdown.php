@@ -12,7 +12,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $markdown_text = $Parsedown->text($html_text);
     
     // Exibir o markdown gerado
-    echo "<h2>Markdown Gerado:</h2>";
     echo $markdown_text;
 }
 ?>
