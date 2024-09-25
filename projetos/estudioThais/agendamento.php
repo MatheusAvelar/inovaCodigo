@@ -88,7 +88,7 @@ unset($_SESSION['status'], $_SESSION['message']);
                     <div id="telefone-error" class="error-message"></div>
 
                     <label for="email">E-mail do Cliente:</label>
-                    <input type="email" id="email" name="email" onchange="validateEmail()">
+                    <input type="email" id="email" name="email">
                     <div id="email-error" class="error-message" style="color: red;"></div>
 
                     <label for="estilo">Estilo:</label>
@@ -144,7 +144,7 @@ unset($_SESSION['status'], $_SESSION['message']);
                     emailError.textContent = ''; // Limpa a mensagem de erro se válido
                     emailError.style.display = 'none';
                 } else {
-                    emailError.textContent = 'Por favor, insira um e-mail válido.';
+                    emailError.textContent = 'Por favor, insira um e-mail válido para receber as informações do seu agendamento.';
                     emailError.style.display = 'block';
                 }
             });
@@ -160,17 +160,6 @@ unset($_SESSION['status'], $_SESSION['message']);
                 valorInput.value = 'R$ ' + value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
             });
         });
-
-        function validateEmail(){
-            var email = document.getElementById("email").value;
-            var errorDiv = document.getElementById("email-error");
-
-            errorDiv.textContent = "";
-
-            if (email === "") {
-                errorDiv.textContent = "Por favor, insira um e-mail válido para receber as informações do seu agendamento.";
-            }
-        }
 
         function validateForm() {
             let isValid = true;
