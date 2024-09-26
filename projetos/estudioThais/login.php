@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agendamento de Macas</title>
     <link rel="icon" href="img/ico.ico" type="image/x-icon">
-    <link rel="stylesheet" href="/projetos/estudioThais/css/estilo.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
