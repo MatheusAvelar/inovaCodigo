@@ -100,6 +100,7 @@ if ($result->num_rows > 0) {
         $linkTermo .= "?nome_cliente=" . $nomeCliente;
         $linkTermo .= "&telefone_cliente=" . $telefoneCliente;
         $linkTermo .= "&email_cliente=" . $emailCliente;
+        $linkTermo .= "&id=" . $_SESSION['id'];
 
         // Definindo a classe CSS de linha de conflito
         $rowClass = $isConflict ? 'style="color: red;"' : '';

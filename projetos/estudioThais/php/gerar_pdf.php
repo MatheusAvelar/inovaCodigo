@@ -1,5 +1,4 @@
 <?php
-session_start();
 require('../fpdf/fpdf.php');
 
 class PDF extends FPDF
@@ -158,7 +157,7 @@ if ($stmt === false) {
     die("Erro na preparação da consulta: " . $conn->error);
 }
 
-$usuario_id = $_SESSION['id'];
+$usuario_id = $_POST['id'];
 
 // Vincular parâmetros
 $stmt->bind_param(
@@ -171,14 +170,7 @@ $stmt->bind_param(
     $assinatura_responsavel, $hepatite_tipo, $medicamento_nome, $alergia_nome
 );
 
-// Executar a declaração
-if ($stmt->execute()) {
-    $_SESSION['status'] = "success";
-    $_SESSION['message'] = "Termo de autorização gerado com sucesso!";
-} else {
-    $_SESSION['status'] = "error";
-    $_SESSION['message'] = "Erro ao salvar o termo: " . $stmt->error;
-}
+$stmt->execute();
 
 $pdf->Output('D', 'termo_autorizacao.pdf');
 // Redireciona de volta para a página de agendamento

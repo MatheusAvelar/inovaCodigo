@@ -48,6 +48,8 @@ unset($_SESSION['status'], $_SESSION['message']);
                     <!-- Dados do Cliente -->
 
                     <h3>Dados do Cliente</h3>
+                    <input type="hidden" name="id" value="<?php echo htmlspecialchars($_GET['id'] ?? '', ENT_QUOTES); ?>" >
+
                     <label>Nome: </label>
                     <input type="text" name="nome_cliente" value="<?php echo htmlspecialchars($_GET['nome_cliente'] ?? '', ENT_QUOTES); ?>" required><br>
 
