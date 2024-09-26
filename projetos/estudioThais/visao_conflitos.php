@@ -28,7 +28,7 @@ if ($_SESSION['perfil_id'] != 2) {
             display: none;
             position: absolute;
             background-color: #f9f9f9;
-            min-width: 160px;
+            min-width: 82px;
             box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
             z-index: 1;
         }
