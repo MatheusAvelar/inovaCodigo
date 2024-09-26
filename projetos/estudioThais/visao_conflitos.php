@@ -73,23 +73,18 @@ if ($_SESSION['perfil_id'] != 2) {
         <nav id="menu"> 
             <ul> 
                 <?php if ($perfil_id == 2) : ?>
-                    <li><a href="criar_acesso.php">Criar Acesso</a></li>
-                    <li><a href="usuarios_estudio.php">Usuários</a></li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)">
+                            <i class="fas fa-cog settings-icon"></i>
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="criar_acesso.php">Criar Acesso</a>
+                            <a href="usuarios_estudio.php">Usuários</a>
+                        </div>
+                    </li>
                 <?php endif; ?>
                 <li><a href="termos_enviados.php">Termos Enviados</a></li>
                 <li><a href="agendamento.php">Agendamento</a></li>
-
-                <!-- Dropdown com ícone de engrenagem -->
-                <li class="dropdown">
-                    <a href="javascript:void(0)">
-                        <i class="fas fa-cog settings-icon"></i>
-                    </a>
-                    <div class="dropdown-content">
-                        <a href="#">Opção 1</a>
-                        <a href="#">Opção 2</a>
-                    </div>
-                </li>
-
                 <li><a href="php/logout.php">Sair</a></li>
             </ul>
         </nav>
