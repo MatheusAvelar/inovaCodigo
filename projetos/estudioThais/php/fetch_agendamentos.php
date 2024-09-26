@@ -102,9 +102,9 @@ if ($result->num_rows > 0) {
         $linkTermo .= "&email_cliente=" . $emailCliente;
 
         // Definindo a classe CSS de linha de conflito
-        $rowClass = $isConflict ? 'conflict' : '';
+        $rowClass = $isConflict ? 'style="color: red;"' : '';
 
-        echo "<tr class='$rowClass'>";
+        echo "<tr $rowClass>";
         echo "<td>" . htmlspecialchars($row['tatuador_nome']) . "</td>";
         echo "<td>" . htmlspecialchars($row['maca_id']) . "</td>";
         echo "<td>" . $formattedDate . "</td>";
