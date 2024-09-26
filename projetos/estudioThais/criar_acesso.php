@@ -28,8 +28,8 @@ include 'php/verificar_perfil.php';
             <ul> 
             <?php if ($perfil_id == 2) : ?>
                     <li><a href="usuarios_estudio.php">Usuários</a></li>
-                    <li><a href="termos_enviados.php">Termos Enviados</a></li>
-                <?php endif; ?>
+                    <?php endif; ?>
+                <li><a href="termos_enviados.php">Termos Enviados</a></li>
                 <li><a href="agendamento.php">Agendamento</a></li>
                 <li><a href="horarios_agendados.php">Horários Agendados</a></li>
                 <li><a href="php/logout.php">Sair</a></li>

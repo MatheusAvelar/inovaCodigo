@@ -8,6 +8,9 @@ $dbname = "u221588236_controle_finan";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
+$usuarioLogado = $_SESSION['id'];
+$perfilUsuario = $_SESSION['perfil_id'];
+
 if ($conn->connect_error) {
     die("Conexão falhou: " . $conn->connect_error);
 }
@@ -15,7 +18,11 @@ if ($conn->connect_error) {
 // Verifica se há um filtro aplicado
 $cliente_nome = isset($_GET['cliente_nome']) ? trim($_GET['cliente_nome']) : '';
 
-$sql = "SELECT id, nome_cliente, email_cliente, data_envio FROM termos_enviados WHERE status = 'ativo'";
+if($perfilUsuario == 2){
+    $sql = "SELECT id, nome_cliente, email_cliente, data_envio FROM termos_enviados WHERE status = 'ativo'";
+} else {
+    $sql = "SELECT id, nome_cliente, email_cliente, data_envio FROM termos_enviados WHERE status = 'ativo' AND usuario_id = $usuarioLogado";
+}
 
 // Se houver um filtro, adicione uma condição na consulta
 if (!empty($cliente_nome)) {
