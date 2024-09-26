@@ -352,5 +352,6 @@ td:nth-child(6) {
 }
 
 .conflict {
-    background-color: #ffcccc; /* Destaca em vermelho claro */
+    background-color: #f8d7da; /* Vermelho claro */
+    color: #721c24; /* Texto vermelho */
 }
