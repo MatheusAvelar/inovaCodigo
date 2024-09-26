@@ -1,15 +1,14 @@
-# Habilita o uso do mod_rewrite para reescrita de URLs
+# Habilitar reescrita de URL
 RewriteEngine On
 
-# Remove a extensão .php das URLs
+# Remover extensão .php da URL
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^([^/.]+)$ $1.php [L]
 
-# Redireciona todas as solicitações para HTTPS
-RewriteCond %{HTTPS} !=on
-RewriteCond %{THE_REQUEST} ^(.+)\.php([#?][^\ ]*)?\ HTTP/
+# Redirecionar de HTTP para HTTPS
+RewriteCond %{HTTPS} off
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-# Habilitar exibição de erros
+# Exibir erros do PHP (para depuração)
 php_value display_errors 1
