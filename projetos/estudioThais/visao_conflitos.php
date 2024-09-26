@@ -18,6 +18,9 @@ if ($_SESSION['perfil_id'] != 2) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        #menu ul li { 
+            display: inline-block; 
+        }
         /* Estilo básico do dropdown */
         .dropdown {
             position: relative;
