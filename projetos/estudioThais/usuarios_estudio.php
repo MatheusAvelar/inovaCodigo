@@ -2,6 +2,10 @@
 session_start();
 include 'php/verificar_perfil.php';
 
+if ($_SESSION['perfil_id'] != 2) {
+    header("Location: agendamento.php");
+    exit();
+}
 // Verifica se há mensagem de status na sessão
 $status = isset($_SESSION['status']) ? $_SESSION['status'] : null;
 $message = isset($_SESSION['message']) ? $_SESSION['message'] : null;
@@ -35,6 +39,7 @@ unset($_SESSION['status'], $_SESSION['message']);
             <ul> 
             <?php if ($perfil_id == 2) : ?>
                     <li><a href="criar_acesso.php">Criar Acesso</a></li>
+                    <li><a href="visao_conflitos.php">Conflitos</a></li>
                 <?php endif; ?>
                 <li><a href="termos_enviados.php">Termos Enviados</a></li>
                 <li><a href="agendamento.php">Agendamento</a></li>

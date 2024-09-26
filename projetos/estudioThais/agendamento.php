@@ -37,6 +37,7 @@ unset($_SESSION['status'], $_SESSION['message']);
             <?php if ($perfil_id == 2) : ?>
                     <li><a href="criar_acesso.php">Criar Acesso</a></li>
                     <li><a href="usuarios_estudio.php">Usuários</a></li>
+                    <li><a href="visao_conflitos.php">Conflitos</a></li>
                 <?php endif; ?>
                 <li><a href="termos_enviados.php">Termos Enviados</a></li>
                 <li><a href="horarios_agendados.php">Horários Agendados</a></li>

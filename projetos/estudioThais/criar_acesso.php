@@ -1,7 +1,14 @@
 <?php
 session_start();
 include 'php/verificar_perfil.php';
-?><!DOCTYPE html>
+
+if ($_SESSION['perfil_id'] != 2) {
+    header("Location: agendamento.php");
+    exit();
+}
+
+?>
+<!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
@@ -28,6 +35,7 @@ include 'php/verificar_perfil.php';
             <ul> 
             <?php if ($perfil_id == 2) : ?>
                     <li><a href="usuarios_estudio.php">Usuários</a></li>
+                    <li><a href="visao_conflitos.php">Conflitos</a></li>
                     <?php endif; ?>
                 <li><a href="termos_enviados.php">Termos Enviados</a></li>
                 <li><a href="agendamento.php">Agendamento</a></li>
