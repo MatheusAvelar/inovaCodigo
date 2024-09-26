@@ -17,6 +17,45 @@ unset($_SESSION['status'], $_SESSION['message']);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agendamento de Macas</title>
     <link rel="stylesheet" href="css/style.css?v=1.0">
+    <style>
+        #menu ul li { 
+            display: inline-block; 
+        }
+        /* Estilo básico do dropdown */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Estilo para a engrenagem */
+        .settings-icon {
+            font-size: 18px;
+        }
+    </style>
 </head>
 
 <body>
@@ -33,14 +72,21 @@ unset($_SESSION['status'], $_SESSION['message']);
 
     <div class="container">
         <nav id="menu"> 
-            <ul> 
-            <?php if ($perfil_id == 2) : ?>
-                    <li><a href="criar_acesso.php">Criar Acesso</a></li>
-                    <li><a href="usuarios_estudio.php">Usuários</a></li>
-                    <li><a href="visao_conflitos.php">Conflitos</a></li>
-                <?php endif; ?>
+            <ul>
                 <li><a href="termos_enviados.php">Termos Enviados</a></li>
                 <li><a href="horarios_agendados.php">Horários Agendados</a></li>
+                <?php if ($perfil_id == 2) : ?>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)">
+                            <i class="fas fa-cog settings-icon"></i>
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="criar_acesso.php">Criar Acesso</a>
+                            <a href="usuarios_estudio.php">Usuários</a>
+                            <a href="visao_conflitos.php">Conflitos</a>
+                        </div>
+                    </li>
+                <?php endif; ?>
                 <li><a href="php/logout.php">Sair</a></li>
             </ul> 
         </nav>
