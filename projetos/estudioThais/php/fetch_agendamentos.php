@@ -46,6 +46,32 @@ if (!empty($filterMonth)) {
     $whereClause .= " AND MONTH(ag.data) = '" . $conn->real_escape_string($filterMonth) . "'";
 }
 
+// Busca de agendamentos com conflitos
+$conflictQuery = "
+    SELECT a1.id AS agendamento1_id, a2.id AS agendamento2_id
+    FROM agendamentos a1
+    JOIN agendamentos a2 ON a1.maca_id = a2.maca_id 
+        AND a1.data = a2.data 
+        AND a1.id != a2.id 
+        AND (
+            a1.start_time BETWEEN a2.start_time AND a2.end_time
+            OR a1.end_time BETWEEN a2.start_time AND a2.end_time
+            OR a2.start_time BETWEEN a1.start_time AND a1.end_time
+            OR a2.end_time BETWEEN a1.start_time AND a1.end_time
+        )
+    WHERE a1.status = 1 AND a2.status = 1
+";
+
+$conflictResult = $conn->query($conflictQuery);
+$conflictIds = [];
+
+if ($conflictResult->num_rows > 0) {
+    while ($conflictRow = $conflictResult->fetch_assoc()) {
+        $conflictIds[] = $conflictRow['agendamento1_id'];
+        $conflictIds[] = $conflictRow['agendamento2_id'];
+    }
+}
+
 // Busca de agendamentos existentes com os filtros aplicados
 $query = "SELECT ag.id, ag.descricao, ag.maca_id, ag.data, ag.start_time, ag.end_time, ag.usuario_id, u.nome AS tatuador_nome, u.perfil_id, ag.telefone_cliente, ag.email_cliente
           FROM agendamentos AS ag
@@ -57,6 +83,9 @@ $result = $conn->query($query);
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
+        // Verifica se o agendamento atual está na lista de conflitos
+        $isConflict = in_array($row['id'], $conflictIds);
+
         // Formatando a data
         $formattedDate = date('d/m/Y', strtotime($row['data']));
         $formattedStartTime = date('H:i', strtotime($row['start_time']));
@@ -72,7 +101,10 @@ if ($result->num_rows > 0) {
         $linkTermo .= "&telefone_cliente=" . $telefoneCliente;
         $linkTermo .= "&email_cliente=" . $emailCliente;
 
-        echo "<tr>";
+        // Definindo a classe CSS de linha de conflito
+        $rowClass = $isConflict ? 'conflict' : '';
+
+        echo "<tr class='$rowClass'>";
         echo "<td>" . htmlspecialchars($row['tatuador_nome']) . "</td>";
         echo "<td>" . htmlspecialchars($row['maca_id']) . "</td>";
         echo "<td>" . $formattedDate . "</td>";
@@ -124,17 +156,3 @@ if ($result->num_rows > 0) {
 // Fechando a conexão
 $conn->close();
 ?>
-
-<script>
-    function confirmDelete(form) {
-        const button = form.querySelector('button');
-        const description = button.getAttribute('data-description');
-        const date = button.getAttribute('data-date');
-        const startTime = button.getAttribute('data-start-time');
-        const endTime = button.getAttribute('data-end-time');
-        
-        const message = `Você tem certeza de que deseja excluir o agendamento com a descrição "${description}" agendado para ${date} das ${startTime} às ${endTime}?`;
-
-        return confirm(message);
-    }
-</script>
