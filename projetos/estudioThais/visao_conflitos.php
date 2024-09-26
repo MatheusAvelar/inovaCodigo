@@ -31,7 +31,7 @@ if ($_SESSION['perfil_id'] != 2) {
     </header>
 
     <div class="container">
-    <nav id="menu"> 
+        <nav id="menu"> 
             <ul> 
                 <?php if ($perfil_id == 2) : ?>
                     <li><a href="criar_acesso.php">Criar Acesso</a></li>
@@ -39,20 +39,20 @@ if ($_SESSION['perfil_id'] != 2) {
                 <?php endif; ?>
                 <li><a href="termos_enviados.php">Termos Enviados</a></li>
                 <li><a href="agendamento.php">Agendamento</a></li>
-                <div class="dropdown">
-                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                        Dropdown link
-                    </a>
-
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </div>
                 <li><a href="php/logout.php">Sair</a></li>
             </ul>
         </nav>
+        <div class="dropdown">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                Dropdown link
+            </a>
+
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+        </div>
         <br>
         <h2>Conflitos Agendamentos</h2>
         <div class="grid">
