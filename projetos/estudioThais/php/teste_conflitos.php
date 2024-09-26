@@ -47,30 +47,28 @@ if ($result->num_rows > 0) {
     echo "<thead>
             <tr>
                 <th>Maca</th>
+                <th>Status</th>
                 <th>Data</th>
                 <th>Início (1)</th>
                 <th>Fim (1)</th>
                 <th>Tatuador (1)</th>
-                <th>Status (1)</th>
                 <th>Início (2)</th>
                 <th>Fim (2)</th>
                 <th>Tatuador (2)</th>
-                <th>Status (2)</th>
             </tr>
           </thead>";
     echo "<tbody>";
     while ($row = $result->fetch_assoc()) {
         echo "<tr>";
         echo "<td>" . htmlspecialchars($row['maca_id']) . "</td>";
+        echo "<td>" . htmlspecialchars($row['status1']) . "</td>";
         echo "<td>" . date('d/m/Y', strtotime($row['data_agendamento'])) . "</td>";
         echo "<td>" . date('H:i', strtotime($row['inicio1'])) . "</td>";
         echo "<td>" . date('H:i', strtotime($row['fim1'])) . "</td>";
         echo "<td>" . htmlspecialchars($row['tatuador1']) . "</td>";
-        echo "<td>" . htmlspecialchars($row['status1']) . "</td>";
         echo "<td>" . date('H:i', strtotime($row['inicio2'])) . "</td>";
         echo "<td>" . date('H:i', strtotime($row['fim2'])) . "</td>";
         echo "<td>" . htmlspecialchars($row['tatuador2']) . "</td>";
-        echo "<td>" . htmlspecialchars($row['status2']) . "</td>";
         echo "</tr>";
     }
     echo "</tbody>";
