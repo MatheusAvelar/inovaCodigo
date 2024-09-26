@@ -39,6 +39,14 @@ if ($_SESSION['perfil_id'] != 2) {
                 <?php endif; ?>
                 <li><a href="termos_enviados.php">Termos Enviados</a></li>
                 <li><a href="agendamento.php">Agendamento</a></li>
+                <li class="dropdown">
+                    <a href="#">Opções</a>
+                    <ul class="dropdown-content">
+                        <li><a href="opcao1.php">Opção 1</a></li>
+                        <li><a href="opcao2.php">Opção 2</a></li>
+                        <li><a href="opcao3.php">Opção 3</a></li>
+                    </ul>
+                </li>
                 <li><a href="php/logout.php">Sair</a></li>
             </ul> 
         </nav>
