@@ -1,4 +1,14 @@
+# Habilita o uso do mod_rewrite para reescrita de URLs
+RewriteEngine On
 
-# HTID:22119713: DO NOT REMOVE OR MODIFY THIS LINE AND THE LINES BELOW
+# Remove a extensão .php das URLs
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^/]+)$ $1.php [L]
+
+# Redireciona todas as solicitações para HTTPS
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Habilitar exibição de erros
 php_value display_errors 1
-# DO NOT REMOVE OR MODIFY THIS LINE AND THE LINES ABOVE HTID:22119713:
