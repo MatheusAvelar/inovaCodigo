@@ -277,7 +277,7 @@ td:nth-child(6) {
 
 #menu ul li a { 
     padding: 2px 10px; 
-    display: inline-block; /* visual do link */ 
+    display: inline-block;
     background-color:#fafafa; 
     color: #333; 
     text-decoration: none; 
