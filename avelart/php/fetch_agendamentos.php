@@ -96,7 +96,7 @@ if ($result->num_rows > 0) {
         $telefoneCliente = urlencode($row['telefone_cliente']);
         $emailCliente = urlencode($row['email_cliente']);
 
-        $linkTermo = "https://inovacodigo.com.br/projetos/estudioThais/termo_responsabilidade.php";
+        $linkTermo = "https://avelart.inovacodigo.com.br/termo_responsabilidade.php";
         $linkTermo .= "?nome_cliente=" . $nomeCliente;
         $linkTermo .= "&telefone_cliente=" . $telefoneCliente;
         $linkTermo .= "&email_cliente=" . $emailCliente;
