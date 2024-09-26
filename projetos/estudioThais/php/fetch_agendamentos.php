@@ -47,7 +47,7 @@ if (!empty($filterMonth)) {
 }
 
 // Busca de agendamentos existentes com os filtros aplicados
-$query = "SELECT ag.id, ag.descricao, ag.maca_id, ag.data, ag.start_time, ag.end_time, ag.usuario_id, u.nome AS tatuador_nome, u.perfil_id
+$query = "SELECT ag.id, ag.descricao, ag.maca_id, ag.data, ag.start_time, ag.end_time, ag.usuario_id, u.nome AS tatuador_nome, u.perfil_id, ag.telefone_cliente, ag.email_cliente
           FROM agendamentos AS ag
           JOIN usuarioEstudio AS u ON ag.usuario_id = u.id
           $whereClause 
@@ -62,15 +62,22 @@ if ($result->num_rows > 0) {
         $formattedStartTime = date('H:i', strtotime($row['start_time']));
         $formattedEndTime = date('H:i', strtotime($row['end_time']));
 
+        // Montando o link do termo de responsabilidade
+        $nomeCliente = urlencode($row['tatuador_nome']);
+        $telefoneCliente = urlencode($row['telefone_cliente']);
+        $emailCliente = urlencode($row['email_cliente']);
+
+        $linkTermo = "https://inovacodigo.com.br/projetos/estudioThais/termo_responsabilidade.php";
+        $linkTermo .= "?nome_cliente=" . $nomeCliente;
+        $linkTermo .= "&telefone_cliente=" . $telefoneCliente;
+        $linkTermo .= "&email_cliente=" . $emailCliente;
+
         echo "<tr>";
         echo "<td>" . htmlspecialchars($row['tatuador_nome']) . "</td>";
         echo "<td>" . htmlspecialchars($row['maca_id']) . "</td>";
         echo "<td>" . $formattedDate . "</td>";
         echo "<td>" . $formattedStartTime . "</td>";
         echo "<td>" . $formattedEndTime . "</td>";
-
-        // Debug para verificar a consulta SQL
-        //debugAlert($perfil_id, 'Perfil: ');
 
         // Verificação para mostrar o botão de excluir apenas se o usuário logado é o dono do agendamento
         if ($row['usuario_id'] == $_SESSION['id'] || $perfil_id == 2) {
@@ -90,11 +97,17 @@ if ($result->num_rows > 0) {
                         <a href='php/reenvia_termos.php?id=" . htmlspecialchars($row['id']) . "' title='Reenviar Termo'>
                             <i class='fas fa-envelope'></i>
                         </a>
+                        <a href='$linkTermo' title='Gerar Termo'>
+                            <i class='fas fa-file-alt'></i>
+                        </a>
                     </td>";
             } else {
                 echo "<td>
                         <a href='php/reenvia_termos.php?id=" . htmlspecialchars($row['id']) . "' title='Reenviar Termo'>
                             <i class='fas fa-envelope'></i>
+                        </a>
+                        <a href='$linkTermo' title='Gerar Termo'>
+                            <i class='fas fa-file-alt'></i>
                         </a>
                     </td>";
             }
