@@ -26,7 +26,7 @@ $query = "
     SELECT a1.id AS agendamento1_id, a2.id AS agendamento2_id,
            a1.data AS data_agendamento, a1.start_time AS inicio1, a1.end_time AS fim1,
            a2.start_time AS inicio2, a2.end_time AS fim2, a1.maca_id, 
-           u1.nome AS tatuador1, u2.nome AS tatuador2
+           u1.nome AS tatuador1, u2.nome AS tatuador2, a1.status AS status1, a2.status AS status2
     FROM agendamentos a1
     JOIN agendamentos a2 ON a1.maca_id = a2.maca_id 
     AND a1.data = a2.data 
