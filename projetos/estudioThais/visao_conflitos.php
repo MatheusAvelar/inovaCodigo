@@ -79,14 +79,14 @@ if ($_SESSION['perfil_id'] != 2) {
                 <!-- Dropdown com ícone de engrenagem -->
                 <li class="dropdown">
                     <a href="javascript:void(0)">
-                        <i class="fas fa-cog settings-icon"></i> Opções
+                        <i class="fas fa-cog settings-icon"></i>
                     </a>
                     <div class="dropdown-content">
                         <a href="#">Opção 1</a>
                         <a href="#">Opção 2</a>
                     </div>
                 </li>
-                
+
                 <li><a href="php/logout.php">Sair</a></li>
             </ul>
         </nav>
