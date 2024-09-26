@@ -4,10 +4,11 @@ RewriteEngine On
 # Remove a extensão .php das URLs
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^([^/]+)$ $1.php [L]
+RewriteRule ^([^/.]+)$ $1.php [L]
 
 # Redireciona todas as solicitações para HTTPS
 RewriteCond %{HTTPS} !=on
+RewriteCond %{THE_REQUEST} ^(.+)\.php([#?][^\ ]*)?\ HTTP/
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 # Habilitar exibição de erros
