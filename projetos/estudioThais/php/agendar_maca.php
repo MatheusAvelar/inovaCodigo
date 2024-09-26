@@ -40,7 +40,6 @@ $status = '1';
 
 // Captura o telefone e remove a máscara
 $telefoneCliente = $_POST['telefone'] ?? '';
-$telefoneCliente = str_replace(['(', ')', ' ', '-'], '', $telefoneCliente); // Remove a máscara de telefone
 
 // Validação dos dados
 $errors = [];

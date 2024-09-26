@@ -55,7 +55,6 @@ if ($result->num_rows > 0) {
     $endTime = $row['end_time'];
     $status = '1';
     $telefoneCliente = $row['telefone_cliente'];
-    $telefoneCliente = str_replace(['(', ')', ' ', '-'], '', $telefoneCliente); 
 
     // Envio de e-mail, se o e-mail do cliente estiver preenchido
     if (!empty($emailCliente)) {
