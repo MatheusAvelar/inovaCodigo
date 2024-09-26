@@ -72,6 +72,8 @@ if ($_SESSION['perfil_id'] != 2) {
     <div class="container">
         <nav id="menu"> 
             <ul> 
+                <li><a href="termos_enviados.php">Termos Enviados</a></li>
+                <li><a href="agendamento.php">Agendamento</a></li>
                 <?php if ($perfil_id == 2) : ?>
                     <li class="dropdown">
                         <a href="javascript:void(0)">
@@ -83,8 +85,6 @@ if ($_SESSION['perfil_id'] != 2) {
                         </div>
                     </li>
                 <?php endif; ?>
-                <li><a href="termos_enviados.php">Termos Enviados</a></li>
-                <li><a href="agendamento.php">Agendamento</a></li>
                 <li><a href="php/logout.php">Sair</a></li>
             </ul>
         </nav>
