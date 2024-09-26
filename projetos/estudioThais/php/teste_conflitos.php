@@ -49,12 +49,9 @@ if ($result->num_rows > 0) {
                 <th>Maca</th>
                 <th>Status</th>
                 <th>Data</th>
-                <th>Início (1)</th>
-                <th>Fim (1)</th>
-                <th>Tatuador (1)</th>
-                <th>Início (2)</th>
-                <th>Fim (2)</th>
-                <th>Tatuador (2)</th>
+                <th>Início</th>
+                <th>Fim</th>
+                <th>Tatuador</th>
             </tr>
           </thead>";
     echo "<tbody>";
@@ -66,9 +63,6 @@ if ($result->num_rows > 0) {
         echo "<td>" . date('H:i', strtotime($row['inicio1'])) . "</td>";
         echo "<td>" . date('H:i', strtotime($row['fim1'])) . "</td>";
         echo "<td>" . htmlspecialchars($row['tatuador1']) . "</td>";
-        echo "<td>" . date('H:i', strtotime($row['inicio2'])) . "</td>";
-        echo "<td>" . date('H:i', strtotime($row['fim2'])) . "</td>";
-        echo "<td>" . htmlspecialchars($row['tatuador2']) . "</td>";
         echo "</tr>";
     }
     echo "</tbody>";
