@@ -79,7 +79,7 @@ if ($result->num_rows > 0) {
             $currentDate = strtotime(date('Y-m-d'));
             $dateDiff = ($agendamentoDate - $currentDate) / 86400; // diferença em dias
 
-            if ($dateDiff >= 2 || $perfil_id == 2) {
+            if ($dateDiff > 2 || $perfil_id == 2) {
                 echo "<td>
                         <a href='editar_agendamento.php?id=" . htmlspecialchars($row['id']) . "' title='Editar'>
                             <i class='fas fa-edit'></i>
