@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['reset_email'] = $email;
 
         // Envia o e-mail com o link de recuperação de senha
-        $resetLink = "https://inovacodigo.com.br/projetos/estudioThais/resetar_senha.php?token=$token";
+        $resetLink = "https://avelart.inovacodigo.com.br/resetar_senha.php?token=$token";
         $subject = "Recuperação de Senha";
         $message = "Clique no link a seguir para resetar sua senha: $resetLink";
         $headers = "From: no-reply@inovacodigo.com.br";

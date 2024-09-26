@@ -61,7 +61,7 @@ if ($result->num_rows > 0) {
         $to = $emailCliente;
         $subject = 'Confirmação de Agendamento de Tatuagem';
         
-        $linkTermo = "https://inovacodigo.com.br/projetos/estudioThais/termo_responsabilidade.php";
+        $linkTermo = "https://avelart.inovacodigo.com.br/termo_responsabilidade.php";
         $linkTermo .= "?nome_cliente=" . urlencode($nomeCliente);
         $linkTermo .= "&telefone_cliente=" . urlencode($telefoneCliente);
         $linkTermo .= "&email_cliente=" . urlencode($emailCliente);
