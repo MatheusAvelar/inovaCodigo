@@ -39,14 +39,17 @@ if ($_SESSION['perfil_id'] != 2) {
                 <?php endif; ?>
                 <li><a href="termos_enviados.php">Termos Enviados</a></li>
                 <li><a href="agendamento.php">Agendamento</a></li>
-                <li class="dropdown">
-                    <a href="#">Opções</a>
-                    <ul class="dropdown-content">
-                        <li><a href="opcao1.php">Opção 1</a></li>
-                        <li><a href="opcao2.php">Opção 2</a></li>
-                        <li><a href="opcao3.php">Opção 3</a></li>
+                <div class="dropdown">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        Dropdown link
+                    </a>
+
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
-                </li>
+                </div>
                 <li><a href="php/logout.php">Sair</a></li>
             </ul>
         </nav>
