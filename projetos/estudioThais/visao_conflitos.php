@@ -78,8 +78,8 @@ if ($_SESSION['perfil_id'] != 2) {
                             <i class="fas fa-cog settings-icon"></i>
                         </a>
                         <div class="dropdown-content">
-                            <a href="criar_acesso.php">Criar Acesso</a>
-                            <a href="usuarios_estudio.php">Usuários</a>
+                            <li><a href="criar_acesso.php">Criar Acesso</a></li>
+                            <li><a href="usuarios_estudio.php">Usuários</a></li>
                         </div>
                     </li>
                 <?php endif; ?>
