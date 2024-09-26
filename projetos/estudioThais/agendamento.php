@@ -130,21 +130,6 @@ unset($_SESSION['status'], $_SESSION['message']);
     </div>
 
     <script>
-        // Validação no submit para avisar sobre o campo vazio
-        form.addEventListener('submit', function(event) {
-            if (emailInput.value === '') {
-                event.preventDefault(); // Impede o envio do formulário
-
-                var confirmSubmit = confirm("O campo de e-mail está vazio. Deseja continuar sem inserir o e-mail?");
-                
-                if (confirmSubmit) {
-                    form.submit(); // Envia o formulário se o usuário confirmar
-                } else {
-                    emailInput.focus(); // Volta o foco para o campo de e-mail
-                }
-            }
-        });
-
         document.getElementById('telefone').addEventListener('input', function (e) {
             var x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
             e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
