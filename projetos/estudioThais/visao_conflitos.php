@@ -105,16 +105,6 @@ unset($_SESSION['status'], $_SESSION['message']);
         <div class="grid">
             <div class="maca">
                 <table>
-                    <thead>
-                        <tr>
-                            <th>Tatuador</th>
-                            <th>Maca</th>
-                            <th>Data</th>
-                            <th>H. Inicial</th>
-                            <th>H. Final</th>
-                            <th>Ação</th>
-                        </tr>
-                    </thead>
                     <tbody>
                         <?php
                         $filter_date = $_GET['filter_date'] ?? '';
