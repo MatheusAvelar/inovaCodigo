@@ -1,5 +1,5 @@
 <?php
-session_start();
+session_start(); 
 include 'php/verificar_perfil.php';
 
 if ($_SESSION['perfil_id'] != 2) {
