@@ -16,8 +16,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-<<<<<<< HEAD
 
 require __DIR__.'/auth.php';
-=======
->>>>>>> parent of 0e1a025 (Projeto CRM - Instalação/Con)
