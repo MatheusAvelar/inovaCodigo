@@ -14,7 +14,7 @@ unset($_SESSION['status'], $_SESSION['message']);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Termos Enviados</title>
+    <title>Termos Preenchidos</title>
     <link rel="icon" href="img/ico.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -98,7 +98,7 @@ unset($_SESSION['status'], $_SESSION['message']);
                 </div>
             <?php endif; ?>
         </div>
-        <h2>Termos Enviados</h2>
+        <h2>Termos Preenchidos</h2>
         <div class="grid">
             <div class="maca">
             <form method="GET" action="">
@@ -117,7 +117,7 @@ unset($_SESSION['status'], $_SESSION['message']);
                     </thead>
                     <tbody>
                         <?php
-                        // Inclua o arquivo com a lógica para buscar os termos enviados
+                        // Inclua o arquivo com a lógica para buscar os Termos Preenchidos
                         include 'php/fetch_termos_enviados.php';
                         ?>
                     </tbody>

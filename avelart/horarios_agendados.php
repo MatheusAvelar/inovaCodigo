@@ -75,7 +75,7 @@ unset($_SESSION['status'], $_SESSION['message']);
     <div class="container">
     <nav id="menu"> 
             <ul> 
-                <li><a href="termos_enviados.php">Termos Enviados</a></li>
+                <li><a href="termos_enviados.php">Termos Preenchidos</a></li>
                 <li><a href="agendamento.php">Agendamento</a></li>
                 <?php if ($perfil_id == 2) : ?>
                     <li class="dropdown">
