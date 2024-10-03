@@ -1,17 +1,11 @@
 <?php
 require('../fpdf/fpdf.php');
+include 'php/utils.php';
 
-// Conectar ao banco de dados
-$servername = "127.0.0.1:3306";
-$username = "u221588236_root";
-$password = "Camila@307";
-$dbname = "u221588236_controle_finan";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Verificar conexão
-if ($conn->connect_error) {
-    die("Falha na conexão: " . $conn->connect_error);
+try {
+    $conn = conectaBanco();
+} catch (Exception $e) {
+    die("Erro: " . $e->getMessage());
 }
 
 // Obter o ID passado pela URL

@@ -1,6 +1,7 @@
 <?php
 session_start();
 //include 'php/verificar_perfil.php';
+include 'php/utils.php';
 
 // Verifica se o ID do usuário foi passado na URL e o converte para um inteiro
 $userId = isset($_GET['id']) ? intval($_GET['id']) : 0;
@@ -12,24 +13,11 @@ if ($userId == 0) {
     die('ID do usuário não fornecido ou inválido.');
 }
 
-// Configuração da conexão com o banco de dados
-$servername = "127.0.0.1:3306";
-$username = "u221588236_root";
-$password = "Camila@307";
-$dbname = "u221588236_controle_finan";
-
-// Criando a conexão
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Verificando a conexão
-if ($conn->connect_error) {
-    $_SESSION['status'] = 'error';
-    $_SESSION['message'] = 'Falha na conexão com o banco de dados: ' . $conn->connect_error;
-    header('Location: ../usuarios_estudio.php');
-    exit();
+try {
+    $conn = conectaBanco();
+} catch (Exception $e) {
+    die("Erro: " . $e->getMessage());
 }
-
-echo "Conexão com o banco de dados bem-sucedida";
 
 // Verificando se o usuário existe
 $query = "SELECT id FROM usuarioEstudio WHERE id = $userId";

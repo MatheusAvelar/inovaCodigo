@@ -1,14 +1,13 @@
 <?php
+include 'php/utils.php';
+
+try {
+    $conn = conectaBanco();
+} catch (Exception $e) {
+    die("Erro: " . $e->getMessage());
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    // Cria a conexão
-    $conexao = mysqli_connect("127.0.0.1:3306", "u221588236_root", "Camila@307", "u221588236_controle_finan");
-
-    // Verifica se a conexão foi estabelecida com sucesso
-    if (!$conexao) {
-        die("Falha na conexão: " . mysqli_connect_error());
-    }
-
     // Prepara os dados recebidos do formulário
     $nome = $_POST['nome'];
     $sobrenome = $_POST['sobrenome'];
@@ -17,14 +16,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $perfil_id = $_POST['perfil'];
 
     // Escapa caracteres especiais para evitar injeção de SQL
-    $nome = mysqli_real_escape_string($conexao, $nome);
-    $sobrenome = mysqli_real_escape_string($conexao, $sobrenome);
-    $email = mysqli_real_escape_string($conexao, $email);
-    $perfil_id = mysqli_real_escape_string($conexao, $perfil_id);
+    $nome = mysqli_real_escape_string($conn, $nome);
+    $sobrenome = mysqli_real_escape_string($conn, $sobrenome);
+    $email = mysqli_real_escape_string($conn, $email);
+    $perfil_id = mysqli_real_escape_string($conn, $perfil_id);
 
     // Verifica se já existe um cadastro com o mesmo e-mail
     $verificaEmail = "SELECT * FROM usuarioEstudio WHERE email = '$email'";
-    $resultado = mysqli_query($conexao, $verificaEmail);
+    $resultado = mysqli_query($conn, $verificaEmail);
 
     if (mysqli_num_rows($resultado) > 0) {
         // Se o e-mail já estiver cadastrado
@@ -39,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Insere os dados na tabela de usuários
         $sql = "INSERT INTO usuarioEstudio(nome, sobrenome, email, senha, perfil_id, ativo) VALUES('$nome','$sobrenome','$email','$senha', '$perfil_id', '1')";
 
-        if (mysqli_query($conexao, $sql)) {
+        if (mysqli_query($conn, $sql)) {
             $status = "success";
             $message = "Cadastro realizado com sucesso!";
             echo "<script>
@@ -49,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </script>";
         } else {
             $status = "error";
-            $message = "Erro ao cadastrar: " . mysqli_error($conexao);
+            $message = "Erro ao cadastrar: " . mysqli_error($conn);
             echo "<script>
                 sessionStorage.setItem('status', '" . addslashes($status) . "');
                 sessionStorage.setItem('message', '" . addslashes($message) . "');
@@ -59,6 +58,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Fecha a conexão com o banco de dados
-    mysqli_close($conexao);
+    mysqli_close($conn);
 }
 ?>

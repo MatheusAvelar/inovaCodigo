@@ -1,5 +1,7 @@
 <?php
 include 'utils.php';
+include 'php/utils.php';
+
 // Verifica se a sessão já foi iniciada
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -11,21 +13,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     exit;
 }
 
-// Configuração da conexão com o banco de dados
-$servername = "127.0.0.1:3306";
-$username = "u221588236_root";
-$password = "Camila@307";
-$dbname = "u221588236_controle_finan";
-
-// Criando a conexão
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Verificando a conexão
-if ($conn->connect_error) {
-    $_SESSION['status'] = 'error';
-    $_SESSION['message'] = 'Erro na conexão com o banco de dados: ' . $conn->connect_error;
-    header("Location: ../horarios_agendados.php");
-    exit;
+try {
+    $conn = conectaBanco();
+} catch (Exception $e) {
+    die("Erro: " . $e->getMessage());
 }
 
 // Obtendo o ID do agendamento a ser excluído

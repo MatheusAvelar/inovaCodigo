@@ -1,5 +1,13 @@
 <?php
 include 'envia_email.php';
+include 'php/utils.php';
+
+try {
+    $conn = conectaBanco();
+} catch (Exception $e) {
+    die("Erro: " . $e->getMessage());
+}
+
 session_start();
 // Definindo variáveis para mensagem de retorno
 $_SESSION['status'] = "";
@@ -11,20 +19,6 @@ if (!isset($_GET['id']) || empty($_GET['id'])) {
 }
 
 $agendamentoId = intval($_GET['id']);
-
-// Configuração da conexão com o banco de dados
-$servername = "127.0.0.1:3306";
-$username = "u221588236_root";
-$password = "Camila@307";
-$dbname = "u221588236_controle_finan";
-
-// Criando a conexão
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Verificando a conexão
-if ($conn->connect_error) {
-    die("Falha na conexão: " . $conn->connect_error);
-}
 
 // Obtendo os dados do agendamento
 $query = "SELECT a.id, a.maca_id, a.data, a.start_time, a.end_time, a.nome_cliente, a.telefone_cliente, a.email_cliente, a.estilo, a.tamanho, a.valor, a.forma_pagamento, a.sinal_pago, a.descricao

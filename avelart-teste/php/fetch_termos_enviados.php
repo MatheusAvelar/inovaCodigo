@@ -1,19 +1,14 @@
 <?php
-include 'utils.php';
-// Conexão com o banco de dados
-$servername = "127.0.0.1:3306";
-$username = "u221588236_root";
-$password = "Camila@307";
-$dbname = "u221588236_controle_finan";
+include 'php/utils.php';
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+try {
+    $conn = conectaBanco();
+} catch (Exception $e) {
+    die("Erro: " . $e->getMessage());
+}
 
 $usuarioLogado = $_SESSION['id'];
 $perfilUsuario = $_SESSION['perfil_id'];
-
-if ($conn->connect_error) {
-    die("Conexão falhou: " . $conn->connect_error);
-}
 
 // Verifica se há um filtro aplicado
 $cliente_nome = isset($_GET['cliente_nome']) ? trim($_GET['cliente_nome']) : '';

@@ -1,14 +1,10 @@
 <?php
-// Conexão com o banco de dados
-$servername = "127.0.0.1:3306";
-$username = "u221588236_root";
-$password = "Camila@307";
-$dbname = "u221588236_controle_finan";
+include 'php/utils.php';
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Conexão falhou: " . $conn->connect_error);
+try {
+    $conn = conectaBanco();
+} catch (Exception $e) {
+    die("Erro: " . $e->getMessage());
 }
 
 $macaId = $_GET['maca'];

@@ -1,21 +1,15 @@
 <?php
+include 'php/utils.php';
+
+try {
+    $conn = conectaBanco();
+} catch (Exception $e) {
+    die("Erro: " . $e->getMessage());
+}
+
 // Verifica se a sessão já foi iniciada
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
-}
-
-// Configuração da conexão com o banco de dados
-$servername = "127.0.0.1:3306";
-$username = "u221588236_root";
-$password = "Camila@307";
-$dbname = "u221588236_controle_finan";
-
-// Criando a conexão
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Verificando a conexão
-if ($conn->connect_error) {
-    die("Falha na conexão: " . $conn->connect_error);
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
