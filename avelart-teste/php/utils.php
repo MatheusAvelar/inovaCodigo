@@ -41,7 +41,7 @@ function executarSQL($conn, $sql) {
  * @throws Exception Se o arquivo .env não for encontrado ou se houver falha na conexão
  * @return mysqli Conexão com o banco de dados
  */
-function conectaBanco($filePath = '.env') {
+function conectaBanco($filePath) {
     // Verifica se o arquivo .env existe
     if (!file_exists($filePath)) {
         throw new Exception("O arquivo .env não foi encontrado.");
