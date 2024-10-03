@@ -13,7 +13,7 @@ if ($conn->connect_error) {
 }
 
 // Deletar uma linha
-/*if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['delete'])) {
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['delete'])) {
     $tabela = $_POST['tabela'];
     $chave_primaria = $_POST['chave_primaria'];
     $valor_chave = $_POST['valor_chave'];
@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['insert'])) {
 
     $sql_insert = "INSERT INTO $tabela ($colunas) VALUES (" . implode(',', $valores) . ")";
     $conn->query($sql_insert);
-}*/
+}
 
 // Executar um comando SQL personalizado
 $sql_custom_result = '';
