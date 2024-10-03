@@ -1,7 +1,7 @@
 <?php
-include 'php/utils.php';
+//include 'php/utils.php';
 // Carrega o arquivo .env
-loadEnv(__DIR__ . '/.env');
+//loadEnv(__DIR__ . '/.env');
 
 // Obtém o ambiente da variável de ambiente
 /*$environment = getenv('ENVIRONMENT');
