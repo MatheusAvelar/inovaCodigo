@@ -4,6 +4,11 @@ $username = "u221588236_root";
 $password = "Camila@307";
 $dbname = "u221588236_controle_finan";
 
+if ($_SESSION['perfil_id'] != 2) {
+    header("Location: agendamento.php");
+    exit();
+}
+
 // Conexão com o banco de dados
 $conn = new mysqli($servername, $username, $password, $dbname);
 
