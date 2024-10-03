@@ -1,14 +1,31 @@
 <?php
-$servername = "127.0.0.1:3306";
-$username = "u221588236_root";
-$password = "Camila@307";
-$dbname = "u221588236_controle_finan";
 
-// Conexão com o banco de dados
-$conn = new mysqli($servername, $username, $password, $dbname);
+// Carrega o arquivo .env
+loadEnv(__DIR__ . '/.env');
 
+// Obtém o ambiente da variável de ambiente
+$environment = getenv('ENVIRONMENT');
+
+if ($environment === 'production') {
+    // Credenciais do banco de dados de produção
+    $dbHost = getenv('DB_HOST_PROD');
+    $dbUser = getenv('DB_USER_PROD');
+    $dbPassword = getenv('DB_PASSWORD_PROD');
+    $dbName = getenv('DB_NAME_PROD');
+} else {
+    // Credenciais do banco de dados de homologação
+    $dbHost = getenv('DB_HOST_HOMOLOG');
+    $dbUser = getenv('DB_USER_HOMOLOG');
+    $dbPassword = getenv('DB_PASSWORD_HOMOLOG');
+    $dbName = getenv('DB_NAME_HOMOLOG');
+}
+
+// Conectando ao banco de dados
+$conn = new mysqli($dbHost, $dbUser, $dbPassword, $dbName);
+
+// Verifica se há erros na conexão
 if ($conn->connect_error) {
-    die("Conexão falhou: " . $conn->connect_error);
+    die("Falha na conexão: " . $conn->connect_error);
 }
 
 // Deletar uma linha
