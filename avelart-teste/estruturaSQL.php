@@ -141,6 +141,8 @@ $result_tabelas = $conn->query($sql_tabelas);
 </head>
 <body>
 <?php
+echo "<h3>Servidor: " . $_SERVER['SERVER_NAME'] . "</h3>";
+
 if ($_SESSION['perfil_id'] != 2) {
     ?><!-- Formulário para executar um comando SQL personalizado -->
     <h2>Executar Comando SQL</h2>
