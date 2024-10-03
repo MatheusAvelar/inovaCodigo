@@ -4,7 +4,7 @@ include 'php/utils.php';
 loadEnv(__DIR__ . '/.env');
 
 // Obtém o ambiente da variável de ambiente
-$environment = getenv('ENVIRONMENT');
+/*$environment = getenv('ENVIRONMENT');
 
 if ($environment === 'production') {
     // Credenciais do banco de dados de produção
@@ -18,7 +18,12 @@ if ($environment === 'production') {
     $dbUser = getenv('DB_USER_HOMOLOG');
     $dbPassword = getenv('DB_PASSWORD_HOMOLOG');
     $dbName = getenv('DB_NAME_HOMOLOG');
-}
+}*/
+
+$dbHost = "127.0.0.1:3306";
+$dbUser = "u221588236_root";
+$dbPassword = "Camila@307";
+$dbName = "u221588236_controle_finan";
 
 // Conectando ao banco de dados
 $conn = new mysqli($dbHost, $dbUser, $dbPassword, $dbName);
