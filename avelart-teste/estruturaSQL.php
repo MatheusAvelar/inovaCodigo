@@ -1,25 +1,4 @@
 <?php
-//include 'php/utils.php';
-// Carrega o arquivo .env
-//loadEnv(__DIR__ . '/.env');
-
-// Obtém o ambiente da variável de ambiente
-/*$environment = getenv('ENVIRONMENT');
-
-if ($environment === 'production') {
-    // Credenciais do banco de dados de produção
-    $dbHost = getenv('DB_HOST_PROD');
-    $dbUser = getenv('DB_USER_PROD');
-    $dbPassword = getenv('DB_PASSWORD_PROD');
-    $dbName = getenv('DB_NAME_PROD');
-} else {
-    // Credenciais do banco de dados de homologação
-    $dbHost = getenv('DB_HOST_HOMOLOG');
-    $dbUser = getenv('DB_USER_HOMOLOG');
-    $dbPassword = getenv('DB_PASSWORD_HOMOLOG');
-    $dbName = getenv('DB_NAME_HOMOLOG');
-}*/
-
 $dbHost = "127.0.0.1:3306";
 $dbUser = "u221588236_root";
 $dbPassword = "Avelart@2024";
@@ -34,7 +13,7 @@ if ($conn->connect_error) {
 }
 
 // Deletar uma linha
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['delete'])) {
+/*if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['delete'])) {
     $tabela = $_POST['tabela'];
     $chave_primaria = $_POST['chave_primaria'];
     $valor_chave = $_POST['valor_chave'];
@@ -53,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['insert'])) {
 
     $sql_insert = "INSERT INTO $tabela ($colunas) VALUES (" . implode(',', $valores) . ")";
     $conn->query($sql_insert);
-}
+}*/
 
 // Executar um comando SQL personalizado
 $sql_custom_result = '';
@@ -180,8 +159,6 @@ if ($_SESSION['perfil_id'] != 2) {
 if (!empty($sql_custom_result)) {
     echo "<h3>Resultado:</h3>";
     echo $sql_custom_result;
-    echo "<h3>Ambiente: </h3>";
-    echo $environment;
 }
 ?>
 
