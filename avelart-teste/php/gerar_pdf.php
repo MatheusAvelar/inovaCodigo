@@ -1,6 +1,6 @@
 <?php
 require('../fpdf/fpdf.php');
-include 'php/utils.php';
+include 'utils.php';
 
 class PDF extends FPDF
 {
@@ -122,7 +122,7 @@ $pdf->SetFont('Arial', '', 12);
 $pdf->Cell(0, 10, utf8_decode('Assinatura do Responsável: ' . $assinatura_responsavel), 0, 1);
 
 try {
-    $conn = conectaBanco();
+    $conn = conectaBanco('./.env');
 } catch (Exception $e) {
     die("Erro: " . $e->getMessage());
 }

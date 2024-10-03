@@ -1,9 +1,9 @@
 <?php
 include 'envia_email.php';
-include 'php/utils.php';
+include 'utils.php';
 
 try {
-    $conn = conectaBanco();
+    $conn = conectaBanco('./.env');
 } catch (Exception $e) {
     die("Erro: " . $e->getMessage());
 }

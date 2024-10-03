@@ -1,5 +1,5 @@
 <?php
-include 'php/utils.php';
+include 'utils.php';
 
 // Verifica se o ID do agendamento foi passado na URL
 if (!isset($_GET['id']) || empty($_GET['id'])) {
@@ -9,7 +9,7 @@ if (!isset($_GET['id']) || empty($_GET['id'])) {
 $agendamentoId = intval($_GET['id']);
 
 try {
-    $conn = conectaBanco();
+    $conn = conectaBanco('./.env');
 } catch (Exception $e) {
     die("Erro: " . $e->getMessage());
 }

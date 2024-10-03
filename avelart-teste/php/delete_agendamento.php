@@ -1,6 +1,5 @@
 <?php
 include 'utils.php';
-include 'php/utils.php';
 
 // Verifica se a sessão já foi iniciada
 if (session_status() === PHP_SESSION_NONE) {
@@ -14,7 +13,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 }
 
 try {
-    $conn = conectaBanco();
+    $conn = conectaBanco('./.env');
 } catch (Exception $e) {
     die("Erro: " . $e->getMessage());
 }
