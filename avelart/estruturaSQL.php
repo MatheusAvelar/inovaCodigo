@@ -161,21 +161,22 @@ $result_tabelas = $conn->query($sql_tabelas);
     </script>
 </head>
 <body>
-    <!-- Formulário para executar um comando SQL personalizado -->
+<?php
+if ($_SESSION['perfil_id'] != 2) {
+    ?><!-- Formulário para executar um comando SQL personalizado -->
     <h2>Executar Comando SQL</h2>
     <form method="POST">
         <textarea name="sql_custom" rows="5" cols="100" placeholder="Escreva seu comando SQL aqui..."></textarea><br>
         <button type="submit" name="sql_command">Executar Comando SQL</button>
-    </form>
-<?php
-
-echo "<h3>Ambiente: </h3>";
-echo $environment;
+    </form><?php
+}
 
 // Exibir resultado do comando SQL personalizado
 if (!empty($sql_custom_result)) {
     echo "<h3>Resultado:</h3>";
     echo $sql_custom_result;
+    echo "<h3>Ambiente: </h3>";
+    echo $environment;
 }
 ?>
 
