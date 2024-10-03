@@ -35,35 +35,40 @@ function executarSQL($conn, $sql) {
 }
 
 /**
- * Função para carregar variáveis de ambiente a partir de um arquivo .env
+ * Função para conectar ao banco de dados utilizando variáveis de ambiente de um arquivo .env
  *
  * @param string $filePath Caminho para o arquivo .env
- * @throws Exception Se o arquivo .env não for encontrado
+ * @throws Exception Se o arquivo .env não for encontrado ou se houver falha na conexão
+ * @return mysqli Conexão com o banco de dados
  */
-function loadEnv($filePath)
-{
+function conectaBanco($filePath = '.env') {
+    // Verifica se o arquivo .env existe
     if (!file_exists($filePath)) {
-        throw new Exception("Arquivo .env não encontrado.");
+        throw new Exception("O arquivo .env não foi encontrado.");
     }
 
-    // Ler o arquivo linha por linha
-    $lines = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-    
-    foreach ($lines as $line) {
-        // Ignorar linhas de comentário
-        if (strpos(trim($line), '#') === 0) {
-            continue;
-        }
+    // Carrega o arquivo .env e define as variáveis de ambiente
+    $envVars = parse_ini_file($filePath);
 
-        // Separar a chave do valor
-        list($name, $value) = explode('=', $line, 2);
-
-        // Remover espaços em branco e aspas desnecessárias
-        $name = trim($name);
-        $value = trim($value, " \t\n\r\0\x0B\"");
-
-        // Definir a variável de ambiente
-        putenv(sprintf('%s=%s', $name, $value));
+    // Verifica se as variáveis foram carregadas corretamente
+    if (!$envVars) {
+        throw new Exception("Erro ao carregar o arquivo .env.");
     }
+
+    // Obtendo os dados de conexão a partir do arquivo .env
+    $servername = $envVars['DB_HOST'];
+    $username = $envVars['DB_USER'];
+    $password = $envVars['DB_PASS'];
+    $dbname = $envVars['DB_NAME'];
+
+    // Criando a conexão
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    // Verificando a conexão
+    if ($conn->connect_error) {
+        throw new Exception("Falha na conexão: " . $conn->connect_error);
+    }
+
+    return $conn;
 }
 ?>

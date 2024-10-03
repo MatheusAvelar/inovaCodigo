@@ -1,15 +1,10 @@
 <?php
-$dbHost = "127.0.0.1:3306";
-$dbUser = "u221588236_root";
-$dbPassword = "Camila@307";
-$dbName = "u221588236_controle_finan";
+include 'php/utils.php';
 
-// Conectando ao banco de dados
-$conn = new mysqli($dbHost, $dbUser, $dbPassword, $dbName);
-
-// Verifica se há erros na conexão
-if ($conn->connect_error) {
-    die("Falha na conexão: " . $conn->connect_error);
+try {
+    $conn = conectaBanco();
+} catch (Exception $e) {
+    die("Erro: " . $e->getMessage());
 }
 
 // Deletar uma linha
