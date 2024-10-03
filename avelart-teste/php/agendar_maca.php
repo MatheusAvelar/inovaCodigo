@@ -2,14 +2,14 @@
 session_start();
 include 'envia_email.php';
 include 'envia_whatsapp.php';
-include 'php/utils.php';
+include 'utils.php';
 
 // Definindo variáveis para mensagem de retorno
 $_SESSION['status'] = "";
 $_SESSION['message'] = "";
 
 try {
-    $conn = conectaBanco();
+    $conn = conectaBanco('../.env');
 } catch (Exception $e) {
     die("Erro: " . $e->getMessage());
 }
