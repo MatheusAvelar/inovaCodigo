@@ -22,7 +22,7 @@ if ($environment === 'production') {
 
 $dbHost = "127.0.0.1:3306";
 $dbUser = "u221588236_root";
-$dbPassword = "Camila@307";
+$dbPassword = "Avelart@2024";
 $dbName = "u221588236_controle_finan";
 
 // Conectando ao banco de dados
