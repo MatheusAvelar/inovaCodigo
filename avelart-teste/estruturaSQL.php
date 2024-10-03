@@ -1,7 +1,7 @@
 <?php
 $dbHost = "127.0.0.1:3306";
 $dbUser = "u221588236_root";
-$dbPassword = "Avelart@2024";
+$dbPassword = "Camila@307";
 $dbName = "u221588236_controle_finan";
 
 // Conectando ao banco de dados
