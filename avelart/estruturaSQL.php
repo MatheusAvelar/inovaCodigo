@@ -1,5 +1,5 @@
 <?php
-
+include 'php/utils.php';
 // Carrega o arquivo .env
 loadEnv(__DIR__ . '/.env');
 
