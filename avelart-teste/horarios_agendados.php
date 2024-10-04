@@ -60,7 +60,7 @@ unset($_SESSION['status'], $_SESSION['message']);*/
     </style>
 </head>
 <body>
-    <header>
+    <!--<header>
         <div class="logo-container">
             <a href="https://avelart-teste.inovacodigo.com.br/agendamento.php">
                 <img src="img/tatto.jpeg" alt="Logo do Estúdio" class="logo">
@@ -98,13 +98,13 @@ unset($_SESSION['status'], $_SESSION['message']);*/
                     <?= htmlspecialchars($message) ?>
                 </div>
             <?php endif; ?>
-        </div>
+        </div> -->
         <h2>Horários Agendados</h2>
         <form id="filter-form" method="GET" action="horarios_agendados.php">
             <!-- <label for="filter-date">Data:</label>
             <input type="date" id="filter-date" name="filter_date" value="<?= htmlspecialchars($_GET['filter_date'] ?? '') ?>"> -->
             
-            <label for="filter-month">Mês:</label>
+            <!--<label for="filter-month">Mês:</label>
             <select id="filter-month" name="filter_month">
                 <option value="">Todos os Meses</option>
                 <?php
@@ -148,7 +148,7 @@ unset($_SESSION['status'], $_SESSION['message']);*/
                     <i class="fa-solid fa-file-csv"></i>
                 </button>
             <?php endif; ?>
-        </form>
+        </form>--->
         <div class="grid">
             <div class="maca">
                 <table>
