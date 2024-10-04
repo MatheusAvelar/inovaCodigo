@@ -1,7 +1,5 @@
 <?php
 session_start();
-include 'php/verificar_perfil.php';
-
 if ($_SESSION['perfil_id'] != 2) {
     header("Location: agendamento.php");
     exit();
@@ -82,7 +80,7 @@ unset($_SESSION['status'], $_SESSION['message']);
                 <li><a href="termos_enviados.php">Termos Preenchidos</a></li>
                 <li><a href="agendamento.php">Agendamento</a></li>
                 <li><a href="horarios_agendados.php">Horários Agendados</a></li>
-                <?php if ($perfil_id == 2) : ?>
+                <?php if ($_SESSION['perfil_id'] == 2) : ?>
                     <li class="dropdown">
                         <a href="javascript:void(0)">
                             <i class="fas fa-cog settings-icon"></i>
