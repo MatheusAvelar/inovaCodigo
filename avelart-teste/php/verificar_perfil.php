@@ -8,10 +8,10 @@ try {
 }
 
 // Verifica se o usuário está logado, se não, redireciona para a página de login
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+/*if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header("Location: index.html");
     exit;
-}
+}*/
 
 // Obtém o perfil do usuário
 $usuario_id = $_SESSION['id'];
