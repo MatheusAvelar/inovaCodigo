@@ -3,6 +3,7 @@ include 'utils.php';
 
 try {
     $conn = conectaBanco();
+    echo "Banco de dados conectado com sucesso!";
 } catch (Exception $e) {
     die("Erro: " . $e->getMessage());
 }
