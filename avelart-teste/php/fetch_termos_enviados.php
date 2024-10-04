@@ -3,6 +3,13 @@ include 'utils.php';
 
 try {
     $conn = conectaBanco('./.env');
+    echo "Diretório atual: " . __DIR__;
+    $filePath = __DIR__ . '/.env';
+    if (!file_exists($filePath)) {
+        die("O arquivo .env não foi encontrado no caminho: " . $filePath);
+    }
+
+
 } catch (Exception $e) {
     die("Erro: " . $e->getMessage());
 }
