@@ -53,7 +53,7 @@ function conectaBanco() {
     if ($conn->connect_error) {
         throw new Exception("Falha na conexão: " . $conn->connect_error);
     } else {
-        throw new Exception('Conectador com sucesso!');
+        throw new Exception('Conectado com sucesso!');
     }
 
     return $conn;
