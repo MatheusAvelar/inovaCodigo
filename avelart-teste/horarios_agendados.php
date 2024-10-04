@@ -73,7 +73,7 @@ unset($_SESSION['status'], $_SESSION['message']);*/
 
     <div class="container">
     <nav id="menu"> 
-            <!--<ul> 
+            <ul> 
                 <li><a href="termos_enviados.php">Termos Preenchidos</a></li>
                 <li><a href="agendamento.php">Agendamento</a></li>
                 <?php if ($_SESSION['perfil_id'] == 2) : ?>
@@ -89,7 +89,7 @@ unset($_SESSION['status'], $_SESSION['message']);*/
                     </li>
                 <?php endif; ?>
                 <li><a href="php/logout.php">Sair</a></li>
-            </ul> -->
+            </ul>
         </nav>
         <br>
         <div id="message-container">
