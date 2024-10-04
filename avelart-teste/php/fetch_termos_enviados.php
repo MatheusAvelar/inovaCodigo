@@ -4,7 +4,7 @@ include 'utils.php';
 try {
     $conn = conectaBanco('.env');
 } catch (Exception $e) {
-    die("Erro: " . $e->getMessage());
+    echo "Erro: " . $e->getMessage();
 }
 
 $usuarioLogado = $_SESSION['id'];
