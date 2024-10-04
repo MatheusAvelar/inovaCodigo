@@ -1,6 +1,5 @@
 <?php
 session_start();
-//include 'php/verificar_perfil.php';
 include 'utils.php';
 
 // Verifica se o ID do usuário foi passado na URL e o converte para um inteiro
@@ -14,7 +13,7 @@ if ($userId == 0) {
 }
 
 try {
-    $conn = conectaBanco('./.env');
+    $conn = conectaBanco();
 } catch (Exception $e) {
     die("Erro: " . $e->getMessage());
 }

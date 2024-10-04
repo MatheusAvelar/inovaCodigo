@@ -122,7 +122,7 @@ $pdf->SetFont('Arial', '', 12);
 $pdf->Cell(0, 10, utf8_decode('Assinatura do Responsável: ' . $assinatura_responsavel), 0, 1);
 
 try {
-    $conn = conectaBanco('./.env');
+    $conn = conectaBanco();
 } catch (Exception $e) {
     die("Erro: " . $e->getMessage());
 }

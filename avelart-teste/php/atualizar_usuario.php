@@ -8,7 +8,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 try {
-    $conn = conectaBanco('./.env');
+    $conn = conectaBanco();
 } catch (Exception $e) {
     die("Erro: " . $e->getMessage());
 }

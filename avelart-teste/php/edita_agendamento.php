@@ -9,7 +9,7 @@ if (!isset($_GET['id']) || empty($_GET['id'])) {
 $agendamentoId = intval($_GET['id']);
 
 try {
-    $conn = conectaBanco('./.env');
+    $conn = conectaBanco();
 } catch (Exception $e) {
     die("Erro: " . $e->getMessage());
 }

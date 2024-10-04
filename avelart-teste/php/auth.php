@@ -3,7 +3,7 @@ session_start();
 include 'utils.php';
 
 try {
-    $conn = conectaBanco('../.env');
+    $conn = conectaBanco();
 } catch (Exception $e) {
     die("Erro: " . $e->getMessage());
 }

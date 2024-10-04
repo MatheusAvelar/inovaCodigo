@@ -1,6 +1,5 @@
 <?php
 session_start();
-include 'php/verificar_perfil.php';
 
 // Verifica se há mensagem de status na sessão
 $status = isset($_SESSION['status']) ? $_SESSION['status'] : null;
@@ -77,7 +76,7 @@ unset($_SESSION['status'], $_SESSION['message']);
             <ul> 
                 <li><a href="termos_enviados.php">Termos Preenchidos</a></li>
                 <li><a href="agendamento.php">Agendamento</a></li>
-                <?php if ($perfil_id == 2) : ?>
+                <?php if ($_SESSION['perfil_id'] == 2) : ?>
                     <li class="dropdown">
                         <a href="javascript:void(0)">
                             <i class="fas fa-cog settings-icon"></i>
@@ -144,7 +143,7 @@ unset($_SESSION['status'], $_SESSION['message']);
             <button type="submit" class="button" id="filter-button">
                 <i class="fas fa-search"></i>
             </button>
-            <?php if ($perfil_id == 2) : ?>
+            <?php if ($_SESSION['perfil_id'] == 2) : ?>
                 <button type="button" class="button" id="export-button">
                     <i class="fa-solid fa-file-csv"></i>
                 </button>
