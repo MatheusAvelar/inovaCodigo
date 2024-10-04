@@ -21,6 +21,7 @@ $resultado = mysqli_query($conn, $sql);
 if ($resultado) {
     $usuario = mysqli_fetch_assoc($resultado);
     $perfil_id = $usuario['perfil_id'];
+    echo "Perfil: ".$perfil_id;
 } else {
     die("Erro ao obter perfil do usuário: " . mysqli_error($conn));
 }
