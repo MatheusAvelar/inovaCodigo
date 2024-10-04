@@ -1,4 +1,5 @@
 <?php
+include 'verifica_perfil.php';
 include 'utils.php';
 
 try {
