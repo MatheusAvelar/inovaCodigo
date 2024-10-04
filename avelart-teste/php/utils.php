@@ -52,6 +52,8 @@ function conectaBanco() {
     // Verificando a conexão
     if ($conn->connect_error) {
         throw new Exception("Falha na conexão: " . $conn->connect_error);
+    } else {
+        throw new Exception('Conectador com sucesso!');
     }
 
     return $conn;
