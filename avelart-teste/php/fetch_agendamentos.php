@@ -105,13 +105,13 @@ if ($result->num_rows > 0) {
         echo "<td>" . $formattedEndTime . "</td>";
 
         // Verificação para mostrar o botão de excluir apenas se o usuário logado é o dono do agendamento
-        if ($row['usuario_id'] == $_SESSION['id'] || $perfil_id == 2) {
+        if ($row['usuario_id'] == $_SESSION['id'] || $_SESSION['perfil_id'] == 2) {
             // Verifica se a data do agendamento está a pelo menos 2 dias no futuro
             $agendamentoDate = strtotime($row['data']);
             $currentDate = strtotime(date('Y-m-d'));
             $dateDiff = ($agendamentoDate - $currentDate) / 86400; // diferença em dias
 
-            if ($dateDiff > 2 || $perfil_id == 2) {
+            if ($dateDiff > 2 || $_SESSION['perfil_id'] == 2) {
                 echo "<td>
                         <a href='editar_agendamento.php?id=" . htmlspecialchars($row['id']) . "' title='Editar'>
                             <i class='fas fa-edit'></i>
