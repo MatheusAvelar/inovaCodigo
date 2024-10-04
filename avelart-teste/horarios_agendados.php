@@ -1,12 +1,12 @@
 <?php
 session_start();
 
-// Verifica se há mensagem de status na sessão
+/*// Verifica se há mensagem de status na sessão
 $status = isset($_SESSION['status']) ? $_SESSION['status'] : null;
 $message = isset($_SESSION['message']) ? $_SESSION['message'] : null;
 
 // Limpa as mensagens de status da sessão após exibir
-unset($_SESSION['status'], $_SESSION['message']);
+unset($_SESSION['status'], $_SESSION['message']);*/
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -136,7 +136,7 @@ unset($_SESSION['status'], $_SESSION['message']);
                 <?php
                 // Carregar a lista de tatuadores
                 // Inclua a lógica para obter os tatuadores do banco de dados
-                include 'php/get_tatuadores.php';
+                //include 'php/get_tatuadores.php';
                 ?>
             </select>
     
@@ -177,7 +177,7 @@ unset($_SESSION['status'], $_SESSION['message']);
     </div>
 
     <script>
-        document.getElementById('export-button').addEventListener('click', function() {
+        /*document.getElementById('export-button').addEventListener('click', function() {
             console.log('Exportar botão clicado');
 
             const form = document.getElementById('filter-form');
@@ -217,7 +217,7 @@ unset($_SESSION['status'], $_SESSION['message']);
             .catch(error => {
                 console.error('Erro na requisição ou na geração do arquivo:', error);
             });
-        });
+        });*/
     </script>
 
 </body>

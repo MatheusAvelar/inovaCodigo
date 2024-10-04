@@ -1,15 +1,15 @@
 <?php
 include 'utils.php';
 
-// Verifica se a sessão já foi iniciada
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
 try {
     $conn = conectaBanco();
 } catch (Exception $e) {
     die("Erro: " . $e->getMessage());
+}
+
+// Verifica se a sessão já foi iniciada
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
 }
 
 // Obtendo os filtros do formulário se estiverem definidos
