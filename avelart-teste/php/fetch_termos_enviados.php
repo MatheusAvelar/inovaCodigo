@@ -2,9 +2,9 @@
 include 'utils.php';
 
 try {
-    $conn = conectaBanco('.env');
+    $conn = conectaBanco('./.env');
 } catch (Exception $e) {
-    echo "Erro: " . $e->getMessage();
+    die("Erro: " . $e->getMessage());
 }
 
 $usuarioLogado = $_SESSION['id'];
