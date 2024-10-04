@@ -37,31 +37,14 @@ function executarSQL($conn, $sql) {
 /**
  * Função para conectar ao banco de dados utilizando variáveis de ambiente de um arquivo .env
  *
- * @param string $filePath Caminho para o arquivo .env
- * @throws Exception Se o arquivo .env não for encontrado ou se houver falha na conexão
  * @return mysqli Conexão com o banco de dados
  */
-function conectaBanco($filePath = '/home/u221588236/domains/inovacodigo.com.br/public_html/avelart-teste/.env') {
-    //$filePath = __DIR__ . '/../.env';
-    //echo "Diretório atual: ".$filePath;
-    // Verifica se o arquivo .env existe
-    if (!file_exists($filePath)) {
-        throw new Exception("O arquivo .env não foi encontrado no caminho: " . $filePath);
-    }
-
-    // Carrega o arquivo .env e define as variáveis de ambiente
-    $envVars = parse_ini_file($filePath);
-
-    // Verifica se as variáveis foram carregadas corretamente
-    if (!$envVars) {
-        throw new Exception("Erro ao carregar o arquivo .env.");
-    }
-
+function conectaBanco() {
     // Obtendo os dados de conexão a partir do arquivo .env
-    $servername = $envVars['DB_HOST'];
-    $username = $envVars['DB_USER'];
-    $password = $envVars['DB_PASS'];
-    $dbname = $envVars['DB_NAME'];
+    $servername = '127.0.0.1:3306';
+    $username = 'u221588236_avelart';
+    $password = 'Avelart@2024';
+    $dbname = 'u221588236_avelart_teste';
 
     // Criando a conexão
     $conn = new mysqli($servername, $username, $password, $dbname);
