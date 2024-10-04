@@ -2,7 +2,7 @@
 include 'utils.php';
 
 try {
-    $conn = conectaBanco('./.env');
+    $conn = conectaBanco('.../.env');
 } catch (Exception $e) {
     die("Erro: " . $e->getMessage());
 }
