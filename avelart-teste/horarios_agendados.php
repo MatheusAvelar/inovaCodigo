@@ -128,7 +128,7 @@ unset($_SESSION['status'], $_SESSION['message']);*/
                 <option value="2" <?= isset($_GET['filter_maca']) && $_GET['filter_maca'] == '2' ? 'selected' : '' ?>>Maca 2</option>
                 <option value="3" <?= isset($_GET['filter_maca']) && $_GET['filter_maca'] == '3' ? 'selected' : '' ?>>Maca 3</option>
                 <option value="4" <?= isset($_GET['filter_maca']) && $_GET['filter_maca'] == '4' ? 'selected' : '' ?>>Maca 4</option>
-            </select>
+            </select>--->
     
             <label for="filter-tatuador">Tatuador:</label>
             <select id="filter-tatuador" name="filter_tatuador">
@@ -142,7 +142,7 @@ unset($_SESSION['status'], $_SESSION['message']);*/
     
             <button type="submit" class="button" id="filter-button">
                 <i class="fas fa-search"></i>
-            </button>--->
+            </button>
             <?php if ($_SESSION['perfil_id'] == 2) : ?>
                 <button type="button" class="button" id="export-button">
                     <i class="fa-solid fa-file-csv"></i>
