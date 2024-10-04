@@ -70,10 +70,10 @@ unset($_SESSION['status'], $_SESSION['message']);*/
             Bem Vindo, <?= htmlspecialchars($_SESSION['usuario_nome']) ?>!
         </div>
     </header>
-<!--
+
     <div class="container">
     <nav id="menu"> 
-            <ul> 
+            <!--<ul> 
                 <li><a href="termos_enviados.php">Termos Preenchidos</a></li>
                 <li><a href="agendamento.php">Agendamento</a></li>
                 <?php if ($_SESSION['perfil_id'] == 2) : ?>
@@ -89,7 +89,7 @@ unset($_SESSION['status'], $_SESSION['message']);*/
                     </li>
                 <?php endif; ?>
                 <li><a href="php/logout.php">Sair</a></li>
-            </ul> 
+            </ul> -->
         </nav>
         <br>
         <div id="message-container">
@@ -98,7 +98,7 @@ unset($_SESSION['status'], $_SESSION['message']);*/
                     <?= htmlspecialchars($message) ?>
                 </div>
             <?php endif; ?>
-        </div> -->
+        </div> 
         <h2>Horários Agendados</h2>
         <form id="filter-form" method="GET" action="horarios_agendados.php">
             <!-- <label for="filter-date">Data:</label>
