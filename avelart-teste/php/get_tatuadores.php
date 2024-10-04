@@ -7,9 +7,12 @@ try {
     die("Erro: " . $e->getMessage());
 }
 
-// Obtendo a lista de tatuadores
 $query = "SELECT id, nome FROM usuarioEstudio";
 $result = $conn->query($query);
+
+if ($result === false) {
+    die('Erro na consulta SQL: ' . $conn->error);
+}
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
@@ -18,8 +21,9 @@ if ($result->num_rows > 0) {
         $selected = (isset($_GET['filter_tatuador']) && $_GET['filter_tatuador'] == $id) ? 'selected' : '';
         echo "<option value=\"$id\" $selected>$nome</option>";
     }
+} else {
+    echo '<option value="">Nenhum tatuador encontrado</option>';
 }
 
-// Fechando a conexão
 $conn->close();
 ?>
