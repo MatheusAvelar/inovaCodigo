@@ -7,7 +7,11 @@ try {
     die("Erro: " . $e->getMessage());
 }
 
-$query = "SELECT id, UPPER(nome) AS nome FROM usuarioEstudio WHERE ativo = '1'";
+$query = "SELECT id, 
+                CONCAT(UPPER(LEFT(nome, 1)), LOWER(SUBSTRING(nome, 2))) AS nome
+            FROM usuarioEstudio 
+            WHERE ativo = '1';
+            ";
 $result = $conn->query($query);
 
 if ($result === false) {
