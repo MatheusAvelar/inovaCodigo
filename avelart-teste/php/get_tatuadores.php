@@ -7,7 +7,7 @@ try {
     die("Erro: " . $e->getMessage());
 }
 
-$query = "SELECT id, UPPER(nome) as nome FROM usuarioEstudio WHERE ativo = '1'";
+$query = "SELECT id, UPPER(nome) AS nome FROM usuarioEstudio WHERE ativo = '1'";
 $result = $conn->query($query);
 
 if ($result === false) {
