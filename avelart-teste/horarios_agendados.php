@@ -177,7 +177,7 @@ unset($_SESSION['status'], $_SESSION['message']);*/
     </div>
 
     <script>
-        /*document.getElementById('export-button').addEventListener('click', function() {
+        document.getElementById('export-button').addEventListener('click', function() {
             console.log('Exportar botão clicado');
 
             const form = document.getElementById('filter-form');
@@ -217,7 +217,7 @@ unset($_SESSION['status'], $_SESSION['message']);*/
             .catch(error => {
                 console.error('Erro na requisição ou na geração do arquivo:', error);
             });
-        });*/
+        });
     </script>
 
 </body>
