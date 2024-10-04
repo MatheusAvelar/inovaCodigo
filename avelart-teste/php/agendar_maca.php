@@ -95,7 +95,7 @@ if ($errors) {
                     $to = $emailCliente;
                     $subject = 'Confirmação de Agendamento de Tatuagem';
                     
-                    $linkTermo = "https://avelart.inovacodigo.com.br/termo_responsabilidade.php";
+                    $linkTermo = "https://avelart-teste.inovacodigo.com.br/termo_responsabilidade.php";
                     $linkTermo .= "?nome_cliente=" . urlencode($nomeCliente);
                     $linkTermo .= "&telefone_cliente=" . urlencode($telefoneCliente);
                     $linkTermo .= "&email_cliente=" . urlencode($emailCliente);
