@@ -119,8 +119,8 @@ unset($_SESSION['status'], $_SESSION['message']);*/
                     echo "<option value=\"$value\" $selected>$name</option>";
                 }
                 ?>
-            </select>
-
+            </select>--->
+            
             <label for="filter-maca">Maca:</label>
             <select id="filter-maca" name="filter_maca">
                 <option value="">Todas as Macas</option>
@@ -128,7 +128,7 @@ unset($_SESSION['status'], $_SESSION['message']);*/
                 <option value="2" <?= isset($_GET['filter_maca']) && $_GET['filter_maca'] == '2' ? 'selected' : '' ?>>Maca 2</option>
                 <option value="3" <?= isset($_GET['filter_maca']) && $_GET['filter_maca'] == '3' ? 'selected' : '' ?>>Maca 3</option>
                 <option value="4" <?= isset($_GET['filter_maca']) && $_GET['filter_maca'] == '4' ? 'selected' : '' ?>>Maca 4</option>
-            </select>--->
+            </select>
     
             <label for="filter-tatuador">Tatuador:</label>
             <select id="filter-tatuador" name="filter_tatuador">
@@ -136,7 +136,7 @@ unset($_SESSION['status'], $_SESSION['message']);*/
                 <?php
                 // Carregar a lista de tatuadores
                 // Inclua a lógica para obter os tatuadores do banco de dados
-                include 'php/get_tatuadores.php';
+                //include 'php/get_tatuadores.php';
                 ?>
             </select>
     
