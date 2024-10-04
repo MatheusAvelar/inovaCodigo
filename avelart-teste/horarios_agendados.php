@@ -135,8 +135,7 @@ unset($_SESSION['status'], $_SESSION['message']);*/
                 <option value="">Todos os Tatuadores</option>
                 <?php
                 // Carregar a lista de tatuadores
-                // Inclua a lógica para obter os tatuadores do banco de dados
-                //include 'php/get_tatuadores.php';
+                include 'php/get_tatuadores.php';
                 ?>
             </select>
     

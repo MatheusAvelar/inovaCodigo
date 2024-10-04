@@ -21,5 +21,5 @@ if ($result->num_rows > 0) {
 }
 
 // Fechando a conexão
-$conn->close();
+//$conn->close();
 ?>
