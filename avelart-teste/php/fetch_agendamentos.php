@@ -136,7 +136,7 @@ if ($result->num_rows > 0) {
                     </td>";
             }
         } else {
-            echo "<td>Não pode excluir</td>";
+            echo "<td>Sem Ação</td>";
         }
 
         echo "</tr>";
