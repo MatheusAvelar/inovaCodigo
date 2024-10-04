@@ -41,9 +41,9 @@ function executarSQL($conn, $sql) {
  * @throws Exception Se o arquivo .env não for encontrado ou se houver falha na conexão
  * @return mysqli Conexão com o banco de dados
  */
-function conectaBanco($filePath) {
-    $filePath = __DIR__ . '/../.env';
-    echo "Diretório atual: ".$filePath;
+function conectaBanco($filePath = '/home/u221588236/domains/inovacodigo.com.br/public_html/avelart-teste/.env') {
+    //$filePath = __DIR__ . '/../.env';
+    //echo "Diretório atual: ".$filePath;
     // Verifica se o arquivo .env existe
     if (!file_exists($filePath)) {
         throw new Exception("O arquivo .env não foi encontrado no caminho: " . $filePath);
