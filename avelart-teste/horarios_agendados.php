@@ -142,13 +142,13 @@ unset($_SESSION['status'], $_SESSION['message']);*/
     
             <button type="submit" class="button" id="filter-button">
                 <i class="fas fa-search"></i>
-            </button>
+            </button>--->
             <?php if ($_SESSION['perfil_id'] == 2) : ?>
                 <button type="button" class="button" id="export-button">
                     <i class="fa-solid fa-file-csv"></i>
                 </button>
             <?php endif; ?>
-        </form>--->
+        </form>
         <div class="grid">
             <div class="maca">
                 <table>
