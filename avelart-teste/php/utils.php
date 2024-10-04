@@ -43,11 +43,11 @@ function executarSQL($conn, $sql) {
  */
 function conectaBanco($filePath) {
     echo "Diretório atual: " . __DIR__;
-    $filePath = __DIR__ . '/.env';
+    $filePath = __DIR__ . '../.env';
     if (!file_exists($filePath)) {
         die("O arquivo .env não foi encontrado no caminho: " . $filePath);
     }
-    
+
     // Verifica se o arquivo .env existe
     if (!file_exists($filePath)) {
         throw new Exception("O arquivo .env não foi encontrado.");
