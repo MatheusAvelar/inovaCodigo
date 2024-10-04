@@ -42,9 +42,8 @@ function executarSQL($conn, $sql) {
  * @return mysqli Conexão com o banco de dados
  */
 function conectaBanco($filePath) {
-    //echo "Diretório atual: " . __DIR__;
     $filePath = __DIR__ . '/../.env';
-
+    echo "Diretório atual: ".$filePath;
     // Verifica se o arquivo .env existe
     if (!file_exists($filePath)) {
         throw new Exception("O arquivo .env não foi encontrado no caminho: " . $filePath);
