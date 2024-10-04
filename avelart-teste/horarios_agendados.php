@@ -104,7 +104,7 @@ unset($_SESSION['status'], $_SESSION['message']);*/
             <!-- <label for="filter-date">Data:</label>
             <input type="date" id="filter-date" name="filter_date" value="<?= htmlspecialchars($_GET['filter_date'] ?? '') ?>"> -->
             
-            <!--<label for="filter-month">Mês:</label>
+            <label for="filter-month">Mês:</label>
             <select id="filter-month" name="filter_month">
                 <option value="">Todos os Meses</option>
                 <?php
@@ -119,8 +119,8 @@ unset($_SESSION['status'], $_SESSION['message']);*/
                     echo "<option value=\"$value\" $selected>$name</option>";
                 }
                 ?>
-            </select>--->
-            
+            </select>
+
             <label for="filter-maca">Maca:</label>
             <select id="filter-maca" name="filter_maca">
                 <option value="">Todas as Macas</option>
