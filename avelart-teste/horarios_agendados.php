@@ -60,7 +60,7 @@ unset($_SESSION['status'], $_SESSION['message']);*/
     </style>
 </head>
 <body>
-    <!--<header>
+    <header>
         <div class="logo-container">
             <a href="https://avelart-teste.inovacodigo.com.br/agendamento.php">
                 <img src="img/tatto.jpeg" alt="Logo do Estúdio" class="logo">
@@ -70,7 +70,7 @@ unset($_SESSION['status'], $_SESSION['message']);*/
             Bem Vindo, <?= htmlspecialchars($_SESSION['usuario_nome']) ?>!
         </div>
     </header>
-
+<!--
     <div class="container">
     <nav id="menu"> 
             <ul> 
