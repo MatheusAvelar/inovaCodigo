@@ -143,7 +143,8 @@ if ($action == 'metricas') {
     $sql_agendamentos_tatuador = "SELECT CONCAT(UPPER(LEFT(u.nome, 1)), LOWER(SUBSTRING(u.nome, 2))) AS tatuador, DATE_FORMAT(a.data, '%m/%Y') AS mes_agendamento, COUNT(*) AS total_agendamentos 
                                     FROM agendamentos a 
                                     JOIN usuarioEstudio u ON a.usuario_id = u.id 
-                                    WHERE a.status = 'ativo'";
+                                    WHERE a.status = 'ativo'
+                                    AND u.id NOT IN (1, 2, 3, 14)";
 
     if ($filtro_aplicado) {
         $sql_agendamentos_tatuador .= " AND ";
