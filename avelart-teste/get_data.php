@@ -57,22 +57,22 @@ if ($action == 'metricas') {
     ]);
     
 } elseif ($action == 'graficos') {
-    // Obter agendamentos agrupados por data
-    $sql_agendamentos = "SELECT DATE_FORMAT(data, '%d/%m') as data_agendamento, COUNT(*) as total_agendamentos 
-                         FROM agendamentos 
-                         WHERE status = 'ativo' AND data >= CURDATE() - INTERVAL $periodo DAY 
-                         GROUP BY data_agendamento 
-                         ORDER BY data_agendamento ASC";
+    // Obter agendamentos agrupados por mês
+    $sql_agendamentos = "SELECT DATE_FORMAT(data, '%m/%Y') as mes_agendamento, COUNT(*) as total_agendamentos 
+                            FROM agendamentos 
+                            WHERE status = 'ativo' AND data >= CURDATE() - INTERVAL $periodo DAY 
+                            GROUP BY mes_agendamento 
+                            ORDER BY mes_agendamento ASC";
     $result_agendamentos = $conn->query($sql_agendamentos);
-    
+
     $labels = [];
     $agendamentos = [];
-    
+
     while ($row = $result_agendamentos->fetch_assoc()) {
-        $labels[] = $row['data_agendamento'];
+        $labels[] = $row['mes_agendamento'];
         $agendamentos[] = $row['total_agendamentos'];
     }
-    
+
     // Retornar os dados em JSON
     echo json_encode([
         'labels' => $labels,
