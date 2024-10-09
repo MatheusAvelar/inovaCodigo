@@ -134,6 +134,13 @@ try {
                 })
                 .catch(error => console.error('Erro ao atualizar gráfico:', error));
         }
+
+        // Inicializar dados ao carregar a página
+        window.onload = function() {
+            filtrarDados();
+            // Atualizar dados a cada 10 segundos (opcional)
+            setInterval(filtrarDados, 10000); // 10000 ms = 10 segundos
+        };
         </script>
 
     </div>
