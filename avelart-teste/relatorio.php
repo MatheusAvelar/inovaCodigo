@@ -100,7 +100,6 @@ try {
                 .then(data => {
                     document.getElementById('totalAgendamentos').textContent = data.total_agendamentos;
                     document.getElementById('totalFaturado').textContent = 'R$ ' + parseFloat(data.total_faturado).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
-                    document.getElementById('agendamentosTatuador').textContent = data.agendamentos_tatuador;
                     document.getElementById('totalCancelamentos').textContent = data.total_cancelamentos;
                 })
                 .catch(error => console.error('Erro ao atualizar métricas:', error));
