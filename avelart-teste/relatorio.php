@@ -106,7 +106,7 @@ try {
             data: {
                 labels: ['Janeiro', 'Fevereiro', 'Março'], // Mude para os meses reais
                 datasets: [{
-                    label: '# de Agendamentos',
+                    label: 'Agendamentos',
                     data: [12, 19, 3], // Dados de exemplo, devem ser dinâmicos
                     backgroundColor: 'rgba(54, 162, 235, 0.2)',
                     borderColor: 'rgba(54, 162, 235, 1)',
