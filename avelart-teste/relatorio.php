@@ -43,7 +43,7 @@ try {
             </div>
             <div class="col-md-4">
                 <label for="ano">Selecionar Ano:</label>
-                <input type="number" class="form-control" id="ano" min="2020" max="<?php echo date('Y'); ?>">
+                <input type="number" class="form-control" id="ano" min="2020" value="<?php echo date('Y'); ?> max="<?php echo date('Y'); ?>">
             </div>
             <div class="col-md-2 align-self-end">
                 <button class="btn btn-primary" onclick="filtrarDados()">Filtrar</button>
@@ -86,12 +86,16 @@ try {
 
         <!-- Exibição de gráfico -->
         <canvas id="agendamentosChart" width="400" height="200"></canvas>
+        <!-- Exibição de gráfico de agendamentos por tatuador -->
+        <canvas id="agendamentosTatuadorChart" width="400" height="200"></canvas>
+
         <script>
         function filtrarDados() {
             const mes = document.getElementById('mes').value; // Assumindo que você tem um campo de seleção para mês
             const ano = document.getElementById('ano').value; // Assumindo que você tem um campo de seleção para ano
             atualizarMetricas(mes, ano);
             atualizarGrafico(mes, ano);
+            atualizarGraficoTatuadores();
         }
 
 
@@ -135,9 +139,41 @@ try {
                 .catch(error => console.error('Erro ao atualizar gráfico:', error));
         }
 
+        // Função para atualizar o gráfico de agendamentos por tatuador
+        function atualizarGraficoTatuadores() {
+            fetch('get_data.php?action=graficos_tatuadores&periodo=' + document.getElementById('periodo').value)
+                .then(response => response.json())
+                .then(data => {
+                    var ctx = document.getElementById('agendamentosTatuadorChart').getContext('2d');
+                    window.agendamentosTatuadorChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: data.labels,
+                            datasets: [{
+                                label: 'Agendamentos por Tatuador',
+                                data: data.tatuadores,
+                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                })
+                .catch(error => console.error('Erro ao atualizar gráfico de tatuadores:', error));
+        }
+
         // Inicializar dados ao carregar a página
         window.onload = function() {
-            filtrarDados();
+            atualizarMetricas('', '');
+            atualizarGrafico('', '');
+            atualizarGraficoTatuadores();
             // Atualizar dados a cada 10 segundos (opcional)
             setInterval(filtrarDados, 10000); // 10000 ms = 10 segundos
         };

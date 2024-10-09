@@ -138,6 +138,47 @@ if ($action == 'metricas') {
         'labels' => $labels,
         'agendamentos' => $agendamentos
     ]);
+}  elseif ($action == 'graficos_tatuadores') {
+    // Obter agendamentos agrupados por tatuador e mês
+    $sql_agendamentos_tatuador = "
+        SELECT u.nome AS tatuador, DATE_FORMAT(a.data, '%m/%Y') AS mes_agendamento, COUNT(*) AS total_agendamentos 
+        FROM agendamentos a 
+        JOIN usuarioEstudio u ON a.usuario_id = u.id 
+        WHERE a.status = 'ativo'";
+
+    if ($filtro_aplicado) {
+        $sql_agendamentos_tatuador .= " AND ";
+        if (!empty($mes)) {
+            $sql_agendamentos_tatuador .= "MONTH(a.data) = '$mes'";
+        }
+        if (!empty($ano)) {
+            if (!empty($mes)) {
+                $sql_agendamentos_tatuador .= " AND ";
+            }
+            $sql_agendamentos_tatuador .= "YEAR(a.data) = '$ano'";
+        }
+    } else {
+        // Se não houver filtros, retorna todos do ano atual
+        $sql_agendamentos_tatuador .= " AND YEAR(a.data) = '".date('Y')."'";
+    }
+
+    $sql_agendamentos_tatuador .= " GROUP BY tatuador, mes_agendamento ORDER BY mes_agendamento ASC";
+
+    $result_agendamentos_tatuador = $conn->query($sql_agendamentos_tatuador);
+
+    $labels_tatuadores = [];
+    $tatuadores_data = [];
+
+    while ($row = $result_agendamentos_tatuador->fetch_assoc()) {
+        $labels_tatuadores[] = $row['mes_agendamento'] . ' - ' . $row['tatuador'];
+        $tatuadores_data[] = $row['total_agendamentos'];
+    }
+
+    // Retornar os dados em JSON
+    echo json_encode([
+        'labels' => $labels_tatuadores,
+        'tatuadores' => $tatuadores_data
+    ]);
 } else {
     echo json_encode(['error' => 'Ação inválida']);
 }
