@@ -88,7 +88,7 @@ try {
         });
 
         function atualizarAgendamentos() {
-            fetch('get_data.php')
+            fetch('relatorio/get_data.php')
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById('totalAgendamentos').textContent = data;
