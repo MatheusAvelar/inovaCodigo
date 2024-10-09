@@ -28,6 +28,49 @@ try {
                 <div class="card text-white bg-primary mb-3">
                     <div class="card-header">Total de Agendamentos</div>
                     <div class="card-body">
+                        <h5 class="card-title" id="totalAgendamentos">Carregando...</h5>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Total Faturado -->
+            <div class="col-md-3">
+                <div class="card text-white bg-success mb-3">
+                    <div class="card-header">Total Faturado</div>
+                    <div class="card-body">
+                        <h5 class="card-title" id="totalFaturado">Carregando...</h5>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Agendamentos por Tatuador -->
+            <div class="col-md-3">
+                <div class="card text-white bg-warning mb-3">
+                    <div class="card-header">Agendamentos por Tatuador</div>
+                    <div class="card-body">
+                        <h5 class="card-title" id="agendamentosTatuador">Carregando...</h5>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Cancelamentos -->
+            <div class="col-md-3">
+                <div class="card text-white bg-danger mb-3">
+                    <div class="card-header">Cancelamentos</div>
+                    <div class="card-body">
+                        <h5 class="card-title" id="totalCancelamentos">Carregando...</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção de Métricas -->
+        <div class="row">
+            <!-- Total de Agendamentos -->
+            <div class="col-md-3">
+                <div class="card text-white bg-primary mb-3">
+                    <div class="card-header">Total de Agendamentos</div>
+                    <div class="card-body">
                         <p class="card-text">
                             <?php
                             $result = $conn->query("SELECT COUNT(*) as total_agendamentos FROM agendamentos WHERE status = 'ativo'");
