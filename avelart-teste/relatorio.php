@@ -91,8 +91,8 @@ try {
 
         <script>
         function filtrarDados() {
-            const mes = document.getElementById('mes').value; // Assumindo que você tem um campo de seleção para mês
-            const ano = document.getElementById('ano').value; // Assumindo que você tem um campo de seleção para ano
+            const mes = document.getElementById('mes').value;
+            const ano = document.getElementById('ano').value;
             atualizarMetricas(mes, ano);
             atualizarGrafico(mes, ano);
             atualizarGraficoTatuadores(mes, ano);
