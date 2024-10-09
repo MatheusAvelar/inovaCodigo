@@ -100,7 +100,7 @@ try {
         <!-- Exibição de gráfico -->
         <canvas id="agendamentosChart" width="400" height="200"></canvas>
         <script>
-        var ctx = document.getElementById('agendamentosChart').getContext('2d');
+        /*var ctx = document.getElementById('agendamentosChart').getContext('2d');
         var agendamentosChart = new Chart(ctx, {
             type: 'bar', // Tipo de gráfico
             data: {
@@ -120,7 +120,66 @@ try {
                     }
                 }
             }
-        });
+        });*/
+        // Função para atualizar métricas
+        function atualizarMetricas() {
+            fetch('get_data.php?action=metricas&periodo=' + document.getElementById('periodo').value)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('totalAgendamentos').textContent = data.total_agendamentos;
+                    document.getElementById('totalFaturado').textContent = 'R$ ' + parseFloat(data.total_faturado).toLocaleString('pt-BR', {minimumFractionDigits: 2});
+                    document.getElementById('agendamentosTatuador').textContent = data.agendamentos_tatuador;
+                    document.getElementById('totalCancelamentos').textContent = data.total_cancelamentos;
+                })
+                .catch(error => console.error('Erro ao atualizar métricas:', error));
+        }
+        
+        // Função para atualizar o gráfico
+        function atualizarGrafico() {
+            fetch('get_data.php?action=graficos&periodo=' + document.getElementById('periodo').value)
+                .then(response => response.json())
+                .then(data => {
+                    if (window.agendamentosChart) {
+                        window.agendamentosChart.destroy();
+                    }
+                    
+                    var ctx = document.getElementById('agendamentosChart').getContext('2d');
+                    window.agendamentosChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: data.labels,
+                            datasets: [{
+                                label: '# de Agendamentos',
+                                data: data.agendamentos,
+                                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                borderColor: 'rgba(54, 162, 235, 1)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                })
+                .catch(error => console.error('Erro ao atualizar gráfico:', error));
+        }
+        
+        // Função para filtrar dados
+        function filtrarDados() {
+            atualizarMetricas();
+            atualizarGrafico();
+        }
+        
+        // Inicializar dados ao carregar a página
+        window.onload = function() {
+            filtrarDados();
+            // Atualizar dados a cada 10 segundos (opcional)
+            setInterval(filtrarDados, 10000); // 10000 ms = 10 segundos
+        };
         </script>
 
     </div>
