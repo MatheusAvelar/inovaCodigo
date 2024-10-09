@@ -27,6 +27,8 @@ try {
     <div class="container">
         <h1>Dashboard de Agendamentos</h1>
 
+        <p class="card-text" id="totalAgendamentos">Carregando...</p>
+
         <!-- Exemplo de visualização de métricas -->
         <div class="row">
             <div class="col-sm-4">
@@ -84,6 +86,20 @@ try {
                 }
             }
         });
+
+        function atualizarAgendamentos() {
+            fetch('get_data.php')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('totalAgendamentos').textContent = data;
+                })
+                .catch(error => console.error('Erro ao buscar os dados:', error));
+        }
+
+        // Chama a função ao carregar a página e a cada 60 segundos (60000 ms)
+        window.onload = atualizarAgendamentos;
+        setInterval(atualizarAgendamentos, 60000);  // Atualiza a cada 60 segundos
+
         </script>
 
     </div>
