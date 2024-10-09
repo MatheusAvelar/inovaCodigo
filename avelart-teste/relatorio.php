@@ -13,6 +13,7 @@
     <div class="container mt-5">
         <h1 class="mb-4">Dashboard de Agendamentos</h1>
         
+        <canvas id="myChart"></canvas>
         <!-- Seção de Métricas -->
         <div class="row">
             <!-- Total de Agendamentos -->
@@ -99,10 +100,13 @@
             fetch('get_data.php?action=graficos&periodo=' + document.getElementById('periodo').value)
                 .then(response => response.json())
                 .then(data => {
+                    
+                    // Verifica se o gráfico existe e o destrói se necessário
                     if (window.agendamentosChart) {
                         window.agendamentosChart.destroy();
                     }
-                    
+                    console.log(window.agendamentosChart);
+
                     var ctx = document.getElementById('myChart').getContext('2d');
                     window.agendamentosChart = new Chart(ctx, {
                         type: 'bar', // ou outro tipo de gráfico
