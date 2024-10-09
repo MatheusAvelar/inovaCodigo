@@ -128,12 +128,26 @@ try {
         <!-- Seção de Filtros -->
         <div class="row mb-4">
             <div class="col-md-4">
-                <label for="periodo">Selecionar Período:</label>
-                <select class="form-control" id="periodo">
-                    <option value="7">Últimos 7 dias</option>
-                    <option value="30" selected>Últimos 30 dias</option>
-                    <option value="90">Últimos 90 dias</option>
+                <label for="mes">Selecionar Mês:</label>
+                <select class="form-control" id="mes">
+                    <option value="">Selecione um mês</option>
+                    <option value="01">Janeiro</option>
+                    <option value="02">Fevereiro</option>
+                    <option value="03">Março</option>
+                    <option value="04">Abril</option>
+                    <option value="05">Maio</option>
+                    <option value="06">Junho</option>
+                    <option value="07">Julho</option>
+                    <option value="08">Agosto</option>
+                    <option value="09">Setembro</option>
+                    <option value="10">Outubro</option>
+                    <option value="11">Novembro</option>
+                    <option value="12">Dezembro</option>
                 </select>
+            </div>
+            <div class="col-md-4">
+                <label for="ano">Selecionar Ano:</label>
+                <input type="number" class="form-control" id="ano" value="<?php echo date('Y'); ?>" min="2020" max="<?php echo date('Y'); ?>">
             </div>
             <div class="col-md-2 align-self-end">
                 <button class="btn btn-primary" onclick="filtrarDados()">Filtrar</button>
@@ -143,45 +157,30 @@ try {
         <!-- Exibição de gráfico -->
         <canvas id="agendamentosChart" width="400" height="200"></canvas>
         <script>
-        /*var ctx = document.getElementById('agendamentosChart').getContext('2d');
-        var agendamentosChart = new Chart(ctx, {
-            type: 'bar', // Tipo de gráfico
-            data: {
-                labels: ['Janeiro', 'Fevereiro', 'Março'], // Mude para os meses reais
-                datasets: [{
-                    label: 'Agendamentos',
-                    data: [12, 19, 3], // Dados de exemplo, devem ser dinâmicos
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });*/
-        // Função para atualizar métricas
-        function atualizarMetricas() {
-            fetch('get_data.php?action=metricas&periodo=' + document.getElementById('periodo').value)
+        function filtrarDados() {
+            const mes = document.getElementById('mes').value;
+            const ano = document.getElementById('ano').value;
+
+            atualizarMetricas(mes, ano);
+            atualizarGrafico(mes, ano);
+        }
+
+        function atualizarMetricas(mes, ano) {
+            fetch(`get_data.php?action=metricas&mes=${mes}&ano=${ano}`)
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById('totalAgendamentos').textContent = data.total_agendamentos;
-                    document.getElementById('totalFaturado').textContent = 'R$ ' + parseFloat(data.total_faturado).toLocaleString('pt-BR', {minimumFractionDigits: 2});
+                    document.getElementById('totalFaturado').textContent = 'R$ ' + parseFloat(data.total_faturado).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
                     document.getElementById('agendamentosTatuador').textContent = data.agendamentos_tatuador;
                     document.getElementById('totalCancelamentos').textContent = data.total_cancelamentos;
                 })
                 .catch(error => console.error('Erro ao atualizar métricas:', error));
         }
-        
-        // Função para atualizar o gráfico
-        function atualizarGrafico() {
-            fetch('get_data.php?action=graficos&periodo=' + document.getElementById('periodo').value)
+
+        function atualizarGrafico(mes, ano) {
+            fetch(`get_data.php?action=graficos&mes=${mes}&ano=${ano}`)
                 .then(response => response.json())
-                .then(data => {                    
+                .then(data => {
                     var ctx = document.getElementById('agendamentosChart').getContext('2d');
                     window.agendamentosChart = new Chart(ctx, {
                         type: 'bar',
@@ -205,12 +204,6 @@ try {
                     });
                 })
                 .catch(error => console.error('Erro ao atualizar gráfico:', error));
-        }
-        
-        // Função para filtrar dados
-        function filtrarDados() {
-            atualizarMetricas();
-            atualizarGrafico();
         }
         
         // Inicializar dados ao carregar a página

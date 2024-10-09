@@ -13,38 +13,28 @@ try {
 
 // Definir o tipo de ação
 $action = isset($_GET['action']) ? $_GET['action'] : '';
-$periodo = isset($_GET['periodo']) ? intval($_GET['periodo']) : 30;
+$mes = isset($_GET['mes']) ? sanitize($_GET['mes']) : '';
+$ano = isset($_GET['ano']) ? sanitize($_GET['ano']) : date('Y');
 
-// Função para sanitizar entrada (opcional, mas recomendada)
+// Função para sanitizar entrada
 function sanitize($data) {
     return htmlspecialchars(strip_tags($data));
 }
 
-$periodo = sanitize($periodo);
-
 if ($action == 'metricas') {
     // Total de Agendamentos
-    $sql_total_agendamentos = "SELECT COUNT(*) as total_agendamentos FROM agendamentos WHERE status = 'ativo' AND data >= CURDATE() - INTERVAL $periodo DAY";
+    $sql_total_agendamentos = "SELECT COUNT(*) as total_agendamentos FROM agendamentos WHERE status = 'ativo' AND MONTH(data) = '$mes' AND YEAR(data) = '$ano'";
     $result_total_agendamentos = $conn->query($sql_total_agendamentos);
     $total_agendamentos = $result_total_agendamentos->fetch_assoc()['total_agendamentos'];
     
     // Total Faturado
-    $sql_total_faturado = "SELECT SUM(valor) as total_faturado FROM agendamentos WHERE status = 'ativo' AND data >= CURDATE() - INTERVAL $periodo DAY";
+    $sql_total_faturado = "SELECT SUM(valor) as total_faturado FROM agendamentos WHERE status = 'ativo' AND MONTH(data) = '$mes' AND YEAR(data) = '$ano'";
     $result_total_faturado = $conn->query($sql_total_faturado);
     $total_faturado = $result_total_faturado->fetch_assoc()['total_faturado'];
     if (is_null($total_faturado)) { $total_faturado = 0; }
     
-    // Agendamentos por Tatuador (exemplo: apenas um tatuador para simplificação)
-    $sql_agendamentos_tatuador = "SELECT u.nome AS tatuador, COUNT(a.id) AS total FROM agendamentos a JOIN usuarioEstudio u ON a.usuario_id = u.id WHERE a.status = 'ativo' AND a.data >= CURDATE() - INTERVAL $periodo DAY GROUP BY a.usuario_id ORDER BY total DESC LIMIT 1";
-    $result_agendamentos_tatuador = $conn->query($sql_agendamentos_tatuador);
-    $agendamentos_tatuador = "Nenhum agendamento";
-    if ($result_agendamentos_tatuador->num_rows > 0) {
-        $row = $result_agendamentos_tatuador->fetch_assoc();
-        $agendamentos_tatuador = $row['tatuador'] . ' (' . $row['total'] . ')';
-    }
-    
     // Total de Cancelamentos
-    $sql_total_cancelamentos = "SELECT COUNT(*) as total_cancelamentos FROM agendamentos WHERE status = 'cancelado' AND data >= CURDATE() - INTERVAL $periodo DAY";
+    $sql_total_cancelamentos = "SELECT COUNT(*) as total_cancelamentos FROM agendamentos WHERE status = 'inativo' AND MONTH(data) = '$mes' AND YEAR(data) = '$ano'";
     $result_total_cancelamentos = $conn->query($sql_total_cancelamentos);
     $total_cancelamentos = $result_total_cancelamentos->fetch_assoc()['total_cancelamentos'];
     
@@ -60,7 +50,7 @@ if ($action == 'metricas') {
     // Obter agendamentos agrupados por mês
     $sql_agendamentos = "SELECT DATE_FORMAT(data, '%m/%Y') as mes_agendamento, COUNT(*) as total_agendamentos 
                             FROM agendamentos 
-                            WHERE status = 'ativo' AND data >= CURDATE() - INTERVAL $periodo DAY 
+                            WHERE status = 'ativo' AND MONTH(data) = '$mes' AND YEAR(data) = '$ano' 
                             GROUP BY mes_agendamento 
                             ORDER BY mes_agendamento ASC";
     $result_agendamentos = $conn->query($sql_agendamentos);
@@ -83,4 +73,3 @@ if ($action == 'metricas') {
 }
 
 $conn->close();
-?>
