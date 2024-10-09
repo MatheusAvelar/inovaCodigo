@@ -43,13 +43,13 @@ try {
             </div>
             <div class="col-md-4">
                 <label for="ano">Selecionar Ano:</label>
-                <input type="number" class="form-control" id="ano" value="<?php echo date('Y'); ?>" min="2020" max="<?php echo date('Y'); ?>">
+                <input type="number" class="form-control" id="ano" min="2020" max="<?php echo date('Y'); ?>">
             </div>
             <div class="col-md-2 align-self-end">
                 <button class="btn btn-primary" onclick="filtrarDados()">Filtrar</button>
             </div>
         </div>
-        
+
         <!-- Seção de Métricas -->
         <div class="row">
             <!-- Total de Agendamentos -->
