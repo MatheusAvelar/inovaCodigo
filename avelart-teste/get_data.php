@@ -26,7 +26,7 @@ $filtro_aplicado = !empty($mes) || !empty($ano);
 
 if ($action == 'metricas') {
     // Total de Agendamentos
-    $sql_total_agendamentos = "SELECT COUNT(*) as total_agendamentos FROM agendamentos WHERE status = 'ativo'";
+    $sql_total_agendamentos = "SELECT COUNT(*) as total_agendamentos FROM agendamentos WHERE status = 1";
     
     if ($filtro_aplicado) {
         $sql_total_agendamentos .= " AND ";
@@ -48,7 +48,7 @@ if ($action == 'metricas') {
     $total_agendamentos = $result_total_agendamentos->fetch_assoc()['total_agendamentos'];
 
     // Total Faturado
-    $sql_total_faturado = "SELECT SUM(valor) as total_faturado FROM agendamentos WHERE status = 'ativo'";
+    $sql_total_faturado = "SELECT SUM(valor) as total_faturado FROM agendamentos WHERE status = 1";
     
     if ($filtro_aplicado) {
         $sql_total_faturado .= " AND ";
@@ -71,7 +71,7 @@ if ($action == 'metricas') {
     if (is_null($total_faturado)) { $total_faturado = 0; }
 
     // Total de Cancelamentos
-    $sql_total_cancelamentos = "SELECT COUNT(*) as total_cancelamentos FROM agendamentos WHERE status = 'inativo'";
+    $sql_total_cancelamentos = "SELECT COUNT(*) as total_cancelamentos FROM agendamentos WHERE status = 0";
     
     if ($filtro_aplicado) {
         $sql_total_cancelamentos .= " AND ";
@@ -103,7 +103,7 @@ if ($action == 'metricas') {
     // Obter agendamentos agrupados por mês
     $sql_agendamentos = "SELECT DATE_FORMAT(data, '%m/%Y') as mes_agendamento, COUNT(*) as total_agendamentos 
                             FROM agendamentos 
-                            WHERE status = 'ativo'";
+                            WHERE status = 1";
     
     if ($filtro_aplicado) {
         $sql_agendamentos .= " AND ";
@@ -143,7 +143,7 @@ if ($action == 'metricas') {
     $sql_agendamentos_tatuador = "SELECT CONCAT(UPPER(LEFT(u.nome, 1)), LOWER(SUBSTRING(u.nome, 2))) AS tatuador, DATE_FORMAT(a.data, '%m/%Y') AS mes_agendamento, COUNT(*) AS total_agendamentos 
                                     FROM agendamentos a 
                                     JOIN usuarioEstudio u ON a.usuario_id = u.id 
-                                    WHERE a.status = 'ativo'
+                                    WHERE a.status = 1
                                     AND u.id NOT IN (1, 2, 13, 14)"; //Alterar produção
 
     if ($filtro_aplicado) {
