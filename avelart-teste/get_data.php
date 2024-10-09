@@ -140,11 +140,10 @@ if ($action == 'metricas') {
     ]);
 }  elseif ($action == 'graficos_tatuadores') {
     // Obter agendamentos agrupados por tatuador e mês
-    $sql_agendamentos_tatuador = "
-        SELECT u.nome AS tatuador, DATE_FORMAT(a.data, '%m/%Y') AS mes_agendamento, COUNT(*) AS total_agendamentos 
-        FROM agendamentos a 
-        JOIN usuarioEstudio u ON a.usuario_id = u.id 
-        WHERE a.status = 'ativo'";
+    $sql_agendamentos_tatuador = "SELECT CONCAT(UPPER(LEFT(u.nome, 1)), LOWER(SUBSTRING(u.nome, 2))) AS tatuador, DATE_FORMAT(a.data, '%m/%Y') AS mes_agendamento, COUNT(*) AS total_agendamentos 
+                                    FROM agendamentos a 
+                                    JOIN usuarioEstudio u ON a.usuario_id = u.id 
+                                    WHERE a.status = 'ativo'";
 
     if ($filtro_aplicado) {
         $sql_agendamentos_tatuador .= " AND ";
