@@ -43,7 +43,7 @@ try {
             </div>
             <div class="col-md-4">
                 <label for="ano">Selecionar Ano:</label>
-                <input type="number" class="form-control" id="ano" min="2020" value="<?php echo date('Y'); ?> max="<?php echo date('Y'); ?>">
+                <input type="number" class="form-control" id="ano" min="2020" value="<?php echo date('Y'); ?>" max="<?php echo date('Y'); ?>">
             </div>
             <div class="col-md-2 align-self-end">
                 <button class="btn btn-primary" onclick="filtrarDados()">Filtrar</button>
