@@ -111,13 +111,12 @@ unset($_SESSION['status'], $_SESSION['message']);
             <?php endif; ?>
         </div>
 
-        <h2>Agendamento de Macas</h2>
-        
-
+        <h2>Relatório</h2>
+    
         <div class="grid">
             <div class="maca">
                 <!-- Seção de Filtros -->
-                <!--<div class="row mb-4">
+                <div class="row mb-4">
                     <div class="col-md-4">
                         <label for="mes">Selecionar Mês:</label>
                         <select class="form-control" id="mes">
@@ -143,7 +142,7 @@ unset($_SESSION['status'], $_SESSION['message']);
                     <div class="col-md-2 align-self-end">
                         <button class="btn btn-primary" onclick="filtrarDados()">Filtrar</button>
                     </div>
-                </div> -->
+                </div>
 
                 <!-- Seção de Métricas -->
                 <div class="row">
@@ -185,7 +184,7 @@ unset($_SESSION['status'], $_SESSION['message']);
                 <canvas id="agendamentosTatuadorChart" width="400" height="200"></canvas>
             </div>
         </div>
-        
+
         <script>
         function filtrarDados() {
             const mes = document.getElementById('mes').value;
