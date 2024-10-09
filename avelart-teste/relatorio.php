@@ -181,11 +181,7 @@ try {
         function atualizarGrafico() {
             fetch('get_data.php?action=graficos&periodo=' + document.getElementById('periodo').value)
                 .then(response => response.json())
-                .then(data => {
-                    if (window.agendamentosChart) {
-                        window.agendamentosChart.destroy();
-                    }
-                    
+                .then(data => {                    
                     var ctx = document.getElementById('agendamentosChart').getContext('2d');
                     window.agendamentosChart = new Chart(ctx, {
                         type: 'bar',
@@ -207,6 +203,9 @@ try {
                             }
                         }
                     });
+                    if (window.agendamentosChart) {
+                        window.agendamentosChart.destroy();
+                    }
                 })
                 .catch(error => console.error('Erro ao atualizar gráfico:', error));
         }
