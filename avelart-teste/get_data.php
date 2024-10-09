@@ -42,7 +42,6 @@ if ($action == 'metricas') {
     echo json_encode([
         'total_agendamentos' => $total_agendamentos,
         'total_faturado' => $total_faturado,
-        'agendamentos_tatuador' => $agendamentos_tatuador,
         'total_cancelamentos' => $total_cancelamentos
     ]);
     
