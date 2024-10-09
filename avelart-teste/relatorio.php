@@ -13,7 +13,6 @@
     <div class="container mt-5">
         <h1 class="mb-4">Dashboard de Agendamentos</h1>
         
-        <canvas id="myChart"></canvas>
         <!-- Seção de Métricas -->
         <div class="row">
             <!-- Total de Agendamentos -->
@@ -107,7 +106,7 @@
                     }
                     console.log(window.agendamentosChart);
 
-                    var ctx = document.getElementById('myChart').getContext('2d');
+                    var ctx = document.getElementById('agendamentosChart').getContext('2d');
                     window.agendamentosChart = new Chart(ctx, {
                         type: 'bar', // ou outro tipo de gráfico
                         data: {
