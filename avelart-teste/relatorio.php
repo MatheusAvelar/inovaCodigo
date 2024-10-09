@@ -95,7 +95,7 @@ try {
             const ano = document.getElementById('ano').value; // Assumindo que você tem um campo de seleção para ano
             atualizarMetricas(mes, ano);
             atualizarGrafico(mes, ano);
-            atualizarGraficoTatuadores();
+            atualizarGraficoTatuadores(mes, ano);
         }
 
 
@@ -140,8 +140,8 @@ try {
         }
 
         // Função para atualizar o gráfico de agendamentos por tatuador
-        function atualizarGraficoTatuadores() {
-            fetch('get_data.php?action=graficos_tatuadores&periodo=' + document.getElementById('periodo').value)
+        function atualizarGraficoTatuadores(mes,ano) {
+            fetch(`get_data.php?action=graficos_tatuadores&mes=${mes}&ano=${ano}`)
                 .then(response => response.json())
                 .then(data => {
                     var ctx = document.getElementById('agendamentosTatuadorChart').getContext('2d');
@@ -173,7 +173,7 @@ try {
         window.onload = function() {
             atualizarMetricas('', '');
             atualizarGrafico('', '');
-            atualizarGraficoTatuadores();
+            atualizarGraficoTatuadores('','');
             // Atualizar dados a cada 10 segundos (opcional)
             setInterval(filtrarDados, 10000); // 10000 ms = 10 segundos
         };
