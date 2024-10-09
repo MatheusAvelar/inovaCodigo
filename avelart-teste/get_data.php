@@ -144,7 +144,7 @@ if ($action == 'metricas') {
                                     FROM agendamentos a 
                                     JOIN usuarioEstudio u ON a.usuario_id = u.id 
                                     WHERE a.status = 'ativo'
-                                    AND u.id NOT IN (1, 2, 3, 14)";
+                                    AND u.id NOT IN (1, 2, 13, 14)";
 
     if ($filtro_aplicado) {
         $sql_agendamentos_tatuador .= " AND ";
