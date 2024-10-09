@@ -87,12 +87,12 @@ try {
         <canvas id="agendamentosChart" width="400" height="200"></canvas>
         <script>
         function filtrarDados() {
-            const mes = document.getElementById('mes').value;
-            const ano = document.getElementById('ano').value;
-
+            const mes = document.getElementById('mes').value; // Assumindo que você tem um campo de seleção para mês
+            const ano = document.getElementById('ano').value; // Assumindo que você tem um campo de seleção para ano
             atualizarMetricas(mes, ano);
             atualizarGrafico(mes, ano);
         }
+
 
         function atualizarMetricas(mes, ano) {
             fetch(`get_data.php?action=metricas&mes=${mes}&ano=${ano}`)
@@ -135,11 +135,11 @@ try {
         }
         
         // Inicializar dados ao carregar a página
-        window.onload = function() {
+        /*window.onload = function() {
             filtrarDados();
             // Atualizar dados a cada 10 segundos (opcional)
             setInterval(filtrarDados, 10000); // 10000 ms = 10 segundos
-        };
+        };*/
         </script>
 
     </div>
