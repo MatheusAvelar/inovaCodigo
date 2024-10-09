@@ -83,7 +83,7 @@
     <script>
         // Função para atualizar métricas
         function atualizarMetricas() {
-            fetch('relatorio/get_data.php?action=metricas&periodo=' + document.getElementById('periodo').value)
+            fetch('get_data.php?action=metricas&periodo=' + document.getElementById('periodo').value)
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById('totalAgendamentos').textContent = data.total_agendamentos;
