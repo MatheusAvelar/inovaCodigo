@@ -35,7 +35,7 @@ if ($action == 'metricas') {
     if (is_null($total_faturado)) { $total_faturado = 0; }
     
     // Agendamentos por Tatuador (exemplo: apenas um tatuador para simplificação)
-    $sql_agendamentos_tatuador = "SELECT u.nome AS tatuador, COUNT(a.id) AS total FROM agendamentos a JOIN usuarios u ON a.usuario_id = u.id WHERE a.status = 'ativo' AND a.data >= CURDATE() - INTERVAL $periodo DAY GROUP BY a.usuario_id ORDER BY total DESC LIMIT 1";
+    $sql_agendamentos_tatuador = "SELECT u.nome AS tatuador, COUNT(a.id) AS total FROM agendamentos a JOIN usuarioEstudio u ON a.usuario_id = u.id WHERE a.status = 'ativo' AND a.data >= CURDATE() - INTERVAL $periodo DAY GROUP BY a.usuario_id ORDER BY total DESC LIMIT 1";
     $result_agendamentos_tatuador = $conn->query($sql_agendamentos_tatuador);
     $agendamentos_tatuador = "Nenhum agendamento";
     if ($result_agendamentos_tatuador->num_rows > 0) {
