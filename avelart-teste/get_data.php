@@ -144,6 +144,7 @@ if ($action == 'metricas') {
                                     FROM agendamentos a 
                                     JOIN usuarioEstudio u ON a.usuario_id = u.id 
                                     WHERE a.status = 1
+                                    AND u.ativo = 1
                                     AND u.id NOT IN (1, 2, 13, 14)"; //Alterar produção
 
     if ($filtro_aplicado) {
