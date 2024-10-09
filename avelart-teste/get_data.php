@@ -1,6 +1,11 @@
 <?php
 include 'php/utils.php';
- 
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+/*
 try {
     $conn = conectaBanco();
 } catch (Exception $e) {
@@ -76,7 +81,28 @@ if ($action == 'metricas') {
     ]);
 } else {
     echo json_encode(['error' => 'Ação inválida']);
+}*/
+
+if (isset($_GET['action']) && $_GET['action'] == 'metricas') {
+    // Código para tratar a ação 'metricas'
+    $periodo = isset($_GET['periodo']) ? (int) $_GET['periodo'] : 7;
+
+    // Exemplo de uma resposta JSON fictícia
+    $response = [
+        'total_agendamentos' => 10,
+        'total_faturado' => 5000,
+        'agendamentos_tatuador' => 2,
+        'total_cancelamentos' => 1
+    ];
+
+    // Retornar a resposta como JSON
+    header('Content-Type: application/json');
+    echo json_encode($response);
+    exit;
+} else {
+    echo json_encode(['error' => 'Ação inválida']);
+    exit;
 }
 
-$conn->close();
+//$conn->close();
 ?>
