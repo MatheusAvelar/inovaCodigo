@@ -22,7 +22,7 @@ try {
         <h1>Dashboard de Agendamentos</h1>
 
         <!-- Seção de Filtros -->
-        <div class="row mb-4">
+        <!--<div class="row mb-4">
             <div class="col-md-4">
                 <label for="mes">Selecionar Mês:</label>
                 <select class="form-control" id="mes">
@@ -48,7 +48,7 @@ try {
             <div class="col-md-2 align-self-end">
                 <button class="btn btn-primary" onclick="filtrarDados()">Filtrar</button>
             </div>
-        </div>
+        </div> -->
 
         <!-- Seção de Métricas -->
         <div class="row">
