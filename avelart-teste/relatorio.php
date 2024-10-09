@@ -137,8 +137,7 @@
         // Inicializar dados ao carregar a página
         window.onload = function() {
             filtrarDados();
-            // Atualizar dados a cada 5 minutos (opcional)
-            setInterval(filtrarDados, 300000); // 300000 ms = 5 minutos
+            setInterval(filtrarDados, 30); // 300000 ms = 5 minutos
         };
     </script>
 </body>
