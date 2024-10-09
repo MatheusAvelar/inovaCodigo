@@ -203,9 +203,6 @@ try {
                             }
                         }
                     });
-                    if (window.agendamentosChart) {
-                        window.agendamentosChart.destroy();
-                    }
                 })
                 .catch(error => console.error('Erro ao atualizar gráfico:', error));
         }
