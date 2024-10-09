@@ -34,11 +34,14 @@ if ($action == 'metricas') {
             $sql_total_agendamentos .= "MONTH(data) = '$mes'";
         }
         if (!empty($ano)) {
-            if ($filtro_aplicado && !empty($mes)) {
+            if (!empty($mes)) {
                 $sql_total_agendamentos .= " AND ";
             }
             $sql_total_agendamentos .= "YEAR(data) = '$ano'";
         }
+    } else {
+        // Se não houver filtros, retorna todos do ano atual
+        $sql_total_agendamentos .= " AND YEAR(data) = '".date('Y')."'";
     }
 
     $result_total_agendamentos = $conn->query($sql_total_agendamentos);
@@ -53,17 +56,20 @@ if ($action == 'metricas') {
             $sql_total_faturado .= "MONTH(data) = '$mes'";
         }
         if (!empty($ano)) {
-            if ($filtro_aplicado && !empty($mes)) {
+            if (!empty($mes)) {
                 $sql_total_faturado .= " AND ";
             }
             $sql_total_faturado .= "YEAR(data) = '$ano'";
         }
+    } else {
+        // Se não houver filtros, retorna todos do ano atual
+        $sql_total_faturado .= " AND YEAR(data) = '".date('Y')."'";
     }
-    
+
     $result_total_faturado = $conn->query($sql_total_faturado);
     $total_faturado = $result_total_faturado->fetch_assoc()['total_faturado'];
     if (is_null($total_faturado)) { $total_faturado = 0; }
-    
+
     // Total de Cancelamentos
     $sql_total_cancelamentos = "SELECT COUNT(*) as total_cancelamentos FROM agendamentos WHERE status = 'inativo'";
     
@@ -73,16 +79,19 @@ if ($action == 'metricas') {
             $sql_total_cancelamentos .= "MONTH(data) = '$mes'";
         }
         if (!empty($ano)) {
-            if ($filtro_aplicado && !empty($mes)) {
+            if (!empty($mes)) {
                 $sql_total_cancelamentos .= " AND ";
             }
             $sql_total_cancelamentos .= "YEAR(data) = '$ano'";
         }
+    } else {
+        // Se não houver filtros, retorna todos do ano atual
+        $sql_total_cancelamentos .= " AND YEAR(data) = '".date('Y')."'";
     }
-    
+
     $result_total_cancelamentos = $conn->query($sql_total_cancelamentos);
     $total_cancelamentos = $result_total_cancelamentos->fetch_assoc()['total_cancelamentos'];
-    
+
     // Retornar os dados em JSON
     echo json_encode([
         'total_agendamentos' => $total_agendamentos,
@@ -102,11 +111,14 @@ if ($action == 'metricas') {
             $sql_agendamentos .= "MONTH(data) = '$mes'";
         }
         if (!empty($ano)) {
-            if ($filtro_aplicado && !empty($mes)) {
+            if (!empty($mes)) {
                 $sql_agendamentos .= " AND ";
             }
             $sql_agendamentos .= "YEAR(data) = '$ano'";
         }
+    } else {
+        // Se não houver filtros, retorna todos do ano atual
+        $sql_agendamentos .= " AND YEAR(data) = '".date('Y')."'";
     }
 
     $sql_agendamentos .= " GROUP BY mes_agendamento ORDER BY mes_agendamento ASC";

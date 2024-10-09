@@ -21,6 +21,35 @@ try {
     <div class="container">
         <h1>Dashboard de Agendamentos</h1>
 
+        <!-- Seção de Filtros -->
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <label for="mes">Selecionar Mês:</label>
+                <select class="form-control" id="mes">
+                    <option value="">Selecione um mês</option>
+                    <option value="01">Janeiro</option>
+                    <option value="02">Fevereiro</option>
+                    <option value="03">Março</option>
+                    <option value="04">Abril</option>
+                    <option value="05">Maio</option>
+                    <option value="06">Junho</option>
+                    <option value="07">Julho</option>
+                    <option value="08">Agosto</option>
+                    <option value="09">Setembro</option>
+                    <option value="10">Outubro</option>
+                    <option value="11">Novembro</option>
+                    <option value="12">Dezembro</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label for="ano">Selecionar Ano:</label>
+                <input type="number" class="form-control" id="ano" value="<?php echo date('Y'); ?>" min="2020" max="<?php echo date('Y'); ?>">
+            </div>
+            <div class="col-md-2 align-self-end">
+                <button class="btn btn-primary" onclick="filtrarDados()">Filtrar</button>
+            </div>
+        </div>
+        
         <!-- Seção de Métricas -->
         <div class="row">
             <!-- Total de Agendamentos -->
@@ -54,34 +83,6 @@ try {
             </div>
         </div>
         
-        <!-- Seção de Filtros -->
-        <div class="row mb-4">
-            <div class="col-md-4">
-                <label for="mes">Selecionar Mês:</label>
-                <select class="form-control" id="mes">
-                    <option value="">Selecione um mês</option>
-                    <option value="01">Janeiro</option>
-                    <option value="02">Fevereiro</option>
-                    <option value="03">Março</option>
-                    <option value="04">Abril</option>
-                    <option value="05">Maio</option>
-                    <option value="06">Junho</option>
-                    <option value="07">Julho</option>
-                    <option value="08">Agosto</option>
-                    <option value="09">Setembro</option>
-                    <option value="10">Outubro</option>
-                    <option value="11">Novembro</option>
-                    <option value="12">Dezembro</option>
-                </select>
-            </div>
-            <div class="col-md-4">
-                <label for="ano">Selecionar Ano:</label>
-                <input type="number" class="form-control" id="ano" value="<?php echo date('Y'); ?>" min="2020" max="<?php echo date('Y'); ?>">
-            </div>
-            <div class="col-md-2 align-self-end">
-                <button class="btn btn-primary" onclick="filtrarDados()">Filtrar</button>
-            </div>
-        </div>
 
         <!-- Exibição de gráfico -->
         <canvas id="agendamentosChart" width="400" height="200"></canvas>
@@ -133,13 +134,6 @@ try {
                 })
                 .catch(error => console.error('Erro ao atualizar gráfico:', error));
         }
-        
-        // Inicializar dados ao carregar a página
-        /*window.onload = function() {
-            filtrarDados();
-            // Atualizar dados a cada 10 segundos (opcional)
-            setInterval(filtrarDados, 10000); // 10000 ms = 10 segundos
-        };*/
         </script>
 
     </div>
