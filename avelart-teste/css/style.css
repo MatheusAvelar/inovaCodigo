@@ -1,0 +1,352 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background-color: #fff;
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.logo {
+    width: 50px;
+    height: auto;
+    border-radius: 50%;
+}
+
+h1 {
+    font-size: 20px;
+    margin: 0;
+}
+
+.container {
+    max-width: 90%;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.maca {
+    background-color: #fafafa;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.maca h2 {
+    font-size: 18px;
+    margin-top: 0;
+}
+
+.maca form {
+    display: flex;
+    flex-direction: column;
+}
+
+.maca label {
+    margin-bottom: 5px;
+}
+
+.maca input,
+.maca select,
+.maca button {
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.maca button {
+    background-color: #fec66f;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.maca button:hover {
+    background-color: #f4ab36;
+}
+
+.message {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.error-message {
+    color: #721c24;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+@media (min-width: 700px) {
+    .container {
+        max-width: 700px;
+    }
+
+    .logo {
+        width: 80px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+}
+
+/* Estilizando a tabela */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+th {
+    background-color: #f2f2f2;
+    text-align: left;
+    white-space: nowrap;
+}
+
+td {
+    white-space: nowrap;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Ajusta a largura das colunas */
+th:nth-child(1),
+td:nth-child(1) {
+    width: 20%;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+    width: 15%;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+    width: 15%;
+}
+
+th:nth-child(4),
+td:nth-child(4) {
+    width: 15%;
+}
+
+th:nth-child(5),
+td:nth-child(5) {
+    width: 15%;
+}
+
+th:nth-child(6),
+td:nth-child(6) {
+    width: 20%;
+}
+
+.logo-container {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.header {
+    background-color: #333;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+}
+
+/* Botões */
+.button,
+.maca button,
+.logout-button {
+    background-color: #fec66f;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.button:hover,
+.maca button:hover {
+    background-color: #f4ab36;
+}
+
+/* Remove sombras */
+.button:active,
+.maca button:active,
+.logout-button:active {
+    background-color: #dbbe4d;
+    transform: translateY(2px);
+}
+
+.logout-container {
+    text-align: right;
+    margin: 10px;
+}
+
+/* Estilo geral do filtro */
+#filter-form {
+    display: flex;
+    align-items: center;
+}
+
+#filter-form label, 
+#filter-form input, 
+#filter-form select {
+    margin-right: 10px;
+}
+
+#filter-button, 
+#export-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 5px;
+    margin-left: 10px;
+}
+
+#filter-button i,
+#export-button i {
+    color: #fec66f; /* ou a cor que você preferir */
+}
+
+#filter-button:hover i,
+#export-button:hover i {
+    color: #f4ab36; /* cor ao passar o mouse */
+}
+
+#menu ul { 
+    padding:0px;
+    margin:0px;
+    background-color:#fafafa;
+    list-style:none;
+    border-radius: 8px;
+}
+
+#menu ul li { 
+    display: inline-block; 
+}
+
+#menu ul li a { 
+    padding: 2px 10px; 
+    display: inline-block;
+    background-color:#fafafa; 
+    color: #333; 
+    text-decoration: none; 
+    border-bottom:3px solid #fafafa; 
+}
+
+#menu ul li a:hover { 
+    background-color:#D6D6D6;
+    color: #6D6D6D;
+    border-bottom:3px solid #fec66f;
+}
+
+/* Estilo do ícone de exclusão */
+.delete-icon {
+    color: #fdcf9c; /* cor do ícone */
+    font-size: 20px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.delete-icon:hover {
+    color: #fec66f; /* cor ao passar o mouse */
+}
+
+/* Estilização personalizada dos checkboxes */
+.custom-checkbox {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    padding-left: 30px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    user-select: none;
+}
+
+.custom-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #eee;
+    border-radius: 5px;
+}
+
+.custom-checkbox input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.custom-checkbox input:checked ~ .checkmark:after {
+    display: block;
+    left: 7px;
+    top: 3px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}

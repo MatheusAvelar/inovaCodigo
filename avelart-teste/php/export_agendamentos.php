@@ -1,0 +1,84 @@
+<?php
+include 'utils.php';
+
+try {
+    $conn = conectaBanco();
+} catch (Exception $e) {
+    die("Erro: " . $e->getMessage());
+}
+
+// Verifica se a sessão já foi iniciada
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Obtendo os filtros do formulário se estiverem definidos
+$filterDate = isset($_GET['filter_date']) ? $_GET['filter_date'] : '';
+$filterMaca = isset($_GET['filter_maca']) ? $_GET['filter_maca'] : '';
+$filterTatuador = isset($_GET['filter_tatuador']) ? $_GET['filter_tatuador'] : '';
+
+// Condição para aplicar os filtros
+$whereClause = "WHERE status = 1"; // Começa com condição verdadeira para adicionar filtros dinamicamente
+
+if (!empty($filterDate)) {
+    $whereClause .= " AND ag.data = '" . $conn->real_escape_string($filterDate) . "'";
+}
+
+if (!empty($filterMaca)) {
+    $whereClause .= " AND ag.maca_id = '" . $conn->real_escape_string($filterMaca) . "'";
+}
+
+if (!empty($filterTatuador)) {
+    $whereClause .= " AND ag.usuario_id = '" . $conn->real_escape_string($filterTatuador) . "'";
+}
+
+// Busca de agendamentos existentes com os filtros aplicados
+$query = "SELECT ag.id, ag.descricao, ag.maca_id, ag.data, ag.start_time, ag.end_time, ag.usuario_id, ag.nome_cliente, ag.estilo, ag.tamanho, ag.valor, ag.forma_pagamento, ag.sinal_pago, u.nome AS tatuador_nome 
+          FROM agendamentos AS ag
+          JOIN usuarioEstudio AS u ON ag.usuario_id = u.id
+          $whereClause 
+          ORDER BY ag.data, ag.start_time";
+
+$result = $conn->query($query);
+
+// Inicia a resposta JSON
+header('Content-Type: application/json');
+
+// Prepara um array para armazenar os dados
+$data = [];
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        // Formatando a data
+        $formattedDate = date('d/m/Y', strtotime($row['data']));
+        $formattedStartTime = date('H:i', strtotime($row['start_time']));
+        $formattedEndTime = date('H:i', strtotime($row['end_time']));
+
+        $data[] = [
+            'tatuador' => htmlspecialchars($row['tatuador_nome']),
+            'maca' => htmlspecialchars($row['maca_id']),
+            'data' => $formattedDate,
+            'h.inicial' => $formattedStartTime,
+            'h.final' => $formattedEndTime,
+            'nomeCliente' => htmlspecialchars($row['nome_cliente']),
+            'estilo' => htmlspecialchars($row['estilo']),
+            'tamanho' => htmlspecialchars($row['tamanho']),
+            'valor' => htmlspecialchars($row['valor']),
+            'formaPagamento' => htmlspecialchars($row['forma_pagamento']),
+            'sinal' => htmlspecialchars($row['sinal_pago']),
+            'descricao' => htmlspecialchars($row['descricao'])
+        ];
+    }
+} else {
+    $data[] = ['message' => 'Nenhum agendamento encontrado.'];
+}
+
+// Adiciona a linha para depuração
+error_log(json_encode($data));
+
+// Retorna o JSON
+echo json_encode($data);
+
+// Fechando a conexão
+$conn->close();
+?>

@@ -1,14 +1,15 @@
 <?php
-$servername = "127.0.0.1:3306";
-$username = "u221588236_root";
-$password = "Camila@307";
-$dbname = "u221588236_controle_finan";
+$dbHost = "127.0.0.1:3306";
+$dbUser = "u221588236_root";
+$dbPassword = "Camila@307";
+$dbName = "u221588236_controle_finan";
 
-// Conexão com o banco de dados
-$conn = new mysqli($servername, $username, $password, $dbname);
+// Conectando ao banco de dados
+$conn = new mysqli($dbHost, $dbUser, $dbPassword, $dbName);
 
+// Verifica se há erros na conexão
 if ($conn->connect_error) {
-    die("Conexão falhou: " . $conn->connect_error);
+    die("Falha na conexão: " . $conn->connect_error);
 }
 
 // Deletar uma linha
@@ -33,6 +34,36 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['insert'])) {
     $conn->query($sql_insert);
 }
 
+// Executar um comando SQL personalizado
+$sql_custom_result = '';
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['sql_command'])) {
+    $sql_custom = $_POST['sql_custom'];
+    if (!empty($sql_custom)) {
+        $result = $conn->query($sql_custom);
+        if ($result === TRUE) {
+            $sql_custom_result = "Comando executado com sucesso!";
+        } elseif ($result->num_rows > 0) {
+            // Se houver um resultado (como em SELECT), exiba a tabela
+            $sql_custom_result = "<table border='1'><tr>";
+            $fields = $result->fetch_fields();
+            foreach ($fields as $field) {
+                $sql_custom_result .= "<th>{$field->name}</th>";
+            }
+            $sql_custom_result .= "</tr>";
+            while ($row = $result->fetch_assoc()) {
+                $sql_custom_result .= "<tr>";
+                foreach ($row as $value) {
+                    $sql_custom_result .= "<td>" . htmlspecialchars($value) . "</td>";
+                }
+                $sql_custom_result .= "</tr>";
+            }
+            $sql_custom_result .= "</table>";
+        } else {
+            $sql_custom_result = "Erro ao executar o comando: " . $conn->error;
+        }
+    }
+}
+
 // Consulta para obter todas as tabelas do banco de dados
 $sql_tabelas = "SHOW TABLES";
 $result_tabelas = $conn->query($sql_tabelas);
@@ -45,6 +76,7 @@ $result_tabelas = $conn->query($sql_tabelas);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estrutura do Banco de Dados</title>
     <link rel="icon" href="img/ico.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -78,9 +110,6 @@ $result_tabelas = $conn->query($sql_tabelas);
         }
         tr:hover {
             background-color: #f1f1f1;
-        }
-        p {
-            color: #666;
         }
         .data-container {
             display: none;
@@ -116,6 +145,22 @@ $result_tabelas = $conn->query($sql_tabelas);
     </script>
 </head>
 <body>
+<?php
+if ($_SESSION['perfil_id'] != 2) {
+    ?><!-- Formulário para executar um comando SQL personalizado -->
+    <h2>Executar Comando SQL</h2>
+    <form method="POST">
+        <textarea name="sql_custom" rows="5" cols="100" placeholder="Escreva seu comando SQL aqui..."></textarea><br>
+        <button type="submit" name="sql_command">Executar Comando SQL</button>
+    </form><?php
+}
+
+// Exibir resultado do comando SQL personalizado
+if (!empty($sql_custom_result)) {
+    echo "<h3>Resultado:</h3>";
+    echo $sql_custom_result;
+}
+?>
 
 <?php
 if ($result_tabelas->num_rows > 0) {
@@ -156,7 +201,7 @@ if ($result_tabelas->num_rows > 0) {
         }
 
         // Adiciona botão e contêiner para visualizar dados
-        echo "<button onclick=\"toggleData('$tabela')\">Visualizar Dados</button>";
+        echo "<button onclick=\"toggleData('$tabela')\">Exibir Dados</button>";
         echo "<div id=\"data-$tabela\" class=\"data-container\">";
 
         // Consulta para obter os dados da tabela
@@ -182,7 +227,7 @@ if ($result_tabelas->num_rows > 0) {
                 // Adiciona botão de deletar
                 $chave_primaria = $field_info[0]->name;  // Assume que a primeira coluna é a chave primária
                 echo "<td class='actions'>
-                        <form method='POST' style='display:inline;'>
+                        <form method='POST' style='display:inline;' onsubmit=\"return confirm('Tem certeza que deseja deletar este item?');\">
                             <input type='hidden' name='tabela' value='$tabela'>
                             <input type='hidden' name='chave_primaria' value='$chave_primaria'>
                             <input type='hidden' name='valor_chave' value='" . htmlspecialchars($row_dado[$chave_primaria]) . "'>

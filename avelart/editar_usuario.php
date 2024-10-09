@@ -3,6 +3,11 @@ session_start();
 include 'php/verificar_perfil.php';
 include 'php/edita_usuario.php';
 
+if ($_SESSION['perfil_id'] != 2) {
+    header("Location: agendamento.php");
+    exit();
+}
+
 // Verifica se há mensagem de status na sessão
 $status = isset($_SESSION['status']) ? $_SESSION['status'] : null;
 $message = isset($_SESSION['message']) ? $_SESSION['message'] : null;
@@ -74,7 +79,7 @@ unset($_SESSION['status'], $_SESSION['message']);
     <div class="container">
         <nav id="menu"> 
             <ul> 
-                <li><a href="termos_enviados.php">Termos Enviados</a></li>
+                <li><a href="termos_enviados.php">Termos Preenchidos</a></li>
                 <li><a href="agendamento.php">Agendamento</a></li>
                 <li><a href="horarios_agendados.php">Horários Agendados</a></li>
                 <?php if ($perfil_id == 2) : ?>
