@@ -30,7 +30,7 @@ try {
                     <div class="card-body">
                         <p class="card-text">
                             <?php
-                            $result = $conn->query("SELECT COUNT(*) as total_agendamentos FROM agendamentos");
+                            $result = $conn->query("SELECT COUNT(*) as total_agendamentos FROM agendamentos WHERE status = 'ativo'");
                             $row = $result->fetch_assoc();
                             echo $row['total_agendamentos'];
                             ?>
@@ -46,7 +46,7 @@ try {
                     <div class="card-body">
                         <p class="card-text">
                             <?php
-                            $result = $conn->query("SELECT SUM(valor) as total_faturado FROM agendamentos");
+                            $result = $conn->query("SELECT SUM(valor) as total_faturado FROM agendamentos WHERE status = 'ativo'");
                             $row = $result->fetch_assoc();
                             echo "R$ " . number_format($row['total_faturado'], 2, ',', '.');
                             ?>
