@@ -1,4 +1,12 @@
-<?php include 'db_connect.php'; ?>
+<?php include 'php/utils.php';
+
+try {
+    $conn = conectaBanco();
+} catch (Exception $e) {
+    die("Erro: " . $e->getMessage());
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
