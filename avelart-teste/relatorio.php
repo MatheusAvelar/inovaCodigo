@@ -70,7 +70,13 @@ try {
                 <div class="card text-white bg-danger mb-3">
                     <div class="card-header">Cancelamentos</div>
                     <div class="card-body">
-                        <h5 class="card-title" id="totalCancelamentos">Carregando...</h5>
+                        <p class="card-text">
+                            <?php
+                            $result = $conn->query("SELECT COUNT(*) as cancelados FROM agendamentos WHERE status = 'inativo'");
+                            $row = $result->fetch_assoc();
+                            echo $row['cancelados'];
+                            ?>
+                        </p>
                     </div>
                 </div>
             </div>
