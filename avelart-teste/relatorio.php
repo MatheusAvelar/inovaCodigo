@@ -43,83 +43,12 @@ try {
                 </div>
             </div>
             
-            <!-- Agendamentos por Tatuador -->
-            <div class="col-md-3">
-                <div class="card text-white bg-warning mb-3">
-                    <div class="card-header">Agendamentos por Tatuador</div>
-                    <div class="card-body">
-                        <h5 class="card-title" id="agendamentosTatuador">Carregando...</h5>
-                    </div>
-                </div>
-            </div>
-            
             <!-- Cancelamentos -->
             <div class="col-md-3">
                 <div class="card text-white bg-danger mb-3">
                     <div class="card-header">Cancelamentos</div>
                     <div class="card-body">
                         <h5 class="card-title" id="totalCancelamentos">Carregando...</h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Seção de Métricas -->
-        <div class="row">
-            <!-- Total de Agendamentos -->
-            <div class="col-md-3">
-                <div class="card text-white bg-primary mb-3">
-                    <div class="card-header">Total de Agendamentos</div>
-                    <div class="card-body">
-                        <p class="card-text">
-                            <?php
-                            $result = $conn->query("SELECT COUNT(*) as total_agendamentos FROM agendamentos WHERE status = 'ativo'");
-                            $row = $result->fetch_assoc();
-                            echo $row['total_agendamentos'];
-                            ?>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Total Faturado -->
-            <div class="col-md-3">
-                <div class="card text-white bg-success mb-3">
-                    <div class="card-header">Total Faturado</div>
-                    <div class="card-body">
-                        <p class="card-text">
-                            <?php
-                            $result = $conn->query("SELECT SUM(valor) as total_faturado FROM agendamentos WHERE status = 'ativo'");
-                            $row = $result->fetch_assoc();
-                            echo "R$ " . number_format($row['total_faturado'], 2, ',', '.');
-                            ?>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Agendamentos por Tatuador 
-            <div class="col-md-3">
-                <div class="card text-white bg-warning mb-3">
-                    <div class="card-header">Agendamentos por Tatuador</div>
-                    <div class="card-body">
-                        <h5 class="card-title" id="agendamentosTatuador">Carregando...</h5>
-                    </div>
-                </div>
-            </div>-->
-            
-            <!-- Cancelamentos -->
-            <div class="col-md-3">
-                <div class="card text-white bg-danger mb-3">
-                    <div class="card-header">Cancelamentos</div>
-                    <div class="card-body">
-                        <p class="card-text">
-                            <?php
-                            $result = $conn->query("SELECT COUNT(*) as cancelados FROM agendamentos WHERE status = 'inativo'");
-                            $row = $result->fetch_assoc();
-                            echo $row['cancelados'];
-                            ?>
-                        </p>
                     </div>
                 </div>
             </div>
