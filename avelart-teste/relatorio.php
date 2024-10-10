@@ -182,9 +182,9 @@ unset($_SESSION['status'], $_SESSION['message']);
                 <!-- <canvas id="agendamentosChart" width="400" height="200"></canvas> -->
                 <!-- Exibição de gráfico de agendamentos por tatuador -->
                 <!-- <canvas id="agendamentosTatuadorChart" width="400" height="200"></canvas> -->
-                <form method="POST" action="php/get_dados_relatorio.php">
+                <form method="GET" action="php/get_dados_relatorio.php">
                     <label for="inicio">Data de Início:</label>
-                    <input type="date" id="inicio" name="inicio">
+                    <input type="date" id="inicio" name="inicio"> 
 
                     <label for="fim">Data de Fim:</label>
                     <input type="date" id="fim" name="fim">
