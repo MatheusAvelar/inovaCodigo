@@ -10,8 +10,8 @@ try {
 $query = "SELECT id, 
                 CONCAT(UPPER(LEFT(nome, 1)), LOWER(SUBSTRING(nome, 2))) AS nome
             FROM usuarioEstudio 
-            WHERE ativo = '1';
-            ";
+            WHERE ativo = 1";
+
 $result = $conn->query($query);
 
 if ($result === false) {
