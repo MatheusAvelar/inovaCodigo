@@ -20,13 +20,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $opcao_total = $_POST['opcao_total'];
 
     // Construir a consulta SQL
-    $query = "SELECT usuario_id, SUM(valor_faturado) AS total_faturado, SUM(valor_recebido_estudio) AS total_estudio
+    $query = "SELECT usuario_id, SUM(valor) AS total_faturado, SUM(valor) AS total_estudio
               FROM agendamentos
               WHERE data BETWEEN '$inicio' AND '$fim'";
 
     // Filtrar por tatuador se não for 'Todos'
     if ($tatuador != '') {
-        $query .= " AND usuario_id = '$tatuador'";
+        $query .= " AND usuario_id = $tatuador";
     }
 
     $query .= " GROUP BY usuario_id";
@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Exibir os dados
         while ($row = $result->fetch_assoc()) {
             echo "<tr>
-                    <td>" . $row['tatuador'] . "</td>";
+                    <td>" . $row['usuario_id'] . "</td>";
             if ($opcao_total == 'faturado') {
                 echo "<td>R$ " . number_format($row['total_faturado'], 2, ',', '.') . "</td>";
             } else {
