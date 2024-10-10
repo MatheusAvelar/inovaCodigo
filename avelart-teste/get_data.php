@@ -71,7 +71,7 @@ if ($action == 'metricas') {
     if (is_null($total_faturado)) { $total_faturado = 0; }
 
     // Total de Cancelamentos
-    $sql_total_cancelamentos = "SELECT COUNT(*) as total_cancelamentos FROM agendamentos WHERE status = 0";
+    $sql_total_cancelamentos = "SELECT COUNT(*) AS total_cancelamentos FROM agendamentos WHERE status = 0 ORDER BY id ASC";
     
     if ($filtro_aplicado) {
         $sql_total_cancelamentos .= " AND ";
