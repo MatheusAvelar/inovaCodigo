@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               WHERE data BETWEEN '$inicio' AND '$fim'";
 
     // Filtrar por tatuador se não for 'Todos'
-    if ($tatuador != 'todos') {
+    if ($tatuador != '') {
         $query .= " AND usuario_id = '$tatuador'";
     }
 
