@@ -21,7 +21,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Construir a consulta SQL
     $query = "SELECT usuario_id, SUM(valor) AS total_faturado, SUM(valor) AS total_estudio
-              FROM agendamentos";
+              FROM agendamentos
+              WHERE ";
 
     // Filtrar por tatuador se não for 'Todos'
     if ($tatuador != '') {
