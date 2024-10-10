@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Capture as entradas do formulário
     $inicio = $_POST['inicio'];
     $fim = $_POST['fim'];
-    $tatuador = $_POST['tatuador'];
+    $tatuador = $_POST['filter-tatuador'];
     $opcao_total = $_POST['opcao_total'];
 
     // Construir a consulta SQL
