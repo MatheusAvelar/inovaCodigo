@@ -20,16 +20,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $opcao_total = $_POST['opcao_total'];
 
     // Construir a consulta SQL
-    $query = "SELECT usuario_id, SUM(valor) AS total_faturado, SUM(valor) AS total_estudio
+    /*$query = "SELECT usuario_id, SUM(valor) AS total_faturado, SUM(valor) AS total_estudio
               FROM agendamentos
-              WHERE data BETWEEN '$inicio' AND '$fim'";
+              WHERE data BETWEEN '$inicio' AND '$fim'";*/
+    $query = "SELECT usuario_id, SUM(valor) AS total_faturado, SUM(valor) AS total_estudio
+            FROM agendamentos
+            GROUP BY usuario_id";
 
     // Filtrar por tatuador se não for 'Todos'
-    if ($tatuador != '') {
+    /*if ($tatuador != '') {
         $query .= " AND usuario_id = $tatuador";
     }
 
-    $query .= " GROUP BY usuario_id";
+    $query .= " GROUP BY usuario_id";*/
 
     // Executar a consulta
     $result = $conn->query($query);
