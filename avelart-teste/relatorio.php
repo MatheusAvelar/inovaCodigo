@@ -199,7 +199,7 @@ unset($_SESSION['status'], $_SESSION['message']);
                             $conn = conectaBanco();
 
                             // Query para buscar os tatuadores (ajuste o nome da tabela e os campos de acordo com seu banco)
-                            $query = "SELECT id, nome FROM tatuadores ORDER BY nome ASC";
+                            $query = "SELECT id, nome FROM usuarioEstudio ORDER BY nome ASC";
                             $result = $conn->query($query);
 
                             // Verifica se retornou algum resultado
