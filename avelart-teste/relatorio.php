@@ -182,6 +182,30 @@ unset($_SESSION['status'], $_SESSION['message']);
                 <canvas id="agendamentosChart" width="400" height="200"></canvas>
                 <!-- Exibição de gráfico de agendamentos por tatuador -->
                 <canvas id="agendamentosTatuadorChart" width="400" height="200"></canvas>
+
+                <form method="POST" action="relatorio.php">
+                    <label for="inicio">Data de Início:</label>
+                    <input type="date" id="inicio" name="inicio">
+
+                    <label for="fim">Data de Fim:</label>
+                    <input type="date" id="fim" name="fim">
+
+                    <label for="tatuador">Tatuador:</label>
+                    <select id="tatuador" name="tatuador">
+                        <option value="todos">Todos os Tatuadores</option>
+                        <?include 'php/get_tatuadores.php';?>
+                        <!-- Continue a lista de tatuadores -->
+                    </select>
+
+                    <label for="opcao_total">Tipo de Relatório:</label>
+                    <select id="opcao_total" name="opcao_total">
+                        <option value="faturado">Total Faturado</option>
+                        <option value="recebido_estudio">Total Recebido pelo Estúdio</option>
+                    </select>
+
+                    <button type="submit">Gerar Relatório</button>
+                </form>
+
             </div>
         </div>
 
