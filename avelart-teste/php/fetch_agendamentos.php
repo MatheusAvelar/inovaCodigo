@@ -1,5 +1,6 @@
 <?php
-include 'utils.php';
+include 'php/verificar_perfil.php';
+include 'php/utils.php';
 
 try {
     $conn = conectaBanco();
