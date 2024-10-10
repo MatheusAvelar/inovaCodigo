@@ -189,10 +189,13 @@ unset($_SESSION['status'], $_SESSION['message']);
                     <label for="fim">Data de Fim:</label>
                     <input type="date" id="fim" name="fim">
 
-                    <label for="filter_tatuador">Tatuador:</label>
-                    <select id="filter_tatuador" name="filter_tatuador">
-                        <option value="todos">Todos os Tatuadores</option>
-                        <?include 'php/get_tatuadores.php';?>
+                    <label for="filter-tatuador">Tatuador:</label>
+                    <select id="filter-tatuador" name="filter_tatuador">
+                        <option value="">Todos os Tatuadores</option>
+                        <?php
+                        // Carregar a lista de tatuadores
+                        include 'php/get_tatuadores.php';
+                        ?>
                     </select>
 
                     <label for="opcao_total">Tipo de Relatório:</label>
