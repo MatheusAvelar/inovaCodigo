@@ -21,11 +21,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Construir a consulta SQL
     $query = "SELECT usuario_id, SUM(valor) AS total_faturado, SUM(valor) AS total_estudio
-              FROM agendamentos";
-    //data BETWEEN '$inicio' AND '$fim'
+              FROM agendamentos
+              WHERE data BETWEEN '$inicio' AND '$fim'";
+
     // Filtrar por tatuador se não for 'Todos'
     if ($tatuador != '') {
-        $query .= "WHERE usuario_id = $tatuador";
+        $query .= " AND usuario_id = $tatuador";
     }
 
     $query .= " GROUP BY usuario_id";
