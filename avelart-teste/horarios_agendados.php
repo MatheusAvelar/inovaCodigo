@@ -1,5 +1,6 @@
 <?php
 session_start();
+include 'php/verificar_perfil.php';
 
 // Verifica se há mensagem de status na sessão
 $status = isset($_SESSION['status']) ? $_SESSION['status'] : null;
@@ -62,7 +63,7 @@ unset($_SESSION['status'], $_SESSION['message']);
 <body>
     <header>
         <div class="logo-container">
-            <a href="https://avelart-teste.inovacodigo.com.br/agendamento.php">
+            <a href="https://avelart.inovacodigo.com.br/agendamento.php">
                 <img src="img/tatto.jpeg" alt="Logo do Estúdio" class="logo">
             </a>
         </div>
@@ -76,7 +77,7 @@ unset($_SESSION['status'], $_SESSION['message']);
             <ul> 
                 <li><a href="termos_enviados.php">Termos Preenchidos</a></li>
                 <li><a href="agendamento.php">Agendamento</a></li>
-                <?php if ($_SESSION['perfil_id'] == 2) : ?>
+                <?php if ($perfil_id == 2) : ?>
                     <li class="dropdown">
                         <a href="javascript:void(0)">
                             <i class="fas fa-cog settings-icon"></i>
@@ -89,7 +90,7 @@ unset($_SESSION['status'], $_SESSION['message']);
                     </li>
                 <?php endif; ?>
                 <li><a href="php/logout.php">Sair</a></li>
-            </ul>
+            </ul> 
         </nav>
         <br>
         <div id="message-container">
@@ -98,7 +99,7 @@ unset($_SESSION['status'], $_SESSION['message']);
                     <?= htmlspecialchars($message) ?>
                 </div>
             <?php endif; ?>
-        </div> 
+        </div>
         <h2>Horários Agendados</h2>
         <form id="filter-form" method="GET" action="horarios_agendados.php">
             <!-- <label for="filter-date">Data:</label>
@@ -135,14 +136,14 @@ unset($_SESSION['status'], $_SESSION['message']);
                 <option value="">Todos os Tatuadores</option>
                 <?php
                 // Carregar a lista de tatuadores
-                //include 'php/get_tatuadores.php';
+                include 'php/get_tatuadores.php';
                 ?>
             </select>
     
             <button type="submit" class="button" id="filter-button">
                 <i class="fas fa-search"></i>
             </button>
-            <?php if ($_SESSION['perfil_id'] == 2) : ?>
+            <?php if ($perfil_id == 2) : ?>
                 <button type="button" class="button" id="export-button">
                     <i class="fa-solid fa-file-csv"></i>
                 </button>
