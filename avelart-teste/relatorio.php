@@ -189,13 +189,12 @@ unset($_SESSION['status'], $_SESSION['message']);
                     <label for="fim">Data de Fim:</label>
                     <input type="date" id="fim" name="fim">
 
-                    <label for="filter-tatuador">Tatuador:</label>
-                    <select id="filter-tatuador" name="filter_tatuador">
+                    <label for="filter_tatuador">Tatuador:</label>
+                    <select id="filter_tatuador" name="filter_tatuador">
                         <option value="">Todos os Tatuadores</option>
                         <?php
                         // Carregar a lista de tatuadores
                         try {
-                            // Conecte-se ao banco de dados
                             $conn = conectaBanco();
 
                             // Query para buscar os tatuadores (ajuste o nome da tabela e os campos de acordo com seu banco)
