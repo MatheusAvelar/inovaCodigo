@@ -194,7 +194,29 @@ unset($_SESSION['status'], $_SESSION['message']);
                         <option value="">Todos os Tatuadores</option>
                         <?php
                         // Carregar a lista de tatuadores
-                        include 'php/get_tatuadores.php';
+                        try {
+                            // Conecte-se ao banco de dados
+                            $conn = conectaBanco();
+
+                            // Query para buscar os tatuadores (ajuste o nome da tabela e os campos de acordo com seu banco)
+                            $query = "SELECT id, nome FROM tatuadores ORDER BY nome ASC";
+                            $result = $conn->query($query);
+
+                            // Verifica se retornou algum resultado
+                            if ($result->num_rows > 0) {
+                                // Loop pelos resultados e imprime as opções do select
+                                while ($row = $result->fetch_assoc()) {
+                                    echo "<option value='" . htmlspecialchars($row['id']) . "'>" . htmlspecialchars($row['nome']) . "</option>";
+                                }
+                            } else {
+                                // Caso não haja tatuadores
+                                echo "<option value=''>Nenhum tatuador encontrado</option>";
+                            }
+                            
+                        } catch (Exception $e) {
+                            // Em caso de erro na conexão ou na query, exibe uma opção com erro
+                            echo "<option value=''>Erro ao carregar tatuadores</option>";
+                        }
                         ?>
                     </select>
 
