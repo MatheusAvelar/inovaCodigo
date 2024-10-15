@@ -115,74 +115,7 @@ unset($_SESSION['status'], $_SESSION['message']);
     
         <div class="grid">
             <div class="maca">
-                <!-- Seção de Filtros -->
-                <!--<div class="row mb-4">
-                    <div class="col-md-4">
-                        <label for="mes">Selecionar Mês:</label>
-                        <select class="form-control" id="mes">
-                            <option value="">Selecione um mês</option>
-                            <option value="01">Janeiro</option>
-                            <option value="02">Fevereiro</option>
-                            <option value="03">Março</option>
-                            <option value="04">Abril</option>
-                            <option value="05">Maio</option>
-                            <option value="06">Junho</option>
-                            <option value="07">Julho</option>
-                            <option value="08">Agosto</option>
-                            <option value="09">Setembro</option>
-                            <option value="10">Outubro</option>
-                            <option value="11">Novembro</option>
-                            <option value="12">Dezembro</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="ano">Selecionar Ano:</label>
-                        <input type="number" class="form-control" id="ano" min="2020" value="<?php echo date('Y'); ?>" max="<?php echo date('Y'); ?>">
-                    </div>
-                    <div class="col-md-2 align-self-end">
-                        <button class="btn btn-primary" onclick="filtrarDados()">Filtrar</button>
-                    </div>
-                </div>-->
-
-                <!-- Seção de Métricas -->
-                <!-- <div class="row"> -->
-                    <!-- Total de Agendamentos -->
-                    <!--<div class="col-md-3">
-                        <div class="card text-white bg-primary mb-3">
-                            <div class="card-header">Total de Agendamentos</div>
-                            <div class="card-body">
-                                <h5 class="card-title" id="totalAgendamentos">Carregando...</h5>
-                            </div>
-                        </div>
-                    </div>-->
-                    
-                    <!-- Total Faturado -->
-                    <!--<div class="col-md-3">
-                        <div class="card text-white bg-success mb-3">
-                            <div class="card-header">Total Faturado</div>
-                            <div class="card-body">
-                                <h5 class="card-title" id="totalFaturado">Carregando...</h5>
-                            </div>
-                        </div>
-                    </div>-->
-                    
-                    <!-- Cancelamentos -->
-                    <!--<div class="col-md-3">
-                        <div class="card text-white bg-danger mb-3">
-                            <div class="card-header">Cancelamentos</div>
-                            <div class="card-body">
-                                <h5 class="card-title" id="totalCancelamentos">Carregando...</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>-->
-                
-
-                <!-- Exibição de gráfico -->
-                <!-- <canvas id="agendamentosChart" width="400" height="200"></canvas> -->
-                <!-- Exibição de gráfico de agendamentos por tatuador -->
-                <!-- <canvas id="agendamentosTatuadorChart" width="400" height="200"></canvas> -->
-                <form method="POST" action="php/get_dados_relatorio.php">
+                <form method="POST" action="relatorio.php">
                     <label for="inicio">Data de Início:</label>
                     <input type="date" id="inicio" name="inicio"> 
 
@@ -195,9 +128,6 @@ unset($_SESSION['status'], $_SESSION['message']);
                         <?php
                         // Carregar a lista de tatuadores
                         try {
-                            $conn = conectaBanco();
-
-                            // Query para buscar os tatuadores (ajuste o nome da tabela e os campos de acordo com seu banco)
                             $query = "SELECT id, nome FROM usuarioEstudio ORDER BY nome ASC";
                             $result = $conn->query($query);
 
@@ -230,97 +160,6 @@ unset($_SESSION['status'], $_SESSION['message']);
 
             </div>
         </div>
-
-        <script>
-        function filtrarDados() {
-            const mes = document.getElementById('mes').value;
-            const ano = document.getElementById('ano').value;
-            atualizarMetricas(mes, ano);
-            atualizarGrafico(mes, ano);
-            atualizarGraficoTatuadores(mes, ano);
-        }
-
-
-        function atualizarMetricas(mes, ano) {
-            fetch(`get_data.php?action=metricas&mes=${mes}&ano=${ano}`)
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('totalAgendamentos').textContent = data.total_agendamentos;
-                    document.getElementById('totalFaturado').textContent = 'R$ ' + parseFloat(data.total_faturado).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
-                    document.getElementById('totalCancelamentos').textContent = data.total_cancelamentos;
-                })
-                .catch(error => console.error('Erro ao atualizar métricas:', error));
-        }
-
-        function atualizarGrafico(mes, ano) {
-            fetch(`get_data.php?action=graficos&mes=${mes}&ano=${ano}`)
-                .then(response => response.json())
-                .then(data => {
-                    var ctx = document.getElementById('agendamentosChart').getContext('2d');
-                    window.agendamentosChart = new Chart(ctx, {
-                        type: 'bar',
-                        data: {
-                            labels: data.labels,
-                            datasets: [{
-                                label: 'Agendamentos',
-                                data: data.agendamentos,
-                                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                                borderColor: 'rgba(54, 162, 235, 1)',
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                y: {
-                                    beginAtZero: true
-                                }
-                            }
-                        }
-                    });
-                })
-                .catch(error => console.error('Erro ao atualizar gráfico:', error));
-        }
-
-        // Função para atualizar o gráfico de agendamentos por tatuador
-        function atualizarGraficoTatuadores(mes,ano) {
-            fetch(`get_data.php?action=graficos_tatuadores&mes=${mes}&ano=${ano}`)
-                .then(response => response.json())
-                .then(data => {
-                    var ctx = document.getElementById('agendamentosTatuadorChart').getContext('2d');
-                    window.agendamentosTatuadorChart = new Chart(ctx, {
-                        type: 'bar',
-                        data: {
-                            labels: data.labels,
-                            datasets: [{
-                                label: 'Agendamentos por Tatuador',
-                                data: data.tatuadores,
-                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                                borderColor: 'rgba(75, 192, 192, 1)',
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                y: {
-                                    beginAtZero: true
-                                }
-                            }
-                        }
-                    });
-                })
-                .catch(error => console.error('Erro ao atualizar gráfico de tatuadores:', error));
-        }
-
-        // Inicializar dados ao carregar a página
-        window.onload = function() {
-            atualizarMetricas('', '');
-            atualizarGrafico('', '');
-            atualizarGraficoTatuadores('','');
-            // Atualizar dados a cada 10 segundos (opcional)
-            setInterval(filtrarDados, 10000); // 10000 ms = 10 segundos
-        };
-        </script>
-
     </div>
 </body>
 </html>

@@ -104,6 +104,7 @@ if ($errors) {
                     $linkTermo .= "?nome_cliente=" . urlencode($nomeCliente);
                     $linkTermo .= "&telefone_cliente=" . urlencode($telefoneCliente);
                     $linkTermo .= "&email_cliente=" . urlencode($emailCliente);
+                    $linkTermo .= "&id=" . $_SESSION['id'];
 
                     $messages = "
                         <html>
