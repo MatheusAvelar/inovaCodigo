@@ -337,7 +337,7 @@ ol {
 }
 
 .header__top__right__language:after {
-  position: absolute;
+  position: relative;
   right: -21px;
   top: 1px;
   height: 20px;
