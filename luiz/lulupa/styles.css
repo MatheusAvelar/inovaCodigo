@@ -1,0 +1,199 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  margin: 0;
+}
+
+.social-icons {
+  position: absolute; /* Fixa a posição */
+  top: 20px; /* Distância do topo */
+  right: 30px; /* Distância da direita */
+}
+
+.icon {
+  margin-left: 5px; /* Espaçamento entre os ícones */
+  color: #333; /* Cor dos ícones */
+  text-decoration: none; /* Remove sublinhado dos links */
+  font-size: 20px; /* Tamanho dos ícones */
+  transition: color 0.3s; /* Animação de transição de cor */
+}
+
+.icon:nth-of-type(1) {
+  color: #25d366; /* Cor do WhatsApp ao passar o mouse */
+}
+
+.icon:nth-of-type(2) {
+  background: linear-gradient(45deg, #833ab4, #fd1d1d, #fcaf45, #f9d65e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Alinhamento e estilo do header */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f9f9f9;
+  padding: 10px 20px;
+}
+
+/* Configurações para a imagem do logotipo */
+.logo img {
+  width: 200px; /* Ajuste o tamanho conforme necessário */
+  height: auto;
+}
+
+/* Estilização do menu de navegação */
+nav {
+  display: flex; /* Adiciona flex ao nav para alinhamento */
+}
+
+nav ul {
+  list-style-type: none;
+  display: flex;
+  gap: 40px;
+  margin: 0;
+}
+
+nav ul li a {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.banner {
+  text-align: center;
+  padding: 60px 20px;
+  background: linear-gradient(to bottom, #ddd, #fff);
+}
+
+.banner h1 {
+  font-size: 2.5em;
+  color: #333;
+}
+
+.produtos-destaque,
+.lista-produtos {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.produtos-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.produto-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 200px;
+  margin: 20px;
+  padding: 20px;
+  text-align: center;
+}
+
+.produto-card img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.produto-card h3 {
+  font-size: 1.2em;
+  color: #333;
+}
+
+/*Página de contatos*/
+/* Reset básico */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Estilização do corpo */
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Conteúdo Principal */
+.content {
+  padding: 80px 20px; /* Espaçamento para o cabeçalho fixo */
+  text-align: center;
+}
+
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+h2 {
+  font-size: 1.8em;
+  margin: 20px 0;
+  color: #25d366; /* Cor para o subtítulo */
+}
+
+/* Estilo do Formulário de Contato */
+form {
+  max-width: 600px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+  border-color: #25d366; /* Cor ao focar nos campos */
+}
+
+input[type="submit"] {
+  background-color: #333;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+  background-color: #25d366; /* Cor ao passar o mouse sobre o botão */
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .content {
+    padding: 60px 10px; /* Ajusta o padding em telas menores */
+  }
+}
