@@ -4,11 +4,15 @@
   padding: 0;
 }
 
+@import "~font-awesome/css/font-awesome.css";
+
 body {
   font-family: Arial, sans-serif;
   background-color: #f9f9f9;
   margin: 0;
 }
+
+/*MENU*/
 
 .social-icons {
   position: absolute; /* Fixa a posição */
@@ -196,4 +200,27 @@ input[type="submit"]:hover {
   .content {
     padding: 60px 10px; /* Ajusta o padding em telas menores */
   }
+}
+/* BOTOES DO"COMPRAR E DO CARRINHO"
+
+/* Estilo para os botões */
+button {
+  background-color: transparent; /* Fundo transparente */
+  color: #000000; /* Cor do texto (pode ser ajustada) */
+  border: none; /* Remove a borda */
+  cursor: pointer; /* Muda o cursor ao passar o mouse */
+  padding: 10px 15px; /* Adiciona um pouco de espaçamento interno */
+  font-size: 16px; /* Tamanho da fonte */
+  transition: background-color 0.3s ease; /* Transição suave */
+}
+
+/* Estilo para o botão de comprar ao passar o mouse */
+button:hover {
+  background-color: rgba(0, 0, 0, 0.1); /* Cor de fundo ao passar o mouse */
+}
+
+/* Estilo para o ícone do carrinho */
+.produto-card .fa-shopping-cart {
+  font-size: 15px; /* Tamanho do ícone */
+  color: #333; /* Cor do ícone */
 }
