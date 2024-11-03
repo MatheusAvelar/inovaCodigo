@@ -115,6 +115,7 @@ unset($_SESSION['status'], $_SESSION['message']);
                         <option value="2" <?= $agendamento['maca_id'] == 2 ? 'selected' : '' ?>>Maca 2</option>
                         <option value="3" <?= $agendamento['maca_id'] == 3 ? 'selected' : '' ?>>Maca 3</option>
                         <option value="4" <?= $agendamento['maca_id'] == 4 ? 'selected' : '' ?>>Maca 4</option>
+                        <option value="5" <?= $agendamento['maca_id'] == 5 ? 'selected' : '' ?>>Sala de Atendimento Íntimo</option>
                     </select>
                     <div id="maca-error" class="error-message"></div>
 
@@ -157,7 +158,8 @@ unset($_SESSION['status'], $_SESSION['message']);
                     <label for="pagamento">Forma de Pagamento:</label>
                     <select id="pagamento" name="pagamento" required>
                         <option value="Dinheiro" <?= $agendamento['forma_pagamento'] == 'Dinheiro' ? 'selected' : '' ?>>Dinheiro</option>
-                        <option value="Cartão" <?= $agendamento['forma_pagamento'] == 'Cartão' ? 'selected' : '' ?>>Cartão</option>
+                        <option value="Cartão" <?= $agendamento['forma_pagamento'] == 'Cartão' ? 'selected' : '' ?>>Cartão Particular</option>
+                        <option value="Cartão Estúdio" <?= $agendamento['forma_pagamento'] == 'Cartão Estúdio' ? 'selected' : '' ?>>Cartão Estúdio</option>
                         <option value="Pix" <?= $agendamento['forma_pagamento'] == 'Pix' ? 'selected' : '' ?>>Pix</option>
                     </select>
                     <div id="pagamento-error" class="error-message"></div>

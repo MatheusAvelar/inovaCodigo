@@ -115,6 +115,7 @@ unset($_SESSION['status'], $_SESSION['message']);
                         <option value="2">Maca 2</option>
                         <option value="3">Maca 3</option>
                         <option value="4">Maca 4</option>
+                        <option value="5">Sala de Atendimento Íntimo</option>
                     </select>
                     <div id="maca-error" class="error-message"></div>
 
@@ -158,7 +159,8 @@ unset($_SESSION['status'], $_SESSION['message']);
                     <select id="pagamento" name="pagamento" required>
                         <option value="">Selecione a forma de pagamento</option>
                         <option value="Dinheiro">Dinheiro</option>
-                        <option value="Cartão">Cartão</option>
+                        <option value="Cartão">Cartão Particular</option>
+                        <option value="Cartão Estúdio">Cartão Estúdio</option>
                         <option value="Pix">Pix</option>
                     </select>
                     <div id="pagamento-error" class="error-message"></div>
