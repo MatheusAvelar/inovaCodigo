@@ -158,7 +158,8 @@ unset($_SESSION['status'], $_SESSION['message']);
                     <select id="pagamento" name="pagamento" required>
                         <option value="">Selecione a forma de pagamento</option>
                         <option value="Dinheiro">Dinheiro</option>
-                        <option value="Cartão">Cartão</option>
+                        <option value="Cartão">Cartão Particular</option>
+                        <option value="Cartão Estúdio">Cartão Estúdio</option>
                         <option value="Pix">Pix</option>
                     </select>
                     <div id="pagamento-error" class="error-message"></div>
