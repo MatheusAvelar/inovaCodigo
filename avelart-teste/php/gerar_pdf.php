@@ -150,6 +150,7 @@ $pdf->Cell(0, 10, utf8_decode('Consome bebidas alcoólicas ou drogas recreativas
 $pdf->Cell(0, 10, utf8_decode('Está em jejum há mais de 4 horas? ' . ($jejum === 'sim' ? 'Sim' : 'Não')), 0, 1);
 $pdf->Cell(0, 10, utf8_decode('Tem alergia a látex ou materiais descartáveis? ' . ($alergiaLatex === 'sim' ? 'Sim' : 'Não')), 0, 1);
 
+$pdf->Ln(10);
 $pdf->ChapterBody(
     "Confirmo que todas as informações acima são verdadeiras, e, assumo total responsabilidade por qualquer omissão ou erro nas mesmas.\n" .
     "Estou ciente dos cuidados necessários antes e após a realização da tatuagem e que os resultados podem variar dependendo de fatores individuais, como cicatrização e cuidados pessoais."
