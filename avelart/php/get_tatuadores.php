@@ -14,7 +14,7 @@ if ($conn->connect_error) {
 }
 
 // Obtendo a lista de tatuadores
-$query = "SELECT id, nome FROM usuarioEstudio";
+$query = "SELECT id, nome FROM usuarioEstudio WHERE ativo = 1";
 $result = $conn->query($query);
 
 if ($result->num_rows > 0) {
