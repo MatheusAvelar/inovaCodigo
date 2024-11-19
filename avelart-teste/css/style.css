@@ -233,7 +233,7 @@ td:nth-child(6) {
 
 /* Estilo geral do filtro */
 #filter-form {
-    /*display: flex;*/
+    display: flex;
     align-items: center;
 }
 
