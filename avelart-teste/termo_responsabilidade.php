@@ -355,7 +355,7 @@ unset($_SESSION['status'], $_SESSION['message']);
                         <input type="radio" name="doencaCronica" value="nao" onchange="toggleDoencaCronicaField()" required> 
                         <span class="checkmark"></span> Não
                     </label><br>
-                    <input type="text" name="doenca_nome" placeholder="Qual ?" id="doenca_nome" style="display: none;"><br>
+                    <input type="text" name="doencaCronica_nome" placeholder="Qual ?" id="doencaCronica_nome" style="display: none;"><br>
 
                     <label>Você tem ou já teve diabetes? </label>
                     <label class="custom-checkbox">
@@ -366,7 +366,7 @@ unset($_SESSION['status'], $_SESSION['message']);
                         <input type="radio" name="diabetes" value="nao" onchange="toggleDiabetesField()" required> 
                         <span class="checkmark"></span> Não
                     </label><br>
-                    <input type="text" name="doenca_nome" placeholder="Qual tipo?" id="doenca_nome" style="display: none;"><br>
+                    <input type="text" name="diabetes_nome" placeholder="Qual tipo?" id="diabetes_nome" style="display: none;"><br>
 
                     <label>Faz ou fez uso de corticoide recentemente? </label>
                     <label class="custom-checkbox">
@@ -467,13 +467,13 @@ unset($_SESSION['status'], $_SESSION['message']);
 
         function toggleDoencaCronicaField() {
             var doencaCronicaSim = document.querySelector('input[name="doencaCronica"][value="sim"]');
-            var doencaNome = document.getElementById('doenca_nome');
+            var doencaNome = document.getElementById('doencaCronica_nome');
             doencaNome.style.display = doencaCronicaSim.checked ? 'block' : 'none';
         }
 
         function toggleDiabetesField() {
             var diabetesSim = document.querySelector('input[name="diabetes"][value="sim"]');
-            var doencaNome = document.getElementById('doenca_nome');
+            var doencaNome = document.getElementById('diabetes_nome');
             doencaNome.style.display = diabetesSim.checked ? 'block' : 'none';
         }
 
