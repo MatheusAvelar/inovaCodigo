@@ -14,11 +14,11 @@ class PDF extends FPDF
     function Header()
     {
         // Centralizar a imagem
-        $this->SetXY(($this->GetPageWidth() - 50) / 2, 10); // A largura da imagem é 50
-        $this->Image('../img/tatto.jpeg', null, null, 50);  // Centraliza e ajusta a largura da imagem para 50
+        $this->SetXY(($this->GetPageWidth() - 25) / 2, 10); // A largura da imagem é 50
+        $this->Image('../img/tatto.jpeg', null, null, 25);  // Centraliza e ajusta a largura da imagem para 50
 
         // Espaço após a imagem
-        $this->Ln(45); // Ajuste para criar um espaçamento adequado após a imagem
+        $this->Ln(10); // Ajuste para criar um espaçamento adequado após a imagem
 
         // Título
         $this->SetFont('Arial', 'B', 14);
