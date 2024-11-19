@@ -140,7 +140,19 @@ unset($_SESSION['status'], $_SESSION['message']);
                 include 'php/get_tatuadores.php';
                 ?>
             </select>
-    
+            
+            <?php if ($perfil_id == 2) : ?>
+                <label for="filter-status">Status:</label>
+                <select id="filter-status" name="filter_status">
+                    <option value="1">Ativo</option>
+                    <option value="0">Inativo</option>
+                    <?php
+                    // Carregar a lista de tatuadores
+                    include 'php/get_tatuadores.php';
+                    ?>
+                </select>
+            <?php endif; ?>
+
             <button type="submit" class="button" id="filter-button">
                 <i class="fas fa-search"></i>
             </button>

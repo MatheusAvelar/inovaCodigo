@@ -148,7 +148,7 @@ unset($_SESSION['status'], $_SESSION['message']);
                     <option value="0">Inativo</option>
                     <?php
                     // Carregar a lista de tatuadores
-                    include 'php/get_tatuadores.php';
+                    //include 'php/get_tatuadores.php';
                     ?>
                 </select>
             <?php endif; ?>
