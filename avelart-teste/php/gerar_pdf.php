@@ -4,9 +4,23 @@ include 'utils.php';
 
 class PDF extends FPDF
 {
-    function Header()
+    /*function Header()
     {
         $this->Image('../img/tatto.jpeg', 10, 6, 25);  // Caminho relativo para a imagem
+        $this->SetFont('Arial', 'B', 14);
+        $this->Cell(0, 10, 'Termo de Autorizacao - Estudio Avelart Tattoo', 0, 1, 'C');
+        $this->Ln(10);
+    }*/
+    function Header()
+    {
+        // Centralizar a imagem
+        $this->SetXY(($this->GetPageWidth() - 50) / 2, 10); // A largura da imagem é 50
+        $this->Image('../img/tatto.jpeg', null, null, 50);  // Centraliza e ajusta a largura da imagem para 50
+
+        // Espaço após a imagem
+        $this->Ln(45); // Ajuste para criar um espaçamento adequado após a imagem
+
+        // Título
         $this->SetFont('Arial', 'B', 14);
         $this->Cell(0, 10, 'Termo de Autorizacao - Estudio Avelart Tattoo', 0, 1, 'C');
         $this->Ln(10);
