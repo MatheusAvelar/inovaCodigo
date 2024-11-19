@@ -146,10 +146,6 @@ unset($_SESSION['status'], $_SESSION['message']);
                 <select id="filter-status" name="filter_status">
                     <option value="1">Ativo</option>
                     <option value="0">Inativo</option>
-                    <?php
-                    // Carregar a lista de tatuadores
-                    include 'php/get_tatuadores.php';
-                    ?>
                 </select>
             <?php endif; ?>
 
