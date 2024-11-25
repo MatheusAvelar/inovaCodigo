@@ -25,7 +25,10 @@ $query = "SELECT
           JOIN perfis AS p ON u.perfil_id = p.id;";
 $result = $conn->query($query);
 
-if ($result->num_rows > 0) {
+// Obter a contagem total de registros
+$total_records = $result->num_rows;
+
+if ($total_records > 0) {
     while ($row = $result->fetch_assoc()) {
         echo "<tr>";
         $ativoStatus = $row['ativo'] == 1 ? 'Ativo' : 'Inativo';
