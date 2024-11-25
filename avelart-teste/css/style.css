@@ -1,23 +1,11 @@
-/* Reset e Configurações Globais */
-:root {
-    --primary-color: #fec66f;
-    --hover-color: #f4ab36;
-    --background-color: #fafafa;
-    --text-color: #333;
-    --error-color: #721c24;
-    --success-color: #155724;
-    --light-gray: #f4f4f4;
-}
-
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background: var(--light-gray);
-    color: var(--text-color);
+    background: #f4f4f4;
+    color: #333;
 }
 
-/* Header */
 header {
     background-color: #fff;
     padding: 15px;
@@ -43,7 +31,6 @@ h1 {
     margin: 0;
 }
 
-/* Containers e Grid */
 .container {
     max-width: 90%;
     margin: 20px auto;
@@ -59,7 +46,7 @@ h1 {
 }
 
 .maca {
-    background-color: var(--background-color);
+    background-color: #fafafa;
     border-radius: 8px;
     padding: 15px;
 }
@@ -69,7 +56,6 @@ h1 {
     margin-top: 0;
 }
 
-/* Formulários */
 .maca form {
     display: flex;
     flex-direction: column;
@@ -90,19 +76,16 @@ h1 {
 }
 
 .maca button {
-    background-color: var(--primary-color);
+    background-color: #fec66f;
     color: white;
     border: none;
     cursor: pointer;
-    border-radius: 4px;
-    transition: all 0.3s ease;
 }
 
 .maca button:hover {
-    background-color: var(--hover-color);
+    background-color: #f4ab36;
 }
 
-/* Mensagens */
 .message {
     padding: 10px;
     margin-bottom: 15px;
@@ -112,32 +95,46 @@ h1 {
 
 .message.success {
     background-color: #d4edda;
-    color: var(--success-color);
+    color: #155724;
     border: 1px solid #c3e6cb;
 }
 
 .message.error {
     background-color: #f8d7da;
-    color: var(--error-color);
+    color: #721c24;
     border: 1px solid #f5c6cb;
 }
 
 .error-message {
-    color: var(--error-color);
+    color: #721c24;
     font-size: 14px;
     margin-bottom: 10px;
 }
 
-/* Tabelas */
+@media (min-width: 700px) {
+    .container {
+        max-width: 700px;
+    }
+
+    .logo {
+        width: 80px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+}
+
+/* Estilizando a tabela */
 table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 table, th, td {
     border: 1px solid #ddd;
-    padding: 5px;
+    padding: 8px;
 }
 
 th {
@@ -158,63 +155,83 @@ tr:hover {
     background-color: #f1f1f1;
 }
 
-table {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
+/* Ajusta a largura das colunas */
+th:nth-child(1),
+td:nth-child(1) {
+    width: 20%;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+    width: 15%;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+    width: 15%;
+}
+
+th:nth-child(4),
+td:nth-child(4) {
+    width: 15%;
+}
+
+th:nth-child(5),
+td:nth-child(5) {
+    width: 15%;
+}
+
+th:nth-child(6),
+td:nth-child(6) {
+    width: 20%;
+}
+
+.logo-container {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.header {
+    background-color: #333;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
 }
 
 /* Botões */
 .button,
 .maca button,
 .logout-button {
-    background-color: var(--primary-color);
-    color: white;
+    background-color: #fec66f;
+    color: #fff;
     border: none;
     padding: 10px 20px;
     font-size: 14px;
     cursor: pointer;
+    text-align: center;
     text-decoration: none;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
 }
 
 .button:hover,
-.maca button:hover,
-.logout-button:hover {
-    background-color: var(--hover-color);
+.maca button:hover {
+    background-color: #f4ab36;
 }
 
-/* Menu */
-#menu ul { 
-    padding: 0;
-    margin: 0;
-    background-color: var(--background-color);
-    list-style: none;
-    border-radius: 8px;
+/* Remove sombras */
+.button:active,
+.maca button:active,
+.logout-button:active {
+    background-color: #dbbe4d;
+    transform: translateY(2px);
 }
 
-#menu ul li { 
-    display: inline-block; 
+.logout-container {
+    text-align: right;
+    margin: 10px;
 }
 
-#menu ul li a { 
-    padding: 2px 10px; 
-    display: inline-block;
-    background-color: var(--background-color); 
-    color: var(--text-color); 
-    text-decoration: none; 
-    border-bottom: 3px solid var(--background-color); 
-    transition: all 0.3s ease;
-}
-
-#menu ul li a:hover { 
-    background-color: #d6d6d6;
-    color: #6d6d6d;
-    border-bottom: 3px solid var(--primary-color);
-}
-
-/* Filtro */
+/* Estilo geral do filtro */
 #filter-form {
     display: flex;
     align-items: center;
@@ -238,15 +255,54 @@ table {
 
 #filter-button i,
 #export-button i {
-    color: var(--primary-color);
+    color: #fec66f; /* ou a cor que você preferir */
 }
 
 #filter-button:hover i,
 #export-button:hover i {
-    color: var(--hover-color);
+    color: #f4ab36; /* cor ao passar o mouse */
 }
 
-/* Checkboxes */
+#menu ul { 
+    padding:0px;
+    margin:0px;
+    background-color:#fafafa;
+    list-style:none;
+    border-radius: 8px;
+}
+
+#menu ul li { 
+    display: inline-block; 
+}
+
+#menu ul li a { 
+    padding: 2px 10px; 
+    display: inline-block;
+    background-color:#fafafa; 
+    color: #333; 
+    text-decoration: none; 
+    border-bottom:3px solid #fafafa; 
+}
+
+#menu ul li a:hover { 
+    background-color:#D6D6D6;
+    color: #6D6D6D;
+    border-bottom:3px solid #fec66f;
+}
+
+/* Estilo do ícone de exclusão */
+.delete-icon {
+    color: #fdcf9c; /* cor do ícone */
+    font-size: 20px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.delete-icon:hover {
+    color: #fec66f; /* cor ao passar o mouse */
+}
+
+/* Estilização personalizada dos checkboxes */
 .custom-checkbox {
     display: inline-flex;
     align-items: center;
@@ -293,36 +349,4 @@ table {
     border: solid white;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
-}
-
-/* Responsividade */
-@media (min-width: 700px) {
-    .container {
-        max-width: 700px;
-    }
-
-    .logo {
-        width: 80px;
-    }
-
-    h1 {
-        font-size: 24px;
-    }
-}
-
-@media (max-width: 480px) {
-    header {
-        text-align: left;
-        padding: 10px;
-    }
-
-    .grid {
-        gap: 10px;
-    }
-
-    .maca input,
-    .maca select,
-    .maca button {
-        font-size: 14px;
-    }
 }
