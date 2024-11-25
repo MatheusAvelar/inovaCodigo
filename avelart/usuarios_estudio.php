@@ -110,10 +110,8 @@ unset($_SESSION['status'], $_SESSION['message']);
                 <table>
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Ativo</th>
                             <th>Nome</th>
-                            <th>Sobrenome</th>
                             <th>Email</th>
                             <th>Perfil</th>
                             <th>Ações</th>
