@@ -19,9 +19,21 @@ if ($conn->connect_error) {
 $cliente_nome = isset($_GET['cliente_nome']) ? trim($_GET['cliente_nome']) : '';
 
 if($perfilUsuario == 2){
-    $sql = "SELECT id, nome_cliente, email_cliente, data_envio FROM termos_enviados WHERE status = 'ativo'";
+    $sql = "SELECT 
+                id, 
+                CONCAT(UPPER(SUBSTRING(nome_cliente, 1, 1)), LOWER(SUBSTRING(nome_cliente, 2))) AS nome_cliente, 
+                email_cliente, 
+                data_envio 
+            FROM termos_enviados 
+            WHERE status = 'ativo'";
 } else {
-    $sql = "SELECT id, nome_cliente, email_cliente, data_envio FROM termos_enviados WHERE status = 'ativo' AND usuario_id = $usuarioLogado";
+    $sql = "SELECT 
+                id,
+                CONCAT(UPPER(SUBSTRING(nome_cliente, 1, 1)), LOWER(SUBSTRING(nome_cliente, 2))) AS nome_cliente,email_cliente,
+                data_envio 
+            FROM termos_enviados 
+            WHERE status = 'ativo' 
+            AND usuario_id = $usuarioLogado";
 }
 
 // Se houver um filtro, adicione uma condição na consulta
