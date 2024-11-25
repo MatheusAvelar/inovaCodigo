@@ -29,7 +29,7 @@ realizado em $endereco, com carga horária total de $carga_horaria horas.
 "), 0, 'C');
 
 // Adicionando carimbo ou assinatura
-$pdf->Image('carimbo.png', 230, 150, 50, 50); // Imagem do carimbo (ajustar caminho e tamanho)
+//$pdf->Image('carimbo.png', 230, 150, 50, 50); // Imagem do carimbo (ajustar caminho e tamanho)
 
 // Adicionando a data e assinatura
 $pdf->Ln(40);
