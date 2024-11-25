@@ -23,7 +23,7 @@ unset($_SESSION['status'], $_SESSION['message']);
 <body>
     <header>
         <div class="logo-container">
-            <a href="https://avelart.inovacodigo.com.br/agendamento.php">
+            <a href="https://avelart-teste.inovacodigo.com.br/agendamento.php">
                 <img src="img/tatto.jpeg" alt="Logo do Estúdio" class="logo">
             </a>
         </div>
@@ -45,7 +45,10 @@ unset($_SESSION['status'], $_SESSION['message']);
 
                     <p>Assumo na qualidade de genitor(a) do(a) menor, plena responsabilidade pelo trabalho ora autorizado. É de minha livre vontade declarar que isento de responsabilidade civil ou criminal ao tatuador(a), seja de ordem médica, estética ou ainda defeitos da própria inscrição, salvo aquelas decorrentes de imperícia técnica. Ficando ainda plenamente ciente de que o procedimento da tatuagem tem caráter permanente, não podendo ser removida.</p>
 
-                    <p>Declaro ainda, ser do meu conhecimento as técnicas a serem executadas, os materiais a serem utilizados, bem como fui informado e tenho total ciência dos procedimentos e cuidados que devem ser executados por mim ou por meu/minha filho(a) durante o período recomendado pelo tatuador, com a finalidade de evitar qualquer complicação no período de cicatrização do local. Reconheço finalmente que a tatuagem se trata de um processo artesanal e como tal não comporta perfeição.</p>
+                    <p>Declaro ainda, ser do meu conhecimento as técnicas a serem executadas, os materiais a serem utilizados, bem como fui informado e tenho total ciência dos procedimentos e cuidados que devem ser executados por mim ou por meu/minha filho(a) durante o período recomendado pelo tatuador, com a finalidade de evitar qualquer complicação no período de cicatrização do local. Apesar de todos os cuidados tomados pelo estúdio com a devida biossegurança durante o procedimento da tattoo, como o uso de materiais descartáveis e esterilizados, o procedimento pode apresentar riscos, tais como: reações alérgicas a tinta; infecções caso os cuidados solicitados pelo seu tatuador não sejam seguidos corretamente; irritação ou sensibilidade na pele; riscos de cicatrização irregular. Reconheço finalmente que a tatuagem se trata de um processo artesanal e como tal, não comporta perfeição.</p>
+
+                    <p>Autorizo o estúdio Avelart Tattoo, e o/a tatuador(a) a utilizar imagens da tatuagem realizada e, se necessário, de partes do meu corpo que apareçam nas fotografias/filmagens, para fins de divulgação e marketing, incluindo, mas não se limitando, a publicações em redes sociais, portfólio, site oficial e materiais promocionais do estúdio. Esta autorização é concedida de forma gratuita e por prazo indeterminado. E, declaro também que não há qualquer vínculo comercial ou de exclusividade decorrente desta autorização.</p>
+
 
                     <!-- Dados do Cliente -->
 
@@ -290,7 +293,149 @@ unset($_SESSION['status'], $_SESSION['message']);
                         <span class="checkmark"></span> Não
                     </label><br>
 
+                    <!-- Novos -->
+
+                    <label>Possui doenças de pele, como psoríase, dermatite, vitiligo..? </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="pele" value="sim" onchange="togglePeleField()" required> 
+                        <span class="checkmark"></span> Sim
+                    </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="pele" value="nao" onchange="togglePeleField()" required> 
+                        <span class="checkmark"></span> Não
+                    </label><br>
+                    <input type="text" name="doenca_nome" placeholder="Qual tipo?" id="doenca_nome" style="display: none;"><br>
+
+                    <label>Tem tendência a queloide? </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="queloide" value="sim" required> 
+                        <span class="checkmark"></span> Sim
+                    </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="queloide" value="nao" required> 
+                        <span class="checkmark"></span> Não
+                    </label><br>
+
+                    <label>Possui hipertensão (pressão alta)? </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="hipertensao" value="sim" required> 
+                        <span class="checkmark"></span> Sim
+                    </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="hipertensao" value="nao" required> 
+                        <span class="checkmark"></span> Não
+                    </label><br>
+                    
+                    <label>Tem ou já teve alguma condição cardíaca? </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="cardiaco" value="sim" required> 
+                        <span class="checkmark"></span> Sim
+                    </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="cardiaco" value="nao" required> 
+                        <span class="checkmark"></span> Não
+                    </label><br>
+
+                    <label>Sofre com pressão baixa? </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="pressaoBaixa" value="sim" required> 
+                        <span class="checkmark"></span> Sim
+                    </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="pressaoBaixa" value="nao" required> 
+                        <span class="checkmark"></span> Não
+                    </label><br>
+
+                    <label>Você possui alguma condição de saúde ou doença crônica? </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="doencaCronica" value="sim" onchange="toggleDoencaCronicaField()" required> 
+                        <span class="checkmark"></span> Sim
+                    </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="doencaCronica" value="nao" onchange="toggleDoencaCronicaField()" required> 
+                        <span class="checkmark"></span> Não
+                    </label><br>
+                    <input type="text" name="doencaCronica_nome" placeholder="Qual ?" id="doencaCronica_nome" style="display: none;"><br>
+
+                    <label>Você tem ou já teve diabetes? </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="diabetes" value="sim" onchange="toggleDiabetesField()" required> 
+                        <span class="checkmark"></span> Sim
+                    </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="diabetes" value="nao" onchange="toggleDiabetesField()" required> 
+                        <span class="checkmark"></span> Não
+                    </label><br>
+                    <input type="text" name="diabetes_nome" placeholder="Qual tipo?" id="diabetes_nome" style="display: none;"><br>
+
+                    <label>Faz ou fez uso de corticoide recentemente? </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="corticoide" value="sim" required> 
+                        <span class="checkmark"></span> Sim
+                    </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="corticoide" value="nao" required> 
+                        <span class="checkmark"></span> Não
+                    </label><br>
+
+                    <label>Já teve alguma reação alérgica a tatuagens? </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="reacao" value="sim" required> 
+                        <span class="checkmark"></span> Sim
+                    </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="reacao" value="nao" required> 
+                        <span class="checkmark"></span> Não
+                    </label><br>
+
+                    <label>Está grávida ou amamentando? </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="gravida" value="sim" required> 
+                        <span class="checkmark"></span> Sim
+                    </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="gravida" value="nao" required> 
+                        <span class="checkmark"></span> Não
+                    </label><br>
+
+                    <!-- Hábitos e cuidados -->
+
+                    <label>Consome bebidas alcoólicas ou drogas recreativas? </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="bebidaDroga" value="sim" required> 
+                        <span class="checkmark"></span> Sim
+                    </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="bebidaDroga" value="nao" required> 
+                        <span class="checkmark"></span> Não
+                    </label><br>
+
+                    <label>Está em jejum há mais de 4 horas? </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="jejum" value="sim" required> 
+                        <span class="checkmark"></span> Sim
+                    </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="jejum" value="nao" required> 
+                        <span class="checkmark"></span> Não
+                    </label><br>
+
+                    <label>Tem alergia a látex ou materiais descartáveis? </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="alergiaLatex" value="sim" required> 
+                        <span class="checkmark"></span> Sim
+                    </label>
+                    <label class="custom-checkbox">
+                        <input type="radio" name="alergiaLatex" value="nao" required> 
+                        <span class="checkmark"></span> Não
+                    </label><br>
+
                     <!-- Assinatura -->
+
+                    <p>Confirmo que todas as informações acima são verdadeiras, e, assumo total responsabilidade por qualquer omissão ou erro nas mesmas.</p>
+
+                    <p>Estou ciente dos cuidados necessários antes e após a realização da tatuagem e que os resultados podem variar dependendo de fatores individuais, como cicatrização e cuidados pessoais.
+                    </p>
                      
                     <label>Assinatura (digite seu nome completo): </label>
                     <input type="text" name="assinatura_responsavel" required><br><br>
@@ -312,6 +457,24 @@ unset($_SESSION['status'], $_SESSION['message']);
             var alergiaSim = document.querySelector('input[name="alergia"][value="sim"]');
             var alergiaNome = document.getElementById('alergia_nome');
             alergiaNome.style.display = alergiaSim.checked ? 'block' : 'none';
+        }
+
+        function togglePeleField() {
+            var peleSim = document.querySelector('input[name="pele"][value="sim"]');
+            var doencaNome = document.getElementById('doenca_nome');
+            doencaNome.style.display = peleSim.checked ? 'block' : 'none';
+        }
+
+        function toggleDoencaCronicaField() {
+            var doencaCronicaSim = document.querySelector('input[name="doencaCronica"][value="sim"]');
+            var doencaNome = document.getElementById('doencaCronica_nome');
+            doencaNome.style.display = doencaCronicaSim.checked ? 'block' : 'none';
+        }
+
+        function toggleDiabetesField() {
+            var diabetesSim = document.querySelector('input[name="diabetes"][value="sim"]');
+            var doencaNome = document.getElementById('diabetes_nome');
+            doencaNome.style.display = diabetesSim.checked ? 'block' : 'none';
         }
 
         function toggleHepatiteField() {
