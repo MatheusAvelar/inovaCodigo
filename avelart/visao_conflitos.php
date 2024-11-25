@@ -99,7 +99,11 @@ if ($_SESSION['perfil_id'] != 2) {
                         include 'php/teste_conflitos.php';
                         ?>
                     </tbody>
-                </table>
+                </table><br>
+                <!-- Exibe a contagem de registros -->
+                <div class="record-count">
+                    <?php echo "Total de Registros: " . $total_records; ?>
+                </div>
             </div>            
         </div>
     </div>
