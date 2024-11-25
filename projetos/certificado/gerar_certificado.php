@@ -1,5 +1,5 @@
 <?php
-require('../avelart/fpdf/fpdf.php');
+require('../../avelart/fpdf/fpdf.php');
 
 // Recebendo os dados do formulário
 $nome = $_POST['nome'] ?? '';
