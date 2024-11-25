@@ -19,6 +19,14 @@ if ($conn->connect_error) {
 $cliente_nome = isset($_GET['cliente_nome']) ? trim($_GET['cliente_nome']) : '';
 
 if($perfilUsuario == 2){
+    // Consulta para contar o número total de registros ativos
+    $count_query = "SELECT COUNT(*) AS total FROM termos_enviados WHERE status = 'ativo'";
+    $count_result = $mysqli->query($count_query);
+    $total_records = 0;
+    if ($count_result) {
+        $total_records = $count_result;
+    }
+
     $sql = "SELECT 
                 id, 
                 CONCAT(UPPER(SUBSTRING(nome_cliente, 1, 1)), LOWER(SUBSTRING(nome_cliente, 2))) AS nome_cliente, 
@@ -27,6 +35,14 @@ if($perfilUsuario == 2){
             FROM termos_enviados 
             WHERE status = 'ativo'";
 } else {
+    // Consulta para contar o número total de registros ativos
+    $count_query = "SELECT COUNT(*) AS total FROM termos_enviados WHERE status = 'ativo' AND usuario_id = $usuarioLogado";
+    $count_result = $mysqli->query($count_query);
+    $total_records = 0;
+    if ($count_result) {
+        $total_records = $count_result;
+    }
+
     $sql = "SELECT 
                 id,
                 CONCAT(UPPER(SUBSTRING(nome_cliente, 1, 1)), LOWER(SUBSTRING(nome_cliente, 2))) AS nome_cliente,email_cliente,
