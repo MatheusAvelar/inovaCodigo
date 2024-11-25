@@ -44,10 +44,12 @@ if (!empty($cliente_nome)) {
 
 
 // Consulta para contar o número total de registros ativos
-$count_result = $conn->query($sql);
+$sqlCount = "SELECT COUNT(*) as total FROM sua_tabela";
+$count_result = $conn->query($sqlCount);
+
 $total_records = 0;
-if ($count_result) {
-    $total_records = $count_result;
+if ($count_result && $row = $count_result->fetch_assoc()) {
+    $total_records = $row['total'];
 }
 
 $stmt->execute();
