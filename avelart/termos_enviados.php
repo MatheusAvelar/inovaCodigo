@@ -108,7 +108,7 @@ unset($_SESSION['status'], $_SESSION['message']);
             </form>
                 <!-- Exibe a contagem de registros -->
                 <div class="record-count">
-                    <?php echo "Total de Registros: " . $total_records; ?>
+                    <?php echo "Total de Registros: "; /*. $total_records; */?>
                 </div>
                 <table>
                     <thead>
