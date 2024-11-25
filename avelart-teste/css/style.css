@@ -132,12 +132,12 @@ h1 {
 table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 table, th, td {
     border: 1px solid #ddd;
-    padding: 8px;
+    padding: 5px;
 }
 
 th {
