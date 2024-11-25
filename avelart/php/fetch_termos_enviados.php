@@ -29,7 +29,8 @@ if($perfilUsuario == 2){
 } else {
     $sql = "SELECT 
                 id,
-                CONCAT(UPPER(SUBSTRING(nome_cliente, 1, 1)), LOWER(SUBSTRING(nome_cliente, 2))) AS nome_cliente,email_cliente,
+                CONCAT(UPPER(SUBSTRING(nome_cliente, 1, 1)), LOWER(SUBSTRING(nome_cliente, 2))) AS nome_cliente, 
+                email_cliente,
                 data_envio 
             FROM termos_enviados 
             WHERE status = 'ativo' 
@@ -54,7 +55,10 @@ if (!empty($cliente_nome)) {
 $stmt->execute();
 $result = $stmt->get_result();
 
-if ($result->num_rows > 0) {
+// Obter a contagem total de registros
+$total_records = $result->num_rows;
+
+if ($total_records > 0) {
     while($row = $result->fetch_assoc()) {
         echo "<tr>";
         echo "<td>" . htmlspecialchars($row['nome_cliente']) . "</td>";
