@@ -125,11 +125,11 @@ unset($_SESSION['status'], $_SESSION['message']);
                         include 'php/fetch_termos_enviados.php';
                         ?>
                     </tbody>
-                </table>
+                </table><br>
                 <!-- Exibe a contagem de registros -->
                 <div class="record-count">
                     <?php echo "Total de Registros: "; /*. $total_records; */?>
-                </div><br>
+                </div>
             </div>            
         </div>
     </div>
