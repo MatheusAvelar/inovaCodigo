@@ -106,10 +106,6 @@ unset($_SESSION['status'], $_SESSION['message']);
                 <input type="text" name="cliente_nome" id="cliente_nome" placeholder="Nome do Cliente" value="<?= htmlspecialchars(isset($_GET['cliente_nome']) ? $_GET['cliente_nome'] : '') ?>">
                 <button type="submit">Filtrar</button>
             </form>
-                <!-- Exibe a contagem de registros -->
-                <div class="record-count">
-                    <?php echo "Total de Registros: "; /*. $total_records; */?>
-                </div><br>
                 <table>
                     <thead>
                         <tr>
