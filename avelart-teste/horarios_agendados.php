@@ -231,6 +231,10 @@ unset($_SESSION['status'], $_SESSION['message']);
                     <select id="filter-tatuador" name="filter_tatuador">
                         <option value="">Todos os Tatuadores</option>
                         <!-- Inclua a lógica PHP para listar os tatuadores -->
+                        <?php
+                        // Carregar a lista de tatuadores
+                        include 'php/get_tatuadores.php';
+                        ?>
                     </select>
                 </div>
 
