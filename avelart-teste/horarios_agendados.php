@@ -116,6 +116,7 @@ unset($_SESSION['status'], $_SESSION['message']);
             background-color: #f4f4f4;
             border: 1px solid #ddd;
             border-radius: 8px;
+            display: flex;
         }
 
         #actions-container .button {
