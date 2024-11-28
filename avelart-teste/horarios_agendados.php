@@ -234,7 +234,7 @@ unset($_SESSION['status'], $_SESSION['message']);
                         <!-- Inclua a lógica PHP para listar os tatuadores -->
                         <?php
                         // Carregar a lista de tatuadores
-                        include 'php/get_tatuadores.php';
+                        //include 'php/get_tatuadores.php';
                         ?>
                     </select>
                 </div>
