@@ -290,7 +290,7 @@ unset($_SESSION['status'], $_SESSION['message']);
         document.getElementById('export-button').addEventListener('click', function() {
             console.log('Exportar botão clicado');
 
-            const form = document.getElementById('filter-form');
+            const form = document.getElementById('filter-actions-form');
             const filterData = new FormData(form);
 
             // Converte os dados do formulário para uma string de query
