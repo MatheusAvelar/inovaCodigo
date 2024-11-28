@@ -61,36 +61,32 @@ unset($_SESSION['status'], $_SESSION['message']);
             font-size: 18px;
         }
 
-        #filter-section {
+        #filter-actions-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #filters-container {
             display: flex;
             flex-wrap: wrap;
             gap: 15px;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            background-color: #f4f4f4;
-            padding: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
             border-radius: 8px;
-            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
         }
 
-        #filter-section .filters,
-        #filter-section .actions {
-            flex: 1 1 calc(50% - 15px);
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
+        #filters-container div {
+            flex: 1 1 calc(33.333% - 15px);
+            min-width: 200px;
         }
 
-        #filter-section .filters>div,
-        #filter-section .actions {
-            flex: 1 1 100%;
-        }
-
-        #filter-section .filters div {
-            flex: 1 1 calc(33.33% - 10px);
-        }
-
-        #filter-section label {
+        #filters-container label {
             display: block;
             font-size: 14px;
             font-weight: bold;
@@ -98,56 +94,67 @@ unset($_SESSION['status'], $_SESSION['message']);
             color: #333;
         }
 
-        #filter-section select,
-        #filter-section input {
+        #filters-container select,
+        #filters-container input {
             width: 100%;
-            padding: 8px;
+            padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
             font-size: 14px;
-            box-sizing: border-box;
+            background-color: #fff;
+            transition: border-color 0.2s ease-in-out;
         }
 
-        #filter-section .button {
-            padding: 10px 20px;
+        #filters-container select:hover,
+        #filters-container input:hover {
+            border-color: #ff6f61;
+        }
+
+        #actions-container {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            padding: 15px;
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        #actions-container .button {
+            padding: 12px 20px;
             font-size: 16px;
             font-weight: bold;
+            color: #fff;
             background-color: #ff6f61;
-            color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
-            text-align: center;
-            min-width: 120px;
         }
 
-        #filter-section .button:hover {
+        #actions-container .button:hover {
             background-color: #e65c50;
         }
 
-        #filter-section .button i {
+        #actions-container .button i {
             margin-right: 5px;
         }
 
         @media (max-width: 768px) {
-            #filter-section {
+            #filters-container {
                 flex-direction: column;
             }
 
-            #filter-section .filters div {
+            #filters-container div {
                 flex: 1 1 100%;
             }
 
-            #filter-section .actions {
+            #actions-container {
                 justify-content: center;
-                flex-direction: column;
-                align-items: stretch;
             }
 
-            #filter-section .button {
+            #actions-container .button {
                 width: 100%;
-                margin-bottom: 10px;
             }
         }
     </style>
