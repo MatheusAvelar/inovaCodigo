@@ -61,33 +61,68 @@ unset($_SESSION['status'], $_SESSION['message']);
             font-size: 18px;
         }
 
-        .filters {
+        #filter-form {
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
+            gap: 10px;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
         }
 
-        .filter-group {
-            flex: 1 1 calc(50% - 1rem);
-            /* 50% da largura em telas maiores */
-            min-width: 150px;
+        #filter-form label {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
         }
 
-        .filter-actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 0.5rem;
-            margin-top: 1rem;
+        #filter-form select,
+        #filter-form input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        #filter-form .button {
+            padding: 10px 15px;
+            font-size: 16px;
+            font-weight: bold;
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #filter-form .button:hover {
+            background-color: #e65c50;
+        }
+
+        #filter-form .button i {
+            margin-right: 5px;
         }
 
         @media (max-width: 768px) {
-            .filters {
+            #filter-form {
                 flex-direction: column;
-                /* Organiza os filtros em uma única coluna */
             }
 
-            .filter-group {
-                flex: 1 1 100%;
+            #filter-form select,
+            #filter-form input {
+                font-size: 16px;
+            }
+
+            #filter-form .button {
+                width: 100%;
             }
         }
     </style>
