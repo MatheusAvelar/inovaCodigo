@@ -110,7 +110,6 @@ unset($_SESSION['status'], $_SESSION['message']);
         }
 
         #actions-container {
-            display: flex;
             justify-content: flex-end;
             gap: 10px;
             padding: 15px;
