@@ -194,28 +194,13 @@ unset($_SESSION['status'], $_SESSION['message']);
             <?php endif; ?>
         </div>
         <h2>Horários Agendados</h2>
-        <form id="filter-form" method="GET" action="horarios_agendados.php" style="max-width: 800px; margin: auto;">
-            <div class="filters">
-                <div class="filter-group">
+        <form id="filter-actions-form" method="GET" action="horarios_agendados.php">
+            <div id="filters-container">
+                <div>
                     <label for="filter-month">Mês:</label>
                     <select id="filter-month" name="filter_month">
                         <option value="">Todos os Meses</option>
                         <?php
-                        $months = [
-                            '01' => 'Janeiro',
-                            '02' => 'Fevereiro',
-                            '03' => 'Março',
-                            '04' => 'Abril',
-                            '05' => 'Maio',
-                            '06' => 'Junho',
-                            '07' => 'Julho',
-                            '08' => 'Agosto',
-                            '09' => 'Setembro',
-                            '10' => 'Outubro',
-                            '11' => 'Novembro',
-                            '12' => 'Dezembro'
-                        ];
-
                         foreach ($months as $value => $name) {
                             $selected = (isset($_GET['filter_month']) && $_GET['filter_month'] == $value) ? 'selected' : '';
                             echo "<option value=\"$value\" $selected>$name</option>";
@@ -224,7 +209,7 @@ unset($_SESSION['status'], $_SESSION['message']);
                     </select>
                 </div>
 
-                <div class="filter-group">
+                <div>
                     <label for="filter-maca">Maca:</label>
                     <select id="filter-maca" name="filter_maca">
                         <option value="">Todas as Macas</option>
@@ -236,36 +221,38 @@ unset($_SESSION['status'], $_SESSION['message']);
                     </select>
                 </div>
 
-                <div class="filter-group">
+                <div>
                     <label for="filter-tatuador">Tatuador:</label>
                     <select id="filter-tatuador" name="filter_tatuador">
                         <option value="">Todos os Tatuadores</option>
-                        <!-- Aqui você pode incluir a lógica para listar tatuadores -->
+                        <!-- Inclua a lógica PHP para listar os tatuadores -->
                     </select>
                 </div>
 
                 <?php if ($perfil_id == 2) : ?>
-                    <div class="filter-group">
+                    <div>
                         <label for="filter-status">Status:</label>
                         <select id="filter-status" name="filter_status">
-                            <option value="1" <?= isset($_GET['filter_status']) && $_GET['filter_status'] == '1' ? 'selected' : '' ?>>Ativo</option>
-                            <option value="0" <?= isset($_GET['filter_status']) && $_GET['filter_status'] == '0' ? 'selected' : '' ?>>Inativo</option>
+                            <option value="1">Ativo</option>
+                            <option value="0">Inativo</option>
                         </select>
                     </div>
                 <?php endif; ?>
             </div>
 
-            <div class="filter-actions">
-                <button type="submit" id="filter-button">
-                    <i class="fas fa-search"></i>
+            <div id="actions-container">
+                <button type="submit" class="button">
+                    <i class="fas fa-search"></i> Filtrar
                 </button>
+
                 <?php if ($perfil_id == 2) : ?>
-                    <button type="button" id="export-button">
-                        <i class="fa-solid fa-file-csv"></i>
+                    <button type="button" class="button" id="export-button">
+                        <i class="fa-solid fa-file-csv"></i> Exportar
                     </button>
                 <?php endif; ?>
             </div>
         </form>
+
 
         <div class="grid">
             <div class="maca">
