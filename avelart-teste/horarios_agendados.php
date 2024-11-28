@@ -61,19 +61,36 @@ unset($_SESSION['status'], $_SESSION['message']);
             font-size: 18px;
         }
 
-        #filter-form {
+        #filter-section {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 15px;
             justify-content: space-between;
             margin-bottom: 20px;
             background-color: #f4f4f4;
-            padding: 15px;
+            padding: 20px;
             border-radius: 8px;
             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
         }
 
-        #filter-form label {
+        #filter-section .filters,
+        #filter-section .actions {
+            flex: 1 1 calc(50% - 15px);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        #filter-section .filters>div,
+        #filter-section .actions {
+            flex: 1 1 100%;
+        }
+
+        #filter-section .filters div {
+            flex: 1 1 calc(33.33% - 10px);
+        }
+
+        #filter-section label {
             display: block;
             font-size: 14px;
             font-weight: bold;
@@ -81,8 +98,8 @@ unset($_SESSION['status'], $_SESSION['message']);
             color: #333;
         }
 
-        #filter-form select,
-        #filter-form input {
+        #filter-section select,
+        #filter-section input {
             width: 100%;
             padding: 8px;
             border: 1px solid #ccc;
@@ -91,8 +108,8 @@ unset($_SESSION['status'], $_SESSION['message']);
             box-sizing: border-box;
         }
 
-        #filter-form .button {
-            padding: 10px 15px;
+        #filter-section .button {
+            padding: 10px 20px;
             font-size: 16px;
             font-weight: bold;
             background-color: #ff6f61;
@@ -101,28 +118,36 @@ unset($_SESSION['status'], $_SESSION['message']);
             border-radius: 4px;
             cursor: pointer;
             transition: background-color 0.3s;
+            text-align: center;
+            min-width: 120px;
         }
 
-        #filter-form .button:hover {
+        #filter-section .button:hover {
             background-color: #e65c50;
         }
 
-        #filter-form .button i {
+        #filter-section .button i {
             margin-right: 5px;
         }
 
         @media (max-width: 768px) {
-            #filter-form {
+            #filter-section {
                 flex-direction: column;
             }
 
-            #filter-form select,
-            #filter-form input {
-                font-size: 16px;
+            #filter-section .filters div {
+                flex: 1 1 100%;
             }
 
-            #filter-form .button {
+            #filter-section .actions {
+                justify-content: center;
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            #filter-section .button {
                 width: 100%;
+                margin-bottom: 10px;
             }
         }
     </style>
