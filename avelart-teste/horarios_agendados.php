@@ -11,6 +11,7 @@ unset($_SESSION['status'], $_SESSION['message']);
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,9 +22,10 @@ unset($_SESSION['status'], $_SESSION['message']);
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        #menu ul li { 
-            display: inline-block; 
+        #menu ul li {
+            display: inline-block;
         }
+
         /* Estilo básico do dropdown */
         .dropdown {
             position: relative;
@@ -35,7 +37,7 @@ unset($_SESSION['status'], $_SESSION['message']);
             position: absolute;
             background-color: #f9f9f9;
             min-width: 160px;
-            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
             z-index: 1;
         }
 
@@ -58,8 +60,39 @@ unset($_SESSION['status'], $_SESSION['message']);
         .settings-icon {
             font-size: 18px;
         }
+
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .filter-group {
+            flex: 1 1 calc(50% - 1rem);
+            /* 50% da largura em telas maiores */
+            min-width: 150px;
+        }
+
+        .filter-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .filters {
+                flex-direction: column;
+                /* Organiza os filtros em uma única coluna */
+            }
+
+            .filter-group {
+                flex: 1 1 100%;
+            }
+        }
     </style>
 </head>
+
 <body>
     <header>
         <div class="logo-container">
@@ -73,8 +106,8 @@ unset($_SESSION['status'], $_SESSION['message']);
     </header>
 
     <div class="container">
-    <nav id="menu"> 
-            <ul> 
+        <nav id="menu">
+            <ul>
                 <li><a href="termos_enviados.php">Termos Preenchidos</a></li>
                 <li><a href="agendamento.php">Agendamento</a></li>
                 <?php if ($perfil_id == 2) : ?>
@@ -90,7 +123,7 @@ unset($_SESSION['status'], $_SESSION['message']);
                     </li>
                 <?php endif; ?>
                 <li><a href="php/logout.php">Sair</a></li>
-            </ul> 
+            </ul>
         </nav>
         <br>
         <div id="message-container">
@@ -101,63 +134,79 @@ unset($_SESSION['status'], $_SESSION['message']);
             <?php endif; ?>
         </div>
         <h2>Horários Agendados</h2>
-        <form id="filter-form" method="GET" action="horarios_agendados.php">
-            <!-- <label for="filter-date">Data:</label>
-            <input type="date" id="filter-date" name="filter_date" value="<?= htmlspecialchars($_GET['filter_date'] ?? '') ?>"> -->
-            
-            <label for="filter-month">Mês:</label>
-            <select id="filter-month" name="filter_month">
-                <option value="">Todos os Meses</option>
-                <?php
-                $months = [
-                    '01' => 'Janeiro', '02' => 'Fevereiro', '03' => 'Março', '04' => 'Abril',
-                    '05' => 'Maio', '06' => 'Junho', '07' => 'Julho', '08' => 'Agosto',
-                    '09' => 'Setembro', '10' => 'Outubro', '11' => 'Novembro', '12' => 'Dezembro'
-                ];
+        <form id="filter-form" method="GET" action="horarios_agendados.php" style="max-width: 800px; margin: auto;">
+            <div class="filters">
+                <div class="filter-group">
+                    <label for="filter-month">Mês:</label>
+                    <select id="filter-month" name="filter_month">
+                        <option value="">Todos os Meses</option>
+                        <?php
+                        $months = [
+                            '01' => 'Janeiro',
+                            '02' => 'Fevereiro',
+                            '03' => 'Março',
+                            '04' => 'Abril',
+                            '05' => 'Maio',
+                            '06' => 'Junho',
+                            '07' => 'Julho',
+                            '08' => 'Agosto',
+                            '09' => 'Setembro',
+                            '10' => 'Outubro',
+                            '11' => 'Novembro',
+                            '12' => 'Dezembro'
+                        ];
 
-                foreach ($months as $value => $name) {
-                    $selected = (isset($_GET['filter_month']) && $_GET['filter_month'] == $value) ? 'selected' : '';
-                    echo "<option value=\"$value\" $selected>$name</option>";
-                }
-                ?>
-            </select>
+                        foreach ($months as $value => $name) {
+                            $selected = (isset($_GET['filter_month']) && $_GET['filter_month'] == $value) ? 'selected' : '';
+                            echo "<option value=\"$value\" $selected>$name</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
 
-            <label for="filter-maca">Maca:</label>
-            <select id="filter-maca" name="filter_maca">
-                <option value="">Todas as Macas</option>
-                <option value="1" <?= isset($_GET['filter_maca']) && $_GET['filter_maca'] == '1' ? 'selected' : '' ?>>Maca 1</option>
-                <option value="2" <?= isset($_GET['filter_maca']) && $_GET['filter_maca'] == '2' ? 'selected' : '' ?>>Maca 2</option>
-                <option value="3" <?= isset($_GET['filter_maca']) && $_GET['filter_maca'] == '3' ? 'selected' : '' ?>>Maca 3</option>
-                <option value="4" <?= isset($_GET['filter_maca']) && $_GET['filter_maca'] == '4' ? 'selected' : '' ?>>Maca 4</option>
-                <option value="5" <?= isset($_GET['filter_maca']) && $_GET['filter_maca'] == '5' ? 'selected' : '' ?>>Sala de Atendimento Íntimo</option>
-            </select>
-    
-            <label for="filter-tatuador">Tatuador:</label>
-            <select id="filter-tatuador" name="filter_tatuador">
-                <option value="">Todos os Tatuadores</option>
-                <?php
-                // Carregar a lista de tatuadores
-                //include 'php/get_tatuadores.php';
-                ?>
-            </select>
+                <div class="filter-group">
+                    <label for="filter-maca">Maca:</label>
+                    <select id="filter-maca" name="filter_maca">
+                        <option value="">Todas as Macas</option>
+                        <option value="1" <?= isset($_GET['filter_maca']) && $_GET['filter_maca'] == '1' ? 'selected' : '' ?>>Maca 1</option>
+                        <option value="2" <?= isset($_GET['filter_maca']) && $_GET['filter_maca'] == '2' ? 'selected' : '' ?>>Maca 2</option>
+                        <option value="3" <?= isset($_GET['filter_maca']) && $_GET['filter_maca'] == '3' ? 'selected' : '' ?>>Maca 3</option>
+                        <option value="4" <?= isset($_GET['filter_maca']) && $_GET['filter_maca'] == '4' ? 'selected' : '' ?>>Maca 4</option>
+                        <option value="5" <?= isset($_GET['filter_maca']) && $_GET['filter_maca'] == '5' ? 'selected' : '' ?>>Sala de Atendimento Íntimo</option>
+                    </select>
+                </div>
 
-            <?php if ($perfil_id == 2) : ?>
-                <label for="filter-status">Status:</label>
-                <select id="filter-status" name="filter_status">
-                    <option value="1">Ativo</option>
-                    <option value="0">Inativo</option>
-                </select>
-            <?php endif; ?>
-    
-            <button type="submit" class="button" id="filter-button">
-                <i class="fas fa-search"></i>
-            </button>
-            <?php if ($perfil_id == 2) : ?>
-                <button type="button" class="button" id="export-button">
-                    <i class="fa-solid fa-file-csv"></i>
+                <div class="filter-group">
+                    <label for="filter-tatuador">Tatuador:</label>
+                    <select id="filter-tatuador" name="filter_tatuador">
+                        <option value="">Todos os Tatuadores</option>
+                        <!-- Aqui você pode incluir a lógica para listar tatuadores -->
+                    </select>
+                </div>
+
+                <?php if ($perfil_id == 2) : ?>
+                    <div class="filter-group">
+                        <label for="filter-status">Status:</label>
+                        <select id="filter-status" name="filter_status">
+                            <option value="1" <?= isset($_GET['filter_status']) && $_GET['filter_status'] == '1' ? 'selected' : '' ?>>Ativo</option>
+                            <option value="0" <?= isset($_GET['filter_status']) && $_GET['filter_status'] == '0' ? 'selected' : '' ?>>Inativo</option>
+                        </select>
+                    </div>
+                <?php endif; ?>
+            </div>
+
+            <div class="filter-actions">
+                <button type="submit" id="filter-button">
+                    <i class="fas fa-search"></i>
                 </button>
-            <?php endif; ?>
+                <?php if ($perfil_id == 2) : ?>
+                    <button type="button" id="export-button">
+                        <i class="fa-solid fa-file-csv"></i>
+                    </button>
+                <?php endif; ?>
+            </div>
         </form>
+
         <div class="grid">
             <div class="maca">
                 <table>
@@ -181,7 +230,7 @@ unset($_SESSION['status'], $_SESSION['message']);
                         ?>
                     </tbody>
                 </table>
-            </div>            
+            </div>
         </div>
     </div>
 
@@ -198,36 +247,39 @@ unset($_SESSION['status'], $_SESSION['message']);
 
             // Faz a requisição para o PHP e busca os dados
             fetch('php/export_agendamentos.php?' + queryString)
-            .then(response => response.text())  // Use text() para ver o conteúdo bruto
-            .then(data => {
-                console.log('Dados recebidos (texto bruto):', data);
+                .then(response => response.text()) // Use text() para ver o conteúdo bruto
+                .then(data => {
+                    console.log('Dados recebidos (texto bruto):', data);
 
-                try {
-                    // Tente converter o texto para JSON
-                    const jsonData = JSON.parse(data);
-                    console.log('Dados recebidos (JSON):', jsonData);
+                    try {
+                        // Tente converter o texto para JSON
+                        const jsonData = JSON.parse(data);
+                        console.log('Dados recebidos (JSON):', jsonData);
 
-                    // Adiciona os cabeçalhos das colunas
-                    const headers = ['tatuador', 'maca', 'data', 'h.inicial', 'h.final', 'nomeCliente', 'estilo', 'tamanho', 'valor', 'formaPagamento', 'sinal', 'descricao'];
+                        // Adiciona os cabeçalhos das colunas
+                        const headers = ['tatuador', 'maca', 'data', 'h.inicial', 'h.final', 'nomeCliente', 'estilo', 'tamanho', 'valor', 'formaPagamento', 'sinal', 'descricao'];
 
-                    // Cria uma planilha com os dados
-                    const worksheet = XLSX.utils.json_to_sheet(jsonData, {header: headers});
-                    const workbook = XLSX.utils.book_new();
-                    XLSX.utils.book_append_sheet(workbook, worksheet, "Agendamentos");
+                        // Cria uma planilha com os dados
+                        const worksheet = XLSX.utils.json_to_sheet(jsonData, {
+                            header: headers
+                        });
+                        const workbook = XLSX.utils.book_new();
+                        XLSX.utils.book_append_sheet(workbook, worksheet, "Agendamentos");
 
-                    // Gera o arquivo e força o download
-                    XLSX.writeFile(workbook, "agendamentos_filtrados.xlsx");
+                        // Gera o arquivo e força o download
+                        XLSX.writeFile(workbook, "agendamentos_filtrados.xlsx");
 
-                    console.log('Arquivo Excel gerado e baixado.');
-                } catch (error) {
-                    console.error('Erro ao interpretar JSON:', error);
-                }
-            })
-            .catch(error => {
-                console.error('Erro na requisição ou na geração do arquivo:', error);
-            });
+                        console.log('Arquivo Excel gerado e baixado.');
+                    } catch (error) {
+                        console.error('Erro ao interpretar JSON:', error);
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro na requisição ou na geração do arquivo:', error);
+                });
         });
     </script>
 
 </body>
+
 </html>
