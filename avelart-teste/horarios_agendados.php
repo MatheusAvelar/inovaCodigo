@@ -288,25 +288,25 @@ unset($_SESSION['status'], $_SESSION['message']);
 
     <script>
         document.getElementById('export-button').addEventListener('click', function() {
-            console.log('Exportar botão clicado');
+            //console.log('Exportar botão clicado');
 
             const form = document.getElementById('filter-actions-form');
             const filterData = new FormData(form);
 
             // Converte os dados do formulário para uma string de query
             const queryString = new URLSearchParams(filterData).toString();
-            console.log('Query string gerada:', queryString);
+            //console.log('Query string gerada:', queryString);
 
             // Faz a requisição para o PHP e busca os dados
             fetch('php/export_agendamentos.php?' + queryString)
                 .then(response => response.text()) // Use text() para ver o conteúdo bruto
                 .then(data => {
-                    console.log('Dados recebidos (texto bruto):', data);
+                    //console.log('Dados recebidos (texto bruto):', data);
 
                     try {
                         // Tente converter o texto para JSON
                         const jsonData = JSON.parse(data);
-                        console.log('Dados recebidos (JSON):', jsonData);
+                        //console.log('Dados recebidos (JSON):', jsonData);
 
                         // Adiciona os cabeçalhos das colunas
                         const headers = ['tatuador', 'maca', 'data', 'h.inicial', 'h.final', 'nomeCliente', 'estilo', 'tamanho', 'valor', 'formaPagamento', 'sinal', 'descricao'];
@@ -321,7 +321,7 @@ unset($_SESSION['status'], $_SESSION['message']);
                         // Gera o arquivo e força o download
                         XLSX.writeFile(workbook, "agendamentos_filtrados.xlsx");
 
-                        console.log('Arquivo Excel gerado e baixado.');
+                        //console.log('Arquivo Excel gerado e baixado.');
                     } catch (error) {
                         console.error('Erro ao interpretar JSON:', error);
                     }
