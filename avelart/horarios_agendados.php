@@ -258,6 +258,7 @@ $months = [
                     <div>
                         <label for="filter-status">Status:</label>
                         <select id="filter-status" name="filter_status">
+                            <option value="">Nenhum Valor</option>
                             <option value="1">Ativo</option>
                             <option value="0">Inativo</option>
                         </select>
