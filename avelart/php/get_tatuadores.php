@@ -14,7 +14,9 @@ if ($conn->connect_error) {
 }
 
 // Obtendo a lista de tatuadores
-$query = "SELECT id, nome FROM usuarioEstudio WHERE ativo = 1";
+$query = "SELECT id, CONCAT(UPPER(LEFT(nome, 1)), LOWER(SUBSTRING(nome, 2))) AS nome 
+FROM usuarioEstudio 
+WHERE ativo = 1;";
 $result = $conn->query($query);
 
 if ($result->num_rows > 0) {
