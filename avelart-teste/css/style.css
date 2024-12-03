@@ -260,8 +260,7 @@ td:nth-child(6) {
 }
 */
 
-#filter-button:hover i,
-#export-button:hover i {
+#filter-button:hover i {
     color: #f4ab36; /* cor ao passar o mouse */
 }
 
