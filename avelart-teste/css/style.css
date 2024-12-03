@@ -253,10 +253,12 @@ td:nth-child(6) {
     margin-left: 10px;
 }
 
+/*
 #filter-button i,
 #export-button i {
-    color: #fec66f; /* ou a cor que você preferir */
+    color: #fec66f; /* ou a cor que você preferir 
 }
+*/
 
 #filter-button:hover i,
 #export-button:hover i {
