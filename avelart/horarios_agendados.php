@@ -139,7 +139,7 @@ $months = [
             font-size: 16px;
             font-weight: bold;
             color: #fff;
-            background-color: #ff6f61;
+            background-color: #fec66f;
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -147,7 +147,7 @@ $months = [
         }
 
         #actions-container .button:hover {
-            background-color: #e65c50;
+            background-color: #f4ab36;
         }
 
         #actions-container .button i {
