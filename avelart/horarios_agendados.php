@@ -273,7 +273,7 @@ $months = [
 
                 <?php if ($perfil_id == 2) : ?>
                     <button type="button" class="button" id="export-button">
-                        <i class="fa-solid fa-file-csv"></i> Exportar
+                        Exportar
                     </button>
                 <?php endif; ?>
             </div>
