@@ -114,7 +114,7 @@ unset($_SESSION['status'], $_SESSION['message']);
                         <option value="1">Maca 1</option>
                         <option value="2">Maca 2</option>
                         <option value="3">Maca 3</option>
-                        <option value="4">Maca 4</option>
+                        <!--<option value="4">Maca 4</option>-->
                         <option value="5">Sala de Atendimento Íntimo</option>
                     </select>
                     <div id="maca-error" class="error-message"></div>
