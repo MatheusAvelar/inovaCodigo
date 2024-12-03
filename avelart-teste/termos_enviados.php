@@ -1,5 +1,6 @@
 <?php
 session_start();
+include 'php/verificar_perfil.php';
 
 // Verifica se há mensagem de status na sessão
 $status = isset($_SESSION['status']) ? $_SESSION['status'] : null;
@@ -9,7 +10,7 @@ $message = isset($_SESSION['message']) ? $_SESSION['message'] : null;
 unset($_SESSION['status'], $_SESSION['message']);
 ?>
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR"> 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -60,7 +61,7 @@ unset($_SESSION['status'], $_SESSION['message']);
 <body>
     <header>
         <div class="logo-container">
-            <a href="https://avelart-teste.inovacodigo.com.br/agendamento.php">
+            <a href="https://avelart.inovacodigo.com.br/agendamento.php">
                 <img src="img/tatto.jpeg" alt="Logo do Estúdio" class="logo">
             </a>
         </div>
@@ -74,7 +75,7 @@ unset($_SESSION['status'], $_SESSION['message']);
             <ul> 
                 <li><a href="agendamento.php">Agendamento</a></li>
                 <li><a href="horarios_agendados.php">Horários Agendados</a></li>
-                <?php if ($_SESSION['perfil_id'] == 2) : ?>
+                <?php if ($perfil_id == 2) : ?>
                     <li class="dropdown">
                         <a href="javascript:void(0)">
                             <i class="fas fa-cog settings-icon"></i>
@@ -120,7 +121,11 @@ unset($_SESSION['status'], $_SESSION['message']);
                         include 'php/fetch_termos_enviados.php';
                         ?>
                     </tbody>
-                </table>
+                </table><br>
+                <!-- Exibe a contagem de registros -->
+                <div class="record-count">
+                    <?php echo "Total de Registros: " . $total_records; ?>
+                </div>
             </div>            
         </div>
     </div>

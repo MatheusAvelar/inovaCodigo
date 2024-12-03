@@ -44,7 +44,10 @@ $query = "SELECT a1.id AS agendamento1_id, a2.id AS agendamento2_id,
 
 $result = $conn->query($query);
 
-if ($result->num_rows > 0) {
+// Obter a contagem total de registros
+$total_records = $result->num_rows;
+
+if ($total_records > 0) {
     echo "<table>";
     echo "<thead>
             <tr>

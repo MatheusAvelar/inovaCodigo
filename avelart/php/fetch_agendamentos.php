@@ -82,7 +82,10 @@ $query = "SELECT ag.id, ag.descricao, ag.maca_id, ag.data, ag.start_time, ag.end
 
 $result = $conn->query($query);
 
-if ($result->num_rows > 0) {
+// Obter a contagem total de registros
+$total_records = $result->num_rows;
+
+if ($total_records > 0) {
     while ($row = $result->fetch_assoc()) {
         // Verifica se o agendamento atual está na lista de conflitos
         $isConflict = in_array($row['id'], $conflictIds);

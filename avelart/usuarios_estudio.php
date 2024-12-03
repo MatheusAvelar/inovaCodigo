@@ -110,10 +110,8 @@ unset($_SESSION['status'], $_SESSION['message']);
                 <table>
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Ativo</th>
                             <th>Nome</th>
-                            <th>Sobrenome</th>
                             <th>Email</th>
                             <th>Perfil</th>
                             <th>Ações</th>
@@ -124,7 +122,11 @@ unset($_SESSION['status'], $_SESSION['message']);
                         include 'php/get_usuarios.php';
                         ?>
                     </tbody>
-                </table>
+                </table><br>
+                <!-- Exibe a contagem de registros -->
+                <div class="record-count">
+                    <?php echo "Total de Registros: " . $total_records; ?>
+                </div>
             </div>
         </div>
     </div>

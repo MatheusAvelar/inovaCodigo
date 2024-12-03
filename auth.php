@@ -11,10 +11,10 @@ $row     = mysqli_num_rows($query);
 if($row>0){ 
     $_SESSION['loggedin'] = true;
     $_SESSION['email'] = $email;
-    header("Location: ../agendamento.php");
+    header("Location: ../apropriacao.php");
     exit;
 } else {
-    header("Location: ../agendamento.php");
+    header("Location: ../login.php");
 }
 
 ?>

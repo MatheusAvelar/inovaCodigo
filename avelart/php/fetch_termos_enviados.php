@@ -19,9 +19,22 @@ if ($conn->connect_error) {
 $cliente_nome = isset($_GET['cliente_nome']) ? trim($_GET['cliente_nome']) : '';
 
 if($perfilUsuario == 2){
-    $sql = "SELECT id, nome_cliente, email_cliente, data_envio FROM termos_enviados WHERE status = 'ativo'";
+    $sql = "SELECT 
+                id, 
+                CONCAT(UPPER(SUBSTRING(nome_cliente, 1, 1)), LOWER(SUBSTRING(nome_cliente, 2))) AS nome_cliente, 
+                email_cliente, 
+                data_envio 
+            FROM termos_enviados 
+            WHERE status = 'ativo'";
 } else {
-    $sql = "SELECT id, nome_cliente, email_cliente, data_envio FROM termos_enviados WHERE status = 'ativo' AND usuario_id = $usuarioLogado";
+    $sql = "SELECT 
+                id,
+                CONCAT(UPPER(SUBSTRING(nome_cliente, 1, 1)), LOWER(SUBSTRING(nome_cliente, 2))) AS nome_cliente, 
+                email_cliente,
+                data_envio 
+            FROM termos_enviados 
+            WHERE status = 'ativo' 
+            AND usuario_id = $usuarioLogado";
 }
 
 // Se houver um filtro, adicione uma condição na consulta
@@ -29,7 +42,7 @@ if (!empty($cliente_nome)) {
     $sql .= " AND nome_cliente LIKE ?";
 }
 
-$sql .= " ORDER BY data_envio DESC";
+$sql .= " GROUP BY nome_cliente, email_cliente, DATE(data_envio) ORDER BY data_envio DESC";
 
 $stmt = $conn->prepare($sql);
 
@@ -42,12 +55,15 @@ if (!empty($cliente_nome)) {
 $stmt->execute();
 $result = $stmt->get_result();
 
-if ($result->num_rows > 0) {
+// Obter a contagem total de registros
+$total_records = $result->num_rows;
+
+if ($total_records > 0) {
     while($row = $result->fetch_assoc()) {
         echo "<tr>";
         echo "<td>" . htmlspecialchars($row['nome_cliente']) . "</td>";
         echo "<td>" . htmlspecialchars($row['email_cliente']) . "</td>";
-        echo "<td>" . htmlspecialchars(date('d/m/Y H:i:s', strtotime($row['data_envio']))) . "</td>";
+        echo "<td>" . htmlspecialchars(date('d/m/Y', strtotime($row['data_envio']))) . "</td>";
         echo "<td><a href='php/visualizar_termo.php?id=" . $row['id'] . "' target='_blank'>Visualizar</a></td>";
         echo "</tr>";
     }
