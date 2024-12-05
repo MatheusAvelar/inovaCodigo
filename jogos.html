@@ -14,7 +14,7 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1516963750502427"
         crossorigin="anonymous"></script>
     <style>
-        html, body {
+        html {
             height: 100%;
         }
 
@@ -49,6 +49,26 @@
 
         .menu a:hover {
             background-color: #ccc;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0; /* Opcional: para destacar a área ao redor */
+        }
+        
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
+            grid-gap: 10px;
+            margin-top: 0; /* Removemos o margin-top */
+            background-color: #fff; /* Opcional: fundo do tabuleiro */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Opcional: adiciona sombra ao tabuleiro */
+            padding: 10px; /* Opcional: adiciona espaçamento interno ao tabuleiro */
         }
     </style>
 </head>
