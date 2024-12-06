@@ -128,7 +128,7 @@ $months = [
         </div>
 
         <h2>Relatório</h2>
-        <form id="filter-actions-form" method="GET" action="horarios_agendados.php">
+        <form id="filter-actions-form" method="GET" action="relatorios.php">
             <div id="filters-container">
                 <div>
                     <label for="filter-month">Mês:</label>
