@@ -196,15 +196,17 @@ $months = [
                     <label for="inicio">Data de Início:</label>
                     <input type="date" id="inicio" name="inicio">
                 </div>
-
-                <label for="fim">Data de Fim:</label>
-                <input type="date" id="fim" name="fim">
-
-                <label for="tipo_relatorio">Tipo de Relatório:</label>
-                <select id="tipo_relatorio" name="tipo_relatorio">
-                    <option value="faturado">Total Faturado</option>
-                    <option value="recebido_estudio">Total Recebido pelo Estúdio</option>
-                </select>
+                <div>
+                    <label for="fim">Data de Fim:</label>
+                    <input type="date" id="fim" name="fim">
+                </div>
+                <div>
+                    <label for="tipo_relatorio">Tipo de Relatório:</label>
+                    <select id="tipo_relatorio" name="tipo_relatorio">
+                        <option value="faturado">Total Faturado</option>
+                        <option value="recebido_estudio">Total Recebido pelo Estúdio</option>
+                    </select>
+                </div>
             </div>
 
             <div id="actions-container">
