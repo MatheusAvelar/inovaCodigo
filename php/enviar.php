@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     mail($to, $subject, $message, $headers);
     
-    header("Location: obrigado.html"); // Página de agradecimento após enviar o formulário
+    header("Location: ../obrigado.html"); // Página de agradecimento após enviar o formulário
     exit();
 }
 ?>
