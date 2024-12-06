@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     usuarioEstudio ue
               ON 
                     a.usuario_id = ue.id
-              WHERE 1 = 1";
+              WHERE a.status = 0";
 
     // Filtros opcionais
     if (!empty($tatuador)) {
@@ -68,6 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Exibir os resultados
     if ($result->num_rows > 0) {
+        echo $query;
         echo "<table border='1'>
                 <tr>
                     <th>Tatuador</th>
