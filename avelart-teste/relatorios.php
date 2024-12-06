@@ -192,9 +192,10 @@ $months = [
                         </select>
                     </div>
                 <?php endif; ?>
-
-                <label for="inicio">Data de Início:</label>
-                <input type="date" id="inicio" name="inicio">
+                <div>
+                    <label for="inicio">Data de Início:</label>
+                    <input type="date" id="inicio" name="inicio">
+                </div>
 
                 <label for="fim">Data de Fim:</label>
                 <input type="date" id="fim" name="fim">
