@@ -55,40 +55,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 
-    // Preparar e executar a consulta
-    if ($stmt = $conn->prepare($query)) {
-        $stmt->bind_param("iss", $usuario_id, $inicio, $fim); // Vincular os parâmetros
-        $stmt->execute();
-        $result = $stmt->get_result(); // Obter o resultado da consulta
-
-        // Verificar se há resultados
-        if ($result->num_rows > 0) {
-            echo "<table border='1'>
-                    <tr>
-                        <th>Tatuador</th>
-                        <th>Total Faturado</th>
-                    </tr>";
-
-            // Exibir os resultados
-            while ($row = $result->fetch_assoc()) {
-                echo "<tr>
-                        <td>" . $row['nome_completo'] . "</td>
-                        <td>R$ " . number_format($row['total_faturado'], 2, ',', '.') . "</td>
-                      </tr>";
-            }
-            echo "</table>";
-        } else {
-            echo "Nenhum resultado encontrado para os filtros selecionados.";
-        }
-
-        echo $query;
-        // Fechar a declaração
-        $stmt->close();
-    } else {
-        echo "Erro na preparação da consulta: " . $conn->error;
+    if ($conn->connect_error) {
+        die("Conexão falhou: " . $conn->connect_error);
     }
-
-    // Fechar a conexão
+    
+    $result = $conn->query($query);
+    
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            print_r($row);
+        }
+    } else {
+        echo "Nenhum dado encontrado.";
+    }
+    
     $conn->close();
 }
 ?>
