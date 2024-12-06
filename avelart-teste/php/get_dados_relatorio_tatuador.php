@@ -13,12 +13,12 @@ try {
 }
 
 // Inicializar variáveis para filtros
-$filter_month = $_GET['filter_month'] ?? '';
-$filter_maca = $_GET['filter_maca'] ?? '';
-$filter_tatuador = $_GET['filter_tatuador'] ?? '';
-$filter_status = $_GET['filter_status'] ?? '';
-$inicio = $_GET['inicio'] ?? '';
-$fim = $_GET['fim'] ?? '';
+$filterDate = isset($_GET['filter_date']) ? $_GET['filter_date'] : '';
+$filterMaca = isset($_GET['filter_maca']) ? $_GET['filter_maca'] : '';
+$filterTatuador = isset($_GET['filter_tatuador']) ? $_GET['filter_tatuador'] : '';
+$filterMonth = isset($_GET['filter_month']) ? $_GET['filter_month'] : '';
+$inicio = isset($_GET['inicio']) ? $_GET['inicio'] : '';
+$fim = isset($_GET['fim']) ? $_GET['fim'] : '';
 
 // Criar query base
 $query = "SELECT 
@@ -31,17 +31,17 @@ $query = "SELECT
 
 // Adicionar filtros dinâmicos
 $params = [];
-if ($filter_month) {
+if ($filterMonth) {
     $query .= " AND MONTH(a.data) = ?";
-    $params[] = $filter_month;
+    $params[] = $filterMonth;
 }
-if ($filter_maca) {
+if ($filterMaca) {
     $query .= " AND a.maca_id = ?";
-    $params[] = $filter_maca;
+    $params[] = $filterMaca;
 }
-if ($filter_tatuador) {
+if ($filterTatuador) {
     $query .= " AND a.usuario_id = ?";
-    $params[] = $filter_tatuador;
+    $params[] = $filterTatuador;
 }
 if ($inicio) {
     $query .= " AND a.data >= ?";
@@ -50,10 +50,6 @@ if ($inicio) {
 if ($fim) {
     $query .= " AND a.data <= ?";
     $params[] = $fim;
-}
-if ($filter_status !== '') {
-    $query .= " AND a.status = ?";
-    $params[] = $filter_status;
 }
 
 //$query .= " ORDER BY a.nome DESC";
