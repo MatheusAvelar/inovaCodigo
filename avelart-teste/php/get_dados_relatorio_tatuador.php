@@ -19,46 +19,44 @@ $filter_tatuador = $_GET['filter_tatuador'] ?? '';
 $filter_status = $_GET['filter_status'] ?? '';
 $inicio = $_GET['inicio'] ?? '';
 $fim = $_GET['fim'] ?? '';
-$tipo_relatorio = $_GET['tipo_relatorio'] ?? '';
 
 // Criar query base
-$query = "SELECT usuarioEstudio.nome AS tatuador, agendamento.valor, agendamento.tipo_relatorio 
-          FROM agendamento
-          JOIN usuarioEstudio ON agendamento.tatuador_id = usuarioEstudio.id 
-          WHERE 1=1";
+$query = "SELECT 
+                CONCAT(UCASE(LEFT(ue.nome, 1)), LCASE(SUBSTRING(ue.nome, 2)), ' ', 
+                        UCASE(LEFT(ue.sobrenome, 1)), LCASE(SUBSTRING(ue.sobrenome, 2))) AS nome_completo,
+                SUM(a.valor) AS valor
+            FROM usuarioEstudio ue
+            JOIN agendamentos a ON ue.id = a.usuario_id
+            WHERE a.status = 1";
 
 // Adicionar filtros dinâmicos
 $params = [];
 if ($filter_month) {
-    $query .= " AND MONTH(agendamento.data) = ?";
+    $query .= " AND MONTH(a.data) = ?";
     $params[] = $filter_month;
 }
 if ($filter_maca) {
-    $query .= " AND agendamento.maca = ?";
+    $query .= " AND a.maca_id = ?";
     $params[] = $filter_maca;
 }
 if ($filter_tatuador) {
-    $query .= " AND agendamento.tatuador_id = ?";
+    $query .= " AND a.usuario_id = ?";
     $params[] = $filter_tatuador;
 }
 if ($inicio) {
-    $query .= " AND agendamento.data >= ?";
+    $query .= " AND a.data >= ?";
     $params[] = $inicio;
 }
 if ($fim) {
-    $query .= " AND agendamento.data <= ?";
+    $query .= " AND a.data <= ?";
     $params[] = $fim;
 }
 if ($filter_status !== '') {
-    $query .= " AND agendamento.status = ?";
+    $query .= " AND a.status = ?";
     $params[] = $filter_status;
 }
-if ($tipo_relatorio) {
-    $query .= " AND agendamento.tipo_relatorio = ?";
-    $params[] = $tipo_relatorio;
-}
 
-$query .= " ORDER BY agendamento.data DESC";
+$query .= " ORDER BY a.nome_completo DESC";
 
 try {
     $stmt = $conn->prepare($query);
@@ -98,9 +96,8 @@ if ($results):
             <tbody>
                 <?php foreach ($results as $row): ?>
                     <tr>
-                        <td><?= htmlspecialchars($row['tatuador']) ?></td>
+                        <td><?= htmlspecialchars($row['nome_completo']) ?></td>
                         <td>R$ <?= number_format($row['valor'], 2, ',', '.') ?></td>
-                        <td><?= htmlspecialchars($row['tipo_relatorio']) ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
