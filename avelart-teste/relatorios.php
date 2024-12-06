@@ -329,8 +329,7 @@ $months = [
                     </thead>
                     <tbody>
                         <?php
-                        // Inclua o arquivo com a lógica para buscar agendamentos com filtros
-                        include 'php/get_dados_relatorio_tatuador.php';
+                            include 'php/get_dados_relatorio_tatuador.php';
                         ?>
                     </tbody>
                 </table><br>

@@ -295,11 +295,11 @@ $months = [
                     </thead>
                     <tbody>
                         <?php
-                        $filter_date = $_GET['filter_date'] ?? '';
-                        $filter_maca = $_GET['filter_maca'] ?? '';
+                            $filter_date = $_GET['filter_date'] ?? '';
+                            $filter_maca = $_GET['filter_maca'] ?? '';
 
-                        // Inclua o arquivo com a lógica para buscar agendamentos com filtros
-                        include 'php/fetch_agendamentos.php';
+                            // Inclua o arquivo com a lógica para buscar agendamentos com filtros
+                            include 'php/fetch_agendamentos.php';
                         ?>
                     </tbody>
                 </table><br>
