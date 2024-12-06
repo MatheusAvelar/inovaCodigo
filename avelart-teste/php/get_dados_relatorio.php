@@ -15,7 +15,7 @@ try {
 // Verifique se o formulário foi enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Capture e sanitize as entradas do formulário
-    $usuario_id = $_POST['usuario_id'] ?? '';
+    $usuario_id = $_POST['filter_tatuador'] ?? '';
     $inicio = $_POST['inicio'] ?? '';
     $fim = $_POST['fim'] ?? '';
 
