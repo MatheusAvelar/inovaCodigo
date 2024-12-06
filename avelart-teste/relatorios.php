@@ -115,73 +115,6 @@ unset($_SESSION['status'], $_SESSION['message']);
     
         <div class="grid">
             <div class="maca">
-                <!-- Seção de Filtros -->
-                <!--<div class="row mb-4">
-                    <div class="col-md-4">
-                        <label for="mes">Selecionar Mês:</label>
-                        <select class="form-control" id="mes">
-                            <option value="">Selecione um mês</option>
-                            <option value="01">Janeiro</option>
-                            <option value="02">Fevereiro</option>
-                            <option value="03">Março</option>
-                            <option value="04">Abril</option>
-                            <option value="05">Maio</option>
-                            <option value="06">Junho</option>
-                            <option value="07">Julho</option>
-                            <option value="08">Agosto</option>
-                            <option value="09">Setembro</option>
-                            <option value="10">Outubro</option>
-                            <option value="11">Novembro</option>
-                            <option value="12">Dezembro</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="ano">Selecionar Ano:</label>
-                        <input type="number" class="form-control" id="ano" min="2020" value="<?php echo date('Y'); ?>" max="<?php echo date('Y'); ?>">
-                    </div>
-                    <div class="col-md-2 align-self-end">
-                        <button class="btn btn-primary" onclick="filtrarDados()">Filtrar</button>
-                    </div>
-                </div>-->
-
-                <!-- Seção de Métricas -->
-                <!-- <div class="row"> -->
-                    <!-- Total de Agendamentos -->
-                    <!--<div class="col-md-3">
-                        <div class="card text-white bg-primary mb-3">
-                            <div class="card-header">Total de Agendamentos</div>
-                            <div class="card-body">
-                                <h5 class="card-title" id="totalAgendamentos">Carregando...</h5>
-                            </div>
-                        </div>
-                    </div>-->
-                    
-                    <!-- Total Faturado -->
-                    <!--<div class="col-md-3">
-                        <div class="card text-white bg-success mb-3">
-                            <div class="card-header">Total Faturado</div>
-                            <div class="card-body">
-                                <h5 class="card-title" id="totalFaturado">Carregando...</h5>
-                            </div>
-                        </div>
-                    </div>-->
-                    
-                    <!-- Cancelamentos -->
-                    <!--<div class="col-md-3">
-                        <div class="card text-white bg-danger mb-3">
-                            <div class="card-header">Cancelamentos</div>
-                            <div class="card-body">
-                                <h5 class="card-title" id="totalCancelamentos">Carregando...</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>-->
-                
-
-                <!-- Exibição de gráfico -->
-                <!-- <canvas id="agendamentosChart" width="400" height="200"></canvas> -->
-                <!-- Exibição de gráfico de agendamentos por tatuador -->
-                <!-- <canvas id="agendamentosTatuadorChart" width="400" height="200"></canvas> -->
                 <form method="POST" action="php/get_dados_relatorio.php">
                     <label for="inicio">Data de Início:</label>
                     <input type="date" id="inicio" name="inicio"> 
@@ -216,15 +149,15 @@ unset($_SESSION['status'], $_SESSION['message']);
                         ?>
                     </select>
 
-                    <label for="opcao_total">Tipo de Relatório:</label>
-                    <select id="opcao_total" name="opcao_total">
+                    <label for="tipo_relatorio">Tipo de Relatório:</label>
+                    <select id="tipo_relatorio" name="tipo_relatorio">
                         <option value="faturado">Total Faturado</option>
                         <option value="recebido_estudio">Total Recebido pelo Estúdio</option>
                     </select>
 
                     <button type="submit">Gerar Relatório</button>
                 </form>
-
+                <div>exibição do relatorio aqui</div>
             </div>
         </div>
 
