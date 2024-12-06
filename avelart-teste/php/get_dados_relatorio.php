@@ -54,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $params[] = $tatuador;
     }
     if (!empty($inicio) && !empty($fim)) {
-        $param_types .= 'ii';
+        $param_types .= 'ss';
         $params[] = $inicio;
         $params[] = $fim;
     }
