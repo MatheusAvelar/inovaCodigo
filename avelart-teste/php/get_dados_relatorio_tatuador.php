@@ -90,7 +90,6 @@ if ($results):
                 <tr>
                     <th>Tatuador</th>
                     <th>Valor</th>
-                    <th>Tipo Relatório</th>
                 </tr>
             </thead>
             <tbody>
