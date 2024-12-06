@@ -56,19 +56,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if ($conn->connect_error) {
-        die("Conexão falhou: " . $conn->connect_error);
+        die("Erro de conexão: " . $conn->connect_error);
     }
-    
+
     $result = $conn->query($query);
-    
+
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
-            print_r($row);
+            foreach ($row as $campo => $valor) {
+                echo "<p><strong>$campo:</strong> $valor</p>";
+            }
         }
     } else {
         echo "Nenhum dado encontrado.";
     }
-    
+
     $conn->close();
 }
 ?>

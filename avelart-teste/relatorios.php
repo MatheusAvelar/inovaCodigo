@@ -160,97 +160,40 @@ unset($_SESSION['status'], $_SESSION['message']);
                 <div>exibição do relatorio aqui</div>
             </div>
         </div>
-
-        <script>
-        function filtrarDados() {
-            const mes = document.getElementById('mes').value;
-            const ano = document.getElementById('ano').value;
-            atualizarMetricas(mes, ano);
-            atualizarGrafico(mes, ano);
-            atualizarGraficoTatuadores(mes, ano);
-        }
-
-
-        function atualizarMetricas(mes, ano) {
-            fetch(`get_data.php?action=metricas&mes=${mes}&ano=${ano}`)
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('totalAgendamentos').textContent = data.total_agendamentos;
-                    document.getElementById('totalFaturado').textContent = 'R$ ' + parseFloat(data.total_faturado).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
-                    document.getElementById('totalCancelamentos').textContent = data.total_cancelamentos;
-                })
-                .catch(error => console.error('Erro ao atualizar métricas:', error));
-        }
-
-        function atualizarGrafico(mes, ano) {
-            fetch(`get_data.php?action=graficos&mes=${mes}&ano=${ano}`)
-                .then(response => response.json())
-                .then(data => {
-                    var ctx = document.getElementById('agendamentosChart').getContext('2d');
-                    window.agendamentosChart = new Chart(ctx, {
-                        type: 'bar',
-                        data: {
-                            labels: data.labels,
-                            datasets: [{
-                                label: 'Agendamentos',
-                                data: data.agendamentos,
-                                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                                borderColor: 'rgba(54, 162, 235, 1)',
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                y: {
-                                    beginAtZero: true
-                                }
-                            }
-                        }
-                    });
-                })
-                .catch(error => console.error('Erro ao atualizar gráfico:', error));
-        }
-
-        // Função para atualizar o gráfico de agendamentos por tatuador
-        function atualizarGraficoTatuadores(mes,ano) {
-            fetch(`get_data.php?action=graficos_tatuadores&mes=${mes}&ano=${ano}`)
-                .then(response => response.json())
-                .then(data => {
-                    var ctx = document.getElementById('agendamentosTatuadorChart').getContext('2d');
-                    window.agendamentosTatuadorChart = new Chart(ctx, {
-                        type: 'bar',
-                        data: {
-                            labels: data.labels,
-                            datasets: [{
-                                label: 'Agendamentos por Tatuador',
-                                data: data.tatuadores,
-                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                                borderColor: 'rgba(75, 192, 192, 1)',
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                y: {
-                                    beginAtZero: true
-                                }
-                            }
-                        }
-                    });
-                })
-                .catch(error => console.error('Erro ao atualizar gráfico de tatuadores:', error));
-        }
-
-        // Inicializar dados ao carregar a página
-        window.onload = function() {
-            atualizarMetricas('', '');
-            atualizarGrafico('', '');
-            atualizarGraficoTatuadores('','');
-            // Atualizar dados a cada 10 segundos (opcional)
-            setInterval(filtrarDados, 10000); // 10000 ms = 10 segundos
-        };
-        </script>
-
     </div>
 </body>
+<!-- Div para exibir os resultados -->
+    <div id="resultado" style="margin-top: 20px; border: 1px solid #ddd; padding: 10px; display: none;">
+        <h2>Resultado do Relatório</h2>
+        <div id="dados-relatorio"></div>
+    </div>
+
+    <script>
+        // Evento de envio do formulário
+        $('#form-relatorio').on('submit', function (e) {
+            e.preventDefault();
+
+            // Obter o tipo de relatório selecionado
+            const tipoRelatorio = $('#tipo_relatorio').val();
+
+            if (!tipoRelatorio) {
+                alert("Por favor, selecione um tipo de relatório.");
+                return;
+            }
+
+            // Enviar via AJAX para o servidor
+            $.ajax({
+                url: 'get_dados_relatorio.php', // Arquivo PHP para processar
+                type: 'POST',
+                data: { tipo_relatorio: tipoRelatorio },
+                success: function (response) {
+                    $('#dados-relatorio').html(response); // Atualizar a div com os dados
+                    $('#resultado').show(); // Exibir a div de resultados
+                },
+                error: function () {
+                    alert("Erro ao gerar relatório. Tente novamente.");
+                }
+            });
+        });
+    </script>
 </html>
