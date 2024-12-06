@@ -53,10 +53,15 @@ if ($fim) {
 }
 
 //$query .= " ORDER BY a.nome DESC";
+$params[] = $filterMonth ?: null;
+$params[] = $filterMaca ?: null;
+$params[] = $filterTatuador ?: null;
+$params[] = $inicio ?: null;
+$params[] = $fim ?: null;
 
 try {
     $stmt = $conn->prepare($query);
-
+    
     // Vincular parâmetros dinamicamente
     if ($params) {
         $types = str_repeat('s', count($params)); // Define o tipo como string para todos os parâmetros
@@ -75,8 +80,9 @@ try {
             echo "</tr>";
         }
     } else {
-        echo "<tr><td colspan='7'>Nenhum agendamento encontrado.</td></tr>";
+        echo "<tr><td colspan='2'>Nenhum agendamento encontrado. Verifique os filtros aplicados.</td></tr>";
     }
+    
 } catch (Exception $e) {
     die("Erro ao executar consulta: " . $e->getMessage());
 }
