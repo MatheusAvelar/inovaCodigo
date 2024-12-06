@@ -31,10 +31,10 @@ $query = "SELECT
 
 // Adicionar filtros dinâmicos
 $params = [];
-if ($filterMonth) {
+/*if ($filterMonth) {
     $query .= " AND MONTH(a.data) = ?";
     $params[] = $filterMonth;
-}
+}*/
 if ($filterMaca) {
     $query .= " AND a.maca_id = ?";
     $params[] = $filterMaca;

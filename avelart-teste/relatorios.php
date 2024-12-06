@@ -307,7 +307,7 @@ $months = [
 
             <div id="actions-container">
                 <button type="submit" class="button">
-                    <i class="fas fa-search"></i> Filtrar
+                    <i class="fas fa-filter"></i> Filtrar
                 </button>
 
                 <?php if ($perfil_id == 2) : ?>
