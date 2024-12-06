@@ -8,61 +8,82 @@ error_reporting(E_ALL);
 try {
     $conn = conectaBanco();
 } catch (Exception $e) {
-    die("Erro: " . $e->getMessage());
+    die("Erro ao conectar ao banco de dados: " . $e->getMessage());
 }
 
 // Verifique se o formulário foi enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Capture as entradas do formulário
-    $inicio = $_POST['inicio'];
-    $fim = $_POST['fim'];
-    $tatuador = $_POST['filter_tatuador'];
-    $opcao_total = $_POST['opcao_total'];
-    
+    // Capture e sanitize as entradas do formulário
+    $inicio = $_POST['inicio'] ?? '';
+    $fim = $_POST['fim'] ?? '';
+    $tatuador = $_POST['filter_tatuador'] ?? '';
+    $opcao_total = $_POST['opcao_total'] ?? 'faturado';
+
+    // Início da query
     $query = "SELECT 
                     CONCAT(UCASE(LEFT(ue.nome, 1)), LCASE(SUBSTRING(ue.nome, 2)), ' ', 
-                        UCASE(LEFT(ue.sobrenome, 1)), LCASE(SUBSTRING(ue.sobrenome, 2))) AS nome_completo,
+                           UCASE(LEFT(ue.sobrenome, 1)), LCASE(SUBSTRING(ue.sobrenome, 2))) AS nome_completo,
                     SUM(a.valor) AS total_faturado,
                     (SELECT SUM(valor) FROM agendamentos) AS total_estudio
-                FROM 
+              FROM 
                     agendamentos a
-                JOIN 
+              JOIN 
                     usuarioEstudio ue
-                ON 
-                    a.usuario_id = ue.id";
+              ON 
+                    a.usuario_id = ue.id
+              WHERE 1 = 1";
 
-    // Filtrar por tatuador se não for 'Todos'
-    if ($tatuador != '') {
-        $query .= " AND usuario_id = $tatuador";
+    // Filtros opcionais
+    if (!empty($tatuador)) {
+        $query .= " AND a.usuario_id = ?";
+    }
+    if (!empty($inicio) && !empty($fim)) {
+        $query .= " AND a.data BETWEEN ? AND ?";
     }
 
     $query .= " GROUP BY ue.id, ue.nome, ue.sobrenome";
-    
-    // Executar a consulta
-    $result = $conn->query($query);
 
-    // Verificar se há resultados
+    // Preparar e executar a query
+    $stmt = $conn->prepare($query);
+
+    $param_types = '';
+    $params = [];
+
+    if (!empty($tatuador)) {
+        $param_types .= 'i';
+        $params[] = $tatuador;
+    }
+    if (!empty($inicio) && !empty($fim)) {
+        $param_types .= 'ss';
+        $params[] = $inicio;
+        $params[] = $fim;
+    }
+
+    if ($param_types) {
+        $stmt->bind_param($param_types, ...$params);
+    }
+
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Exibir os resultados
     if ($result->num_rows > 0) {
         echo "<table border='1'>
                 <tr>
-                    <th>Tatuador</th>";
-        if ($opcao_total == 'faturado') {
-            echo "<th>Total Faturado por " . $row['nome_completo'] . "</th>";
-        } else {
-            echo "<th>Total Recebido pelo Estúdio</th>";
-        }
-        echo "</tr>";
-
-        // Exibir os dados
+                    <th>Tatuador</th>
+                    <th>" . ($opcao_total == 'faturado' ? "Total Faturado" : "Total Recebido pelo Estúdio") . "</th>
+                </tr>";
+        
         while ($row = $result->fetch_assoc()) {
             echo "<tr>
-                    <td>" . $row['nome_completo'] . "</td>";
-            if ($opcao_total == 'faturado') {
-                echo "<td>R$ " . number_format($row['total_faturado'], 2, ',', '.') . "</td>";
-            } else {
-                echo "<td>R$ " . number_format($row['total_estudio'], 2, ',', '.') . "</td>";
-            }
-            echo "</tr>";
+                    <td>" . $row['nome_completo'] . "</td>
+                    <td>R$ " . number_format(
+                        ($opcao_total == 'faturado' ? $row['total_faturado'] : $row['total_estudio']),
+                        2,
+                        ',',
+                        '.'
+                    ) . "</td>
+                  </tr>";
         }
         echo "</table>";
     } else {
@@ -70,6 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Fechar conexão
+    $stmt->close();
     $conn->close();
 }
 ?>
