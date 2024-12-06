@@ -53,11 +53,6 @@ if ($fim) {
 }
 
 //$query .= " ORDER BY a.nome DESC";
-$params[] = $filterMonth ?: null;
-$params[] = $filterMaca ?: null;
-$params[] = $filterTatuador ?: null;
-$params[] = $inicio ?: null;
-$params[] = $fim ?: null;
 
 try {
     $stmt = $conn->prepare($query);
