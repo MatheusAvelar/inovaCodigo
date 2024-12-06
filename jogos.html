@@ -75,25 +75,11 @@
     <div class="menu">
         <a href="#" onclick="loadGame('snake')">Snake</a>
         <a href="#" onclick="loadGame('deadshot')">Deadshot</a>
+        <a href="#" onclick="loadGame('jogoVelha')">Jogo da Velha</a>
     </div>
 
     <div class="container" id="game-container">
-        <div class="jogo-da-velha">
-            <h2>Jogo da Velha</h2>
-            <button id="restart-button" onclick="restartGame()">Reiniciar Jogo</button>
-            <div class="board">
-                <div class="cell" onclick="makeMove(this)"></div>
-                <div class="cell" onclick="makeMove(this)"></div>
-                <div class="cell" onclick="makeMove(this)"></div>
-                <div class="cell" onclick="makeMove(this)"></div>
-                <div class="cell" onclick="makeMove(this)"></div>
-                <div class="cell" onclick="makeMove(this)"></div>
-                <div class="cell" onclick="makeMove(this)"></div>
-                <div class="cell" onclick="makeMove(this)"></div>
-                <div class="cell" onclick="makeMove(this)"></div>
-            </div>
-            <div id="result-message" class="result-message"></div>
-        </div>
+        <!-- Frame aqui -->
     </div>
 
     <footer class="footer">
@@ -131,6 +117,23 @@
                 container.innerHTML = `<iframe src="https://www.crazygames.com.br/embed/snake-io" frameborder="0" allow="gamepad *;"></iframe>`;
             } else if (gameName === 'deadshot') {
                 container.innerHTML = `<iframe src="https://www.crazygames.com.br/embed/deadshot-io" frameborder="0" allow="gamepad *;"></iframe>`;
+            } else if (gameName == 'jogoVelha') {
+                container.innerHTML = `<div class="jogo-da-velha">
+                    <h2>Jogo da Velha</h2>
+                    <button id="restart-button" onclick="restartGame()">Reiniciar Jogo</button>
+                    <div class="board">
+                        <div class="cell" onclick="makeMove(this)"></div>
+                        <div class="cell" onclick="makeMove(this)"></div>
+                        <div class="cell" onclick="makeMove(this)"></div>
+                        <div class="cell" onclick="makeMove(this)"></div>
+                        <div class="cell" onclick="makeMove(this)"></div>
+                        <div class="cell" onclick="makeMove(this)"></div>
+                        <div class="cell" onclick="makeMove(this)"></div>
+                        <div class="cell" onclick="makeMove(this)"></div>
+                        <div class="cell" onclick="makeMove(this)"></div>
+                    </div>
+                    <div id="result-message" class="result-message"></div>
+                </div>`;
             }
         }
     </script>
