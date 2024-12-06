@@ -30,9 +30,10 @@ unset($_SESSION['status'], $_SESSION['message']);
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        #menu ul li { 
-            display: inline-block; 
+        #menu ul li {
+            display: inline-block;
         }
+
         /* Estilo básico do dropdown */
         .dropdown {
             position: relative;
@@ -44,7 +45,7 @@ unset($_SESSION['status'], $_SESSION['message']);
             position: absolute;
             background-color: #f9f9f9;
             min-width: 160px;
-            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
             z-index: 1;
         }
 
@@ -83,7 +84,7 @@ unset($_SESSION['status'], $_SESSION['message']);
     </header>
 
     <div class="container">
-        <nav id="menu"> 
+        <nav id="menu">
             <ul>
                 <li><a href="termos_enviados.php">Termos Preenchidos</a></li>
                 <li><a href="horarios_agendados.php">Horários Agendados</a></li>
@@ -100,7 +101,7 @@ unset($_SESSION['status'], $_SESSION['message']);
                     </li>
                 <?php endif; ?>
                 <li><a href="php/logout.php">Sair</a></li>
-            </ul> 
+            </ul>
         </nav>
         <br>
         <div id="message-container">
@@ -112,12 +113,12 @@ unset($_SESSION['status'], $_SESSION['message']);
         </div>
 
         <h2>Relatório</h2>
-    
+
         <div class="grid">
             <div class="maca">
                 <form method="POST" action="php/get_dados_relatorio.php">
                     <label for="inicio">Data de Início:</label>
-                    <input type="date" id="inicio" name="inicio"> 
+                    <input type="date" id="inicio" name="inicio">
 
                     <label for="fim">Data de Fim:</label>
                     <input type="date" id="fim" name="fim">
@@ -141,7 +142,6 @@ unset($_SESSION['status'], $_SESSION['message']);
                                 // Caso não haja tatuadores
                                 echo "<option value=''>Nenhum tatuador encontrado</option>";
                             }
-                            
                         } catch (Exception $e) {
                             // Em caso de erro na conexão ou na query, exibe uma opção com erro
                             echo "<option value=''>Erro ao carregar tatuadores</option>";
@@ -165,10 +165,9 @@ unset($_SESSION['status'], $_SESSION['message']);
             </div>
         </div>
     </div>
-</body>
     <script>
         // Evento de envio do formulário
-        $('#form-relatorio').on('submit', function (e) {
+        $('#form-relatorio').on('submit', function(e) {
             e.preventDefault();
 
             // Obter o tipo de relatório selecionado
@@ -183,15 +182,19 @@ unset($_SESSION['status'], $_SESSION['message']);
             $.ajax({
                 url: 'get_dados_relatorio.php', // Arquivo PHP para processar
                 type: 'POST',
-                data: { tipo_relatorio: tipoRelatorio },
-                success: function (response) {
+                data: {
+                    tipo_relatorio: tipoRelatorio
+                },
+                success: function(response) {
                     $('#dados-relatorio').html(response); // Atualizar a div com os dados
                     $('#resultado').show(); // Exibir a div de resultados
                 },
-                error: function () {
+                error: function() {
                     alert("Erro ao gerar relatório. Tente novamente.");
                 }
             });
         });
     </script>
+</body>
+
 </html>
