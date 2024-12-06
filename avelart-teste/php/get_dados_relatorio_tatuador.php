@@ -7,70 +7,110 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 try {
-    $conn = conectaBanco(); // Função para conectar ao banco
+    $conn = conectaBanco();
 } catch (Exception $e) {
-    die("Erro ao conectar ao banco de dados: " . $e->getMessage());
+    die("Erro ao conectar ao banco: " . $e->getMessage());
 }
 
-// Verifique se o formulário foi enviado
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Capture e sanitize as entradas do formulário
-    $tipoRelatorio = $_POST['tipo_relatorio'] ?? '';
-    $usuario_id = $_POST['filter_tatuador'] ?? '';
-    $inicio = $_POST['inicio'] ?? '';
-    $fim = $_POST['fim'] ?? '';
+// Inicializar variáveis para filtros
+$filter_month = $_GET['filter_month'] ?? '';
+$filter_maca = $_GET['filter_maca'] ?? '';
+$filter_tatuador = $_GET['filter_tatuador'] ?? '';
+$filter_status = $_GET['filter_status'] ?? '';
+$inicio = $_GET['inicio'] ?? '';
+$fim = $_GET['fim'] ?? '';
+$tipo_relatorio = $_GET['tipo_relatorio'] ?? '';
 
-    // Validar os campos obrigatórios
-    /*if (empty($usuario_id) || empty($inicio) || empty($fim) || empty($tipoRelatorio)) {
-        echo "Por favor, preencha todos os campos.";
-        exit;
-    }*/
+// Criar query base
+$query = "SELECT usuarioEstudio.nome AS tatuador, agendamento.valor, agendamento.tipo_relatorio 
+          FROM agendamento
+          JOIN usuarioEstudio ON agendamento.tatuador_id = usuarioEstudio.id 
+          WHERE 1=1";
 
-    // Definir a consulta SQL
-    // Inicializar a query
-    $query = '';
-
-    if ($tipoRelatorio === 'faturado') {
-        // Query para faturado
-        $query = "
-            SELECT 
-                CONCAT(UCASE(LEFT(ue.nome, 1)), LCASE(SUBSTRING(ue.nome, 2)), ' ', 
-                        UCASE(LEFT(ue.sobrenome, 1)), LCASE(SUBSTRING(ue.sobrenome, 2))) AS nome_completo,
-                SUM(a.valor) AS total_faturado
-            FROM usuarioEstudio ue
-            JOIN agendamentos a ON ue.id = a.usuario_id
-            WHERE a.status = 1
-            GROUP BY nome_completo
-        ";
-    } elseif ($tipoRelatorio === 'recebido_estudio') {
-        // Query para recebido_estudio
-        $query = "
-            SELECT 
-                SUM(valor) AS total_recebido
-            FROM agendamentos
-            WHERE status = 1
-        ";
-    } else {
-        echo "Tipo de relatório inválido ou não informado.";
-        exit;
-    }
-
-    if ($conn->connect_error) {
-        die("Erro de conexão: " . $conn->connect_error);
-    }
-
-    $result = $conn->query($query);
-
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            foreach ($row as $campo => $valor) {
-                echo "<p><strong>$campo:</strong> $valor</p>";
-            }
-        }
-    } else {
-        echo "Nenhum dado encontrado.";
-    }
-
-    $conn->close();
+// Adicionar filtros dinâmicos
+$params = [];
+if ($filter_month) {
+    $query .= " AND MONTH(agendamento.data) = ?";
+    $params[] = $filter_month;
 }
+if ($filter_maca) {
+    $query .= " AND agendamento.maca = ?";
+    $params[] = $filter_maca;
+}
+if ($filter_tatuador) {
+    $query .= " AND agendamento.tatuador_id = ?";
+    $params[] = $filter_tatuador;
+}
+if ($inicio) {
+    $query .= " AND agendamento.data >= ?";
+    $params[] = $inicio;
+}
+if ($fim) {
+    $query .= " AND agendamento.data <= ?";
+    $params[] = $fim;
+}
+if ($filter_status !== '') {
+    $query .= " AND agendamento.status = ?";
+    $params[] = $filter_status;
+}
+if ($tipo_relatorio) {
+    $query .= " AND agendamento.tipo_relatorio = ?";
+    $params[] = $tipo_relatorio;
+}
+
+$query .= " ORDER BY agendamento.data DESC";
+
+try {
+    $stmt = $conn->prepare($query);
+
+    // Vincular parâmetros dinamicamente
+    if ($params) {
+        $types = str_repeat('s', count($params)); // Define o tipo como string para todos os parâmetros
+        $stmt->bind_param($types, ...$params);
+    }
+
+    // Executar consulta
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Coletar resultados em um array
+    $results = [];
+    while ($row = $result->fetch_assoc()) {
+        $results[] = $row;
+    }
+} catch (Exception $e) {
+    die("Erro ao executar consulta: " . $e->getMessage());
+}
+
+// Exibir resultados na div
+if ($results):
+?>
+    <div class="info-container">
+        <h3>Resultados:</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Tatuador</th>
+                    <th>Valor</th>
+                    <th>Tipo Relatório</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($results as $row): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($row['tatuador']) ?></td>
+                        <td>R$ <?= number_format($row['valor'], 2, ',', '.') ?></td>
+                        <td><?= htmlspecialchars($row['tipo_relatorio']) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+<?php
+else:
+    echo "<div class='info-container'><p>Nenhum resultado encontrado.</p></div>";
+endif;
+
+// Fechar a conexão
+$conn->close();
 ?>
