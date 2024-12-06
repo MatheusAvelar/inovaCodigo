@@ -67,13 +67,11 @@ try {
     $stmt->execute();
     $result = $stmt->get_result();
 
-    // Coletar resultados em um array
-    $results = [];
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             echo "<tr>";
             echo "<td>" . htmlspecialchars($row['nome_completo']) . "</td>";
-            echo "<td>" . number_format($row['valor'], 2, ',', '.') . "</td>";
+            echo "<td> R$ " . number_format($row['valor'], 2, ',', '.') . "</td>";
             echo "</tr>";
         }
     } else {
