@@ -325,14 +325,10 @@ $months = [
                         <tr>
                             <th>Tatuador</th>
                             <th>Valor</th>
-                            <th>Tipo Relatório</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        $filter_date = $_GET['filter_date'] ?? '';
-                        $filter_maca = $_GET['filter_maca'] ?? '';
-
                         // Inclua o arquivo com a lógica para buscar agendamentos com filtros
                         include 'php/get_dados_relatorio_tatuador.php';
                         ?>
