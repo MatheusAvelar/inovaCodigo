@@ -65,10 +65,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $stmt->execute();
     $result = $stmt->get_result();
+    echo $query;
 
     // Exibir os resultados
     if ($result->num_rows > 0) {
-        echo $query;
         echo "<table border='1'>
                 <tr>
                     <th>Tatuador</th>
