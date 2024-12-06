@@ -73,10 +73,15 @@ try {
 
     // Coletar resultados em um array
     $results = [];
-    while ($row = $result->fetch_assoc()) {
-        $results[] = $row;
-        echo "<td>" . htmlspecialchars($row['nome_completo']) . "</td>";
-        echo "<td>" . number_format($row['valor'], 2, ',', '.') . "</td>";
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            echo "<tr>";
+            echo "<td>" . htmlspecialchars($row['nome_completo']) . "</td>";
+            echo "<td>" . number_format($row['valor'], 2, ',', '.') . "</td>";
+            echo "</tr>";
+        }
+    } else {
+        echo "<tr><td colspan='7'>Nenhum agendamento encontrado.</td></tr>";
     }
 } catch (Exception $e) {
     die("Erro ao executar consulta: " . $e->getMessage());
