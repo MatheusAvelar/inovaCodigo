@@ -157,17 +157,15 @@ unset($_SESSION['status'], $_SESSION['message']);
 
                     <button type="submit">Gerar Relatório</button>
                 </form>
-                <div>exibição do relatorio aqui</div>
+                <!-- Div para exibir os resultados -->
+                <div id="resultado" style="margin-top: 20px; border: 1px solid #ddd; padding: 10px; display: none;">
+                    <h2>Resultado do Relatório</h2>
+                    <div id="dados-relatorio"></div>
+                </div>
             </div>
         </div>
     </div>
 </body>
-<!-- Div para exibir os resultados -->
-    <div id="resultado" style="margin-top: 20px; border: 1px solid #ddd; padding: 10px; display: none;">
-        <h2>Resultado do Relatório</h2>
-        <div id="dados-relatorio"></div>
-    </div>
-
     <script>
         // Evento de envio do formulário
         $('#form-relatorio').on('submit', function (e) {
