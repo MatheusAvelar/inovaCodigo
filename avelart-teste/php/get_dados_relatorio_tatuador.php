@@ -53,7 +53,7 @@ if ($fim) {
 }
 
 //$query .= " ORDER BY a.nome DESC";
-
+echo $query;
 try {
     $stmt = $conn->prepare($query);
     
