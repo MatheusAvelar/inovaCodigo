@@ -51,17 +51,21 @@ if ($fim) {
     $query .= " AND a.data <= ?";
     $params[] = $fim;
 }
-
+$params[] = $filterMonth ?: null;
+$params[] = $filterMaca ?: null;
+$params[] = $filterTatuador ?: null;
+$params[] = $inicio ?: null;
+$params[] = $fim ?: null;
 //$query .= " ORDER BY a.nome DESC";
 echo $query;
 try {
     $stmt = $conn->prepare($query);
     
     // Vincular parâmetros dinamicamente
-    if ($params) {
+    /*if ($params) {
         $types = str_repeat('s', count($params)); // Define o tipo como string para todos os parâmetros
         $stmt->bind_param($types, ...$params);
-    }
+    }*/
 
     // Executar consulta
     $stmt->execute();
