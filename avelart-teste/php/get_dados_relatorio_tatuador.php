@@ -56,7 +56,7 @@ if ($filter_status !== '') {
     $params[] = $filter_status;
 }
 
-$query .= " ORDER BY a.nome_completo DESC";
+//$query .= " ORDER BY a.nome DESC";
 
 try {
     $stmt = $conn->prepare($query);
