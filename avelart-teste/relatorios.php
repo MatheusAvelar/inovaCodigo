@@ -83,6 +83,102 @@ $months = [
         .settings-icon {
             font-size: 18px;
         }
+
+        #filter-actions-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        #filters-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        #filters-container div {
+            flex: 1 1 calc(33.333% - 15px);
+            min-width: 200px;
+        }
+
+        #filters-container label {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        #filters-container select,
+        #filters-container input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            background-color: #fff;
+            transition: border-color 0.2s ease-in-out;
+        }
+
+        #filters-container select:hover,
+        #filters-container input:hover {
+            border-color: #ff6f61;
+        }
+
+        #actions-container {
+            justify-content: flex-end;
+            gap: 10px;
+            padding: 15px;
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            display: flex;
+        }
+
+        #actions-container .button {
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+            background-color: #fec66f;
+            border: none; 
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #actions-container .button:hover {
+            background-color: #f4ab36;
+        }
+
+        #actions-container .button i {
+            margin-right: 5px;
+        }
+
+        @media (max-width: 768px) {
+            #filters-container {
+                flex-direction: column;
+            }
+
+            #filters-container div {
+                flex: 1 1 100%;
+            }
+
+            #actions-container {
+                justify-content: center;
+            }
+
+            #actions-container .button {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 
