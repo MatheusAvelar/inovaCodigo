@@ -75,37 +75,12 @@ try {
     $results = [];
     while ($row = $result->fetch_assoc()) {
         $results[] = $row;
+        echo "<td>" . htmlspecialchars($row['nome_completo']) . "</td>";
+        echo "<td>" . number_format($row['valor'], 2, ',', '.') . "</td>";
     }
 } catch (Exception $e) {
     die("Erro ao executar consulta: " . $e->getMessage());
 }
-
-// Exibir resultados na div
-if ($results):
-?>
-    <div class="info-container">
-        <h3>Resultados:</h3>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Tatuador</th>
-                    <th>Valor</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($results as $row): ?>
-                    <tr>
-                        <td><?= htmlspecialchars($row['nome_completo']) ?></td>
-                        <td>R$ <?= number_format($row['valor'], 2, ',', '.') ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    </div>
-<?php
-else:
-    echo "<div class='info-container'><p>Nenhum resultado encontrado.</p></div>";
-endif;
 
 // Fechar a conexão
 $conn->close();
