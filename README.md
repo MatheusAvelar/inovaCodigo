@@ -41,7 +41,7 @@ Bem-vindo ao InovaCódigo! Este é o repositório oficial do site <a href="https
 ## Como Contribuir
 
 - Sinta-se à vontade para explorar o código-fonte dos projetos no <a href="https://github.com/MatheusAvelar" target="_blank">GitHub</a> e contribuir com sugestões, correções ou novas funcionalidades.
-- Reporte problemas ou sugira melhorias através das <a href="https://github.com/usuario/inovacodigo/issues" target="_blank">issues do GitHub</a>.
+- Reporte problemas ou sugira melhorias através das <a href="https://github.com/MatheusAvelar/inovacodigo/issues" target="_blank">issues do GitHub</a>.
 
 ## Contato
 
