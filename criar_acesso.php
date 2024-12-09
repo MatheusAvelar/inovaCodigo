@@ -68,7 +68,7 @@
         <h1>Cadastro do Acesso</h1>
     </center>
     <div class="consulta-cep">
-        <form action="processa_cadastro.php" method="POST">
+        <form action="php/processa_cadastro.php" method="POST">
             <label for="nome">Nome:</label>
             <input type="text" id="nome" name="nome" required>
 

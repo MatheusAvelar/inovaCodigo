@@ -23,11 +23,11 @@
             <a href="projetos.html">Projetos</a>
             <a href="publicacoes.html">Publicações</a>
             <a href="gerador.html">Geradores</a>
-            <a href="projetos/controleFinanceiro/login.php">Controle Financeiro</a>
+            <!--<a href="projetos/controleFinanceiro/login.php">Controle Financeiro</a>
             <a href="kanban.html">Kanban</a>
-            <a href="jogos.html">Jogos</a>
+            <a href="jogos.html">Jogos</a>-->
             <a href="https://matheusavelar.github.io/">Currículo</a>
-            <a href="apropriacao.php">Apropriação de Horas</a>
+            <!--<a href="apropriacao.php">Apropriação de Horas</a>-->
         </nav>
     </header>
 
@@ -39,25 +39,22 @@
         <a href="meu-ip.html">Qual é meu IP ?</a>
         <a href="gerador-senha.html">Gerador de Senhas</a>
         <a href="gerador-CPF.html">Gerador de CPF</a>
-        <!-- Adicione mais links de geradores aqui -->
     </div>
     <div class="centro">
-        <div class="consulta-cep"> <!-- Renomeie a classe -->
+        <div class="consulta-cep">
             <h1>Verifica CPF</h1>
             <div class="input-container">
                 <label for="cpf">Digite o CPF:</label>
-                <input type="text" id="cpf" placeholder="Digite o CPF"> <!-- Altere o ID do input para 'cpf' -->
-                <button id="validar">Validar</button> <!-- Altere o ID do botão para 'validar' -->
+                <input type="text" id="cpf" placeholder="Digite o CPF">
+                <button id="validar">Validar</button>
             </div>
             <div id="resultado">
-                <!-- Aqui serão exibidos os resultados da valida -->
             </div>
             <h1>Gerador de CPF válido</h1>
             <div class="input-container">
-                <button id="gerar">Gerar</button> <!-- Altere o ID do botão para 'gerar' -->
+                <button id="gerar">Gerar</button>
             </div>
             <div id="resultado2">
-                <!-- Aqui serão exibidos os resultados da gerador -->
             </div>
         </div>
     </div>
@@ -94,14 +91,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <script>
         document.getElementById("validar").addEventListener("click", function () {
-            const cpf = document.getElementById("cpf").value.trim(); // Trim whitespace
+            const cpf = document.getElementById("cpf").value.trim();
             if (cpf === "") {
                 const resultado = document.getElementById("resultado");
                 resultado.innerHTML = `<p>Por favor, digite um CPF válido.</p>`;
-                return; // Exit the function
+                return;
             }
         
-            // Remova a consulta de CEP e ajuste para validar CPF
+            
             if (validaCPF(cpf)) {
                 const resultado = document.getElementById("resultado");
                 resultado.innerHTML = `
@@ -147,10 +144,10 @@
         }
 
         function validaCPF(cpf) {
-            cpf = cpf.replace(/[^\d]+/g, ''); // Remove caracteres não numéricos
+            cpf = cpf.replace(/[^\d]+/g, ''); 
             
             if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) {
-                return false; // CPF deve ter 11 dígitos e não pode ser formado por uma sequência de números iguais
+                return false; 
             }
             
             var soma = 0;

@@ -65,13 +65,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <a href="projetos.html">Projetos</a>
             <a href="publicacoes.html">Publicações</a>
             <a href="gerador.html">Geradores</a>
-            <a href="projetos/controleFinanceiro/login.php">Controle Financeiro</a>
+            <!--<a href="projetos/controleFinanceiro/login.php">Controle Financeiro</a>
             <a href="kanban.html">Kanban</a>
-            <a href="jogos.html">Jogos</a>
+            <a href="jogos.html">Jogos</a>-->
             <a href="https://matheusavelar.github.io/">Currículo</a>
-            <a href="apropriacao.php">Apropriação de Horas</a>
-            <a href="receitas.html">Receitas</a>
-            <a href="logout.php">Sair</a>
+            <!--<a href="apropriacao.php">Apropriação de Horas</a>-->
+            <a href="php/logout.php">Sair</a>
         </nav>
     </header>
 
@@ -132,7 +131,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             var totalHours = calculateTotalHours(startTime, endTime);
 
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "save_hours.php", true);
+            xhr.open("POST", "php/save_hours.php", true);
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4 && xhr.status === 200) {
@@ -187,7 +186,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
         function carregarRelatorio() {
             var xhr = new XMLHttpRequest();
-            xhr.open("GET", "relatorioApropriacao.php", true);
+            xhr.open("GET", "php/relatorioApropriacao.php", true);
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     document.getElementById("relatorio").innerHTML = xhr.responseText;
@@ -208,7 +207,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             var filterTask = document.getElementById("filterTask").value;
             
             var xhr = new XMLHttpRequest();
-            xhr.open("GET", "relatorioApropriacao.php?filterStartDate=" + filterStartDate + "&filterEndDate=" + filterEndDate + "&filterTask=" + filterTask, true);
+            xhr.open("GET", "php/relatorioApropriacao.php?filterStartDate=" + filterStartDate + "&filterEndDate=" + filterEndDate + "&filterTask=" + filterTask, true);
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     document.getElementById("relatorio").innerHTML = xhr.responseText;
@@ -220,7 +219,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         function deleteRecord(recordId) {
             if (confirm("Tem certeza de que deseja excluir este registro?")) {
                 var xhr = new XMLHttpRequest();
-                xhr.open("POST", "delete_record.php", true);
+                xhr.open("POST", "php/delete_record.php", true);
                 xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                 xhr.onreadystatechange = function () {
                     if (xhr.readyState === 4 && xhr.status === 200) {
@@ -265,7 +264,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
         function updateCellValue(rowId, cellIndex, newValue) {
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "update_cell_value.php", true);
+            xhr.open("POST", "php/update_cell_value.php", true);
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4 && xhr.status === 200) {

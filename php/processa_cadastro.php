@@ -1,11 +1,5 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Conexão com o banco de dados (substitua os valores pelos seus próprios)
-    $servername = "seu_servidor";
-    $username = "seu_usuario";
-    $password = "sua_senha";
-    $dbname = "seu_banco_de_dados";
-
     // Cria a conexão
     $conexao = mysqli_connect("127.0.0.1:3306", "u221588236_root", "Camila@307", "u221588236_controle_finan");
 

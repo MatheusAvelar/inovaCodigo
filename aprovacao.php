@@ -141,13 +141,12 @@ $result = $conexao->query($sql);
             <a href="projetos.html">Projetos</a>
             <a href="publicacoes.html">Publicações</a>
             <a href="gerador.html">Geradores</a>
-            <a href="projetos/controleFinanceiro/login.php">Controle Financeiro</a>
+            <!--<a href="projetos/controleFinanceiro/login.php">Controle Financeiro</a>
             <a href="kanban.html">Kanban</a>
-            <a href="jogos.html">Jogos</a>
+            <a href="jogos.html">Jogos</a>-->
             <a href="https://matheusavelar.github.io/">Currículo</a>
-            <a href="apropriacao.php">Apropriação de Horas</a>
-            <a href="receitas.html">Receitas</a>
-            <a href="logout.php">Sair</a>
+            <!--<a href="apropriacao.php">Apropriação de Horas</a>-->
+            <a href="php/logout.php">Sair</a>
         </nav>
     </header>
 
