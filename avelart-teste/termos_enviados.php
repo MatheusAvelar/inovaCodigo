@@ -86,7 +86,7 @@ $months = [
             flex-wrap: wrap;
             gap: 15px;
             padding: 15px;
-            background-color: #f8f9fa;
+            background-color: #f8f9fa; 
             border: 1px solid #ddd;
             border-radius: 8px;
         }
@@ -106,7 +106,7 @@ $months = [
 
         #filters-container select,
         #filters-container input {
-            width: 100%;
+            width: 96%;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
