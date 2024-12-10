@@ -278,8 +278,7 @@ $months = [
                     </button>
                 <?php endif; ?>
             </div>
-        </form>
-        </div>
+        </form> 
         <div class="grid">
             <div class="maca">
                 <div style="overflow-x: auto;">
