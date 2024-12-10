@@ -15,7 +15,7 @@ unset($_SESSION['status'], $_SESSION['message']);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atualizar Agendamento de Macas</title>
+    <title>Visualização do Agendamento</title>
     <link rel="icon" href="img/ico.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css?v=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -101,7 +101,7 @@ unset($_SESSION['status'], $_SESSION['message']);
             <?php endif; ?>
         </div>
 
-        <h2>Atualizar Agendamento de Macas</h2>
+        <h2>Visualização do Agendamento</h2>
 
         <div class="grid">
             <div class="maca">
