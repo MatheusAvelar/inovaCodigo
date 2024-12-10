@@ -146,7 +146,7 @@ unset($_SESSION['status'], $_SESSION['message']);
                 <!-- Exibe a contagem de registros -->
                 <div class="record-count">
                     <p>Total de Registros: <?php echo $total_records; ?></p>
-                    <p>Registros nesta página: <?php echo $totalRecordsCurrentPage; ?></p>
+                    <p>Registros nesta página: <?php echo $offset; ?></p>
                 </div>
             </div>            
         </div>
