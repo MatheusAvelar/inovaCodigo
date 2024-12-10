@@ -305,6 +305,29 @@ $months = [
                     </tbody>
                 </table>
                 </div><br>
+                <!-- Exibe a lista de páginas -->
+                 <?php
+                 // Links de paginação
+                echo '<div class="pagination">';
+                if ($currentPage > 1) {
+                    echo "<a href='?page=1'><i class='fas fa-angle-double-left'></i></a>";
+                    echo "<a href='?page=" . ($currentPage - 1) . "'><i class='fas fa-angle-left'></i></a>";
+                }
+
+                for ($i = 1; $i <= $totalPages; $i++) {
+                    if ($i == $currentPage) {
+                        echo "<span class='current-page'>$i</span>";
+                    } else {
+                        echo "<a href='?page=$i'>$i</a>";
+                    }
+                }
+
+                if ($currentPage < $totalPages) {
+                    echo "<a href='?page=" . ($currentPage + 1) . "'><i class='fas fa-angle-right'></i></a>";
+                    echo "<a href='?page=$totalPages'><i class='fas fa-angle-double-right'></i></a>";
+                }
+                echo '</div>';
+                ?>
                 <!-- Exibe a contagem de registros -->
                 <div class="record-count">
                     <p>Total de Registros: <?php echo $totalRecords; ?></p>
