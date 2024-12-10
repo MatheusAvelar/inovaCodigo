@@ -165,11 +165,16 @@ if ($result->num_rows > 0) {
     echo "<tr><td colspan='7'>Nenhum agendamento encontrado.</td></tr>";
 }
 
+$totalPages = ceil($totalRecords / $itemsPerPage);
+
 // Links de paginação
 echo '<div class="pagination">';
-for ($page = 1; $page <= $totalPages; $page++) {
-    $activeClass = $page == $currentPage ? 'class="current-page"' : '';
-    echo "<a href='?page=$page&filter_date=$filterDate&filter_maca=$filterMaca' $activeClass>$page</a>";
+for ($i = 1; $i <= $totalPages; $i++) {
+    if ($i == $currentPage) {
+        echo "<span class='current-page'>$i</span>";
+    } else {
+        echo "<a href='?page=$i'>$i</a>";
+    }
 }
 echo '</div>';
 
