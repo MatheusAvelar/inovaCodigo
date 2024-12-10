@@ -18,6 +18,11 @@ if ($conn->connect_error) {
 // Verifica se há um filtro aplicado
 $cliente_nome = isset($_GET['cliente_nome']) ? trim($_GET['cliente_nome']) : '';
 
+// Configuração de Paginação
+$perPage = 50;
+$currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$offset = ($currentPage - 1) * $perPage;
+
 if($perfilUsuario == 2){
     $sql = "SELECT 
                 id, 
@@ -60,6 +65,7 @@ $total_records = $result->num_rows;
 
 if ($total_records > 0) {
     while($row = $result->fetch_assoc()) {
+        $totalRecordsCurrentPage = $result->num_rows;
         echo "<tr>";
         echo "<td>" . htmlspecialchars($row['nome_cliente']) . "</td>";
         echo "<td>" . htmlspecialchars($row['email_cliente']) . "</td>";
@@ -70,6 +76,20 @@ if ($total_records > 0) {
 } else {
     echo "<tr><td colspan='5'>Nenhum termo encontrado.</td></tr>";
 }
+
+// Obter a contagem total de registros
+$total_records_sql = "SELECT COUNT(*) FROM termos_enviados WHERE status = 'ativo'";
+if ($perfilUsuario != 2) {
+    $total_records_sql .= " AND usuario_id = $usuarioLogado";
+}
+if (!empty($cliente_nome)) {
+    $total_records_sql .= " AND nome_cliente LIKE '%$cliente_nome%'";
+}
+$total_result = $conn->query($total_records_sql);
+$totalRecords = $total_result->fetch_row()[0];
+
+// Calcular o número total de páginas
+$totalPages = ceil($totalRecords / $perPage);
 
 $stmt->close();
 $conn->close();
