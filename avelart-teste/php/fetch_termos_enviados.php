@@ -25,23 +25,22 @@ $perPage = 50;
 $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $offset = ($currentPage - 1) * $perPage;
 
-if($perfilUsuario == 2){
-    $sql = "SELECT 
-                id, 
-                CONCAT(UPPER(SUBSTRING(nome_cliente, 1, 1)), LOWER(SUBSTRING(nome_cliente, 2))) AS nome_cliente, 
-                email_cliente, 
-                data_envio 
-            FROM termos_enviados 
-            WHERE status = $filter_status";
-} else {
-    $sql = "SELECT 
-                id,
-                CONCAT(UPPER(SUBSTRING(nome_cliente, 1, 1)), LOWER(SUBSTRING(nome_cliente, 2))) AS nome_cliente, 
-                email_cliente,
-                data_envio 
-            FROM termos_enviados 
-            WHERE status = $filter_status 
-            AND usuario_id = $usuarioLogado";
+$whereClause = "WHERE 1 = 1";
+
+$sql = "SELECT 
+            id, 
+            CONCAT(UPPER(SUBSTRING(nome_cliente, 1, 1)), LOWER(SUBSTRING(nome_cliente, 2))) AS nome_cliente, 
+            email_cliente, 
+            data_envio 
+        FROM termos_enviados 
+        $whereClause";
+
+if($perfilUsuario != 2){
+    $whereClause .= "AND usuario_id = $usuarioLogado";
+}
+
+if (!empty($filter_status)) {
+    $whereClause = "AND status = '" . $filter_status . "'";
 }
 
 // Adiciona paginação
