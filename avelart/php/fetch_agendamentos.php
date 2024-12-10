@@ -47,7 +47,36 @@ if (!empty($filterMonth)) {
     $whereClause .= " AND MONTH(ag.data) = '" . $conn->real_escape_string($filterMonth) . "'";
 }
 
-// Busca de agendamentos com conflitos
+// Configuração da paginação
+$itemsPerPage = 50; // Número de registros por página
+$currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+if ($currentPage < 1) $currentPage = 1;
+
+$offset = ($currentPage - 1) * $itemsPerPage;
+
+// Obtém o número total de registros (sem LIMIT e OFFSET)
+$totalQuery = "SELECT COUNT(*) AS total FROM agendamentos AS ag JOIN usuarioEstudio AS u ON ag.usuario_id = u.id $whereClause";
+$totalResult = $conn->query($totalQuery);
+$totalRow = $totalResult->fetch_assoc();
+$totalRecords = $totalRow['total'];
+
+$totalPages = ceil($totalRecords / $itemsPerPage);
+
+// Consulta principal para buscar os registros com paginação
+$query = "SELECT ag.id, ag.descricao, ag.maca_id, ag.data, ag.start_time, ag.end_time, ag.usuario_id, 
+                 u.nome AS tatuador_nome, u.perfil_id, ag.telefone_cliente, ag.email_cliente, ag.nome_cliente AS nome_cliente
+          FROM agendamentos AS ag
+          JOIN usuarioEstudio AS u ON ag.usuario_id = u.id
+          $whereClause
+          ORDER BY ag.data, ag.start_time
+          LIMIT $itemsPerPage OFFSET $offset";
+
+$result = $conn->query($query);
+
+// Obtém o número de registros na página atual
+$totalRecordsCurrentPage = $result->num_rows;
+
+// Obtenção de conflitos
 $conflictQuery = "
     SELECT a1.id AS agendamento1_id, a2.id AS agendamento2_id
     FROM agendamentos a1
@@ -60,8 +89,7 @@ $conflictQuery = "
             OR a2.start_time BETWEEN a1.start_time AND a1.end_time
             OR a2.end_time BETWEEN a1.start_time AND a1.end_time
         )
-    WHERE a1.status = 1 AND a2.status = 1
-";
+    WHERE a1.status = 1 AND a2.status = 1";
 
 $conflictResult = $conn->query($conflictQuery);
 $conflictIds = [];
@@ -73,19 +101,8 @@ if ($conflictResult->num_rows > 0) {
     }
 }
 
-// Busca de agendamentos existentes com os filtros aplicados
-$query = "SELECT ag.id, ag.descricao, ag.maca_id, ag.data, ag.start_time, ag.end_time, ag.usuario_id, u.nome AS tatuador_nome, u.perfil_id, ag.telefone_cliente, ag.email_cliente, ag.nome_cliente AS nome_cliente
-          FROM agendamentos AS ag
-          JOIN usuarioEstudio AS u ON ag.usuario_id = u.id
-          $whereClause 
-          ORDER BY ag.data, ag.start_time";
-
-$result = $conn->query($query);
-
-// Obter a contagem total de registros
-$total_records = $result->num_rows;
-
-if ($total_records > 0) {
+// Exibição dos agendamentos
+if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         // Verifica se o agendamento atual está na lista de conflitos
         $isConflict = in_array($row['id'], $conflictIds);
@@ -167,4 +184,3 @@ if ($total_records > 0) {
 
 // Fechando a conexão
 $conn->close();
-?>
