@@ -320,7 +320,7 @@ $months = [
 
                     // Adiciona '?' somente se existirem filtros
                     $paginationBaseUrl = !empty($queryString) ? "?$queryString&page=" : "?page=";
-                    $url = $_SERVER['REQUEST_URI'];
+                    $url = $_SERVER['QUERY_STRING'];
                     // Depuração (opcional)
                     echo "Página: $url";
                     if ($currentPage > 1): ?>
