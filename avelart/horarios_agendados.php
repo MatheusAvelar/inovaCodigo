@@ -282,6 +282,7 @@ $months = [
 
         <div class="grid">
             <div class="maca">
+                <div style="overflow-x: auto;">
                 <table>
                     <thead>
                         <tr>
@@ -302,7 +303,8 @@ $months = [
                             include 'php/fetch_agendamentos.php';
                         ?>
                     </tbody>
-                </table><br>
+                </table>
+                </div><br>
                 <!-- Exibe a contagem de registros -->
                 <div class="record-count">
                     <?php echo "Total de Registros: " . $total_records; ?>
