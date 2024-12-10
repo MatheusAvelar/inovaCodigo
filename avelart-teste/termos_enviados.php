@@ -8,6 +8,21 @@ $message = isset($_SESSION['message']) ? $_SESSION['message'] : null;
 
 // Limpa as mensagens de status da sessão após exibir
 unset($_SESSION['status'], $_SESSION['message']);
+
+$months = [
+    "01" => "Janeiro",
+    "02" => "Fevereiro",
+    "03" => "Março",
+    "04" => "Abril",
+    "05" => "Maio",
+    "06" => "Junho",
+    "07" => "Julho",
+    "08" => "Agosto",
+    "09" => "Setembro",
+    "10" => "Outubro",
+    "11" => "Novembro",
+    "12" => "Dezembro",
+];
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR"> 
@@ -197,11 +212,11 @@ unset($_SESSION['status'], $_SESSION['message']);
         <h2>Termos Preenchidos</h2>
         <div class="grid">
             <div class="maca">
-            <form method="GET" action="">
+            <!--<form method="GET" action="">
                 <label for="cliente_nome">Filtrar por Cliente:</label>
                 <input type="text" name="cliente_nome" id="cliente_nome" placeholder="Nome do Cliente" value="<?= htmlspecialchars(isset($_GET['cliente_nome']) ? $_GET['cliente_nome'] : '') ?>">
                 <button type="submit">Filtrar</button>
-            </form>
+            </form>-->
             <form id="filter-actions-form" method="GET" action="termos_enviados.php">
                 <div id="filters-container">
                     <div>
