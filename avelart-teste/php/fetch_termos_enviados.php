@@ -64,6 +64,7 @@ $total_records = $result->num_rows;
 
 if ($total_records > 0) {
     while($row = $result->fetch_assoc()) {
+        $totalRecordsCurrentPage = $result->num_rows;
         echo "<tr>";
         echo "<td>" . htmlspecialchars($row['nome_cliente']) . "</td>";
         echo "<td>" . htmlspecialchars($row['email_cliente']) . "</td>";
@@ -84,10 +85,10 @@ if (!empty($cliente_nome)) {
     $total_records_sql .= " AND nome_cliente LIKE '%$cliente_nome%'";
 }
 $total_result = $conn->query($total_records_sql);
-$total_records = $total_result->fetch_row()[0];
+$totalRecords = $total_result->fetch_row()[0];
 
 // Calcular o número total de páginas
-$totalPages = ceil($total_records / $perPage);
+$totalPages = ceil($totalRecords / $perPage);
 
 $stmt->close();
 $conn->close();
