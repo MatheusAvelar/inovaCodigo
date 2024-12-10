@@ -353,35 +353,48 @@ td:nth-child(6) {
 }
 
 .pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
+    text-align: center;
+    margin: 20px 0;
 }
 
-.pagination a, .pagination span {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 35px;
-    height: 35px;
+.page-link {
+    display: inline-block;
     margin: 0 5px;
-    border-radius: 50%;
-    text-decoration: none;
-    font-size: 16px;
-    color: #555;
-    background-color: #f0f0f0;
+    padding: 10px 15px;
     border: 1px solid #ddd;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.3s;
 }
 
-.pagination a:hover {
-    background-color: #007bff;
-    color: #fff;
-}
-
-.pagination .current-page {
-    background-color: #007bff;
-    color: #fff;
+.page-link.active {
+    background-color: #f4ab36; /* Cor principal */
+    color: white;
     font-weight: bold;
 }
 
+.page-link:hover {
+    background-color: #fec66f; /* Cor secundária */
+    color: #333;
+}
+
+.page-link i {
+    font-size: 16px; /* Tamanho dos ícones */
+}
+
+.page-link i.fas {
+    color: inherit; /* Herda a cor do link */
+}
+
+/* Cor personalizada para os ícones */
+.page-link i.fas.fa-angle-left,
+.page-link i.fas.fa-angle-right {
+    color: #f4ab36; /* Cor principal para as setas */
+}
+
+.page-link i.fas.fa-angle-double-left,
+.page-link i.fas.fa-angle-double-right {
+    color: #fec66f; /* Cor secundária para as setas duplas */
+}
 
