@@ -55,18 +55,13 @@ $totalRecords = $totalRow['total'];
 $totalPages = ceil($totalRecords / $itemsPerPage);
 
 // Consulta principal para buscar os registros com paginação
-$query = "SELECT ag.id, ag.descricao, ag.maca_id, ag.data, ag.start_time, ag.end_time, ag.usuario_id, 
-                 u.nome AS tatuador_nome, u.perfil_id, ag.telefone_cliente, ag.email_cliente, ag.nome_cliente AS nome_cliente
-          FROM agendamentos AS ag
-          JOIN usuarioEstudio AS u ON ag.usuario_id = u.id
-          $whereClause
-          ORDER BY ag.data, ag.start_time
+$query = "$sql
           LIMIT $itemsPerPage OFFSET $offset";
-
-$result = $conn->query($query);
+echo $query;
+//$result = $conn->query($query);
 
 // Obtém o número de registros na página atual
-$totalRecordsCurrentPage = $result->num_rows;
+//$totalRecordsCurrentPage = $result->num_rows;
 
 // Obtenção de conflitos
 $conflictQuery = "
