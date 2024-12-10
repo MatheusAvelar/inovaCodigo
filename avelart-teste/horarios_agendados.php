@@ -310,7 +310,13 @@ $months = [
                 <div class="pagination">
                 <?php
                 // Captura os filtros aplicados na URL
-                print_r($_GET);
+
+                if (function_exists('http_build_query')) {
+                    echo "A função http_build_query está disponível.";
+                } else {
+                    echo "A função http_build_query não está disponível.";
+                }
+
                 $queryString = '';
                 foreach ($_GET as $key => $value) {
                     if (!empty($value)) {
