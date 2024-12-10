@@ -62,8 +62,17 @@ if ($errors) {
     $_SESSION['message'] = implode("<br>", $errors);
 } else {
     // Verificação de conflito de horário
-    $stmt = $conn->prepare("SELECT start_time, end_time FROM agendamentos WHERE maca_id = ? AND status = '1' AND data = ? AND ((start_time <= ? AND end_time > ?) OR (start_time < ? AND end_time >= ?))");
-    $stmt->bind_param("ssssss", $maca, $date, $startTime, $startTime, $endTime, $endTime);
+    $stmt = $conn->prepare("SELECT start_time, end_time 
+                                    FROM agendamentos 
+                                    WHERE maca_id = ? 
+                                    AND status = '1' 
+                                    AND data = ? 
+                                    AND ((start_time < ? AND end_time > ?) OR
+                                        (start_time <= ? AND end_time > ?) OR
+                                        (start_time >= ? AND end_time <= ?) OR
+                                        (end_time = ?) OR
+                                        (start_time = ?))");
+    $stmt->bind_param("ssssssssss", $maca, $date, $endTime, $startTime, $startTime, $endTime, $startTime, $endTime, $startTime, $endTime);
 
     if (!$stmt->execute()) {
         $_SESSION['status'] = "error";
