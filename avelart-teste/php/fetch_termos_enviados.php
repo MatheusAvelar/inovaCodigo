@@ -110,7 +110,7 @@ if (!empty($filter_month)) {
     $total_records_sql .= " AND MONTH(data_envio) = '" . $conn->real_escape_string($filter_month) . "'";
 }
 if (!empty($filter_status)) {
-    $whereClause = "AND status = '" . $conn->real_escape_string($filter_status) . "'";
+    $total_records_sql .= "AND status = '" . $conn->real_escape_string($filter_status) . "'";
 }
 
 $total_result = $conn->query($total_records_sql);
