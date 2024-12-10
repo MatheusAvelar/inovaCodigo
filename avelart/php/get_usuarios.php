@@ -44,7 +44,7 @@ $totalRecordsCurrentPage = $result->num_rows;
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         echo "<tr>";
-        echo "<td>" . htmlspecialchars($row['id']) . "</td>";
+        //echo "<td>" . htmlspecialchars($row['id']) . "</td>";
         $ativoStatus = $row['ativo'] == 1 ? 'Ativo' : 'Inativo';
         echo "<td>" . htmlspecialchars($ativoStatus) . "</td>";
         echo "<td>" . htmlspecialchars($row['nome']) . "</td>";
