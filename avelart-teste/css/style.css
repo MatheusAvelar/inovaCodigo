@@ -355,48 +355,33 @@ td:nth-child(6) {
 .pagination {
     display: flex;
     justify-content: center;
-    align-items: center;
-    gap: 8px;
     margin-top: 20px;
 }
 
-.pagination a,
-.pagination span {
-    display: flex;
+.pagination a, .pagination span {
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
-    border: 1px solid #ccc;
+    width: 35px;
+    height: 35px;
+    margin: 0 5px;
     border-radius: 50%;
     text-decoration: none;
     font-size: 16px;
-    color: #333;
-    background-color: #f9f9f9;
-    transition: background-color 0.3s, color 0.3s;
+    color: #555;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
 }
 
 .pagination a:hover {
     background-color: #007bff;
     color: #fff;
-    border-color: #007bff;
 }
 
 .pagination .current-page {
     background-color: #007bff;
     color: #fff;
-    border-color: #007bff;
-    pointer-events: none; /* Desativa o clique na página atual */
     font-weight: bold;
 }
 
-.pagination i {
-    font-size: 18px;
-}
-
-.pagination a[title="Primeira Página"],
-.pagination a[title="Última Página"] {
-    width: 40px;
-    height: 40px;
-}
 
