@@ -38,6 +38,7 @@ if (!empty($cliente_nome)) {
 // Aqui, o GROUP BY é importante para contabilizar os registros agrupados por cliente e data
 $total_records_sql .= " GROUP BY nome_cliente, email_cliente, DATE(data_envio)";
 $total_result = $conn->query($total_records_sql);
+var_dump($total_result);
 $totalRecords = $total_result->num_rows; // Contagem dos grupos
 
 // Consulta para exibir os termos enviados com base no filtro, incluindo a paginação
@@ -56,9 +57,9 @@ if (!empty($cliente_nome)) {
     $sql .= " AND nome_cliente LIKE '%$cliente_nome%'";
 }
 
-$sql .= " GROUP BY nome_cliente, email_cliente, DATE(data_envio) 
+/*$sql .= " GROUP BY nome_cliente, email_cliente, DATE(data_envio) 
           ORDER BY data_envio DESC 
-          LIMIT $offset, $records_per_page"; // Aplicando LIMIT para a paginação
+          LIMIT $offset, $records_per_page";*/ // Aplicando LIMIT para a paginação
 
 $result = $conn->query($sql);
 
