@@ -46,7 +46,7 @@ if (!empty($cliente_nome)) {
     $sql .= " AND nome_cliente LIKE ?";
 }
 
-/*$sql .= " GROUP BY nome_cliente, email_cliente, DATE(data_envio) ORDER BY data_envio DESC"*/;
+$sql .= " LIMIT $perPage OFFSET $offset";
 
 $stmt = $conn->prepare($sql);
 
@@ -91,10 +91,7 @@ $totalRecords = $total_result->fetch_row()[0];
 $totalPages = ceil($totalRecords / $perPage);
 echo $sql;
 // Consulta principal para buscar os registros com paginação
-$query = "$sql
-          LIMIT $perPage OFFSET $offset";
-
-$result = $conn->query($query);
+$result = $conn->query($sql);
 
 // Obtém o número de registros na página atual
 $totalRecordsCurrentPage = $result->num_rows;
