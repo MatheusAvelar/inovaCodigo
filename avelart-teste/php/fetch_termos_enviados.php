@@ -62,7 +62,7 @@ $result = $stmt->get_result();
 // Obter a contagem total de registros
 $totalRecords = $result->num_rows;
 
-if ($totalRecords > 0) {
+if ($total_records > 0) {
     while($row = $result->fetch_assoc()) {
         $totalRecordsCurrentPage = $result->num_rows;
         echo "<tr>";
