@@ -64,7 +64,6 @@ $total_records = $result->num_rows;
 
 if ($total_records > 0) {
     while($row = $result->fetch_assoc()) {
-        $totalRecordsCurrentPage = $result->num_rows;
         echo "<tr>";
         echo "<td>" . htmlspecialchars($row['nome_cliente']) . "</td>";
         echo "<td>" . htmlspecialchars($row['email_cliente']) . "</td>";
