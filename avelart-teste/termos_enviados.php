@@ -106,6 +106,7 @@ unset($_SESSION['status'], $_SESSION['message']);
                 <input type="text" name="cliente_nome" id="cliente_nome" placeholder="Nome do Cliente" value="<?= htmlspecialchars(isset($_GET['cliente_nome']) ? $_GET['cliente_nome'] : '') ?>">
                 <button type="submit">Filtrar</button>
             </form>
+                <div style="overflow-x: auto;">
                 <table>
                     <thead>
                         <tr>
@@ -121,7 +122,8 @@ unset($_SESSION['status'], $_SESSION['message']);
                         include 'php/fetch_termos_enviados.php';
                         ?>
                     </tbody>
-                </table><br>
+                </table>
+                </div><br>
                 <!-- Exibe a contagem de registros -->
                 <div class="record-count">
                     <?php echo "Total de Registros: " . $total_records; ?>
