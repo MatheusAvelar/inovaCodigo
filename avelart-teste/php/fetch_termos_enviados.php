@@ -22,7 +22,7 @@ $filter_month = isset($_GET['filter_month']) ? $_GET['filter_month'] : '';
 $perPage = 50;
 $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $offset = ($currentPage - 1) * $perPage;
-echo "Paginação: $currentPage";
+
 if($perfilUsuario == 2){
     $sql = "SELECT 
                 id, 

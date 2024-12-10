@@ -210,14 +210,14 @@ $months = [
             <?php endif; ?>
         </div>
         <h2>Termos Preenchidos</h2>
-            <!--<form method="GET" action="">
+            <!--<form method="GET" action=""> 
                 <label for="cliente_nome">Filtrar por Cliente:</label>
                 <input type="text" name="cliente_nome" id="cliente_nome" placeholder="Nome do Cliente" value="<?= htmlspecialchars(isset($_GET['cliente_nome']) ? $_GET['cliente_nome'] : '') ?>">
                 <button type="submit">Filtrar</button>
             </form>-->
             <form id="filter-actions-form" method="GET" action="termos_enviados.php">
                 <div id="filters-container">
-                    <div>
+                    <!--<div>
                         <label for="filter-month">Mês:</label>
                         <select id="filter-month" name="filter_month">
                             <option value="">Todos os Meses</option>
@@ -228,14 +228,14 @@ $months = [
                             }
                             ?>
                         </select>
-                    </div>
+                    </div>-->
 
                     <div>
                         <label for="filter-maca">Cliente:</label>
                         <input type="text" name="cliente_nome" id="cliente_nome" placeholder="Nome do Cliente" value="<?= htmlspecialchars(isset($_GET['cliente_nome']) ? $_GET['cliente_nome'] : '') ?>">
                     </div>
 
-                    <div>
+                    <!--<div>
                         <label for="filter-tatuador">Tatuador:</label>
                         <select id="filter-tatuador" name="filter_tatuador">
                             <option value="">Todos os Tatuadores</option>
@@ -244,10 +244,10 @@ $months = [
                             // Carregar a lista de tatuadores
                             //include 'php/get_tatuadores.php';
                             ?>
-                        </select>
-                    </div>
+                        <!--</select>
+                    </div>-->
 
-                    <?php if ($perfil_id == 2) : ?>
+                    <!--<?php if ($perfil_id == 2) : ?>
                         <div>
                             <label for="filter-status">Status:</label>
                             <select id="filter-status" name="filter_status">
@@ -257,7 +257,7 @@ $months = [
                             </select>
                         </div>
                     <?php endif; ?>
-                </div>
+                </div>-->
 
                 <div id="actions-container">
                     <button type="submit" class="button">
@@ -265,9 +265,9 @@ $months = [
                     </button>
 
                     <?php if ($perfil_id == 2) : ?>
-                        <button type="button" class="button" id="export-button">
+                        <!--<button type="button" class="button" id="export-button">
                             <i class="fa-solid fa-file-csv"></i> Exportar
-                        </button>
+                        </button>-->
                     <?php endif; ?>
                 </div>
             </form>
@@ -294,19 +294,19 @@ $months = [
                 <!-- Exibe a lista de páginas -->
                 <div class="pagination">
                     <?php if ($currentPage > 1): ?>
-                        <a href="?page=1&cliente_nome=<?php echo $cliente_nome; ?>&filter_month=<?php echo $filter_month; ?>" class="page-link"><i class="fas fa-angles-left"></i></a>
-                        <a href="?page=<?php echo $currentPage - 1; ?>&cliente_nome=<?php echo $cliente_nome; ?>&filter_month=<?php echo $filter_month; ?>" class="page-link"><i class="fas fa-angle-left"></i></a>
+                        <a href="?page=1&cliente_nome=<?php echo $cliente_nome; ?>" class="page-link"><i class="fas fa-angles-left"></i></a>
+                        <a href="?page=<?php echo $currentPage - 1; ?>&cliente_nome=<?php echo $cliente_nome; ?>" class="page-link"><i class="fas fa-angle-left"></i></a>
                     <?php endif; ?>
 
                     <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                        <a href="?page=<?php echo $i; ?>&cliente_nome=<?php echo $cliente_nome; ?>&filter_month=<?php echo $filter_month; ?>" class="page-link <?php echo $i == $currentPage ? 'active' : ''; ?>">
+                        <a href="?page=<?php echo $i; ?>&cliente_nome=<?php echo $cliente_nome; ?>" class="page-link <?php echo $i == $currentPage ? 'active' : ''; ?>">
                             <?php echo $i; ?>
                         </a>
                     <?php endfor; ?>
 
                     <?php if ($currentPage < $totalPages): ?>
-                        <a href="?page=<?php echo $currentPage + 1; ?>&cliente_nome=<?php echo $cliente_nome; ?>&filter_month=<?php echo $filter_month; ?>" class="page-link"><i class="fas fa-angle-right"></i></a>
-                        <a href="?page=<?php echo $totalPages; ?>&cliente_nome=<?php echo $cliente_nome; ?>&filter_month=<?php echo $filter_month; ?>" class="page-link"><i class="fas fa-angles-right"></i></a>
+                        <a href="?page=<?php echo $currentPage + 1; ?>&cliente_nome=<?php echo $cliente_nome; ?>" class="page-link"><i class="fas fa-angle-right"></i></a>
+                        <a href="?page=<?php echo $totalPages; ?>&cliente_nome=<?php echo $cliente_nome; ?>" class="page-link"><i class="fas fa-angles-right"></i></a>
                     <?php endif; ?>
                 </div>
                 <br>
