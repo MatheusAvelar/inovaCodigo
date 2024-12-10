@@ -91,12 +91,7 @@ $totalRecords = $total_result->fetch_row()[0];
 $totalPages = ceil($totalRecords / $perPage);
 
 // Consulta principal para buscar os registros com paginação
-$query = "SELECT ag.id, ag.descricao, ag.maca_id, ag.data, ag.start_time, ag.end_time, ag.usuario_id, 
-                 u.nome AS tatuador_nome, u.perfil_id, ag.telefone_cliente, ag.email_cliente, ag.nome_cliente AS nome_cliente
-          FROM agendamentos AS ag
-          JOIN usuarioEstudio AS u ON ag.usuario_id = u.id
-          $whereClause
-          ORDER BY ag.data, ag.start_time
+$query = "$sql
           LIMIT $perPage OFFSET $offset";
 
 $result = $conn->query($query);
