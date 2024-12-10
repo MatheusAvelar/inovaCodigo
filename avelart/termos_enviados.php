@@ -126,29 +126,21 @@ unset($_SESSION['status'], $_SESSION['message']);
                 </div><br>
                 <!-- Exibe a lista de páginas -->
                 <div class="pagination">
-                    <?php
-                    // Calcular número total de páginas
-                    $totalPages = ceil($totalRecords / $records_per_page);
+                    <?php if ($currentPage > 1): ?>
+                        <a href="?page=1" class="page-link"><i class="fas fa-angle-double-left"></i></a>
+                        <a href="?page=<?php echo $currentPage - 1; ?>" class="page-link"><i class="fas fa-arrow-left"></i></a>
+                    <?php endif; ?>
 
-                    // Exibir os links de navegação de página
-                    if ($page_number > 1) {
-                        echo "<a href='?page=1'>&laquo; Primeira</a>";
-                        echo "<a href='?page=" . ($page_number - 1) . "'>&lsaquo; Anterior</a>";
-                    }
+                    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                        <a href="?page=<?php echo $i; ?>" class="page-link <?php echo $i == $currentPage ? 'active' : ''; ?>">
+                            <?php echo $i; ?>
+                        </a>
+                    <?php endfor; ?>
 
-                    for ($i = 1; $i <= $totalPages; $i++) {
-                        if ($i == $page_number) {
-                            echo "<a class='active' href='?page=$i'>$i</a>";
-                        } else {
-                            echo "<a href='?page=$i'>$i</a>";
-                        }
-                    }
-
-                    if ($page_number < $totalPages) {
-                        echo "<a href='?page=" . ($page_number + 1) . "'>Próxima &rsaquo;</a>";
-                        echo "<a href='?page=$totalPages'>Última &raquo;</a>";
-                    }
-                    ?>
+                    <?php if ($currentPage < $totalPages): ?>
+                        <a href="?page=<?php echo $currentPage + 1; ?>" class="page-link"><i class="fas fa-arrow-right"></i></a>
+                        <a href="?page=<?php echo $totalPages; ?>" class="page-link"><i class="fas fa-angle-double-right"></i></a>
+                    <?php endif; ?>
                 </div>
                 <br>
                 <!-- Exibe a contagem de registros -->
