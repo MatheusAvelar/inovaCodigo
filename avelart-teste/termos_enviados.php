@@ -210,11 +210,6 @@ $months = [
             <?php endif; ?>
         </div>
         <h2>Termos Preenchidos</h2>
-            <!--<form method="GET" action=""> 
-                <label for="cliente_nome">Filtrar por Cliente:</label>
-                <input type="text" name="cliente_nome" id="cliente_nome" placeholder="Nome do Cliente" value="<?= htmlspecialchars(isset($_GET['cliente_nome']) ? $_GET['cliente_nome'] : '') ?>">
-                <button type="submit">Filtrar</button>
-            </form>-->
             <form id="filter-actions-form" method="GET" action="termos_enviados.php">
                 <div id="filters-container">
                     <div>
