@@ -106,6 +106,68 @@ unset($_SESSION['status'], $_SESSION['message']);
                 <input type="text" name="cliente_nome" id="cliente_nome" placeholder="Nome do Cliente" value="<?= htmlspecialchars(isset($_GET['cliente_nome']) ? $_GET['cliente_nome'] : '') ?>">
                 <button type="submit">Filtrar</button>
             </form>
+            <form id="filter-actions-form" method="GET" action="termos_enviados.php">
+                <div id="filters-container">
+                    <div>
+                        <label for="filter-month">Mês:</label>
+                        <select id="filter-month" name="filter_month">
+                            <option value="">Todos os Meses</option>
+                            <?php
+                            foreach ($months as $value => $name) {
+                                $selected = (isset($_GET['filter_month']) && $_GET['filter_month'] == $value) ? 'selected' : '';
+                                echo "<option value=\"$value\" $selected>$name</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="filter-maca">Maca:</label>
+                        <select id="filter-maca" name="filter_maca">
+                            <option value="">Todas as Macas</option>
+                            <option value="1" <?= isset($_GET['filter_maca']) && $_GET['filter_maca'] == '1' ? 'selected' : '' ?>>Maca 1</option>
+                            <option value="2" <?= isset($_GET['filter_maca']) && $_GET['filter_maca'] == '2' ? 'selected' : '' ?>>Maca 2</option>
+                            <option value="3" <?= isset($_GET['filter_maca']) && $_GET['filter_maca'] == '3' ? 'selected' : '' ?>>Maca 3</option>
+                            <option value="4" <?= isset($_GET['filter_maca']) && $_GET['filter_maca'] == '4' ? 'selected' : '' ?>>Maca 4</option>
+                            <option value="5" <?= isset($_GET['filter_maca']) && $_GET['filter_maca'] == '5' ? 'selected' : '' ?>>Sala de Atendimento Íntimo</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="filter-tatuador">Tatuador:</label>
+                        <select id="filter-tatuador" name="filter_tatuador">
+                            <option value="">Todos os Tatuadores</option>
+                            <!-- Inclua a lógica PHP para listar os tatuadores -->
+                            <?php
+                            // Carregar a lista de tatuadores
+                            //include 'php/get_tatuadores.php';
+                            ?>
+                        </select>
+                    </div>
+
+                    <?php if ($perfil_id == 2) : ?>
+                        <div>
+                            <label for="filter-status">Status:</label>
+                            <select id="filter-status" name="filter_status">
+                                <option value="1">Ativo</option>
+                                <option value="0">Inativo</option>
+                            </select>
+                        </div>
+                    <?php endif; ?>
+                </div>
+
+                <div id="actions-container">
+                    <button type="submit" class="button">
+                        <i class="fas fa-search"></i> Filtrar
+                    </button>
+
+                    <?php if ($perfil_id == 2) : ?>
+                        <button type="button" class="button" id="export-button">
+                            <i class="fa-solid fa-file-csv"></i> Exportar
+                        </button>
+                    <?php endif; ?>
+                </div>
+            </form>
                 <div style="overflow-x: auto;">
                 <table>
                     <thead>
