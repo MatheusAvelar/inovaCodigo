@@ -126,6 +126,9 @@ if ($total_records > 0) {
 
             if ($dateDiff > 2 || $perfil_id == 2) {
                 echo "<td>
+                        <a href='visualizar_agendamento.php?id=" . htmlspecialchars($row['id']) . "' title='Visualizar'>
+                            <i class='fas fa-eye'></i>
+                        </a>
                         <a href='editar_agendamento.php?id=" . htmlspecialchars($row['id']) . "' title='Editar'>
                             <i class='fas fa-edit'></i>
                         </a>
@@ -141,6 +144,9 @@ if ($total_records > 0) {
                     </td>";
             } else {
                 echo "<td>
+                        <a href='visualizar_agendamento.php?id=" . htmlspecialchars($row['id']) . "' title='Visualizar'>
+                            <i class='fas fa-eye'></i>
+                        </a>
                         <a href='php/reenvia_termos.php?id=" . htmlspecialchars($row['id']) . "' title='Reenviar Termo'>
                             <i class='fas fa-envelope'></i>
                         </a>
