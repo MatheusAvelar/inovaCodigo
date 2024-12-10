@@ -105,6 +105,7 @@ unset($_SESSION['status'], $_SESSION['message']);
         <h2>Usuários do Sistema</h2>
         <div class="grid">
             <div class="maca">
+                <div style="overflow-x: auto;">
                 <table>
                     <thead>
                         <tr>
@@ -123,6 +124,7 @@ unset($_SESSION['status'], $_SESSION['message']);
                         ?>
                     </tbody>
                 </table>
+                </div>
             </div>
         </div>
     </div>
