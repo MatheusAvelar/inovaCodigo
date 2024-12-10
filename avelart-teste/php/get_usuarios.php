@@ -32,6 +32,9 @@ $query = "SELECT u.id, u.ativo, u.nome, u.sobrenome, u.email, p.nome AS perfil_n
           LIMIT $offset, $recordsPerPage";
 $result = $conn->query($query);
 
+// Obtém o número de registros na página atual
+$totalRecordsCurrentPage = $result->num_rows;
+
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         echo "<tr>";
