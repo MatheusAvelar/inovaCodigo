@@ -78,4 +78,3 @@ if ($totalRecordsCurrentPage > 0) {
 
 $stmt->close();
 $conn->close();
-?>
