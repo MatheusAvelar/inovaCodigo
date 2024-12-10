@@ -18,7 +18,7 @@ try {
 $query = "SELECT a.id, a.maca_id, a.data, a.start_time, a.end_time, a.nome_cliente, a.telefone_cliente, a.email_cliente, a.estilo, a.tamanho, a.valor, a.forma_pagamento, a.sinal_pago, a.descricao
           FROM agendamentos AS a
           WHERE a.id = $agendamentoId
-          /*AND status = '1'*/";
+          AND status = '1'";
 $result = $conn->query($query);
 
 if ($result->num_rows === 0) {
