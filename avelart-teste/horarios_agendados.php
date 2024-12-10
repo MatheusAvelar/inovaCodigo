@@ -324,6 +324,7 @@ $months = [
                     }
                 }
                 $queryString = rtrim($queryString, '&');
+                echo $queryString;
                 // Adiciona os filtros aos links de paginação
                 $paginationBaseUrl = "?$queryString&page=";
                 echo "Página: $paginationBaseUrl";
