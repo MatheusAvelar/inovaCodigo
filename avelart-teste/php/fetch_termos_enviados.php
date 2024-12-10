@@ -85,7 +85,6 @@ if (!empty($cliente_nome)) {
     $total_records_sql .= " AND nome_cliente LIKE '%$cliente_nome%'";
 }
 
-$total_records_sql .= " GROUP BY nome_cliente, email_cliente, DATE(data_envio) ORDER BY data_envio DESC";
 $total_result = $conn->query($total_records_sql);
 $totalRecords = $total_result->fetch_row()[0];
 
