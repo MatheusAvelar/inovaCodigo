@@ -310,17 +310,9 @@ $months = [
                 <div class="pagination">
                     <?php
                     // Captura os filtros aplicados na URL
-                    $queryString = '';
-                    foreach ($_GET as $key => $value) {
-                        if (!empty($value)) {
-                            $queryString .= urlencode($key) . '=' . urlencode($value) . '&';
-                        }
-                    }
-                    $queryString = rtrim($queryString, '&');
-
-                    // Adiciona '?' somente se existirem filtros
+                    $queryString = $_SERVER['QUERY_STRING'];
                     $paginationBaseUrl = !empty($queryString) ? "?$queryString&page=" : "?page=";
-                    $url = $_SERVER['QUERY_STRING'];
+                    
                     // Depuração (opcional)
                     echo "Página: $url";
                     if ($currentPage > 1): ?>
