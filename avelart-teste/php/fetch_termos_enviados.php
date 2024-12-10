@@ -40,11 +40,11 @@ if($perfilUsuario != 2){
 }
 
 if (!empty($filter_status)) {
-    $whereClause = "AND status = '" . $filter_status . "'";
+    $whereClause = " AND status = '" . $filter_status . "'";
 }
 
 // Adiciona paginação
-$sql .= " LIMIT $perPage OFFSET $offset";
+$whereClause .= " LIMIT $perPage OFFSET $offset";
 echo "Consulta 0: $sql";
 // Prepara a declaração SQL
 $stmt = $conn->prepare($sql);
