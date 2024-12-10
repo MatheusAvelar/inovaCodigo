@@ -279,32 +279,31 @@ $months = [
                 <?php endif; ?>
             </div>
         </form>
-
-
+        </div>
         <div class="grid">
             <div class="maca">
                 <div style="overflow-x: auto;">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Tatuador</th>
-                            <th>Maca</th>
-                            <th>Data</th>
-                            <th>H. Inicial</th>
-                            <th>H. Final</th>
-                            <th>Ação</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $filter_date = $_GET['filter_date'] ?? '';
-                        $filter_maca = $_GET['filter_maca'] ?? '';
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tatuador</th>
+                                <th>Maca</th>
+                                <th>Data</th>
+                                <th>H. Inicial</th>
+                                <th>H. Final</th>
+                                <th>Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $filter_date = $_GET['filter_date'] ?? '';
+                            $filter_maca = $_GET['filter_maca'] ?? '';
 
-                        // Inclua o arquivo com a lógica para buscar agendamentos com filtros
-                        include 'php/fetch_agendamentos.php';
-                        ?>
-                    </tbody>
-                </table>
+                            // Inclua o arquivo com a lógica para buscar agendamentos com filtros
+                            include 'php/fetch_agendamentos.php';
+                            ?>
+                        </tbody>
+                    </table>
                 </div><br>
                 <!-- Exibe a lista de páginas -->
                 <div class="pagination">
