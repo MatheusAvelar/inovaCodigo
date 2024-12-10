@@ -17,6 +17,7 @@ if ($conn->connect_error) {
 // Verifica se há um filtro aplicado
 $cliente_nome = isset($_GET['cliente_nome']) ? trim($_GET['cliente_nome']) : '';
 $filter_month = isset($_GET['filter_month']) ? $_GET['filter_month'] : '';
+$filter_status = isset($_GET['filter_status']) ? $_GET['filter_status'] : 'ativo';
 
 // Configuração de Paginação
 $perPage = 50;
@@ -30,7 +31,7 @@ if($perfilUsuario == 2){
                 email_cliente, 
                 data_envio 
             FROM termos_enviados 
-            WHERE status = 'ativo'";
+            WHERE 1 = 1";
 } else {
     $sql = "SELECT 
                 id,
@@ -38,7 +39,7 @@ if($perfilUsuario == 2){
                 email_cliente,
                 data_envio 
             FROM termos_enviados 
-            WHERE status = 'ativo' 
+            WHERE 1 = 1 
             AND usuario_id = $usuarioLogado";
 }
 
@@ -48,6 +49,9 @@ if (!empty($cliente_nome)) {
 }
 if (!empty($filter_month)) {
     $sql .= " AND MONTH(data_envio) = ?";
+}
+if (!empty($filter_status)) {
+    $sql .= " AND status = ?";
 }
 
 $sql .= " LIMIT $perPage OFFSET $offset";
@@ -65,6 +69,10 @@ if (!empty($cliente_nome)) {
 if (!empty($filter_month)) {
     $params[] = $filter_month;
     $types .= "i";
+}
+if (!empty($filter_status)) {
+    $params[] = $filter_status;
+    $types .= "s";
 }
 
 // Vincula os parâmetros, se existirem
@@ -91,7 +99,7 @@ if ($total_records > 0) {
 }
 
 // Obter a contagem total de registros
-$total_records_sql = "SELECT COUNT(*) FROM termos_enviados WHERE status = 'ativo'";
+$total_records_sql = "SELECT COUNT(*) FROM termos_enviados WHERE 1 = 1";
 if ($perfilUsuario != 2) {
     $total_records_sql .= " AND usuario_id = $usuarioLogado";
 }
@@ -101,6 +109,10 @@ if (!empty($cliente_nome)) {
 if (!empty($filter_month)) {
     $total_records_sql .= " AND MONTH(data_envio) = '" . $conn->real_escape_string($filter_month) . "'";
 }
+if (!empty($filter_status)) {
+    $whereClause = "AND status = '" . $conn->real_escape_string($filter_status) . "'";
+}
+
 $total_result = $conn->query($total_records_sql);
 $totalRecords = $total_result->fetch_row()[0];
 
