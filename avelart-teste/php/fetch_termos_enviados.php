@@ -32,7 +32,7 @@ if($perfilUsuario == 2){
                 email_cliente, 
                 data_envio 
             FROM termos_enviados 
-            WHERE status = 'ativo'";
+            WHERE status = $filter_status";
 } else {
     $sql = "SELECT 
                 id,
@@ -40,7 +40,7 @@ if($perfilUsuario == 2){
                 email_cliente,
                 data_envio 
             FROM termos_enviados 
-            WHERE status = 'ativo' 
+            WHERE status = $filter_status 
             AND usuario_id = $usuarioLogado";
 }
 
