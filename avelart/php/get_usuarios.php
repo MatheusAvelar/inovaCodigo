@@ -47,8 +47,7 @@ if ($result->num_rows > 0) {
         //echo "<td>" . htmlspecialchars($row['id']) . "</td>";
         $ativoStatus = $row['ativo'] == 1 ? 'Ativo' : 'Inativo';
         echo "<td>" . htmlspecialchars($ativoStatus) . "</td>";
-        echo "<td>" . htmlspecialchars($row['nome']) . "</td>";
-        echo "<td>" . htmlspecialchars($row['sobrenome']) . "</td>";
+        echo "<td>" . htmlspecialchars($row['nome']) . " " .htmlspecialchars($row['sobrenome']) . "</td>";
         echo "<td>" . htmlspecialchars($row['email']) . "</td>";
         echo "<td>" . htmlspecialchars($row['perfil_nome']) . "</td>";
         echo "<td>
