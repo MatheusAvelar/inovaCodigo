@@ -18,7 +18,7 @@ $filterDate = isset($_GET['filter_date']) ? $_GET['filter_date'] : '';
 $filterMaca = isset($_GET['filter_maca']) ? $_GET['filter_maca'] : '';
 $filterTatuador = isset($_GET['filter_tatuador']) ? $_GET['filter_tatuador'] : '';
 $filterMonth = isset($_GET['filter_month']) ? $_GET['filter_month'] : '';
-$filterSatus = isset($_GET['filter_status']) ? $_GET['filter_status'] : '';
+$filterSatus = isset($_GET['filter_status']) ? $_GET['filter_status'] : '1';
 
 // Condição para aplicar os filtros
 $whereClause = "WHERE status = '" . $conn->real_escape_string($filterSatus) . "'";
@@ -104,10 +104,16 @@ if ($result->num_rows > 0) {
         $formattedStartTime = date('H:i', strtotime($row['start_time']));
         $formattedEndTime = date('H:i', strtotime($row['end_time']));
 
+        // Montando o link do termo de responsabilidade
+        $nomeTatuador = urlencode($row['tatuador_nome']);
+        $nomeCliente = urlencode($row['nome_cliente']);
+        $telefoneCliente = urlencode($row['telefone_cliente']);
+        $emailCliente = urlencode($row['email_cliente']);
+
         $linkTermo = "https://avelart.inovacodigo.com.br/termo_responsabilidade.php";
-        $linkTermo .= "?nome_cliente=" . urlencode($row['nome_cliente']);
-        $linkTermo .= "&telefone_cliente=" . urlencode($row['telefone_cliente']);
-        $linkTermo .= "&email_cliente=" . urlencode($row['email_cliente']);
+        $linkTermo .= "?nome_cliente=" . $nomeCliente;
+        $linkTermo .= "&telefone_cliente=" . $telefoneCliente;
+        $linkTermo .= "&email_cliente=" . $emailCliente;
         $linkTermo .= "&id=" . $_SESSION['id'];
 
         // Definindo a classe CSS de linha de conflito
