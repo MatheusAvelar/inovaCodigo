@@ -386,15 +386,3 @@ td:nth-child(6) {
 .page-link i.fas {
     color: inherit; /* Herda a cor do link */
 }
-
-/* Cor personalizada para os ícones */
-/*.page-link i.fas.fa-angle-left,
-.page-link i.fas.fa-angle-right {
-    color: #f4ab36; /* Cor principal para as setas */
-/*}*/
-
-/*.page-link i.fas.fa-angle-double-left,
-.page-link i.fas.fa-angle-double-right {
-    color: #fec66f; /* Cor secundária para as setas duplas */
-/*}*/
-
