@@ -263,12 +263,12 @@ $months = [
                     <button type="submit" class="button">
                         <i class="fas fa-search"></i> Filtrar
                     </button>
-
-                    <?php /*if ($perfil_id == 2) :*/ ?>
-                        <!--<button type="button" class="button" id="export-button">
+    
+                    <?php if ($perfil_id == 2) : ?>
+                        <button type="button" class="button" id="export-button">
                             <i class="fa-solid fa-file-csv"></i> Exportar
-                        </button>-->
-                    <?php /*endif;*/ ?>
+                        </button>
+                    <?php endif; ?>
                 </div>
             </form>
         </div>
