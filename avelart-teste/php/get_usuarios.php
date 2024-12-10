@@ -1,4 +1,4 @@
-<?php
+<?php 
 include 'utils.php';
 
 try {
@@ -7,10 +7,29 @@ try {
     die("Erro: " . $e->getMessage());
 }
 
-// Obtendo a lista de tatuadores
+// Definir o número de registros por página
+$recordsPerPage = 50;
+
+// Obter o número total de registros
+$totalQuery = "SELECT COUNT(*) AS total FROM usuarioEstudio AS u";
+$totalResult = $conn->query($totalQuery);
+$totalRow = $totalResult->fetch_assoc();
+$totalRecords = $totalRow['total'];
+
+// Calcular o número total de páginas
+$totalPages = ceil($totalRecords / $recordsPerPage);
+
+// Obter a página atual, se não estiver definida, usar a página 1
+$currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+// Calcular o índice de início para a consulta SQL (baseado na página atual)
+$offset = ($currentPage - 1) * $recordsPerPage;
+
+// Consulta para obter os dados da página atual
 $query = "SELECT u.id, u.ativo, u.nome, u.sobrenome, u.email, p.nome AS perfil_nome
           FROM usuarioEstudio AS u
-          JOIN perfis AS p ON u.perfil_id = p.id";
+          JOIN perfis AS p ON u.perfil_id = p.id
+          LIMIT $offset, $recordsPerPage";
 $result = $conn->query($query);
 
 if ($result->num_rows > 0) {
@@ -40,4 +59,3 @@ if ($result->num_rows > 0) {
 // Fechando a conexão
 $conn->close();
 ?>
-
