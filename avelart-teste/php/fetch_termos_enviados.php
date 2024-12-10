@@ -24,34 +24,31 @@ $perPage = 50;
 $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $offset = ($currentPage - 1) * $perPage;
 
-if($perfilUsuario == 2){
-    $sql = "SELECT 
-                id, 
-                CONCAT(UPPER(SUBSTRING(nome_cliente, 1, 1)), LOWER(SUBSTRING(nome_cliente, 2))) AS nome_cliente, 
-                email_cliente, 
-                data_envio 
-            FROM termos_enviados 
-            WHERE 1";
-} else {
-    $sql = "SELECT 
-                id,
-                CONCAT(UPPER(SUBSTRING(nome_cliente, 1, 1)), LOWER(SUBSTRING(nome_cliente, 2))) AS nome_cliente, 
-                email_cliente,
-                data_envio 
-            FROM termos_enviados 
-            WHERE 1
-            AND usuario_id = $usuarioLogado";
-}
+$sql = "SELECT 
+            id, 
+            CONCAT(UPPER(SUBSTRING(nome_cliente, 1, 1)), LOWER(SUBSTRING(nome_cliente, 2))) AS nome_cliente, 
+            email_cliente, 
+            data_envio 
+        FROM termos_enviados 
+        WHERE 1"; // Começar com a condição genérica
 
-// Se houver um filtro, adicione uma condição na consulta
+// Se o perfil não for 2, adiciona a condição de usuario_id
+if ($perfilUsuario != 2) {
+    $sql .= " AND usuario_id = $usuarioLogado";
+}
+// Adiciona o filtro de status de acordo com a seleção do filtro
+if (!empty($filter_status)) {
+    $sql .= " AND status = ?";
+} else {
+    // Se não houver filtro de status, mostra ambos os status (ativo e inativo)
+    $sql .= " AND (status = 'ativo' OR status = 'inativo')";
+}
+// Adiciona filtros adicionais
 if (!empty($cliente_nome)) {
     $sql .= " AND nome_cliente LIKE ?";
 }
 if (!empty($filter_month)) {
     $sql .= " AND MONTH(data_envio) = ?";
-}
-if (!empty($filter_status)) {
-    $sql .= " AND status = ?";
 }
 
 $sql .= " LIMIT $perPage OFFSET $offset";
