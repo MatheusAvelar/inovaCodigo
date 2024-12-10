@@ -127,19 +127,19 @@ unset($_SESSION['status'], $_SESSION['message']);
                 <!-- Exibe a lista de páginas -->
                 <div class="pagination">
                     <?php if ($currentPage > 1): ?>
-                        <a href="?page=1" class="page-link"><i class="fas fa-angle-double-left"></i></a>
-                        <a href="?page=<?php echo $currentPage - 1; ?>" class="page-link"><i class="fas fa-arrow-left"></i></a>
+                        <a href="?page=1&cliente_nome=<?php echo $cliente_nome; ?>" class="page-link"><i class="fas fa-angles-left"></i></a>
+                        <a href="?page=<?php echo $currentPage - 1; ?>&cliente_nome=<?php echo $cliente_nome; ?>" class="page-link"><i class="fas fa-angle-left"></i></a>
                     <?php endif; ?>
 
                     <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                        <a href="?page=<?php echo $i; ?>" class="page-link <?php echo $i == $currentPage ? 'active' : ''; ?>">
+                        <a href="?page=<?php echo $i; ?>&cliente_nome=<?php echo $cliente_nome; ?>" class="page-link <?php echo $i == $currentPage ? 'active' : ''; ?>">
                             <?php echo $i; ?>
                         </a>
                     <?php endfor; ?>
 
                     <?php if ($currentPage < $totalPages): ?>
-                        <a href="?page=<?php echo $currentPage + 1; ?>" class="page-link"><i class="fas fa-arrow-right"></i></a>
-                        <a href="?page=<?php echo $totalPages; ?>" class="page-link"><i class="fas fa-angle-double-right"></i></a>
+                        <a href="?page=<?php echo $currentPage + 1; ?>&cliente_nome=<?php echo $cliente_nome; ?>" class="page-link"><i class="fas fa-angle-right"></i></a>
+                        <a href="?page=<?php echo $totalPages; ?>&cliente_nome=<?php echo $cliente_nome; ?>" class="page-link"><i class="fas fa-angles-right"></i></a>
                     <?php endif; ?>
                 </div>
                 <br>

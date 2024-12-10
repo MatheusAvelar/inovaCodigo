@@ -47,7 +47,7 @@ if (!empty($cliente_nome)) {
     $sql .= " AND nome_cliente LIKE ?";
 }
 
-$sql .= " GROUP BY nome_cliente, email_cliente, DATE(data_envio) ORDER BY data_envio DESC";
+$sql .= " LIMIT $perPage OFFSET $offset";
 
 $stmt = $conn->prepare($sql);
 
@@ -65,7 +65,6 @@ $total_records = $result->num_rows;
 
 if ($total_records > 0) {
     while($row = $result->fetch_assoc()) {
-        $totalRecordsCurrentPage = $result->num_rows;
         echo "<tr>";
         echo "<td>" . htmlspecialchars($row['nome_cliente']) . "</td>";
         echo "<td>" . htmlspecialchars($row['email_cliente']) . "</td>";
@@ -85,11 +84,18 @@ if ($perfilUsuario != 2) {
 if (!empty($cliente_nome)) {
     $total_records_sql .= " AND nome_cliente LIKE '%$cliente_nome%'";
 }
+
 $total_result = $conn->query($total_records_sql);
 $totalRecords = $total_result->fetch_row()[0];
 
 // Calcular o número total de páginas
 $totalPages = ceil($totalRecords / $perPage);
+echo $sql;
+// Consulta principal para buscar os registros com paginação
+$result = $conn->query($sql);
+
+// Obtém o número de registros na página atual
+$totalRecordsCurrentPage = $result->num_rows;
 
 $stmt->close();
 $conn->close();
