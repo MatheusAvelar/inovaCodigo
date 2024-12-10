@@ -46,7 +46,7 @@ if (!empty($cliente_nome)) {
     $sql .= " AND nome_cliente LIKE ?";
 }
 
-$sql .= " ORDER BY data_envio DESC";
+$sql .= " GROUP BY nome_cliente, email_cliente, DATE(data_envio) ORDER BY data_envio DESC";
 
 $stmt = $conn->prepare($sql);
 
