@@ -90,7 +90,7 @@ $totalRecords = $total_result->fetch_row()[0];
 // Calcular o número total de páginas
 $totalPages = ceil($totalRecords / $perPage);
 
-echo $sql;
+echo $sql + "LIMIT $perPage OFFSET $offset";
 // Consulta principal para buscar os registros com paginação
 $query = "SELECT ag.id, ag.descricao, ag.maca_id, ag.data, ag.start_time, ag.end_time, ag.usuario_id, 
                  u.nome AS tatuador_nome, u.perfil_id, ag.telefone_cliente, ag.email_cliente, ag.nome_cliente AS nome_cliente
