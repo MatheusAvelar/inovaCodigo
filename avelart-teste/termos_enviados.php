@@ -251,8 +251,9 @@ $months = [
                         <div>
                             <label for="filter-status">Status:</label>
                             <select id="filter-status" name="filter_status">
-                                <option value="1">Ativo</option>
-                                <option value="0">Inativo</option>
+                                <option value="">Nenhum Valor</option>
+                                <option value="ativo">Ativo</option>
+                                <option value="inativo">Inativo</option>
                             </select>
                         </div>
                     <?php endif; ?>

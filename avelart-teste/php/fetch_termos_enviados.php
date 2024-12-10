@@ -16,6 +16,9 @@ if ($conn->connect_error) {
 
 // Verifica se há um filtro aplicado
 $cliente_nome = isset($_GET['cliente_nome']) ? trim($_GET['cliente_nome']) : '';
+$filter_status = isset($_GET['filter_status']) ? trim($_GET['filter_status']) : '';
+$filter_tatuador = isset($_GET['filter_tatuador']) ? trim($_GET['filter_tatuador']) : '';
+$filter_month = isset($_GET['filter_month']) ? trim($_GET['filter_month']) : '';
 
 // Configuração de Paginação
 $perPage = 50;
@@ -41,19 +44,36 @@ if($perfilUsuario == 2){
             AND usuario_id = $usuarioLogado";
 }
 
-// Se houver um filtro, adicione uma condição na consulta
-if (!empty($cliente_nome)) {
-    $sql .= " AND nome_cliente LIKE ?";
-}
-
+// Adiciona paginação
 $sql .= " LIMIT $perPage OFFSET $offset";
 
+// Prepara a declaração SQL
 $stmt = $conn->prepare($sql);
 
-// Se houver um filtro, vincule o parâmetro
+// Vincula os parâmetros dinamicamente
+$params = [];
+$types = ""; // String que define os tipos dos parâmetros para o bind_param
+
 if (!empty($cliente_nome)) {
-    $param = "%" . $cliente_nome . "%";
-    $stmt->bind_param("s", $param);
+    $params[] = "%" . $cliente_nome . "%";
+    $types .= "s"; // Tipo string
+}
+if (!empty($filter_status)) {
+    $params[] = $filter_status;
+    $types .= "s"; // Tipo string
+}
+if (!empty($filter_tatuador)) {
+    $params[] = "%" . $filter_tatuador . "%";
+    $types .= "s"; // Tipo string
+}
+if (!empty($filter_month)) {
+    $params[] = $filter_month;
+    $types .= "i"; // Tipo inteiro
+}
+
+// Vincula os parâmetros, se existirem
+if (!empty($params)) {
+    $stmt->bind_param($types, ...$params);
 }
 
 $stmt->execute();
@@ -82,6 +102,15 @@ if ($perfilUsuario != 2) {
 }
 if (!empty($cliente_nome)) {
     $total_records_sql .= " AND nome_cliente LIKE '%$cliente_nome%'";
+}
+if (!empty($filter_status)) {
+    $total_records_sql .= " AND status = '$filter_status'";
+}
+if (!empty($filter_tatuador)) {
+    $total_records_sql .= " AND nome_tatuador LIKE '%$filter_tatuador%'";
+}
+if (!empty($filter_month)) {
+    $total_records_sql .= " AND MONTH(data_envio) = '$filter_month'";
 }
 
 $total_result = $conn->query($total_records_sql);
