@@ -18,7 +18,7 @@ if ($conn->connect_error) {
 $cliente_nome = isset($_GET['cliente_nome']) ? trim($_GET['cliente_nome']) : '';
 
 // Calculando a página atual e a quantidade de registros por página
-$records_per_page = 10; // Quantidade de registros por página
+$records_per_page = 50; // Quantidade de registros por página
 $page_number = isset($_GET['page']) ? $_GET['page'] : 1; // Página atual, default é 1
 $offset = ($page_number - 1) * $records_per_page; // Deslocamento para o LIMIT
 
