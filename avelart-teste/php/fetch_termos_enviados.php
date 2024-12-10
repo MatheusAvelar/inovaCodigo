@@ -17,29 +17,13 @@ if ($conn->connect_error) {
 // Verifica se há um filtro aplicado
 $cliente_nome = isset($_GET['cliente_nome']) ? trim($_GET['cliente_nome']) : '';
 
-// Calculando a página atual e a quantidade de registros por página
-$records_per_page = 50; // Quantidade de registros por página
-$page_number = isset($_GET['page']) ? $_GET['page'] : 1; // Página atual, default é 1
-$offset = ($page_number - 1) * $records_per_page; // Deslocamento para o LIMIT
+// Configuração de Paginação
+$itemsPerPage = 50; // Número de registros por página
+$currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+if ($currentPage < 1) $currentPage = 1;
 
-// Contagem total de registros com GROUP BY
-$total_records_sql = "SELECT COUNT(*) 
-                      FROM termos_enviados 
-                      WHERE status = 'ativo'";
+$offset = ($currentPage - 1) * $itemsPerPage;
 
-if ($perfilUsuario != 2) {
-    $total_records_sql .= " AND usuario_id = $usuarioLogado";
-}
-
-if (!empty($cliente_nome)) {
-    $total_records_sql .= " AND nome_cliente LIKE '%$cliente_nome%'";
-}
-
-// Aqui, o GROUP BY é importante para contabilizar os registros agrupados por cliente e data
-$total_result = $conn->query($total_records_sql);
-$totalRecords = $total_result->num_rows; // Contagem dos grupos
-
-// Consulta para exibir os termos enviados com base no filtro, incluindo a paginação
 $sql = "SELECT id, 
                CONCAT(UPPER(SUBSTRING(nome_cliente, 1, 1)), LOWER(SUBSTRING(nome_cliente, 2))) AS nome_cliente, 
                email_cliente, 
@@ -51,20 +35,30 @@ if ($perfilUsuario != 2) {
     $sql .= " AND usuario_id = $usuarioLogado";
 }
 
+// Se houver um filtro, adicione uma condição na consulta
 if (!empty($cliente_nome)) {
-    $sql .= " AND nome_cliente LIKE '%$cliente_nome%'";
+    $sql .= " AND nome_cliente LIKE ?";
 }
 
-$sql .= " LIMIT $offset, $records_per_page"; // Aplicando LIMIT para a paginação
+$sql .= " GROUP BY nome_cliente, email_cliente, DATE(data_envio) ORDER BY data_envio DESC";
 
-$result = $conn->query($sql);
+$stmt = $conn->prepare($sql);
 
-// Obter a contagem de registros na página atual
-$totalRecordsCurrentPage = $result->num_rows;
+// Se houver um filtro, vincule o parâmetro
+if (!empty($cliente_nome)) {
+    $param = "%" . $cliente_nome . "%";
+    $stmt->bind_param("s", $param);
+}
 
-// Exibir os registros
-if ($totalRecordsCurrentPage > 0) {
-    while ($row = $result->fetch_assoc()) {
+$stmt->execute();
+$result = $stmt->get_result();
+
+// Obter a contagem total de registros
+$total_records = $result->num_rows;
+
+if ($total_records > 0) {
+    while($row = $result->fetch_assoc()) {
+        $totalRecordsCurrentPage = $result->num_rows;
         echo "<tr>";
         echo "<td>" . htmlspecialchars($row['nome_cliente']) . "</td>";
         echo "<td>" . htmlspecialchars($row['email_cliente']) . "</td>";
@@ -73,8 +67,23 @@ if ($totalRecordsCurrentPage > 0) {
         echo "</tr>";
     }
 } else {
-    echo "<tr><td colspan='4'>Nenhum termo encontrado.</td></tr>";
+    echo "<tr><td colspan='5'>Nenhum termo encontrado.</td></tr>";
 }
+
+// Obter a contagem total de registros
+$total_records_sql = "SELECT COUNT(*) FROM termos_enviados WHERE status = 'ativo'";
+if ($perfilUsuario != 2) {
+    $total_records_sql .= " AND usuario_id = $usuarioLogado";
+}
+if (!empty($cliente_nome)) {
+    $total_records_sql .= " AND nome_cliente LIKE '%$cliente_nome%'";
+}
+$total_result = $conn->query($total_records_sql);
+$totalRecords = $total_result->fetch_row()[0];
+
+// Calcular o número total de páginas
+$totalPages = ceil($totalRecords / $perPage);
 
 $stmt->close();
 $conn->close();
+?>
