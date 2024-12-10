@@ -65,6 +65,9 @@ $query = "SELECT ag.id, ag.descricao, ag.maca_id, ag.data, ag.start_time, ag.end
 
 $result = $conn->query($query);
 
+// Obtém o número de registros na página atual
+$totalRecordsCurrentPage = $result->num_rows;
+
 // Obtenção de conflitos
 $conflictQuery = "
     SELECT a1.id AS agendamento1_id, a2.id AS agendamento2_id
