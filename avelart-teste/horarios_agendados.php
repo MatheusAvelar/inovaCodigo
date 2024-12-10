@@ -313,8 +313,6 @@ $months = [
                     $queryString = $_SERVER['QUERY_STRING'];
                     $paginationBaseUrl = !empty($queryString) ? "?$queryString&page=" : "?page=";
                     
-                    // Depuração (opcional)
-                    echo "Página: $url";
                     if ($currentPage > 1): ?>
                         <a href="<?php echo $paginationBaseUrl . '1'; ?>" class="page-link"><i class="fas fa-angles-left"></i></a>
                         <a href="<?php echo $paginationBaseUrl . ($currentPage - 1); ?>" class="page-link"><i class="fas fa-angle-left"></i></a>
