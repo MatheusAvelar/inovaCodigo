@@ -310,11 +310,14 @@ $months = [
                 <div class="pagination">
                 <?php
                 // Captura os filtros aplicados na URL
+                print_r($_GET);
                 $queryString = http_build_query(array_filter($_GET));
-
                 // Adiciona os filtros aos links de paginação
                 $paginationBaseUrl = "?$queryString&page=";
-
+                echo "Página $paginationBaseUrl";
+                echo "<p>Filtros Aplicados:</p>";
+                echo "<p>Data: " . ($filter_date ?? 'Nenhum') . "</p>";
+                echo "<p>Maca: " . ($filter_maca ?? 'Nenhuma') . "</p>";
                 if ($currentPage > 1): ?>
                     <a href="<?php echo $paginationBaseUrl . '1'; ?>" class="page-link"><i class="fas fa-angles-left"></i></a>
                     <a href="<?php echo $paginationBaseUrl . ($currentPage - 1); ?>" class="page-link"><i class="fas fa-angle-left"></i></a>
