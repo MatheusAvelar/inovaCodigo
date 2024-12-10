@@ -60,7 +60,7 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 // Obter a contagem total de registros
-$totalRecords = $result->num_rows;
+$total_records = $result->num_rows;
 
 if ($total_records > 0) {
     while($row = $result->fetch_assoc()) {
