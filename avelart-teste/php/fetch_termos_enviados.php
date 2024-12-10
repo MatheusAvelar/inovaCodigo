@@ -17,33 +17,32 @@ if ($conn->connect_error) {
 // Verifica se há um filtro aplicado
 $cliente_nome = isset($_GET['cliente_nome']) ? trim($_GET['cliente_nome']) : '';
 $filter_month = isset($_GET['filter_month']) ? $_GET['filter_month'] : '';
-$filter_status = isset($_GET['filter_status']) ? $_GET['filter_status'] : 'ativo';
 
 // Configuração de Paginação
 $perPage = 50;
 $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $offset = ($currentPage - 1) * $perPage;
 
-$sql = "SELECT 
-            id, 
-            CONCAT(UPPER(SUBSTRING(nome_cliente, 1, 1)), LOWER(SUBSTRING(nome_cliente, 2))) AS nome_cliente, 
-            email_cliente, 
-            data_envio 
-        FROM termos_enviados 
-        WHERE 1"; // Começar com a condição genérica
-
-// Se o perfil não for 2, adiciona a condição de usuario_id
-if ($perfilUsuario != 2) {
-    $sql .= " AND usuario_id = $usuarioLogado";
-}
-// Adiciona o filtro de status de acordo com a seleção do filtro
-if (!empty($filter_status)) {
-    $sql .= " AND status = ?";
+if($perfilUsuario == 2){
+    $sql = "SELECT 
+                id, 
+                CONCAT(UPPER(SUBSTRING(nome_cliente, 1, 1)), LOWER(SUBSTRING(nome_cliente, 2))) AS nome_cliente, 
+                email_cliente, 
+                data_envio 
+            FROM termos_enviados 
+            WHERE status = 'ativo'";
 } else {
-    // Se não houver filtro de status, mostra ambos os status (ativo e inativo)
-    $sql .= " AND (status = 'ativo' OR status = 'inativo')";
+    $sql = "SELECT 
+                id,
+                CONCAT(UPPER(SUBSTRING(nome_cliente, 1, 1)), LOWER(SUBSTRING(nome_cliente, 2))) AS nome_cliente, 
+                email_cliente,
+                data_envio 
+            FROM termos_enviados 
+            WHERE status = 'ativo' 
+            AND usuario_id = $usuarioLogado";
 }
-// Adiciona filtros adicionais
+
+// Se houver um filtro, adicione uma condição na consulta
 if (!empty($cliente_nome)) {
     $sql .= " AND nome_cliente LIKE ?";
 }
@@ -59,17 +58,13 @@ $params = [];
 $types = "";
 
 // Se houver um filtro, vincule o parâmetro
-if (!empty($cliente_nome)) {
+if (!empty($cliente_nome)) { 
     $params[] = "%" . $cliente_nome . "%";
     $types .= "s";
 }
 if (!empty($filter_month)) {
     $params[] = $filter_month;
     $types .= "i";
-}
-if (!empty($filter_status)) {
-    $params[] = $filter_status;
-    $types .= "s";
 }
 
 // Vincula os parâmetros, se existirem
@@ -96,7 +91,7 @@ if ($total_records > 0) {
 }
 
 // Obter a contagem total de registros
-$total_records_sql = "SELECT COUNT(*) FROM termos_enviados WHERE 1 = 1";
+$total_records_sql = "SELECT COUNT(*) FROM termos_enviados WHERE status = 'ativo'";
 if ($perfilUsuario != 2) {
     $total_records_sql .= " AND usuario_id = $usuarioLogado";
 }
@@ -105,9 +100,6 @@ if (!empty($cliente_nome)) {
 }
 if (!empty($filter_month)) {
     $total_records_sql .= " AND MONTH(data_envio) = '" . $conn->real_escape_string($filter_month) . "'";
-}
-if (!empty($filter_status)) {
-    $total_records_sql .= "AND status = '" . $conn->real_escape_string($filter_status) . "'";
 }
 
 $total_result = $conn->query($total_records_sql);
