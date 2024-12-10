@@ -308,7 +308,7 @@ $months = [
                 <!-- Exibe a lista de páginas -->
                 <div class="pagination">
                     <?php if ($currentPage > 1): ?>
-                        <a href="?page=1" class="page-link"><i class="fas fa-arrow-left"></i></a>
+                        <a href="?page=1" class="page-link"><i class="fas fa-angle-double-right"></i></a>
                         <a href="?page=<?php echo $currentPage - 1; ?>" class="page-link"><i class="fas fa-arrow-left"></i></a>
                     <?php endif; ?>
 
@@ -320,7 +320,7 @@ $months = [
 
                     <?php if ($currentPage < $totalPages): ?>
                         <a href="?page=<?php echo $currentPage + 1; ?>" class="page-link"><i class="fas fa-arrow-right"></i></a>
-                        <a href="?page=<?php echo $totalPages; ?>" class="page-link"><i class="fas fa-arrow-right"></i></a>
+                        <a href="?page=<?php echo $totalPages; ?>" class="page-link"><i class="fas fa-angle-double-right"></i></a>
                     <?php endif; ?>
                 </div>
                 <br>
