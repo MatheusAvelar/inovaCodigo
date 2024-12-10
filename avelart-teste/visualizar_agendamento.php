@@ -106,10 +106,10 @@ unset($_SESSION['status'], $_SESSION['message']);
         <div class="grid">
             <div class="maca">
                 <form id="form1" method="POST" action="php/atualizar_maca.php" onsubmit="return validateForm()">
-                    <input type="hidden" name="id" value="<?= $agendamento['id'] ?>" readonly>
+                    <input type="hidden" name="id" value="<?= $agendamento['id'] ?>" disabled>
 
                     <label for="maca">Maca:</label>
-                    <select id="maca" name="maca" readonly>
+                    <select id="maca" name="maca" disabled>
                         <option value="1" <?= $agendamento['maca_id'] == 1 ? 'selected' : '' ?>>Maca 1</option>
                         <option value="2" <?= $agendamento['maca_id'] == 2 ? 'selected' : '' ?>>Maca 2</option>
                         <option value="3" <?= $agendamento['maca_id'] == 3 ? 'selected' : '' ?>>Maca 3</option>
@@ -119,43 +119,43 @@ unset($_SESSION['status'], $_SESSION['message']);
                     <div id="maca-error" class="error-message"></div>
 
                     <label for="date1">Data:</label>
-                    <input type="date" id="date1" name="date1" value="<?= $agendamento['data'] ?>" readonly>
+                    <input type="date" id="date1" name="date1" value="<?= $agendamento['data'] ?>" disabled>
                     <div id="date1-error" class="error-message"></div>
 
                     <label for="start-time1">Horário Inicial:</label>
-                    <input type="time" id="start-time1" name="start-time1" value="<?= $agendamento['start_time'] ?>" readonly>
+                    <input type="time" id="start-time1" name="start-time1" value="<?= $agendamento['start_time'] ?>" disabled>
                     <div id="start-time1-error" class="error-message"></div>
 
                     <label for="end-time1">Horário Final:</label>
-                    <input type="time" id="end-time1" name="end-time1" value="<?= $agendamento['end_time'] ?>" readonly>
+                    <input type="time" id="end-time1" name="end-time1" value="<?= $agendamento['end_time'] ?>" disabled>
                     <div id="end-time1-error" class="error-message"></div>
 
                     <label for="cliente">Nome do Cliente:</label>
-                    <input type="text" id="cliente" name="cliente" value="<?= $agendamento['nome_cliente'] ?>" readonly>
+                    <input type="text" id="cliente" name="cliente" value="<?= $agendamento['nome_cliente'] ?>" disabled>
                     <div id="name-error" class="error-message"></div>
 
                     <label for="telefone">Telefone Celular:</label>
-                    <input type="tel" id="telefone" name="telefone" value="<?= $agendamento['telefone_cliente'] ?>" readonly>
+                    <input type="tel" id="telefone" name="telefone" value="<?= $agendamento['telefone_cliente'] ?>" disabled>
                     <div id="telefone-error" class="error-message"></div>
 
                     <label for="email">E-mail do Cliente:</label>
-                    <input type="email" id="email" name="email" value="<?= $agendamento['email_cliente'] ?>" readonly>
+                    <input type="email" id="email" name="email" value="<?= $agendamento['email_cliente'] ?>" disabled>
                     <div id="email-error" class="error-message"></div>
 
                     <label for="estilo">Estilo:</label>
-                    <input type="text" id="estilo" name="estilo" value="<?= $agendamento['estilo'] ?>" readonly>
+                    <input type="text" id="estilo" name="estilo" value="<?= $agendamento['estilo'] ?>" disabled>
                     <div id="estilo-error" class="error-message"></div>
 
                     <label for="tamanho">Tamanho (cm):</label>
-                    <input type="text" id="tamanho" name="tamanho" value="<?= $agendamento['tamanho'] ?>" readonly>
+                    <input type="text" id="tamanho" name="tamanho" value="<?= $agendamento['tamanho'] ?>" disabled>
                     <div id="tamanho-error" class="error-message"></div>
 
                     <label for="valor">Valor:</label>
-                    <input type="text" id="valor" name="valor" value="<?= 'R$ ' . number_format($agendamento['valor'], 2, ',', '.') ?>" readonly>
+                    <input type="text" id="valor" name="valor" value="<?= 'R$ ' . number_format($agendamento['valor'], 2, ',', '.') ?>" disabled>
                     <div id="valor-error" class="error-message"></div>
 
                     <label for="pagamento">Forma de Pagamento:</label>
-                    <select id="pagamento" name="pagamento" readonly>
+                    <select id="pagamento" name="pagamento" disabled>
                         <option value="Dinheiro" <?= $agendamento['forma_pagamento'] == 'Dinheiro' ? 'selected' : '' ?>>Dinheiro</option>
                         <option value="Cartão" <?= $agendamento['forma_pagamento'] == 'Cartão' ? 'selected' : '' ?>>Cartão Particular</option>
                         <option value="Pix" <?= $agendamento['forma_pagamento'] == 'Cartão Estúdio' ? 'selected' : '' ?>>Cartão Estúdio</option>
@@ -164,14 +164,14 @@ unset($_SESSION['status'], $_SESSION['message']);
                     <div id="pagamento-error" class="error-message"></div>
 
                     <label for="sinal_pago">Sinal pago?</label>
-                    <select id="sinal_pago" name="sinal_pago" readonly>
+                    <select id="sinal_pago" name="sinal_pago" disabled>
                         <option value="Sim" <?= $agendamento['sinal_pago'] == 'Sim' ? 'selected' : '' ?>>Sim</option>
                         <option value="Não" <?= $agendamento['sinal_pago'] == 'Não' ? 'selected' : '' ?>>Não</option>
                     </select>
                     <div id="sinal_pago-error" class="error-message"></div>
 
                     <label for="descricao">Descrição:</label>
-                    <input type="text" id="descricao" name="descricao" value="<?= $agendamento['descricao'] ?>" readonly>
+                    <input type="text" id="descricao" name="descricao" value="<?= $agendamento['descricao'] ?>" disabled>
                 </form>
             </div>
         </div>
