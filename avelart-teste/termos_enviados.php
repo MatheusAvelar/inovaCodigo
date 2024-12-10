@@ -255,9 +255,9 @@ $months = [
                                 <option value="ativo">Ativo</option>
                                 <option value="inativo">Inativo</option>
                             </select>
-                        </div>
+                        </div>-->
                     <?php /*endif;*/ ?>
-                </div>-->
+                </div>
 
                 <div id="actions-container">
                     <button type="submit" class="button">
@@ -265,9 +265,9 @@ $months = [
                     </button>
     
                     <?php if ($perfil_id == 2) : ?>
-                        <button type="button" class="button" id="export-button">
+                        <!--<button type="button" class="button" id="export-button">
                             <i class="fa-solid fa-file-csv"></i> Exportar
-                        </button>
+                        </button>-->
                     <?php endif; ?>
                 </div>
             </form>
