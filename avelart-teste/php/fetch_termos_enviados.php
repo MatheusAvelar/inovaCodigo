@@ -18,21 +18,27 @@ if ($conn->connect_error) {
 $cliente_nome = isset($_GET['cliente_nome']) ? trim($_GET['cliente_nome']) : '';
 
 // Configuração de Paginação
-$itemsPerPage = 50; // Número de registros por página
+$perPage = 50;
 $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-if ($currentPage < 1) $currentPage = 1;
+$offset = ($currentPage - 1) * $perPage;
 
-$offset = ($currentPage - 1) * $itemsPerPage;
-
-$sql = "SELECT id, 
-               CONCAT(UPPER(SUBSTRING(nome_cliente, 1, 1)), LOWER(SUBSTRING(nome_cliente, 2))) AS nome_cliente, 
-               email_cliente, 
-               data_envio 
-        FROM termos_enviados 
-        WHERE status = 'ativo'";
-
-if ($perfilUsuario != 2) {
-    $sql .= " AND usuario_id = $usuarioLogado";
+if($perfilUsuario == 2){
+    $sql = "SELECT 
+                id, 
+                CONCAT(UPPER(SUBSTRING(nome_cliente, 1, 1)), LOWER(SUBSTRING(nome_cliente, 2))) AS nome_cliente, 
+                email_cliente, 
+                data_envio 
+            FROM termos_enviados 
+            WHERE status = 'ativo'";
+} else {
+    $sql = "SELECT 
+                id,
+                CONCAT(UPPER(SUBSTRING(nome_cliente, 1, 1)), LOWER(SUBSTRING(nome_cliente, 2))) AS nome_cliente, 
+                email_cliente,
+                data_envio 
+            FROM termos_enviados 
+            WHERE status = 'ativo' 
+            AND usuario_id = $usuarioLogado";
 }
 
 // Se houver um filtro, adicione uma condição na consulta
