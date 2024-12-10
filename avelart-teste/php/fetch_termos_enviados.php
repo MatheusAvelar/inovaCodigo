@@ -31,7 +31,7 @@ if($perfilUsuario == 2){
                 email_cliente, 
                 data_envio 
             FROM termos_enviados 
-            WHERE 1 = 1";
+            WHERE 1";
 } else {
     $sql = "SELECT 
                 id,
@@ -39,7 +39,7 @@ if($perfilUsuario == 2){
                 email_cliente,
                 data_envio 
             FROM termos_enviados 
-            WHERE 1 = 1 
+            WHERE 1
             AND usuario_id = $usuarioLogado";
 }
 
