@@ -306,7 +306,7 @@ $months = [
                 </div><br>
                 <!-- Exibe a contagem de registros -->
                 <div class="record-count">
-                    <?php echo "Total de Registros: " . $total_records; ?>
+                    <?php echo "Total de Registros: " . $totalRecords; ?>
                 </div>
             </div>
         </div>
