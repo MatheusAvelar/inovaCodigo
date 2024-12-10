@@ -199,7 +199,7 @@ $months = [
                     </li>
                 <?php endif; ?>
                 <li><a href="php/logout.php">Sair</a></li>
-            </ul> 
+            </ul>  
         </nav>
         <br>
         <div id="message-container">
@@ -222,10 +222,10 @@ $months = [
                         <select id="filter-month" name="filter_month">
                             <option value="">Todos os Meses</option>
                             <?php
-                            foreach ($months as $value => $name) {
+                            /*foreach ($months as $value => $name) {
                                 $selected = (isset($_GET['filter_month']) && $_GET['filter_month'] == $value) ? 'selected' : '';
                                 echo "<option value=\"$value\" $selected>$name</option>";
-                            }
+                            }*/
                             ?>
                         </select>
                     </div>-->
@@ -239,7 +239,7 @@ $months = [
                         <label for="filter-tatuador">Tatuador:</label>
                         <select id="filter-tatuador" name="filter_tatuador">
                             <option value="">Todos os Tatuadores</option>
-                            <!-- Inclua a lógica PHP para listar os tatuadores -->
+                             Inclua a lógica PHP para listar os tatuadores -->
                             <?php
                             // Carregar a lista de tatuadores
                             //include 'php/get_tatuadores.php';
@@ -247,7 +247,7 @@ $months = [
                         <!--</select>
                     </div>-->
 
-                    <!--<?php if ($perfil_id == 2) : ?>
+                    <!--<?php /*if ($perfil_id == 2) :*/ ?>
                         <div>
                             <label for="filter-status">Status:</label>
                             <select id="filter-status" name="filter_status">
@@ -256,7 +256,7 @@ $months = [
                                 <option value="inativo">Inativo</option>
                             </select>
                         </div>
-                    <?php endif; ?>
+                    <?php /*endif;*/ ?>
                 </div>-->
 
                 <div id="actions-container">
@@ -264,11 +264,11 @@ $months = [
                         <i class="fas fa-search"></i> Filtrar
                     </button>
 
-                    <?php if ($perfil_id == 2) : ?>
+                    <?php /*if ($perfil_id == 2) :*/ ?>
                         <!--<button type="button" class="button" id="export-button">
                             <i class="fa-solid fa-file-csv"></i> Exportar
                         </button>-->
-                    <?php endif; ?>
+                    <?php /*endif;*/ ?>
                 </div>
             </form>
             <div class="grid">
