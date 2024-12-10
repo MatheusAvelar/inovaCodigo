@@ -306,28 +306,24 @@ $months = [
                 </table>
                 </div><br>
                 <!-- Exibe a lista de páginas -->
-                 <?php
-                 // Links de paginação
-                echo '<div class="pagination">';
-                if ($currentPage > 1) {
-                    echo "<a href='?page=1'><i class='fa-light fa-angles-left'></i></a>";
-                    echo "<a href='?page=" . ($currentPage - 1) . "'><i class='fa-light fa-angle-left'></i></a>";
-                }
+                <div class="pagination">
+                    <?php if ($currentPage > 1): ?>
+                        <a href="?page=1" class="page-link"><i class="fas fa-arrow-left"></i></a>
+                        <a href="?page=<?php echo $currentPage - 1; ?>" class="page-link"><i class="fas fa-arrow-left"></i></a>
+                    <?php endif; ?>
 
-                for ($i = 1; $i <= $totalPages; $i++) {
-                    if ($i == $currentPage) {
-                        echo "<span class='current-page'>$i</span>";
-                    } else {
-                        echo "<a href='?page=$i'>$i</a>";
-                    }
-                }
+                    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                        <a href="?page=<?php echo $i; ?>" class="page-link <?php echo $i == $currentPage ? 'active' : ''; ?>">
+                            <?php echo $i; ?>
+                        </a>
+                    <?php endfor; ?>
 
-                if ($currentPage < $totalPages) {
-                    echo "<a href='?page=" . ($currentPage + 1) . "'><i class='fa-light fa-angle-right'></i></a>";
-                    echo "<a href='?page=$totalPages'><i class='fa-light fa-angles-right'></i></a>";
-                }
-                echo '</div>';
-                ?>
+                    <?php if ($currentPage < $totalPages): ?>
+                        <a href="?page=<?php echo $currentPage + 1; ?>" class="page-link"><i class="fas fa-arrow-right"></i></a>
+                        <a href="?page=<?php echo $totalPages; ?>" class="page-link"><i class="fas fa-arrow-right"></i></a>
+                    <?php endif; ?>
+                </div>
+                <br>
                 <!-- Exibe a contagem de registros -->
                 <div class="record-count">
                     <p>Total de Registros: <?php echo $totalRecords; ?></p>
