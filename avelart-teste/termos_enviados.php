@@ -210,8 +210,6 @@ $months = [
             <?php endif; ?>
         </div>
         <h2>Termos Preenchidos</h2>
-        <div class="grid">
-            <div class="maca">
             <!--<form method="GET" action="">
                 <label for="cliente_nome">Filtrar por Cliente:</label>
                 <input type="text" name="cliente_nome" id="cliente_nome" placeholder="Nome do Cliente" value="<?= htmlspecialchars(isset($_GET['cliente_nome']) ? $_GET['cliente_nome'] : '') ?>">
@@ -272,6 +270,8 @@ $months = [
                     <?php endif; ?>
                 </div>
             </form>
+            <div class="grid">
+            <div class="maca">
                 <div style="overflow-x: auto;">
                 <table>
                     <thead>
