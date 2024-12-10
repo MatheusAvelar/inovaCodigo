@@ -90,7 +90,7 @@ $totalRecords = $total_result->fetch_row()[0];
 
 // Calcular o número total de páginas
 $totalPages = ceil($totalRecords / $perPage);
-echo $sql;
+
 // Consulta principal para buscar os registros com paginação
 $result = $conn->query($sql);
 
