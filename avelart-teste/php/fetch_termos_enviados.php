@@ -21,32 +21,28 @@ $cliente_nome = isset($_GET['cliente_nome']) ? trim($_GET['cliente_nome']) : '';
 $perPage = 50;
 $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $offset = ($currentPage - 1) * $perPage;
+$whereClause = "WHERE 1=1";
+
+$sql = "SELECT 
+            id, 
+            CONCAT(UPPER(SUBSTRING(nome_cliente, 1, 1)), LOWER(SUBSTRING(nome_cliente, 2))) AS nome_cliente, 
+            email_cliente, 
+            data_envio 
+        FROM termos_enviados
+        $whereClause"; 
 
 if($perfilUsuario == 2){
-    $sql = "SELECT 
-                id, 
-                CONCAT(UPPER(SUBSTRING(nome_cliente, 1, 1)), LOWER(SUBSTRING(nome_cliente, 2))) AS nome_cliente, 
-                email_cliente, 
-                data_envio 
-            FROM termos_enviados 
-            WHERE status = 'ativo'";
+    $whereClause .= "AND status = 'ativo'";
 } else {
-    $sql = "SELECT 
-                id,
-                CONCAT(UPPER(SUBSTRING(nome_cliente, 1, 1)), LOWER(SUBSTRING(nome_cliente, 2))) AS nome_cliente, 
-                email_cliente,
-                data_envio 
-            FROM termos_enviados 
-            WHERE status = 'ativo' 
-            AND usuario_id = $usuarioLogado";
+    $whereClause = "AND usuario_id = $usuarioLogado";
 }
 
 // Se houver um filtro, adicione uma condição na consulta
 if (!empty($cliente_nome)) {
-    $sql .= " AND nome_cliente LIKE ?";
+    $whereClause .= " AND nome_cliente LIKE ?";
 }
 
-$sql .= " GROUP BY nome_cliente, email_cliente, DATE(data_envio) ORDER BY data_envio DESC";
+$whereClause .= " GROUP BY nome_cliente, email_cliente, DATE(data_envio) ORDER BY data_envio DESC";
 
 $stmt = $conn->prepare($sql);
 
@@ -89,6 +85,21 @@ $totalRecords = $total_result->fetch_row()[0];
 
 // Calcular o número total de páginas
 $totalPages = ceil($totalRecords / $perPage);
+
+// Consulta principal para buscar os registros com paginação
+$query = "SELECT 
+            id, 
+            CONCAT(UPPER(SUBSTRING(nome_cliente, 1, 1)), LOWER(SUBSTRING(nome_cliente, 2))) AS nome_cliente, 
+            email_cliente, 
+            data_envio 
+        FROM termos_enviados
+          $whereClause
+          LIMIT $perPage OFFSET $offset";
+
+$result = $conn->query($query);
+
+// Obtém o número de registros na página atual
+$totalRecordsCurrentPage = $result->num_rows;
 
 $stmt->close();
 $conn->close();
