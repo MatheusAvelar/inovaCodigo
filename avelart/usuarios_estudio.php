@@ -107,6 +107,7 @@ unset($_SESSION['status'], $_SESSION['message']);
         <h2>Usuários do Sistema</h2>
         <div class="grid">
             <div class="maca">
+                <div style="overflow-x: auto;">
                 <table>
                     <thead>
                         <tr>
@@ -122,7 +123,8 @@ unset($_SESSION['status'], $_SESSION['message']);
                         include 'php/get_usuarios.php';
                         ?>
                     </tbody>
-                </table><br>
+                </table>
+                </div><br>
                 <!-- Exibe a contagem de registros -->
                 <div class="record-count">
                     <?php echo "Total de Registros: " . $total_records; ?>
