@@ -21,7 +21,12 @@ $filterMonth = isset($_GET['filter_month']) ? $_GET['filter_month'] : '';
 $filterSatus = isset($_GET['filter_status']) ? $_GET['filter_status'] : '1';
 
 // Condição para aplicar os filtros
-$whereClause = "WHERE status = '" . $conn->real_escape_string($filterSatus) . "'";
+
+$whereClause = "WHERE 1 = 1";
+
+if (!empty($filterSatus)) {
+    $whereClause = "AND status = '" . $conn->real_escape_string($filterSatus) . "'";
+}
 
 if (!empty($filterDate)) {
     $whereClause .= " AND ag.data = '" . $conn->real_escape_string($filterDate) . "'";
