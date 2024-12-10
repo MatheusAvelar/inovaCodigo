@@ -17,7 +17,7 @@ if ($conn->connect_error) {
 // Verifica se há um filtro aplicado
 $cliente_nome = isset($_GET['cliente_nome']) ? trim($_GET['cliente_nome']) : '';
 $filter_status = isset($_GET['filter_status']) ? trim($_GET['filter_status']) : '';
-$filter_tatuador = isset($_GET['filter_tatuador']) ? trim($_GET['filter_tatuador']) : 'ativo';
+$filter_tatuador = isset($_GET['filter_tatuador']) ? trim($_GET['filter_tatuador']) : '';
 $filter_month = isset($_GET['filter_month']) ? trim($_GET['filter_month']) : '';
 
 // Configuração de Paginação
