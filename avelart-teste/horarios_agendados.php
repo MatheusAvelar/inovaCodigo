@@ -310,8 +310,8 @@ $months = [
                  // Links de paginação
                 echo '<div class="pagination">';
                 if ($currentPage > 1) {
-                    echo "<a href='?page=1'><i class='fas fa-angle-double-left'></i></a>";
-                    echo "<a href='?page=" . ($currentPage - 1) . "'><i class='fas fa-angle-left'></i></a>";
+                    echo "<a href='?page=1'><i class='fa-light fa-angles-left'></i></a>";
+                    echo "<a href='?page=" . ($currentPage - 1) . "'><i class='fa-light fa-angle-left'></i></a>";
                 }
 
                 for ($i = 1; $i <= $totalPages; $i++) {
@@ -323,8 +323,8 @@ $months = [
                 }
 
                 if ($currentPage < $totalPages) {
-                    echo "<a href='?page=" . ($currentPage + 1) . "'><i class='fas fa-angle-right'></i></a>";
-                    echo "<a href='?page=$totalPages'><i class='fas fa-angle-double-right'></i></a>";
+                    echo "<a href='?page=" . ($currentPage + 1) . "'><i class='fa-light fa-angle-right'></i></a>";
+                    echo "<a href='?page=$totalPages'><i class='fa-light fa-angles-right'></i></a>";
                 }
                 echo '</div>';
                 ?>
