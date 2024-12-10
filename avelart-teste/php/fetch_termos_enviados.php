@@ -46,7 +46,7 @@ if($perfilUsuario == 2){
 
 // Adiciona paginação
 $sql .= " LIMIT $perPage OFFSET $offset";
-
+echo "Consulta 0: $sql";
 // Prepara a declaração SQL
 $stmt = $conn->prepare($sql);
 
@@ -113,6 +113,7 @@ if (!empty($filter_month)) {
     $total_records_sql .= " AND MONTH(data_envio) = '$filter_month'";
 }
 
+echo "Consulta 2: $total_records_sql";
 $total_result = $conn->query($total_records_sql);
 $totalRecords = $total_result->fetch_row()[0];
 
