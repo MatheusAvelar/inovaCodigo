@@ -3,7 +3,7 @@ session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = [];
-
+    $teste = 1;
     // Capturar os dados do formulário
     $form_data = [
         'maca' => $_POST['maca'] ?? '',
@@ -48,10 +48,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Se houver erros, salvar os dados na sessão e redirecionar
-    if (!empty($errors)) {
+    if (!empty($teste)) {
         $_SESSION['form_data'] = $form_data;
         $_SESSION['errors'] = $errors;
-        header("Location: formulario.php");
+        header("Location: agendamento.php");
         exit;
     }
 
