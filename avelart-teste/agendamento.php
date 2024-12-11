@@ -2,8 +2,6 @@
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $errors = [];
-    $teste = 1;
     // Capturar os dados do formulário
     $form_data = [
         'maca' => $_POST['maca'] ?? '',
@@ -21,44 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'descricao' => $_POST['descricao'] ?? '',
     ];
 
-    // Validação dos campos
-    if (empty($form_data['maca'])) {
-        $errors['maca'] = "Selecione uma maca.";
-    }
-    if (empty($form_data['date1'])) {
-        $errors['date1'] = "Informe a data.";
-    }
-    if (empty($form_data['start-time1'])) {
-        $errors['start-time1'] = "Informe o horário inicial.";
-    }
-    if (empty($form_data['end-time1'])) {
-        $errors['end-time1'] = "Informe o horário final.";
-    }
-    if (empty($form_data['cliente'])) {
-        $errors['cliente'] = "Informe o nome do cliente.";
-    }
-    if (empty($form_data['valor'])) {
-        $errors['valor'] = "Informe o valor.";
-    }
-    if (empty($form_data['pagamento'])) {
-        $errors['pagamento'] = "Selecione a forma de pagamento.";
-    }
-    if (empty($form_data['sinal_pago'])) {
-        $errors['sinal_pago'] = "Informe se o sinal foi pago.";
-    }
-
-    // Se houver erros, salvar os dados na sessão e redirecionar
-    if (!empty($teste)) {
-        $_SESSION['form_data'] = $form_data;
-        $_SESSION['errors'] = $errors;
-        header("Location: agendamento.php");
-        exit;
-    }
-
-    // Processar os dados (salvar no banco de dados, etc.)
-    // Aqui você pode adicionar o código para salvar no banco de dados
-    echo "Formulário enviado com sucesso!";
-    exit;
+    $_SESSION['form_data'] = $form_data;
 }
 
 // Recuperar os dados da sessão, se existirem
