@@ -169,6 +169,25 @@ if ($errors) {
     }
 }
 
+// Capturar os dados do formulário
+$form_data = [
+    'maca' => $_POST['maca'] ?? '',
+    'date1' => $_POST['date1'] ?? '',
+    'start-time1' => $_POST['start-time1'] ?? '',
+    'end-time1' => $_POST['end-time1'] ?? '',
+    'cliente' => $_POST['cliente'] ?? '',
+    'telefone' => $_POST['telefone'] ?? '',
+    'email' => $_POST['email'] ?? '',
+    'estilo' => $_POST['estilo'] ?? '',
+    'tamanho' => $_POST['tamanho'] ?? '',
+    'valor' => $_POST['valor'] ?? '',
+    'pagamento' => $_POST['pagamento'] ?? '',
+    'sinal_pago' => $_POST['sinal_pago'] ?? '',
+    'descricao' => $_POST['descricao'] ?? '',
+];
+
+$_SESSION['form_data'] = $form_data;
+
 // Redireciona de volta para a página de agendamento
 header("Location: ../agendamento.php");
 exit();

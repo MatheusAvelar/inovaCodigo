@@ -24,13 +24,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // Recuperar os dados da sessão, se existirem
 $form_data = $_SESSION['form_data'] ?? [];
-$errors = $_SESSION['errors'] ?? [];
 $status = isset($_SESSION['status']) ? $_SESSION['status'] : null;
 $message = isset($_SESSION['message']) ? $_SESSION['message'] : null;
 
 // Limpar os dados da sessão para evitar reutilização
 unset($_SESSION['form_data']);
-unset($_SESSION['errors']);
 unset($_SESSION['status'], $_SESSION['message']);
 ?>
 <!DOCTYPE html>
