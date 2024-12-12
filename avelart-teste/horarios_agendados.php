@@ -35,6 +35,7 @@ $months = [
     <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.sheetjs.com/xlsx-latest/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         #menu ul li {
@@ -258,6 +259,7 @@ $months = [
                     <div>
                         <label for="filter-status">Status:</label>
                         <select id="filter-status" name="filter_status">
+                            <option value="">Nenhum Valor</option>
                             <option value="1">Ativo</option>
                             <option value="0">Inativo</option>
                         </select>
@@ -276,35 +278,60 @@ $months = [
                     </button>
                 <?php endif; ?>
             </div>
-        </form>
-
-
+        </form> 
         <div class="grid">
             <div class="maca">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Tatuador</th>
-                            <th>Maca</th>
-                            <th>Data</th>
-                            <th>H. Inicial</th>
-                            <th>H. Final</th>
-                            <th>Ação</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $filter_date = $_GET['filter_date'] ?? '';
-                        $filter_maca = $_GET['filter_maca'] ?? '';
+                <div style="overflow-x: auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tatuador</th>
+                                <th>Maca</th>
+                                <th>Data</th>
+                                <th>H. Inicial</th>
+                                <th>H. Final</th>
+                                <th>Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $filter_date = $_GET['filter_date'] ?? '';
+                            $filter_maca = $_GET['filter_maca'] ?? '';
 
-                        // Inclua o arquivo com a lógica para buscar agendamentos com filtros
-                        include 'php/fetch_agendamentos.php';
-                        ?>
-                    </tbody>
-                </table><br>
+                            // Inclua o arquivo com a lógica para buscar agendamentos com filtros
+                            include 'php/fetch_agendamentos.php';
+                            ?>
+                        </tbody>
+                    </table>
+                </div><br>
+                <!-- Exibe a lista de páginas -->
+                <div class="pagination">
+                    <?php
+                    // Captura os filtros aplicados na URL
+                    $queryString = $_SERVER['QUERY_STRING'];
+                    $paginationBaseUrl = !empty($queryString) ? "?$queryString&page=" : "?page=";
+                    
+                    if ($currentPage > 1): ?>
+                        <a href="<?php echo $paginationBaseUrl . '1'; ?>" class="page-link"><i class="fas fa-angles-left"></i></a>
+                        <a href="<?php echo $paginationBaseUrl . ($currentPage - 1); ?>" class="page-link"><i class="fas fa-angle-left"></i></a>
+                    <?php endif; ?>
+
+                    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                        <a href="<?php echo $paginationBaseUrl . $i; ?>" class="page-link <?php echo $i == $currentPage ? 'active' : ''; ?>">
+                            <?php echo $i; ?>
+                        </a>
+                    <?php endfor; ?>
+
+                    <?php if ($currentPage < $totalPages): ?>
+                        <a href="<?php echo $paginationBaseUrl . ($currentPage + 1); ?>" class="page-link"><i class="fas fa-angle-right"></i></a>
+                        <a href="<?php echo $paginationBaseUrl . $totalPages; ?>" class="page-link"><i class="fas fa-angles-right"></i></a>
+                    <?php endif; ?>
+                </div>
+                <br>
                 <!-- Exibe a contagem de registros -->
                 <div class="record-count">
-                    <?php echo "Total de Registros: " . $total_records; ?>
+                    <p>Total de Registros: <?php echo $totalRecords; ?></p>
+                    <p>Registros nesta página: <?php echo $totalRecordsCurrentPage; ?></p>
                 </div>
             </div>
         </div>

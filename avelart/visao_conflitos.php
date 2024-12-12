@@ -93,13 +93,15 @@ if ($_SESSION['perfil_id'] != 2) {
         <h2>Conflitos Agendamentos</h2>
         <div class="grid">
             <div class="maca">
+                <div style="overflow-x: auto;">
                 <table>
                     <tbody>
                         <?php
                         include 'php/teste_conflitos.php';
                         ?>
                     </tbody>
-                </table><br>
+                </table>
+                </div><br>
                 <!-- Exibe a contagem de registros -->
                 <div class="record-count">
                     <?php echo "Total de Registros: " . $total_records; ?>

@@ -351,3 +351,38 @@ td:nth-child(6) {
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
 }
+
+.pagination {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.page-link {
+    display: inline-block;
+    margin: 0 5px;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.3s;
+}
+
+.page-link.active {
+    background-color: #f4ab36; /* Cor principal */
+    color: white;
+    font-weight: bold;
+}
+
+.page-link:hover {
+    background-color: #fec66f; /* Cor secundária */
+    color: #333;
+}
+
+.page-link i {
+    font-size: 16px; /* Tamanho dos ícones */
+}
+
+.page-link i.fas {
+    color: inherit; /* Herda a cor do link */
+}

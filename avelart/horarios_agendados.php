@@ -282,6 +282,7 @@ $months = [
 
         <div class="grid">
             <div class="maca">
+                <div style="overflow-x: auto;">
                 <table>
                     <thead>
                         <tr>
@@ -302,10 +303,36 @@ $months = [
                             include 'php/fetch_agendamentos.php';
                         ?>
                     </tbody>
-                </table><br>
+                </table>
+                </div><br>
+                <!-- Exibe a lista de páginas -->
+                <div class="pagination">
+                    <?php
+                    // Captura os filtros aplicados na URL
+                    $queryString = $_SERVER['QUERY_STRING'];
+                    $paginationBaseUrl = !empty($queryString) ? "?$queryString&page=" : "?page=";
+                    
+                    if ($currentPage > 1): ?>
+                        <a href="<?php echo $paginationBaseUrl . '1'; ?>" class="page-link"><i class="fas fa-angles-left"></i></a>
+                        <a href="<?php echo $paginationBaseUrl . ($currentPage - 1); ?>" class="page-link"><i class="fas fa-angle-left"></i></a>
+                    <?php endif; ?>
+
+                    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                        <a href="<?php echo $paginationBaseUrl . $i; ?>" class="page-link <?php echo $i == $currentPage ? 'active' : ''; ?>">
+                            <?php echo $i; ?>
+                        </a>
+                    <?php endfor; ?>
+
+                    <?php if ($currentPage < $totalPages): ?>
+                        <a href="<?php echo $paginationBaseUrl . ($currentPage + 1); ?>" class="page-link"><i class="fas fa-angle-right"></i></a>
+                        <a href="<?php echo $paginationBaseUrl . $totalPages; ?>" class="page-link"><i class="fas fa-angles-right"></i></a>
+                    <?php endif; ?>
+                </div>
+                <br>
                 <!-- Exibe a contagem de registros -->
                 <div class="record-count">
-                    <?php echo "Total de Registros: " . $total_records; ?>
+                    <p>Total de Registros: <?php echo $totalRecords; ?></p>
+                    <p>Registros nesta página: <?php echo $totalRecordsCurrentPage; ?></p>
                 </div>
             </div>
         </div>

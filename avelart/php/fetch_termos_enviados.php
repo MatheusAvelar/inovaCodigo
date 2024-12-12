@@ -15,8 +15,13 @@ if ($conn->connect_error) {
     die("Conexão falhou: " . $conn->connect_error);
 }
 
-// Verifica se há um filtro aplicado
 $cliente_nome = isset($_GET['cliente_nome']) ? trim($_GET['cliente_nome']) : '';
+$filter_month = isset($_GET['filter_month']) ? $_GET['filter_month'] : '';
+
+// Configuração de Paginação
+$perPage = 50;
+$currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$offset = ($currentPage - 1) * $perPage;
 
 if($perfilUsuario == 2){
     $sql = "SELECT 
@@ -41,17 +46,31 @@ if($perfilUsuario == 2){
 if (!empty($cliente_nome)) {
     $sql .= " AND nome_cliente LIKE ?";
 }
+if (!empty($filter_month)) {
+    $sql .= " AND MONTH(data_envio) = ?";
+}
 
-$sql .= " GROUP BY nome_cliente, email_cliente, DATE(data_envio) ORDER BY data_envio DESC";
+$sql .= " LIMIT $perPage OFFSET $offset";
 
 $stmt = $conn->prepare($sql);
 
+$params = [];
+$types = "";
+
 // Se houver um filtro, vincule o parâmetro
-if (!empty($cliente_nome)) {
-    $param = "%" . $cliente_nome . "%";
-    $stmt->bind_param("s", $param);
+if (!empty($cliente_nome)) { 
+    $params[] = "%" . $cliente_nome . "%";
+    $types .= "s";
+}
+if (!empty($filter_month)) {
+    $params[] = $filter_month;
+    $types .= "i";
 }
 
+// Vincula os parâmetros, se existirem
+if (!empty($params)) {
+    $stmt->bind_param($types, ...$params);
+}
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -70,6 +89,30 @@ if ($total_records > 0) {
 } else {
     echo "<tr><td colspan='5'>Nenhum termo encontrado.</td></tr>";
 }
+
+// Obter a contagem total de registros
+$total_records_sql = "SELECT COUNT(*) FROM termos_enviados WHERE status = 'ativo'";
+if ($perfilUsuario != 2) {
+    $total_records_sql .= " AND usuario_id = $usuarioLogado";
+}
+if (!empty($cliente_nome)) {
+    $total_records_sql .= " AND nome_cliente LIKE '%$cliente_nome%'";
+}
+if (!empty($filter_month)) {
+    $total_records_sql .= " AND MONTH(data_envio) = '" . $conn->real_escape_string($filter_month) . "'";
+}
+
+$total_result = $conn->query($total_records_sql);
+$totalRecords = $total_result->fetch_row()[0];
+
+// Calcular o número total de páginas
+$totalPages = ceil($totalRecords / $perPage);
+
+// Consulta principal para buscar os registros com paginação
+$result = $conn->query($sql);
+
+// Obtém o número de registros na página atual
+$totalRecordsCurrentPage = $result->num_rows;
 
 $stmt->close();
 $conn->close();

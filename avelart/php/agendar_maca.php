@@ -67,8 +67,17 @@ if ($errors) {
     $_SESSION['message'] = implode("<br>", $errors);
 } else {
     // Verificação de conflito de horário
-    $stmt = $conn->prepare("SELECT start_time, end_time FROM agendamentos WHERE maca_id = ? AND status = '1' AND data = ? AND ((start_time <= ? AND end_time > ?) OR (start_time < ? AND end_time >= ?))");
-    $stmt->bind_param("ssssss", $maca, $date, $startTime, $startTime, $endTime, $endTime);
+    $stmt = $conn->prepare("SELECT start_time, end_time 
+                                    FROM agendamentos 
+                                    WHERE maca_id = ? 
+                                    AND status = '1' 
+                                    AND data = ? 
+                                    AND ((start_time < ? AND end_time > ?) OR
+                                        (start_time <= ? AND end_time > ?) OR
+                                        (start_time >= ? AND end_time <= ?) OR
+                                        (end_time = ?) OR
+                                        (start_time = ?))");
+    $stmt->bind_param("ssssssssss", $maca, $date, $endTime, $startTime, $startTime, $endTime, $startTime, $endTime, $startTime, $endTime);
 
     if (!$stmt->execute()) {
         $_SESSION['status'] = "error";
@@ -159,6 +168,25 @@ if ($errors) {
         }
     }
 }
+
+// Capturar os dados do formulário
+$form_data = [
+    'maca' => $_POST['maca'] ?? '',
+    'date1' => $_POST['date1'] ?? '',
+    'start-time1' => $_POST['start-time1'] ?? '',
+    'end-time1' => $_POST['end-time1'] ?? '',
+    'cliente' => $_POST['cliente'] ?? '',
+    'telefone' => $_POST['telefone'] ?? '',
+    'email' => $_POST['email'] ?? '',
+    'estilo' => $_POST['estilo'] ?? '',
+    'tamanho' => $_POST['tamanho'] ?? '',
+    'valor' => $_POST['valor'] ?? '',
+    'pagamento' => $_POST['pagamento'] ?? '',
+    'sinal_pago' => $_POST['sinal_pago'] ?? '',
+    'descricao' => $_POST['descricao'] ?? '',
+];
+
+$_SESSION['form_data'] = $form_data;
 
 // Redireciona de volta para a página de agendamento
 header("Location: ../agendamento.php");

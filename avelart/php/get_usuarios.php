@@ -13,27 +13,41 @@ if ($conn->connect_error) {
     die("Falha na conexão: " . $conn->connect_error);
 }
 
-// Obtendo a lista de tatuadores
-$query = "SELECT 
-            u.id, 
-            u.ativo, 
-            CONCAT(UCASE(LEFT(u.nome, 1)), LOWER(SUBSTRING(u.nome, 2)), ' ', 
-                UCASE(LEFT(u.sobrenome, 1)), LOWER(SUBSTRING(u.sobrenome, 2))) AS nome, 
-            u.email, 
-            p.nome AS perfil_nome
+// Definir o número de registros por página
+$recordsPerPage = 50;
+
+// Obter o número total de registros
+$totalQuery = "SELECT COUNT(*) AS total FROM usuarioEstudio AS u";
+$totalResult = $conn->query($totalQuery);
+$totalRow = $totalResult->fetch_assoc();
+$totalRecords = $totalRow['total'];
+
+// Calcular o número total de páginas
+$totalPages = ceil($totalRecords / $recordsPerPage);
+
+// Obter a página atual, se não estiver definida, usar a página 1
+$currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+// Calcular o índice de início para a consulta SQL (baseado na página atual)
+$offset = ($currentPage - 1) * $recordsPerPage;
+
+// Consulta para obter os dados da página atual
+$query = "SELECT u.id, u.ativo, u.nome, u.sobrenome, u.email, p.nome AS perfil_nome
           FROM usuarioEstudio AS u
-          JOIN perfis AS p ON u.perfil_id = p.id;";
+          JOIN perfis AS p ON u.perfil_id = p.id
+          LIMIT $offset, $recordsPerPage";
 $result = $conn->query($query);
 
-// Obter a contagem total de registros
-$total_records = $result->num_rows;
+// Obtém o número de registros na página atual
+$totalRecordsCurrentPage = $result->num_rows;
 
-if ($total_records > 0) {
+if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         echo "<tr>";
+        //echo "<td>" . htmlspecialchars($row['id']) . "</td>";
         $ativoStatus = $row['ativo'] == 1 ? 'Ativo' : 'Inativo';
         echo "<td>" . htmlspecialchars($ativoStatus) . "</td>";
-        echo "<td>" . htmlspecialchars($row['nome']) . "</td>";
+        echo "<td>" . htmlspecialchars($row['nome']) . " " .htmlspecialchars($row['sobrenome']) . "</td>";
         echo "<td>" . htmlspecialchars($row['email']) . "</td>";
         echo "<td>" . htmlspecialchars($row['perfil_nome']) . "</td>";
         echo "<td>
@@ -53,4 +67,3 @@ if ($total_records > 0) {
 // Fechando a conexão
 $conn->close();
 ?>
-

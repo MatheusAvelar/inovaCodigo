@@ -1,11 +1,34 @@
 <?php
 session_start();
 
-// Verifica se há mensagem de status na sessão
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Capturar os dados do formulário
+    $form_data = [
+        'maca' => $_POST['maca'] ?? '',
+        'date1' => $_POST['date1'] ?? '',
+        'start-time1' => $_POST['start-time1'] ?? '',
+        'end-time1' => $_POST['end-time1'] ?? '',
+        'cliente' => $_POST['cliente'] ?? '',
+        'telefone' => $_POST['telefone'] ?? '',
+        'email' => $_POST['email'] ?? '',
+        'estilo' => $_POST['estilo'] ?? '',
+        'tamanho' => $_POST['tamanho'] ?? '',
+        'valor' => $_POST['valor'] ?? '',
+        'pagamento' => $_POST['pagamento'] ?? '',
+        'sinal_pago' => $_POST['sinal_pago'] ?? '',
+        'descricao' => $_POST['descricao'] ?? '',
+    ];
+
+    $_SESSION['form_data'] = $form_data;
+}
+
+// Recuperar os dados da sessão, se existirem
+$form_data = $_SESSION['form_data'] ?? [];
 $status = isset($_SESSION['status']) ? $_SESSION['status'] : null;
 $message = isset($_SESSION['message']) ? $_SESSION['message'] : null;
 
-// Limpa as mensagens de status da sessão após exibir
+// Limpar os dados da sessão para evitar reutilização
+unset($_SESSION['form_data']);
 unset($_SESSION['status'], $_SESSION['message']);
 ?>
 <!DOCTYPE html>
@@ -108,15 +131,15 @@ unset($_SESSION['status'], $_SESSION['message']);
             <div class="maca">
                 <form id="form1" method="POST" action="php/agendar_maca.php" onsubmit="return validateForm()">
                     <label for="maca">Maca:</label>
-                    <select id="maca" name="maca" required>
+                    <select id="maca" name="maca">
                         <option value="">Selecione a maca</option>
-                        <option value="1">Maca 1</option>
-                        <option value="2">Maca 2</option>
-                        <option value="3">Maca 3</option>
-                        <option value="4">Maca 4</option>
-                        <option value="5">Sala de Atendimento Íntimo</option>
+                        <option value="1" <?= isset($form_data['maca']) && $form_data['maca'] == '1' ? 'selected' : '' ?>>Maca 1</option>
+                        <option value="2" <?= isset($form_data['maca']) && $form_data['maca'] == '2' ? 'selected' : '' ?>>Maca 2</option>
+                        <option value="3" <?= isset($form_data['maca']) && $form_data['maca'] == '3' ? 'selected' : '' ?>>Maca 3</option>
+                        <option value="4" <?= isset($form_data['maca']) && $form_data['maca'] == '4' ? 'selected' : '' ?>>Maca 4</option>
+                        <option value="5" <?= isset($form_data['maca']) && $form_data['maca'] == '5' ? 'selected' : '' ?>>Sala de Atendimento Íntimo</option>
                     </select>
-                    <div id="maca-error" class="error-message"></div>
+                    <div id="maca-error" class="error-message"><?= $errors['maca'] ?? '' ?></div>
 
                     <label for="date1">Data:</label>
                     <input type="date" id="date1" name="date1" required>
@@ -128,57 +151,54 @@ unset($_SESSION['status'], $_SESSION['message']);
                     <div id="resultados" class="horarios"></div>
 
                     <label for="start-time1">Horário Inicial:</label>
-                    <input type="time" id="start-time1" name="start-time1" required>
-                    <div id="start-time1-error" class="error-message"></div>
+                    <input type="time" id="start-time1" name="start-time1" value="<?= htmlspecialchars($form_data['start-time1'] ?? '') ?>">
+                    <div id="start-time1-error" class="error-message"><?= $errors['start-time1'] ?? '' ?></div>
 
                     <label for="end-time1">Horário Final:</label>
-                    <input type="time" id="end-time1" name="end-time1" required>
-                    <div id="end-time1-error" class="error-message"></div>
+                    <input type="time" id="end-time1" name="end-time1" value="<?= htmlspecialchars($form_data['end-time1'] ?? '') ?>">
+                    <div id="end-time1-error" class="error-message"><?= $errors['end-time1'] ?? '' ?></div>
 
                     <label for="cliente">Nome do Cliente:</label>
-                    <input type="text" id="cliente" name="cliente" required>
-                    <div id="name-error" class="error-message"></div>
+                    <input type="text" id="cliente" name="cliente" value="<?= htmlspecialchars($form_data['cliente'] ?? '') ?>">
+                    <div id="name-error" class="error-message"><?= $errors['cliente'] ?? '' ?></div>
 
                     <label for="telefone">Telefone Celular:</label>
-                    <input type="tel" id="telefone" name="telefone" placeholder="(99) 99999-9999">
-                    <div id="telefone-error" class="error-message"></div>
+                    <input type="tel" id="telefone" name="telefone" value="<?= htmlspecialchars($form_data['telefone'] ?? '') ?>">
 
                     <label for="email">E-mail do Cliente:</label>
-                    <input type="email" id="email" name="email">
-                    <div id="email-error" class="error-message" style="color: red;"></div>
+                    <input type="email" id="email" name="email" value="<?= htmlspecialchars($form_data['email'] ?? '') ?>">
+                    <div id="email-error" class="error-message"></div>
 
                     <label for="estilo">Estilo:</label>
-                    <input type="text" id="estilo" name="estilo" required>
-                    <div id="estilo-error" class="error-message"></div>
+                    <input type="text" id="estilo" name="estilo" value="<?= htmlspecialchars($form_data['estilo'] ?? '') ?>">
 
                     <label for="tamanho">Tamanho (cm):</label>
-                    <input type="text" id="tamanho" name="tamanho" required>
-                    <div id="tamanho-error" class="error-message"></div>
+                    <input type="text" id="tamanho" name="tamanho" value="<?= htmlspecialchars($form_data['tamanho'] ?? '') ?>">
 
                     <label for="valor">Valor:</label>
-                    <input type="text" id="valor" name="valor" required>
-                    <div id="valor-error" class="error-message"></div>
+                    <input type="text" id="valor" name="valor" value="<?= htmlspecialchars($form_data['valor'] ?? '') ?>">
+                    <div id="valor-error" class="error-message"><?= $errors['valor'] ?? '' ?></div>
 
                     <label for="pagamento">Forma de Pagamento:</label>
-                    <select id="pagamento" name="pagamento" required>
+                    <select id="pagamento" name="pagamento">
                         <option value="">Selecione a forma de pagamento</option>
-                        <option value="Dinheiro">Dinheiro</option>
-                        <option value="Cartão">Cartão Particular</option>
-                        <option value="Cartão Estúdio">Cartão Estúdio</option>
-                        <option value="Pix">Pix</option>
+                        <option value="Dinheiro" <?= isset($form_data['pagamento']) && $form_data['pagamento'] == 'Dinheiro' ? 'selected' : '' ?>>Dinheiro</option>
+                        <option value="Cartão" <?= isset($form_data['pagamento']) && $form_data['pagamento'] == 'Cartão' ? 'selected' : '' ?>>Cartão</option>
+                        <option value="Cartão Estúdio" <?= isset($form_data['pagamento']) && $form_data['pagamento'] == 'Cartão Estúdio' ? 'selected' : '' ?>>Cartão Estúdio</option>
+                        <option value="Pix" <?= isset($form_data['pagamento']) && $form_data['pagamento'] == 'Pix' ? 'selected' : '' ?>>Pix</option>
                     </select>
-                    <div id="pagamento-error" class="error-message"></div>
+                    <div id="pagamento-error" class="error-message"><?= $errors['pagamento'] ?? '' ?></div>
 
                     <label for="sinal_pago">Sinal pago?</label>
-                    <select id="sinal_pago" name="sinal_pago" required>
+                    <select id="sinal_pago" name="sinal_pago">
                         <option value="">Selecione uma opção</option>
-                        <option value="Sim">Sim</option>
-                        <option value="Não">Não</option>
+                        <option value="Sim" <?= isset($form_data['sinal_pago']) && $form_data['sinal_pago'] == 'Sim' ? 'selected' : '' ?>>Sim</option>
+                        <option value="Não" <?= isset($form_data['sinal_pago']) && $form_data['sinal_pago'] == 'Não' ? 'selected' : '' ?>>Não</option>
                     </select>
-                    <div id="sinal_pago-error" class="error-message"></div>
+                    <div id="sinal_pago-error" class="error-message"><?= $errors['sinal_pago'] ?? '' ?></div>
 
                     <label for="descricao">Descrição:</label>
-                    <input type="text" id="descricao" name="descricao" required>
+                    <input type="text" id="descricao" name="descricao" value="<?= htmlspecialchars($form_data['descricao'] ?? '') ?>">
 
                     <button type="submit">Agendar</button>
                 </form>

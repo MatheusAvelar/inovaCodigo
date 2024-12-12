@@ -92,6 +92,7 @@ if ($_SESSION['perfil_id'] != 2) {
         <h2>Conflitos Agendamentos</h2>
         <div class="grid">
             <div class="maca">
+                <div style="overflow-x: auto;">
                 <table>
                     <tbody>
                         <?php
@@ -99,6 +100,7 @@ if ($_SESSION['perfil_id'] != 2) {
                         ?>
                     </tbody>
                 </table>
+                </div>
             </div>            
         </div>
     </div>
