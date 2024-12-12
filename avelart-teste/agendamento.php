@@ -333,7 +333,7 @@ unset($_SESSION['status'], $_SESSION['message']);
         document.getElementById('date1').addEventListener('change', function() {
             const date = this.value;
             
-            fetch('PHP/verificar_horarios.php', {
+            fetch('php/verificar_horarios.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
