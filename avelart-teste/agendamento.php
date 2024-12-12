@@ -320,34 +320,56 @@ unset($_SESSION['status'], $_SESSION['message']);
             }
         });
 
-        document.getElementById('date1').addEventListener('change', function () {
-            const data = this.value;
+        document.getElementById('date1').addEventListener('input', function () {
+            const dateInput = document.getElementById('date1').value;
 
+            // Limpa mensagens e resultados quando o campo é limpo
+            if (!dateInput) {
+                document.getElementById('date1-error').innerText = 'Por favor, insira uma data.';
+                document.getElementById('resultados').innerHTML = ''; // Limpa os resultados
+                return;
+            }
+
+            // Faz a requisição ao servidor
             fetch('php/verificar_horarios.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: 'data=' + encodeURIComponent(data)
+                body: 'date1=' + encodeURIComponent(dateInput)
             })
-            .then(response => response.json())
-            .then(horarios => {
-                const errorDiv = document.getElementById('date1-error');
-                const resultDiv = document.getElementById('resultados');
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Erro ${response.status}: ${response.statusText}`);
+                }
+                return response.text();
+            })
+            .then(text => {
+                try {
+                    const horarios = JSON.parse(text);
+                    const errorDiv = document.getElementById('date1-error');
+                    const resultDiv = document.getElementById('resultados');
+                    resultDiv.innerHTML = ''; // Limpa resultados anteriores
 
-                // Limpa os resultados anteriores
-                resultDiv.innerHTML = '';
-
-                if (horarios.length > 0) {
-                    errorDiv.innerText = 'Horários já agendados nesta data:';
-                    horarios.forEach(horario => {
-                        const p = document.createElement('p');
-                        p.textContent = horario;
-                        resultDiv.appendChild(p);
-                    });
-                } else {
-                    errorDiv.innerText = 'Nenhum horário agendado nesta data.';
+                    if (Array.isArray(horarios) && horarios.length > 0) {
+                        errorDiv.innerText = 'Horários já agendados nesta data:';
+                        horarios.forEach(horario => {
+                            const p = document.createElement('p');
+                            p.textContent = horario;
+                            resultDiv.appendChild(p);
+                        });
+                    } else if (horarios.erro) {
+                        errorDiv.innerText = horarios.erro;
+                    } else {
+                        errorDiv.innerText = 'Nenhum horário agendado nesta data.';
+                    }
+                } catch (e) {
+                    console.error('Erro ao analisar JSON:', e);
+                    document.getElementById('date1-error').innerText = 'Erro ao processar a resposta do servidor.';
                 }
             })
-            .catch(error => console.error('Erro:', error));
+            .catch(error => {
+                console.error('Erro na requisição:', error);
+                document.getElementById('date1-error').innerText = 'Erro ao carregar os dados.';
+            });
         });
     </script>
 </body>
