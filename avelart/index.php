@@ -124,28 +124,30 @@
         <br>
         <div class="grid">
             <div class="maca">
-                <main>
-                    <h2>Bem-vindo</h2>
-                    <p>Descubra o sistema de agendamento ideal para estúdios de tatuagem.</p>
+                <div style="overflow-x: auto;">
+                    <main>
+                        <h2>Bem-vindo</h2>
+                        <p>Descubra o sistema de agendamento ideal para estúdios de tatuagem.</p>
 
-                    <div class="features" id="features">
-                        <div class="feature">
-                            <i class="fas fa-calendar-alt feature-icon"></i>
-                            <h3>Gestão de Agendamentos</h3>
-                            <p>Organize e visualize seus agendamentos de forma prática e eficiente.</p>
+                        <div class="features" id="features">
+                            <div class="feature">
+                                <i class="fas fa-calendar-alt feature-icon"></i>
+                                <h3>Gestão de Agendamentos</h3>
+                                <p>Organize e visualize seus agendamentos de forma prática e eficiente.</p>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-bell feature-icon"></i>
+                                <h3>Notificações Automáticas</h3>
+                                <p>Envie confirmações e lembretes automáticos por e-mail.</p>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-file-signature feature-icon"></i>
+                                <h3>Termos de Aceite</h3>
+                                <p>Gere e imprima termos de aceite personalizados.</p>
+                            </div>
                         </div>
-                        <div class="feature">
-                            <i class="fas fa-bell feature-icon"></i>
-                            <h3>Notificações Automáticas</h3>
-                            <p>Envie confirmações e lembretes automáticos por e-mail.</p>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-file-signature feature-icon"></i>
-                            <h3>Termos de Aceite</h3>
-                            <p>Gere e imprima termos de aceite personalizados.</p>
-                        </div>
-                    </div>
-                </main>
+                    </main>
+                </div>
             </div>
         </div>
         <footer>
