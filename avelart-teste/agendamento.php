@@ -160,7 +160,7 @@ unset($_SESSION['status'], $_SESSION['message']);
                     <!-- Lista de horários -->
                     <div id="resultados" class="horarios"></div>
 
-                    <table id="resultados" border="1">
+                    <table id="resultados" border="1" disabled>
                         <thead>
                             <tr>
                                 <th>Maca</th>
