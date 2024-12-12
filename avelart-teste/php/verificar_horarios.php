@@ -23,17 +23,22 @@ if (empty($_POST['date1'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['date1'])) {
     $date = $_POST['date1'];
 
-    $query = "SELECT start_time, end_time FROM agendamentos WHERE data = '$date' AND status = 1";
+    $query = "SELECT maca_id, start_time, end_time FROM agendamentos WHERE data = '$date' AND status = 1";
     $result = $conn->query($query);
     
-    if ($result) {
+    if ($result->num_rows > 0) {
         $horarios = [];
         while ($row = $result->fetch_assoc()) {
-            $horarios[] = "Inicio: {$row['start_time']} horas | Fim: {$row['end_time']} horas";
+            // Formata os horários
+            $horarios[] = [
+                'maca' => $row['maca_id'],
+                'start_time' => date('H:i', strtotime($row['start_time'])),
+                'end_time' => date('H:i', strtotime($row['end_time'])),
+            ];
         }
-        echo json_encode($horarios);
+        echo json_encode(['sucesso' => true, 'horarios' => $horarios]);
     } else {
-        echo json_encode(["erro" => "Erro ao consultar o banco de dados"]);
+        echo json_encode(['sucesso' => false, 'mensagem' => 'Nenhum horário agendado nesta data.']);
     }
 } else {
     echo json_encode(['erro' => 'Parâmetro "date1" não encontrado.']);
