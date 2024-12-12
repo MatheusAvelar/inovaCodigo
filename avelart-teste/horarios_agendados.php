@@ -178,7 +178,7 @@ $months = [
 <body>
     <header>
         <div class="logo-container">
-            <a href="https://avelart.inovacodigo.com.br/index.html">
+            <a href="https://avelart.inovacodigo.com.br/index.php">
                 <img src="img/tatto.jpeg" alt="Logo do Estúdio" class="logo">
             </a>
         </div>
