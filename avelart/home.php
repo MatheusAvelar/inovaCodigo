@@ -1,11 +1,17 @@
 <?php
 session_start();
+include 'php/verificar_perfil.php';
+
+if ($_SESSION['perfil_id'] != 2) {
+    header("Location: agendamento.php");
+    exit();
+}
+
 $status = isset($_SESSION['status']) ? $_SESSION['status'] : null;
 $message = isset($_SESSION['message']) ? $_SESSION['message'] : null;
 
 // Limpa as mensagens de status da sessão após exibir
 unset($_SESSION['status'], $_SESSION['message']);
-unset($_SESSION['form_data']);
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
