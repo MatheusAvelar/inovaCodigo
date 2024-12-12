@@ -160,7 +160,7 @@ unset($_SESSION['status'], $_SESSION['message']);
                     <!-- Lista de horários -->
                     <div id="resultados" class="horarios"></div>
 
-                    <table id="resultados" border="1" disabled>
+                    <table id="resultados" border="1" style="display: none;">
                         <thead>
                             <tr>
                                 <th>Maca</th>
@@ -355,33 +355,26 @@ unset($_SESSION['status'], $_SESSION['message']);
             })
             .then(response => response.json())
             .then(data => {
+                console.log(data);
                 const errorMessageElement = document.getElementById('date1-error');
-                const resultadosElement = document.getElementById('resultados').getElementsByTagName('tbody')[0];
+                const resultadosElement = document.getElementById('resultados');
                 
-                // Limpar a tabela antes de adicionar novos resultados
-                resultadosElement.innerHTML = ''; 
-
                 // Se houver horários agendados
                 if (data.sucesso && data.horarios.length > 0) {
                     errorMessageElement.style.color = 'green';  // Verde claro
                     errorMessageElement.innerText = 'Horários já agendados nesta data:';
 
-                    // Preenche a tabela com os horários
+                    // Exibe os horários
+                    resultadosElement.innerHTML = ''; // Limpar resultados anteriores
                     data.horarios.forEach(item => {
-                        const row = resultadosElement.insertRow(); // Adiciona uma nova linha à tabela
-                        
-                        const macaCell = row.insertCell(0); // Cria a célula para 'Maca'
-                        const startTimeCell = row.insertCell(1); // Cria a célula para 'Início'
-                        const endTimeCell = row.insertCell(2); // Cria a célula para 'Fim'
-                        
-                        // Preenche as células com os dados
-                        macaCell.innerText = item.maca;
-                        startTimeCell.innerText = item.start_time;
-                        endTimeCell.innerText = item.end_time;
+                        const horarioItem = document.createElement('div');
+                        horarioItem.innerText = `Maca: ${item.maca} Inicio: ${item.start_time} horas | Fim: ${item.end_time} horas`;
+                        resultadosElement.appendChild(horarioItem);
                     });
                 } else {
                     errorMessageElement.style.color = 'red';  // Vermelho para erro
                     errorMessageElement.innerText = data.mensagem || 'Nenhum horário agendado nesta data.';
+                    resultadosElement.innerHTML = '';  // Limpar resultados se não houver horários
                 }
             })
             .catch(error => console.error('Erro:', error));
