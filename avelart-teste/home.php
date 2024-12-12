@@ -74,7 +74,7 @@ session_start();
                 <?php if (isset($_SESSION['usuario_logado']) && $_SESSION['usuario_logado']): ?>
                     <li><a href="php/logout.php">Sair</a></li>
                 <?php else: ?>
-                    <li><a href="agendamento.html">Minha Conta</a></li>
+                    <li><a href="agendamento.php">Minha Conta</a></li>
                 <?php endif; ?>
             </ul> 
         </nav>
