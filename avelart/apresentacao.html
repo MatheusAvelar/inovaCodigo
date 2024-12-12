@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InkScheduler - Apresentação</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        section {
+            padding: 20px;
+            margin: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        ul li {
+            margin: 8px 0;
+        }
+        .planos {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .plano {
+            background-color: #e3e3e3;
+            padding: 20px;
+            width: 30%;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .preco {
+            font-size: 24px;
+            color: #333;
+        }
+        .preco span {
+            font-size: 18px;
+            color: #888;
+        }
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>InkScheduler - Sistema de Agendamento para Estúdios de Tatuagem</h1>
+</header>
+
+<section>
+    <h2>1. Introdução</h2>
+    <p>O <strong>InkScheduler</strong> é uma solução completa e personalizada para a gestão de agendamentos de tatuagens em estúdios. Ele foi desenvolvido para otimizar o fluxo de trabalho dos tatuadores e administradores, garantindo um gerenciamento eficiente e uma experiência satisfatória para os clientes.</p>
+</section>
+
+<section>
+    <h2>2. Funcionalidades do Sistema</h2>
+
+    <h3>Para Tatuadores</h3>
+    <ul>
+        <li><strong>Agendamento de Tatuagens</strong> - Cadastro de dados do cliente, incluindo nome, estilo, tamanho, valor, forma de pagamento e sinal pago.</li>
+        <li><strong>Edição e Exclusão de Agendamentos</strong> - Alteração ou cancelamento de agendamentos até 2 dias antes da data agendada.</li>
+        <li><strong>Geração do Termo de Aceite</strong> - Possibilidade de gerar o termo de aceite para impressão no dia da tatuagem.</li>
+        <li><strong>Visualização de Detalhes</strong> - Consulta de agendamentos realizados a qualquer momento.</li>
+    </ul>
+
+    <h3>Para Administradores</h3>
+    <ul>
+        <li><strong>Gerenciamento de Agendamentos</strong> - Visualização e edição de todos os agendamentos cadastrados no sistema.</li>
+        <li><strong>Cadastro e Gerenciamento de Usuários</strong> - Criação e gestão de contas de tatuadores e outros administradores.</li>
+        <li><strong>Relatórios e Exportação</strong> - Geração de relatórios detalhados e exportação para planilhas Excel.</li>
+    </ul>
+</section>
+
+<section>
+    <h2>3. Benefícios do Sistema</h2>
+    <ul>
+        <li><strong>Automação de Processos</strong> - Redução de trabalho manual com envio automático de e-mails e termos de aceite.</li>
+        <li><strong>Gestão Centralizada</strong> - Todos os agendamentos e informações em um único lugar, acessível para tatuadores e administradores.</li>
+        <li><strong>Melhor Experiência do Cliente</strong> - Comunicação clara e profissional com os clientes através de e-mails personalizados.</li>
+        <li><strong>Controle de Permissões</strong> - Garantia de segurança e organização com acessos diferenciados para tatuadores e administradores.</li>
+    </ul>
+</section>
+
+<section>
+    <h2>4. Modelos de Cobrança</h2>
+    <ul>
+        <li><strong>Taxa Única (Compra do Sistema)</strong> - Valor único para adquirir o sistema completo.</li>
+        <li><strong>Modelo de Assinatura (Plano Mensal/Anual)</strong> - Valor recorrente com suporte básico e atualizações.</li>
+        <li><strong>Modelo Híbrido (Configuração + Assinatura)</strong> - Taxa inicial para personalização, seguida de plano mensal ou anual.</li>
+    </ul>
+</section>
+
+<section>
+    <h2>5. Proposta de Pacotes</h2>
+    <div class="planos">
+        <div class="plano">
+            <h3>Plano Básico</h3>
+            <p>Inclui agendamento, envio de e-mails e até 3 usuários.</p>
+            <p class="preco">R$ 1.500,00 <span>taxa inicial</span> + R$ 150,00/mês</p>
+        </div>
+        <div class="plano">
+            <h3>Plano Avançado</h3>
+            <p>Inclui tudo no Plano Básico, mais relatórios detalhados e até 10 usuários.</p>
+            <p class="preco">R$ 2.000,00 <span>taxa inicial</span> + R$ 250,00/mês</p>
+        </div>
+        <div class="plano">
+            <h3>Plano Premium</h3>
+            <p>Inclui tudo no Plano Avançado, mais usuários ilimitados e suporte técnico 24/7.</p>
+            <p class="preco">R$ 3.000,00 <span>taxa inicial</span> + R$ 400,00/mês</p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>6. Adicionais Opcionais</h2>
+    <ul>
+        <li>Usuários Extras (R$ 50,00/mês por cada 5 usuários adicionais)</li>
+        <li>Backup Diário (R$ 100,00/mês)</li>
+        <li>Consultoria para Customizações (R$ 150,00/hora)</li>
+        <li>Treinamento de Equipe (R$ 500,00/sessão de 2 horas)</li>
+    </ul>
+</section>
+
+<section>
+    <h2>7. Estratégia de Preço Inicial</h2>
+    <p><strong>Promoção para os Primeiros Clientes:</strong> 20% de desconto na taxa inicial e domínio personalizado gratuito no primeiro ano para planos Avançado ou Premium.</p>
+</section>
+
+<section>
+    <h2>8. Simulação de Receita Anual</h2>
+    <p><strong>10 clientes:</strong></p>
+    <ul>
+        <li>Plano Básico: R$ 33.000/ano</li>
+        <li>Plano Avançado: R$ 44.000/ano</li>
+        <li>Plano Premium: R$ 66.000/ano</li>
+    </ul>
+</section>
+
+<footer class="footer">
+    <p>&copy; 2024 InkScheduler. Todos os direitos reservados.</p>
+</footer>
+
+</body>
+</html>
