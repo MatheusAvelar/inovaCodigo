@@ -160,6 +160,19 @@ unset($_SESSION['status'], $_SESSION['message']);
                     <!-- Lista de horários -->
                     <div id="resultados" class="horarios"></div>
 
+                    <table id="resultados" border="1">
+                        <thead>
+                            <tr>
+                                <th>Maca</th>
+                                <th>Início</th>
+                                <th>Fim</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Os dados serão inseridos aqui -->
+                        </tbody>
+                    </table><br>
+
                     <label for="start-time1">Horário Inicial:</label>
                     <input type="time" id="start-time1" name="start-time1" value="<?= htmlspecialchars($form_data['start-time1'] ?? '') ?>">
                     <div id="start-time1-error" class="error-message"><?= $errors['start-time1'] ?? '' ?></div>
