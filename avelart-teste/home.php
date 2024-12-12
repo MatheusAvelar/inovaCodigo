@@ -77,6 +77,7 @@
         <div class="grid">
             <div class="maca">
                 <h1>Confira no mapa onde estamos localizados:</h1>
+                <br>                
                 <div id="map-container">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3750.7239964067485!2d-43.933740014505254!3d-19.936032390660714!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa6994eaa17c755%3A0x68406fd37f99c948!2sR.%20Santa%20Rita%20Dur%C3%A3o%2C%20339%20-%20Funcion%C3%A1rios%2C%20Belo%20Horizonte%20-%20MG%2C%2030140-111!5e0!3m2!1spt-BR!2sbr!4v1734013337987!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
