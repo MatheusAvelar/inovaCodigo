@@ -43,6 +43,60 @@
         .settings-icon {
             font-size: 18px;
         }
+        
+        .welcome-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .welcome-section h2 {
+            font-size: 2.5em;
+            color: #e67e22;
+            margin-bottom: 10px;
+        }
+
+        .welcome-section p {
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        .features {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .feature {
+            text-align: center;
+            background: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            max-width: 300px;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .feature h3 {
+            font-size: 1.5em;
+            color: #e67e22;
+            margin-bottom: 10px;
+        }
+
+        .feature p {
+            font-size: 1em;
+            color: #666;
+        }
     </style>
 </head>
 <body>
@@ -56,7 +110,7 @@
     <div class="container">
         <nav id="menu"> 
             <ul>
-                <li><a href="">Home</a></li>
+                <li><a href="index.php">Home</a></li>
                 <li><a href="contato.php">Contato</a></li>
                 <?php if (isset($_SESSION['usuario_logado']) && $_SESSION['usuario_logado']): ?>
                     <li><a href="php/logout.php">Sair</a></li>
@@ -70,18 +124,21 @@
             <div class="maca">
                 <main>
                     <h2>Bem-vindo</h2>
-                    <p>O sistema de agendamento completo para estúdios de tatuagem.</p>
-            
+                    <p>Descubra o sistema de agendamento ideal para estúdios de tatuagem.</p>
+
                     <div class="features" id="features">
                         <div class="feature">
+                            <i class="fas fa-calendar-alt feature-icon"></i>
                             <h3>Gestão de Agendamentos</h3>
                             <p>Organize e visualize seus agendamentos de forma prática e eficiente.</p>
                         </div>
                         <div class="feature">
+                            <i class="fas fa-bell feature-icon"></i>
                             <h3>Notificações Automáticas</h3>
                             <p>Envie confirmações e lembretes automáticos por e-mail.</p>
                         </div>
                         <div class="feature">
+                            <i class="fas fa-file-signature feature-icon"></i>
                             <h3>Termos de Aceite</h3>
                             <p>Gere e imprima termos de aceite personalizados.</p>
                         </div>
