@@ -112,7 +112,7 @@
     <div class="container">
         <nav id="menu"> 
             <ul>
-                <li><a href="">Home</a></li>
+                <li><a href="index.php">Home</a></li>
                 <li><a href="contato.php">Contato</a></li>
                 <?php if (isset($_SESSION['usuario_logado']) && $_SESSION['usuario_logado']): ?>
                     <li><a href="php/logout.php">Sair</a></li>
@@ -126,8 +126,8 @@
             <div class="maca">
                 <main>
                     <section class="welcome-section">
-                        <h2>Bem-vindo ao InkManager</h2>
-                        <p>Seu sistema completo para gerenciar agendamentos e melhorar a experiência no estúdio de tatuagem.</p>
+                        <h1>Bem-vindo</h1>
+                        <p>Tenha seu sistema completo para gerenciar agendamentos e melhorar a experiência no estúdio de tatuagem.</p>
                     </section>
 
                     <section class="features-section">
