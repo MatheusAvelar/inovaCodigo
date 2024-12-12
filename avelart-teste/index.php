@@ -56,7 +56,6 @@
 
         .welcome-section h2 {
             font-size: 2.5em;
-            color: #e67e22;
             margin-bottom: 10px;
         }
 
@@ -93,12 +92,10 @@
         .feature-icon {
             font-size: 3rem;
             margin-bottom: 15px;
-            color: #e67e22;
         }
 
         .feature h3 {
             font-size: 1.5em;
-            color: #e67e22;
             margin-bottom: 10px;
         }
 
