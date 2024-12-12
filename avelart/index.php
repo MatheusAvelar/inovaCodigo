@@ -90,7 +90,7 @@
             </div>
         </div>
         <footer>
-            <p>&copy; 2024 InkManager. Todos os direitos reservados. | <a href="#contact">Entre em contato</a></p>
+            <p>&copy; 2024 Inova Código. Todos os direitos reservados. | <a href="https://inovacodigo.com.br/">Entre em contato</a></p>
         </footer>
     </div>
 
