@@ -7,7 +7,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 // Verifica se o usuário está logado
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    header("Location: ../index.html");
+    header("Location: ../login.php");
     exit;
 }
 

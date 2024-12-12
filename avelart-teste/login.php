@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Agendamento</title>
+    <title>Agendamento de Macas</title>
+    <link rel="icon" href="img/ico.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css">
     <style>
         #menu ul li { 
@@ -45,6 +47,7 @@
         }
     </style>
 </head>
+
 <body>
     <header>
         <div class="logo-container">
@@ -53,46 +56,47 @@
             </a>
         </div>
     </header>
+    
     <div class="container">
         <nav id="menu"> 
             <ul>
-                <li><a href="">Home</a></li>
+                <li><a href="index.html">Home</a></li>
                 <li><a href="contato.php">Contato</a></li>
-                <?php if (isset($_SESSION['usuario_logado']) && $_SESSION['usuario_logado']): ?>
-                    <li><a href="php/logout.php">Sair</a></li>
-                <?php else: ?>
-                    <li><a href="agendamento.php">Minha Conta</a></li>
-                <?php endif; ?>
             </ul> 
         </nav>
-        <br>
         <div class="grid">
             <div class="maca">
-                <main>
-                    <h2>Bem-vindo</h2>
-                    <p>O sistema de agendamento completo para estúdios de tatuagem.</p>
-            
-                    <div class="features" id="features">
-                        <div class="feature">
-                            <h3>Gestão de Agendamentos</h3>
-                            <p>Organize e visualize seus agendamentos de forma prática e eficiente.</p>
-                        </div>
-                        <div class="feature">
-                            <h3>Notificações Automáticas</h3>
-                            <p>Envie confirmações e lembretes automáticos por e-mail.</p>
-                        </div>
-                        <div class="feature">
-                            <h3>Termos de Aceite</h3>
-                            <p>Gere e imprima termos de aceite personalizados.</p>
-                        </div>
-                    </div>
-                </main>
+                <form action="php/auth.php" method="POST">
+                    <label for="username">Usuário:</label><br>
+                    <input type="text" id="username" name="username" required><br>
+                    <label for="password">Senha:</label><br>
+                    <input type="password" id="password" name="password" required><br><br>
+                    <button type="submit">Entrar</button>
+                </form>
+                <form action="esqueceu_senha.php" method="GET">
+                    <button type="submit">Esqueceu a Senha</button>
+                </form>
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const status = sessionStorage.getItem('status');
+            const message = sessionStorage.getItem('message');
 
-    <footer>
-        <p>&copy; 2024 InkManager. Todos os direitos reservados. | <a href="#contact">Entre em contato</a></p>
-    </footer>
+            if (status && message) {
+                const messageContainer = document.getElementById('message-container');
+                const messageElement = document.createElement('div');
+                messageElement.className = 'message ' + status;
+                messageElement.innerHTML = message;
+
+                messageContainer.appendChild(messageElement);
+
+                // Limpa as mensagens após exibi-las
+                sessionStorage.removeItem('status');
+                sessionStorage.removeItem('message');
+            }
+        });
+    </script>
 </body>
 </html>

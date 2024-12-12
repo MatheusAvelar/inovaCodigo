@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Esqueceu a Senha</title>
+    <title>Agendamento de Macas</title>
     <link rel="icon" href="img/ico.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css">
+    
 </head>
+
 <body>
     <header>
         <div class="logo-container">
@@ -23,19 +26,22 @@
                     <?= $message ?>
                 </div>
             <?php endif; ?>
-        </div>
-        <h2>Esqueceu a Senha</h2>
+        </div> 
         <div class="grid">
             <div class="maca">
-                <form action="php/recuperar_senha.php" method="POST">
-                    <label for="email">Seu E-mail:</label>
-                    <input type="email" id="email" name="email" required>
-                    <button type="submit">Enviar Link de Redefinição</button>
+                <form action="php/auth.php" method="POST">
+                    <label for="username">Usuário:</label><br>
+                    <input type="text" id="username" name="username" required><br>
+                    <label for="password">Senha:</label><br>
+                    <input type="password" id="password" name="password" required><br><br>
+                    <button type="submit">Entrar</button>
+                </form>
+                <form action="esqueceu_senha.php" method="GET">
+                    <button type="submit">Esqueceu a Senha</button>
                 </form>
             </div>
         </div>
     </div>
-
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const status = sessionStorage.getItem('status');
