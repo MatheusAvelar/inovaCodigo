@@ -15,13 +15,13 @@ if ($conn->connect_error) {
 }
 
 // Verifica se a data foi fornecida
-if (empty($_POST['data'])) {
+if (empty($_POST['date1'])) {
     echo json_encode(["erro" => "Data não fornecida"]);
     exit;
 }
 
 // Sanitiza o parâmetro
-$data = $conn->real_escape_string($_POST['data']);
+$data = $conn->real_escape_string($_POST['date1']);
 
 // Consulta os horários
 $query = "SELECT start_time, end_time FROM agendamentos WHERE data = '$data' AND stats = 1";
