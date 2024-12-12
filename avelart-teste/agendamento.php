@@ -120,7 +120,12 @@ unset($_SESSION['status'], $_SESSION['message']);
 
                     <label for="date1">Data:</label>
                     <input type="date" id="date1" name="date1" required>
+                
+                    <!-- Mensagem de erro ou sucesso -->
                     <div id="date1-error" class="error-message"></div>
+
+                    <!-- Lista de horários -->
+                    <div id="resultados" class="horarios"></div>
 
                     <label for="start-time1">Horário Inicial:</label>
                     <input type="time" id="start-time1" name="start-time1" required>
@@ -293,6 +298,36 @@ unset($_SESSION['status'], $_SESSION['message']);
                 sessionStorage.removeItem('status');
                 sessionStorage.removeItem('message');
             }
+        });
+
+        document.getElementById('date1').addEventListener('change', function () {
+            const data = this.value;
+
+            fetch('verificar_horarios.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: 'data=' + encodeURIComponent(data)
+            })
+            .then(response => response.json())
+            .then(horarios => {
+                const errorDiv = document.getElementById('date1-error');
+                const resultDiv = document.getElementById('resultados');
+
+                // Limpa os resultados anteriores
+                resultDiv.innerHTML = '';
+
+                if (horarios.length > 0) {
+                    errorDiv.innerText = 'Horários já agendados nesta data:';
+                    horarios.forEach(horario => {
+                        const p = document.createElement('p');
+                        p.textContent = horario;
+                        resultDiv.appendChild(p);
+                    });
+                } else {
+                    errorDiv.innerText = 'Nenhum horário agendado nesta data.';
+                }
+            })
+            .catch(error => console.error('Erro:', error));
         });
     </script>
 </body>
