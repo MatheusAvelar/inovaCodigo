@@ -15,12 +15,12 @@ if ($conn->connect_error) {
 }
 
 // Verifica se a data foi fornecida
-if (empty($_POST['date1'])) {
+/*if (empty($_POST['date1'])) {
     echo json_encode(["erro" => "Data não fornecida"]);
     exit;
-}
+}*/
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['date1'])) {
+//if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['date1'])) {
     $date = $_POST['date1'];
 
     $query = "SELECT maca_id, start_time, end_time FROM agendamentos WHERE data = '$date' AND status = 1";
@@ -40,9 +40,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['date1'])) {
     } else {
         echo json_encode(['sucesso' => false, 'mensagem' => 'Nenhum horário agendado nesta data.']);
     }
-} else {
+/*} else {
     echo json_encode(['erro' => 'Parâmetro "date1" não encontrado.']);
-}
+}*/
 
 
 $conn->close();
