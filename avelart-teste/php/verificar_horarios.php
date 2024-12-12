@@ -25,7 +25,7 @@ if ($conn->connect_error) {
 
     $query = "SELECT maca_id, start_time, end_time FROM agendamentos WHERE data = '$date' AND status = 1";
     $result = $conn->query($query);
-    
+    echo $query;
     if ($result->num_rows > 0) {
         $horarios = [];
         while ($row = $result->fetch_assoc()) {
