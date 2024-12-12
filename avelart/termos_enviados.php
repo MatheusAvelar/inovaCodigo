@@ -195,28 +195,28 @@ unset($_SESSION['status'], $_SESSION['message']);
             <?php endif; ?>
         </div>
         <h2>Termos Preenchidos</h2>
+        <form id="filter-actions-form" method="GET" action="termos_enviados.php">
+            <div id="filters-container">
+                <div>
+                    <label for="filter-maca">Cliente:</label>
+                    <input type="text" name="cliente_nome" id="cliente_nome" placeholder="Nome do Cliente" value="<?= htmlspecialchars(isset($_GET['cliente_nome']) ? $_GET['cliente_nome'] : '') ?>">
+                </div>
+            </div>
+
+            <div id="actions-container">
+                <button type="submit" class="button">
+                    <i class="fas fa-search"></i> Filtrar
+                </button>
+
+                <?php if ($perfil_id == 2) : ?>
+                    <!--<button type="button" class="button" id="export-button">
+                        <i class="fa-solid fa-file-csv"></i> Exportar
+                    </button>-->
+                <?php endif; ?>
+            </div>
+        </form>
         <div class="grid">
             <div class="maca">
-                <form id="filter-actions-form" method="GET" action="termos_enviados.php">
-                    <div id="filters-container">
-                        <div>
-                            <label for="filter-maca">Cliente:</label>
-                            <input type="text" name="cliente_nome" id="cliente_nome" placeholder="Nome do Cliente" value="<?= htmlspecialchars(isset($_GET['cliente_nome']) ? $_GET['cliente_nome'] : '') ?>">
-                        </div>
-                    </div>
-
-                    <div id="actions-container">
-                        <button type="submit" class="button">
-                            <i class="fas fa-search"></i> Filtrar
-                        </button>
-        
-                        <?php if ($perfil_id == 2) : ?>
-                            <!--<button type="button" class="button" id="export-button">
-                                <i class="fa-solid fa-file-csv"></i> Exportar
-                            </button>-->
-                        <?php endif; ?>
-                    </div>
-                </form>
                 <div style="overflow-x: auto;">
                     <table>
                         <thead>
