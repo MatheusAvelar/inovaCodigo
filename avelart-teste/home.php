@@ -71,11 +71,10 @@ session_start();
             <ul>
                 <li><a href="">Home</a></li>
                 <li><a href="contato.php">Contato</a></li>
-                <li><a href="agendamento.php">Minha Conta</a></li>
                 <?php if (isset($_SESSION['usuario_logado']) && $_SESSION['usuario_logado']): ?>
                     <li><a href="php/logout.php">Sair</a></li>
                 <?php else: ?>
-                    <li><a href="index.html">Entrar</a></li>
+                    <li><a href="agendamento.html">Minha Conta</a></li>
                 <?php endif; ?>
             </ul> 
         </nav>
