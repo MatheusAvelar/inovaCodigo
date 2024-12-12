@@ -86,8 +86,7 @@
         }
 
         .feature-icon {
-            width: 50px;
-            height: 50px;
+            font-size: 3rem;
             margin-bottom: 15px;
         }
 
