@@ -62,11 +62,6 @@
             <ul>
                 <li><a href="">Home</a></li>
                 <li><a href="contato.php">Contato</a></li>
-                <?php if (isset($_SESSION['usuario_logado']) && $_SESSION['usuario_logado']): ?>
-                    <li><a href="php/logout.php">Sair</a></li>
-                <?php else: ?>
-                    <li><a href="agendamento.php">Minha Conta</a></li>
-                <?php endif; ?>
             </ul> 
         </nav>
         <div class="grid">

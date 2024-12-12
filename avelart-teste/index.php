@@ -65,7 +65,7 @@
                 <?php endif; ?>
             </ul> 
         </nav>
-        <br>
+        <br><br>
         <div class="grid">
             <div class="maca">
                 <main>
