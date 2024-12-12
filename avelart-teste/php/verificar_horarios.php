@@ -20,21 +20,24 @@ if (empty($_POST['date1'])) {
     exit;
 }
 
-// Sanitiza o parâmetro
-$data = $conn->real_escape_string($_POST['date1']);
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['date1'])) {
+    $date = $_POST['date1'];
 
-// Consulta os horários
-$query = "SELECT start_time, end_time FROM agendamentos WHERE data = '$data' AND stats = 1";
-$result = $conn->query($query);
-
-if ($result) {
-    $horarios = [];
-    while ($row = $result->fetch_assoc()) {
-        $horarios[] = "Inicio: {$row['start_time']} horas | Fim: {$row['end_time']} horas";
+    $query = "SELECT start_time, end_time FROM agendamentos WHERE data = '$date' AND status = 1";
+    $result = $conn->query($query);
+    
+    if ($result) {
+        $horarios = [];
+        while ($row = $result->fetch_assoc()) {
+            $horarios[] = "Inicio: {$row['start_time']} horas | Fim: {$row['end_time']} horas";
+        }
+        echo json_encode($horarios);
+    } else {
+        echo json_encode(["erro" => "Erro ao consultar o banco de dados"]);
     }
-    echo json_encode($horarios);
 } else {
-    echo json_encode(["erro" => "Erro ao consultar o banco de dados"]);
+    echo json_encode(['erro' => 'Parâmetro "date1" não encontrado.']);
 }
+
 
 $conn->close();
