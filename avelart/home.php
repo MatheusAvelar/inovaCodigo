@@ -79,7 +79,7 @@ unset($_SESSION['status'], $_SESSION['message']);
     </header>
 
     <div class="container">
-        <nav id="menu"> 
+        <!--<nav id="menu"> 
             <ul>
                 <li><a href="termos_enviados.php">Termos Preenchidos</a></li>
                 <li><a href="horarios_agendados.php">Horários Agendados</a></li>
@@ -97,7 +97,7 @@ unset($_SESSION['status'], $_SESSION['message']);
                 <?php endif; ?>
                 <li><a href="php/logout.php">Sair</a></li>
             </ul> 
-        </nav>
+        </nav>-->
         <br>
         <div id="message-container">
             <?php if (isset($status) && isset($message)) : ?>
