@@ -46,14 +46,15 @@
             font-size: 18px;
         }
         
+        /* Estilo geral para a seção */
         .welcome-section {
             text-align: center;
             margin-bottom: 30px;
+            padding: 20px;
         }
 
         .welcome-section h2 {
             font-size: 2.5em;
-            color: #e67e22;
             margin-bottom: 10px;
         }
 
@@ -62,10 +63,13 @@
             color: #333;
         }
 
+        /* Estilo das funcionalidades */
         .features {
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 20px;
             justify-content: center;
+            padding: 20px;
         }
 
         .feature {
@@ -91,13 +95,31 @@
 
         .feature h3 {
             font-size: 1.5em;
-            color: #e67e22;
             margin-bottom: 10px;
         }
 
         .feature p {
             font-size: 1em;
             color: #666;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .welcome-section h2 {
+                font-size: 2em;
+            }
+
+            .welcome-section p {
+                font-size: 1em;
+            }
+
+            .feature-icon {
+                font-size: 2.5rem;
+            }
+
+            .feature h3 {
+                font-size: 1.3em;
+            }
         }
     </style>
 </head>
@@ -124,30 +146,30 @@
         <br>
         <div class="grid">
             <div class="maca">
-                <div style="overflow-x: auto;">
-                    <main>
-                        <h2>Bem-vindo</h2>
-                        <p>Descubra o sistema de agendamento ideal para estúdios de tatuagem.</p>
+                <main>
+                    <section class="welcome-section">
+                        <h2>Bem-vindo ao Sistema de Agendamento</h2>
+                        <p>Descubra o sistema ideal para estúdios de tatuagem. Organize agendamentos, envie notificações e crie termos de aceite de forma simples e eficiente.</p>
+                    </section>
 
-                        <div class="features" id="features">
-                            <div class="feature">
-                                <i class="fas fa-calendar-alt feature-icon"></i>
-                                <h3>Gestão de Agendamentos</h3>
-                                <p>Organize e visualize seus agendamentos de forma prática e eficiente.</p>
-                            </div>
-                            <div class="feature">
-                                <i class="fas fa-bell feature-icon"></i>
-                                <h3>Notificações Automáticas</h3>
-                                <p>Envie confirmações e lembretes automáticos por e-mail.</p>
-                            </div>
-                            <div class="feature">
-                                <i class="fas fa-file-signature feature-icon"></i>
-                                <h3>Termos de Aceite</h3>
-                                <p>Gere e imprima termos de aceite personalizados.</p>
-                            </div>
+                    <section class="features">
+                        <div class="feature">
+                            <i class="fas fa-calendar-alt feature-icon"></i>
+                            <h3>Gestão de Agendamentos</h3>
+                            <p>Visualize e organize os seus agendamentos de forma prática e eficiente.</p>
                         </div>
-                    </main>
-                </div>
+                        <div class="feature">
+                            <i class="fas fa-bell feature-icon"></i>
+                            <h3>Notificações Automáticas</h3>
+                            <p>Envie confirmações e lembretes automáticos diretamente para o seu cliente.</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-file-signature feature-icon"></i>
+                            <h3>Termos de Aceite</h3>
+                            <p>Gere e imprima termos personalizados para cada cliente.</p>
+                        </div>
+                    </section>
+                </main>
             </div>
         </div>
         <footer>
