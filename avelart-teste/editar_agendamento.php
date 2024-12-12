@@ -63,7 +63,7 @@ unset($_SESSION['status'], $_SESSION['message']);
 <body>
     <header>
         <div class="logo-container">
-            <a href="https://avelart-teste.inovacodigo.com.br/home.php">
+            <a href="https://avelart-teste.inovacodigo.com.br/index.html">
                 <img src="img/tatto.jpeg" alt="Logo do Estúdio" class="logo">
             </a>
         </div>
