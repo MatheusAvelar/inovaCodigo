@@ -6,6 +6,8 @@
     <title>Sistema de Agendamento</title>
     <link rel="icon" href="img/ico.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
     <style>
         #menu ul li { 
             display: inline-block; 
@@ -124,32 +126,29 @@
         <br><br>
         <div class="grid">
             <div class="maca">
-                <main>
-                    <section class="welcome-section">
-                        <h1>Bem-vindo</h1>
-                        <p>Tenha seu sistema completo para gerenciar agendamentos e melhorar a experiência no estúdio de tatuagem.</p>
-                    </section>
+            <main>
+                <h2>Bem-vindo</h2>
+                <p>Descubra o sistema de agendamento ideal para estúdios de tatuagem.</p>
 
-                    <section class="features-section">
-                        <div class="features" id="features">
-                            <div class="feature">
-                                <img src="img/agendamentos.png" alt="Ícone de agendamentos" class="feature-icon">
-                                <h3>Gestão de Agendamentos</h3>
-                                <p>Organize e visualize seus agendamentos de forma prática, otimizando seu tempo.</p>
-                            </div>
-                            <div class="feature">
-                                <img src="img/notificacoes.png" alt="Ícone de notificações" class="feature-icon">
-                                <h3>Notificações Automáticas</h3>
-                                <p>Envie confirmações e lembretes automáticos por e-mail para seus clientes.</p>
-                            </div>
-                            <div class="feature">
-                                <img src="img/termos.png" alt="Ícone de termos" class="feature-icon">
-                                <h3>Termos de Aceite</h3>
-                                <p>Crie e imprima termos de aceite personalizados com facilidade.</p>
-                            </div>
-                        </div>
-                    </section>
-                </main>
+                <div class="features" id="features">
+                    <div class="feature">
+                        <i class="fas fa-calendar-alt feature-icon"></i>
+                        <h3>Gestão de Agendamentos</h3>
+                        <p>Organize e visualize seus agendamentos de forma prática e eficiente.</p>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-bell feature-icon"></i>
+                        <h3>Notificações Automáticas</h3>
+                        <p>Envie confirmações e lembretes automáticos por e-mail.</p>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-file-signature feature-icon"></i>
+                        <h3>Termos de Aceite</h3>
+                        <p>Gere e imprima termos de aceite personalizados.</p>
+                    </div>
+                </div>
+            </main>
+
             </div>
         </div>
         <footer>
