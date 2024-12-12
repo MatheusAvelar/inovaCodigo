@@ -68,7 +68,7 @@
             <ul>
                 <li><a href="">Home</a></li>
                 <li><a href="contato.php">Contato</a></li>
-                <li><a href="agendamento.php">Area </a></li>
+                <li><a href="agendamento.php">Minha Conta</a></li>
                 <li><a href="php/logout.php">Sair</a></li>
             </ul> 
         </nav>
