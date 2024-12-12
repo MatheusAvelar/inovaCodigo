@@ -21,7 +21,7 @@ if ($conn->connect_error) {
 }*/
 
 //if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['date1'])) {
-    $date = '2024-12-21';
+    $date = '2024-09-21';
 
     $query = "SELECT maca_id, start_time, end_time FROM agendamentos WHERE data = '$date' AND status = 1";
     $result = $conn->query($query);
