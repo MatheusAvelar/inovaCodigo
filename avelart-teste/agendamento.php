@@ -343,7 +343,7 @@ unset($_SESSION['status'], $_SESSION['message']);
             }
         });
 
-        document.getElementById('date1').addEventListener('change', function() {
+        /*document.getElementById('date1').addEventListener('change', function() {
             const date = this.value;
             
             fetch('php/verificar_horarios.php', {
@@ -378,7 +378,59 @@ unset($_SESSION['status'], $_SESSION['message']);
                 }
             })
             .catch(error => console.error('Erro:', error));
+        });*/
+        
+        document.getElementById('date1').addEventListener('change', function() {
+            const date = this.value;
+            
+            fetch('php/verificar_horarios.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'date1=' + encodeURIComponent(date)
+            })
+            .then(response => response.json())
+            .then(data => {
+                const errorMessageElement = document.getElementById('date1-error');
+                const resultadosElement = document.getElementById('resultados').getElementsByTagName('tbody')[0];
+                const resultadosTable = document.getElementById('resultados');
+                
+                // Limpar a tabela antes de adicionar novos resultados
+                resultadosElement.innerHTML = ''; 
+
+                // Se houver horários agendados
+                if (data.sucesso && data.horarios.length > 0) {
+                    // Exibe a tabela
+                    resultadosTable.style.display = 'table'; // Torna a tabela visível
+
+                    errorMessageElement.style.color = 'green';  // Verde claro
+                    errorMessageElement.innerText = 'Horários já agendados nesta data:';
+
+                    // Preenche a tabela com os horários
+                    data.horarios.forEach(item => {
+                        const row = resultadosElement.insertRow(); // Adiciona uma nova linha à tabela
+                        
+                        const macaCell = row.insertCell(0); // Cria a célula para 'Maca'
+                        const startTimeCell = row.insertCell(1); // Cria a célula para 'Início'
+                        const endTimeCell = row.insertCell(2); // Cria a célula para 'Fim'
+                        
+                        // Preenche as células com os dados
+                        macaCell.innerText = item.maca;
+                        startTimeCell.innerText = item.start_time;
+                        endTimeCell.innerText = item.end_time;
+                    });
+                } else {
+                    // Oculta a tabela se não houver dados
+                    resultadosTable.style.display = 'none'; // Oculta a tabela
+
+                    errorMessageElement.style.color = 'red';  // Vermelho para erro
+                    errorMessageElement.innerText = data.mensagem || 'Nenhum horário agendado nesta data.';
+                }
+            })
+            .catch(error => console.error('Erro:', error));
         });
+
     </script>
 </body>
 
