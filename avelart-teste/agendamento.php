@@ -342,6 +342,7 @@ unset($_SESSION['status'], $_SESSION['message']);
             })
             .then(response => response.json())
             .then(data => {
+                console.log(data);
                 const errorMessageElement = document.getElementById('date1-error');
                 const resultadosElement = document.getElementById('resultados');
                 
