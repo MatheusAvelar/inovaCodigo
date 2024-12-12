@@ -23,9 +23,12 @@ if (empty($_POST['date1'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['date1'])) {
     $date = $_POST['date1'];
 
-    $query = "SELECT maca_id, start_time, end_time FROM agendamentos WHERE data = '$date' AND status = 1";
-    $result = $conn->query($query);
-    echo $query;
+    // Proteção contra injeção de SQL - Usando prepared statements
+    $stmt = $conn->prepare("SELECT maca_id, start_time, end_time FROM agendamentos WHERE data = ? AND status = 1");
+    $stmt->bind_param("s", $date); // "s" é o tipo da variável (string)
+    $stmt->execute();
+    $result = $stmt->get_result();
+
     if ($result->num_rows > 0) {
         $horarios = [];
         while ($row = $result->fetch_assoc()) {
@@ -36,13 +39,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['date1'])) {
                 'end_time' => date('H:i', strtotime($row['end_time'])),
             ];
         }
-        return json_encode(['sucesso' => true, 'horarios' => $horarios]);
+        // Envia a resposta JSON com os horários
+        echo json_encode(['sucesso' => true, 'horarios' => $horarios]);
     } else {
-        return json_encode(['sucesso' => false, 'mensagem' => 'Nenhum horário agendado nesta data.']);
+        // Envia a resposta JSON informando que não há horários agendados
+        echo json_encode(['sucesso' => false, 'mensagem' => 'Nenhum horário agendado nesta data.']);
     }
 } else {
-    return json_encode(['erro' => 'Parâmetro "date1" não encontrado.']);
+    // Envia a resposta JSON informando que o parâmetro 'date1' não foi fornecido
+    echo json_encode(['erro' => 'Parâmetro "date1" não encontrado.']);
 }
-
 
 $conn->close();
