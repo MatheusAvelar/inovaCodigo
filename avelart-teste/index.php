@@ -44,23 +44,60 @@
             font-size: 18px;
         }
         
-        .feature {
-            padding: 20px;
+        .welcome-section {
             text-align: center;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 30px;
         }
-        .feature:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-        .feature h3 {
+
+        .welcome-section h2 {
+            font-size: 2.5em;
             color: #e67e22;
             margin-bottom: 10px;
         }
 
+        .welcome-section p {
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        .features {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .feature {
+            text-align: center;
+            background: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            max-width: 300px;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 15px;
+        }
+
+        .feature h3 {
+            font-size: 1.5em;
+            color: #e67e22;
+            margin-bottom: 10px;
+        }
+
+        .feature p {
+            font-size: 1em;
+            color: #666;
+        }
     </style>
 </head>
 <body>
@@ -87,23 +124,30 @@
         <div class="grid">
             <div class="maca">
                 <main>
-                    <h2>Bem-vindo</h2>
-                    <p>O sistema de agendamento completo para estúdios de tatuagem.</p>
-            
-                    <div class="features" id="features">
-                        <div class="feature">
-                            <h3>Gestão de Agendamentos</h3>
-                            <p>Organize e visualize seus agendamentos de forma prática e eficiente.</p>
+                    <section class="welcome-section">
+                        <h2>Bem-vindo ao InkManager</h2>
+                        <p>Seu sistema completo para gerenciar agendamentos e melhorar a experiência no estúdio de tatuagem.</p>
+                    </section>
+
+                    <section class="features-section">
+                        <div class="features" id="features">
+                            <div class="feature">
+                                <img src="img/agendamentos.png" alt="Ícone de agendamentos" class="feature-icon">
+                                <h3>Gestão de Agendamentos</h3>
+                                <p>Organize e visualize seus agendamentos de forma prática, otimizando seu tempo.</p>
+                            </div>
+                            <div class="feature">
+                                <img src="img/notificacoes.png" alt="Ícone de notificações" class="feature-icon">
+                                <h3>Notificações Automáticas</h3>
+                                <p>Envie confirmações e lembretes automáticos por e-mail para seus clientes.</p>
+                            </div>
+                            <div class="feature">
+                                <img src="img/termos.png" alt="Ícone de termos" class="feature-icon">
+                                <h3>Termos de Aceite</h3>
+                                <p>Crie e imprima termos de aceite personalizados com facilidade.</p>
+                            </div>
                         </div>
-                        <div class="feature">
-                            <h3>Notificações Automáticas</h3>
-                            <p>Envie confirmações e lembretes automáticos por e-mail.</p>
-                        </div>
-                        <div class="feature">
-                            <h3>Termos de Aceite</h3>
-                            <p>Gere e imprima termos de aceite personalizados.</p>
-                        </div>
-                    </div>
+                    </section>
                 </main>
             </div>
         </div>
