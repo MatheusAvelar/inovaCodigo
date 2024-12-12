@@ -89,10 +89,9 @@
                 </main>
             </div>
         </div>
+        <footer>
+            <p>&copy; 2024 InkManager. Todos os direitos reservados. | <a href="#contact">Entre em contato</a></p>
+        </footer>
     </div>
-
-    <footer>
-        <p>&copy; 2024 InkManager. Todos os direitos reservados. | <a href="#contact">Entre em contato</a></p>
-    </footer>
 </body>
 </html>
