@@ -43,6 +43,24 @@
         .settings-icon {
             font-size: 18px;
         }
+        
+        .feature {
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .feature h3 {
+            color: #e67e22;
+            margin-bottom: 10px;
+        }
+
     </style>
 </head>
 <body>
