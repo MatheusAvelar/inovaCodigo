@@ -343,43 +343,6 @@ unset($_SESSION['status'], $_SESSION['message']);
             }
         });
 
-        /*document.getElementById('date1').addEventListener('change', function() {
-            const date = this.value;
-            
-            fetch('php/verificar_horarios.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: 'date1=' + encodeURIComponent(date)
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                const errorMessageElement = document.getElementById('date1-error');
-                const resultadosElement = document.getElementById('resultados');
-                
-                // Se houver horários agendados
-                if (data.sucesso && data.horarios.length > 0) {
-                    errorMessageElement.style.color = 'green';  // Verde claro
-                    errorMessageElement.innerText = 'Horários já agendados nesta data:';
-
-                    // Exibe os horários
-                    resultadosElement.innerHTML = ''; // Limpar resultados anteriores
-                    data.horarios.forEach(item => {
-                        const horarioItem = document.createElement('div');
-                        horarioItem.innerText = `Maca: ${item.maca} Inicio: ${item.start_time} horas | Fim: ${item.end_time} horas`;
-                        resultadosElement.appendChild(horarioItem);
-                    });
-                } else {
-                    errorMessageElement.style.color = 'red';  // Vermelho para erro
-                    errorMessageElement.innerText = data.mensagem || 'Nenhum horário agendado nesta data.';
-                    resultadosElement.innerHTML = '';  // Limpar resultados se não houver horários
-                }
-            })
-            .catch(error => console.error('Erro:', error));
-        });*/
-        
         document.getElementById('date1').addEventListener('change', function () {
             const date = this.value;
             

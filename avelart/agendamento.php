@@ -146,6 +146,20 @@ unset($_SESSION['form_data']);
                     <input type="date" id="date1" name="date1" value="<?= htmlspecialchars($form_data['date1'] ?? '') ?>">
                     <div id="date1-error" class="error-message"><?= $errors['date1'] ?? '' ?></div>
 
+                    <!-- Lista de horários -->
+                    <table id="resultados" border="1" style="display: none;">
+                        <thead>
+                            <tr>
+                                <th>Maca</th>
+                                <th>Início</th>
+                                <th>Fim</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Os dados serão inseridos aqui -->
+                        </tbody>
+                    </table><br>
+
                     <label for="start-time1">Horário Inicial:</label>
                     <input type="time" id="start-time1" name="start-time1" value="<?= htmlspecialchars($form_data['start-time1'] ?? '') ?>">
                     <div id="start-time1-error" class="error-message"><?= $errors['start-time1'] ?? '' ?></div>
@@ -314,6 +328,63 @@ unset($_SESSION['form_data']);
                 sessionStorage.removeItem('status');
                 sessionStorage.removeItem('message');
             }
+        });
+
+        document.getElementById('date1').addEventListener('change', function () {
+            const date = this.value;
+            
+            fetch('php/verificar_horarios.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'date1=' + encodeURIComponent(date)
+            })
+            .then(response => response.json())
+            .then(data => {
+                const errorMessageElement = document.getElementById('date1-error');
+                const resultadosTable = document.getElementById('resultados'); // A tabela
+                const resultadosElement = resultadosTable.querySelector('tbody'); // O tbody dentro da tabela
+
+                // Certifique-se de que a tabela e o tbody existem
+                if (!resultadosTable || !resultadosElement) {
+                    console.error("Tabela ou tbody não encontrados no DOM.");
+                    return;
+                }
+
+                // Limpar a tabela antes de adicionar novos resultados
+                resultadosElement.innerHTML = '';
+
+                // Se houver horários agendados
+                if (data.sucesso && data.horarios.length > 0) {
+                    // Exibe a tabela
+                    resultadosTable.style.display = 'table'; // Torna a tabela visível
+
+                    errorMessageElement.style.color = 'green'; // Verde claro
+                    errorMessageElement.innerText = 'Horários já agendados nesta data:';
+
+                    // Preenche a tabela com os horários
+                    data.horarios.forEach(item => {
+                        const row = resultadosElement.insertRow(); // Adiciona uma nova linha à tabela
+                        
+                        const macaCell = row.insertCell(0); // Cria a célula para 'Maca'
+                        const startTimeCell = row.insertCell(1); // Cria a célula para 'Início'
+                        const endTimeCell = row.insertCell(2); // Cria a célula para 'Fim'
+                        
+                        // Preenche as células com os dados
+                        macaCell.innerText = item.maca;
+                        startTimeCell.innerText = item.start_time;
+                        endTimeCell.innerText = item.end_time;
+                    });
+                } else {
+                    // Oculta a tabela se não houver dados
+                    resultadosTable.style.display = 'none'; // Oculta a tabela
+
+                    errorMessageElement.style.color = 'red'; // Vermelho para erro
+                    errorMessageElement.innerText = data.mensagem || 'Nenhum horário agendado nesta data.';
+                }
+            })
+            .catch(error => console.error('Erro:', error));
         });
     </script>
 </body>
