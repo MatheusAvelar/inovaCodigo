@@ -1,11 +1,14 @@
 <?php
 include 'utils.php';
 
-try {
-    $conn = conectaBanco();
-} catch (Exception $e) {
-    die("Erro: " . $e->getMessage());
-}
+// Configuração da conexão com o banco de dados
+$servername = "127.0.0.1:3306";
+$username = "u221588236_root";
+$password = "Camila@307";
+$dbname = "u221588236_controle_finan";
+
+// Criando a conexão
+$conn = new mysqli($servername, $username, $password, $dbname);
 
 $usuarioLogado = $_SESSION['id'];
 $perfilUsuario = $_SESSION['perfil_id'];
