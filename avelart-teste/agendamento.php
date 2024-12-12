@@ -158,7 +158,7 @@ unset($_SESSION['status'], $_SESSION['message']);
                     <div id="date1-error" class="error-message"></div>
 
                     <!-- Lista de horários -->
-                    <div id="resultados" class="horarios"></div>
+                    <!--<div id="resultados" class="horarios"></div>-->
 
                     <table id="resultados" border="1" style="display: none;">
                         <thead>
@@ -380,10 +380,10 @@ unset($_SESSION['status'], $_SESSION['message']);
             .catch(error => console.error('Erro:', error));
         });*/
         
-        document.getElementById('date1').addEventListener('change', function() {
+        document.getElementById('date1').addEventListener('change', function () {
             const date = this.value;
             
-            fetch('php/verificar_horarios.php', {
+            fetch('PHP/verificar_horarios.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
@@ -393,18 +393,24 @@ unset($_SESSION['status'], $_SESSION['message']);
             .then(response => response.json())
             .then(data => {
                 const errorMessageElement = document.getElementById('date1-error');
-                const resultadosElement = document.getElementById('resultados').getElementsByTagName('tbody')[0];
-                const resultadosTable = document.getElementById('resultados');
-                
+                const resultadosTable = document.getElementById('resultados'); // A tabela
+                const resultadosElement = resultadosTable.querySelector('tbody'); // O tbody dentro da tabela
+
+                // Certifique-se de que a tabela e o tbody existem
+                if (!resultadosTable || !resultadosElement) {
+                    console.error("Tabela ou tbody não encontrados no DOM.");
+                    return;
+                }
+
                 // Limpar a tabela antes de adicionar novos resultados
-                resultadosElement.innerHTML = ''; 
+                resultadosElement.innerHTML = '';
 
                 // Se houver horários agendados
                 if (data.sucesso && data.horarios.length > 0) {
                     // Exibe a tabela
                     resultadosTable.style.display = 'table'; // Torna a tabela visível
 
-                    errorMessageElement.style.color = 'green';  // Verde claro
+                    errorMessageElement.style.color = 'green'; // Verde claro
                     errorMessageElement.innerText = 'Horários já agendados nesta data:';
 
                     // Preenche a tabela com os horários
@@ -424,13 +430,12 @@ unset($_SESSION['status'], $_SESSION['message']);
                     // Oculta a tabela se não houver dados
                     resultadosTable.style.display = 'none'; // Oculta a tabela
 
-                    errorMessageElement.style.color = 'red';  // Vermelho para erro
+                    errorMessageElement.style.color = 'red'; // Vermelho para erro
                     errorMessageElement.innerText = data.mensagem || 'Nenhum horário agendado nesta data.';
                 }
             })
             .catch(error => console.error('Erro:', error));
         });
-
     </script>
 </body>
 
