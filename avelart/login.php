@@ -7,7 +7,45 @@
     <title>Agendamento de Macas</title>
     <link rel="icon" href="img/ico.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css">
-    
+    <style>
+        #menu ul li { 
+            display: inline-block; 
+        }
+        /* Estilo básico do dropdown */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Estilo para a engrenagem */
+        .settings-icon {
+            font-size: 18px;
+        }
+    </style>
 </head>
 
 <body>
@@ -20,13 +58,12 @@
     </header>
     
     <div class="container">
-        <div id="message-container">
-            <?php if (isset($status) && isset($message)) : ?>
-                <div class="message <?= $status ?>">
-                    <?= $message ?>
-                </div>
-            <?php endif; ?>
-        </div> 
+        <nav id="menu"> 
+            <ul>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="contato.php">Contato</a></li>
+            </ul> 
+        </nav>
         <div class="grid">
             <div class="maca">
                 <form action="php/auth.php" method="POST">
