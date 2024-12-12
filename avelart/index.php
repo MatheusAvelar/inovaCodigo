@@ -8,68 +8,97 @@
     <link rel="stylesheet" href="css/style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
-        /* Responsividade para telas pequenas */
-        @media (max-width: 768px) {
-            .features {
-                flex-direction: column;
-                gap: 10px;
-                padding: 0 10px;
-            }
-
-            .feature {
-                max-width: 100%;
-                margin: 0 auto;
-            }
-
-            nav#menu ul {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                padding: 0;
-            }
-
-            nav#menu ul li {
-                margin-bottom: 10px;
-            }
-
-            nav#menu ul li a {
-                font-size: 1em;
-            }
-
-            .welcome-section h2 {
-                font-size: 2em;
-            }
-
-            .welcome-section p {
-                font-size: 1em;
-            }
-
-            footer p {
-                font-size: 0.9em;
-                text-align: center;
-            }
+        #menu ul li { 
+            display: inline-block; 
+        }
+        /* Estilo básico do dropdown */
+        .dropdown {
+            position: relative;
+            display: inline-block;
         }
 
-        /* Ajustes para telas muito pequenas */
-        @media (max-width: 480px) {
-            .feature-icon {
-                font-size: 2rem;
-            }
-
-            .feature h3 {
-                font-size: 1.2em;
-            }
-
-            .feature p {
-                font-size: 0.9em;
-            }
-
-            .logo {
-                max-width: 80px;
-                height: auto;
-            }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
         }
 
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Estilo para a engrenagem */
+        .settings-icon {
+            font-size: 18px;
+        }
+        
+        .welcome-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .welcome-section h2 {
+            font-size: 2.5em;
+            color: #e67e22;
+            margin-bottom: 10px;
+        }
+
+        .welcome-section p {
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        .features {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .feature {
+            text-align: center;
+            background: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            max-width: 300px;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .feature h3 {
+            font-size: 1.5em;
+            color: #e67e22;
+            margin-bottom: 10px;
+        }
+
+        .feature p {
+            font-size: 1em;
+            color: #666;
+        }
     </style>
 </head>
 <body>
