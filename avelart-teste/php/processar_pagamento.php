@@ -1,8 +1,8 @@
 <?php
 
 // Configurações iniciais do PagSeguro
-define('PAGSEGURO_EMAIL', 'seu-email@pagseguro.com.br');
-define('PAGSEGURO_TOKEN', 'SEU_TOKEN_PAGSEGURO');
+define('PAGSEGURO_EMAIL', 'matheus_valladao@hotmail.com');
+define('PAGSEGURO_TOKEN', '88E1B6800CFC49978ECE7C0B994C7EB0');
 define('PAGSEGURO_URL', 'https://ws.sandbox.pagseguro.uol.com.br/v2/checkout'); // Sandbox. Use https://ws.pagseguro.uol.com.br/v2/checkout para produção.
 
 // Verifique se os dados foram enviados

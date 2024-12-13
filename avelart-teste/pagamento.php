@@ -74,7 +74,7 @@
 <body>
     <div class="payment-container">
         <h2>Pagamento via PagSeguro</h2>
-        <form id="paymentForm" method="POST" action="processar_pagseguro.php">
+        <form id="paymentForm" method="POST" action="php/processar_pagseguro.php">
             <div class="form-group">
                 <label for="name">Nome Completo:</label>
                 <input type="text" id="name" name="name" required>
