@@ -3,7 +3,7 @@
 // Configurações iniciais do PagSeguro
 define('PAGSEGURO_EMAIL', 'matheus_valladao@hotmail.com');
 define('PAGSEGURO_TOKEN', '88E1B6800CFC49978ECE7C0B994C7EB0');
-define('PAGSEGURO_URL', 'https://ws.sandbox.pagseguro.uol.com.br/v2/checkout'); // Sandbox. Use https://ws.pagseguro.uol.com.br/v2/checkout para produção.
+define('PAGSEGURO_URL', 'https://ws.sandbox.pagbank.com.br/v2/checkout'); // Sandbox. Use https://ws.pagseguro.uol.com.br/v2/checkout para produção.
 
 // Verifique se os dados foram enviados
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
