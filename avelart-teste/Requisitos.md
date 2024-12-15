@@ -33,3 +33,21 @@ Sem Melhorias
 - [ ] Enviar email com um formulário de perguntas.
 - [ ] Vincular formulário a tabela de dados, para gerar o PDF.
 - [ ] Criar tela para visualizar e baixar os PDFs preenchidos após o envio do email.
+
+### Alterações
+- [ ] Reenvio de email para edição de agendamento (Data)
+- [ ] Assinatura Digital
+- [ ] PDF deve conter as Assinaturas (Cliente, Responsavel e Tatuador) 
+- [ ] RG não é obrigatório
+- [ ] Envio de documentos caso seja menor de idade (Responsavel e Cliente)
+- [ ] Filtrar horarios agendados incial do mes atual (a partir do dia atual)
+- [ ] Depois de preencher o termo, enviar uma confirmação de termo preenchido
+- [ ] Mostrar somente 1 termo de cada dia para cada cliente
+- [ ] Bem vindo (Ortografia)
+- [ ] Incluir termo de LGPD no termo
+- [ ] Incluir LGPD no site (Tabela, estrutura)
+- [ ] Pagina para gerenciamento de Macas
+- [ ] Criar agendamento para outros usuários (Master)
+- [ ] Olhar valor Wpp
+- [ ] Sincroninizar Google Calendario
+ 
