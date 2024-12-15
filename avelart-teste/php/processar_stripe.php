@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 // Caminho para a pasta onde o código Stripe foi baixado
-require_once('stripe-php/init.php');  // Altere o caminho conforme necessário
+require_once('../stripe-php/init.php');  // Altere o caminho conforme necessário
 
 // Definir a chave da API do Stripe
 \Stripe\Stripe::setApiKey('sk_test_51QVXcjDl7Fi26zyynbuqFrvethFcM92kWyyb98XUeGW16agStI8iswpqtu9TmuxqQDXFxwgwrhCrNlIgUWPmKG1U00ZBGsCFnQ'); // Substitua com sua chave secreta
