@@ -1,9 +1,10 @@
 <?php
-// Habilitar exibição de erros no PHP para debug
+// Habilitar exibição de erros no PHP (para debug)
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-require_once('vendor/autoload.php');  // Certifique-se de que o caminho está correto para o Stripe
+// Caminho para a pasta onde o código Stripe foi baixado
+require_once(__DIR__ . '/../stripe-php/init.php');  // Altere o caminho conforme necessário
 
 // Definir a chave da API do Stripe
 \Stripe\Stripe::setApiKey('sk_test_51QVXcjDl7Fi26zyynbuqFrvethFcM92kWyyb98XUeGW16agStI8iswpqtu9TmuxqQDXFxwgwrhCrNlIgUWPmKG1U00ZBGsCFnQ'); // Substitua com sua chave secreta
@@ -12,7 +13,7 @@ require_once('vendor/autoload.php');  // Certifique-se de que o caminho está co
 $response = ['status' => 'error', 'message' => ''];
 
 try {
-    // Simular recebendo o token gerado no frontend
+    // Receber o token enviado pelo frontend
     $token = $_POST['stripeToken']; // Esse é o token enviado pelo frontend
 
     if (!$token) {
