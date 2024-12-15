@@ -1,5 +1,5 @@
 <?php
-// Habilitar exibição de erros no PHP (para debug)
+// Habilitar exibição de erros no PHP para debug
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
@@ -12,16 +12,11 @@ require_once('vendor/autoload.php');  // Certifique-se de que o caminho está co
 $response = ['status' => 'error', 'message' => ''];
 
 try {
-    // Verificar se o token foi enviado
-    if (!isset($_POST['stripeToken'])) {
-        throw new Exception("Token do cartão não encontrado.");
-    }
-
+    // Simular recebendo o token gerado no frontend
     $token = $_POST['stripeToken']; // Esse é o token enviado pelo frontend
 
-    // Verificar se o token não está vazio
-    if (empty($token)) {
-        throw new Exception("Token do cartão está vazio.");
+    if (!$token) {
+        throw new Exception("Token do cartão não encontrado.");
     }
 
     // Criar a intenção de pagamento
@@ -49,6 +44,5 @@ try {
 }
 
 // Retornar resposta como JSON
-header('Content-Type: application/json');
-echo json_encode($response);
-?>
+header('Content-Type: application/json');  // Cabeçalho correto
+echo json_encode($response);  // Enviar a resposta JSON
