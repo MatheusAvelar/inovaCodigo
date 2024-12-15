@@ -112,7 +112,7 @@
     <!-- Stripe.js Script -->
     <script src="https://js.stripe.com/v3/"></script>
     <script>
-        var stripe = Stripe('pk_live_51QVXcjDl7Fi26zyyLnlI9rmR4q9UDpWfbkH1ehLnVR0c9Lw4dAGVHddCyk0WSPjoxVGEvYlOfV0pDIsW5J6778Ll00PMbAtB77'); // Substitua com sua chave pública
+        var stripe = Stripe('pk_test_51QVXcjDl7Fi26zyyYy3z4WkVJr7CLzkV96c9EVuBlFIsUhnJ3HVlAujoXSEzhBWB8XMVVd7jnLwast5vKPfe0Ss300Wpjvpgsk'); // Substitua com sua chave pública
         var elements = stripe.elements();
 
         // Criação do Stripe Card Element

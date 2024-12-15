@@ -4,7 +4,7 @@
 require_once('avelart/stripe-php/init.php');  // Caminho para a pasta stripe-php extraída
 
 // Configurações do Stripe
-\Stripe\Stripe::setApiKey(''); // Substitua com sua chave secreta
+\Stripe\Stripe::setApiKey('sk_test_51QVXcjDl7Fi26zyynbuqFrvethFcM92kWyyb98XUeGW16agStI8iswpqtu9TmuxqQDXFxwgwrhCrNlIgUWPmKG1U00ZBGsCFnQ'); // Substitua com sua chave secreta
 
 // Recebe os dados enviados via POST
 $input = json_decode(file_get_contents('php://input'), true);
