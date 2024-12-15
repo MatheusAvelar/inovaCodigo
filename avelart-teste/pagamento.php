@@ -65,7 +65,7 @@
                         var formData = new FormData(form);
                         formData.append('stripeToken', result.token.id);
 
-                        fetch('https://avelart-teste.inovacodigo.com.br/php/processar_stripe.php', {
+                        fetch('php/processar_stripe.php', {
                             method: 'POST',
                             body: formData,
                         })
