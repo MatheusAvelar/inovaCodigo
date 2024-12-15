@@ -30,11 +30,9 @@
     <script src="https://js.stripe.com/v3/"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Inicialize o Stripe
-            var stripe = Stripe('pk_test_51QVXcjDl7Fi26zyyYy3z4WkVJr7CLzkV96c9EVuBlFIsUhnJ3HVlAujoXSEzhBWB8XMVVd7jnLwast5vKPfe0Ss300Wpjvpgsk'); // Substitua pela sua chave pública de teste
+            var stripe = Stripe('pk_test_51QVXcjDl7Fi26zyyYy3z4WkVJr7CLzkV96c9EVuBlFIsUhnJ3HVlAujoXSEzhBWB8XMVVd7jnLwast5vKPfe0Ss300Wpjvpgsk'); // Chave pública do Stripe
             var elements = stripe.elements();
 
-            // Prepare o formulário e o elemento de cartão
             var style = {
                 base: {
                     color: "#32325d",
@@ -51,17 +49,14 @@
             var card = elements.create("card", { style: style });
             card.mount("#card-element");
 
-            // Manipulador de envio do formulário
             var form = document.getElementById('paymentForm');
             form.addEventListener('submit', function (event) {
                 event.preventDefault();
 
                 stripe.createToken(card).then(function (result) {
                     if (result.error) {
-                        // Exibir erro no frontend
                         document.getElementById('error-message').textContent = result.error.message;
                     } else {
-                        // Enviar o token para o servidor
                         var formData = new FormData(form);
                         formData.append('stripeToken', result.token.id);
 
@@ -71,11 +66,10 @@
                         })
                         .then(response => response.json())  // Espera um JSON válido do servidor
                         .then(data => {
-                            // Se a resposta for sucesso
+                            console.log("Resposta do servidor:", data); // Adicionado para depuração
                             if (data.status === 'success') {
                                 alert('Pagamento realizado com sucesso!');
                             } else {
-                                // Exibir erro
                                 alert('Erro: ' + data.message);
                             }
                         })
@@ -87,7 +81,6 @@
                 });
             });
         });
-
     </script>
 </body>
 </html>

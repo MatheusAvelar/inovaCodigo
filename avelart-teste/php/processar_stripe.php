@@ -12,11 +12,16 @@ require_once('vendor/autoload.php');  // Certifique-se de que o caminho está co
 $response = ['status' => 'error', 'message' => ''];
 
 try {
-    // Simular recebendo o token gerado no frontend
+    // Verificar se o token foi enviado
+    if (!isset($_POST['stripeToken'])) {
+        throw new Exception("Token do cartão não encontrado.");
+    }
+
     $token = $_POST['stripeToken']; // Esse é o token enviado pelo frontend
 
-    if (!$token) {
-        throw new Exception("Token do cartão não encontrado.");
+    // Verificar se o token não está vazio
+    if (empty($token)) {
+        throw new Exception("Token do cartão está vazio.");
     }
 
     // Criar a intenção de pagamento
