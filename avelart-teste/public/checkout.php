@@ -6,7 +6,7 @@ require_once '../secrets.php';
 $stripe = new \Stripe\StripeClient($stripeSecretKey);
 header('Content-Type: application/json');
 
-$YOUR_DOMAIN = 'https://avelart-teste.inovacodigo.com.br/';//https://avelart-teste.inovacodigo.com.br/public/
+$YOUR_DOMAIN = '//https://avelart-teste.inovacodigo.com.br/public/';
 
 $checkout_session = $stripe->checkout->sessions->create([
   'ui_mode' => 'embedded',
