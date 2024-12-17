@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Credenciais da API PagSeguro
     $pagbank_email = "matheus_valladao@hotmail.com";
     $pagbank_token = "75acd1e9-fb07-4c42-96ff-3ec516f8fe4c894e4de44aceb872f623a723dc9142b455e8-f737-427d-8970-945a76961132";
-    $api_url = "https://sandbox.api.pagseguro.com/v2/checkout";
+    $api_url = "https://sandbox.api.pagseguro.com/checkouts";
 
     // Valida o valor recebido
     $valor = floatval($_POST['valor'] ?? 0);
