@@ -37,6 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ],
             ],
             'mode' => 'payment',
+            'success_url' => 'http://localhost/sucesso.php', // Substitua pelo seu URL de sucesso
+            'cancel_url' => 'http://localhost/cancelado.php', // Substitua pelo seu URL de cancelamento
         ]);
 
         // Armazena o link gerado
