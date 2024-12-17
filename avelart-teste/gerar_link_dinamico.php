@@ -48,7 +48,7 @@
                         <div class="success">
                             Link gerado com sucesso! <br>
                             <a href="${data.payment_url}" target="_blank">Ir para o Pagamento</a>
-                        </div>`;
+                        </div><br><br>`;
                 } else {
                     responseDiv.innerHTML = `<div class="error">${data.message}</div>`;
                 }

@@ -1,11 +1,10 @@
 <?php
-//require_once __DIR__ . '/stripe-php/init.php';
 require_once __DIR__ . '/../stripe-php/init.php';
-require_once 'config.php'; // Inclui a configuração da chave privada
+require_once 'config.php';
 
-\Stripe\Stripe::setApiKey(STRIPE_SECRET_KEY); // Define a chave secreta do Stripe
+\Stripe\Stripe::setApiKey(STRIPE_SECRET_KEY);
 
-header('Content-Type: application/json'); // Define o tipo de resposta JSON
+header('Content-Type: application/json');
 
 $response = ['success' => false, 'message' => '', 'payment_url' => ''];
 
