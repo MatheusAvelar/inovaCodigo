@@ -18,6 +18,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $valorCentavos = $valor * 100; // Converte para centavos
 
         try {
+            // Debug: Imprimir os dados antes de enviar para o Stripe
+            echo '<pre>';
+            print_r([
+                'line_items' => [
+                    [
+                        'price_data' => [
+                            'currency' => 'brl',
+                            'product_data' => [
+                                'name' => 'Tatuagem Personalizada', // Nome do produto
+                            ],
+                            'unit_amount' => $valorCentavos, // Valor em centavos
+                        ],
+                        'quantity' => 1,
+                    ],
+                ]
+            ]);
+            echo '</pre>';
+
             // Cria um link de pagamento no Stripe
             $paymentLink = \Stripe\PaymentLink::create([
                 'line_items' => [
@@ -38,6 +56,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $paymentLinkUrl = $paymentLink->url;
 
         } catch (Exception $e) {
+            // Debug: Captura detalhada do erro
+            echo '<pre>';
+            var_dump($e->getMessage());  // Mensagem do erro
+            var_dump($e->getTraceAsString());  // Detalhes do trace
+            echo '</pre>';
+
             $error = $e->getMessage(); // Captura o erro, se ocorrer
         }
     } else {
