@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </style>
 </head>
 <body>
-    <h2>Gerar Link de Pagamento - Valor Dinâmico</h2>
+    <h2>Gerar Link de Pagamento - Valor Dinâmicos</h2>
     <form method="POST" action="">
         <label for="valor">Informe o valor da tatuagem (R$):</label>
         <input type="text" id="valor" name="valor" placeholder="Ex: 150.00" required>
