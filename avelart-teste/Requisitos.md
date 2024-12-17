@@ -36,6 +36,7 @@ Sem Melhorias
 
 ### Alterações
 - [ ] Reenvio de email para edição de agendamento (Data)
+- [ ] Pagamento via Link
 - [ ] Assinatura Digital
 - [ ] PDF deve conter as Assinaturas (Cliente, Responsavel e Tatuador) 
 - [ ] RG não é obrigatório
