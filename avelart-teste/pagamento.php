@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php if (!$success): ?>
         <form id="payment-form" method="POST">
             <div id="card-element"></div>
-            <button type="submit" id="submit">Pagar R$ 20,00</button>
+            <button type="submit" id="pay-button">Pagar R$ 20,00</button>
             <p id="error-message"></p>
         </form>
     <?php endif; ?>
