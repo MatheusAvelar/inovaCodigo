@@ -1,9 +1,6 @@
 <?php
-if(!file_exists('../stripe-php/init.php')){
-    die('Arquivo ../stripe-php/init.php não encontrado. Verifique o caminho.');
-}
 //require_once __DIR__ . '/stripe-php/init.php';
-require_once '/home/u221588236/domains/inovacodigo.com.br/public_html/avelart-teste/stripe-php/init.php';
+require_once __DIR__ . '/../stripe-php/init.php';
 require_once 'config.php'; // Inclui a configuração da chave privada
 
 \Stripe\Stripe::setApiKey(STRIPE_SECRET_KEY); // Define a chave secreta do Stripe
