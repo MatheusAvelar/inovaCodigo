@@ -49,9 +49,11 @@ curl_close($ch);
 // Processa a resposta da API (em XML)
 $xml = simplexml_load_string($response);
 
+var_dump($response);
+
 if ($xml && isset($xml->code)) {
     // Gera o link de pagamento com o código retornado
-    $paymentLink = "https://pagseguro.uol.com.br/v2/checkout/payment.html?code={$xml->code}";
+    $paymentLink = "https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code={$xml->code}";
     echo json_encode(['success' => true, 'payment_url' => $paymentLink]);
 } else {
     echo json_encode(['success' => false, 'message' => 'Falha ao gerar o link de pagamento.']);
