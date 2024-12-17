@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once __DIR__ . '/../stripe-php/init.php';
 require_once 'config.php';
 
@@ -45,6 +46,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ]);
 
         // Resposta JSON com o link de pagamento
+        $_SESSION['status'] = 'success';
+        $_SESSION['message'] = 'Link gerado';
         $response['success'] = true;
         $response['payment_url'] = $checkoutSession->url;
 

@@ -94,7 +94,7 @@ unset($_SESSION['status'], $_SESSION['message']);
         <br>
         <div id="message-container">
             <?php if (isset($status) && isset($message)) : ?>
-                <div class="message <?= $status ?>" id="message">
+                <div class="message <?= $status ?>">
                     <?= $message ?>
                 </div>
             <?php endif; ?>
@@ -136,7 +136,6 @@ unset($_SESSION['status'], $_SESSION['message']);
                 if (data.success) {
                     const paymentUrl = encodeURIComponent(data.payment_url);
                     const whatsappMessage = encodeURIComponent("Aqui está o link para realizar o pagamento da tatuagem: " + data.payment_url);
-                    
                     responseDiv.innerHTML = `
                             <a href="https://wa.me/?text=${whatsappMessage}" target="_blank" 
                             style="display: inline-block; margin-top: 10px; text-decoration: none; background-color: #25D366; color: white; padding: 8px 12px; border-radius: 5px; font-weight: bold;">
