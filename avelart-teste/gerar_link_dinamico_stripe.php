@@ -116,7 +116,7 @@ unset($_SESSION['status'], $_SESSION['message']);
     </div>
     <script>
         const form = document.getElementById('paymentForm');
-        const responseDiv = document.getElementById('message');
+        const responseDiv = document.getElementById('response');
 
         form.addEventListener('submit', async function (e) {
             e.preventDefault();
