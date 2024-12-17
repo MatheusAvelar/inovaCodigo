@@ -2,7 +2,8 @@
 if (!file_exists('../stripe-php/init.php')) {
     die('Arquivo ../stripe-php/init.php não encontrado. Verifique o caminho.' + __DIR__ );
 }
-
+echo __DIR__ . '/stripe-php/init.php';
+/*
 // Inclua o Stripe manualmente
 require_once 'stripe-php/init.php';
 
@@ -24,14 +25,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'description' => 'Pagamento Simples',
                 'source' => $token,
             ]);*/
-            $success = true; // Pagamento bem-sucedido
+            /*$success = true; // Pagamento bem-sucedido
         } catch (Exception $e) {
             $error = $e->getMessage(); // Captura o erro
         }
     } else {
         $error = 'Token do Stripe não foi gerado.';
     }
-}
+}*/
 ?>
 
 <!DOCTYPE html>
@@ -52,19 +53,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <h2>Checkout Simples - Stripe</h2>
 
-    <?php if ($success): ?>
+    <?php //if ($success): ?>
         <p class="success">Pagamento realizado com sucesso!</p>
-    <?php elseif ($error): ?>
+    <?php //elseif ($error): ?>
         <p class="error">Erro: <?php echo htmlspecialchars($error); ?></p>
-    <?php endif; ?>
+    <?php //endif; ?>
 
-    <?php if (!$success): ?>
+    <?php //if (!$success): ?>
         <form id="payment-form" method="POST">
             <div id="card-element"></div>
             <button type="submit" id="submit">Pagar R$ 20,00</button>
             <p id="error-message"></p>
         </form>
-    <?php endif; ?>
+    <?php //endif; ?>
 
     <script>
         const stripe = Stripe("pk_test_51QVXcjDl7Fi26zyyYy3z4WkVJr7CLzkV96c9EVuBlFIsUhnJ3HVlAujoXSEzhBWB8XMVVd7jnLwast5vKPfe0Ss300Wpjvpgsk"); // Substitua pela sua chave pública
