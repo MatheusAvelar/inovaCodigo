@@ -7,12 +7,13 @@ $pagbank_token = "75acd1e9-fb07-4c42-96ff-3ec516f8fe4c894e4de44aceb872f623a723dc
 $api_url = "https://ws.pagseguro.uol.com.br/v2/checkout";
 
 // Validação do valor informado
-if (!isset($_POST['valor']) || empty($_POST['valor'])) {
+/*if (!isset($_POST['valor']) || empty($_POST['valor'])) {
     echo json_encode(['success' => false, 'message' => 'O valor não foi informado.']);
     exit;
-}
+}*/
 
-$valor = floatval($_POST['valor']);
+//$valor = floatval($_POST['valor']);
+$valor = floatval(1);
 if ($valor <= 0) {
     echo json_encode(['success' => false, 'message' => 'Valor inválido.']);
     exit;
