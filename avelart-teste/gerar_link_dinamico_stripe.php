@@ -67,7 +67,7 @@ unset($_SESSION['status'], $_SESSION['message']);
             </a>
         </div>
         <div class="welcome-message">
-            Bem Vindo, <?= htmlspecialchars($_SESSION['usuario_nome']) ?>!
+            Bem-vindo, <?= htmlspecialchars($_SESSION['usuario_nome']) ?>!
         </div>
     </header>
 
@@ -94,7 +94,7 @@ unset($_SESSION['status'], $_SESSION['message']);
         <br>
         <div id="message-container">
             <?php if (isset($status) && isset($message)) : ?>
-                <div class="message <?= $status ?>">
+                <div class="message <?= $status ?>" id="message">
                     <?= $message ?>
                 </div>
             <?php endif; ?>
@@ -116,7 +116,7 @@ unset($_SESSION['status'], $_SESSION['message']);
     </div>
     <script>
         const form = document.getElementById('paymentForm');
-        const responseDiv = document.getElementById('response');
+        const responseDiv = document.getElementById('message');
 
         form.addEventListener('submit', async function (e) {
             e.preventDefault();
