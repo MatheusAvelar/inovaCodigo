@@ -1,3 +1,56 @@
+<?php
+// Inclua a biblioteca do Stripe manualmente
+require_once __DIR__ . '/stripe-php/init.php';
+
+// Defina a chave secreta do Stripe
+\Stripe\Stripe::setApiKey('sk_test_51QVXcjDl7Fi26zyynbuqFrvethFcM92kWyyb98XUeGW16agStI8iswpqtu9TmuxqQDXFxwgwrhCrNlIgUWPmKG1U00ZBGsCFnQ'); // Substitua pela sua chave secreta
+
+// Inicialização de variáveis
+$paymentLinkUrl = '';
+$error = '';
+
+// Processamento do formulário
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $valor = $_POST['valor'] ?? '';
+
+    try {
+        // 1. Criação do Produto
+    $product = \Stripe\Product::create([
+        'name' => 'Tatuagem Personalizada',
+        'description' => 'Tatuagem feita sob medida',
+    ]);
+
+    // 2. Criação do Preço
+    $price = \Stripe\Price::create([
+        'unit_amount' => $valor * 100, // Valor em centavos
+        'currency' => 'brl',
+        'product' => $product->id,
+    ]);
+
+    // 3. Criação da Sessão de Checkout
+    $checkoutSession = \Stripe\Checkout\Session::create([
+        'payment_method_types' => ['card'],
+        'line_items' => [
+            [
+                'price' => $price->id,
+                'quantity' => 1,
+            ],
+        ],
+        'payment_intent_data' => [
+            'capture_method' => 'automatic',
+        ],
+        'success_url' => 'https://www.seusite.com/sucesso',
+        'cancel_url' => 'https://www.seusite.com/cancelado',
+    ]);
+
+    // Exibir o link gerado
+    echo 'Link de pagamento: <a href="' . $checkoutSession->url . '" target="_blank">Clique aqui para pagar em parcelas</a>';
+
+} catch (\Stripe\Exception\ApiErrorException $e) {
+    echo 'Erro ao criar o link de pagamento: ' . $e->getMessage();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -14,7 +67,7 @@
 </head>
 <body>
     <h2>Gerar Link de Pagamento - Valor Dinâmico</h2>
-    <form method="POST" action="php/gera_pagamento.php">
+    <form method="POST" action="">
         <label for="valor">Informe o valor da tatuagem (R$):</label>
         <input type="number" step="0.01" min="0.01" name="valor" id="valor" placeholder="Ex: 150.00" required>
         <button type="submit">Gerar Link de Pagamento</button>
