@@ -8,46 +8,46 @@ require_once __DIR__ . '/stripe-php/init.php';
 // Inicialização de variáveis
 $paymentLinkUrl = '';
 $error = '';
-
 // Processamento do formulário
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $valor = $_POST['valor'] ?? '';
 
     try {
         // 1. Criação do Produto
-    $product = \Stripe\Product::create([
-        'name' => 'Tatuagem Personalizada',
-        'description' => 'Tatuagem feita sob medida',
-    ]);
-
-    // 2. Criação do Preço
-    $price = \Stripe\Price::create([
-        'unit_amount' => $valor * 100, // Valor em centavos
-        'currency' => 'brl',
-        'product' => $product->id,
-    ]);
-
-    // 3. Criação da Sessão de Checkout
-    $checkoutSession = \Stripe\Checkout\Session::create([
-        'payment_method_types' => ['card'],
-        'line_items' => [
-            [
-                'price' => $price->id,
-                'quantity' => 1,
+        $product = \Stripe\Product::create([
+            'name' => 'Tatuagem Personalizada',
+            'description' => 'Tatuagem feita sob medida',
+        ]);
+    
+        // 2. Criação do Preço
+        $price = \Stripe\Price::create([
+            'unit_amount' => $valor * 100, // Valor em centavos
+            'currency' => 'brl',
+            'product' => $product->id,
+        ]);
+    
+        // 3. Criação da Sessão de Checkout
+        $checkoutSession = \Stripe\Checkout\Session::create([
+            'payment_method_types' => ['card'],
+            'line_items' => [
+                [
+                    'price' => $price->id,
+                    'quantity' => 1,
+                ],
             ],
-        ],
-        'payment_intent_data' => [
-            'capture_method' => 'automatic',
-        ],
-        'success_url' => 'https://www.seusite.com/sucesso',
-        'cancel_url' => 'https://www.seusite.com/cancelado',
-    ]);
-
-    // Exibir o link gerado
-    echo 'Link de pagamento: <a href="' . $checkoutSession->url . '" target="_blank">Clique aqui para pagar em parcelas</a>';
-
-} catch (\Stripe\Exception\ApiErrorException $e) {
-    echo 'Erro ao criar o link de pagamento: ' . $e->getMessage();
+            'payment_intent_data' => [
+                'capture_method' => 'automatic',
+            ],
+            'success_url' => 'https://www.seusite.com/sucesso',
+            'cancel_url' => 'https://www.seusite.com/cancelado',
+        ]);
+    
+        // Exibir o link gerado
+        echo 'Link de pagamento: <a href="' . $checkoutSession->url . '" target="_blank">Clique aqui para pagar em parcelas</a>';
+    
+    } catch (\Stripe\Exception\ApiErrorException $e) {
+        echo 'Erro ao criar o link de pagamento: ' . $e->getMessage();
+    }
 }
 ?>
 
