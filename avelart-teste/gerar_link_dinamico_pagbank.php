@@ -11,8 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Credenciais da API PagSeguro
     $pagbank_email = "matheus_valladao@hotmail.com";
     $pagbank_token = "88E1B6800CFC49978ECE7C0B994C7EB0";
-    //$api_url = "https://ws.sandbox.pagbank.com.br/v2/checkout";
-    $api_url = "https://sandbox.api.pagseguro.com/checkouts";
+    $api_url = "https://ws.sandbox.pagbank.com.br/v2/checkout";
+    //$api_url = "https://sandbox.api.pagseguro.com/checkouts";
     //$api_url = "https://sandbox.api.pagseguro.com/orders";
 
     // Valida o valor recebido
@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Processa a resposta da API
             $xml = simplexml_load_string($result);
             if ($xml && isset($xml->code)) {
-                $paymentLink = "https://pagseguro.uol.com.br/v2/checkout/payment.html?code={$xml->code}";
+                $paymentLink = "https://pagamento.pagseguro.uol.com.br/pagamento?code={$xml->code}";
                 $response = ['success' => true, 'payment_url' => $paymentLink];
             } else {
                 $response = ['success' => false, 'message' => 'Resposta inválida da API.', 'debug' => $result];
