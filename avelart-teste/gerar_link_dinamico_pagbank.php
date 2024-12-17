@@ -30,11 +30,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'redirectURL' => 'https://seusite.com/obrigado'
         ]);
 
+        $headers = [
+            'Authorization: Bearer ' . $pagbank_token,
+            'Content-Type: application/x-www-form-urlencoded',
+        ];
+
+        
         // Inicializa o cURL
         $ch = curl_init($api_url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         $result = curl_exec($ch);
 
         // Imprime a resposta para depuração
