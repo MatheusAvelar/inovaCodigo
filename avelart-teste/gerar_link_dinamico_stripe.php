@@ -100,7 +100,7 @@ unset($_SESSION['status'], $_SESSION['message']);
             <?php endif; ?>
         </div>
 
-        <h2>Gerar Link de Pagamento - Valor Dinâmico</h2>
+        <h2>Gerar Link de Pagamento - Stripe</h2>
 
         <div class="grid">
             <div class="maca">
