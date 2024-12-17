@@ -1,7 +1,7 @@
 <?php
 if(!file_exists('../stripe-php/init.php')){
     die('Arquivo ../stripe-php/init.php não encontrado. Verifique o caminho.');
-}
+} //home/u221588236/domains/inovacodigo.com.br/public_html/avelart-teste/php/stripe-php/init.php
 require_once __DIR__ . '/stripe-php/init.php';
 require_once 'config.php'; // Inclui a configuração da chave privada
 
