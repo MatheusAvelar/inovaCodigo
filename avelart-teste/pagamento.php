@@ -2,7 +2,6 @@
 if (!file_exists('../stripe-php/init.php')) {
     die('Arquivo ../stripe-php/init.php não encontrado. Verifique o caminho.' + __DIR__ );
 }
-echo __DIR__ . '/stripe-php/init.php';
 ?>
 
 <!DOCTYPE html>
@@ -22,45 +21,5 @@ echo __DIR__ . '/stripe-php/init.php';
 </head>
 <body>
     <h2>Checkout Simples - Stripe</h2>
-
-    <?php //if ($success): ?>
-        <p class="success">Pagamento realizado com sucesso!</p>
-    <?php //elseif ($error): ?>
-        <p class="error">Erro: <?php echo htmlspecialchars($error); ?></p>
-    <?php //endif; ?>
-
-    <?php //if (!$success): ?>
-        <form id="payment-form" method="POST">
-            <div id="card-element"></div>
-            <button type="submit" id="submit">Pagar R$ 20,00</button>
-            <p id="error-message"></p>
-        </form>
-    <?php //endif; ?>
-
-    <script>
-        const stripe = Stripe("pk_test_51QVXcjDl7Fi26zyyYy3z4WkVJr7CLzkV96c9EVuBlFIsUhnJ3HVlAujoXSEzhBWB8XMVVd7jnLwast5vKPfe0Ss300Wpjvpgsk"); // Substitua pela sua chave pública
-        const elements = stripe.elements();
-        const cardElement = elements.create("card");
-
-        cardElement.mount("#card-element");
-
-        const form = document.getElementById("payment-form");
-
-        form.addEventListener("submit", async (event) => {
-            event.preventDefault();
-            const { token, error } = await stripe.createToken(cardElement);
-
-            if (error) {
-                document.getElementById("error-message").textContent = error.message;
-            } else {
-                const hiddenInput = document.createElement("input");
-                hiddenInput.setAttribute("type", "hidden");
-                hiddenInput.setAttribute("name", "stripeToken");
-                hiddenInput.setAttribute("value", token.id);
-                form.appendChild(hiddenInput);
-                form.submit();
-            }
-        });
-    </script>
 </body>
 </html>
