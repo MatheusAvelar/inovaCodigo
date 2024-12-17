@@ -36,7 +36,8 @@ Sem Melhorias
 
 ### Alterações
 - [ ] Reenvio de email para edição de agendamento (Data)
-- [ ] Pagamento via Link
+- [x] ~~*Pagamento via Link (Stripe)*~~ [17-12-2024]
+- [ ] Pagamento via link (PagBank)
 - [ ] Assinatura Digital
 - [ ] PDF deve conter as Assinaturas (Cliente, Responsavel e Tatuador) 
 - [ ] RG não é obrigatório
@@ -51,4 +52,5 @@ Sem Melhorias
 - [ ] Criar agendamento para outros usuários (Master)
 - [ ] Olhar valor Wpp
 - [ ] Sincroninizar Google Calendario
+- [ ] Jejum ? se a pessoa preencher o termo antes do dia
  
