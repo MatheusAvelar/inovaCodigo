@@ -8,6 +8,7 @@ require_once __DIR__ . '/stripe-php/init.php';
 // Inicialização de variáveis
 $paymentLinkUrl = '';
 $error = '';
+
 // Processamento do formulário
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $valor = $_POST['valor'] ?? '';
@@ -35,16 +36,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     'quantity' => 1,
                 ],
             ],
-            'mode' => 'payment', // Define que é um pagamento único
-            'success_url' => 'https://www.seusite.com/sucesso',
-            'cancel_url' => 'https://www.seusite.com/cancelado',
+            'mode' => 'payment',
         ]);
-    
-        // Exibir o link gerado
-        echo 'Link de pagamento: <a href="' . $checkoutSession->url . '" target="_blank">Clique aqui para pagar</a>';
-    
+
+        // Armazena o link gerado
+        $paymentLinkUrl = $checkoutSession->url;
+
     } catch (\Stripe\Exception\ApiErrorException $e) {
-        echo 'Erro ao criar o link de pagamento: ' . $e->getMessage();
+        $error = 'Erro ao criar o link de pagamento: ' . $e->getMessage();
     }
 }
 ?>
@@ -67,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <h2>Gerar Link de Pagamento - Valor Dinâmico</h2>
     <form method="POST" action="">
         <label for="valor">Informe o valor da tatuagem (R$):</label>
-        <input type="number" step="0.01" min="0.01" name="valor" id="valor" placeholder="Ex: 150.00" required>
+        <input type="text" name="valor" id="valor" placeholder="Ex: 150.00" required>
         <button type="submit">Gerar Link de Pagamento</button>
     </form>
 
@@ -80,5 +79,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php elseif ($error): ?>
         <p class="error"><?php echo htmlspecialchars($error); ?></p>
     <?php endif; ?>
+
+    <script>
+        // Aplicar máscara para o valor no formato 0.00
+        const valorInput = document.getElementById('valor');
+        valorInput.addEventListener('input', function (e) {
+            let value = e.target.value;
+
+            // Remove caracteres não numéricos
+            value = value.replace(/[^\d]/g, '');
+
+            // Converte para o formato 0.00
+            value = (parseInt(value, 10) / 100).toFixed(2);
+
+            e.target.value = value;
+        });
+    </script>
 </body>
 </html>
