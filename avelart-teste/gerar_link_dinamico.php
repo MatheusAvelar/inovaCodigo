@@ -1,6 +1,6 @@
 <?php
 // Inclua a biblioteca do Stripe manualmente
-require_once __DIR__ . '/stripe-php/init.php';
+require_once __DIR__ . 'stripe-php/init.php';
 
 // Defina a chave secreta do Stripe
 \Stripe\Stripe::setApiKey('sk_test_51QVXcjDl7Fi26zyynbuqFrvethFcM92kWyyb98XUeGW16agStI8iswpqtu9TmuxqQDXFxwgwrhCrNlIgUWPmKG1U00ZBGsCFnQ'); // Substitua pela sua chave secreta
