@@ -67,27 +67,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php endif; ?>
 
     <script>
+        // Inicializa o Stripe com sua chave pública
         const stripe = Stripe("pk_test_51QVXcjDl7Fi26zyyYy3z4WkVJr7CLzkV96c9EVuBlFIsUhnJ3HVlAujoXSEzhBWB8XMVVd7jnLwast5vKPfe0Ss300Wpjvpgsk"); // Substitua pela sua chave pública
         const elements = stripe.elements();
         const cardElement = elements.create("card");
 
+        // Monta o campo de cartão
         cardElement.mount("#card-element");
 
-        const form = document.getElementById("payment-form");
+        // Obtém o formulário
+        const paymentForm = document.getElementById("payment-form");
 
-        form.addEventListener("submit", async (event) => {
+        // Listener para envio do formulário
+        paymentForm.addEventListener("submit", async (event) => {
             event.preventDefault();
+
             const { token, error } = await stripe.createToken(cardElement);
 
             if (error) {
+                // Exibe a mensagem de erro
                 document.getElementById("error-message").textContent = error.message;
             } else {
+                // Cria um input hidden com o token do Stripe
                 const hiddenInput = document.createElement("input");
                 hiddenInput.setAttribute("type", "hidden");
                 hiddenInput.setAttribute("name", "stripeToken");
                 hiddenInput.setAttribute("value", token.id);
-                form.appendChild(hiddenInput);
-                form.submit();
+
+                // Adiciona o token ao formulário e envia
+                paymentForm.appendChild(hiddenInput);
+                paymentForm.submit();
             }
         });
     </script>
