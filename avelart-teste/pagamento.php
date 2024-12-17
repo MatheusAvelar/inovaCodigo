@@ -1,9 +1,14 @@
 <?php
+if (!file_exists('stripe-php/init.php')) {
+    die('Arquivo stripe-php/init.php não encontrado. Verifique o caminho.');
+}
+require_once 'stripe-php/init.php';
+
 // Inclua o Stripe manualmente
 require_once 'stripe-php/init.php';
 
 // Defina a chave secreta do Stripe
-\Stripe\Stripe::setApiKey('sk_test_51QVXcjDl7Fi26zyynbuqFrvethFcM92kWyyb98XUeGW16agStI8iswpqtu9TmuxqQDXFxwgwrhCrNlIgUWPmKG1U00ZBGsCFnQ'); // Substitua pela sua chave secreta
+//\Stripe\Stripe::setApiKey('sk_test_51QVXcjDl7Fi26zyynbuqFrvethFcM92kWyyb98XUeGW16agStI8iswpqtu9TmuxqQDXFxwgwrhCrNlIgUWPmKG1U00ZBGsCFnQ'); // Substitua pela sua chave secreta
 
 // Processamento do pagamento
 $success = false;
@@ -14,12 +19,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($token) {
         try {
-            $charge = \Stripe\Charge::create([
+            /*$charge = \Stripe\Charge::create([
                 'amount' => 2000, // Valor em centavos (R$20,00)
                 'currency' => 'brl',
                 'description' => 'Pagamento Simples',
                 'source' => $token,
-            ]);
+            ]);*/
             $success = true; // Pagamento bem-sucedido
         } catch (Exception $e) {
             $error = $e->getMessage(); // Captura o erro
