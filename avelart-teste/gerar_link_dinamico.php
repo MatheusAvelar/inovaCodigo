@@ -13,59 +13,35 @@ $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $valor = $_POST['valor'] ?? '';
 
-    // Validação do valor
-    if (is_numeric($valor) && $valor > 0) {
-        $valorCentavos = $valor * 100; // Converte para centavos
+    try {
+        // 1. Criação do Produto
+        $product = \Stripe\Product::create([
+            'name' => 'Tatuagem Personalizada',
+            'description' => 'Tatuagem feita sob medida',
+        ]);
 
-        try {
-            // Debug: Imprimir os dados antes de enviar para o Stripe
-            echo '<pre>';
-            print_r([
-                'line_items' => [
-                    [
-                        'price_data' => [
-                            'currency' => 'brl',
-                            'product_data' => [
-                                'name' => 'Tatuagem Personalizada', // Nome do produto
-                            ],
-                            'unit_amount' => $valorCentavos, // Valor em centavos
-                        ],
-                        'quantity' => 1,
-                    ],
-                ]
-            ]);
-            echo '</pre>';
+        // 2. Criação do Preço
+        $price = \Stripe\Price::create([
+            'unit_amount' => $valor * 100, // Valor em centavos
+            'currency' => 'brl',
+            'product' => $product->id,
+        ]);
 
-            // Cria um link de pagamento no Stripe
-            $paymentLink = \Stripe\PaymentLink::create([
-                'line_items' => [
-                    [
-                        'price_data' => [
-                            'currency' => 'brl',
-                            'product_data' => [
-                                'name' => 'Tatuagem Personalizada', // Nome do produto
-                            ],
-                            'unit_amount' => $valorCentavos, // Valor em centavos
-                        ],
-                        'quantity' => 1,
-                    ],
+        // 3. Criar Link de Pagamento
+        $paymentLink = \Stripe\PaymentLink::create([
+            'line_items' => [
+                [
+                    'price' => $price->id,
+                    'quantity' => 1,
                 ],
-            ]);
+            ],
+        ]);
 
-            // URL gerada pelo Stripe
-            $paymentLinkUrl = $paymentLink->url;
+        // Exibir o link gerado
+        echo 'Link de pagamento: <a href="' . $paymentLink->url . '" target="_blank">Clique aqui para pagar</a>';
 
-        } catch (Exception $e) {
-            // Debug: Captura detalhada do erro
-            echo '<pre>';
-            var_dump($e->getMessage());  // Mensagem do erro
-            var_dump($e->getTraceAsString());  // Detalhes do trace
-            echo '</pre>';
-
-            $error = $e->getMessage(); // Captura o erro, se ocorrer
-        }
-    } else {
-        $error = 'Por favor, insira um valor válido maior que 0.';
+    } catch (\Stripe\Exception\ApiErrorException $e) {
+        echo 'Erro ao criar o link de pagamento: ' . $e->getMessage();
     }
 }
 ?>
