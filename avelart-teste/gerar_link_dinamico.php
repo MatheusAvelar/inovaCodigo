@@ -35,15 +35,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     'quantity' => 1,
                 ],
             ],
-            'payment_intent_data' => [
-                'capture_method' => 'automatic',
-            ],
+            'mode' => 'payment', // Define que é um pagamento único
             'success_url' => 'https://www.seusite.com/sucesso',
             'cancel_url' => 'https://www.seusite.com/cancelado',
         ]);
     
         // Exibir o link gerado
-        echo 'Link de pagamento: <a href="' . $checkoutSession->url . '" target="_blank">Clique aqui para pagar em parcelas</a>';
+        echo 'Link de pagamento: <a href="' . $checkoutSession->url . '" target="_blank">Clique aqui para pagar</a>';
     
     } catch (\Stripe\Exception\ApiErrorException $e) {
         echo 'Erro ao criar o link de pagamento: ' . $e->getMessage();
