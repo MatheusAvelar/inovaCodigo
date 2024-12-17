@@ -1,6 +1,6 @@
 <?php
 if (!file_exists('../stripe-php/init.php')) {
-    die('Arquivo stripe-php/init.php não encontrado. Verifique o caminho.');
+    die('Arquivo ../stripe-php/init.php não encontrado. Verifique o caminho.' + __DIR__ );
 }
 
 // Inclua o Stripe manualmente
