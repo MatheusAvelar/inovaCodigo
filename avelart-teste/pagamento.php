@@ -1,8 +1,7 @@
 <?php
-if (!file_exists('stripe-php/init.php')) {
+if (!file_exists('../stripe-php/init.php')) {
     die('Arquivo stripe-php/init.php não encontrado. Verifique o caminho.');
 }
-require_once 'stripe-php/init.php';
 
 // Inclua o Stripe manualmente
 require_once 'stripe-php/init.php';
