@@ -1,4 +1,7 @@
 <?php
+if(!file_exists(__DIR__ . '/stripe-php/init.php')){
+    die('Arquivo ' . __DIR__ . '/stripe-php/init.php não encontrado. Verifique o caminho.');
+}
 require_once __DIR__ . '/stripe-php/init.php';
 require_once 'config.php'; // Inclui a configuração da chave privada
 
