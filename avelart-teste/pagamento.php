@@ -1,85 +1,90 @@
- <!DOCTYPE html>
+<?php
+// Inclua o Stripe manualmente
+require_once 'stripe-php/init.php';
+
+// Defina a chave secreta do Stripe
+\Stripe\Stripe::setApiKey('sk_test_51QVXcjDl7Fi26zyynbuqFrvethFcM92kWyyb98XUeGW16agStI8iswpqtu9TmuxqQDXFxwgwrhCrNlIgUWPmKG1U00ZBGsCFnQ'); // Substitua pela sua chave secreta
+
+// Processamento do pagamento
+$success = false;
+$error = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $token = $_POST['stripeToken'] ?? '';
+
+    if ($token) {
+        try {
+            $charge = \Stripe\Charge::create([
+                'amount' => 2000, // Valor em centavos (R$20,00)
+                'currency' => 'brl',
+                'description' => 'Pagamento Simples',
+                'source' => $token,
+            ]);
+            $success = true; // Pagamento bem-sucedido
+        } catch (Exception $e) {
+            $error = $e->getMessage(); // Captura o erro
+        }
+    } else {
+        $error = 'Token do Stripe não foi gerado.';
+    }
+}
+?>
+
+<!DOCTYPE html>
 <html lang="pt-BR">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Pagamento via Stripe</title>
-        <link rel="icon" href="img/ico.ico" type="image/x-icon">
-    <script src="https://js.stripe.com/v3/"></script> <!-- Stripe JS -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Stripe</title>
+    <script src="https://js.stripe.com/v3/"></script>
     <style>
-        body { font-family: Arial, sans-serif; }
-        .error-message { color: red; font-size: 0.9rem; }
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        #card-element { border: 1px solid #ccc; padding: 10px; border-radius: 4px; margin-top: 10px; }
+        button { margin-top: 20px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        .success { color: green; font-size: 18px; }
+        .error { color: red; font-size: 18px; }
     </style>
 </head>
 <body>
-    <div>
-        <h2>Pagamento via Stripe</h2>
-        <form id="paymentForm">
-            <div>
-                <label for="card-element">Informações do Cartão:</label>
-                <div id="card-element">
-                    <!-- Elemento do cartão será inserido aqui -->
-                </div>
-                <div class="error-message" id="error-message"></div>
-            </div>
-            <button type="submit">Pagar</button>
+    <h2>Checkout Simples - Stripe</h2>
+
+    <?php if ($success): ?>
+        <p class="success">Pagamento realizado com sucesso!</p>
+    <?php elseif ($error): ?>
+        <p class="error">Erro: <?php echo htmlspecialchars($error); ?></p>
+    <?php endif; ?>
+
+    <?php if (!$success): ?>
+        <form id="payment-form" method="POST">
+            <div id="card-element"></div>
+            <button type="submit" id="submit">Pagar R$ 20,00</button>
+            <p id="error-message"></p>
         </form>
-    </div>
+    <?php endif; ?>
 
-    <!-- Stripe.js Script -->
-    <script src="https://js.stripe.com/v3/"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var stripe = Stripe('pk_test_51QVXcjDl7Fi26zyyYy3z4WkVJr7CLzkV96c9EVuBlFIsUhnJ3HVlAujoXSEzhBWB8XMVVd7jnLwast5vKPfe0Ss300Wpjvpgsk'); // Chave pública do Stripe
-            var elements = stripe.elements();
+        const stripe = Stripe("pk_test_51QVXcjDl7Fi26zyyYy3z4WkVJr7CLzkV96c9EVuBlFIsUhnJ3HVlAujoXSEzhBWB8XMVVd7jnLwast5vKPfe0Ss300Wpjvpgsk"); // Substitua pela sua chave pública
+        const elements = stripe.elements();
+        const cardElement = elements.create("card");
 
-            var style = {
-                base: {
-                    color: "#32325d",
-                    lineHeight: "24px",
-                    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-                    fontSmoothing: "antialiased",
-                    fontSize: "16px",
-                    "::placeholder": {
-                        color: "#aab7c4"
-                    }
-                }
-            };
+        cardElement.mount("#card-element");
 
-            var card = elements.create("card", { style: style });
-            card.mount("#card-element");
+        const form = document.getElementById("payment-form");
 
-            var form = document.getElementById('paymentForm');
-            form.addEventListener('submit', function (event) {
-                event.preventDefault();
+        form.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            const { token, error } = await stripe.createToken(cardElement);
 
-                stripe.createToken(card).then(function (result) {
-                    if (result.error) {
-                        document.getElementById('error-message').textContent = result.error.message;
-                    } else {
-                        var formData = new FormData(form);
-                        formData.append('stripeToken', result.token.id);
-
-                        fetch('php/processar_stripe.php', {
-                            method: 'POST',
-                            body: formData,
-                        })
-                        .then(response => response.json())  // Espera um JSON válido do servidor
-                        .then(data => {
-                            console.log("Resposta do servidor:", data); // Adicionado para depuração
-                            if (data.status === 'success') {
-                                alert('Pagamento realizado com sucesso!');
-                            } else {
-                                alert('Erro: ' + data.message);
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Erro na comunicação com o servidor:', error);
-                            alert('Erro na comunicação com o servidor. Tente novamente.');
-                        });
-                    }
-                });
-            });
+            if (error) {
+                document.getElementById("error-message").textContent = error.message;
+            } else {
+                const hiddenInput = document.createElement("input");
+                hiddenInput.setAttribute("type", "hidden");
+                hiddenInput.setAttribute("name", "stripeToken");
+                hiddenInput.setAttribute("value", token.id);
+                form.appendChild(hiddenInput);
+                form.submit();
+            }
         });
     </script>
 </body>
