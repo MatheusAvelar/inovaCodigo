@@ -57,6 +57,7 @@ if ($xml && isset($xml->code)) {
     $paymentLink = "https://pagseguro.uol.com.br/v2/checkout/payment.html?code={$xml->code}";
     echo json_encode(['success' => true, 'payment_url' => $paymentLink]);
 } else {
+    $paymentLink = $paymentLink;
     echo json_encode(['success' => false, 'message' => 'Falha ao gerar o link de pagamento.', 'response' => $response]);
 }
 ?>
