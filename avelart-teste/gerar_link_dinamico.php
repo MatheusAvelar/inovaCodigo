@@ -48,12 +48,10 @@
                     const whatsappMessage = encodeURIComponent("Aqui está o link para realizar o pagamento da tatuagem: " + data.payment_url);
                     
                     responseDiv.innerHTML = `
-                        <div class="success">
                             <a href="https://wa.me/?text=${whatsappMessage}" target="_blank" 
                             style="display: inline-block; margin-top: 10px; text-decoration: none; background-color: #25D366; color: white; padding: 8px 12px; border-radius: 5px; font-weight: bold;">
                                 Compartilhar no WhatsApp
-                            </a>
-                        </div>`;
+                            </a>`;
                 } else {
                     responseDiv.innerHTML = `<div class="error">${data.message}</div>`;
                 }
