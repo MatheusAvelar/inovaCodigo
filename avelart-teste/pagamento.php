@@ -1,5 +1,5 @@
 <?php
-if (!file_exists('stripe-php/init.php')) {
+if (!file_exists(__DIR__ . '/stripe-php/init.php')) {
     die('Arquivo ' . __DIR__ . '/stripe-php/init.php não encontrado. Verifique o caminho.');
 }
 ?>
