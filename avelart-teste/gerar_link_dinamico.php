@@ -1,100 +1,60 @@
-<?php
-// Inclua a biblioteca do Stripe manualmente
-require_once __DIR__ . '/stripe-php/init.php';
-
-// Defina a chave secreta do Stripe
-\Stripe\Stripe::setApiKey('sk_test_51QVXcjDl7Fi26zyynbuqFrvethFcM92kWyyb98XUeGW16agStI8iswpqtu9TmuxqQDXFxwgwrhCrNlIgUWPmKG1U00ZBGsCFnQ'); // Substitua pela sua chave secreta
-
-// Inicialização de variáveis
-$paymentLinkUrl = '';
-$error = '';
-
-// Processamento do formulário
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $valor = $_POST['valor'] ?? '';
-
-    try {
-        // 1. Criação do Produto
-        $product = \Stripe\Product::create([
-            'name' => 'Tatuagem Personalizada',
-            'description' => 'Tatuagem feita sob medida',
-        ]);
-    
-        // 2. Criação do Preço
-        $price = \Stripe\Price::create([
-            'unit_amount' => $valor * 100, // Valor em centavos
-            'currency' => 'brl',
-            'product' => $product->id,
-        ]);
-    
-        // 3. Criação da Sessão de Checkout
-        $checkoutSession = \Stripe\Checkout\Session::create([
-            'payment_method_types' => ['card'],
-            'line_items' => [
-                [
-                    'price' => $price->id,
-                    'quantity' => 1,
-                ],
-            ],
-            'mode' => 'payment',
-            'success_url' => 'http://localhost/sucesso.php', // Substitua pelo seu URL de sucesso
-            'cancel_url' => 'http://localhost/cancelado.php', // Substitua pelo seu URL de cancelamento
-        ]);
-
-        // Armazena o link gerado
-        $paymentLinkUrl = $checkoutSession->url;
-
-    } catch (\Stripe\Exception\ApiErrorException $e) {
-        $error = 'Erro ao criar o link de pagamento: ' . $e->getMessage();
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerar Link de Pagamento Dinâmico</title>
+    <title>Gerar Link de Pagamento</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; }
-        input { padding: 8px; margin-top: 10px; border: 1px solid #ccc; border-radius: 4px; width: 100%; }
-        button { margin-top: 10px; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
-        a { display: inline-block; margin-top: 10px; text-decoration: none; background-color: #28a745; color: white; padding: 10px 15px; border-radius: 4px; }
-        .error { color: red; margin-top: 10px; }
+        input, button { padding: 10px; margin-top: 10px; border: 1px solid #ccc; border-radius: 4px; width: 100%; }
+        button { background-color: #007bff; color: white; cursor: pointer; }
+        .success, .error { margin-top: 10px; padding: 10px; border-radius: 4px; }
+        .success { background-color: #28a745; color: white; }
+        .error { background-color: #dc3545; color: white; }
+        a { display: inline-block; margin-top: 10px; background-color: #28a745; color: white; padding: 10px 15px; text-decoration: none; border-radius: 4px; }
     </style>
 </head>
 <body>
     <h2>Gerar Link de Pagamento - Valor Dinâmico</h2>
-    <form method="POST" action="">
+    <form id="paymentForm">
         <label for="valor">Informe o valor da tatuagem (R$):</label>
-        <input type="text" name="valor" id="valor" placeholder="Ex: 150.00" required>
-        <button type="submit">Gerar Link de Pagamento</button>
+        <input type="text" id="valor" name="valor" placeholder="Ex: 150.00" required>
+        <button type="submit">Gerar Link</button>
     </form>
 
-    <?php if ($paymentLinkUrl): ?>
-        <p>Link de Pagamento Criado com Sucesso:</p>
-        <a href="<?php echo htmlspecialchars($paymentLinkUrl); ?>" target="_blank">Ir para o Pagamento</a>
-
-        <p>Compartilhe este link com o cliente para que ele possa realizar o pagamento.</p>
-        <textarea rows="3" cols="50" readonly><?php echo htmlspecialchars($paymentLinkUrl); ?></textarea>
-    <?php elseif ($error): ?>
-        <p class="error"><?php echo htmlspecialchars($error); ?></p>
-    <?php endif; ?>
+    <div id="response"></div>
 
     <script>
-        // Aplicar máscara para o valor no formato 0.00
-        const valorInput = document.getElementById('valor');
-        valorInput.addEventListener('input', function (e) {
-            let value = e.target.value;
+        const form = document.getElementById('paymentForm');
+        const responseDiv = document.getElementById('response');
 
-            // Remove caracteres não numéricos
-            value = value.replace(/[^\d]/g, '');
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
 
-            // Converte para o formato 0.00
-            value = (parseInt(value, 10) / 100).toFixed(2);
+            const valor = document.getElementById('valor').value;
+            responseDiv.innerHTML = 'Gerando link...';
 
-            e.target.value = value;
+            try {
+                const res = await fetch('php/processa_pagamento.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: `valor=${encodeURIComponent(valor)}`
+                });
+
+                const data = await res.json();
+
+                if (data.success) {
+                    responseDiv.innerHTML = `
+                        <div class="success">
+                            Link gerado com sucesso! <br>
+                            <a href="${data.payment_url}" target="_blank">Ir para o Pagamento</a>
+                        </div>`;
+                } else {
+                    responseDiv.innerHTML = `<div class="error">${data.message}</div>`;
+                }
+            } catch (error) {
+                responseDiv.innerHTML = `<div class="error">Erro ao enviar a solicitação: ${error.message}</div>`;
+            }
         });
     </script>
 </body>
