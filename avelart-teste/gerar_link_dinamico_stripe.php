@@ -35,7 +35,7 @@
             responseDiv.innerHTML = 'Gerando link...';
 
             try {
-                const res = await fetch('php/processa_pagamento.php', {
+                const res = await fetch('php/processa_pagamento_stripe.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                     body: `valor=${encodeURIComponent(valor)}`
