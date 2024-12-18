@@ -6,13 +6,13 @@ $data = [
     'reference_id' => 'REFERENCIA123',
     'expiration_date' => '2024-12-31T19:09:10-03:00',
     'customer' => [
-        'name' => '',
-        'email' => '',
-        'tax_id' => '',
+        'name' => 'João Teste',
+        'email' => 'joao@teste.com',
+        'tax_id' => '12345678909',
         'phone' => [
             'country' => '+55',
-            'area' => '',
-            'number' => ''
+            'area' => '27',
+            'number' => '999999999'
         ]
     ],
     'customer_modifiable' => true,
