@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $ddd = strval(substr($telefoneLimpo, 0, 2));  // Extrai os dois primeiros números como DDD e garante que seja uma string
     $numeroTelefone = strval(substr($telefoneLimpo, 2)); // Extrai o número do telefone e garante que seja uma string
     $imagem = "avelart-teste/img/tatto.jpg";
-    
+
     $data = [
         'reference_id' => 'REFERENCIA123',
         'expiration_date' => '2024-12-31T19:09:10-03:00',
@@ -52,6 +52,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ],
     ];
 
+    var_dump($data);
+
     curl_setopt_array($curl, [
         CURLOPT_URL => "https://sandbox.api.pagseguro.com/checkouts",
         CURLOPT_RETURNTRANSFER => true,
@@ -72,6 +74,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo json_encode(['success' => false, 'message' => "Erro cURL: $err"]);
     } else {
         $data = json_decode($response, true);
+
+        // Debug: Verificando a resposta da API
+        var_dump($data);
 
         if (isset($data['links'])) {
             foreach ($data['links'] as $link) {
