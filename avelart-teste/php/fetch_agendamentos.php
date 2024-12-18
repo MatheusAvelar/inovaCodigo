@@ -155,7 +155,7 @@ if ($result->num_rows > 0) {
                         <a href='$linkTermo' title='Gerar Termo'>
                             <i class='fas fa-file-alt'></i>
                         </a>
-                        <a href='php/gerar_pagamento.php?id=" . htmlspecialchars($row['id']) . "' title='Gerar Link de Pagamento'>
+                        <a href='gerar_pagamento.php?id=" . htmlspecialchars($row['id']) . "' title='Gerar Link de Pagamento'>
                             <i class='fas fa-money-bill-wave'></i>
                         </a>
                     </td>";
