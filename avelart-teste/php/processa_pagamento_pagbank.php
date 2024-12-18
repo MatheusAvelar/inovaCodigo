@@ -1,5 +1,5 @@
 <?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+//if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $valor = $_POST['valor'];
     $valorEmCentavos = (int) (floatval($valor) * 100); // Converte para centavos
 
@@ -89,6 +89,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         echo json_encode(['success' => false, 'message' => 'Não foi possível gerar o link de pagamento.']);
     }
-} else {
+/*} else {
     echo json_encode(['success' => false, 'message' => 'Acesso inválido.']);
-}
+}*/
