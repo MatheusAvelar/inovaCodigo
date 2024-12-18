@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $emailCliente = "joao@teste.com";
     $cpfCliente = "12345678909";
     $telefoneCliente = "999999999";
-    $imagem = "https://www.exemplo.com/imagem.jpg";
+    $imageUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/img/tatto.jpg';
 
     $data = [
         'reference_id' => 'REFERENCIA123',
@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'name' => 'Tatuagem',
                 'quantity' => 1,
                 'unit_amount' => $valorEmCentavos,
-                'image_url' => $imagem,
+                'image_url' => $imageUrl,
             ],
         ],
         'payment_methods' => [
@@ -42,9 +42,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ['type' => 'CREDIT_CARD'],
         ],
         'redirect_url' => 'https://avelart-teste.inovacodigo.com.br',
-        'notification_urls' => [
-            'https://meusite.com.br/notificacao',
-        ],
     ];
 
     curl_setopt_array($curl, [
