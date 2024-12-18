@@ -114,6 +114,9 @@ unset($_SESSION['status'], $_SESSION['message']);
                     
                     <label for="telefone">Telefone:</label>
                     <input type="text" id="telefone" name="telefone" value="<?= $agendamento['telefone_cliente'] ?>"  required>
+
+                    <label for="cpf">CPF:</label>
+                    <input type="text" id="cpf" name="cpf" value="<?= $agendamento['cpf_cliente'] ?>"  required>
                     
                     <label for="valor">Informe o valor da tatuagem (R$):</label>
                     <input type="text" id="valor" name="valor" placeholder="Ex: 150.00" value="<?= $agendamento['valor'] ?>" required>

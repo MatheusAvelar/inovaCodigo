@@ -6,10 +6,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $curl = curl_init();
 
     // Dados do cliente (valores fictícios)
-    $nomeCliente = "João Teste";
-    $emailCliente = "joao@teste.com";
-    $cpfCliente = "12345678909";
-    $telefoneCliente = "999999999";
+    $nomeCliente = $_POST['nome'];
+    $emailCliente = $_POST['email'];
+    $cpfCliente = $_POST[''];
+    $telefoneCliente = $_POST['telefone'];
     $imagem = "https://www.exemplo.com/imagem.jpg";
 
     $data = [
