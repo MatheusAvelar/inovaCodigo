@@ -1,5 +1,5 @@
 <?php
-session_start();
+include 'php/verificar_perfil.php';
 include 'utils.php';
 
 // Verifica se o ID do agendamento foi passado na URL
