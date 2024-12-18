@@ -53,38 +53,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         CURLOPT_CUSTOMREQUEST => "POST",
         CURLOPT_POSTFIELDS => json_encode($data),
         CURLOPT_HTTPHEADER => [
-            "Authorization: Bearer 88E1B6800CFC49978ECE7C0B994C7EB0", // Substitua pelo seu token real
+            "Authorization: Bearer 88E1B6800CFC49978ECE7C0B994C7EB0",
             "Content-Type: application/json",
         ],
     ]);
 
-    $apiResponse = curl_exec($curl);
+    $response = curl_exec($curl);
     $err = curl_error($curl);
 
     curl_close($curl);
 
     if ($err) {
-        /*echo "<div class='error'>Erro cURL: " . htmlspecialchars($err) . "</div>";*/
+        echo json_encode(['success' => false, 'message' => "Erro cURL: $err"]);
     } else {
-        $data = json_decode($apiResponse, true);
+        $data = json_decode($response, true);
 
         if (isset($data['links'])) {
             foreach ($data['links'] as $link) {
                 if ($link['rel'] === 'PAY') {
-                    $response['success'] = true;
-                    $response['payment_url'] = $link['href'];
-                    /*echo "<div class='success'>Link gerado com sucesso: <a href='$linkPagamento' target='_blank'>Pagar no PagSeguro</a></div>";
-                    echo "<a href='https://wa.me/?text=Aqui está o link de pagamento: " . urlencode($linkPagamento) . "' target='_blank'>Compartilhar no WhatsApp</a>";*/
-                    // Retorna a resposta em formato JSON
-                    echo json_encode($response);
+                    echo json_encode(['success' => true, 'payment_url' => $link['href']]);
+                    exit;
                 }
             }
         }
 
-        /*echo "<div class='error'>Não foi possível gerar o link de pagamento.</div>";
-        echo "<pre>" . htmlspecialchars($apiResponse) . "</pre>";*/
+        echo json_encode(['success' => false, 'message' => 'Não foi possível gerar o link de pagamento.']);
     }
 } else {
-    /*echo "<div class='error'>Acesso inválido.</div>";*/
+    echo json_encode(['success' => false, 'message' => 'Acesso inválido.']);
 }
-?>
