@@ -1,5 +1,6 @@
 <?php
 session_start();
+include 'php/edita_agendamento.php';
 
 // Verifica se há mensagem de status na sessão
 $status = isset($_SESSION['status']) ? $_SESSION['status'] : null;
@@ -105,14 +106,18 @@ unset($_SESSION['status'], $_SESSION['message']);
         <div class="grid">
             <div class="maca">
                 <form id="paymentForm">
-                    <label for="valor">Informe o valor da tatuagem (R$):</label>
-                    <input type="text" id="valor" name="valor" placeholder="Ex: 150.00" required>
-
-                    <label for="valor">Informe o valor da tatuagem (R$):</label>
-                    <input type="text" id="valor" name="valor" placeholder="Ex: 150.00" required>
+                    <label for="nome">Nome:</label>
+                    <input type="text" id="nome" name="nome" value="<?= $agendamento['nome_cliente'] ?>" required>
+                    
+                    <label for="email">Email:</label>
+                    <input type="text" id="email" name="email" value="<?= $agendamento['email_cliente'] ?>"  required>
+                    
+                    <label for="telefone">Telefone:</label>
+                    <input type="text" id="telefone" name="telefone" value="<?= $agendamento['telefone_cliente'] ?>"  required>
                     
                     <label for="valor">Informe o valor da tatuagem (R$):</label>
-                    <input type="text" id="valor" name="valor" placeholder="Ex: 150.00" required>
+                    <input type="text" id="valor" name="valor" placeholder="Ex: 150.00" value="<?= $agendamento['valor'] ?>" required>
+
                     <button type="submit">Gerar Link</button>
                 </form>
                 <div id="response"></div>
