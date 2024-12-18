@@ -1,5 +1,5 @@
 <?php
-//if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $valor = $_POST['valor'];
     $valorEmCentavos = (int) (floatval($valor) * 100); // Converte para centavos
 
@@ -11,13 +11,11 @@
     $cpfCliente = strval($_POST['cpf']);
     $telefoneCliente = strval($_POST['telefone']);
 
-    echo "Nome: $nomeCliente Email: $emailCliente CPF: $cpfCliente Telefone: $telefoneCliente Valor: $valor";
-    
     // Limpeza do telefone e extração do DDD e número como strings
     $telefoneLimpo = preg_replace('/[^0-9]/', '', $telefoneCliente); // Remove qualquer caractere não numérico
     $ddd = strval(substr($telefoneLimpo, 0, 2));  // Extrai os dois primeiros números como DDD e garante que seja uma string
     $numeroTelefone = strval(substr($telefoneLimpo, 2)); // Extrai o número do telefone e garante que seja uma string
-    $imagem = "avelart-teste/img/tatto.jpg";
+    $imagem = "img/tatto.jpg";
 
     $data = [
         'reference_id' => 'REFERENCIA123',
@@ -91,6 +89,6 @@
 
         echo json_encode(['success' => false, 'message' => 'Não foi possível gerar o link de pagamento.']);
     }
-/*} else {
+} else {
     echo json_encode(['success' => false, 'message' => 'Acesso inválido.']);
-}*/
+}
