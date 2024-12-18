@@ -7,8 +7,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Dados do cliente (valores fictícios)
     $nomeCliente = $_POST['nome'];
-    $emailCliente = "joao@teste.com";
-    $cpfCliente = "12345678909";
+    $emailCliente = $_POST['email'];
+    $cpfCliente = preg_replace('/\D/', '', $_POST['cpf']);
     $ddd = "31";
     $telefoneCliente = "999999999";
     $imageUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/img/tatto.jpg';
