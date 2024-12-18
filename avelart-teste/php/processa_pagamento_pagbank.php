@@ -9,19 +9,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nomeCliente = "João Teste";
     $emailCliente = "joao@teste.com";
     $cpfCliente = "12345678909";
+    $ddd = "31";
     $telefoneCliente = "999999999";
     $imageUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/img/tatto.jpg';
+    $expirationDate = date('Y-m-d\TH:i:sP', strtotime('+2 days'));
 
     $data = [
         'reference_id' => 'REFERENCIA123',
-        'expiration_date' => '2024-12-31T19:09:10-03:00',
+        'expiration_date' => $expirationDate,
         'customer' => [
             'name' => $nomeCliente,
             'email' => $emailCliente,
             'tax_id' => $cpfCliente,
             'phone' => [
                 'country' => '+55',
-                'area' => '27',
+                'area' => $ddd,
                 'number' => $telefoneCliente,
             ],
         ],
