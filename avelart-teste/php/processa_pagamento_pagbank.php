@@ -11,6 +11,8 @@
     $cpfCliente = strval($_POST['cpf']);
     $telefoneCliente = strval($_POST['telefone']);
 
+    echo "Nome: $nomeCliente Email: $emailCliente CPF: $cpfCliente Telefone: $telefoneCliente Valor: $valor";
+    
     // Limpeza do telefone e extração do DDD e número como strings
     $telefoneLimpo = preg_replace('/[^0-9]/', '', $telefoneCliente); // Remove qualquer caractere não numérico
     $ddd = strval(substr($telefoneLimpo, 0, 2));  // Extrai os dois primeiros números como DDD e garante que seja uma string
