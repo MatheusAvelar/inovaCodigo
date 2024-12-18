@@ -9,8 +9,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nomeCliente = $_POST['nome'];
     $emailCliente = $_POST['email'];
     $cpfCliente = preg_replace('/\D/', '', $_POST['cpf']);
-    $ddd = "31";
-    $telefoneCliente = "999999999";
+    //$ddd = "31";
+    $telefoneCliente = preg_replace('/\D/', '', $_POST['telefone']); 
+    $ddd = substr($telefoneCliente, 0, 2);
+    $numero = substr($telefoneCliente, 2);
     $imageUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/img/tatto.jpg';
     $expirationDate = date('Y-m-d\TH:i:sP', strtotime('+2 days'));
 
@@ -24,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'phone' => [
                 'country' => '+55',
                 'area' => $ddd,
-                'number' => $telefoneCliente,
+                'number' => $numero,
             ],
         ],
         'customer_modifiable' => true,
