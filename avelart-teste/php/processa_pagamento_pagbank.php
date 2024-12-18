@@ -71,7 +71,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($data['links'])) {
             foreach ($data['links'] as $link) {
                 if ($link['rel'] === 'PAY') {
-                    $response['payment_url'] = $link['href'];
+                    $linkPagamento = $link['href'];
+                    echo "<div class='success'>Link gerado com sucesso: <a href='$linkPagamento' target='_blank'>Pagar no PagSeguro</a></div>";
+                    echo "<a href='https://wa.me/?text=Aqui está o link de pagamento: " . urlencode($linkPagamento) . "' target='_blank'>Compartilhar no WhatsApp</a>";
+                    exit;
                 }
             }
         }
