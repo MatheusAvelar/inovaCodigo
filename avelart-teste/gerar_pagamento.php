@@ -110,13 +110,13 @@ unset($_SESSION['status'], $_SESSION['message']);
                     <input type="text" id="nome" name="nome" value="<?= $agendamento['nome_cliente'] ?>" required>
                     
                     <label for="email">Email:</label>
-                    <input type="text" id="email" name="email" value="<?= $agendamento['email_cliente'] ?>"  required>
+                    <input type="text" id="email" name="email" value="<?= $agendamento['email_cliente'] ?>" required>
                     
                     <label for="telefone">Telefone:</label>
-                    <input type="text" id="telefone" name="telefone" value="<?= $agendamento['telefone_cliente'] ?>"  required>
+                    <input type="text" id="telefone" name="telefone" value="<?= $agendamento['telefone_cliente'] ?>" required>
 
                     <label for="cpf">CPF:</label>
-                    <input type="text" id="cpf" name="cpf" value="<?= $agendamento['cpf_cliente'] ?>"  required>
+                    <input type="text" id="cpf" name="cpf" value="<?= $agendamento['cpf_cliente'] ?>" required>
                     
                     <label for="valor">Informe o valor da tatuagem (R$):</label>
                     <input type="text" id="valor" name="valor" placeholder="Ex: 150.00" value="<?= $agendamento['valor'] ?>" required>
@@ -159,6 +159,85 @@ unset($_SESSION['status'], $_SESSION['message']);
                 }
             } catch (error) {
                 responseDiv.innerHTML = `<div class="error">Erro ao enviar a solicitação: ${error.message}</div>`;
+            }
+        });
+        function validarCPF(cpf) {
+            cpf = cpf.replace(/[^\d]+/g, ''); // Remove caracteres não numéricos
+
+            // Verifica se o CPF possui 11 dígitos
+            if (cpf.length !== 11) return false;
+
+            // Valida CPF com algorítmo de verificação
+            let soma = 0;
+            let resto;
+
+            // Valida o primeiro dígito verificador
+            for (let i = 0; i < 9; i++) soma += parseInt(cpf.charAt(i)) * (10 - i);
+            resto = soma % 11;
+            if (resto < 2) resto = 0;
+            else resto = 11 - resto;
+            if (parseInt(cpf.charAt(9)) !== resto) return false;
+
+            soma = 0;
+            // Valida o segundo dígito verificador
+            for (let i = 0; i < 10; i++) soma += parseInt(cpf.charAt(i)) * (11 - i);
+            resto = soma % 11;
+            if (resto < 2) resto = 0;
+            else resto = 11 - resto;
+            if (parseInt(cpf.charAt(10)) !== resto) return false;
+
+            return true;
+        }
+
+        // Função para validar telefone (formato (XX) XXXXX-XXXX)
+        function validarTelefone(telefone) {
+            const regex = /^\(\d{2}\) \d{5}-\d{4}$/;
+            return regex.test(telefone);
+        }
+
+        // Função para validar email
+        function validarEmail(email) {
+            const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            return regex.test(email);
+        }
+
+        // Função para validar valor (ex: 150.00)
+        function validarValor(valor) {
+            const regex = /^\d+(\.\d{1,2})?$/;  // Permite até duas casas decimais
+            return regex.test(valor);
+        }
+
+        // Evento de submit do formulário
+        document.getElementById('paymentForm').addEventListener('submit', function(event) {
+            const nome = document.getElementById('nome').value;
+            const email = document.getElementById('email').value;
+            const telefone = document.getElementById('telefone').value;
+            const cpf = document.getElementById('cpf').value;
+            const valor = document.getElementById('valor').value;
+
+            // Validações
+            if (!validarEmail(email)) {
+                alert('Por favor, insira um email válido.');
+                event.preventDefault(); // Previne o envio do formulário
+                return;
+            }
+
+            if (!validarTelefone(telefone)) {
+                alert('Por favor, insira um telefone válido no formato (XX) XXXXX-XXXX.');
+                event.preventDefault();
+                return;
+            }
+
+            if (!validarCPF(cpf)) {
+                alert('Por favor, insira um CPF válido.');
+                event.preventDefault();
+                return;
+            }
+
+            if (!validarValor(valor)) {
+                alert('Por favor, insira um valor válido no formato 0.00.');
+                event.preventDefault();
+                return;
             }
         });
     </script>

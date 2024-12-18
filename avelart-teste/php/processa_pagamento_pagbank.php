@@ -6,10 +6,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $curl = curl_init();
 
     // Dados do cliente (valores fictícios)
-    $nomeCliente = $_POST['nome'];
-    $emailCliente = $_POST['email'];
-    $cpfCliente = $_POST['cpf'];
-    $telefoneCliente = $_POST['telefone'];
+    $nomeCliente = strval($_POST['nome']);
+    $emailCliente = strval($_POST['email']);
+    $cpfCliente = strval($_POST['cpf']);
+    $telefoneCliente = strval($_POST['telefone']);
+
+    // Limpeza do telefone e extração do DDD e número como strings
+    $telefoneLimpo = preg_replace('/[^0-9]/', '', $telefoneCliente); // Remove qualquer caractere não numérico
+    $ddd = strval(substr($telefoneLimpo, 0, 2));  // Extrai os dois primeiros números como DDD e garante que seja uma string
+    $numeroTelefone = strval(substr($telefoneLimpo, 2)); // Extrai o número do telefone e garante que seja uma string
     $imagem = "https://www.exemplo.com/imagem.jpg";
 
     $data = [
@@ -21,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'tax_id' => $cpfCliente,
             'phone' => [
                 'country' => '+55',
-                'area' => '27',
+                'area' => $ddd,
                 'number' => $telefoneCliente,
             ],
         ],
