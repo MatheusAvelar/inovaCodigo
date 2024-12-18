@@ -64,25 +64,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     curl_close($curl);
 
     if ($err) {
-        echo "<div class='error'>Erro cURL: " . htmlspecialchars($err) . "</div>";
+        /*echo "<div class='error'>Erro cURL: " . htmlspecialchars($err) . "</div>";*/
     } else {
         $data = json_decode($apiResponse, true);
 
         if (isset($data['links'])) {
             foreach ($data['links'] as $link) {
                 if ($link['rel'] === 'PAY') {
-                    $linkPagamento = $link['href'];
-                    echo "<div class='success'>Link gerado com sucesso: <a href='$linkPagamento' target='_blank'>Pagar no PagSeguro</a></div>";
-                    echo "<a href='https://wa.me/?text=Aqui está o link de pagamento: " . urlencode($linkPagamento) . "' target='_blank'>Compartilhar no WhatsApp</a>";
-                    exit;
+                    $response['success'] = true;
+                    $response['payment_url'] = $link['href'];
+                    /*echo "<div class='success'>Link gerado com sucesso: <a href='$linkPagamento' target='_blank'>Pagar no PagSeguro</a></div>";
+                    echo "<a href='https://wa.me/?text=Aqui está o link de pagamento: " . urlencode($linkPagamento) . "' target='_blank'>Compartilhar no WhatsApp</a>";*/
+                    // Retorna a resposta em formato JSON
+                    echo json_encode($response);
                 }
             }
         }
 
-        echo "<div class='error'>Não foi possível gerar o link de pagamento.</div>";
-        echo "<pre>" . htmlspecialchars($apiResponse) . "</pre>";
+        /*echo "<div class='error'>Não foi possível gerar o link de pagamento.</div>";
+        echo "<pre>" . htmlspecialchars($apiResponse) . "</pre>";*/
     }
 } else {
-    echo "<div class='error'>Acesso inválido.</div>";
+    /*echo "<div class='error'>Acesso inválido.</div>";*/
 }
 ?>
