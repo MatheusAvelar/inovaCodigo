@@ -25,22 +25,11 @@ $data = [
             'image_url' => 'https://www.petz.com.br/blog//wp-content/upload/2018/09/tamanho-de-cachorro-pet-1.jpg'
         ]
     ],
-    'shipping' => [
-        'type' => 'FREE',
-        'address' => [
-            'country' => 'BRA',
-            'region_code' => 'SP',
-            'city' => 'São Paulo',
-            'postal_code' => '01452002',
-            'street' => 'Faria Lima',
-            'number' => '1384',
-            'locality' => 'Pinheiros',
-            'complement' => '5 andar'
-        ]
-    ],
     'payment_methods' => [
         ['type' => 'PIX'],
-        ['type' => 'BOLETO']
+        ['type' => 'BOLETO'],
+        ['type' => 'DEBIT_CARD'],
+        ['type' => 'CREDIT_CARD']
     ],
     'redirect_url' => 'https://pagseguro.uol.com.br',
     'notification_urls' => [
