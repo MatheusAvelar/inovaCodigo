@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'reference_id' => 'REFERENCIA123',
         'expiration_date' => $expirationDate,
         'customer' => [
-            'name' => $nomeCliente,
+            'name' => $expirationDate,
             'email' => $emailCliente,
             'tax_id' => $cpfCliente,
             'phone' => [
