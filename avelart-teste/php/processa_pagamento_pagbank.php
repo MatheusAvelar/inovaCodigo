@@ -15,8 +15,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $telefoneLimpo = preg_replace('/[^0-9]/', '', $telefoneCliente); // Remove qualquer caractere não numérico
     $ddd = strval(substr($telefoneLimpo, 0, 2));  // Extrai os dois primeiros números como DDD e garante que seja uma string
     $numeroTelefone = strval(substr($telefoneLimpo, 2)); // Extrai o número do telefone e garante que seja uma string
-    $imagem = "https://www.exemplo.com/imagem.jpg";
-
+    $imagem = "avelart-teste/img/tatto.jpg";
+    
     $data = [
         'reference_id' => 'REFERENCIA123',
         'expiration_date' => '2024-12-31T19:09:10-03:00',
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'phone' => [
                 'country' => '+55',
                 'area' => $ddd,
-                'number' => $telefoneCliente,
+                'number' => $numeroTelefone,
             ],
         ],
         'customer_modifiable' => true,
