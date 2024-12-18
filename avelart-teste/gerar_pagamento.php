@@ -141,7 +141,8 @@ unset($_SESSION['status'], $_SESSION['message']);
                 const res = await fetch('php/processa_pagamento_pagbank.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: `valor=${encodeURIComponent(valor)}&nome=${encodeURIComponent(document.getElementById('nome').value)}&email=${encodeURIComponent(document.getElementById('email').value)}&telefone=${encodeURIComponent(document.getElementById('telefone').value)}&cpf=${encodeURIComponent(document.getElementById('cpf').value)}`
+                    /*body: `valor=${encodeURIComponent(valor)}&nome=${encodeURIComponent(document.getElementById('nome').value)}&email=${encodeURIComponent(document.getElementById('email').value)}&telefone=${encodeURIComponent(document.getElementById('telefone').value)}&cpf=${encodeURIComponent(document.getElementById('cpf').value)}`*/
+                    body: `valor=${encodeURIComponent(valor)}`
                 });
 
                 const data = await res.json();
