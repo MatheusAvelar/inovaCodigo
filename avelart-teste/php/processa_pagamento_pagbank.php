@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $curl = curl_init();
 
     // Dados do cliente (valores fictícios)
-    $nomeCliente = $_POST['nome'];;
+    $nomeCliente = $_POST['nome'];
     $emailCliente = "joao@teste.com";
     $cpfCliente = "12345678909";
     $ddd = "31";
