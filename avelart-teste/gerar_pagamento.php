@@ -105,7 +105,7 @@ unset($_SESSION['status'], $_SESSION['message']);
 
         <div class="grid">
             <div class="maca">
-                <form id="paymentForm">
+                <form id="paymentForm" action="POST">
                     <label for="nome">Nome:</label>
                     <input type="text" id="nome" name="nome" value="<?= $agendamento['nome_cliente'] ?>" required>
                     
