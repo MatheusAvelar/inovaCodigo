@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'utils.php';
 
 // Verifica se o ID do agendamento foi passado na URL

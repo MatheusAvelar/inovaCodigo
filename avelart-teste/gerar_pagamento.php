@@ -101,7 +101,7 @@ unset($_SESSION['status'], $_SESSION['message']);
             <?php endif; ?>
         </div>
 
-        <h2>Gerar Link de Pagamento - PagSeguro</h2>
+        <h2>Gerar Link de Pagamento</h2>
 
         <div class="grid">
             <div class="maca">
