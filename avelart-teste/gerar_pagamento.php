@@ -107,6 +107,12 @@ unset($_SESSION['status'], $_SESSION['message']);
                 <form id="paymentForm">
                     <label for="valor">Informe o valor da tatuagem (R$):</label>
                     <input type="text" id="valor" name="valor" placeholder="Ex: 150.00" required>
+
+                    <label for="valor">Informe o valor da tatuagem (R$):</label>
+                    <input type="text" id="valor" name="valor" placeholder="Ex: 150.00" required>
+                    
+                    <label for="valor">Informe o valor da tatuagem (R$):</label>
+                    <input type="text" id="valor" name="valor" placeholder="Ex: 150.00" required>
                     <button type="submit">Gerar Link</button>
                 </form>
                 <div id="response"></div>
@@ -124,7 +130,7 @@ unset($_SESSION['status'], $_SESSION['message']);
             responseDiv.innerHTML = 'Gerando link...';
 
             try {
-                const res = await fetch('php/processa_pagamento_stripe.php', {
+                const res = await fetch('php/processa_pagamento_pagbank.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                     body: `valor=${encodeURIComponent(valor)}`
