@@ -5,8 +5,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $curl = curl_init();
 
+    $nomeCliente = "João Teste";
+    $emailCliente = "joao@teste.com";
+    $cpfCliente = "12345678909";
+    $telefoneCliente = "999999999";
+    $imagem = "https://www.exemplo.com/imagem.jpg";
+
     // Dados do cliente (valores fictícios)
-    $nomeCliente = strval($_POST['nome']);
+    /*$nomeCliente = strval($_POST['nome']);
     $emailCliente = strval($_POST['email']);
     $cpfCliente = strval($_POST['cpf']);
     $telefoneCliente = strval($_POST['telefone']);
@@ -15,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $telefoneLimpo = preg_replace('/[^0-9]/', '', $telefoneCliente); // Remove qualquer caractere não numérico
     $ddd = strval(substr($telefoneLimpo, 0, 2));  // Extrai os dois primeiros números como DDD e garante que seja uma string
     $numeroTelefone = strval(substr($telefoneLimpo, 2)); // Extrai o número do telefone e garante que seja uma string
-    $imagem = "img/tatto.jpg";
+    $imagem = "img/tatto.jpg";*/
 
     $data = [
         'reference_id' => 'REFERENCIA123',
