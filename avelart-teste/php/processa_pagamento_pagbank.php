@@ -5,23 +5,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $curl = curl_init();
 
+    // Dados do cliente (valores fictícios)
     $nomeCliente = "João Teste";
     $emailCliente = "joao@teste.com";
     $cpfCliente = "12345678909";
     $telefoneCliente = "999999999";
     $imagem = "https://www.exemplo.com/imagem.jpg";
-
-    // Dados do cliente (valores fictícios)
-    /*$nomeCliente = strval($_POST['nome']);
-    $emailCliente = strval($_POST['email']);
-    $cpfCliente = strval($_POST['cpf']);
-    $telefoneCliente = strval($_POST['telefone']);
-
-    // Limpeza do telefone e extração do DDD e número como strings
-    $telefoneLimpo = preg_replace('/[^0-9]/', '', $telefoneCliente); // Remove qualquer caractere não numérico
-    $ddd = strval(substr($telefoneLimpo, 0, 2));  // Extrai os dois primeiros números como DDD e garante que seja uma string
-    $numeroTelefone = strval(substr($telefoneLimpo, 2)); // Extrai o número do telefone e garante que seja uma string
-    $imagem = "img/tatto.jpg";*/
 
     $data = [
         'reference_id' => 'REFERENCIA123',
@@ -32,8 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'tax_id' => $cpfCliente,
             'phone' => [
                 'country' => '+55',
-                'area' => $ddd,
-                'number' => $numeroTelefone,
+                'area' => '27',
+                'number' => $telefoneCliente,
             ],
         ],
         'customer_modifiable' => true,
@@ -58,15 +47,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ],
     ];
 
-    var_dump($data);
-
     curl_setopt_array($curl, [
         CURLOPT_URL => "https://sandbox.api.pagseguro.com/checkouts",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_CUSTOMREQUEST => "POST",
         CURLOPT_POSTFIELDS => json_encode($data),
         CURLOPT_HTTPHEADER => [
-            "Authorization: Bearer 88E1B6800CFC49978ECE7C0B994C7EB0",
+            "Authorization: Bearer 88E1B6800CFC49978ECE7C0B994C7EB0", // Substitua pelo seu token real
             "Content-Type: application/json",
         ],
     ]);
@@ -80,9 +67,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo json_encode(['success' => false, 'message' => "Erro cURL: $err"]);
     } else {
         $data = json_decode($response, true);
-
-        // Debug: Verificando a resposta da API
-        var_dump($data);
 
         if (isset($data['links'])) {
             foreach ($data['links'] as $link) {
