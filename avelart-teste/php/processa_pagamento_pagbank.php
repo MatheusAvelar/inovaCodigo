@@ -1,4 +1,5 @@
 <?php
+include 'php/verificar_perfil.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $valor = $_POST['valor'];
     $valorEmCentavos = (int) (floatval($valor) * 100); // Converte para centavos
