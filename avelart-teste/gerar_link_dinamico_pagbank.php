@@ -104,7 +104,7 @@ unset($_SESSION['status'], $_SESSION['message']);
 
         <div class="grid">
             <div class="maca">
-                <form method="POST" action="processar.php">
+                <form method="POST" action="php/processa_pagamento_pagbank.php">
                     <label for="valor">Informe o valor da tatuagem (R$):</label>
                     <input type="text" id="valor" name="valor" placeholder="Ex: 150.00" required>
                     <button type="submit">Gerar Link</button>
