@@ -3,7 +3,7 @@
 $curl = curl_init();
 
 $data = [
-    'reference_id' => 'REFERENCIA123', // Substitua por sua referência de produto
+    'reference_id' => 'REFERENCIA123',
     'expiration_date' => '2024-12-31T19:09:10-03:00',
     'customer' => [
         'name' => 'João Teste',
@@ -53,9 +53,20 @@ $err = curl_error($curl);
 
 curl_close($curl);
 
-if ($err) {
-    echo "Erro cURL: " . $err;
-} else {
-    echo "Resposta da API:<br>";
-    echo "<pre>" . htmlspecialchars($response) . "</pre>";
+$data = json_decode($response, true);
+
+// Inicializa a variável para o link de pagamento
+$linkPagamento = null;
+
+// Percorre o array de links para encontrar o que possui "rel" igual a "PAY"
+foreach ($data['links'] as $link) {
+    if ($link['rel'] === 'PAY') {
+        $linkPagamento = $link['href'];
+        break;
+    }
+}
+
+// Exibe o link de pagamento
+if ($linkPagamento) {
+    echo "Link de Pagamento: " . $linkPagamento;
 }
