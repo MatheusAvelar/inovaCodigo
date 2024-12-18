@@ -33,4 +33,17 @@ $perfResult = $conn->query($queryPerfis);
 
 // Fechando a conexão
 $conn->close();
+
+function formatarTelefone($telefone) {
+    // Remove todos os caracteres não numéricos
+    $telefone = preg_replace('/\D/', '', $telefone);
+
+    // Verifica se o número possui 11 dígitos (para o formato (XX) XXXXX-XXXX)
+    if (strlen($telefone) == 11) {
+        // Aplica a formatação
+        return '(' . substr($telefone, 0, 2) . ') ' . substr($telefone, 2, 5) . '-' . substr($telefone, 7);
+    }
+    // Se o telefone não tiver 11 dígitos, retorna ele sem formatação
+    return $telefone;
+}
 ?>

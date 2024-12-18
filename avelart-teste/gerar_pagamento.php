@@ -113,7 +113,7 @@ unset($_SESSION['status'], $_SESSION['message']);
                     <input type="text" id="email" name="email" value="<?= $agendamento['email_cliente'] ?>" required>
                     
                     <label for="telefone">Telefone:</label>
-                    <input type="text" id="telefone" name="telefone" value="<?= $agendamento['telefone_cliente'] ?>" required>
+                    <input type="text" id="telefone" name="telefone" value="<?= formatarTelefone($agendamento['telefone_cliente']) ?>" required>
 
                     <label for="cpf">CPF:</label>
                     <input type="text" id="cpf" name="cpf" value="<?= $agendamento['cpf_cliente'] ?>" required>
