@@ -1,68 +1,82 @@
 <?php
-header('Content-Type: text/html; charset=utf-8');
-
-// Ativa a exibição de erros para depuração
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-// Verifica se o formulário foi submetido via POST
 $response = null;
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Credenciais da API PagSeguro
-    $pagbank_email = "matheus_valladao@hotmail.com";
-    $pagbank_token = "88E1B6800CFC49978ECE7C0B994C7EB0";
-    $api_url = "https://ws.sandbox.pagbank.com.br/v2/checkout";
-    //$api_url = "https://sandbox.api.pagseguro.com/checkouts";
-    //$api_url = "https://sandbox.api.pagseguro.com/orders";
+    $valor = filter_input(INPUT_POST, 'valor', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
 
-    // Valida o valor recebido
-    $valor = floatval($_POST['valor'] ?? 0);
-    if ($valor <= 0) {
-        $response = ['success' => false, 'message' => 'Valor inválido.'];
-    } else {
-        // Monta os dados para envio
-        $data = http_build_query([
-            'email' => $pagbank_email,
-            'token' => $pagbank_token,
-            'currency' => 'BRL',
-            'itemId1' => '001',
-            'itemDescription1' => 'Pagamento de Tatuagem',
-            'itemAmount1' => number_format($valor, 2, '.', ''),
-            'itemQuantity1' => 1,
-            'redirectURL' => 'https://seusite.com/obrigado'
-        ]);
+    if ($valor) {
+        $email = "matheus_valladao@hotmail.com";
+        $token = "88E1B6800CFC49978ECE7C0B994C7EB0";
 
-        $headers = [
-            'Authorization: Bearer ' . $pagbank_token,
-            'Content-Type: application/x-www-form-urlencoded',
+        $payload = [
+            'reference_id' => 'TATUAGEM_' . time(),
+            'customer' => [
+                'name' => 'Cliente Exemplo',
+                'email' => 'cliente@exemplo.com',
+                'tax_id' => '12345678909',
+                'phone' => [
+                    'country' => '+55',
+                    'area' => '27',
+                    'number' => '999999999'
+                ]
+            ],
+            'items' => [
+                [
+                    'reference_id' => 'ITEM01',
+                    'name' => 'Serviço de Tatuagem',
+                    'quantity' => 1,
+                    'unit_amount' => (int)($valor * 100), // Convertendo para centavos
+                ]
+            ],
+            'redirect_url' => 'https://seusite.com.br/sucesso',
+            'notification_urls' => [
+                'https://seusite.com.br/notificacao'
+            ]
         ];
 
-        
-        // Inicializa o cURL
-        $ch = curl_init($api_url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        $ch = curl_init();
+        curl_setopt_array($ch, [
+            CURLOPT_URL => "https://sandbox.api.pagseguro.com/checkout",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => json_encode($payload),
+            CURLOPT_HTTPHEADER => [
+                "Content-Type: application/json",
+                "Authorization: Bearer $token"
+            ]
+        ]);
+
         $result = curl_exec($ch);
+        $error = curl_error($ch);
+        curl_close($ch);
 
-        // Imprime a resposta para depuração
-        echo "<pre>" . htmlspecialchars($result) . "</pre>";
-
-        // Trata erros de cURL
-        if (curl_errno($ch)) {
-            $response = ['success' => false, 'message' => 'Erro cURL: ' . curl_error($ch)];
+        if ($error) {
+            $response = [
+                'success' => false,
+                'message' => "Erro na solicitação: $error",
+                'debug' => $result
+            ];
         } else {
-            // Processa a resposta da API
-            $xml = simplexml_load_string($result);
-            if ($xml && isset($xml->code)) {
-                $paymentLink = "https://pagamento.pagseguro.uol.com.br/pagamento?code={$xml->code}";
-                $response = ['success' => true, 'payment_url' => $paymentLink];
+            $result = json_decode($result, true);
+
+            if (isset($result['id'])) {
+                $response = [
+                    'success' => true,
+                    'payment_url' => $result['links'][0]['href'] ?? null
+                ];
             } else {
-                $response = ['success' => false, 'message' => 'Resposta inválida da API.', 'debug' => $result];
+                $response = [
+                    'success' => false,
+                    'message' => "Erro ao criar o pagamento: " . ($result['message'] ?? 'Erro desconhecido'),
+                    'debug' => json_encode($result, JSON_PRETTY_PRINT)
+                ];
             }
         }
-        curl_close($ch);
+    } else {
+        $response = [
+            'success' => false,
+            'message' => 'Valor inválido informado!'
+        ];
     }
 }
 ?>
