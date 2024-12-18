@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $curl = curl_init();
 
     // Dados do cliente (valores fictícios)
-    $nomeCliente = "João Teste";
+    $nomeCliente = $_POST['nome'];;
     $emailCliente = "joao@teste.com";
     $cpfCliente = "12345678909";
     $ddd = "31";
@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'reference_id' => 'REFERENCIA123',
         'expiration_date' => $expirationDate,
         'customer' => [
-            'name' => $expirationDate,
+            'name' => $nomeCliente,
             'email' => $emailCliente,
             'tax_id' => $cpfCliente,
             'phone' => [
