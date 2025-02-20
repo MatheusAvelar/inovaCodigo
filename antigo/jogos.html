@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="img/ico.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+    <title>Inova Código - Jogos</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1516963750502427"
+        crossorigin="anonymous"></script>
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        iframe {
+            width: 80%;
+            height: 100%; /* Ajuste a altura conforme necessário */
+            border: none;
+        }
+
+        .menu {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .menu a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #f0f0f0;
+            color: #333;
+            text-decoration: none;
+            margin: 0 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .menu a:hover {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="navbar">
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="projetos.html">Projetos</a>
+            <a href="publicacoes.html">Publicações</a>
+            <a href="gerador.html">Geradores</a>
+            <!--<a href="projetos/controleFinanceiro/login.php">Controle Financeiro</a>
+            <a href="kanban.html">Kanban</a>
+            <a href="jogos.html">Jogos</a>-->
+            <a href="portifolio.html">Currículo</a>
+            <!--<a href="apropriacao.php">Apropriação de Horas</a>-->
+        </nav>
+    </header>
+
+    <center>
+        <h1>Jogos</h1>
+    </center>
+
+    <div class="menu">
+        <a href="#" onclick="loadGame('snake')">Snake</a>
+        <a href="#" onclick="loadGame('deadshot')">Deadshot</a>
+        <a href="#" onclick="loadGame('jogoVelha')">Jogo da Velha</a>
+    </div>
+
+    <div class="container" id="game-container">
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="img/nome.png" alt="Logo da Marca no Rodapé">
+            </div>
+            <div class="footer-social">
+                <a href="https://www.linkedin.com/in/matheusavelar/" target="blank"><img align="center"
+                        src="img/linkedin.png" alt="https://www.linkedin.com/in/matheusavelar/" /></a>
+                <a href="https://fb.com/matheus.dapaz.33" target="blank"><img align="center" src="img/facebook.png"
+                        alt="matheus.dapaz.33" /></a>
+                <a href="https://instagram.com/matheusnutela" target="blank"><img align="center" src="img/instagram.png"
+                        alt="matheusnutela" /></a>
+                <a href="https://github.com/MatheusAvelar" target="blank"><img align="center" src="img/github.png"
+                        alt="matheusnutela" /></a>
+                <a href="https://api.whatsapp.com/send?phone=5531993018766" target="blank"><img align="center"
+                        src="img/whatsapp.png" alt="matheusnutela" /></a>
+            </div>
+        </div>
+        <div class="footer-links">
+            <a href="termosUso.html">Termos de Uso</a>
+            <a href="politica.html">Política de Privacidade</a>
+            <a href="contato.html">Contato</a>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2023 Inova Código. Todos os direitos reservados.
+        </div>
+    </footer>
+
+    <script>
+        function loadGame(gameName) {
+            const container = document.getElementById('game-container');
+            if (gameName === 'snake') {
+                container.innerHTML = `<iframe src="https://www.crazygames.com.br/embed/snake-io" frameborder="0" allow="gamepad *;"></iframe>`;
+            } else if (gameName === 'deadshot') {
+                container.innerHTML = `<iframe src="https://www.crazygames.com.br/embed/deadshot-io" frameborder="0" allow="gamepad *;"></iframe>`;
+            } else if (gameName == 'jogoVelha') {
+                container.innerHTML = `<div class="jogo-da-velha">
+                    <h2>Jogo da Velha</h2>
+                    <button id="restart-button" onclick="restartGame()">Reiniciar Jogo</button>
+                    <div class="board">
+                        <div class="cell" onclick="makeMove(this)"></div>
+                        <div class="cell" onclick="makeMove(this)"></div>
+                        <div class="cell" onclick="makeMove(this)"></div>
+                        <div class="cell" onclick="makeMove(this)"></div>
+                        <div class="cell" onclick="makeMove(this)"></div>
+                        <div class="cell" onclick="makeMove(this)"></div>
+                        <div class="cell" onclick="makeMove(this)"></div>
+                        <div class="cell" onclick="makeMove(this)"></div>
+                        <div class="cell" onclick="makeMove(this)"></div>
+                    </div>
+                    <div id="result-message" class="result-message"></div>
+                </div>`;
+            }
+        }
+    </script>
+</body>
+
+</html>

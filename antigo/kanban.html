@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="img/ico.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+    <title>Inova Código - Kanban</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1516963750502427" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: rgb(68, 91, 91);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        #kanban {
+            display: flex;
+        }
+
+        .column {
+            flex: 1;
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            position: relative;
+        }
+
+        .column h2 {
+            margin-top: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .task-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .task-list li {
+            background-color: #fff;
+            margin-bottom: 5px;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .delete-btn {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        /* Adicionado */
+        .config-icon {
+            cursor: pointer;
+        }
+
+        .input-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .input-container input {
+            flex: 1;
+            padding: 5px;
+            margin-right: 10px;
+        }
+
+        .input-container img {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="navbar">
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="projetos.html">Projetos</a>
+            <a href="publicacoes.html">Publicações</a>
+            <a href="gerador.html">Geradores</a>
+            <!--<a href="projetos/controleFinanceiro/login.php">Controle Financeiro</a>
+            <a href="kanban.html">Kanban</a>
+            <a href="jogos.html">Jogos</a>-->
+            <a href="portifolio.html">Currículo</a>
+            <!--<a href="apropriacao.php">Apropriação de Horas</a>-->
+        </nav>
+    </header>
+
+    <center>
+        <h1>Kanban</h1>
+    </center>
+    <div class="consulta-cep">
+        <div id="kanban">
+            <div id="todo" class="column" ondrop="drop(event, 'todo')" ondragover="allowDrop(event)">
+                <h2>A Fazer <img src="img/excluir.png" class="config-icon" onclick="deleteColumn('todo')" alt="Excluir Coluna"></h2>
+                <ul id="todo-list" class="task-list" ondrop="drop(event, 'todo')" ondragover="allowDrop(event)">
+                </ul>
+            </div>
+
+            <div id="doing" class="column" ondrop="drop(event, 'doing')" ondragover="allowDrop(event)">
+                <h2>Desenvolvendo <img src="img/excluir.png" class="config-icon" onclick="deleteColumn('doing')" alt="Excluir Coluna"></h2>
+                <ul id="doing-list" class="task-list" ondrop="drop(event, 'doing')" ondragover="allowDrop(event)">
+                </ul>
+            </div>
+
+            <div id="done" class="column" ondrop="drop(event, 'done')" ondragover="allowDrop(event)">
+                <h2>Feito <img src="img/excluir.png" class="config-icon" onclick="deleteColumn('done')" alt="Excluir Coluna"></h2>
+                <ul id="done-list" class="task-list" ondrop="drop(event, 'done')" ondragover="allowDrop(event)">
+                </ul>
+            </div>
+        </div>
+        <div class="input-container" id="task-form">
+            <input type="text" id="task-input" placeholder="Nova Tarefa">
+            <img src="img/adicionar.png" alt="Adicionar" onclick="addTask()">
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="img/nome.png" alt="Logo da Marca no Rodapé">
+            </div>
+            <div class="footer-social">
+                <a href="https://www.linkedin.com/in/matheusavelar/" target="blank"><img align="center" src="img/linkedin.png" alt="https://www.linkedin.com/in/matheusavelar/" /></a>
+                <a href="https://fb.com/matheus.dapaz.33" target="blank"><img align="center" src="img/facebook.png" alt="matheus.dapaz.33" /></a>
+                <a href="https://instagram.com/matheusnutela" target="blank"><img align="center" src="img/instagram.png" alt="matheusnutela" /></a>
+                <a href="https://github.com/MatheusAvelar" target="blank"><img align="center" src="img/github.png" alt="matheusnutela" /></a>
+                <a href="https://api.whatsapp.com/send?phone=5531993018766" target="blank"><img align="center" src="img/whatsapp.png" alt="matheusnutela" /></a>
+            </div>
+        </div>
+        <div class="footer-links">
+            <a href="termosUso.html">Termos de Uso</a>
+            <a href="politica.html">Política de Privacidade</a>
+            <a href="contato.html">Contato</a>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2023 Inova Código. Todos os direitos reservados.
+        </div>
+    </footer>
+
+    <script>
+        function allowDrop(event) {
+            event.preventDefault();
+        }
+
+        function drag(event) {
+            event.dataTransfer.setData("text", event.target.id);
+        }
+
+        function drop(event, target) {
+            event.preventDefault();
+            const taskId = event.dataTransfer.getData("text");
+            const taskElement = document.getElementById(taskId);
+            const targetList = document.getElementById(`${target}-list`);
+            if (targetList.children.length < 6) {
+                targetList.appendChild(taskElement);
+                saveTasks();
+            } else {
+                alert(`Limite máximo de 6 tarefas na coluna "${target}" atingido!`);
+            }
+        }
+
+        function addTask() {
+            const taskInput = document.getElementById('task-input');
+            const newTask = taskInput.value.trim();
+            const firstColumnList = document.querySelector('.task-list');
+            if (firstColumnList) {
+                if (firstColumnList.children.length < 6 && newTask !== '') {
+                    const taskId = `task-${Date.now()}`;
+                    const taskElement = `<li id="${taskId}" class="draggable" draggable="true" ondragstart="drag(event)">${newTask}<span class="delete-btn" onclick="deleteTask('${taskId}')"><img src="img/excluirp.png" alt="Excluir"></span></li>`;
+                    firstColumnList.innerHTML += taskElement;
+                    taskInput.value = '';
+                    saveTasks();
+                } else {
+                    alert('Limite máximo de 6 tarefas atingido!');
+                }
+            } else {
+                alert('Por favor, crie uma coluna primeiro.');
+            }
+        }
+
+        function addColumn() {
+            const columnNameInput = document.getElementById('column-name');
+            const columnName = columnNameInput.value.trim();
+            if (columnName !== '') {
+                const columnId = columnName.toLowerCase().replace(/\s/g, '-');
+                const newColumn = `<div id="${columnId}" class="column" ondrop="drop(event, '${columnId}')" ondragover="allowDrop(event)">
+                <h2>${columnName} <img src="img/excluir.png" class="config-icon" onclick="deleteColumn('${columnId}')" alt="Excluir Coluna"></h2>
+                <ul id="${columnId}-list" class="task-list" ondrop="drop(event, '${columnId}')" ondragover="allowDrop(event)">
+                    <!-- Tarefas da coluna ${columnName} serão inseridas aqui -->
+                </ul>
+            </div>`;
+                document.getElementById('kanban').innerHTML += newColumn;
+                columnNameInput.value = '';
+            } else {
+                alert('Por favor, insira um nome para a coluna.');
+            }
+        }
+
+        function deleteColumn(columnId) {
+            if (confirm("Tem certeza que deseja excluir esta coluna?")) {
+                const column = document.getElementById(columnId);
+                column.parentNode.removeChild(column);
+                saveColumn(columnId);
+            }
+        }
+
+        function deleteTask(taskId) {
+            const task = document.getElementById(taskId);
+            task.parentNode.removeChild(task);
+            saveTasks();
+        }
+
+        function saveTasks() {
+            const todoList = document.getElementById('todo-list').innerHTML;
+            const doingList = document.getElementById('doing-list').innerHTML;
+            const doneList = document.getElementById('done-list').innerHTML;
+            localStorage.setItem('todo', todoList);
+            localStorage.setItem('doing', doingList);
+            localStorage.setItem('done', doneList);
+        }
+
+        function saveColumn(columnId) {
+            localStorage.removeItem(`column_${columnId}_deleted`);
+        }
+
+        function createElementFromHTML(htmlString) {
+            const div = document.createElement('div');
+            div.innerHTML = htmlString.trim();
+            return div.firstChild;
+        }
+
+        window.onload = function () {
+            const todo = localStorage.getItem('todo');
+            const doing = localStorage.getItem('doing');
+            const done = localStorage.getItem('done');
+            document.getElementById('todo-list').innerHTML = todo || '';
+            document.getElementById('doing-list').innerHTML = doing || '';
+            document.getElementById('done-list').innerHTML = done || '';
+        };
+    </script>
+</body>
+
+</html>

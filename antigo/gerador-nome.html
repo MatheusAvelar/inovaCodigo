@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="img/ico.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+    <title>Inova Código - Geradores</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1516963750502427"
+     crossorigin="anonymous"></script>
+</head>
+
+<body>
+    
+    <header class="navbar">
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="projetos.html">Projetos</a>
+            <a href="publicacoes.html">Publicações</a>
+            <a href="gerador.html">Geradores</a>
+        </nav>
+    </header>
+
+    <h1>Geradores</h1>
+
+    <div class="generator-links">
+        <a href="gerador.html">Gerador de CEP</a>
+        <a href="gerador-senha.html">Gerador de Senhas</a>
+    </div>
+
+    <h1>Gerador de Nomes</h1>
+
+    <div class="generator-content">
+        <button id="gerarNome">Gerar Nome</button>
+        <p id="nomeGerado"></p>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="img/nome.png" alt="Logo da Marca no Rodapé">
+            </div>
+            <div class="footer-social">
+                <a href="https://www.linkedin.com/in/matheusavelar/" target="blank"><img align="center" src="img/linkedin.png"
+                    alt="https://www.linkedin.com/in/matheusavelar/" /></a>
+            <a href="https://fb.com/matheus.dapaz.33" target="blank"><img align="center" src="img/facebook.png"
+                    alt="matheus.dapaz.33" /></a>
+            <a href="https://instagram.com/matheusnutela" target="blank"><img align="center" src="img/instagram.png"
+                    alt="matheusnutela" /></a>
+            <a href="https://github.com/MatheusAvelar" target="blank"><img align="center" src="img/github.png"
+                    alt="matheusnutela" /></a>
+            <a href="https://api.whatsapp.com/send?phone=5531993018766" target="blank"><img align="center"
+                    src="img/whatsapp.png" alt="matheusnutela" /></a>
+            </div>
+        </div>
+        <div class="footer-links">
+            <a href="termosUso.html">Termos de Uso</a>
+            <a href="politica.html">Política de Privacidade</a>
+            <a href="contato.html">Contato</a>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2023 Inova Código. Todos os direitos reservados.
+        </div>
+    </footer>
+
+    <script>
+        const vogais = ["a", "e", "i", "o", "u"];
+        const consoantes = ["b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z"];
+
+        const botaoGerarNome = document.getElementById("gerarNome");
+        const nomeGerado = document.getElementById("nomeGerado");
+
+        function gerarNome() {
+            const comprimentoNome = Math.floor(Math.random() * 5) + 4; // Comprimento entre 4 e 8 caracteres
+            let nome = "";
+
+            for (let i = 0; i < comprimentoNome; i++) {
+                if (i % 2 === 0) {
+                    nome += consoantes[Math.floor(Math.random() * consoantes.length)];
+                } else {
+                    nome += vogais[Math.floor(Math.random() * vogais.length)];
+                }
+            }
+
+            return nome.charAt(0).toUpperCase() + nome.slice(1);
+        }
+
+        botaoGerarNome.addEventListener("click", () => {
+            const nomeAleatorio = gerarNome();
+            nomeGerado.textContent = `Nome Gerado: ${nomeAleatorio}`;
+        });
+    </script>
+</body>
+
+</html>
