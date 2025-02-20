@@ -1,4 +1,0 @@
-# Bug
--
-# Melhoria
--

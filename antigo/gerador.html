@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="img/ico.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+    <title>Inova Código - Consulta de CEP</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1516963750502427"
+     crossorigin="anonymous"></script>
+</head>
+
+<body>
+    
+    <header class="navbar">
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="projetos.html">Projetos</a>
+            <a href="publicacoes.html">Publicações</a>
+            <a href="gerador.html">Geradores</a>
+            <!--<a href="projetos/controleFinanceiro/login.php">Controle Financeiro</a>
+            <a href="kanban.html">Kanban</a>
+            <a href="jogos.html">Jogos</a>-->
+            <a href="portifolio.html">Currículo</a>
+            <!--<a href="apropriacao.php">Apropriação de Horas</a>-->
+        </nav>
+    </header>
+
+    <center><h1>Geradores</h1></center>
+
+    <div class="generator-links">
+        <a href="gerador.html">Consulta de CEP</a>
+        <a href="converter-texto.html">Converter Texto</a>
+        <a href="meu-ip.html">Qual é meu IP ?</a>
+        <a href="gerador-senha.html">Gerador de Senhas</a>
+        <a href="gerador-CPF.html">Gerador de CPF</a>
+    </div>
+    <div class="centro">
+        <div class="consulta-cep">
+            <h1>Consulta de CEP</h1>
+            <div class="input-container">
+                <label for="cep">Digite o CEP:</label>
+                <input type="text" id="cep" placeholder="Digite o CEP">
+                <button id="buscar">Buscar</button>
+            </div>
+            <div id="resultado">
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="img/nome.png" alt="Logo da Marca no Rodapé">
+            </div>
+            <div class="footer-social">
+                <a href="https://www.linkedin.com/in/matheusavelar/" target="blank"><img align="center" src="img/linkedin.png"
+                    alt="https://www.linkedin.com/in/matheusavelar/" /></a>
+            <a href="https://fb.com/matheus.dapaz.33" target="blank"><img align="center" src="img/facebook.png"
+                    alt="matheus.dapaz.33" /></a>
+            <a href="https://instagram.com/matheusnutela" target="blank"><img align="center" src="img/instagram.png"
+                    alt="matheusnutela" /></a>
+            <a href="https://github.com/MatheusAvelar" target="blank"><img align="center" src="img/github.png"
+                    alt="matheusnutela" /></a>
+            <a href="https://api.whatsapp.com/send?phone=5531993018766" target="blank"><img align="center"
+                    src="img/whatsapp.png" alt="matheusnutela" /></a>
+            </div>
+        </div>
+        <div class="footer-links">
+            <a href="termosUso.html">Termos de Uso</a>
+            <a href="politica.html">Política de Privacidade</a>
+            <a href="contato.html">Contato</a>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2023 Inova Código. Todos os direitos reservados.
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script>
+        document.getElementById("buscar").addEventListener("click", function () {
+            const cep = document.getElementById("cep").value.trim();
+            if (cep === "") {
+                const resultado = document.getElementById("resultado");
+                resultado.innerHTML = `<p>Por favor, digite um CEP válido.</p>`;
+                return;
+            }
+    
+            const apiUrl = `https://viacep.com.br/ws/${cep}/json/`;
+    
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const resultado = document.getElementById("resultado");
+                    resultado.innerHTML = `
+                        <h2>Informações do Endereço:</h2>
+                        <p>CEP: ${data.cep}</p>
+                        <p>Logradouro: ${data.logradouro}</p>
+                        <p>Bairro: ${data.bairro}</p>
+                        <p>Cidade: ${data.localidade}</p>
+                        <p>Estado: ${data.uf}</p>
+                    `;
+                })
+                .catch(error => {
+                    const resultado = document.getElementById("resultado");
+                    resultado.innerHTML = `<p>Ocorreu um erro: ${error}</p>`;
+                });
+        });
+    </script>
+</body>
+
+</html>
