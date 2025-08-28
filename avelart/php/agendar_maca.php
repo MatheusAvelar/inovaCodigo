@@ -140,7 +140,7 @@ if ($errors) {
                             'Reply-To: contato@estudioavelart.com' . "\r\n" .
                             'Content-Type: text/html; charset=UTF-8' . "\r\n";
 
-                    if (sendEmail($to, $subject, $messages, $headers)) {
+                    if (sendEmail($to, $subject, $messages, $headers, $conn)) {
                         $_SESSION['message'] .= "\n"."Foi enviado um e-mail com os dados do agendamento para o cliente.";
                     } else {
                         $_SESSION['message'] .= "\n"."Ocorreu um erro ao enviar o e-mail para o cliente.";
